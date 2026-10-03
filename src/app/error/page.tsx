@@ -18,36 +18,36 @@ const ERROR_CONFIGS: Record<string, ErrorConfig> = {
   '400': {
     icon: <AlertCircle className="size-12 animate-pulse" />,
     title: '400',
-    subtitle: 'Permintaan Tidak Valid',
-    description: 'Server tidak dapat memproses permintaan Anda karena format yang tidak valid.',
+    subtitle: 'Requisição inválida',
+    description: 'O servidor não conseguiu processar sua requisição porque o formato é inválido.',
     colorTheme: 'amber',
   },
   '401': {
     icon: <Lock className="size-12 animate-pulse" />,
     title: '401',
-    subtitle: 'Akses Ditolak',
-    description: 'Anda harus masuk (login) terlebih dahulu untuk mengakses halaman ini.',
+    subtitle: 'Acesso negado',
+    description: 'Você precisa entrar (fazer login) antes de acessar esta página.',
     colorTheme: 'rose',
   },
   '403': {
     icon: <ShieldAlert className="size-12 animate-pulse" />,
     title: '403',
-    subtitle: 'Akses Terlarang',
-    description: 'Anda tidak memiliki izin yang cukup untuk mengakses halaman atau sumber daya ini.',
+    subtitle: 'Acesso proibido',
+    description: 'Você não tem permissão suficiente para acessar esta página ou recurso.',
     colorTheme: 'destructive',
   },
   '429': {
     icon: <Hourglass className="size-12 animate-pulse" />,
     title: '429',
-    subtitle: 'Terlalu Banyak Permintaan',
-    description: 'Batas permintaan terlampaui. Harap tunggu beberapa saat sebelum mencoba lagi.',
+    subtitle: 'Muitas requisições',
+    description: 'O limite de requisições foi excedido. Aguarde alguns instantes antes de tentar novamente.',
     colorTheme: 'indigo',
   },
   '500': {
     icon: <AlertCircle className="size-12 animate-pulse" />,
     title: '500',
-    subtitle: 'Kesalahan Server',
-    description: 'Terjadi kesalahan tak terduga pada server saat memproses permintaan Anda.',
+    subtitle: 'Erro no servidor',
+    description: 'Ocorreu um erro inesperado no servidor ao processar sua requisição.',
     colorTheme: 'destructive',
   },
 };
@@ -66,8 +66,8 @@ function ErrorContent() {
   const config = ERROR_CONFIGS[code] || {
     icon: <HelpCircle className="size-12 animate-pulse" />,
     title: code,
-    subtitle: 'Terjadi Kesalahan',
-    description: customMessage || 'Terjadi kesalahan atau kendala tak terduga pada aplikasi.',
+    subtitle: 'Ocorreu um erro',
+    description: customMessage || 'Ocorreu um erro ou problema inesperado no aplicativo.',
     colorTheme: 'primary',
   };
 
@@ -121,7 +121,7 @@ function ErrorContent() {
             className={`w-full flex-1 flex items-center justify-center gap-2 h-12 ${colorMap.border} ${colorMap.hoverBg} ${colorMap.text} ${colorMap.hoverText} rounded-xl transition-all shadow-sm`}
           >
             <ArrowLeft className="size-4" />
-            <span>Kembali</span>
+            <span>Voltar</span>
           </Button>
           <Button
             asChild
@@ -129,7 +129,7 @@ function ErrorContent() {
           >
             <Link href="/dashboard">
               <Home className="size-4" />
-              <span>Beranda</span>
+              <span>Início</span>
             </Link>
           </Button>
         </div>

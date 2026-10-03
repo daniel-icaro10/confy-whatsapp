@@ -294,7 +294,7 @@ model SystemConfig {
   appName            String   @default("WA-AKG")
   logoUrl            String?
   faviconUrl         String?
-  timezone           String   @default("Asia/Jakarta")
+  timezone           String   @default("America/Sao_Paulo")
   enableRegistration Boolean  @default(true)
   
   updatedAt          DateTime @updatedAt

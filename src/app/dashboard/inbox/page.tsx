@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Bell, Inbox, Trash2, CheckCheck, ChevronLeft, Info, AlertTriangle, CheckCircle, Settings, ExternalLink } from "lucide-react";
 import { toast } from "sonner";
 import { formatDistanceToNow } from "date-fns";
+import { ptBR } from "date-fns/locale";
 import { cn } from "@/lib/utils";
 
 interface Notification {
@@ -25,6 +26,13 @@ const TYPE_STYLES: Record<string, { icon: any; bg: string; border: string; dot: 
     WARNING: { icon: AlertTriangle, bg: "bg-yellow-50 dark:bg-yellow-950/30", border: "border-l-yellow-500", dot: "bg-yellow-500" },
     SUCCESS: { icon: CheckCircle, bg: "bg-green-50 dark:bg-green-950/30", border: "border-l-green-500", dot: "bg-green-500" },
     SYSTEM: { icon: Settings, bg: "bg-purple-50 dark:bg-purple-950/30", border: "border-l-purple-500", dot: "bg-purple-500" },
+};
+
+const TYPE_LABELS: Record<string, string> = {
+    INFO: "Info",
+    WARNING: "Aviso",
+    SUCCESS: "Sucesso",
+    SYSTEM: "Sistema",
 };
 
 export default function InboxPage() {
@@ -86,10 +94,10 @@ export default function InboxPage() {
             const res = await fetch(`/api/notifications/delete?id=${id}`, { method: "DELETE" });
             if (res.ok) {
                 setNotifications(prev => prev.filter(n => n.id !== id));
-                toast.success("Notification deleted");
+                toast.success("Notificação excluída");
             }
         } catch (e) {
-            toast.error("Failed to delete");
+            toast.error("Falha ao excluir");
         }
     };
 
@@ -121,16 +129,16 @@ export default function InboxPage() {
                 <div>
                     <h1 className="text-xl sm:text-2xl font-bold flex items-center gap-2">
                         <Inbox className="h-5 w-5 sm:h-6 sm:w-6" />
-                        Inbox
+                        Caixa de entrada
                     </h1>
                     <p className="text-sm text-muted-foreground mt-1">
                         {unreadCount > 0
-                            ? `${unreadCount} unread notification${unreadCount !== 1 ? "s" : ""}`
-                            : "All caught up!"}
+                            ? `${unreadCount} ${unreadCount !== 1 ? "notificações não lidas" : "notificação não lida"}`
+                            : "Tudo em dia!"}
                     </p>
                 </div>
                 <Button variant="outline" size="sm" onClick={() => router.push("/dashboard")}>
-                    <ChevronLeft className="h-4 w-4 mr-1" /> Back
+                    <ChevronLeft className="h-4 w-4 mr-1" /> Voltar
                 </Button>
             </div>
 
@@ -144,7 +152,7 @@ export default function InboxPage() {
                                 ? "bg-primary text-primary-foreground"
                                 : "bg-muted/50 text-muted-foreground hover:bg-muted"
                         )}>
-                        {f === "all" ? "All" : f === "unread" ? "Unread" : "Read"}
+                        {f === "all" ? "Todas" : f === "unread" ? "Não lidas" : "Lidas"}
                         {f === "unread" && unreadCount > 0 && (
                             <span className="ml-1.5 text-[10px] opacity-70">({unreadCount})</span>
                         )}
@@ -152,7 +160,7 @@ export default function InboxPage() {
                 ))}
                 {unreadCount > 0 && (
                     <Button variant="ghost" size="sm" className="ml-auto h-7 text-xs" onClick={() => markAsRead()}>
-                        <CheckCheck className="h-3.5 w-3.5 mr-1" /> Mark all read
+                        <CheckCheck className="h-3.5 w-3.5 mr-1" /> Marcar todas como lidas
                     </Button>
                 )}
             </div>
@@ -164,13 +172,13 @@ export default function InboxPage() {
                         <div className="h-12 w-12 rounded-full bg-muted/50 flex items-center justify-center mb-3">
                             <Inbox className="h-6 w-6 text-muted-foreground/50" />
                         </div>
-                        <h3 className="text-sm font-semibold">No notifications</h3>
+                        <h3 className="text-sm font-semibold">Nenhuma notificação</h3>
                         <p className="text-xs text-muted-foreground mt-1">
                             {filter === "all"
-                                ? "No notifications yet. We'll notify you when something arrives."
+                                ? "Nenhuma notificação ainda. Avisaremos você quando algo chegar."
                                 : filter === "unread"
-                                    ? "No unread notifications. Good job!"
-                                    : "No read notifications."}
+                                    ? "Nenhuma notificação não lida. Bom trabalho!"
+                                    : "Nenhuma notificação lida."}
                         </p>
                     </CardContent>
                 </Card>
@@ -222,14 +230,14 @@ export default function InboxPage() {
                                     {/* Footer: time + href badge */}
                                     <div className="flex items-center gap-2 mt-2">
                                         <span className="text-[10px] text-muted-foreground">
-                                            {formatDistanceToNow(new Date(n.createdAt), { addSuffix: true })}
+                                            {formatDistanceToNow(new Date(n.createdAt), { addSuffix: true, locale: ptBR })}
                                         </span>
                                         <Badge variant="outline" className="text-[9px] px-1.5 py-0 h-4 font-normal">
-                                            {n.type}
+                                            {TYPE_LABELS[n.type] || n.type}
                                         </Badge>
                                         {n.href && (
                                             <span className="text-[10px] text-primary flex items-center gap-0.5 ml-auto">
-                                                <ExternalLink className="h-3 w-3" /> Click to view
+                                                <ExternalLink className="h-3 w-3" /> Clique para ver
                                             </span>
                                         )}
                                     </div>
@@ -240,13 +248,13 @@ export default function InboxPage() {
                                     {!n.read && (
                                         <Button variant="ghost" size="icon" className="h-7 w-7"
                                             onClick={(e) => { e.stopPropagation(); markAsRead(n.id); }}
-                                            title="Mark as read">
+                                            title="Marcar como lida">
                                             <CheckCheck className="h-3.5 w-3.5" />
                                         </Button>
                                     )}
                                     <Button variant="ghost" size="icon" className="h-7 w-7 text-destructive/70 hover:text-destructive"
                                         onClick={(e) => { e.stopPropagation(); deleteNotification(n.id); }}
-                                        title="Delete">
+                                        title="Excluir">
                                         <Trash2 className="h-3.5 w-3.5" />
                                     </Button>
                                 </div>
@@ -256,7 +264,7 @@ export default function InboxPage() {
 
                     {/* Summary */}
                     <p className="text-[10px] text-center text-muted-foreground pt-4 pb-8">
-                        Showing {filtered.length} of {notifications.length} notification{notifications.length !== 1 ? "s" : ""}
+                        Mostrando {filtered.length} de {notifications.length} {notifications.length !== 1 ? "notificações" : "notificação"}
                     </p>
                 </div>
             )}
