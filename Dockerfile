@@ -10,6 +10,8 @@ RUN npm ci --legacy-peer-deps && npm cache clean --force
 
 # Source & build
 COPY . .
+# Raise V8 heap limit for next build on low-RAM hosts (builder stage only)
+ENV NODE_OPTIONS=--max-old-space-size=2560
 RUN npx prisma generate && npm run build
 
 # Strip devDeps from node_modules after build
