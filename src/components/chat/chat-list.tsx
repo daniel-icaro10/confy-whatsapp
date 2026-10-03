@@ -216,7 +216,7 @@ function ChatRow({
                 onContextMenu={(e) => { e.preventDefault(); setCtxMenu({ x: e.clientX, y: e.clientY, jid: chat.jid, name: displayName }); }}
             >
                 <Avatar className="h-10 w-10 flex-shrink-0">
-                    <AvatarImage src={chat.profilePic || ""} />
+                    <AvatarImage src={`/api/chat/${sessionId}/${encodeURIComponent(chat.jid)}/avatar`} />
                     <AvatarFallback className="text-xs font-medium bg-gradient-to-br from-primary/20 to-blue-500/20 text-primary">
                         {displayName.slice(0, 2).toUpperCase()}
                     </AvatarFallback>
