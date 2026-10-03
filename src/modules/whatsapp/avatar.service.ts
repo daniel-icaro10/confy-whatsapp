@@ -19,6 +19,7 @@ const AVATAR_DIR = path.join(process.cwd(), "data", "avatars");
 const TTL_MS = 24 * 60 * 60 * 1000;
 const FETCH_INTERVAL_MS = 400;
 const WAIT_TIMEOUT_MS = 15_000;
+const QUERY_TIMEOUT_MS = 8_000;
 const MAX_PENDING_PER_SESSION = 200;
 
 type SessionQueue = { chain: Promise<void>; pending: Map<string, Promise<void>> };
@@ -54,11 +55,15 @@ async function fetchAndStore(sessionId: string, jid: string) {
 
     let url: string | undefined;
     try {
-        url = await socket.profilePictureUrl(jid, "preview");
+        // Some JIDs (e.g. system accounts) never answer; don't let them block the queue
+        url = await Promise.race([
+            socket.profilePictureUrl(jid, "preview"),
+            sleep(QUERY_TIMEOUT_MS).then(() => { throw new Error("query-timeout"); }),
+        ]);
     } catch (e: unknown) {
         const msg = e instanceof Error ? e.message : String(e);
-        // No picture, or hidden by the contact's privacy settings
-        if (/401|404|not-authorized|item-not-found|not-found/i.test(msg)) {
+        // No picture, hidden by the contact's privacy settings, or unresponsive JID
+        if (/401|404|not-authorized|item-not-found|not-found|query-timeout/i.test(msg)) {
             await writeFile(none, "");
             await unlink(image).catch(() => {});
         } else {
