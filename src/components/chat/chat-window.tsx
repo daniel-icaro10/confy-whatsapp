@@ -3,7 +3,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Send, Paperclip, ArrowLeft, FileText, Image as ImageIcon, Music, Video, Download, ArrowDown, CornerUpLeft, Copy, Trash2, Info, X } from "lucide-react";
+import {
+    Send, Paperclip, ArrowLeft, FileText, Image as ImageIcon, Music, Video,
+    Download, ArrowDown, CornerUpLeft, Copy, Trash2, Info, X,
+    UserCheck, ArrowRightLeft, CheckCircle2, RotateCcw, Zap, Tag
+} from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
     AlertDialog,
@@ -15,9 +19,35 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+} from "@/components/ui/dialog";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
-import { getChatMessages, sendChatMessage, sendMediaMessage } from "@/app/dashboard/chat/actions";
+import {
+    getChatMessages,
+    sendChatMessage,
+    sendMediaMessage,
+    getTicketDetails,
+    assignTicketToMe,
+    transferTicket,
+    updateTicketStatus,
+    getTransferOptions,
+    getQuickReplies
+} from "@/app/dashboard/chat/actions";
 import { useSocket } from "./socket-context";
 
 interface Message {
@@ -196,8 +226,121 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
     // Context menu state
     const [contextMenu, setContextMenu] = useState<ContextMenuState | null>(null);
 
+    // Ticket & Customer Service state
+    const [ticket, setTicket] = useState<any>(null);
+    const [transferOpen, setTransferOpen] = useState(false);
+    const [transferLoading, setTransferLoading] = useState(false);
+    const [transferOptions, setTransferOptions] = useState<{ departments: any[]; attendants: any[]; currentUserId: string } | null>(null);
+    const [targetDeptId, setTargetDeptId] = useState<string>("none");
+    const [targetUserId, setTargetUserId] = useState<string>("none");
+
+    // Quick replies state
+    const [quickReplies, setQuickReplies] = useState<any[]>([]);
+    const [quickReplyOpen, setQuickReplyOpen] = useState(false);
+    const [quickReplySearch, setQuickReplySearch] = useState("");
+
     const { getSocket, joinSession } = useSocket();
     const getDateLabel = useDateLabel();
+
+    // Fetch Ticket details and Quick Replies
+    useEffect(() => {
+        let mounted = true;
+        getTicketDetails(sessionId, jid).then(t => {
+            if (mounted) setTicket(t);
+        }).catch(console.error);
+
+        getQuickReplies(sessionId).then(qr => {
+            if (mounted) setQuickReplies(qr || []);
+        }).catch(console.error);
+
+        return () => { mounted = false; };
+    }, [sessionId, jid]);
+
+    // Real-time Ticket updates
+    useEffect(() => {
+        const socket = getSocket();
+        if (!socket) return;
+        const handler = (updatedTicket: any) => {
+            if (updatedTicket?.jid === jid) {
+                setTicket(updatedTicket);
+            }
+        };
+        socket.on("ticket.updated", handler);
+        return () => {
+            socket.off("ticket.updated", handler);
+        };
+    }, [jid, getSocket]);
+
+    const handleAssignToMe = async () => {
+        try {
+            const updated = await assignTicketToMe(sessionId, jid);
+            setTicket(updated);
+            toast.success("Você assumiu este atendimento!");
+        } catch (e: any) {
+            toast.error(e.message || "Falha ao assumir atendimento");
+        }
+    };
+
+    const handleOpenTransfer = async () => {
+        try {
+            const options = await getTransferOptions(sessionId);
+            setTransferOptions(options);
+            setTargetDeptId(ticket?.departmentId || "none");
+            setTargetUserId(ticket?.assignedUserId || "none");
+            setTransferOpen(true);
+        } catch (e: any) {
+            toast.error("Falha ao carregar opções de transferência");
+        }
+    };
+
+    const handleConfirmTransfer = async () => {
+        setTransferLoading(true);
+        try {
+            const deptId = targetDeptId === "none" ? null : targetDeptId;
+            const userId = targetUserId === "none" ? null : targetUserId;
+            const updated = await transferTicket(sessionId, jid, { departmentId: deptId, userId });
+            setTicket(updated);
+            setTransferOpen(false);
+            toast.success("Atendimento transferido com sucesso!");
+        } catch (e: any) {
+            toast.error(e.message || "Falha ao transferir");
+        } finally {
+            setTransferLoading(false);
+        }
+    };
+
+    const handleToggleStatus = async () => {
+        try {
+            const newStatus = ticket?.status === "RESOLVED" ? "IN_PROGRESS" : "RESOLVED";
+            const updated = await updateTicketStatus(sessionId, jid, newStatus);
+            setTicket(updated);
+            if (newStatus === "RESOLVED") {
+                toast.success("Atendimento finalizado!");
+            } else {
+                toast.success("Atendimento reaberto!");
+            }
+        } catch (e: any) {
+            toast.error(e.message || "Falha ao alterar status");
+        }
+    };
+
+    const handleSelectQuickReply = (qr: any) => {
+        setInput(prev => {
+            const match = prev.match(/\/([a-zA-Z0-9_\-]*)$/);
+            if (match) {
+                return prev.substring(0, match.index) + qr.content;
+            }
+            return prev ? `${prev} ${qr.content}` : qr.content;
+        });
+        setQuickReplyOpen(false);
+        inputRef.current?.focus();
+    };
+
+    const slashMatch = input.match(/\/([a-zA-Z0-9_\-]*)$/);
+    const slashQuery = slashMatch ? slashMatch[1].toLowerCase() : null;
+    const matchingQuickReplies = slashQuery !== null
+        ? quickReplies.filter(qr => qr.shortcut.toLowerCase().includes(slashQuery) || qr.title.toLowerCase().includes(slashQuery))
+        : [];
 
     const scrollToBottom = useCallback((smooth = true) => {
         bottomRef.current?.scrollIntoView({ behavior: smooth ? "smooth" : "auto", block: "end" });
@@ -417,23 +560,162 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
             )}
 
             {/* Header */}
-            <div className="shrink-0 px-3 py-2.5 border-b bg-background/80 backdrop-blur-sm flex items-center gap-3 z-10">
-                {onBack && (
-                    <Button variant="ghost" size="icon" className="h-8 w-8 md:hidden shrink-0 text-muted-foreground hover:text-foreground" onClick={onBack}>
-                        <ArrowLeft className="h-4 w-4" />
+            <div className="shrink-0 px-3 py-2 border-b bg-background/80 backdrop-blur-sm flex items-center justify-between gap-2 sm:gap-3 z-10">
+                <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                    {onBack && (
+                        <Button variant="ghost" size="icon" className="h-8 w-8 md:hidden shrink-0 text-muted-foreground hover:text-foreground" onClick={onBack}>
+                            <ArrowLeft className="h-4 w-4" />
+                        </Button>
+                    )}
+                    <Avatar className="h-9 w-9 shrink-0">
+                        <AvatarImage src={`/api/chat/${sessionId}/${encodeURIComponent(jid)}/avatar`} />
+                        <AvatarFallback className="text-xs font-medium bg-gradient-to-br from-primary/20 to-blue-500/20 text-primary">
+                            {displayName.slice(0, 2).toUpperCase()}
+                        </AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                            <h3 className="text-sm font-semibold text-foreground truncate">{displayName}</h3>
+                            {/* Status Badge */}
+                            {ticket?.status === "IN_PROGRESS" ? (
+                                <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-600 dark:text-blue-400 font-medium shrink-0 flex items-center gap-1">
+                                    <span className="h-1.5 w-1.5 rounded-full bg-blue-500 animate-pulse" />
+                                    {ticket.assignedUser?.name?.split(' ')[0] || "Em atendimento"}
+                                </span>
+                            ) : ticket?.status === "RESOLVED" ? (
+                                <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 font-medium shrink-0">
+                                    Resolvido
+                                </span>
+                            ) : (
+                                <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 font-medium shrink-0">
+                                    Na fila
+                                </span>
+                            )}
+                            {/* Department Badge */}
+                            {ticket?.department && (
+                                <span
+                                    className="text-[10px] px-2 py-0.5 rounded-full font-medium shrink-0"
+                                    style={{
+                                        backgroundColor: `${ticket.department.colorHex}20`,
+                                        color: ticket.department.colorHex
+                                    }}
+                                >
+                                    {ticket.department.name}
+                                </span>
+                            )}
+                        </div>
+                        <p className="text-[10px] text-muted-foreground truncate">{jid}</p>
+                    </div>
+                </div>
+
+                {/* Customer Service Header Actions */}
+                <div className="flex items-center gap-1 shrink-0">
+                    {/* Assumir atendimento */}
+                    {ticket?.status !== "RESOLVED" && (
+                        <Button
+                            variant={ticket?.status === "OPEN" ? "default" : "outline"}
+                            size="sm"
+                            className="h-7 sm:h-8 px-2 sm:px-2.5 text-xs font-medium gap-1 rounded-lg"
+                            onClick={handleAssignToMe}
+                            title="Assumir esta conversa"
+                        >
+                            <UserCheck className="h-3.5 w-3.5" />
+                            <span className="hidden sm:inline">Assumir</span>
+                        </Button>
+                    )}
+
+                    {/* Transferir */}
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        className="h-7 sm:h-8 px-2 sm:px-2.5 text-xs font-medium gap-1 rounded-lg"
+                        onClick={handleOpenTransfer}
+                        title="Transferir para setor ou atendente"
+                    >
+                        <ArrowRightLeft className="h-3.5 w-3.5" />
+                        <span className="hidden sm:inline">Transferir</span>
                     </Button>
-                )}
-                <Avatar className="h-9 w-9 shrink-0">
-                    <AvatarImage src={`/api/chat/${sessionId}/${encodeURIComponent(jid)}/avatar`} />
-                    <AvatarFallback className="text-xs font-medium bg-gradient-to-br from-primary/20 to-blue-500/20 text-primary">
-                        {displayName.slice(0, 2).toUpperCase()}
-                    </AvatarFallback>
-                </Avatar>
-                <div className="flex-1 min-w-0">
-                    <h3 className="text-sm font-semibold text-foreground truncate">{displayName}</h3>
-                    <p className="text-[10px] text-muted-foreground truncate">{jid}</p>
+
+                    {/* Finalizar / Reabrir */}
+                    <Button
+                        variant={ticket?.status === "RESOLVED" ? "secondary" : "ghost"}
+                        size="sm"
+                        className={cn(
+                            "h-7 sm:h-8 px-2 sm:px-2.5 text-xs font-medium gap-1 rounded-lg",
+                            ticket?.status !== "RESOLVED" && "text-emerald-600 hover:text-emerald-700 hover:bg-emerald-500/10"
+                        )}
+                        onClick={handleToggleStatus}
+                        title={ticket?.status === "RESOLVED" ? "Reabrir atendimento" : "Finalizar atendimento"}
+                    >
+                        {ticket?.status === "RESOLVED" ? (
+                            <>
+                                <RotateCcw className="h-3.5 w-3.5" />
+                                <span className="hidden sm:inline">Reabrir</span>
+                            </>
+                        ) : (
+                            <>
+                                <CheckCircle2 className="h-3.5 w-3.5" />
+                                <span className="hidden sm:inline">Finalizar</span>
+                            </>
+                        )}
+                    </Button>
                 </div>
             </div>
+
+            {/* Transfer Dialog */}
+            <Dialog open={transferOpen} onOpenChange={setTransferOpen}>
+                <DialogContent className="sm:max-w-md">
+                    <DialogHeader>
+                        <DialogTitle>Transferir atendimento</DialogTitle>
+                        <DialogDescription>
+                            Transfira esta conversa para outro setor da empresa ou diretamente para outro colega atendente.
+                        </DialogDescription>
+                    </DialogHeader>
+
+                    <div className="space-y-4 py-2">
+                        <div className="space-y-1.5">
+                            <label className="text-xs font-semibold text-foreground">Setor de destino</label>
+                            <Select value={targetDeptId} onValueChange={setTargetDeptId}>
+                                <SelectTrigger className="w-full">
+                                    <SelectValue placeholder="Selecione um setor" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="none">Sem setor definido</SelectItem>
+                                    {transferOptions?.departments.map(d => (
+                                        <SelectItem key={d.id} value={d.id}>
+                                            {d.name}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
+
+                        <div className="space-y-1.5">
+                            <label className="text-xs font-semibold text-foreground">Atendente responsável</label>
+                            <Select value={targetUserId} onValueChange={setTargetUserId}>
+                                <SelectTrigger className="w-full">
+                                    <SelectValue placeholder="Selecione um atendente" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="none">Nenhum (Deixar na fila aberta do setor)</SelectItem>
+                                    {transferOptions?.attendants.map(a => (
+                                        <SelectItem key={a.id} value={a.id}>
+                                            {a.name || a.email} {a.id === transferOptions.currentUserId ? "(Você)" : ""}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
+                    </div>
+
+                    <DialogFooter>
+                        <Button variant="outline" onClick={() => setTransferOpen(false)}>Cancelar</Button>
+                        <Button onClick={handleConfirmTransfer} disabled={transferLoading}>
+                            {transferLoading ? "Transferindo..." : "Confirmar transferência"}
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
 
             {/* Messages */}
             <div ref={scrollRef} className="flex-1 overflow-y-auto px-3 sm:px-4 py-3 min-h-0 styled-scrollbar" onScroll={handleScroll}
@@ -601,7 +883,81 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
                         </PopoverContent>
                     </Popover>
 
-                    <div className="flex-1">
+                    {/* Quick Replies Button */}
+                    <Popover open={quickReplyOpen} onOpenChange={setQuickReplyOpen}>
+                        <PopoverTrigger asChild>
+                            <Button
+                                variant="ghost"
+                                size="icon"
+                                className="h-9 w-9 rounded-full shrink-0 text-amber-500 hover:text-amber-600 hover:bg-amber-500/10"
+                                title="Respostas rápidas (atalho: digite / na mensagem)"
+                            >
+                                <Zap className="h-4 w-4" />
+                            </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-72 p-2 shadow-xl" side="top" align="start">
+                            <div className="flex items-center justify-between px-1.5 py-1 mb-1 border-b pb-1.5">
+                                <span className="text-xs font-semibold text-foreground flex items-center gap-1.5">
+                                    <Zap className="h-3.5 w-3.5 text-amber-500" />
+                                    Respostas Rápidas
+                                </span>
+                                <span className="text-[10px] text-muted-foreground">atalho: /</span>
+                            </div>
+                            <Input
+                                placeholder="Filtrar por atalho..."
+                                value={quickReplySearch}
+                                onChange={(e) => setQuickReplySearch(e.target.value)}
+                                className="h-7 text-xs mb-2 bg-muted/40"
+                            />
+                            <div className="max-h-52 overflow-y-auto space-y-1">
+                                {quickReplies
+                                    .filter(qr => qr.shortcut.toLowerCase().includes(quickReplySearch.toLowerCase()) || qr.title.toLowerCase().includes(quickReplySearch.toLowerCase()))
+                                    .map(qr => (
+                                        <button
+                                            key={qr.id}
+                                            onClick={() => handleSelectQuickReply(qr)}
+                                            className="w-full text-left p-2 rounded-lg hover:bg-muted/70 transition-colors flex flex-col gap-0.5 cursor-pointer border border-transparent hover:border-border/60"
+                                        >
+                                            <div className="flex items-center justify-between">
+                                                <span className="text-xs font-semibold text-foreground">{qr.title}</span>
+                                                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-600 dark:text-amber-400 font-bold">/{qr.shortcut}</span>
+                                            </div>
+                                            <p className="text-[11px] text-muted-foreground line-clamp-2">{qr.content}</p>
+                                        </button>
+                                    ))}
+                                {quickReplies.length === 0 && (
+                                    <p className="text-xs text-muted-foreground text-center py-4">Nenhuma resposta cadastrada ainda.</p>
+                                )}
+                            </div>
+                        </PopoverContent>
+                    </Popover>
+
+                    <div className="flex-1 relative">
+                        {/* Slash autocomplete floating bar */}
+                        {slashQuery !== null && matchingQuickReplies.length > 0 && (
+                            <div className="absolute bottom-full left-0 right-0 mb-2 p-1.5 rounded-xl bg-background/95 backdrop-blur-md border border-border shadow-xl space-y-1 z-30 animate-in slide-in-from-bottom-2">
+                                <div className="text-[10px] font-semibold text-muted-foreground px-1.5 flex items-center justify-between">
+                                    <span>Respostas Rápidas Sugeridas:</span>
+                                    <span>Pressione Tab para inserir</span>
+                                </div>
+                                <div className="max-h-40 overflow-y-auto space-y-0.5">
+                                    {matchingQuickReplies.slice(0, 5).map(qr => (
+                                        <button
+                                            key={qr.id}
+                                            onClick={() => handleSelectQuickReply(qr)}
+                                            className="w-full text-left px-2 py-1.5 rounded-lg hover:bg-amber-500/10 transition-colors flex items-center justify-between text-xs cursor-pointer group"
+                                        >
+                                            <div className="flex items-center gap-2 truncate">
+                                                <span className="font-mono text-amber-600 dark:text-amber-400 font-bold">/{qr.shortcut}</span>
+                                                <span className="text-muted-foreground truncate">{qr.title}</span>
+                                            </div>
+                                            <span className="text-[10px] text-muted-foreground/60 group-hover:text-foreground shrink-0 font-medium">Inserir</span>
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
                         {/* Reply preview bar */}
                         {replyingTo && (
                             <div className="mb-2 flex items-start gap-2 px-2 py-1.5 rounded-lg bg-muted/50 border-l-2 border-amber-500 text-xs animate-in slide-in-from-bottom-1 overflow-hidden">
@@ -614,7 +970,16 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
                         )}
                         <div className="flex items-end gap-2 p-1 rounded-2xl border border-border/30 bg-background">
                             <textarea ref={inputRef} value={input} onChange={(e) => { setInput(e.target.value); const el = e.target; el.style.height = "auto"; el.style.height = Math.min(el.scrollHeight, 120) + "px"; }}
-                                onKeyDown={handleKeyDown} placeholder="Digite uma mensagem..." rows={1} style={{ minHeight: "36px", maxHeight: "120px" }}
+                                onKeyDown={(e) => {
+                                    if (e.key === "Tab" && slashQuery !== null && matchingQuickReplies.length > 0) {
+                                        e.preventDefault();
+                                        handleSelectQuickReply(matchingQuickReplies[0]);
+                                        return;
+                                    }
+                                    handleKeyDown(e);
+                                }}
+                                placeholder="Digite uma mensagem... (ou digite / para respostas rápidas)"
+                                rows={1} style={{ minHeight: "36px", maxHeight: "120px" }}
                                 className="flex-1 resize-none bg-transparent px-2 py-1.5 text-sm text-foreground placeholder-muted-foreground focus:outline-none leading-normal" />
                         </div>
                     </div>

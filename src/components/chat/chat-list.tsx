@@ -13,6 +13,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { getChatsStatus } from "@/app/dashboard/chat/actions";
 import { useSocket } from "./socket-context";
+import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 
 interface ChatContact {
@@ -20,6 +21,12 @@ interface ChatContact {
     name: string | null;
     notify: string | null;
     profilePic: string | null;
+    ticket?: {
+        id: string;
+        status: "OPEN" | "IN_PROGRESS" | "RESOLVED";
+        assignedUser?: { id: string; name: string | null; email: string } | null;
+        department?: { id: string; name: string; colorHex: string } | null;
+    } | null;
     lastMessage?: {
         content: string | null;
         timestamp: string;
@@ -239,7 +246,36 @@ function ChatRow({
                             <span className="text-[10px] text-muted-foreground flex-shrink-0">{getTimeLabel(chat.lastMessage.timestamp)}</span>
                         )}
                     </div>
-                    <p className="text-xs text-muted-foreground truncate mt-0.5">{getMessagePreview(chat)}</p>
+                    <div className="flex items-center justify-between gap-1.5 mt-1">
+                        <p className="text-xs text-muted-foreground truncate flex-1">{getMessagePreview(chat)}</p>
+                        {/* Status Badge */}
+                        {chat.ticket?.status === "IN_PROGRESS" ? (
+                            <span className="text-[9px] px-1.5 py-0.5 rounded-md bg-blue-500/15 text-blue-600 dark:text-blue-400 font-medium shrink-0 flex items-center gap-1">
+                                <span className="h-1.5 w-1.5 rounded-full bg-blue-500 animate-pulse" />
+                                {chat.ticket.assignedUser?.name?.split(' ')[0] || "Em atendimento"}
+                            </span>
+                        ) : chat.ticket?.status === "RESOLVED" ? (
+                            <span className="text-[9px] px-1.5 py-0.5 rounded-md bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 font-medium shrink-0">
+                                Resolvido
+                            </span>
+                        ) : (
+                            <span className="text-[9px] px-1.5 py-0.5 rounded-md bg-amber-500/15 text-amber-600 dark:text-amber-400 font-medium shrink-0">
+                                Na fila
+                            </span>
+                        )}
+                        {/* Department Badge */}
+                        {chat.ticket?.department && (
+                            <span
+                                className="text-[9px] px-1.5 py-0.5 rounded-md font-medium shrink-0"
+                                style={{
+                                    backgroundColor: `${chat.ticket.department.colorHex}20`,
+                                    color: chat.ticket.department.colorHex
+                                }}
+                            >
+                                {chat.ticket.department.name}
+                            </span>
+                        )}
+                    </div>
                 </div>
 
                 {/* Label button on hover */}
@@ -277,7 +313,11 @@ export function ChatList({ sessionId, onSelectChat, selectedJid }: ChatListProps
     const [newChatNumber, setNewChatNumber] = useState("");
     const [hasMore, setHasMore] = useState(true);
     // Label dots per JID — {colorHex}[]
-    const [chatLabelMap, setChatLabelMap] = useState<Map<string, {colorHex: string}[]>>(new Map());
+    const { data: authSession } = useSession();
+    const currentUserId = authSession?.user?.id;
+    const [ticketFilter, setTicketFilter] = useState<"ALL" | "OPEN" | "MINE" | "RESOLVED">("ALL");
+
+    const [chatLabelMap, setChatLabelMap] = useState<Map<string, { colorHex: string }[]>>(new Map());
 
     const { getSocket, joinSession } = useSocket();
     const searchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -326,6 +366,7 @@ export function ChatList({ sessionId, onSelectChat, selectedJid }: ChatListProps
         const onConnect = () => joinSession(sessionId);
         if (socket.connected) joinSession(sessionId);
         socket.on("connect", onConnect);
+
         const handler = async (newMessages: any[]) => {
             let needsReload = false;
             setChats(prev => {
@@ -346,8 +387,27 @@ export function ChatList({ sessionId, onSelectChat, selectedJid }: ChatListProps
             });
             if (needsReload) fetchChats();
         };
+
+        const ticketHandler = (ticket: any) => {
+            if (!ticket?.jid) return;
+            setChats(prev => {
+                return prev.map(c => {
+                    if (c.jid === ticket.jid) {
+                        return { ...c, ticket };
+                    }
+                    return c;
+                });
+            });
+        };
+
         socket.on("message.update", handler);
-        return () => { socket.off("connect", onConnect); socket.off("message.update", handler); };
+        socket.on("ticket.updated", ticketHandler);
+
+        return () => {
+            socket.off("connect", onConnect);
+            socket.off("message.update", handler);
+            socket.off("ticket.updated", ticketHandler);
+        };
     }, [sessionId, getSocket, joinSession, fetchChats]);
 
     // Fetch label assignments for all chats
@@ -380,15 +440,29 @@ export function ChatList({ sessionId, onSelectChat, selectedJid }: ChatListProps
         }, 300);
     };
 
+    const queueCount = useMemo(() => chats.filter(c => c.ticket?.status === "OPEN" || !c.ticket).length, [chats]);
+    const mineCount = useMemo(() => chats.filter(c => c.ticket?.assignedUser?.id === currentUserId && c.ticket?.status !== "RESOLVED").length, [chats, currentUserId]);
+
     const filteredChats = useMemo(() => {
-        if (!searchQuery.trim()) return chats;
-        const q = searchQuery.toLowerCase();
-        return chats.filter(chat => {
-            const name = (chat.name || chat.notify || "").toLowerCase();
-            const jid = chat.jid.toLowerCase();
-            return name.includes(q) || jid.includes(q);
-        });
-    }, [chats, searchQuery]);
+        let result = chats;
+        if (ticketFilter === "OPEN") {
+            result = result.filter(c => c.ticket?.status === "OPEN" || !c.ticket);
+        } else if (ticketFilter === "MINE") {
+            result = result.filter(c => c.ticket?.assignedUser?.id === currentUserId && c.ticket?.status !== "RESOLVED");
+        } else if (ticketFilter === "RESOLVED") {
+            result = result.filter(c => c.ticket?.status === "RESOLVED");
+        }
+
+        if (searchQuery.trim()) {
+            const q = searchQuery.toLowerCase();
+            result = result.filter(chat => {
+                const name = (chat.name || chat.notify || "").toLowerCase();
+                const jid = chat.jid.toLowerCase();
+                return name.includes(q) || jid.includes(q);
+            });
+        }
+        return result;
+    }, [chats, ticketFilter, searchQuery, currentUserId]);
 
     const handleEndReached = useCallback(() => {
         if (hasMore && !loading && !searchQuery.trim()) {
@@ -443,6 +517,56 @@ export function ChatList({ sessionId, onSelectChat, selectedJid }: ChatListProps
                     <Input placeholder="Buscar conversas..." value={searchInput}
                         onChange={(e) => handleSearchChange(e.target.value)}
                         className="h-8 pl-8 text-sm bg-muted/50 border-0 rounded-lg focus-visible:ring-1" />
+                </div>
+
+                {/* Attendance Filter Tabs */}
+                <div className="flex items-center gap-1 p-0.5 bg-muted/40 rounded-lg text-xs">
+                    <button
+                        onClick={() => setTicketFilter("ALL")}
+                        className={cn(
+                            "flex-1 py-1 px-1 rounded-md font-medium text-center transition-all text-[11px]",
+                            ticketFilter === "ALL" ? "bg-background text-foreground shadow-xs font-semibold" : "text-muted-foreground hover:text-foreground"
+                        )}
+                    >
+                        Todas
+                    </button>
+                    <button
+                        onClick={() => setTicketFilter("OPEN")}
+                        className={cn(
+                            "flex-1 py-1 px-1 rounded-md font-medium text-center transition-all text-[11px] flex items-center justify-center gap-1",
+                            ticketFilter === "OPEN" ? "bg-background text-foreground shadow-xs font-semibold" : "text-muted-foreground hover:text-foreground"
+                        )}
+                    >
+                        Fila
+                        {queueCount > 0 && (
+                            <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-amber-500/20 text-amber-600 dark:text-amber-400 font-bold">
+                                {queueCount}
+                            </span>
+                        )}
+                    </button>
+                    <button
+                        onClick={() => setTicketFilter("MINE")}
+                        className={cn(
+                            "flex-1 py-1 px-1 rounded-md font-medium text-center transition-all text-[11px] flex items-center justify-center gap-1",
+                            ticketFilter === "MINE" ? "bg-background text-foreground shadow-xs font-semibold" : "text-muted-foreground hover:text-foreground"
+                        )}
+                    >
+                        Minhas
+                        {mineCount > 0 && (
+                            <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-blue-500/20 text-blue-600 dark:text-blue-400 font-bold">
+                                {mineCount}
+                            </span>
+                        )}
+                    </button>
+                    <button
+                        onClick={() => setTicketFilter("RESOLVED")}
+                        className={cn(
+                            "flex-1 py-1 px-1 rounded-md font-medium text-center transition-all text-[11px]",
+                            ticketFilter === "RESOLVED" ? "bg-background text-foreground shadow-xs font-semibold" : "text-muted-foreground hover:text-foreground"
+                        )}
+                    >
+                        Resolvidas
+                    </button>
                 </div>
 
                 {isNewChatOpen && (

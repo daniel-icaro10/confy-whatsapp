@@ -48,7 +48,7 @@ export class ChatService {
 
         // 2. Batch fetch contacts & groups ONLY for JIDs that have messages
         const jids = rawLastMessages.map(m => m.remoteJid);
-        const [contacts, groups] = await Promise.all([
+        const [contacts, groups, tickets] = await Promise.all([
             prisma.contact.findMany({
                 where: { sessionId: dbSessionId, jid: { in: jids } },
                 select: { jid: true, name: true, notify: true, profilePic: true }
@@ -56,6 +56,13 @@ export class ChatService {
             prisma.group.findMany({
                 where: { sessionId: dbSessionId, jid: { in: jids } },
                 select: { jid: true, subject: true }
+            }),
+            prisma.ticket.findMany({
+                where: { sessionId: dbSessionId, jid: { in: jids } },
+                include: {
+                    assignedUser: { select: { id: true, name: true, email: true } },
+                    department: { select: { id: true, name: true, colorHex: true } }
+                }
             })
         ]);
 
@@ -63,6 +70,9 @@ export class ChatService {
         const infoMap = new Map<string, { name: string | null; notify: string | null; profilePic: string | null }>();
         contacts.forEach(c => infoMap.set(c.jid, { name: c.name, notify: c.notify, profilePic: c.profilePic }));
         groups.forEach(g => infoMap.set(g.jid, { name: g.subject, notify: g.subject, profilePic: null }));
+
+        const ticketMap = new Map<string, any>();
+        tickets.forEach(t => ticketMap.set(t.jid, t));
 
         // 3. Build result array (already sorted by SQL DESC)
         const result: any[] = [];
@@ -72,11 +82,19 @@ export class ChatService {
             seenJids.add(msg.remoteJid);
 
             const info = infoMap.get(msg.remoteJid);
+            const ticket = ticketMap.get(msg.remoteJid);
+
             result.push({
                 jid: msg.remoteJid,
                 name: info?.name || null,
                 notify: info?.notify || null,
                 profilePic: info?.profilePic || null,
+                ticket: ticket ? {
+                    id: ticket.id,
+                    status: ticket.status,
+                    assignedUser: ticket.assignedUser,
+                    department: ticket.department
+                } : null,
                 lastMessage: {
                     content: msg.content,
                     timestamp: msg.timestamp instanceof Date

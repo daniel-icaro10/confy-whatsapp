@@ -27,7 +27,10 @@ import {
     Tag,
     MessageCircleReply,
     Contact,
-    UserPlus
+    UserPlus,
+    Building2,
+    BarChart3,
+    Zap
 } from "lucide-react";
 import { useSidebar } from "./sidebar-context";
 import {
@@ -53,17 +56,20 @@ interface NavItem {
 
 const navGroups: NavGroup[] = [
     {
-        label: "Main",
+        label: "Atendimento",
         items: [
-            { href: "/dashboard", label: "Painel", icon: LayoutDashboard },
-            { href: "/dashboard/sessions", label: "Sessões / QR Code", icon: QrCode },
+            { href: "/dashboard/chat", label: "Conversas / Fila", icon: MessageSquare },
+            { href: "/dashboard/quick-replies", label: "Respostas Rápidas", icon: Zap },
+            { href: "/dashboard/departments", label: "Setores & Filas", icon: Building2, allowedRoles: ["SUPERADMIN", "OWNER"] },
+            { href: "/dashboard/attendance-reports", label: "Métricas & TMR", icon: BarChart3, allowedRoles: ["SUPERADMIN", "OWNER"] },
         ],
     },
     {
-        label: "Mensagens",
+        label: "WhatsApp",
         items: [
-            { href: "/dashboard/chat", label: "Conversas", icon: MessageSquare },
-            { href: "/dashboard/broadcast", label: "Disparos", icon: Megaphone },
+            { href: "/dashboard", label: "Painel Geral", icon: LayoutDashboard, allowedRoles: ["SUPERADMIN", "OWNER"] },
+            { href: "/dashboard/sessions", label: "Sessões / QR Code", icon: QrCode, allowedRoles: ["SUPERADMIN", "OWNER"] },
+            { href: "/dashboard/broadcast", label: "Disparos", icon: Megaphone, allowedRoles: ["SUPERADMIN", "OWNER"] },
             { href: "/dashboard/sticker", label: "Criador de figurinhas", icon: ImageIcon },
         ],
     },
@@ -78,26 +84,26 @@ const navGroups: NavGroup[] = [
     {
         label: "Automação",
         items: [
-            { href: "/dashboard/bot-settings", label: "Configurações do bot", icon: Bot },
-            { href: "/dashboard/autoreply", label: "Resposta automática", icon: MessageCircleReply },
-            { href: "/dashboard/profile", label: "Perfil do bot", icon: UserCircle },
-            { href: "/dashboard/scheduler", label: "Agendamentos", icon: CalendarClock },
-            { href: "/dashboard/webhooks", label: "Webhooks e API", icon: Webhook },
+            { href: "/dashboard/bot-settings", label: "Configurações do bot", icon: Bot, allowedRoles: ["SUPERADMIN", "OWNER"] },
+            { href: "/dashboard/autoreply", label: "Resposta automática (URA)", icon: MessageCircleReply, allowedRoles: ["SUPERADMIN", "OWNER"] },
+            { href: "/dashboard/profile", label: "Perfil do bot", icon: UserCircle, allowedRoles: ["SUPERADMIN", "OWNER"] },
+            { href: "/dashboard/scheduler", label: "Agendamentos", icon: CalendarClock, allowedRoles: ["SUPERADMIN", "OWNER"] },
+            { href: "/dashboard/webhooks", label: "Webhooks e API", icon: Webhook, allowedRoles: ["SUPERADMIN", "OWNER"] },
         ],
     },
     {
         label: "Desenvolvedor",
         items: [
-            { href: "/docs", label: "Documentação da API", icon: FileText },
-            { href: "/swagger", label: "Swagger UI", icon: Code, external: true },
+            { href: "/docs", label: "Documentação da API", icon: FileText, allowedRoles: ["SUPERADMIN", "OWNER"] },
+            { href: "/swagger", label: "Swagger UI", icon: Code, external: true, allowedRoles: ["SUPERADMIN", "OWNER"] },
         ],
     },
     {
         label: "Administração",
         items: [
-            { href: "/dashboard/media", label: "Gerenciador de mídia", icon: HardDrive },
-            { href: "/dashboard/sessions/access", label: "Acesso às sessões", icon: UserPlus },
-            { href: "/dashboard/users", label: "Usuários", icon: Users, superadminOnly: true },
+            { href: "/dashboard/media", label: "Gerenciador de mídia", icon: HardDrive, allowedRoles: ["SUPERADMIN", "OWNER"] },
+            { href: "/dashboard/sessions/access", label: "Equipe / Acessos", icon: UserPlus, allowedRoles: ["SUPERADMIN", "OWNER"] },
+            { href: "/dashboard/users", label: "Usuários Globais", icon: Users, superadminOnly: true },
             { href: "/dashboard/settings", label: "Configurações", icon: Settings },
             { href: "/dashboard/system-monitor", label: "Monitor do sistema", icon: Activity, superadminOnly: true },
             { href: "/dashboard/notifications", label: "Notificações", icon: Bell, superadminOnly: true },

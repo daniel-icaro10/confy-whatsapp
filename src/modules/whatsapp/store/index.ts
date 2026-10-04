@@ -4,6 +4,7 @@ import { normalizeMessageContent } from "@whiskeysockets/baileys";
 import { onMessageReceived, onMessageSent, dispatchWebhook, downloadAndSaveMedia } from "@/lib/webhook";
 import { handleBotCommand, setSessionStartTime } from "../bot/command-handler";
 import { resolveToPhoneJid, isLidJid, normalizeJid } from "@/lib/jid-utils";
+import { TicketService } from "../ticket.service";
 
 import { Server } from "socket.io";
 import { logger } from "@/lib/logger";
@@ -553,6 +554,20 @@ async function processAndSaveMessage(
                     logger.info("Store", `Sending welcome message to ${finalRemoteJid}`);
                     await sock.sendMessage(finalRemoteJid, { text: config.welcomeMessage });
                 }
+            }
+        }
+
+        // Customer Service Ticket Lifecycle (Queue, TMR, Department Routing)
+        if (triggerWebhook && remoteJid && !remoteJid.includes('@g.us') && !remoteJid.includes('status@broadcast')) {
+            const normalizedTargetJid = normalizeJid(normalizedRemoteJid);
+            if (!fromMe) {
+                TicketService.handleIncomingMessage(sessionId, dbSessionId, normalizedTargetJid, text).catch(e =>
+                    logger.error("Store", "Error updating ticket for incoming message", e)
+                );
+            } else {
+                TicketService.handleOutgoingMessage(sessionId, dbSessionId, normalizedTargetJid).catch(e =>
+                    logger.error("Store", "Error updating ticket for outgoing message", e)
+                );
             }
         }
 

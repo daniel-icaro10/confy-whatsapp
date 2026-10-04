@@ -2,6 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { ChatService } from "@/modules/whatsapp/chat.service";
+import { TicketService } from "@/modules/whatsapp/ticket.service";
 import { getAuthenticatedUserForAction } from "@/lib/server-action-auth";
 import { canAccessSession } from "@/lib/api-auth";
 
@@ -73,6 +74,15 @@ export async function sendChatMessage(sessionId: string, jid: string, text: stri
 
     try {
         await ChatService.sendTextMessage(sessionId, jid, { text }, undefined, quotedMessageId);
+
+        const session = await prisma.session.findUnique({
+            where: { sessionId },
+            select: { id: true }
+        });
+        if (session) {
+            TicketService.handleOutgoingMessage(sessionId, session.id, jid, user.id).catch(console.error);
+        }
+
         return { success: true };
     } catch (error: any) {
         throw new Error(`Failed to send message: ${error.message}`);
@@ -110,9 +120,114 @@ export async function sendMediaMessage(formData: FormData) {
             caption
         );
 
+        const session = await prisma.session.findUnique({
+            where: { sessionId },
+            select: { id: true }
+        });
+        if (session) {
+            TicketService.handleOutgoingMessage(sessionId, session.id, jid, user.id).catch(console.error);
+        }
+
         return { success: true };
     } catch (error: any) {
         console.error("Media send error:", error);
         throw new Error(`Failed to send media: ${error.message}`);
     }
 }
+
+// ─── Customer Service Actions ───────────────────────────────────
+
+export async function getTicketDetails(sessionId: string, jid: string) {
+    const user = await getAuthenticatedUserForAction();
+    if (!user) throw new Error("Unauthorized");
+
+    const canAccess = await canAccessSession(user.id, user.role, sessionId);
+    if (!canAccess) throw new Error("Forbidden");
+
+    return await TicketService.getOrCreateTicket(sessionId, jid);
+}
+
+export async function assignTicketToMe(sessionId: string, jid: string) {
+    const user = await getAuthenticatedUserForAction();
+    if (!user) throw new Error("Unauthorized");
+
+    const canAccess = await canAccessSession(user.id, user.role, sessionId);
+    if (!canAccess) throw new Error("Forbidden");
+
+    return await TicketService.assignTicket(sessionId, jid, user.id);
+}
+
+export async function transferTicket(sessionId: string, jid: string, target: { departmentId?: string | null; userId?: string | null }) {
+    const user = await getAuthenticatedUserForAction();
+    if (!user) throw new Error("Unauthorized");
+
+    const canAccess = await canAccessSession(user.id, user.role, sessionId);
+    if (!canAccess) throw new Error("Forbidden");
+
+    return await TicketService.transferTicket(sessionId, jid, target);
+}
+
+export async function updateTicketStatus(sessionId: string, jid: string, status: "OPEN" | "IN_PROGRESS" | "RESOLVED") {
+    const user = await getAuthenticatedUserForAction();
+    if (!user) throw new Error("Unauthorized");
+
+    const canAccess = await canAccessSession(user.id, user.role, sessionId);
+    if (!canAccess) throw new Error("Forbidden");
+
+    return await TicketService.updateStatus(sessionId, jid, status as any);
+}
+
+export async function getTransferOptions(sessionId: string) {
+    const user = await getAuthenticatedUserForAction();
+    if (!user) throw new Error("Unauthorized");
+
+    const canAccess = await canAccessSession(user.id, user.role, sessionId);
+    if (!canAccess) throw new Error("Forbidden");
+
+    const session = await prisma.session.findUnique({
+        where: { sessionId },
+        select: { id: true, userId: true }
+    });
+    if (!session) throw new Error("Session not found");
+
+    const [departments, attendants] = await Promise.all([
+        prisma.department.findMany({
+            where: { sessionId: session.id },
+            select: { id: true, name: true, colorHex: true },
+            orderBy: { name: "asc" }
+        }),
+        prisma.user.findMany({
+            where: {
+                OR: [
+                    { id: session.userId },
+                    { sessionAccesses: { some: { sessionId: session.id } } },
+                    { role: "SUPERADMIN" }
+                ]
+            },
+            select: { id: true, name: true, email: true },
+            orderBy: { name: "asc" }
+        })
+    ]);
+
+    return { departments, attendants, currentUserId: user.id };
+}
+
+export async function getQuickReplies(sessionId: string) {
+    const user = await getAuthenticatedUserForAction();
+    if (!user) throw new Error("Unauthorized");
+
+    const canAccess = await canAccessSession(user.id, user.role, sessionId);
+    if (!canAccess) throw new Error("Forbidden");
+
+    const session = await prisma.session.findUnique({
+        where: { sessionId },
+        select: { id: true }
+    });
+    if (!session) return [];
+
+    return await prisma.quickReply.findMany({
+        where: { sessionId: session.id },
+        orderBy: { shortcut: "asc" }
+    });
+}
+
