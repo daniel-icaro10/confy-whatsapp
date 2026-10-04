@@ -29,7 +29,8 @@ import {
     UserPlus,
     Building2,
     BarChart3,
-    Zap
+    Zap,
+    Clock
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
@@ -55,6 +56,7 @@ const navGroups: NavGroup[] = [
             { href: "/dashboard/chat", label: "Conversas / Fila", icon: MessageSquare },
             { href: "/dashboard/quick-replies", label: "Respostas Rápidas", icon: Zap },
             { href: "/dashboard/departments", label: "Setores & Filas", icon: Building2, allowedRoles: ["SUPERADMIN", "OWNER"] },
+            { href: "/dashboard/attendance-settings", label: "Horários & CSAT", icon: Clock, allowedRoles: ["SUPERADMIN", "OWNER"] },
             { href: "/dashboard/attendance-reports", label: "Métricas & TMR", icon: BarChart3, allowedRoles: ["SUPERADMIN", "OWNER"] },
         ],
     },

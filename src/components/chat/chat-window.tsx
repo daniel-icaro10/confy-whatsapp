@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button";
 import {
     Send, Paperclip, ArrowLeft, FileText, Image as ImageIcon, Music, Video,
     Download, ArrowDown, CornerUpLeft, Copy, Trash2, Info, X,
-    UserCheck, ArrowRightLeft, CheckCircle2, RotateCcw, Zap, Tag, Lock
+    UserCheck, ArrowRightLeft, CheckCircle2, RotateCcw, Zap, Tag, Lock,
+    PanelRight, User
 } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
@@ -53,6 +54,7 @@ import {
 } from "@/app/dashboard/chat/actions";
 import { useSocket } from "./socket-context";
 import { LabelAssignPopover } from "./chat-list";
+import { ChatSidebarPanel } from "./chat-sidebar-panel";
 
 interface Message {
     id: string;
@@ -249,6 +251,7 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
     // Internal Notes state
     const [notes, setNotes] = useState<any[]>([]);
     const [inputMode, setInputMode] = useState<"message" | "note">("message");
+    const [showRightPanel, setShowRightPanel] = useState(true);
 
     // Attendant Signature state
     const [useSignature, setUseSignature] = useState(() => {
@@ -566,7 +569,7 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
 
     return (
         <div
-            className="flex-1 flex flex-col bg-muted/20 min-w-0 min-h-0 relative"
+            className="flex-1 flex flex-row bg-muted/20 min-w-0 min-h-0 relative overflow-hidden"
             onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
             onDragLeave={() => setIsDragging(false)}
             onDrop={(e) => {
@@ -575,6 +578,7 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
                 if (f) processFileUpload(f);
             }}
         >
+            <div className="flex-1 flex flex-col min-w-0 min-h-0 relative overflow-hidden h-full">
             {/* Context menu */}
             {contextMenu && (
                 <ContextMenu
@@ -741,6 +745,21 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
                             <span className="hidden sm:inline">Etiquetas</span>
                         </Button>
                     </LabelAssignPopover>
+
+                    {/* Painel Lateral / Mini-CRM */}
+                    <Button
+                        variant={showRightPanel ? "default" : "outline"}
+                        size="sm"
+                        className={cn(
+                            "h-7 sm:h-8 px-2 sm:px-2.5 text-xs font-medium gap-1.5 rounded-lg transition-colors",
+                            showRightPanel && "bg-primary text-primary-foreground shadow-xs"
+                        )}
+                        onClick={() => setShowRightPanel(prev => !prev)}
+                        title={showRightPanel ? "Recolher painel de contato" : "Exibir dados do contato e mini-CRM"}
+                    >
+                        <PanelRight className="h-3.5 w-3.5" />
+                        <span className="hidden md:inline">Contato</span>
+                    </Button>
                 </div>
             </div>
 
@@ -1184,6 +1203,19 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
                     )}
                 </div>
             </div>
+            </div>
+
+            {/* Right-Side Panel: Mini-CRM & Conversation Actions (Chatwoot style) */}
+            {showRightPanel && (
+                <ChatSidebarPanel
+                    sessionId={sessionId}
+                    jid={jid}
+                    ticket={ticket}
+                    transferOptions={transferOptions || { departments: [], attendants: [] }}
+                    onClose={() => setShowRightPanel(false)}
+                    onTicketUpdated={(updated) => setTicket(updated)}
+                />
+            )}
         </div>
     );
 }

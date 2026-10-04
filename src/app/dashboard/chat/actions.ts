@@ -257,4 +257,241 @@ export async function getTicketNotes(sessionId: string, jid: string) {
     return await TicketService.listNotes(sessionId, jid);
 }
 
+export async function updateTicketPriority(
+    sessionId: string,
+    jid: string,
+    priority: "LOW" | "MEDIUM" | "HIGH" | "URGENT"
+) {
+    const user = await getAuthenticatedUserForAction();
+    if (!user) throw new Error("Unauthorized");
+
+    const canAccess = await canAccessSession(user.id, user.role, sessionId);
+    if (!canAccess) throw new Error("Forbidden");
+
+    return await TicketService.updatePriority(sessionId, jid, priority as any);
+}
+
+export async function getContactDetails(sessionId: string, jid: string) {
+    const user = await getAuthenticatedUserForAction();
+    if (!user) throw new Error("Unauthorized");
+
+    const canAccess = await canAccessSession(user.id, user.role, sessionId);
+    if (!canAccess) throw new Error("Forbidden");
+
+    const session = await prisma.session.findUnique({
+        where: { sessionId },
+        select: { id: true }
+    });
+    if (!session) throw new Error("Session not found");
+
+    const normalizedJid = jid.replace(/:\d+@/, '@');
+
+    const contact = await prisma.contact.findFirst({
+        where: {
+            sessionId: session.id,
+            OR: [
+                { jid },
+                { lid: jid },
+                { remoteJidAlt: jid },
+                { jid: normalizedJid }
+            ]
+        }
+    });
+
+    if (contact) return contact;
+
+    // Return or create a contact entry
+    return await prisma.contact.create({
+        data: {
+            sessionId: session.id,
+            jid: normalizedJid,
+            name: normalizedJid.split('@')[0]
+        }
+    });
+}
+
+export async function updateContactDetails(
+    sessionId: string,
+    jid: string,
+    data: {
+        name?: string;
+        email?: string;
+        document?: string;
+        plan?: string;
+        planValue?: string;
+        notes?: string;
+    }
+) {
+    const user = await getAuthenticatedUserForAction();
+    if (!user) throw new Error("Unauthorized");
+
+    const canAccess = await canAccessSession(user.id, user.role, sessionId);
+    if (!canAccess) throw new Error("Forbidden");
+
+    const session = await prisma.session.findUnique({
+        where: { sessionId },
+        select: { id: true }
+    });
+    if (!session) throw new Error("Session not found");
+
+    const normalizedJid = jid.replace(/:\d+@/, '@');
+
+    const existing = await prisma.contact.findFirst({
+        where: {
+            sessionId: session.id,
+            OR: [
+                { jid },
+                { lid: jid },
+                { remoteJidAlt: jid },
+                { jid: normalizedJid }
+            ]
+        }
+    });
+
+    if (existing) {
+        return await prisma.contact.update({
+            where: { id: existing.id },
+            data: {
+                ...(data.name !== undefined ? { name: data.name } : {}),
+                ...(data.email !== undefined ? { email: data.email } : {}),
+                ...(data.document !== undefined ? { document: data.document } : {}),
+                ...(data.plan !== undefined ? { plan: data.plan } : {}),
+                ...(data.planValue !== undefined ? { planValue: data.planValue } : {}),
+                ...(data.notes !== undefined ? { notes: data.notes } : {}),
+            }
+        });
+    }
+
+    return await prisma.contact.create({
+        data: {
+            sessionId: session.id,
+            jid: normalizedJid,
+            name: data.name || normalizedJid.split('@')[0],
+            email: data.email,
+            document: data.document,
+            plan: data.plan,
+            planValue: data.planValue,
+            notes: data.notes,
+        }
+    });
+}
+
+export async function getAttendanceSettings(sessionId: string) {
+    const user = await getAuthenticatedUserForAction();
+    if (!user) throw new Error("Unauthorized");
+
+    const canAccess = await canAccessSession(user.id, user.role, sessionId);
+    if (!canAccess) throw new Error("Forbidden");
+
+    const session = await prisma.session.findUnique({
+        where: { sessionId },
+        include: {
+            businessHours: {
+                orderBy: { dayOfWeek: "asc" }
+            }
+        }
+    });
+
+    if (!session) throw new Error("Session not found");
+
+    // Default 7 days of business hours if none configured yet
+    const existingDays = new Map(session.businessHours.map(b => [b.dayOfWeek, b]));
+    const completeHours = [];
+    for (let day = 0; day <= 6; day++) {
+        if (existingDays.has(day)) {
+            completeHours.push(existingDays.get(day)!);
+        } else {
+            // Default: Mon-Fri open 08:00 - 18:00, Sat-Sun closed
+            completeHours.push({
+                id: `default-${day}`,
+                sessionId: session.id,
+                dayOfWeek: day,
+                isOpen: day >= 1 && day <= 5,
+                openTime: "08:00",
+                closeTime: "18:00"
+            });
+        }
+    }
+
+    return {
+        csatEnabled: session.csatEnabled,
+        csatMessage: session.csatMessage || "⭐ *Pesquisa de Satisfação*\n\nComo você avalia nosso atendimento?\n\n1️⃣ Muito insatisfeito\n2️⃣ Insatisfeito\n3️⃣ Regular\n4️⃣ Bom\n5️⃣ Excelente\n\n_Por favor, responda digitando a nota de 1 a 5._",
+        businessHoursEnabled: session.businessHoursEnabled,
+        outOfOfficeMessage: session.outOfOfficeMessage || "⏰ *Estamos fora do nosso horário de atendimento no momento.*\n\nRecebemos sua mensagem e responderemos assim que retornarmos nosso expediente!",
+        timezone: session.timezone || "America/Sao_Paulo",
+        businessHours: completeHours
+    };
+}
+
+export async function updateAttendanceSettings(
+    sessionId: string,
+    data: {
+        csatEnabled?: boolean;
+        csatMessage?: string;
+        businessHoursEnabled?: boolean;
+        outOfOfficeMessage?: string;
+        timezone?: string;
+        businessHours?: Array<{
+            dayOfWeek: number;
+            isOpen: boolean;
+            openTime: string;
+            closeTime: string;
+        }>;
+    }
+) {
+    const user = await getAuthenticatedUserForAction();
+    if (!user) throw new Error("Unauthorized");
+
+    const canAccess = await canAccessSession(user.id, user.role, sessionId);
+    if (!canAccess) throw new Error("Forbidden");
+
+    const session = await prisma.session.findUnique({
+        where: { sessionId },
+        select: { id: true }
+    });
+
+    if (!session) throw new Error("Session not found");
+
+    // Update Session scalar fields
+    await prisma.session.update({
+        where: { id: session.id },
+        data: {
+            ...(data.csatEnabled !== undefined ? { csatEnabled: data.csatEnabled } : {}),
+            ...(data.csatMessage !== undefined ? { csatMessage: data.csatMessage } : {}),
+            ...(data.businessHoursEnabled !== undefined ? { businessHoursEnabled: data.businessHoursEnabled } : {}),
+            ...(data.outOfOfficeMessage !== undefined ? { outOfOfficeMessage: data.outOfOfficeMessage } : {}),
+            ...(data.timezone !== undefined ? { timezone: data.timezone } : {}),
+        }
+    });
+
+    // Update BusinessHours if provided
+    if (data.businessHours && Array.isArray(data.businessHours)) {
+        for (const hour of data.businessHours) {
+            await prisma.businessHour.upsert({
+                where: {
+                    sessionId_dayOfWeek: {
+                        sessionId: session.id,
+                        dayOfWeek: hour.dayOfWeek
+                    }
+                },
+                create: {
+                    sessionId: session.id,
+                    dayOfWeek: hour.dayOfWeek,
+                    isOpen: hour.isOpen,
+                    openTime: hour.openTime,
+                    closeTime: hour.closeTime
+                },
+                update: {
+                    isOpen: hour.isOpen,
+                    openTime: hour.openTime,
+                    closeTime: hour.closeTime
+                }
+            });
+        }
+    }
+
+    return { success: true };
+}
+
+
 

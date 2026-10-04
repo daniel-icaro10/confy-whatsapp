@@ -16,7 +16,8 @@ import {
     RefreshCw,
     TrendingUp,
     AlertCircle,
-    Loader2
+    Loader2,
+    Star
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -28,6 +29,8 @@ interface AttendanceMetrics {
         resolvedTickets: number;
         avgTmrSeconds: number;
         avgTmrFormatted: string;
+        avgCsat?: number | null;
+        csatCount?: number;
     };
     departments: {
         id: string;
@@ -48,6 +51,8 @@ interface AttendanceMetrics {
         resolvedCount: number;
         activeCount: number;
         avgTmrSeconds: number;
+        avgCsat?: number | null;
+        csatCount?: number;
     }[];
 }
 
@@ -113,59 +118,78 @@ function AttendanceReportsContent() {
             ) : metrics ? (
                 <>
                     {/* Summary KPI Cards */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
                         <Card className="hover:shadow-md transition-shadow">
-                            <CardContent className="p-5 flex items-center justify-between">
+                            <CardContent className="p-4 flex items-center justify-between">
                                 <div className="space-y-1">
-                                    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Total de Atendimentos</p>
+                                    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Total Atendimentos</p>
                                     <h3 className="text-2xl font-bold text-foreground">{metrics.summary.totalTickets}</h3>
-                                    <p className="text-[11px] text-muted-foreground">Todas as conversas registradas</p>
+                                    <p className="text-[11px] text-muted-foreground">Todas conversas</p>
                                 </div>
-                                <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                                    <MessageSquare className="h-5 w-5" />
+                                <div className="h-9 w-9 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                                    <MessageSquare className="h-4.5 w-4.5" />
                                 </div>
                             </CardContent>
                         </Card>
 
                         <Card className="hover:shadow-md transition-shadow">
-                            <CardContent className="p-5 flex items-center justify-between">
+                            <CardContent className="p-4 flex items-center justify-between">
                                 <div className="space-y-1">
-                                    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Tempo Médio de Resposta (TMR)</p>
+                                    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">TMR Médio</p>
                                     <h3 className="text-2xl font-bold text-foreground">{metrics.summary.avgTmrFormatted}</h3>
-                                    <p className="text-[11px] text-muted-foreground">Espera até 1ª resposta humana</p>
+                                    <p className="text-[11px] text-muted-foreground">1ª resposta humana</p>
                                 </div>
-                                <div className="h-10 w-10 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-500">
-                                    <Clock className="h-5 w-5" />
+                                <div className="h-9 w-9 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-500">
+                                    <Clock className="h-4.5 w-4.5" />
                                 </div>
                             </CardContent>
                         </Card>
 
                         <Card className="hover:shadow-md transition-shadow">
-                            <CardContent className="p-5 flex items-center justify-between">
+                            <CardContent className="p-4 flex items-center justify-between">
                                 <div className="space-y-1">
                                     <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Em Atendimento</p>
                                     <h3 className="text-2xl font-bold text-foreground">{metrics.summary.inProgressTickets}</h3>
                                     <span className="text-[11px] text-amber-600 dark:text-amber-400 font-medium">
-                                        {metrics.summary.openTickets} aguardando na fila
+                                        {metrics.summary.openTickets} na fila
                                     </span>
                                 </div>
-                                <div className="h-10 w-10 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-500">
-                                    <AlertCircle className="h-5 w-5" />
+                                <div className="h-9 w-9 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-500">
+                                    <AlertCircle className="h-4.5 w-4.5" />
                                 </div>
                             </CardContent>
                         </Card>
 
                         <Card className="hover:shadow-md transition-shadow">
-                            <CardContent className="p-5 flex items-center justify-between">
+                            <CardContent className="p-4 flex items-center justify-between">
                                 <div className="space-y-1">
-                                    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Finalizados com Sucesso</p>
+                                    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Finalizados</p>
                                     <h3 className="text-2xl font-bold text-foreground">{metrics.summary.resolvedTickets}</h3>
                                     <p className="text-[11px] text-emerald-600 dark:text-emerald-400 font-medium">
-                                        {metrics.summary.totalTickets > 0 ? `${Math.round((metrics.summary.resolvedTickets / metrics.summary.totalTickets) * 100)}% de resolução` : "Sem dados"}
+                                        {metrics.summary.totalTickets > 0 ? `${Math.round((metrics.summary.resolvedTickets / metrics.summary.totalTickets) * 100)}% resolvidos` : "Sem dados"}
                                     </p>
                                 </div>
-                                <div className="h-10 w-10 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-500">
-                                    <CheckCircle2 className="h-5 w-5" />
+                                <div className="h-9 w-9 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-500">
+                                    <CheckCircle2 className="h-4.5 w-4.5" />
+                                </div>
+                            </CardContent>
+                        </Card>
+
+                        <Card className="hover:shadow-md transition-shadow">
+                            <CardContent className="p-4 flex items-center justify-between">
+                                <div className="space-y-1">
+                                    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Nota CSAT</p>
+                                    <h3 className="text-2xl font-bold text-foreground flex items-center gap-1.5">
+                                        <Star className="h-5 w-5 fill-amber-500 text-amber-500" />
+                                        {metrics.summary.avgCsat ? `${metrics.summary.avgCsat}` : "--"}
+                                        {metrics.summary.avgCsat && <span className="text-xs text-muted-foreground font-normal">/5</span>}
+                                    </h3>
+                                    <p className="text-[11px] text-muted-foreground">
+                                        {metrics.summary.csatCount || 0} avaliações
+                                    </p>
+                                </div>
+                                <div className="h-9 w-9 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-500">
+                                    <Star className="h-4.5 w-4.5" />
                                 </div>
                             </CardContent>
                         </Card>
@@ -179,7 +203,7 @@ function AttendanceReportsContent() {
                                 Desempenho & Produtividade da Equipe
                             </CardTitle>
                             <CardDescription>
-                                Ranking de operadores por número de atendimentos concluídos e tempo de resposta individual.
+                                Ranking de operadores por número de atendimentos concluídos, tempo de resposta e nota CSAT.
                             </CardDescription>
                         </CardHeader>
                         <CardContent>
@@ -195,6 +219,7 @@ function AttendanceReportsContent() {
                                                 <th className="py-3 px-4 font-semibold text-center">Ativos Agora</th>
                                                 <th className="py-3 px-4 font-semibold text-center">Resolvidos</th>
                                                 <th className="py-3 px-4 font-semibold text-center">TMR Médio</th>
+                                                <th className="py-3 px-4 font-semibold text-center">Nota CSAT</th>
                                                 <th className="py-3 px-4 font-semibold text-right">Taxa de Resolução</th>
                                             </tr>
                                         </thead>
@@ -225,6 +250,17 @@ function AttendanceReportsContent() {
                                                         </td>
                                                         <td className="py-3 px-4 text-center font-mono text-xs">
                                                             {att.avgTmrSeconds > 0 ? `${att.avgTmrSeconds}s` : "--"}
+                                                        </td>
+                                                        <td className="py-3 px-4 text-center">
+                                                            {att.avgCsat ? (
+                                                                <span className="inline-flex items-center gap-1 font-semibold text-amber-600 dark:text-amber-400 text-xs">
+                                                                    <Star className="h-3 w-3 fill-amber-500 text-amber-500" />
+                                                                    {att.avgCsat}
+                                                                    <span className="text-[10px] text-muted-foreground font-normal">({att.csatCount})</span>
+                                                                </span>
+                                                            ) : (
+                                                                <span className="text-xs text-muted-foreground/60">--</span>
+                                                            )}
                                                         </td>
                                                         <td className="py-3 px-4 text-right font-semibold">
                                                             {rate}%

@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { TicketStatus } from "@prisma/client";
+import { TicketStatus, TicketPriority } from "@prisma/client";
 import { logger } from "@/lib/logger";
 import { ChatService } from "./chat.service";
 
@@ -194,6 +194,43 @@ export class TicketService {
             }
         });
 
+        if (status === TicketStatus.RESOLVED) {
+            this.triggerCsatSurvey(sessionId, dbSessionId, jid, ticket.id).catch(e => {
+                logger.error("TicketService", "Failed to trigger CSAT survey", e);
+            });
+        }
+
+        (global as any).io?.to(sessionId).emit("ticket.updated", ticket);
+        return ticket;
+    }
+
+    /**
+     * Update ticket priority (LOW, MEDIUM, HIGH, URGENT)
+     */
+    static async updatePriority(sessionId: string, jid: string, priority: TicketPriority) {
+        const dbSessionId = await this.getDbSessionId(sessionId);
+        if (!dbSessionId) throw new Error("Sessão não encontrada");
+
+        const ticket = await prisma.ticket.upsert({
+            where: {
+                sessionId_jid: { sessionId: dbSessionId, jid }
+            },
+            create: {
+                sessionId: dbSessionId,
+                jid,
+                status: TicketStatus.OPEN,
+                priority,
+                openedAt: new Date()
+            },
+            update: {
+                priority
+            },
+            include: {
+                assignedUser: { select: { id: true, name: true, email: true, role: true } },
+                department: { select: { id: true, name: true, colorHex: true } }
+            }
+        });
+
         (global as any).io?.to(sessionId).emit("ticket.updated", ticket);
         return ticket;
     }
@@ -209,8 +246,49 @@ export class TicketService {
                 }
             });
 
+            // Check if ticket was resolved and awaiting CSAT response
+            if (existing?.status === TicketStatus.RESOLVED && existing.csatRequestedAt && existing.csatScore === null) {
+                const trimmed = text?.trim() || "";
+                const match = trimmed.match(/^([1-5])(\D|$)/) || trimmed.match(/nota\s*([1-5])/i);
+                if (match) {
+                    const score = parseInt(match[1], 10);
+                    const updated = await prisma.ticket.update({
+                        where: { id: existing.id },
+                        data: {
+                            csatScore: score,
+                            csatComment: trimmed.length > 2 ? trimmed : null,
+                            csatAnsweredAt: new Date()
+                        },
+                        include: {
+                            assignedUser: { select: { id: true, name: true, email: true, role: true } },
+                            department: { select: { id: true, name: true, colorHex: true } }
+                        }
+                    });
+
+                    (global as any).io?.to(sessionId).emit("ticket.updated", updated);
+
+                    const thankYou = `⭐ *Obrigado pela sua avaliação!*\nRegistramos sua nota ${score}/5 com sucesso. Seu feedback é fundamental para continuarmos evoluindo nosso atendimento! 🙏`;
+                    setTimeout(async () => {
+                        try {
+                            await ChatService.sendTextMessage(sessionId, jid, { text: thankYou });
+                        } catch (e) {
+                            logger.error("TicketService", "Failed to send CSAT thank you", e);
+                        }
+                    }, 500);
+
+                    return; // Retorna sem reabrir o ticket!
+                }
+            }
+
             const isNewOrReopened = !existing || existing.status === TicketStatus.RESOLVED;
             let ticket;
+
+            // Check Business Hours outside schedule notification
+            if (isNewOrReopened) {
+                this.checkBusinessHours(sessionId, dbSessionId, jid).catch(e => {
+                    logger.error("TicketService", "Error checking business hours", e);
+                });
+            }
 
             if (!existing) {
                 ticket = await prisma.ticket.create({
@@ -277,6 +355,101 @@ export class TicketService {
         } catch (error) {
             logger.error("TicketService", "Error handling incoming message", error);
         }
+    }
+
+    // In-memory throttle for out-of-office notifications (jid -> timestamp)
+    private static outOfOfficeThrottle = new Map<string, number>();
+
+    /**
+     * Send CSAT evaluation survey when ticket is resolved
+     */
+    private static async triggerCsatSurvey(sessionId: string, dbSessionId: string, jid: string, ticketId: string) {
+        try {
+            const session = await prisma.session.findUnique({
+                where: { id: dbSessionId },
+                select: { csatEnabled: true, csatMessage: true }
+            });
+
+            if (!session || !session.csatEnabled) return;
+
+            const csatText = session.csatMessage?.trim() ||
+                "⭐ *Pesquisa de Satisfação*\n\nComo você avalia nosso atendimento?\n\n1️⃣ Muito insatisfeito\n2️⃣ Insatisfeito\n3️⃣ Regular\n4️⃣ Bom\n5️⃣ Excelente\n\n_Por favor, responda digitando a nota de 1 a 5._";
+
+            // Mark ticket as CSAT requested
+            await prisma.ticket.update({
+                where: { id: ticketId },
+                data: { csatRequestedAt: new Date() }
+            });
+
+            // Send survey after 1.5 seconds
+            setTimeout(async () => {
+                try {
+                    await ChatService.sendTextMessage(sessionId, jid, { text: csatText });
+                } catch (e) {
+                    logger.error("TicketService", "Error sending CSAT survey message", e);
+                }
+            }, 1500);
+        } catch (error) {
+            logger.error("TicketService", "Error in triggerCsatSurvey", error);
+        }
+    }
+
+    /**
+     * Check if customer is contacting outside defined business hours
+     */
+    private static async checkBusinessHours(sessionId: string, dbSessionId: string, jid: string): Promise<boolean> {
+        try {
+            const session = await prisma.session.findUnique({
+                where: { id: dbSessionId },
+                include: { businessHours: true }
+            });
+
+            if (!session || !session.businessHoursEnabled || !session.businessHours || session.businessHours.length === 0) {
+                return false;
+            }
+
+            const timezone = session.timezone || "America/Sao_Paulo";
+            const now = new Date();
+
+            // Time in HH:mm
+            const timeInTz = now.toLocaleTimeString("en-GB", { timeZone: timezone, hour: "2-digit", minute: "2-digit" });
+
+            // Day of week: 0 = Sun, 1 = Mon ...
+            const dayOfWeek = new Date(now.toLocaleString("en-US", { timeZone: timezone })).getDay();
+
+            const todaySchedule = session.businessHours.find(b => b.dayOfWeek === dayOfWeek);
+
+            let isOutside = false;
+            if (!todaySchedule || !todaySchedule.isOpen) {
+                isOutside = true;
+            } else if (timeInTz < todaySchedule.openTime || timeInTz > todaySchedule.closeTime) {
+                isOutside = true;
+            }
+
+            if (isOutside) {
+                const throttleKey = `${dbSessionId}:${jid}`;
+                const lastSent = this.outOfOfficeThrottle.get(throttleKey) || 0;
+                const fourHoursMs = 4 * 60 * 60 * 1000;
+
+                if (Date.now() - lastSent > fourHoursMs) {
+                    this.outOfOfficeThrottle.set(throttleKey, Date.now());
+                    const msg = session.outOfOfficeMessage?.trim() ||
+                        "⏰ *Estamos fora do nosso horário de atendimento no momento.*\n\nRecebemos sua mensagem e entraremos em contato assim que iniciarmos nosso expediente!";
+
+                    setTimeout(async () => {
+                        try {
+                            await ChatService.sendTextMessage(sessionId, jid, { text: msg });
+                        } catch (e) {
+                            logger.error("TicketService", "Failed to send out-of-office message", e);
+                        }
+                    }, 800);
+                }
+                return true;
+            }
+        } catch (e) {
+            logger.error("TicketService", "Error in checkBusinessHours", e);
+        }
+        return false;
     }
 
     /**
@@ -450,6 +623,12 @@ export class TicketService {
             ? Math.round(ticketsWithResponse.reduce((acc, t) => acc + (t.firstResponseMs || 0), 0) / ticketsWithResponse.length)
             : 0;
 
+        // CSAT calculation
+        const ticketsWithCsat = tickets.filter(t => t.csatScore && t.csatScore > 0);
+        const avgCsat = ticketsWithCsat.length > 0
+            ? Number((ticketsWithCsat.reduce((acc, t) => acc + (t.csatScore || 0), 0) / ticketsWithCsat.length).toFixed(1))
+            : null;
+
         // Attendant Ranking
         const attendantMetrics = users.map(user => {
             const userTickets = tickets.filter(t => t.assignedUserId === user.id);
@@ -459,6 +638,10 @@ export class TicketService {
             const userAvgTmrMs = userResponded.length > 0
                 ? Math.round(userResponded.reduce((acc, t) => acc + (t.firstResponseMs || 0), 0) / userResponded.length)
                 : 0;
+            const userCsat = userTickets.filter(t => t.csatScore && t.csatScore > 0);
+            const userAvgCsat = userCsat.length > 0
+                ? Number((userCsat.reduce((acc, t) => acc + (t.csatScore || 0), 0) / userCsat.length).toFixed(1))
+                : null;
 
             return {
                 id: user.id,
@@ -468,7 +651,9 @@ export class TicketService {
                 assignedTotal: userTickets.length,
                 resolvedCount: userResolved,
                 activeCount: userActive,
-                avgTmrSeconds: Math.round(userAvgTmrMs / 1000)
+                avgTmrSeconds: Math.round(userAvgTmrMs / 1000),
+                avgCsat: userAvgCsat,
+                csatCount: userCsat.length
             };
         }).sort((a, b) => b.resolvedCount - a.resolvedCount);
 
@@ -494,7 +679,9 @@ export class TicketService {
                 inProgressTickets: inProgressCount,
                 resolvedTickets: resolvedCount,
                 avgTmrSeconds: Math.round(avgTmrMs / 1000),
-                avgTmrFormatted: this.formatDuration(avgTmrMs)
+                avgTmrFormatted: this.formatDuration(avgTmrMs),
+                avgCsat,
+                csatCount: ticketsWithCsat.length
             },
             departments: departmentMetrics,
             attendants: attendantMetrics

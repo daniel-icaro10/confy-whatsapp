@@ -79,6 +79,13 @@ model Session {
   tickets     Ticket[]
   departments Department[]
   quickReplies QuickReply[]
+  businessHours BusinessHour[]
+
+  csatEnabled         Boolean  @default(true)
+  csatMessage         String?  @db.Text
+  businessHoursEnabled Boolean  @default(false)
+  outOfOfficeMessage  String?  @db.Text
+  timezone            String   @default("America/Sao_Paulo")
 }
 
 model Contact {
@@ -92,6 +99,12 @@ model Contact {
   remoteJidAlt String? // Alternate JID (e.g. Phone if JID is LID)
   profilePic  String?  @db.Text
   data        Json?    // Detailed contact data
+  email       String?
+  document    String?  // CPF or CNPJ
+  plan        String?  // Contract/Plan name
+  planValue   String?  // Contract/Plan value (e.g. "R$ 150/mês")
+  notes       String?  @db.Text
+  customFields Json?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -404,6 +417,13 @@ enum TicketStatus {
   RESOLVED
 }
 
+enum TicketPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
 model Department {
   id          String           @id @default(cuid())
   sessionId   String
@@ -436,31 +456,38 @@ model UserDepartment {
 }
 
 model Ticket {
-  id              String       @id @default(cuid())
+  id              String         @id @default(cuid())
   sessionId       String
   jid             String
-  status          TicketStatus @default(OPEN)
+  status          TicketStatus   @default(OPEN)
+  priority        TicketPriority @default(MEDIUM)
   
   assignedUserId  String?
   departmentId    String?
   
-  openedAt        DateTime     @default(now())
+  openedAt        DateTime       @default(now())
   firstResponseAt DateTime?
-  firstResponseMs Int?         // TMR: time to first response in ms
+  firstResponseMs Int?           // TMR: time to first response in ms
   closedAt        DateTime?
+  csatScore       Int?           // 1 to 5 stars
+  csatComment     String?
+  csatRequestedAt DateTime?
+  csatAnsweredAt  DateTime?
   
-  createdAt       DateTime     @default(now())
-  updatedAt       DateTime     @updatedAt
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
 
-  session         Session      @relation(fields: [sessionId], references: [id], onDelete: Cascade)
-  assignedUser    User?        @relation("AssignedTickets", fields: [assignedUserId], references: [id], onDelete: SetNull)
-  department      Department?  @relation(fields: [departmentId], references: [id], onDelete: SetNull)
+  session         Session        @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  assignedUser    User?          @relation("AssignedTickets", fields: [assignedUserId], references: [id], onDelete: SetNull)
+  department      Department?    @relation(fields: [departmentId], references: [id], onDelete: SetNull)
   notes           TicketNote[]
 
   @@unique([sessionId, jid])
   @@index([sessionId, status])
   @@index([assignedUserId])
   @@index([departmentId])
+  @@index([priority])
+  @@index([csatScore])
 }
 
 model QuickReply {
@@ -494,3 +521,18 @@ model TicketNote {
   @@index([ticketId])
   @@index([userId])
 }
+
+model BusinessHour {
+  id        String   @id @default(cuid())
+  sessionId String
+  dayOfWeek Int      // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+  isOpen    Boolean  @default(true)
+  openTime  String   @default("08:00") // "HH:mm"
+  closeTime String   @default("18:00") // "HH:mm"
+
+  session   Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@unique([sessionId, dayOfWeek])
+  @@index([sessionId])
+}
+
