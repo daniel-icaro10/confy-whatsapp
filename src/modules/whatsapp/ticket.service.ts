@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { TicketStatus } from "@prisma/client";
 import { logger } from "@/lib/logger";
+import { ChatService } from "./chat.service";
 
 export class TicketService {
     /**
@@ -208,7 +209,9 @@ export class TicketService {
                 }
             });
 
+            const isNewOrReopened = !existing || existing.status === TicketStatus.RESOLVED;
             let ticket;
+
             if (!existing) {
                 ticket = await prisma.ticket.create({
                     data: {
@@ -231,7 +234,8 @@ export class TicketService {
                         openedAt: new Date(),
                         firstResponseAt: null,
                         firstResponseMs: null,
-                        closedAt: null
+                        closedAt: null,
+                        departmentId: null // Reset department so URA can route again
                     },
                     include: {
                         assignedUser: { select: { id: true, name: true, email: true, role: true } },
@@ -250,15 +254,110 @@ export class TicketService {
                 });
             }
 
-            // URA Menu evaluation: if ticket has no department and customer typed 1, 2, 3...
-            if (ticket && !ticket.departmentId && text) {
-                await this.evaluateUraRouting(sessionId, dbSessionId, ticket.id, text.trim());
+            // URA Menu evaluation: if ticket has no department
+            if (ticket && !ticket.departmentId) {
+                const routed = text ? await this.evaluateUraRouting(sessionId, dbSessionId, ticket.id, jid, text.trim()) : false;
+
+                // If not routed yet, and this is first contact (or reopened), send the welcome menu!
+                if (!routed && isNewOrReopened) {
+                    await this.sendUraWelcomeMenu(sessionId, dbSessionId, jid);
+                }
             }
 
-            (global as any).io?.to(sessionId).emit("ticket.updated", ticket);
+            // Re-fetch ticket to get updated department if routed
+            const finalTicket = await prisma.ticket.findUnique({
+                where: { id: ticket.id },
+                include: {
+                    assignedUser: { select: { id: true, name: true, email: true, role: true } },
+                    department: { select: { id: true, name: true, colorHex: true } }
+                }
+            });
+
+            (global as any).io?.to(sessionId).emit("ticket.updated", finalTicket || ticket);
         } catch (error) {
             logger.error("TicketService", "Error handling incoming message", error);
         }
+    }
+
+    /**
+     * Send URA welcome menu listing available departments
+     */
+    private static async sendUraWelcomeMenu(sessionId: string, dbSessionId: string, jid: string) {
+        try {
+            const departments = await prisma.department.findMany({
+                where: { sessionId: dbSessionId },
+                orderBy: { createdAt: "asc" }
+            });
+
+            if (departments.length === 0) return;
+
+            const optionsList = departments
+                .map((dept, idx) => `${idx + 1}️⃣ *${dept.name}*`)
+                .join("\n");
+
+            const menuText = `👋 *Olá! Seja bem-vindo ao nosso atendimento.*\n\nPor favor, escolha uma das opções abaixo:\n\n${optionsList}\n\n_Digite o *número* da opção correspondente para falar com o setor._`;
+
+            // Wait 500ms before sending to feel natural
+            setTimeout(async () => {
+                try {
+                    await ChatService.sendTextMessage(sessionId, jid, { text: menuText });
+                } catch (e) {
+                    logger.error("TicketService", "Failed to send URA welcome menu", e);
+                }
+            }, 600);
+        } catch (error) {
+            logger.error("TicketService", "Error in sendUraWelcomeMenu", error);
+        }
+    }
+
+    /**
+     * Check if customer input matches a department option for automated routing
+     */
+    private static async evaluateUraRouting(sessionId: string, dbSessionId: string, ticketId: string, jid: string, input: string): Promise<boolean> {
+        const departments = await prisma.department.findMany({
+            where: { sessionId: dbSessionId },
+            orderBy: { createdAt: "asc" }
+        });
+
+        if (departments.length === 0) return false;
+
+        let matchedDept = null;
+
+        // Check numeric index: "1", "2", "3"
+        const numIndex = parseInt(input, 10);
+        if (!isNaN(numIndex) && numIndex >= 1 && numIndex <= departments.length) {
+            matchedDept = departments[numIndex - 1];
+        } else {
+            // Check by department name exact or prefix
+            const lowerInput = input.toLowerCase();
+            matchedDept = departments.find(d =>
+                d.name.toLowerCase() === lowerInput ||
+                lowerInput.includes(d.name.toLowerCase()) ||
+                d.name.toLowerCase().startsWith(lowerInput)
+            );
+        }
+
+        if (matchedDept) {
+            await prisma.ticket.update({
+                where: { id: ticketId },
+                data: { departmentId: matchedDept.id }
+            });
+
+            logger.info("TicketService", `Ticket ${ticketId} routed to department ${matchedDept.name}`);
+
+            const confirmText = `✅ *Você foi direcionado para o setor ${matchedDept.name}.*\nUm de nossos atendentes irá te atender em breve! ⏳`;
+            setTimeout(async () => {
+                try {
+                    await ChatService.sendTextMessage(sessionId, jid, { text: confirmText });
+                } catch (e) {
+                    logger.error("TicketService", "Failed to send URA transfer confirmation", e);
+                }
+            }, 400);
+
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -304,38 +403,6 @@ export class TicketService {
             (global as any).io?.to(sessionId).emit("ticket.updated", updatedTicket);
         } catch (error) {
             logger.error("TicketService", "Error handling outgoing message", error);
-        }
-    }
-
-    /**
-     * Check if customer input matches a department option for automated routing
-     */
-    private static async evaluateUraRouting(sessionId: string, dbSessionId: string, ticketId: string, input: string) {
-        const departments = await prisma.department.findMany({
-            where: { sessionId: dbSessionId },
-            orderBy: { createdAt: "asc" }
-        });
-
-        if (departments.length === 0) return;
-
-        let matchedDept = null;
-
-        // Check numeric index: "1", "2", "3"
-        const numIndex = parseInt(input, 10);
-        if (!isNaN(numIndex) && numIndex >= 1 && numIndex <= departments.length) {
-            matchedDept = departments[numIndex - 1];
-        } else {
-            // Check by department name exact or prefix
-            const lowerInput = input.toLowerCase();
-            matchedDept = departments.find(d => d.name.toLowerCase() === lowerInput || d.name.toLowerCase().startsWith(lowerInput));
-        }
-
-        if (matchedDept) {
-            await prisma.ticket.update({
-                where: { id: ticketId },
-                data: { departmentId: matchedDept.id }
-            });
-            logger.info("TicketService", `Ticket ${ticketId} routed to department ${matchedDept.name}`);
         }
     }
 
@@ -445,4 +512,60 @@ export class TicketService {
         const remainingMinutes = minutes % 60;
         return `${hours}h ${remainingMinutes}m`;
     }
+
+    /**
+     * Add an internal note to a ticket
+     */
+    static async addNote(sessionId: string, jid: string, userId: string, content: string) {
+        const dbSessionId = await this.getDbSessionId(sessionId);
+        if (!dbSessionId) throw new Error("Sessão não encontrada");
+
+        const ticket = await this.getOrCreateTicket(sessionId, jid);
+        if (!ticket) throw new Error("Ticket não encontrado");
+
+        const note = await prisma.ticketNote.create({
+            data: {
+                ticketId: ticket.id,
+                userId,
+                content
+            },
+            include: {
+                user: { select: { id: true, name: true, email: true, role: true } }
+            }
+        });
+
+        // Real-time emit to attendant room
+        (global as any).io?.to(sessionId).emit("ticket.note_added", {
+            jid,
+            note
+        });
+
+        return note;
+    }
+
+    /**
+     * List internal notes for a ticket
+     */
+    static async listNotes(sessionId: string, jid: string) {
+        const dbSessionId = await this.getDbSessionId(sessionId);
+        if (!dbSessionId) return [];
+
+        const ticket = await prisma.ticket.findUnique({
+            where: {
+                sessionId_jid: { sessionId: dbSessionId, jid }
+            },
+            select: { id: true }
+        });
+
+        if (!ticket) return [];
+
+        return await prisma.ticketNote.findMany({
+            where: { ticketId: ticket.id },
+            include: {
+                user: { select: { id: true, name: true, email: true, role: true } }
+            },
+            orderBy: { createdAt: "asc" }
+        });
+    }
 }
+

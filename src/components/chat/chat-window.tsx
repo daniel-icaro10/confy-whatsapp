@@ -1,12 +1,12 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
     Send, Paperclip, ArrowLeft, FileText, Image as ImageIcon, Music, Video,
     Download, ArrowDown, CornerUpLeft, Copy, Trash2, Info, X,
-    UserCheck, ArrowRightLeft, CheckCircle2, RotateCcw, Zap, Tag
+    UserCheck, ArrowRightLeft, CheckCircle2, RotateCcw, Zap, Tag, Lock
 } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
@@ -37,6 +37,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+import { useSession } from "next-auth/react";
 import {
     getChatMessages,
     sendChatMessage,
@@ -46,9 +47,12 @@ import {
     transferTicket,
     updateTicketStatus,
     getTransferOptions,
-    getQuickReplies
+    getQuickReplies,
+    addTicketNote,
+    getTicketNotes
 } from "@/app/dashboard/chat/actions";
 import { useSocket } from "./socket-context";
+import { LabelAssignPopover } from "./chat-list";
 
 interface Message {
     id: string;
@@ -226,6 +230,9 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
     // Context menu state
     const [contextMenu, setContextMenu] = useState<ContextMenuState | null>(null);
 
+    // Auth & Attendant session info
+    const { data: authSession } = useSession();
+
     // Ticket & Customer Service state
     const [ticket, setTicket] = useState<any>(null);
     const [transferOpen, setTransferOpen] = useState(false);
@@ -239,10 +246,31 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
     const [quickReplyOpen, setQuickReplyOpen] = useState(false);
     const [quickReplySearch, setQuickReplySearch] = useState("");
 
+    // Internal Notes state
+    const [notes, setNotes] = useState<any[]>([]);
+    const [inputMode, setInputMode] = useState<"message" | "note">("message");
+
+    // Attendant Signature state
+    const [useSignature, setUseSignature] = useState(() => {
+        if (typeof window !== "undefined") {
+            return localStorage.getItem("confy_use_signature") === "true";
+        }
+        return false;
+    });
+
+    const toggleSignature = () => {
+        const next = !useSignature;
+        setUseSignature(next);
+        if (typeof window !== "undefined") {
+            localStorage.setItem("confy_use_signature", String(next));
+        }
+        toast.info(next ? "Assinatura do atendente ativada" : "Assinatura do atendente desativada");
+    };
+
     const { getSocket, joinSession } = useSocket();
     const getDateLabel = useDateLabel();
 
-    // Fetch Ticket details and Quick Replies
+    // Fetch Ticket details, Quick Replies and Internal Notes
     useEffect(() => {
         let mounted = true;
         getTicketDetails(sessionId, jid).then(t => {
@@ -253,10 +281,14 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
             if (mounted) setQuickReplies(qr || []);
         }).catch(console.error);
 
+        getTicketNotes(sessionId, jid).then(n => {
+            if (mounted) setNotes(n || []);
+        }).catch(console.error);
+
         return () => { mounted = false; };
     }, [sessionId, jid]);
 
-    // Real-time Ticket updates
+    // Real-time Ticket updates & Notes
     useEffect(() => {
         const socket = getSocket();
         if (!socket) return;
@@ -265,9 +297,20 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
                 setTicket(updatedTicket);
             }
         };
+        const noteHandler = (data: any) => {
+            if (data?.jid === jid && data?.note) {
+                setNotes(prev => {
+                    if (prev.some(n => n.id === data.note.id)) return prev;
+                    return [...prev, data.note];
+                });
+            }
+        };
+
         socket.on("ticket.updated", handler);
+        socket.on("ticket.note_added", noteHandler);
         return () => {
             socket.off("ticket.updated", handler);
+            socket.off("ticket.note_added", noteHandler);
         };
     }, [jid, getSocket]);
 
@@ -410,8 +453,23 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
 
     const handleSend = async () => {
         if (!input.trim()) return;
+
+        if (inputMode === "note") {
+            const noteText = input.trim();
+            setInput("");
+            try {
+                const newNote = await addTicketNote(sessionId, jid, noteText);
+                setNotes(prev => [...prev, newNote]);
+                toast.success("Nota interna salva com sucesso!");
+                scrollToBottom(true);
+            } catch (e: any) {
+                toast.error(e.message || "Falha ao salvar nota interna");
+            }
+            return;
+        }
+
         try {
-            await sendChatMessage(sessionId, jid, input, replyingTo?.keyId);
+            await sendChatMessage(sessionId, jid, input, replyingTo?.keyId, useSignature);
             setInput("");
             setReplyingTo(null);
             setTimeout(() => fetchMessages(), 800);
@@ -490,6 +548,17 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
         e.preventDefault();
         setContextMenu({ x: e.clientX, y: e.clientY, msg });
     }, []);
+
+    const timelineItems = useMemo(() => {
+        const items: Array<
+            | { kind: "message"; data: Message; time: number }
+            | { kind: "note"; data: any; time: number }
+        > = [];
+        messages.forEach(m => items.push({ kind: "message", data: m, time: new Date(m.timestamp).getTime() }));
+        notes.forEach(n => items.push({ kind: "note", data: n, time: new Date(n.createdAt).getTime() }));
+        items.sort((a, b) => a.time - b.time);
+        return items;
+    }, [messages, notes]);
 
     const displayName = name || jid.split('@')[0];
 
@@ -659,6 +728,19 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
                             </>
                         )}
                     </Button>
+
+                    {/* Etiquetas */}
+                    <LabelAssignPopover sessionId={sessionId} jid={jid}>
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            className="h-7 sm:h-8 px-2 sm:px-2.5 text-xs font-medium gap-1 rounded-lg"
+                            title="Gerenciar etiquetas desta conversa"
+                        >
+                            <Tag className="h-3.5 w-3.5" />
+                            <span className="hidden sm:inline">Etiquetas</span>
+                        </Button>
+                    </LabelAssignPopover>
                 </div>
             </div>
 
@@ -727,16 +809,53 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
                             <div className="h-6 w-6 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
                         </div>
                     )}
-                    {!hasMore && messages.length > 0 && (
+                    {!hasMore && timelineItems.length > 0 && (
                         <div className="text-center py-4">
                             <span className="text-[10px] font-medium text-muted-foreground bg-background/80 px-3 py-1 rounded-full border border-border/30">Início da conversa</span>
                         </div>
                     )}
-                    {messages.length === 0 && !loading && (
+                    {timelineItems.length === 0 && !loading && (
                         <div className="flex-1 flex items-center justify-center py-16"><p className="text-sm text-muted-foreground">Nenhuma mensagem ainda</p></div>
                     )}
-                    {messages.map((msg, idx) => {
-                        const showDate = idx === 0 || getDateLabel(msg.timestamp) !== getDateLabel(messages[idx - 1].timestamp);
+                    {timelineItems.map((item, idx) => {
+                        const itemTimeStr = item.kind === "message" ? item.data.timestamp : item.data.createdAt;
+                        const prevTimeStr = idx > 0 
+                            ? (timelineItems[idx - 1].kind === "message" ? (timelineItems[idx - 1].data as Message).timestamp : (timelineItems[idx - 1].data as any).createdAt)
+                            : null;
+                        const showDate = idx === 0 || (prevTimeStr ? getDateLabel(itemTimeStr) !== getDateLabel(prevTimeStr) : true);
+
+                        if (item.kind === "note") {
+                            const note = item.data;
+                            return (
+                                <div key={`note-${note.id}`} className="my-2">
+                                    {showDate && (
+                                        <div className="flex justify-center my-3">
+                                            <span className="text-[10px] font-medium text-muted-foreground bg-background/80 backdrop-blur-sm px-3 py-1 rounded-full shadow-sm border border-border/30">
+                                                {getDateLabel(note.createdAt)}
+                                            </span>
+                                        </div>
+                                    )}
+                                    <div className="mx-auto max-w-lg w-full p-3 rounded-xl bg-amber-500/10 border border-amber-500/25 text-xs shadow-xs space-y-1.5 animate-in fade-in-50">
+                                        <div className="flex items-center justify-between text-amber-600 dark:text-amber-400 font-semibold">
+                                            <div className="flex items-center gap-1.5">
+                                                <Lock className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
+                                                <span>Nota Interna</span>
+                                                <span className="text-muted-foreground font-normal">• {note.user?.name || "Atendente"}</span>
+                                            </div>
+                                            <span className="text-[10px] text-muted-foreground font-normal">
+                                                {new Date(note.createdAt).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}
+                                            </span>
+                                        </div>
+                                        <p className="text-foreground whitespace-pre-wrap leading-relaxed select-text">{note.content}</p>
+                                        <span className="text-[10px] text-amber-600/80 dark:text-amber-400/80 block italic">
+                                            Visível apenas internamente para a equipe (não enviada ao cliente)
+                                        </span>
+                                    </div>
+                                </div>
+                            );
+                        }
+
+                        const msg = item.data;
                         return (
                             <div key={msg.keyId} id={`msg-${msg.keyId}`}>
                                 {showDate && (
@@ -866,75 +985,135 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
             )}
 
             {/* Input */}
-            <div className="shrink-0 px-3 py-2.5 bg-background/80 backdrop-blur-sm border-t">
+            <div className="shrink-0 px-3 py-2 bg-background/80 backdrop-blur-sm border-t space-y-1.5">
+                {/* Mode Switcher & Tools Bar */}
+                <div className="flex items-center justify-between max-w-3xl mx-auto px-1">
+                    <div className="flex items-center gap-1 bg-muted/60 p-0.5 rounded-lg text-xs">
+                        <button
+                            type="button"
+                            onClick={() => setInputMode("message")}
+                            className={cn(
+                                "px-2.5 py-1 rounded-md font-medium transition-all text-xs flex items-center gap-1.5 cursor-pointer",
+                                inputMode === "message" 
+                                    ? "bg-background text-foreground shadow-xs font-semibold" 
+                                    : "text-muted-foreground hover:text-foreground"
+                            )}
+                        >
+                            <Send className="h-3 w-3" />
+                            <span>Mensagem WhatsApp</span>
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => setInputMode("note")}
+                            className={cn(
+                                "px-2.5 py-1 rounded-md font-medium transition-all text-xs flex items-center gap-1.5 cursor-pointer",
+                                inputMode === "note" 
+                                    ? "bg-amber-500/20 text-amber-700 dark:text-amber-300 shadow-xs font-semibold" 
+                                    : "text-muted-foreground hover:text-amber-600"
+                            )}
+                        >
+                            <Lock className="h-3 w-3 text-amber-500" />
+                            <span>Nota Interna</span>
+                        </button>
+                    </div>
+
+                    {inputMode === "message" ? (
+                        <button
+                            type="button"
+                            onClick={toggleSignature}
+                            className={cn(
+                                "flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[11px] font-medium transition-colors border cursor-pointer",
+                                useSignature
+                                    ? "border-primary/40 bg-primary/10 text-primary font-semibold"
+                                    : "border-border/40 text-muted-foreground hover:text-foreground hover:border-border"
+                            )}
+                            title="Ao ativar, cada mensagem enviada começará com seu nome (Ex: *Lucas:* Olá...)"
+                        >
+                            <span>✍️ Assinatura</span>
+                            <span className={cn("text-[9px] px-1 rounded font-bold", useSignature ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground")}>
+                                {useSignature ? "ON" : "OFF"}
+                            </span>
+                        </button>
+                    ) : (
+                        <span className="text-[11px] text-amber-600 dark:text-amber-400 font-medium flex items-center gap-1">
+                            <Lock className="h-3 w-3" />
+                            Visível apenas internamente
+                        </span>
+                    )}
+                </div>
+
                 <div className="flex items-center gap-2 max-w-3xl mx-auto">
                     <input type="file" ref={fileInputRef} className="hidden" onChange={handleFileUpload} />
-                    <Popover>
-                        <PopoverTrigger asChild>
-                            <Button variant="ghost" size="icon" className="h-9 w-9 rounded-full shrink-0 text-muted-foreground hover:text-foreground"><Paperclip className="h-4.5 w-4.5" /></Button>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-44 p-1.5" side="top" align="start">
-                            <div className="flex flex-col gap-0.5">
-                                <Button variant="ghost" size="sm" className="justify-start gap-2 h-8 text-xs" onClick={() => triggerUpload('image')}><ImageIcon className="h-3.5 w-3.5 text-blue-500" /> Imagem</Button>
-                                <Button variant="ghost" size="sm" className="justify-start gap-2 h-8 text-xs" onClick={() => triggerUpload('video')}><Video className="h-3.5 w-3.5 text-purple-500" /> Vídeo</Button>
-                                <Button variant="ghost" size="sm" className="justify-start gap-2 h-8 text-xs" onClick={() => triggerUpload('audio')}><Music className="h-3.5 w-3.5 text-orange-500" /> Áudio</Button>
-                                <Button variant="ghost" size="sm" className="justify-start gap-2 h-8 text-xs" onClick={() => triggerUpload('document')}><FileText className="h-3.5 w-3.5 text-emerald-500" /> Documento</Button>
-                            </div>
-                        </PopoverContent>
-                    </Popover>
+                    {inputMode === "message" && (
+                        <>
+                            <Popover>
+                                <PopoverTrigger asChild>
+                                    <Button variant="ghost" size="icon" className="h-9 w-9 rounded-full shrink-0 text-muted-foreground hover:text-foreground"><Paperclip className="h-4.5 w-4.5" /></Button>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-44 p-1.5" side="top" align="start">
+                                    <div className="flex flex-col gap-0.5">
+                                        <Button variant="ghost" size="sm" className="justify-start gap-2 h-8 text-xs" onClick={() => triggerUpload('image')}><ImageIcon className="h-3.5 w-3.5 text-blue-500" /> Imagem</Button>
+                                        <Button variant="ghost" size="sm" className="justify-start gap-2 h-8 text-xs" onClick={() => triggerUpload('video')}><Video className="h-3.5 w-3.5 text-purple-500" /> Vídeo</Button>
+                                        <Button variant="ghost" size="sm" className="justify-start gap-2 h-8 text-xs" onClick={() => triggerUpload('audio')}><Music className="h-3.5 w-3.5 text-orange-500" /> Áudio</Button>
+                                        <Button variant="ghost" size="sm" className="justify-start gap-2 h-8 text-xs" onClick={() => triggerUpload('document')}><FileText className="h-3.5 w-3.5 text-emerald-500" /> Documento</Button>
+                                    </div>
+                                </PopoverContent>
+                            </Popover>
 
-                    {/* Quick Replies Button */}
-                    <Popover open={quickReplyOpen} onOpenChange={setQuickReplyOpen}>
-                        <PopoverTrigger asChild>
-                            <Button
-                                variant="ghost"
-                                size="icon"
-                                className="h-9 w-9 rounded-full shrink-0 text-amber-500 hover:text-amber-600 hover:bg-amber-500/10"
-                                title="Respostas rápidas (atalho: digite / na mensagem)"
-                            >
-                                <Zap className="h-4 w-4" />
-                            </Button>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-72 p-2 shadow-xl" side="top" align="start">
-                            <div className="flex items-center justify-between px-1.5 py-1 mb-1 border-b pb-1.5">
-                                <span className="text-xs font-semibold text-foreground flex items-center gap-1.5">
-                                    <Zap className="h-3.5 w-3.5 text-amber-500" />
-                                    Respostas Rápidas
-                                </span>
-                                <span className="text-[10px] text-muted-foreground">atalho: /</span>
-                            </div>
-                            <Input
-                                placeholder="Filtrar por atalho..."
-                                value={quickReplySearch}
-                                onChange={(e) => setQuickReplySearch(e.target.value)}
-                                className="h-7 text-xs mb-2 bg-muted/40"
-                            />
-                            <div className="max-h-52 overflow-y-auto space-y-1">
-                                {quickReplies
-                                    .filter(qr => qr.shortcut.toLowerCase().includes(quickReplySearch.toLowerCase()) || qr.title.toLowerCase().includes(quickReplySearch.toLowerCase()))
-                                    .map(qr => (
-                                        <button
-                                            key={qr.id}
-                                            onClick={() => handleSelectQuickReply(qr)}
-                                            className="w-full text-left p-2 rounded-lg hover:bg-muted/70 transition-colors flex flex-col gap-0.5 cursor-pointer border border-transparent hover:border-border/60"
-                                        >
-                                            <div className="flex items-center justify-between">
-                                                <span className="text-xs font-semibold text-foreground">{qr.title}</span>
-                                                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-600 dark:text-amber-400 font-bold">/{qr.shortcut}</span>
-                                            </div>
-                                            <p className="text-[11px] text-muted-foreground line-clamp-2">{qr.content}</p>
-                                        </button>
-                                    ))}
-                                {quickReplies.length === 0 && (
-                                    <p className="text-xs text-muted-foreground text-center py-4">Nenhuma resposta cadastrada ainda.</p>
-                                )}
-                            </div>
-                        </PopoverContent>
-                    </Popover>
+                            {/* Quick Replies Button */}
+                            <Popover open={quickReplyOpen} onOpenChange={setQuickReplyOpen}>
+                                <PopoverTrigger asChild>
+                                    <Button
+                                        variant="ghost"
+                                        size="icon"
+                                        className="h-9 w-9 rounded-full shrink-0 text-amber-500 hover:text-amber-600 hover:bg-amber-500/10"
+                                        title="Respostas rápidas (atalho: digite / na mensagem)"
+                                    >
+                                        <Zap className="h-4 w-4" />
+                                    </Button>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-72 p-2 shadow-xl" side="top" align="start">
+                                    <div className="flex items-center justify-between px-1.5 py-1 mb-1 border-b pb-1.5">
+                                        <span className="text-xs font-semibold text-foreground flex items-center gap-1.5">
+                                            <Zap className="h-3.5 w-3.5 text-amber-500" />
+                                            Respostas Rápidas
+                                        </span>
+                                        <span className="text-[10px] text-muted-foreground">atalho: /</span>
+                                    </div>
+                                    <Input
+                                        placeholder="Filtrar por atalho..."
+                                        value={quickReplySearch}
+                                        onChange={(e) => setQuickReplySearch(e.target.value)}
+                                        className="h-7 text-xs mb-2 bg-muted/40"
+                                    />
+                                    <div className="max-h-52 overflow-y-auto space-y-1">
+                                        {quickReplies
+                                            .filter(qr => qr.shortcut.toLowerCase().includes(quickReplySearch.toLowerCase()) || qr.title.toLowerCase().includes(quickReplySearch.toLowerCase()))
+                                            .map(qr => (
+                                                <button
+                                                    key={qr.id}
+                                                    onClick={() => handleSelectQuickReply(qr)}
+                                                    className="w-full text-left p-2 rounded-lg hover:bg-muted/70 transition-colors flex flex-col gap-0.5 cursor-pointer border border-transparent hover:border-border/60"
+                                                >
+                                                    <div className="flex items-center justify-between">
+                                                        <span className="text-xs font-semibold text-foreground">{qr.title}</span>
+                                                        <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-600 dark:text-amber-400 font-bold">/{qr.shortcut}</span>
+                                                    </div>
+                                                    <p className="text-[11px] text-muted-foreground line-clamp-2">{qr.content}</p>
+                                                </button>
+                                            ))}
+                                        {quickReplies.length === 0 && (
+                                            <p className="text-xs text-muted-foreground text-center py-4">Nenhuma resposta cadastrada ainda.</p>
+                                        )}
+                                    </div>
+                                </PopoverContent>
+                            </Popover>
+                        </>
+                    )}
 
                     <div className="flex-1 relative">
                         {/* Slash autocomplete floating bar */}
-                        {slashQuery !== null && matchingQuickReplies.length > 0 && (
+                        {inputMode === "message" && slashQuery !== null && matchingQuickReplies.length > 0 && (
                             <div className="absolute bottom-full left-0 right-0 mb-2 p-1.5 rounded-xl bg-background/95 backdrop-blur-md border border-border shadow-xl space-y-1 z-30 animate-in slide-in-from-bottom-2">
                                 <div className="text-[10px] font-semibold text-muted-foreground px-1.5 flex items-center justify-between">
                                     <span>Respostas Rápidas Sugeridas:</span>
@@ -959,7 +1138,7 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
                         )}
 
                         {/* Reply preview bar */}
-                        {replyingTo && (
+                        {inputMode === "message" && replyingTo && (
                             <div className="mb-2 flex items-start gap-2 px-2 py-1.5 rounded-lg bg-muted/50 border-l-2 border-amber-500 text-xs animate-in slide-in-from-bottom-1 overflow-hidden">
                                 <div className="flex-1 min-w-0 overflow-hidden">
                                     <span className="font-semibold text-amber-500 block text-[10px]">Respondendo a {replyingTo.fromMe ? "você" : (replyingTo.pushName || jid.split('@')[0])}</span>
@@ -968,23 +1147,41 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
                                 <button onClick={() => setReplyingTo(null)} className="p-0.5 text-muted-foreground hover:text-foreground shrink-0"><X className="h-3 w-3" /></button>
                             </div>
                         )}
-                        <div className="flex items-end gap-2 p-1 rounded-2xl border border-border/30 bg-background">
+                        <div className={cn(
+                            "flex items-end gap-2 p-1 rounded-2xl border transition-colors",
+                            inputMode === "note" 
+                                ? "border-amber-500/50 bg-amber-500/5 focus-within:ring-1 focus-within:ring-amber-500" 
+                                : "border-border/30 bg-background"
+                        )}>
                             <textarea ref={inputRef} value={input} onChange={(e) => { setInput(e.target.value); const el = e.target; el.style.height = "auto"; el.style.height = Math.min(el.scrollHeight, 120) + "px"; }}
                                 onKeyDown={(e) => {
-                                    if (e.key === "Tab" && slashQuery !== null && matchingQuickReplies.length > 0) {
+                                    if (inputMode === "message" && e.key === "Tab" && slashQuery !== null && matchingQuickReplies.length > 0) {
                                         e.preventDefault();
                                         handleSelectQuickReply(matchingQuickReplies[0]);
                                         return;
                                     }
                                     handleKeyDown(e);
                                 }}
-                                placeholder="Digite uma mensagem... (ou digite / para respostas rápidas)"
+                                placeholder={inputMode === "note" ? "Escrever nota interna privada (apenas a equipe verá, não vai para o WhatsApp)..." : "Digite uma mensagem... (ou digite / para respostas rápidas)"}
                                 rows={1} style={{ minHeight: "36px", maxHeight: "120px" }}
                                 className="flex-1 resize-none bg-transparent px-2 py-1.5 text-sm text-foreground placeholder-muted-foreground focus:outline-none leading-normal" />
                         </div>
                     </div>
 
-                    <Button onClick={handleSend} disabled={!input.trim()} size="icon" className="h-9 w-9 rounded-full shrink-0"><Send className="h-4 w-4" /></Button>
+                    {inputMode === "note" ? (
+                        <Button
+                            onClick={handleSend}
+                            disabled={!input.trim()}
+                            className="h-9 px-3 rounded-full shrink-0 gap-1.5 bg-amber-600 hover:bg-amber-700 text-white font-medium text-xs shadow-sm cursor-pointer"
+                        >
+                            <Lock className="h-3.5 w-3.5" />
+                            <span>Salvar Nota</span>
+                        </Button>
+                    ) : (
+                        <Button onClick={handleSend} disabled={!input.trim()} size="icon" className="h-9 w-9 rounded-full shrink-0 cursor-pointer">
+                            <Send className="h-4 w-4" />
+                        </Button>
+                    )}
                 </div>
             </div>
         </div>

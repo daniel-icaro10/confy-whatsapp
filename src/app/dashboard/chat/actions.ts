@@ -65,7 +65,7 @@ export async function getChatMessages(
 }
 
 // Send a basic text message
-export async function sendChatMessage(sessionId: string, jid: string, text: string, quotedMessageId?: string) {
+export async function sendChatMessage(sessionId: string, jid: string, text: string, quotedMessageId?: string, withSignature = false) {
     const user = await getAuthenticatedUserForAction();
     if (!user) throw new Error("Unauthorized");
 
@@ -73,7 +73,13 @@ export async function sendChatMessage(sessionId: string, jid: string, text: stri
     if (!canAccess) throw new Error("Forbidden");
 
     try {
-        await ChatService.sendTextMessage(sessionId, jid, { text }, undefined, quotedMessageId);
+        let finalMessage = text;
+        if (withSignature) {
+            const senderName = user.name || "Atendente";
+            finalMessage = `*${senderName}:*\n${text}`;
+        }
+
+        await ChatService.sendTextMessage(sessionId, jid, { text: finalMessage }, undefined, quotedMessageId);
 
         const session = await prisma.session.findUnique({
             where: { sessionId },
@@ -230,4 +236,25 @@ export async function getQuickReplies(sessionId: string) {
         orderBy: { shortcut: "asc" }
     });
 }
+
+export async function addTicketNote(sessionId: string, jid: string, content: string) {
+    const user = await getAuthenticatedUserForAction();
+    if (!user) throw new Error("Unauthorized");
+
+    const canAccess = await canAccessSession(user.id, user.role, sessionId);
+    if (!canAccess) throw new Error("Forbidden");
+
+    return await TicketService.addNote(sessionId, jid, user.id, content);
+}
+
+export async function getTicketNotes(sessionId: string, jid: string) {
+    const user = await getAuthenticatedUserForAction();
+    if (!user) throw new Error("Unauthorized");
+
+    const canAccess = await canAccessSession(user.id, user.role, sessionId);
+    if (!canAccess) throw new Error("Forbidden");
+
+    return await TicketService.listNotes(sessionId, jid);
+}
+
 

@@ -52,6 +52,7 @@ model User {
   assignedTickets Ticket[]        @relation("AssignedTickets")
   userDepartments UserDepartment[]
   quickReplies    QuickReply[]
+  ticketNotes     TicketNote[]
 }
 
 model Session {
@@ -454,6 +455,7 @@ model Ticket {
   session         Session      @relation(fields: [sessionId], references: [id], onDelete: Cascade)
   assignedUser    User?        @relation("AssignedTickets", fields: [assignedUserId], references: [id], onDelete: SetNull)
   department      Department?  @relation(fields: [departmentId], references: [id], onDelete: SetNull)
+  notes           TicketNote[]
 
   @@unique([sessionId, jid])
   @@index([sessionId, status])
@@ -476,5 +478,19 @@ model QuickReply {
 
   @@unique([sessionId, shortcut])
   @@index([sessionId])
+  @@index([userId])
+}
+
+model TicketNote {
+  id        String   @id @default(cuid())
+  ticketId  String
+  userId    String
+  content   String   @db.Text
+  createdAt DateTime @default(now())
+
+  ticket    Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([ticketId])
   @@index([userId])
 }

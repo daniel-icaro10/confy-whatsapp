@@ -561,11 +561,11 @@ async function processAndSaveMessage(
         if (triggerWebhook && remoteJid && !remoteJid.includes('@g.us') && !remoteJid.includes('status@broadcast')) {
             const normalizedTargetJid = normalizeJid(normalizedRemoteJid);
             if (!fromMe) {
-                TicketService.handleIncomingMessage(sessionId, dbSessionId, normalizedTargetJid, text).catch(e =>
+                TicketService.handleIncomingMessage(sessionId, dbSessionId, normalizedTargetJid, text).catch((e: any) =>
                     logger.error("Store", "Error updating ticket for incoming message", e)
                 );
             } else {
-                TicketService.handleOutgoingMessage(sessionId, dbSessionId, normalizedTargetJid).catch(e =>
+                TicketService.handleOutgoingMessage(sessionId, dbSessionId, normalizedTargetJid).catch((e: any) =>
                     logger.error("Store", "Error updating ticket for outgoing message", e)
                 );
             }

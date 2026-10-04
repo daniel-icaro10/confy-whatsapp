@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import { MessageSquarePlus, Search, MessageCircle, X, Tag, MoreHorizontal, CornerUpLeft, Trash2, Info, Check } from "lucide-react";
+import { MessageSquarePlus, Search, MessageCircle, X, Tag, MoreHorizontal, CornerUpLeft, Trash2, Info, Check, Volume2, VolumeX } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
@@ -83,7 +83,7 @@ function getTimeLabel(timestamp: string): string {
 }
 
 // ─── Label Assignment Popover ──────
-function LabelAssignPopover({ sessionId, jid, children }: { sessionId: string; jid: string; children: React.ReactNode }) {
+export function LabelAssignPopover({ sessionId, jid, children }: { sessionId: string; jid: string; children: React.ReactNode }) {
     const [labels, setLabels] = useState<LabelData[]>([]);
     const [assigned, setAssigned] = useState<Set<string>>(new Set());
     const [loading, setLoading] = useState(false);
@@ -318,6 +318,48 @@ export function ChatList({ sessionId, onSelectChat, selectedJid }: ChatListProps
     const [ticketFilter, setTicketFilter] = useState<"ALL" | "OPEN" | "MINE" | "RESOLVED">("ALL");
 
     const [chatLabelMap, setChatLabelMap] = useState<Map<string, { colorHex: string }[]>>(new Map());
+    const [soundEnabled, setSoundEnabled] = useState(() => {
+        if (typeof window !== "undefined") {
+            return localStorage.getItem("confy_chat_sound") !== "false";
+        }
+        return true;
+    });
+
+    const playSoundNotification = useCallback(() => {
+        if (!soundEnabled) return;
+        try {
+            const AudioCtxClass = window.AudioContext || (window as any).webkitAudioContext;
+            if (!AudioCtxClass) return;
+            const audioCtx = new AudioCtxClass();
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            const now = audioCtx.currentTime;
+            const osc1 = audioCtx.createOscillator();
+            const gain1 = audioCtx.createGain();
+            osc1.type = 'sine';
+            osc1.frequency.setValueAtTime(587.33, now);
+            gain1.gain.setValueAtTime(0.12, now);
+            gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+            osc1.connect(gain1);
+            gain1.connect(audioCtx.destination);
+            osc1.start(now);
+            osc1.stop(now + 0.18);
+
+            const osc2 = audioCtx.createOscillator();
+            const gain2 = audioCtx.createGain();
+            osc2.type = 'sine';
+            osc2.frequency.setValueAtTime(880, now + 0.1);
+            gain2.gain.setValueAtTime(0.15, now + 0.1);
+            gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.32);
+            osc2.connect(gain2);
+            gain2.connect(audioCtx.destination);
+            osc2.start(now + 0.1);
+            osc2.stop(now + 0.32);
+        } catch (e) {
+            // Audio context failed or blocked by policy
+        }
+    }, [soundEnabled]);
 
     const { getSocket, joinSession } = useSocket();
     const searchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -369,6 +411,18 @@ export function ChatList({ sessionId, onSelectChat, selectedJid }: ChatListProps
 
         const handler = async (newMessages: any[]) => {
             let needsReload = false;
+            const hasIncoming = newMessages.some(m => !m.fromMe);
+            if (hasIncoming) {
+                playSoundNotification();
+                if (typeof Notification !== "undefined" && Notification.permission === "granted" && document.hidden) {
+                    const first = newMessages.find(m => !m.fromMe);
+                    new Notification("Nova mensagem recebida", {
+                        body: first?.content || "Nova mensagem no WhatsApp",
+                        icon: "/favicon.ico"
+                    });
+                }
+            }
+
             setChats(prev => {
                 const updated = [...prev];
                 newMessages.forEach(msg => {
@@ -390,6 +444,9 @@ export function ChatList({ sessionId, onSelectChat, selectedJid }: ChatListProps
 
         const ticketHandler = (ticket: any) => {
             if (!ticket?.jid) return;
+            if (ticket.status === "OPEN" && !ticket.assignedUserId) {
+                playSoundNotification();
+            }
             setChats(prev => {
                 return prev.map(c => {
                     if (c.jid === ticket.jid) {
@@ -408,7 +465,7 @@ export function ChatList({ sessionId, onSelectChat, selectedJid }: ChatListProps
             socket.off("message.update", handler);
             socket.off("ticket.updated", ticketHandler);
         };
-    }, [sessionId, getSocket, joinSession, fetchChats]);
+    }, [sessionId, getSocket, joinSession, fetchChats, playSoundNotification]);
 
     // Fetch label assignments for all chats
     useEffect(() => {
@@ -506,10 +563,31 @@ export function ChatList({ sessionId, onSelectChat, selectedJid }: ChatListProps
                         Conversas
                         {chats.length > 0 && <span className="ml-1.5 text-xs font-normal text-muted-foreground">({chats.length})</span>}
                     </h3>
-                    <Button variant="ghost" size="icon" className="h-8 w-8 rounded-lg"
-                        onClick={() => setIsNewChatOpen(!isNewChatOpen)}>
-                        {isNewChatOpen ? <X className="h-4 w-4" /> : <MessageSquarePlus className="h-4 w-4" />}
-                    </Button>
+                    <div className="flex items-center gap-0.5">
+                        <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-8 w-8 rounded-lg text-muted-foreground hover:text-foreground"
+                            onClick={() => {
+                                const next = !soundEnabled;
+                                setSoundEnabled(next);
+                                if (typeof window !== "undefined") {
+                                    localStorage.setItem("confy_chat_sound", String(next));
+                                }
+                                if (next && typeof Notification !== "undefined" && Notification.permission === "default") {
+                                    Notification.requestPermission();
+                                }
+                                toast.info(next ? "Sons de notificação ativados" : "Sons de notificação silenciados");
+                            }}
+                            title={soundEnabled ? "Silenciar notificações sonoras" : "Ativar notificações sonoras"}
+                        >
+                            {soundEnabled ? <Volume2 className="h-4 w-4 text-emerald-500" /> : <VolumeX className="h-4 w-4 text-muted-foreground/50" />}
+                        </Button>
+                        <Button variant="ghost" size="icon" className="h-8 w-8 rounded-lg"
+                            onClick={() => setIsNewChatOpen(!isNewChatOpen)}>
+                            {isNewChatOpen ? <X className="h-4 w-4" /> : <MessageSquarePlus className="h-4 w-4" />}
+                        </Button>
+                    </div>
                 </div>
 
                 <div className="relative">
