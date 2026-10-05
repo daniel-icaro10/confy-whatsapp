@@ -4,9 +4,10 @@ import { normalizeMessageContent, downloadMediaMessage, WAMessage } from "@whisk
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import pino from "pino";
-import { resolveToPhoneJidBySessionId as resolveToPhoneJid, isLidJid } from "./jid-utils";
 import { logger } from "./logger";
+import { resolveToPhoneJidBySessionId as resolveToPhoneJid, isLidJid } from "./jid-utils";
 import { waManager } from "@/modules/whatsapp/manager";
+import { saveMedia } from "./storage";
 
 // Event types that can trigger webhooks
 export type WebhookEventType =
@@ -456,15 +457,8 @@ export async function downloadAndSaveMedia(message: WAMessage, sessionId: string
         }
 
         const filename = `${sessionId}-${message.key.id}.${ext}`;
-        const filePath = path.join(process.cwd(), "data", "media", filename);
-
-        // Ensure directory exists (redundant if handled by OS, but safe)
-        await mkdir(path.dirname(filePath), { recursive: true });
-
-        await writeFile(filePath, buffer);
-
-        // Return URL path using API route for reliable serving
-        const fileUrl = `/api/media/${filename}`;
+        const mimeType = mime || 'application/octet-stream';
+        const { url: fileUrl } = await saveMedia(filename, buffer, mimeType);
         logger.success("Media", `Success. URL: ${fileUrl}`);
         return fileUrl;
 

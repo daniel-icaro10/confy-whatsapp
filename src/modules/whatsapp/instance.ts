@@ -6,7 +6,7 @@ import makeWASocket, {
     ConnectionState
 } from "@whiskeysockets/baileys";
 import { prisma } from "@/lib/prisma";
-import { usePrismaAuthState } from "./auth/usePrismaAuthState";
+import { usePrismaAuthState, flushAuthState } from "./auth/usePrismaAuthState";
 import { Server } from "socket.io";
 import pino from "pino";
 import { bindSessionStore } from "./store";
@@ -267,5 +267,6 @@ export class WhatsAppInstance {
         this.socket?.end(undefined);
         this.socket = null;
         this.reconnectCount = 0;
+        await flushAuthState(this.sessionId).catch(() => {});
     }
 }

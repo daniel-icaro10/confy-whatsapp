@@ -76,4 +76,12 @@ export function startScheduler() {
 
     // Then run every 30 seconds
     setInterval(checkScheduledMessages, 30 * 1000);
+
+    // Run media retention cleanup once on start, then every 6 hours
+    import("@/lib/storage").then(({ cleanupOldMedia }) => {
+        cleanupOldMedia().catch(err => logger.error("Scheduler", "Initial media cleanup error:", err));
+        setInterval(() => {
+            cleanupOldMedia().catch(err => logger.error("Scheduler", "Scheduled media cleanup error:", err));
+        }, 6 * 60 * 60 * 1000);
+    });
 }

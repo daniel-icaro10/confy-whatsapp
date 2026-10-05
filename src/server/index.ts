@@ -56,6 +56,9 @@ app.prepare().then(() => {
   // Start Scheduler
   import("../modules/whatsapp/scheduler").then(m => m.startScheduler());
 
+  // Recover any broadcasts interrupted by previous server restart/crash
+  import("../modules/whatsapp/broadcast-queue").then(m => m.recoverInterruptedBroadcasts());
+
   // Cloudflare 520 Fix: increase keep-alive timeout so Node doesn't kill idle connections that Cloudflare expects to reuse
   // See: https://github.com/vercel/next.js/issues/48962
   server.keepAliveTimeout = 120 * 1000; // 120 seconds
@@ -63,41 +66,29 @@ app.prepare().then(() => {
 
   server.listen(port, () => {
     logger.banner(pkg.name.toUpperCase(), pkg.version, port);
-
-    // --- WA-AKG Monitor Heartbeat ---
-    // Sends a ping every 30 seconds to the monitoring server
-    // Hanya untuk dokumentasi ada berapa layanan WA-AKG yang aktif. 
-    // Hanya untuk memantau tidak bermaksud lain. Semakin banyak WA-AKG yang aktif = semakin semangat saya mengembangkan WA-AKG ini.
-    // Terima kasih telah menggunakan WA-AKG.
-    const MONITOR_URL = "https://api-wa-akg.aikeigroup.net/api/ping";
-    const APP_URL = process.env.BASE_URL || `http://${hostname}:${port}`; // Kamu bisa mengganti ini untuk keamanan WA-AKG kamu. Tapi jangan menghapus semua Heartbeat nya. Terima Kasih.
-    const APP_NAME = process.env.APP_NAME || "WA-AKG";
-
-    const sendHeartbeat = async () => {
-      try {
-        await fetch(MONITOR_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            appUrl: APP_URL,
-            appName: APP_NAME,
-            isBackend: true,
-            systemInfo: {
-              platform: process.platform,
-              nodeVersion: process.version,
-              memoryUsage: Math.round(process.memoryUsage().rss / 1024 / 1024) + "MB"
-            }
-          }),
-        });
-      } catch (error) {
-        // Silently fail to not disturb the main application
-      }
-    };
-
-    // Initial ping
-    sendHeartbeat();
-    // Interval ping
-    setInterval(sendHeartbeat, 30000);
-    // --------------------------------
+    logger.info("Server", `Server running at http://${hostname}:${port}`);
   });
+
+  // Graceful shutdown handlers
+  const handleShutdown = async (signal: string) => {
+    logger.warn("Server", `Received ${signal}. Shutting down gracefully...`);
+    try {
+      const { getActiveBroadcastMap } = await import("../modules/whatsapp/broadcast-queue");
+      const activeMap = getActiveBroadcastMap();
+      if (activeMap.size > 0) {
+        logger.info("Server", `Pausing ${activeMap.size} active broadcasts before exit...`);
+        const { prisma } = await import("../lib/prisma");
+        await prisma.broadcastLog.updateMany({
+          where: { id: { in: Array.from(activeMap.keys()) }, status: "running" },
+          data: { status: "paused" }
+        });
+      }
+    } catch {
+      // ignore
+    }
+    process.exit(0);
+  };
+
+  process.on("SIGTERM", () => handleShutdown("SIGTERM"));
+  process.on("SIGINT", () => handleShutdown("SIGINT"));
 });
