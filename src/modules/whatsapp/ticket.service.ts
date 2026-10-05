@@ -611,17 +611,33 @@ export class TicketService {
     /**
      * Get attendance metrics & reports for a session
      */
-    static async getMetrics(sessionId: string) {
+    static async getMetrics(sessionId: string, days?: number) {
         const dbSessionId = await this.getDbSessionId(sessionId);
         if (!dbSessionId) return null;
 
-        const [tickets, departments, users] = await Promise.all([
+        const dateFilter = (days && days > 0) ? {
+            openedAt: { gte: new Date(Date.now() - days * 24 * 60 * 60 * 1000) }
+        } : {};
+
+        const [tickets, liveTickets, departments, users, labels, contacts] = await Promise.all([
             prisma.ticket.findMany({
-                where: { sessionId: dbSessionId },
+                where: { sessionId: dbSessionId, ...dateFilter },
                 include: {
                     assignedUser: { select: { id: true, name: true, email: true } },
                     department: { select: { id: true, name: true, colorHex: true } }
-                }
+                },
+                orderBy: { openedAt: "desc" }
+            }),
+            prisma.ticket.findMany({
+                where: {
+                    sessionId: dbSessionId,
+                    status: { in: [TicketStatus.OPEN, TicketStatus.IN_PROGRESS] }
+                },
+                include: {
+                    assignedUser: { select: { id: true, name: true, email: true } },
+                    department: { select: { id: true, name: true, colorHex: true } }
+                },
+                orderBy: { openedAt: "asc" }
             }),
             prisma.department.findMany({
                 where: { sessionId: dbSessionId },
@@ -637,19 +653,82 @@ export class TicketService {
                     ]
                 },
                 select: { id: true, name: true, email: true, role: true }
+            }),
+            prisma.label.findMany({
+                where: { sessionId: dbSessionId },
+                include: {
+                    _count: { select: { chatLabels: true } }
+                }
+            }),
+            prisma.contact.findMany({
+                where: { sessionId: dbSessionId },
+                select: { jid: true, name: true, notify: true, verifiedName: true }
             })
         ]);
+
+        const contactMap = new Map<string, string>();
+        contacts.forEach(c => {
+            const name = c.name || c.notify || c.verifiedName;
+            if (name) contactMap.set(c.jid, name);
+        });
+
+        // Real-time Live Overview Calculations
+        const now = Date.now();
+        const waitingQueue = liveTickets
+            .filter(t => t.status === TicketStatus.OPEN)
+            .map(t => {
+                const waitSec = Math.floor((now - new Date(t.openedAt).getTime()) / 1000);
+                return {
+                    id: t.id,
+                    jid: t.jid,
+                    contactName: contactMap.get(t.jid) || t.jid.split('@')[0],
+                    openedAt: t.openedAt,
+                    waitingSeconds: waitSec,
+                    priority: t.priority,
+                    department: t.department ? { name: t.department.name, colorHex: t.department.colorHex } : null,
+                    assignedUser: t.assignedUser ? { name: t.assignedUser.name || t.assignedUser.email } : null
+                };
+            });
+
+        const inProgressLive = liveTickets
+            .filter(t => t.status === TicketStatus.IN_PROGRESS)
+            .map(t => {
+                const durationSec = Math.floor((now - new Date(t.openedAt).getTime()) / 1000);
+                return {
+                    id: t.id,
+                    jid: t.jid,
+                    contactName: contactMap.get(t.jid) || t.jid.split('@')[0],
+                    openedAt: t.openedAt,
+                    durationSeconds: durationSec,
+                    priority: t.priority,
+                    department: t.department ? { name: t.department.name, colorHex: t.department.colorHex } : null,
+                    assignedUser: t.assignedUser ? { id: t.assignedUser.id, name: t.assignedUser.name || t.assignedUser.email } : null
+                };
+            });
+
+        const queueAlerts = {
+            over5min: waitingQueue.filter(w => w.waitingSeconds >= 300).length,
+            over15min: waitingQueue.filter(w => w.waitingSeconds >= 900).length,
+            over30min: waitingQueue.filter(w => w.waitingSeconds >= 1800).length
+        };
 
         // General Counts
         const openCount = tickets.filter(t => t.status === TicketStatus.OPEN).length;
         const inProgressCount = tickets.filter(t => t.status === TicketStatus.IN_PROGRESS).length;
         const resolvedCount = tickets.filter(t => t.status === TicketStatus.RESOLVED).length;
         const totalCount = tickets.length;
+        const resolutionRate = totalCount > 0 ? Math.round((resolvedCount / totalCount) * 100) : 0;
 
-        // Average TMR calculation (Tempo Médio de Resposta)
+        // Average TMR calculation (Tempo Médio de 1ª Resposta)
         const ticketsWithResponse = tickets.filter(t => t.firstResponseMs && t.firstResponseMs > 0);
         const avgTmrMs = ticketsWithResponse.length > 0
             ? Math.round(ticketsWithResponse.reduce((acc, t) => acc + (t.firstResponseMs || 0), 0) / ticketsWithResponse.length)
+            : 0;
+
+        // Average TMA calculation (Tempo Médio de Atendimento para tickets resolvidos)
+        const resolvedWithDuration = tickets.filter(t => t.status === TicketStatus.RESOLVED && t.closedAt);
+        const avgTmaMs = resolvedWithDuration.length > 0
+            ? Math.round(resolvedWithDuration.reduce((acc, t) => acc + (new Date(t.closedAt!).getTime() - new Date(t.openedAt).getTime()), 0) / resolvedWithDuration.length)
             : 0;
 
         // CSAT calculation
@@ -658,11 +737,34 @@ export class TicketService {
             ? Number((ticketsWithCsat.reduce((acc, t) => acc + (t.csatScore || 0), 0) / ticketsWithCsat.length).toFixed(1))
             : null;
 
-        // Attendant Ranking
+        const csatDistribution: Record<number, number> = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+        ticketsWithCsat.forEach(t => {
+            if (t.csatScore && t.csatScore >= 1 && t.csatScore <= 5) {
+                csatDistribution[t.csatScore] = (csatDistribution[t.csatScore] || 0) + 1;
+            }
+        });
+
+        const satisfiedCount = (csatDistribution[4] || 0) + (csatDistribution[5] || 0);
+        const satisfactionPercentage = ticketsWithCsat.length > 0
+            ? Math.round((satisfiedCount / ticketsWithCsat.length) * 100)
+            : null;
+
+        const csatFeedbacks = ticketsWithCsat.slice(0, 50).map(t => ({
+            id: t.id,
+            jid: t.jid,
+            contactName: contactMap.get(t.jid) || t.jid.split('@')[0],
+            score: t.csatScore!,
+            comment: t.csatComment || null,
+            answeredAt: t.csatAnsweredAt || t.updatedAt,
+            attendantName: t.assignedUser?.name || t.assignedUser?.email || "Não atribuído",
+            departmentName: t.department?.name || "Geral"
+        }));
+
+        // Attendant Ranking & Live Workload
         const attendantMetrics = users.map(user => {
             const userTickets = tickets.filter(t => t.assignedUserId === user.id);
             const userResolved = userTickets.filter(t => t.status === TicketStatus.RESOLVED).length;
-            const userActive = userTickets.filter(t => t.status === TicketStatus.IN_PROGRESS).length;
+            const userActive = inProgressLive.filter(t => t.assignedUser?.id === user.id).length;
             const userResponded = userTickets.filter(t => t.firstResponseMs && t.firstResponseMs > 0);
             const userAvgTmrMs = userResponded.length > 0
                 ? Math.round(userResponded.reduce((acc, t) => acc + (t.firstResponseMs || 0), 0) / userResponded.length)
@@ -671,6 +773,7 @@ export class TicketService {
             const userAvgCsat = userCsat.length > 0
                 ? Number((userCsat.reduce((acc, t) => acc + (t.csatScore || 0), 0) / userCsat.length).toFixed(1))
                 : null;
+            const userRate = userTickets.length > 0 ? Math.round((userResolved / userTickets.length) * 100) : 0;
 
             return {
                 id: user.id,
@@ -682,7 +785,8 @@ export class TicketService {
                 activeCount: userActive,
                 avgTmrSeconds: Math.round(userAvgTmrMs / 1000),
                 avgCsat: userAvgCsat,
-                csatCount: userCsat.length
+                csatCount: userCsat.length,
+                resolutionRate: userRate
             };
         }).sort((a, b) => b.resolvedCount - a.resolvedCount);
 
@@ -697,23 +801,73 @@ export class TicketService {
                 openCount: deptTickets.filter(t => t.status === TicketStatus.OPEN).length,
                 inProgressCount: deptTickets.filter(t => t.status === TicketStatus.IN_PROGRESS).length,
                 resolvedCount: deptTickets.filter(t => t.status === TicketStatus.RESOLVED).length,
-                attendantsCount: dept._count.users
+                attendantsCount: dept._count.users,
+                percentOfTotal: totalCount > 0 ? Math.round((deptTickets.length / totalCount) * 100) : 0
             };
-        });
+        }).sort((a, b) => b.ticketsCount - a.ticketsCount);
+
+        // Labels / Tags breakdown
+        const totalLabelAssignments = labels.reduce((acc, l) => acc + l._count.chatLabels, 0);
+        const labelMetrics = labels.map(l => ({
+            id: l.id,
+            name: l.name,
+            colorHex: l.colorHex,
+            count: l._count.chatLabels,
+            percentOfTotal: totalLabelAssignments > 0 ? Math.round((l._count.chatLabels / totalLabelAssignments) * 100) : 0
+        })).sort((a, b) => b.count - a.count);
+
+        // Raw items for client-side download & export
+        const exportTickets = tickets.map(t => ({
+            id: t.id,
+            jid: t.jid,
+            contactName: contactMap.get(t.jid) || t.jid.split('@')[0],
+            status: t.status,
+            priority: t.priority,
+            attendant: t.assignedUser?.name || t.assignedUser?.email || "Não atribuído",
+            department: t.department?.name || "Sem setor",
+            tmrSeconds: t.firstResponseMs ? Math.round(t.firstResponseMs / 1000) : null,
+            csatScore: t.csatScore || null,
+            csatComment: t.csatComment || "",
+            openedAt: t.openedAt.toISOString(),
+            closedAt: t.closedAt ? t.closedAt.toISOString() : null
+        }));
 
         return {
+            period: {
+                days: days ?? 0,
+                label: !days || days === 0 ? "Todo o período" : days === 1 ? "Hoje (24h)" : `Últimos ${days} dias`
+            },
             summary: {
                 totalTickets: totalCount,
                 openTickets: openCount,
                 inProgressTickets: inProgressCount,
                 resolvedTickets: resolvedCount,
+                resolutionRate,
                 avgTmrSeconds: Math.round(avgTmrMs / 1000),
                 avgTmrFormatted: this.formatDuration(avgTmrMs),
+                avgTmaSeconds: Math.round(avgTmaMs / 1000),
+                avgTmaFormatted: this.formatDuration(avgTmaMs),
                 avgCsat,
-                csatCount: ticketsWithCsat.length
+                csatCount: ticketsWithCsat.length,
+                satisfactionPercentage
+            },
+            live: {
+                waitingQueue,
+                inProgressLive,
+                queueAlerts,
+                totalActiveNow: waitingQueue.length + inProgressLive.length
+            },
+            csat: {
+                avgCsat,
+                satisfactionPercentage,
+                totalRatings: ticketsWithCsat.length,
+                distribution: csatDistribution,
+                feedbacks: csatFeedbacks
             },
             departments: departmentMetrics,
-            attendants: attendantMetrics
+            attendants: attendantMetrics,
+            labels: labelMetrics,
+            exportTickets
         };
     }
 

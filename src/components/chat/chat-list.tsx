@@ -23,6 +23,7 @@ interface ChatContact {
     name: string | null;
     notify: string | null;
     profilePic: string | null;
+    unreadCount?: number;
     ticket?: {
         id: string;
         status: "OPEN" | "IN_PROGRESS" | "RESOLVED";
@@ -209,6 +210,7 @@ function ChatRow({
 }) {
     const displayName = getDisplayName(chat);
     const [ctxMenu, setCtxMenu] = useState<CtxMenuState | null>(null);
+    const isUnread = (chat.unreadCount ?? 0) > 0;
 
     return (
         <>
@@ -220,21 +222,28 @@ function ChatRow({
                     "relative w-full flex items-center gap-3 px-3 py-2.5 transition-colors duration-150 border-b border-border/10 group overflow-hidden cursor-pointer",
                     isSelected
                         ? "bg-primary/8 border-l-2 border-l-primary"
-                        : "hover:bg-muted/40 border-l-2 border-l-transparent"
+                        : (isUnread ? "bg-emerald-500/[0.04] hover:bg-emerald-500/[0.07] border-l-2 border-l-emerald-500" : "hover:bg-muted/40 border-l-2 border-l-transparent")
                 )}
                 onClick={() => onSelect(chat.jid, displayName)}
                 onContextMenu={(e) => { e.preventDefault(); setCtxMenu({ x: e.clientX, y: e.clientY, jid: chat.jid, name: displayName }); }}
             >
-                <Avatar className="h-10 w-10 flex-shrink-0">
-                    <AvatarImage src={`/api/chat/${sessionId}/${encodeURIComponent(chat.jid)}/avatar`} />
-                    <AvatarFallback className="text-xs font-medium bg-gradient-to-br from-primary/20 to-blue-500/20 text-primary">
-                        {displayName.slice(0, 2).toUpperCase()}
-                    </AvatarFallback>
-                </Avatar>
+                <div className="relative shrink-0">
+                    <Avatar className="h-10 w-10 flex-shrink-0">
+                        <AvatarImage src={`/api/chat/${sessionId}/${encodeURIComponent(chat.jid)}/avatar`} />
+                        <AvatarFallback className="text-xs font-medium bg-gradient-to-br from-primary/20 to-blue-500/20 text-primary">
+                            {displayName.slice(0, 2).toUpperCase()}
+                        </AvatarFallback>
+                    </Avatar>
+                    {isUnread && (
+                        <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full bg-emerald-500 border-2 border-background shadow-sm" />
+                    )}
+                </div>
 
                 <div className="flex-1 min-w-0 overflow-hidden">
                     <div className="flex justify-between items-baseline gap-2 overflow-hidden">
-                        <h4 className={cn("text-sm truncate flex items-center gap-1.5", isSelected ? "font-semibold text-primary" : "font-medium text-foreground")}>
+                        <h4 className={cn("text-sm truncate flex items-center gap-1.5", 
+                            isSelected ? "font-semibold text-primary" : (isUnread ? "font-bold text-foreground" : "font-medium text-foreground")
+                        )}>
                             {displayName}
                             {/* Label dots — always visible */}
                             {labelDots.length > 0 && (
@@ -246,23 +255,40 @@ function ChatRow({
                             )}
                         </h4>
                         {chat.lastMessage && (
-                            <span className="text-[10px] text-muted-foreground flex-shrink-0">{getTimeLabel(chat.lastMessage.timestamp)}</span>
+                            <span className={cn(
+                                "text-[10px] flex-shrink-0",
+                                isUnread ? "text-emerald-600 dark:text-emerald-400 font-bold" : "text-muted-foreground"
+                            )}>
+                                {getTimeLabel(chat.lastMessage.timestamp)}
+                            </span>
                         )}
                     </div>
 
-                    {/* Middle preview line + Priority tag */}
+                    {/* Middle preview line + Priority tag + WhatsApp Unread badge */}
                     <div className="flex items-center justify-between gap-1.5 mt-0.5">
-                        <p className="text-xs text-muted-foreground truncate flex-1">{getMessagePreview(chat)}</p>
-                        {chat.ticket?.priority === "URGENT" && (
-                            <span className="text-[9px] px-1.5 py-0.2 rounded-md bg-red-500/15 text-red-600 dark:text-red-400 font-bold border border-red-500/25 shrink-0">
-                                Urgente
-                            </span>
-                        )}
-                        {chat.ticket?.priority === "HIGH" && (
-                            <span className="text-[9px] px-1.5 py-0.2 rounded-md bg-amber-500/15 text-amber-600 dark:text-amber-400 font-semibold border border-amber-500/25 shrink-0">
-                                Alta
-                            </span>
-                        )}
+                        <p className={cn(
+                            "text-xs truncate flex-1",
+                            isUnread ? "text-foreground font-medium" : "text-muted-foreground"
+                        )}>
+                            {getMessagePreview(chat)}
+                        </p>
+                        <div className="flex items-center gap-1 shrink-0">
+                            {chat.ticket?.priority === "URGENT" && (
+                                <span className="text-[9px] px-1.5 py-0.2 rounded-md bg-red-500/15 text-red-600 dark:text-red-400 font-bold border border-red-500/25 shrink-0">
+                                    Urgente
+                                </span>
+                            )}
+                            {chat.ticket?.priority === "HIGH" && (
+                                <span className="text-[9px] px-1.5 py-0.2 rounded-md bg-amber-500/15 text-amber-600 dark:text-amber-400 font-semibold border border-amber-500/25 shrink-0">
+                                    Alta
+                                </span>
+                            )}
+                            {isUnread && (
+                                <span className="h-5 min-w-[20px] px-1.5 rounded-full bg-emerald-500 text-white font-bold text-[10px] flex items-center justify-center shrink-0 shadow-sm animate-in zoom-in-75">
+                                    {(chat.unreadCount ?? 0) > 99 ? '99+' : chat.unreadCount}
+                                </span>
+                            )}
+                        </div>
                     </div>
 
                     {/* Bottom Metadata Badges */}
@@ -350,6 +376,15 @@ export function ChatList({ sessionId, onSelectChat, selectedJid }: ChatListProps
         }
         return true;
     });
+
+    const selectedJidRef = useRef(selectedJid);
+    selectedJidRef.current = selectedJid;
+
+    useEffect(() => {
+        if (selectedJid) {
+            setChats(prev => prev.map(c => c.jid === selectedJid ? { ...c, unreadCount: 0 } : c));
+        }
+    }, [selectedJid]);
 
     const playSoundNotification = useCallback(() => {
         if (!soundEnabled) return;
@@ -455,7 +490,14 @@ export function ChatList({ sessionId, onSelectChat, selectedJid }: ChatListProps
                     const jid = msg.remoteJid;
                     const idx = updated.findIndex(c => c.jid === jid);
                     if (idx !== -1) {
-                        updated[idx] = { ...updated[idx], lastMessage: { content: msg.content, timestamp: msg.timestamp, type: msg.type } };
+                        const isCurrent = jid === selectedJidRef.current;
+                        const prevUnread = updated[idx].unreadCount || 0;
+                        const newUnread = isCurrent ? 0 : (!msg.fromMe ? prevUnread + 1 : prevUnread);
+                        updated[idx] = { 
+                            ...updated[idx], 
+                            lastMessage: { content: msg.content, timestamp: msg.timestamp, type: msg.type },
+                            unreadCount: newUnread
+                        };
                     } else { needsReload = true; }
                 });
                 updated.sort((a, b) => {
@@ -575,9 +617,14 @@ export function ChatList({ sessionId, onSelectChat, selectedJid }: ChatListProps
         }
     }, [hasMore, loading, searchQuery, fetchChats]);
 
+    const handleSelectChat = useCallback((jid: string, name?: string) => {
+        setChats(prev => prev.map(c => c.jid === jid ? { ...c, unreadCount: 0 } : c));
+        onSelectChat(jid, name);
+    }, [onSelectChat]);
+
     const itemContent = useCallback(
-        (_: number, chat: ChatContact) => <ChatRow key={chat.jid} chat={chat} isSelected={selectedJid === chat.jid} onSelect={onSelectChat} sessionId={sessionId} labelDots={chatLabelMap.get(chat.jid) || []} />,
-        [selectedJid, onSelectChat, sessionId, chatLabelMap]
+        (_: number, chat: ChatContact) => <ChatRow key={chat.jid} chat={chat} isSelected={selectedJid === chat.jid} onSelect={handleSelectChat} sessionId={sessionId} labelDots={chatLabelMap.get(chat.jid) || []} />,
+        [selectedJid, handleSelectChat, sessionId, chatLabelMap]
     );
 
     const handleStartNewChat = () => {

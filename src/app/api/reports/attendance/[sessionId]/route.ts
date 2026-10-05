@@ -18,7 +18,11 @@ export async function GET(
             return NextResponse.json({ status: false, message: "Acesso negado" }, { status: 403 });
         }
 
-        const metrics = await TicketService.getMetrics(sessionId);
+        const url = new URL(request.url);
+        const daysParam = url.searchParams.get("days");
+        const days = daysParam !== null ? parseInt(daysParam, 10) : undefined;
+
+        const metrics = await TicketService.getMetrics(sessionId, days);
         if (!metrics) {
             return NextResponse.json({ status: false, message: "Sessão não encontrada" }, { status: 404 });
         }

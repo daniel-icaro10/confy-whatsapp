@@ -48,7 +48,7 @@ export class ChatService {
 
         // 2. Batch fetch contacts & groups ONLY for JIDs that have messages
         const jids = rawLastMessages.map(m => m.remoteJid);
-        const [contacts, groups, tickets] = await Promise.all([
+        const [contacts, groups, tickets, unreadCounts] = await Promise.all([
             prisma.contact.findMany({
                 where: { sessionId: dbSessionId, jid: { in: jids } },
                 select: { jid: true, name: true, notify: true, profilePic: true }
@@ -63,6 +63,16 @@ export class ChatService {
                     assignedUser: { select: { id: true, name: true, email: true } },
                     department: { select: { id: true, name: true, colorHex: true } }
                 }
+            }),
+            prisma.message.groupBy({
+                by: ['remoteJid'],
+                where: {
+                    sessionId: dbSessionId,
+                    fromMe: false,
+                    status: { not: 'READ' },
+                    remoteJid: { in: jids }
+                },
+                _count: { id: true }
             })
         ]);
 
@@ -73,6 +83,9 @@ export class ChatService {
 
         const ticketMap = new Map<string, any>();
         tickets.forEach(t => ticketMap.set(t.jid, t));
+
+        const unreadMap = new Map<string, number>();
+        unreadCounts.forEach(u => unreadMap.set(u.remoteJid, u._count.id));
 
         // 3. Build result array (already sorted by SQL DESC)
         const result: any[] = [];
@@ -89,6 +102,7 @@ export class ChatService {
                 name: info?.name || null,
                 notify: info?.notify || null,
                 profilePic: info?.profilePic || null,
+                unreadCount: unreadMap.get(msg.remoteJid) || 0,
                 ticket: ticket ? {
                     id: ticket.id,
                     status: ticket.status,
@@ -166,6 +180,19 @@ export class ChatService {
 
         const hasMore = messages.length > limit;
         if (hasMore) messages.pop();
+
+        // Mark incoming messages as READ when opening/viewing the chat
+        if (!before) {
+            prisma.message.updateMany({
+                where: {
+                    sessionId: dbSessionId,
+                    remoteJid: { in: Array.from(queryJids) },
+                    fromMe: false,
+                    status: { not: 'READ' }
+                },
+                data: { status: 'READ' }
+            }).catch(() => {});
+        }
 
         // Fetch quoted messages
         const quoteIds = messages.map(m => m.quoteId).filter((id): id is string => !!id);

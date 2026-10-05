@@ -63,7 +63,7 @@ const navGroups: NavGroup[] = [
             { href: "/dashboard/quick-replies", label: "Respostas Rápidas", icon: Zap },
             { href: "/dashboard/departments", label: "Setores & Filas", icon: Building2, allowedRoles: ["SUPERADMIN", "OWNER"] },
             { href: "/dashboard/attendance-settings", label: "Horários & CSAT", icon: Clock, allowedRoles: ["SUPERADMIN", "OWNER"] },
-            { href: "/dashboard/attendance-reports", label: "Métricas & TMR", icon: BarChart3, allowedRoles: ["SUPERADMIN", "OWNER"] },
+            { href: "/dashboard/attendance-reports", label: "Relatórios & Análises", icon: BarChart3, allowedRoles: ["SUPERADMIN", "OWNER"] },
         ],
     },
     {
