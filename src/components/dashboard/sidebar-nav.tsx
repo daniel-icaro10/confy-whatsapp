@@ -22,7 +22,6 @@ import {
     Megaphone,
     HardDrive,
     Activity,
-    UserCircle,
     Tag,
     MessageCircleReply,
     Contact,
@@ -86,7 +85,6 @@ const navGroups: NavGroup[] = [
         items: [
             { href: "/dashboard/bot-settings", label: "Configurações do bot", icon: Bot, allowedRoles: ["SUPERADMIN", "OWNER"] },
             { href: "/dashboard/autoreply", label: "Resposta automática (URA)", icon: MessageCircleReply, allowedRoles: ["SUPERADMIN", "OWNER"] },
-            { href: "/dashboard/profile", label: "Perfil do bot", icon: UserCircle, allowedRoles: ["SUPERADMIN", "OWNER"] },
             { href: "/dashboard/scheduler", label: "Agendamentos", icon: CalendarClock, allowedRoles: ["SUPERADMIN", "OWNER"] },
             { href: "/dashboard/webhooks", label: "Webhooks e API", icon: Webhook, allowedRoles: ["SUPERADMIN", "OWNER"] },
         ],
