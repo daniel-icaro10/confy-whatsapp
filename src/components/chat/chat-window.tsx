@@ -655,9 +655,21 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
 
             {/* Header */}
             <div className="shrink-0 px-3 py-2 border-b border-[#222d34] bg-[#202c33] flex items-center justify-between gap-2 sm:gap-3 z-10">
-                <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                <div 
+                    className="flex items-center gap-2 sm:gap-3 min-w-0 cursor-pointer hover:opacity-90 transition-opacity"
+                    onClick={() => setShowRightPanel(prev => !prev)}
+                    title="Ver detalhes e CRM do contato"
+                >
                     {onBack && (
-                        <Button variant="ghost" size="icon" className="h-8 w-8 md:hidden shrink-0 text-muted-foreground hover:text-foreground" onClick={onBack}>
+                        <Button 
+                            variant="ghost" 
+                            size="icon" 
+                            className="h-8 w-8 md:hidden shrink-0 text-muted-foreground hover:text-foreground" 
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                onBack();
+                            }}
+                        >
                             <ArrowLeft className="h-4 w-4" />
                         </Button>
                     )}

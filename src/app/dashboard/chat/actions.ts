@@ -183,6 +183,10 @@ export async function updateTicketStatus(sessionId: string, jid: string, status:
     return await TicketService.updateStatus(sessionId, jid, status as any);
 }
 
+export async function resolveTicket(sessionId: string, jid: string) {
+    return await updateTicketStatus(sessionId, jid, "RESOLVED");
+}
+
 export async function getTransferOptions(sessionId: string) {
     const user = await getAuthenticatedUserForAction();
     if (!user) throw new Error("Unauthorized");
@@ -334,6 +338,7 @@ export async function updateContactDetails(
         plan?: string;
         planValue?: string;
         notes?: string;
+        customFields?: Record<string, any>;
     }
 ) {
     const user = await getAuthenticatedUserForAction();
@@ -372,6 +377,7 @@ export async function updateContactDetails(
                 ...(data.plan !== undefined ? { plan: data.plan } : {}),
                 ...(data.planValue !== undefined ? { planValue: data.planValue } : {}),
                 ...(data.notes !== undefined ? { notes: data.notes } : {}),
+                ...(data.customFields !== undefined ? { customFields: data.customFields } : {}),
             }
         });
     }

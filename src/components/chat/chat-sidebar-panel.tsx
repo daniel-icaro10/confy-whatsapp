@@ -1,12 +1,11 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Skeleton } from "@/components/ui/skeleton";
 import {
     Dialog,
     DialogContent,
@@ -27,21 +26,35 @@ import {
     User,
     Mail,
     Phone,
-    FileText,
-    CreditCard,
-    DollarSign,
+    Building2,
+    MapPin,
     Edit3,
     Copy,
     Check,
     Tag,
-    UserCheck,
-    Users,
-    AlertCircle,
     Star,
     MessageSquare,
     ExternalLink,
     ChevronDown,
-    ShieldAlert
+    ChevronUp,
+    Minus,
+    Plus,
+    Trash2,
+    Link as LinkIcon,
+    Sparkles,
+    Briefcase,
+    Info,
+    CheckCircle2,
+    Zap,
+    Twitter,
+    Linkedin,
+    Github,
+    Instagram,
+    UserCheck,
+    UserX,
+    Wrench,
+    Headphones,
+    Users
 } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
@@ -50,7 +63,8 @@ import {
     updateContactDetails,
     updateTicketPriority,
     transferTicket,
-    assignTicketToMe
+    assignTicketToMe,
+    resolveTicket
 } from "@/app/dashboard/chat/actions";
 import { LabelAssignPopover } from "./chat-list";
 
@@ -79,12 +93,40 @@ interface ContactData {
     notify: string | null;
     verifiedName: string | null;
     jid: string;
+    customFields?: {
+        company?: string;
+        location?: string;
+        bio?: string;
+    } | null;
 }
 
 interface LabelData {
     id: string;
     name: string;
     colorHex: string;
+}
+
+/**
+ * Signal Bars Component matching Chatwoot's priority indicator
+ */
+function PriorityBars({ priority }: { priority: string }) {
+    const bars = priority === "URGENT" ? 4 : priority === "HIGH" ? 3 : priority === "MEDIUM" ? 2 : 1;
+    const color = priority === "URGENT" 
+        ? "bg-rose-500" 
+        : priority === "HIGH" 
+            ? "bg-amber-500" 
+            : priority === "MEDIUM" 
+                ? "bg-blue-400" 
+                : "bg-emerald-500";
+
+    return (
+        <div className="flex items-end gap-[2px] h-3.5 w-3.5 shrink-0" title={`Prioridade ${priority}`}>
+            <span className={cn("w-[2.5px] rounded-full transition-all", bars >= 1 ? color : "bg-[#2a3942]", "h-1.5")} />
+            <span className={cn("w-[2.5px] rounded-full transition-all", bars >= 2 ? color : "bg-[#2a3942]", "h-2.5")} />
+            <span className={cn("w-[2.5px] rounded-full transition-all", bars >= 3 ? color : "bg-[#2a3942]", "h-3.5")} />
+            <span className={cn("w-[2.5px] rounded-full transition-all", bars >= 4 ? color : "bg-[#2a3942]", "h-4")} />
+        </div>
+    );
 }
 
 export function ChatSidebarPanel({
@@ -100,14 +142,22 @@ export function ChatSidebarPanel({
     const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
     const [copiedField, setCopiedField] = useState<string | null>(null);
 
-    // Form state for contact editing
+    // Collapsible sections state
+    const [isActionsOpen, setIsActionsOpen] = useState(true);
+    const [isMacrosOpen, setIsMacrosOpen] = useState(false);
+    const [isCrmOpen, setIsCrmOpen] = useState(true);
+
+    // Form state for editing
     const [editForm, setEditForm] = useState({
         name: "",
         email: "",
         document: "",
         plan: "",
         planValue: "",
-        notes: ""
+        notes: "",
+        company: "",
+        location: "",
+        bio: ""
     });
     const [savingContact, setSavingContact] = useState(false);
 
@@ -119,16 +169,20 @@ export function ChatSidebarPanel({
     const loadContact = useCallback(async () => {
         setLoadingContact(true);
         try {
-            const data = await getContactDetails(sessionId, jid);
-            setContact(data as any);
+            const data: any = await getContactDetails(sessionId, jid);
+            setContact(data);
             if (data) {
+                const custom = data.customFields || {};
                 setEditForm({
                     name: data.name || "",
                     email: data.email || "",
                     document: data.document || "",
                     plan: data.plan || "",
                     planValue: data.planValue || "",
-                    notes: data.notes || ""
+                    notes: data.notes || "",
+                    company: custom.company || "",
+                    location: custom.location || "",
+                    bio: custom.bio || ""
                 });
             }
         } catch (error) {
@@ -149,10 +203,10 @@ export function ChatSidebarPanel({
             const allData = await allLabelsRes.json();
             const assignedData = await assignedRes.json();
 
-            if (allLabelsRes.ok && assignedRes.ok) {
-                const allLabels: LabelData[] = allData.data?.labels || [];
+            if (allData.status && assignedData.status) {
                 const assignedIds = new Set((assignedData.data || []).map((cl: any) => cl.labelId));
-                setAssignedLabels(allLabels.filter(l => assignedIds.has(l.id)));
+                const filtered = (allData.data || []).filter((l: any) => assignedIds.has(l.id));
+                setAssignedLabels(filtered);
             }
         } catch (error) {
             console.error("Failed to load labels", error);
@@ -166,94 +220,117 @@ export function ChatSidebarPanel({
         loadLabels();
     }, [loadContact, loadLabels]);
 
-    const handleCopy = (text: string, fieldName: string) => {
-        navigator.clipboard.writeText(text);
+    const handleCopy = (value: string, fieldName: string) => {
+        navigator.clipboard.writeText(value);
         setCopiedField(fieldName);
-        toast.success(`${fieldName} copiado com sucesso!`);
+        toast.success(`${fieldName} copiado!`);
         setTimeout(() => setCopiedField(null), 2000);
     };
 
     const handleSaveContact = async () => {
         setSavingContact(true);
         try {
-            const updated = await updateContactDetails(sessionId, jid, editForm);
-            setContact(updated as any);
+            await updateContactDetails(sessionId, jid, {
+                name: editForm.name,
+                email: editForm.email,
+                document: editForm.document,
+                plan: editForm.plan,
+                planValue: editForm.planValue,
+                notes: editForm.notes,
+                customFields: {
+                    company: editForm.company,
+                    location: editForm.location,
+                    bio: editForm.bio
+                }
+            });
+            toast.success("Cadastro do cliente atualizado");
             setIsEditDialogOpen(false);
-            toast.success("Dados do contato atualizados com sucesso!");
-        } catch (error: any) {
-            toast.error(error.message || "Erro ao salvar dados do contato");
+            loadContact();
+        } catch (error) {
+            toast.error("Erro ao salvar cadastro do cliente");
         } finally {
             setSavingContact(false);
         }
     };
 
-    const handlePriorityChange = async (newPriority: "LOW" | "MEDIUM" | "HIGH" | "URGENT") => {
+    const handlePriorityChange = async (newPriority: string) => {
         try {
-            const updated = await updateTicketPriority(sessionId, jid, newPriority);
-            if (onTicketUpdated) onTicketUpdated(updated);
-            toast.success(`Prioridade alterada para ${getPriorityLabel(newPriority)}`);
-        } catch (error: any) {
-            toast.error(error.message || "Erro ao alterar prioridade");
-        }
-    };
-
-    const handleAttendantChange = async (userId: string) => {
-        try {
-            const updated = await transferTicket(sessionId, jid, {
-                userId: userId === "unassigned" ? null : userId
-            });
-            if (onTicketUpdated) onTicketUpdated(updated);
-            toast.success("Atendente responsável atualizado!");
-        } catch (error: any) {
-            toast.error(error.message || "Erro ao transferir ticket");
+            const updated = await updateTicketPriority(sessionId, jid, newPriority as any);
+            onTicketUpdated?.(updated);
+            toast.success("Prioridade atualizada com sucesso");
+        } catch (error) {
+            toast.error("Falha ao atualizar prioridade");
         }
     };
 
     const handleDepartmentChange = async (deptId: string) => {
         try {
-            const updated = await transferTicket(sessionId, jid, {
-                departmentId: deptId === "none" ? null : deptId
-            });
-            if (onTicketUpdated) onTicketUpdated(updated);
-            toast.success("Departamento atualizado!");
-        } catch (error: any) {
-            toast.error(error.message || "Erro ao alterar setor");
+            const target = deptId === "none" ? null : deptId;
+            const updated = await transferTicket(sessionId, jid, { departmentId: target });
+            onTicketUpdated?.(updated);
+            toast.success("Setor atualizado com sucesso");
+        } catch (error) {
+            toast.error("Falha ao atualizar setor");
+        }
+    };
+
+    const handleAttendantChange = async (userId: string) => {
+        try {
+            if (userId === "unassigned") {
+                const updated = await transferTicket(sessionId, jid, { userId: null });
+                onTicketUpdated?.(updated);
+                toast.success("Conversa enviada para a fila geral");
+            } else if (userId === transferOptions.currentUserId) {
+                const updated = await assignTicketToMe(sessionId, jid);
+                onTicketUpdated?.(updated);
+                toast.success("Conversa atribuída a você");
+            } else {
+                const updated = await transferTicket(sessionId, jid, { userId });
+                onTicketUpdated?.(updated);
+                toast.success("Conversa transferida para o atendente");
+            }
+        } catch (error) {
+            toast.error("Falha ao atribuir atendente");
         }
     };
 
     const handleRemoveLabel = async (labelId: string) => {
         try {
-            const res = await fetch(`/api/labels/${sessionId}/chat/${encodeURIComponent(jid)}/labels`, {
-                method: "PUT",
+            const res = await fetch(`/api/labels/${sessionId}/assign`, {
+                method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ labelIds: [labelId], action: "remove" })
+                body: JSON.stringify({ labelId, chatJid: jid, action: "unassign" })
             });
             if (res.ok) {
                 setAssignedLabels(prev => prev.filter(l => l.id !== labelId));
                 toast.success("Etiqueta removida");
             }
         } catch (error) {
-            toast.error("Erro ao remover etiqueta");
+            toast.error("Falha ao remover etiqueta");
         }
     };
 
-    const getPriorityLabel = (priority?: string) => {
-        switch (priority) {
-            case "LOW": return "Baixa";
-            case "MEDIUM": return "Média";
-            case "HIGH": return "Alta";
-            case "URGENT": return "Urgente";
-            default: return "Média";
-        }
-    };
-
-    const getPriorityBadgeClass = (priority?: string) => {
-        switch (priority) {
-            case "LOW": return "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20";
-            case "MEDIUM": return "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20";
-            case "HIGH": return "bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20";
-            case "URGENT": return "bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20 animate-pulse";
-            default: return "bg-amber-500/10 text-amber-600 border-amber-500/20";
+    // Quick Macros
+    const handleRunMacro = async (type: "high_priority" | "transfer_support" | "resolve") => {
+        if (type === "high_priority") {
+            await handlePriorityChange("HIGH");
+        } else if (type === "transfer_support") {
+            const supportDept = transferOptions.departments.find(d => 
+                d.name.toLowerCase().includes("suporte") || d.name.toLowerCase().includes("técnico")
+            ) || transferOptions.departments[0];
+            if (supportDept) {
+                await handleDepartmentChange(supportDept.id);
+            } else {
+                toast.info("Nenhum setor de suporte cadastrado");
+            }
+        } else if (type === "resolve") {
+            try {
+                const updated = await resolveTicket(sessionId, jid);
+                onTicketUpdated?.(updated);
+                toast.success("Conversa resolvida com sucesso");
+            } catch {
+                toast.error("Falha ao resolver conversa");
+            }
         }
     };
 
@@ -270,20 +347,38 @@ export function ChatSidebarPanel({
 
     const displayName = contact?.name || contact?.verifiedName || contact?.notify || jid.split("@")[0];
     const rawPhone = jid.split("@")[0];
+    const customFields = contact?.customFields || {};
+    const bioText = customFields.bio || contact?.notes || "Cliente WhatsApp conectado.";
+    const companyText = customFields.company || (contact?.plan ? `Cliente Plano ${contact.plan}` : null);
+    const locationText = customFields.location || "Brasil 🇧🇷";
+
+    // Current assigned attendant & department
+    const currentAttendant = useMemo(() => {
+        if (!ticket?.assignedUserId) return null;
+        return transferOptions.attendants.find(a => a.id === ticket.assignedUserId) || {
+            id: ticket.assignedUserId,
+            name: ticket.assignedUser?.name || "Atendente",
+            email: ticket.assignedUser?.email || ""
+        };
+    }, [ticket, transferOptions.attendants]);
+
+    const currentDepartment = useMemo(() => {
+        if (!ticket?.departmentId) return null;
+        return transferOptions.departments.find(d => d.id === ticket.departmentId) || ticket.department;
+    }, [ticket, transferOptions.departments]);
 
     return (
-        <aside className="w-80 lg:w-88 border-l border-border bg-card/60 backdrop-blur-md flex flex-col h-full overflow-hidden shrink-0 animate-in slide-in-from-right duration-200">
-            {/* Header */}
-            <div className="h-14 px-4 border-b border-border/60 flex items-center justify-between shrink-0 bg-background/50">
-                <span className="text-xs font-semibold text-foreground flex items-center gap-2">
-                    <User className="h-4 w-4 text-primary" />
-                    Detalhes do Contato
+        <aside className="w-80 lg:w-[340px] border-l border-[#222d34] bg-[#111b21] flex flex-col h-full overflow-hidden shrink-0 select-none animate-in slide-in-from-right duration-200">
+            {/* Header: clean title matching Chatwoot "Contatos" */}
+            <div className="h-14 px-4 border-b border-[#222d34] flex items-center justify-between shrink-0 bg-[#182229]/60">
+                <span className="text-sm font-bold text-[#e9edef] tracking-tight">
+                    Contatos
                 </span>
                 <Button
                     variant="ghost"
                     size="icon"
                     onClick={onClose}
-                    className="h-8 w-8 rounded-full text-muted-foreground hover:text-foreground"
+                    className="h-8 w-8 rounded-full text-[#8696a0] hover:text-[#e9edef] hover:bg-[#202c33] cursor-pointer"
                     title="Fechar painel"
                 >
                     <X className="h-4 w-4" />
@@ -291,427 +386,626 @@ export function ChatSidebarPanel({
             </div>
 
             {/* Scrollable Content */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 text-xs">
-                {/* Contact Profile Card */}
-                <div className="flex flex-col items-center text-center p-4 rounded-xl border border-border/50 bg-background/80 shadow-xs relative group">
-                    <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => setIsEditDialogOpen(true)}
-                        className="absolute top-2 right-2 h-7 w-7 rounded-full text-muted-foreground hover:text-foreground opacity-70 group-hover:opacity-100 transition-opacity"
-                        title="Editar cadastro do cliente"
-                    >
-                        <Edit3 className="h-3.5 w-3.5" />
-                    </Button>
-
-                    <div className="relative mb-2.5">
-                        <Avatar className="h-16 w-16 border-2 border-primary/20 shadow-md">
-                            <AvatarImage src={`/api/chat/${sessionId}/${encodeURIComponent(jid)}/avatar`} alt={displayName} />
-                            <AvatarFallback className="bg-primary/10 text-primary font-bold text-lg">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 text-xs styled-scrollbar">
+                {/* 1. Contact Profile Card (left-aligned squircle avatar like Chatwoot) */}
+                <div className="p-4 rounded-2xl border border-[#222d34] bg-[#182229]/50 shadow-sm space-y-3">
+                    {/* Top Row: Squircle Avatar + Actions */}
+                    <div className="flex items-start justify-between">
+                        <Avatar className="h-14 w-14 rounded-2xl border border-white/[0.08] shadow-md shrink-0">
+                            <AvatarImage 
+                                src={`/api/chat/${sessionId}/${encodeURIComponent(jid)}/avatar`} 
+                                alt={displayName} 
+                                className="object-cover rounded-2xl"
+                            />
+                            <AvatarFallback className="bg-gradient-to-br from-[#00a884]/20 to-blue-500/20 text-[#00a884] font-bold text-base rounded-2xl">
                                 {displayName.slice(0, 2).toUpperCase()}
                             </AvatarFallback>
                         </Avatar>
-                        {ticket?.status && (
-                            <span className={cn(
-                                "absolute bottom-0 right-0 h-4 w-4 rounded-full border-2 border-background",
-                                ticket.status === "OPEN" ? "bg-amber-500" :
-                                ticket.status === "IN_PROGRESS" ? "bg-blue-500" : "bg-emerald-500"
-                            )} />
-                        )}
+
+                        <div className="flex items-center gap-1">
+                            <button
+                                onClick={() => handleCopy(rawPhone, "Telefone")}
+                                className="p-1.5 rounded-lg text-[#8696a0] hover:text-[#e9edef] hover:bg-[#202c33] transition-colors cursor-pointer"
+                                title="Informações do contato"
+                            >
+                                <Info className="h-3.5 w-3.5" />
+                            </button>
+                            <a
+                                href={`https://wa.me/${rawPhone}`}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="p-1.5 rounded-lg text-[#8696a0] hover:text-[#e9edef] hover:bg-[#202c33] transition-colors cursor-pointer"
+                                title="Abrir conversa no WhatsApp Web"
+                            >
+                                <ExternalLink className="h-3.5 w-3.5" />
+                            </a>
+                        </div>
                     </div>
 
-                    <h3 className="font-semibold text-sm text-foreground max-w-full truncate px-2">
-                        {displayName}
-                    </h3>
-                    <p className="text-[11px] text-muted-foreground mt-0.5">
-                        Cliente WhatsApp
-                    </p>
+                    {/* Name & Bio */}
+                    <div className="space-y-1">
+                        <h3 className="font-bold text-base text-[#e9edef] leading-tight flex items-center gap-1.5">
+                            <span className="truncate">{displayName}</span>
+                        </h3>
+                        <p className="text-[11px] text-[#8696a0] leading-relaxed line-clamp-2">
+                            {bioText}
+                        </p>
+                    </div>
 
-                    {/* Quick copy fields */}
-                    <div className="w-full mt-3 pt-3 border-t border-border/40 space-y-1.5 text-left">
-                        {/* Phone */}
-                        <div className="flex items-center justify-between group/row hover:bg-muted/50 p-1.5 rounded-lg transition-colors">
-                            <div className="flex items-center gap-2 text-muted-foreground truncate">
-                                <Phone className="h-3.5 w-3.5 shrink-0 text-emerald-500" />
-                                <span className="font-mono text-[11px] text-foreground truncate">
-                                    {formatPhoneNumber(jid)}
-                                </span>
-                            </div>
-                            <Button
-                                variant="ghost"
-                                size="icon"
-                                onClick={() => handleCopy(rawPhone, "Telefone")}
-                                className="h-6 w-6 text-muted-foreground hover:text-foreground shrink-0"
-                            >
-                                {copiedField === "Telefone" ? (
-                                    <Check className="h-3 w-3 text-emerald-500" />
-                                ) : (
-                                    <Copy className="h-3 w-3" />
-                                )}
-                            </Button>
-                        </div>
-
+                    {/* Contact Detail Rows with Clean Icons & Copy */}
+                    <div className="pt-2 border-t border-[#222d34]/60 space-y-2">
                         {/* Email */}
-                        <div className="flex items-center justify-between group/row hover:bg-muted/50 p-1.5 rounded-lg transition-colors">
-                            <div className="flex items-center gap-2 text-muted-foreground truncate">
-                                <Mail className="h-3.5 w-3.5 shrink-0 text-blue-500" />
-                                <span className="text-[11px] text-foreground truncate">
-                                    {contact?.email || <span className="text-muted-foreground italic">Sem e-mail</span>}
+                        <div className="flex items-center justify-between text-[#8696a0] group/row hover:text-[#e9edef] transition-colors">
+                            <div className="flex items-center gap-2 truncate">
+                                <Mail className="h-3.5 w-3.5 shrink-0 text-[#8696a0]" />
+                                <span className="text-[11px] text-[#e9edef] truncate">
+                                    {contact?.email || <span className="text-[#8696a0]/60 italic">Sem e-mail cadastrado</span>}
                                 </span>
                             </div>
                             {contact?.email && (
-                                <Button
-                                    variant="ghost"
-                                    size="icon"
+                                <button
                                     onClick={() => handleCopy(contact.email!, "E-mail")}
-                                    className="h-6 w-6 text-muted-foreground hover:text-foreground shrink-0"
+                                    className="p-1 text-[#8696a0] hover:text-[#00a884] opacity-0 group-hover/row:opacity-100 transition-opacity cursor-pointer"
+                                    title="Copiar e-mail"
                                 >
-                                    {copiedField === "E-mail" ? (
-                                        <Check className="h-3 w-3 text-emerald-500" />
-                                    ) : (
-                                        <Copy className="h-3 w-3" />
-                                    )}
-                                </Button>
+                                    {copiedField === "E-mail" ? <Check className="h-3 w-3 text-[#00a884]" /> : <Copy className="h-3 w-3" />}
+                                </button>
                             )}
                         </div>
+
+                        {/* Phone */}
+                        <div className="flex items-center justify-between text-[#8696a0] group/row hover:text-[#e9edef] transition-colors">
+                            <div className="flex items-center gap-2 truncate">
+                                <Phone className="h-3.5 w-3.5 shrink-0 text-[#8696a0]" />
+                                <span className="font-mono text-[11px] text-[#e9edef] truncate">
+                                    {formatPhoneNumber(jid)}
+                                </span>
+                            </div>
+                            <button
+                                onClick={() => handleCopy(rawPhone, "Telefone")}
+                                className="p-1 text-[#8696a0] hover:text-[#00a884] opacity-0 group-hover/row:opacity-100 transition-opacity cursor-pointer"
+                                title="Copiar telefone"
+                            >
+                                {copiedField === "Telefone" ? <Check className="h-3 w-3 text-[#00a884]" /> : <Copy className="h-3 w-3" />}
+                            </button>
+                        </div>
+
+                        {/* Company */}
+                        {companyText && (
+                            <div className="flex items-center gap-2 text-[#8696a0]">
+                                <Building2 className="h-3.5 w-3.5 shrink-0 text-[#8696a0]" />
+                                <span className="text-[11px] text-[#e9edef] truncate">{companyText}</span>
+                            </div>
+                        )}
+
+                        {/* Location */}
+                        <div className="flex items-center gap-2 text-[#8696a0]">
+                            <MapPin className="h-3.5 w-3.5 shrink-0 text-[#8696a0]" />
+                            <span className="text-[11px] text-[#e9edef] truncate">{locationText}</span>
+                        </div>
+                    </div>
+
+                    {/* Social Media Row (Twitter/X, LinkedIn, GitHub, Instagram) */}
+                    <div className="pt-2 border-t border-[#222d34]/60 flex items-center gap-3 text-[#8696a0]">
+                        <button className="hover:text-[#00a884] transition-colors cursor-pointer" title="Twitter / X">
+                            <Twitter className="h-3.5 w-3.5" />
+                        </button>
+                        <button className="hover:text-[#00a884] transition-colors cursor-pointer" title="LinkedIn">
+                            <Linkedin className="h-3.5 w-3.5" />
+                        </button>
+                        <button className="hover:text-[#00a884] transition-colors cursor-pointer" title="GitHub">
+                            <Github className="h-3.5 w-3.5" />
+                        </button>
+                        <button className="hover:text-[#00a884] transition-colors cursor-pointer" title="Instagram">
+                            <Instagram className="h-3.5 w-3.5" />
+                        </button>
+                    </div>
+
+                    {/* 4 Quick Action Buttons (Message, Edit, Link, Delete) */}
+                    <div className="grid grid-cols-4 gap-2 pt-2 border-t border-[#222d34]/60">
+                        <button
+                            onClick={() => {
+                                const input = document.querySelector("textarea") as HTMLTextAreaElement | null;
+                                input?.focus();
+                            }}
+                            className="h-9 rounded-xl bg-[#202c33] hover:bg-[#2a3942] text-[#e9edef] flex items-center justify-center transition-colors border border-white/[0.04] cursor-pointer"
+                            title="Conversar / Focar mensagem"
+                        >
+                            <MessageSquare className="h-4 w-4" />
+                        </button>
+                        <button
+                            onClick={() => setIsEditDialogOpen(true)}
+                            className="h-9 rounded-xl bg-[#202c33] hover:bg-[#2a3942] text-[#e9edef] flex items-center justify-center transition-colors border border-white/[0.04] cursor-pointer"
+                            title="Editar cadastro do contato"
+                        >
+                            <Edit3 className="h-4 w-4" />
+                        </button>
+                        <button
+                            onClick={() => handleCopy(jid, "JID do Contato")}
+                            className="h-9 rounded-xl bg-[#202c33] hover:bg-[#2a3942] text-[#e9edef] flex items-center justify-center transition-colors border border-white/[0.04] cursor-pointer"
+                            title="Copiar JID do contato"
+                        >
+                            <LinkIcon className="h-4 w-4" />
+                        </button>
+                        <button
+                            onClick={() => toast.info("Histórico protegido")}
+                            className="h-9 rounded-xl bg-[#202c33] hover:bg-red-500/20 text-[#8696a0] hover:text-red-400 flex items-center justify-center transition-colors border border-white/[0.04] cursor-pointer"
+                            title="Opções de exclusão"
+                        >
+                            <Trash2 className="h-4 w-4" />
+                        </button>
                     </div>
                 </div>
 
-                {/* Conversation Actions Card (Inspiração direta Chatwoot) */}
-                <div className="p-3.5 rounded-xl border border-border/50 bg-background/80 shadow-xs space-y-3">
-                    <div className="flex items-center justify-between border-b border-border/40 pb-2">
-                        <span className="font-semibold text-foreground flex items-center gap-1.5 text-xs">
-                            <Users className="h-3.5 w-3.5 text-primary" />
-                            Ações da Conversa
+                {/* 2. Section: Ações da conversa (Chatwoot style) */}
+                <div className="rounded-2xl border border-[#222d34] bg-[#182229]/50 shadow-sm overflow-hidden">
+                    <button
+                        onClick={() => setIsActionsOpen(prev => !prev)}
+                        className="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-[#202c33]/40 transition-colors cursor-pointer"
+                    >
+                        <span className="font-bold text-xs text-[#e9edef] tracking-tight">
+                            Ações da conversa
                         </span>
-                        {ticket?.priority && (
-                            <Badge variant="outline" className={cn("text-[10px] uppercase font-bold", getPriorityBadgeClass(ticket.priority))}>
-                                {getPriorityLabel(ticket.priority)}
-                            </Badge>
-                        )}
-                    </div>
+                        <span className="text-[#8696a0]">
+                            {isActionsOpen ? <Minus className="h-3.5 w-3.5" /> : <Plus className="h-3.5 w-3.5" />}
+                        </span>
+                    </button>
 
-                    {/* Assigned Agent */}
-                    <div className="space-y-1">
-                        <label className="text-[11px] font-medium text-muted-foreground">
-                            Atendente Responsável
-                        </label>
-                        <Select
-                            value={ticket?.assignedUserId || "unassigned"}
-                            onValueChange={handleAttendantChange}
-                        >
-                            <SelectTrigger className="h-8 text-xs bg-muted/30">
-                                <SelectValue placeholder="Selecione um atendente" />
-                            </SelectTrigger>
-                            <SelectContent className="text-xs">
-                                <SelectItem value="unassigned" className="text-muted-foreground">
-                                    ⭕ Não atribuído (Fila geral)
-                                </SelectItem>
-                                {transferOptions.attendants.map(att => (
-                                    <SelectItem key={att.id} value={att.id}>
-                                        👤 {att.name || att.email}
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
-                    </div>
+                    {isActionsOpen && (
+                        <div className="p-4 pt-1 border-t border-[#222d34]/60 space-y-3.5">
+                            {/* Agente atribuído */}
+                            <div className="space-y-1.5">
+                                <label className="text-[11px] font-semibold text-[#8696a0]">
+                                    Agente atribuído
+                                </label>
+                                <Select
+                                    value={ticket?.assignedUserId || "unassigned"}
+                                    onValueChange={handleAttendantChange}
+                                >
+                                    <SelectTrigger className="h-9 text-xs bg-[#202c33] border-[#2a3942] text-[#e9edef] rounded-xl focus:ring-[#00a884]">
+                                        <SelectValue>
+                                            {currentAttendant ? (
+                                                <div className="flex items-center gap-2 truncate">
+                                                    <div className="relative">
+                                                        <div className="h-5 w-5 rounded-full bg-[#00a884]/20 text-[#00a884] font-bold text-[10px] flex items-center justify-center border border-[#00a884]/30">
+                                                            {(currentAttendant.name || currentAttendant.email).charAt(0).toUpperCase()}
+                                                        </div>
+                                                        <span className="absolute bottom-0 right-0 h-1.5 w-1.5 rounded-full bg-emerald-500 ring-1 ring-[#202c33]" />
+                                                    </div>
+                                                    <span className="truncate">{currentAttendant.name || currentAttendant.email}</span>
+                                                </div>
+                                            ) : (
+                                                <span className="text-[#8696a0]">Não atribuído</span>
+                                            )}
+                                        </SelectValue>
+                                    </SelectTrigger>
+                                    <SelectContent className="bg-[#202c33] border-[#2a3942] text-[#e9edef] text-xs">
+                                        <SelectItem value="unassigned" className="text-[#8696a0] focus:bg-[#182229]">
+                                            <div className="flex items-center gap-2">
+                                                <div className="h-5 w-5 rounded-full bg-[#2a3942] text-[#8696a0] flex items-center justify-center">
+                                                    <UserX className="h-3 w-3" />
+                                                </div>
+                                                <span>Não atribuído (Fila geral)</span>
+                                            </div>
+                                        </SelectItem>
+                                        {transferOptions.attendants.map(att => (
+                                            <SelectItem key={att.id} value={att.id} className="focus:bg-[#182229]">
+                                                <div className="flex items-center gap-2">
+                                                    <div className="relative">
+                                                        <div className="h-5 w-5 rounded-full bg-[#00a884]/20 text-[#00a884] font-bold text-[10px] flex items-center justify-center border border-[#00a884]/30">
+                                                            {(att.name || att.email).charAt(0).toUpperCase()}
+                                                        </div>
+                                                        <span className="absolute bottom-0 right-0 h-1.5 w-1.5 rounded-full bg-emerald-500 ring-1 ring-[#202c33]" />
+                                                    </div>
+                                                    <span>{att.name || att.email}</span>
+                                                </div>
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                            </div>
 
-                    {/* Assigned Team / Department */}
-                    <div className="space-y-1">
-                        <label className="text-[11px] font-medium text-muted-foreground">
-                            Setor / Departamento
-                        </label>
-                        <Select
-                            value={ticket?.departmentId || "none"}
-                            onValueChange={handleDepartmentChange}
-                        >
-                            <SelectTrigger className="h-8 text-xs bg-muted/30">
-                                <SelectValue placeholder="Selecione um setor" />
-                            </SelectTrigger>
-                            <SelectContent className="text-xs">
-                                <SelectItem value="none" className="text-muted-foreground">
-                                    🏢 Sem setor atribuído
-                                </SelectItem>
-                                {transferOptions.departments.map(dept => (
-                                    <SelectItem key={dept.id} value={dept.id}>
-                                        <div className="flex items-center gap-1.5">
+                            {/* Time atribuído */}
+                            <div className="space-y-1.5">
+                                <label className="text-[11px] font-semibold text-[#8696a0]">
+                                    Time atribuído
+                                </label>
+                                <Select
+                                    value={ticket?.departmentId || "none"}
+                                    onValueChange={handleDepartmentChange}
+                                >
+                                    <SelectTrigger className="h-9 text-xs bg-[#202c33] border-[#2a3942] text-[#e9edef] rounded-xl focus:ring-[#00a884]">
+                                        <SelectValue>
+                                            {currentDepartment ? (
+                                                <div className="flex items-center gap-2 truncate">
+                                                    <div
+                                                        className="h-4.5 w-4.5 rounded-full flex items-center justify-center text-[9px] font-bold shrink-0"
+                                                        style={{
+                                                            backgroundColor: `${currentDepartment.colorHex}25`,
+                                                            color: currentDepartment.colorHex,
+                                                            borderColor: `${currentDepartment.colorHex}50`,
+                                                            borderWidth: 1
+                                                        }}
+                                                    >
+                                                        {currentDepartment.name.charAt(0).toLowerCase()}
+                                                    </div>
+                                                    <span className="truncate">{currentDepartment.name}</span>
+                                                </div>
+                                            ) : (
+                                                <span className="text-[#8696a0]">Sem time definido</span>
+                                            )}
+                                        </SelectValue>
+                                    </SelectTrigger>
+                                    <SelectContent className="bg-[#202c33] border-[#2a3942] text-[#e9edef] text-xs">
+                                        <SelectItem value="none" className="text-[#8696a0] focus:bg-[#182229]">
+                                            <div className="flex items-center gap-2">
+                                                <div className="h-5 w-5 rounded-full bg-[#2a3942] text-[#8696a0] flex items-center justify-center">
+                                                    <Building2 className="h-3 w-3" />
+                                                </div>
+                                                <span>Sem time atribuído</span>
+                                            </div>
+                                        </SelectItem>
+                                        {transferOptions.departments.map(dept => (
+                                            <SelectItem key={dept.id} value={dept.id} className="focus:bg-[#182229]">
+                                                <div className="flex items-center gap-2">
+                                                    <div
+                                                        className="h-5 w-5 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0"
+                                                        style={{
+                                                            backgroundColor: `${dept.colorHex}25`,
+                                                            color: dept.colorHex,
+                                                            borderColor: `${dept.colorHex}50`,
+                                                            borderWidth: 1
+                                                        }}
+                                                    >
+                                                        {dept.name.charAt(0).toLowerCase()}
+                                                    </div>
+                                                    <span>{dept.name}</span>
+                                                </div>
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                            </div>
+
+                            {/* Prioridade */}
+                            <div className="space-y-1.5">
+                                <label className="text-[11px] font-semibold text-[#8696a0]">
+                                    Prioridade
+                                </label>
+                                <Select
+                                    value={ticket?.priority || "MEDIUM"}
+                                    onValueChange={handlePriorityChange}
+                                >
+                                    <SelectTrigger className="h-9 text-xs bg-[#202c33] border-[#2a3942] text-[#e9edef] rounded-xl focus:ring-[#00a884]">
+                                        <SelectValue>
+                                            <div className="flex items-center gap-2">
+                                                <PriorityBars priority={ticket?.priority || "MEDIUM"} />
+                                                <span className="font-medium">
+                                                    {ticket?.priority === "URGENT" ? "Urgente" : ticket?.priority === "HIGH" ? "Alta" : ticket?.priority === "MEDIUM" ? "Média" : "Baixa"}
+                                                </span>
+                                            </div>
+                                        </SelectValue>
+                                    </SelectTrigger>
+                                    <SelectContent className="bg-[#202c33] border-[#2a3942] text-[#e9edef] text-xs">
+                                        <SelectItem value="LOW" className="focus:bg-[#182229]">
+                                            <div className="flex items-center gap-2">
+                                                <PriorityBars priority="LOW" />
+                                                <span>Baixa</span>
+                                            </div>
+                                        </SelectItem>
+                                        <SelectItem value="MEDIUM" className="focus:bg-[#182229]">
+                                            <div className="flex items-center gap-2">
+                                                <PriorityBars priority="MEDIUM" />
+                                                <span>Média</span>
+                                            </div>
+                                        </SelectItem>
+                                        <SelectItem value="HIGH" className="focus:bg-[#182229]">
+                                            <div className="flex items-center gap-2">
+                                                <PriorityBars priority="HIGH" />
+                                                <span>Alta</span>
+                                            </div>
+                                        </SelectItem>
+                                        <SelectItem value="URGENT" className="focus:bg-[#182229]">
+                                            <div className="flex items-center gap-2">
+                                                <PriorityBars priority="URGENT" />
+                                                <span className="text-rose-400 font-semibold">Urgente</span>
+                                            </div>
+                                        </SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            </div>
+
+                            {/* Etiquetas da conversa */}
+                            <div className="space-y-2 pt-1">
+                                <label className="text-[11px] font-semibold text-[#8696a0] block">
+                                    Etiquetas da conversa
+                                </label>
+
+                                <LabelAssignPopover sessionId={sessionId} jid={jid}>
+                                    <Button
+                                        variant="outline"
+                                        size="sm"
+                                        className="h-7 px-2.5 text-xs font-semibold text-[#00a884] bg-[#00a884]/10 hover:bg-[#00a884]/20 border-[#00a884]/30 rounded-lg w-full justify-center gap-1.5 cursor-pointer"
+                                        onClick={() => setTimeout(loadLabels, 600)}
+                                    >
+                                        <Plus className="h-3 w-3" />
+                                        <span>Adicionar etiquetas</span>
+                                    </Button>
+                                </LabelAssignPopover>
+
+                                <div className="flex flex-wrap gap-1.5 min-h-6 pt-1">
+                                    {assignedLabels.map(label => (
+                                        <span
+                                            key={label.id}
+                                            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-medium border transition-colors shadow-2xs"
+                                            style={{
+                                                backgroundColor: `${label.colorHex}15`,
+                                                borderColor: `${label.colorHex}40`,
+                                                color: label.colorHex
+                                            }}
+                                        >
                                             <span
                                                 className="h-2 w-2 rounded-full shrink-0"
-                                                style={{ backgroundColor: dept.colorHex }}
+                                                style={{ backgroundColor: label.colorHex }}
                                             />
-                                            <span>{dept.name}</span>
-                                        </div>
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
-                    </div>
-
-                    {/* Priority Selector */}
-                    <div className="space-y-1">
-                        <label className="text-[11px] font-medium text-muted-foreground">
-                            Prioridade do Atendimento
-                        </label>
-                        <Select
-                            value={ticket?.priority || "MEDIUM"}
-                            onValueChange={handlePriorityChange}
-                        >
-                            <SelectTrigger className="h-8 text-xs bg-muted/30">
-                                <SelectValue />
-                            </SelectTrigger>
-                            <SelectContent className="text-xs">
-                                <SelectItem value="LOW">
-                                    <span className="flex items-center gap-1.5 text-emerald-600">
-                                        🟢 Baixa
-                                    </span>
-                                </SelectItem>
-                                <SelectItem value="MEDIUM">
-                                    <span className="flex items-center gap-1.5 text-amber-600">
-                                        🟡 Média
-                                    </span>
-                                </SelectItem>
-                                <SelectItem value="HIGH">
-                                    <span className="flex items-center gap-1.5 text-orange-600">
-                                        🟠 Alta
-                                    </span>
-                                </SelectItem>
-                                <SelectItem value="URGENT">
-                                    <span className="flex items-center gap-1.5 text-rose-600 font-semibold">
-                                        🔴 Urgente
-                                    </span>
-                                </SelectItem>
-                            </SelectContent>
-                        </Select>
-                    </div>
-
-                    {/* Labels Section */}
-                    <div className="space-y-1.5 pt-1">
-                        <div className="flex items-center justify-between">
-                            <label className="text-[11px] font-medium text-muted-foreground flex items-center gap-1">
-                                <Tag className="h-3 w-3" />
-                                Etiquetas da Conversa
-                            </label>
-                            <LabelAssignPopover sessionId={sessionId} jid={jid}>
-                                <Button
-                                    variant="ghost"
-                                    size="sm"
-                                    className="h-6 px-2 text-[10px] font-medium text-primary hover:text-primary hover:bg-primary/10"
-                                    onClick={() => setTimeout(loadLabels, 600)}
-                                >
-                                    + Adicionar
-                                </Button>
-                            </LabelAssignPopover>
-                        </div>
-
-                        <div className="flex flex-wrap gap-1.5 min-h-6">
-                            {assignedLabels.map(label => (
-                                <span
-                                    key={label.id}
-                                    className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-medium border transition-colors shadow-2xs"
-                                    style={{
-                                        backgroundColor: `${label.colorHex}15`,
-                                        borderColor: `${label.colorHex}40`,
-                                        color: label.colorHex
-                                    }}
-                                >
-                                    <span
-                                        className="h-1.5 w-1.5 rounded-full shrink-0"
-                                        style={{ backgroundColor: label.colorHex }}
-                                    />
-                                    {label.name}
-                                    <button
-                                        onClick={() => handleRemoveLabel(label.id)}
-                                        className="ml-0.5 hover:opacity-75 p-0.5 rounded-full"
-                                        title="Remover etiqueta"
-                                    >
-                                        <X className="h-2.5 w-2.5" />
-                                    </button>
-                                </span>
-                            ))}
-                            {assignedLabels.length === 0 && !loadingLabels && (
-                                <p className="text-[10px] text-muted-foreground italic py-0.5">
-                                    Nenhuma etiqueta atribuída.
-                                </p>
-                            )}
-                        </div>
-                    </div>
-
-                    {/* CSAT Rating Preview (se houver avaliação) */}
-                    {ticket?.csatScore && (
-                        <div className="mt-2 p-2.5 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-900 dark:text-amber-200 space-y-1">
-                            <div className="flex items-center justify-between text-xs font-semibold">
-                                <span className="flex items-center gap-1">
-                                    <Star className="h-3.5 w-3.5 fill-amber-500 text-amber-500" />
-                                    Avaliação CSAT
-                                </span>
-                                <span>{ticket.csatScore}/5</span>
+                                            <span className="truncate max-w-[120px]">{label.name}</span>
+                                            <button
+                                                onClick={() => handleRemoveLabel(label.id)}
+                                                className="ml-0.5 hover:opacity-80 p-0.5 rounded-full cursor-pointer"
+                                                title="Remover etiqueta"
+                                            >
+                                                <X className="h-2.5 w-2.5" />
+                                            </button>
+                                        </span>
+                                    ))}
+                                    {assignedLabels.length === 0 && !loadingLabels && (
+                                        <p className="text-[10px] text-[#8696a0] italic py-0.5">
+                                            Nenhuma etiqueta adicionada.
+                                        </p>
+                                    )}
+                                </div>
                             </div>
-                            <div className="flex gap-0.5">
-                                {[1, 2, 3, 4, 5].map(star => (
-                                    <Star
-                                        key={star}
-                                        className={cn(
-                                            "h-3 w-3",
-                                            star <= ticket.csatScore
-                                                ? "fill-amber-500 text-amber-500"
-                                                : "text-muted-foreground/30"
-                                        )}
-                                    />
-                                ))}
-                            </div>
-                            {ticket.csatComment && (
-                                <p className="text-[10px] italic text-muted-foreground pt-1">
-                                    &ldquo;{ticket.csatComment}&rdquo;
-                                </p>
-                            )}
                         </div>
                     )}
                 </div>
 
-                {/* Mini-CRM Custom Attributes Card */}
-                <div className="p-3.5 rounded-xl border border-border/50 bg-background/80 shadow-xs space-y-2.5">
-                    <div className="flex items-center justify-between border-b border-border/40 pb-2">
-                        <span className="font-semibold text-foreground flex items-center gap-1.5 text-xs">
-                            <CreditCard className="h-3.5 w-3.5 text-primary" />
-                            Mini-CRM & Contrato
+                {/* 3. Section: Macros (collapsible with +) */}
+                <div className="rounded-2xl border border-[#222d34] bg-[#182229]/50 shadow-sm overflow-hidden">
+                    <button
+                        onClick={() => setIsMacrosOpen(prev => !prev)}
+                        className="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-[#202c33]/40 transition-colors cursor-pointer"
+                    >
+                        <span className="font-bold text-xs text-[#e9edef] tracking-tight flex items-center gap-1.5">
+                            <Zap className="h-3.5 w-3.5 text-amber-400" />
+                            Macros
                         </span>
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => setIsEditDialogOpen(true)}
-                            className="h-6 px-1.5 text-[10px] text-primary hover:text-primary hover:bg-primary/10"
-                        >
-                            <Edit3 className="h-3 w-3 mr-1" /> Editar
-                        </Button>
-                    </div>
+                        <span className="text-[#8696a0]">
+                            {isMacrosOpen ? <Minus className="h-3.5 w-3.5" /> : <Plus className="h-3.5 w-3.5" />}
+                        </span>
+                    </button>
 
-                    <div className="space-y-2">
-                        {/* CPF / CNPJ */}
-                        <div className="flex items-center justify-between py-1 border-b border-border/20">
-                            <span className="text-muted-foreground text-[11px]">CPF / CNPJ:</span>
-                            <div className="flex items-center gap-1 font-mono text-[11px] text-foreground">
-                                <span>{contact?.document || <span className="text-muted-foreground/60 italic font-sans">Não inf.</span>}</span>
-                                {contact?.document && (
-                                    <Button
-                                        variant="ghost"
-                                        size="icon"
-                                        onClick={() => handleCopy(contact.document!, "Documento")}
-                                        className="h-5 w-5 text-muted-foreground"
-                                    >
-                                        <Copy className="h-2.5 w-2.5" />
-                                    </Button>
-                                )}
-                            </div>
+                    {isMacrosOpen && (
+                        <div className="p-4 pt-1 border-t border-[#222d34]/60 space-y-2">
+                            <button
+                                onClick={() => handleRunMacro("high_priority")}
+                                className="w-full text-left p-2 rounded-xl bg-[#202c33] hover:bg-[#2a3942] text-[#e9edef] text-xs transition-colors flex items-center justify-between border border-white/[0.04] cursor-pointer"
+                            >
+                                <span className="font-medium">Definir como Prioridade Alta</span>
+                                <PriorityBars priority="HIGH" />
+                            </button>
+                            <button
+                                onClick={() => handleRunMacro("transfer_support")}
+                                className="w-full text-left p-2 rounded-xl bg-[#202c33] hover:bg-[#2a3942] text-[#e9edef] text-xs transition-colors flex items-center justify-between border border-white/[0.04] cursor-pointer"
+                            >
+                                <span className="font-medium">Transferir p/ Suporte Técnico</span>
+                                <Wrench className="h-3.5 w-3.5 text-blue-400" />
+                            </button>
+                            <button
+                                onClick={() => handleRunMacro("resolve")}
+                                className="w-full text-left p-2 rounded-xl bg-[#202c33] hover:bg-emerald-500/15 hover:text-emerald-400 text-[#e9edef] text-xs transition-colors flex items-center justify-between border border-white/[0.04] cursor-pointer"
+                            >
+                                <span className="font-medium">Resolver e Enviar CSAT</span>
+                                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
+                            </button>
                         </div>
-
-                        {/* Plano */}
-                        <div className="flex items-center justify-between py-1 border-b border-border/20">
-                            <span className="text-muted-foreground text-[11px]">Plano:</span>
-                            <span className="font-medium text-[11px] text-foreground">
-                                {contact?.plan ? (
-                                    <Badge variant="secondary" className="text-[10px] px-1.5 py-0">
-                                        {contact.plan}
-                                    </Badge>
-                                ) : (
-                                    <span className="text-muted-foreground/60 italic">Nenhum</span>
-                                )}
-                            </span>
-                        </div>
-
-                        {/* Valor Contrato */}
-                        <div className="flex items-center justify-between py-1 border-b border-border/20">
-                            <span className="text-muted-foreground text-[11px]">Mensalidade:</span>
-                            <span className="font-medium text-[11px] text-foreground">
-                                {contact?.planValue || <span className="text-muted-foreground/60 italic">--</span>}
-                            </span>
-                        </div>
-
-                        {/* Observações / Notas do Contato */}
-                        <div className="space-y-1 pt-1">
-                            <span className="text-muted-foreground text-[11px] block">Anotações do Contato:</span>
-                            <div className="p-2 rounded-lg bg-muted/40 border border-border/30 text-[11px] text-foreground whitespace-pre-wrap min-h-12 max-h-28 overflow-y-auto">
-                                {contact?.notes || <span className="text-muted-foreground/60 italic">Nenhuma anotação cadastrada. Clique em editar para adicionar observações sobre o cliente.</span>}
-                            </div>
-                        </div>
-                    </div>
+                    )}
                 </div>
+
+                {/* 4. Section: Mini-CRM & Dados Comerciais */}
+                <div className="rounded-2xl border border-[#222d34] bg-[#182229]/50 shadow-sm overflow-hidden">
+                    <button
+                        onClick={() => setIsCrmOpen(prev => !prev)}
+                        className="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-[#202c33]/40 transition-colors cursor-pointer"
+                    >
+                        <span className="font-bold text-xs text-[#e9edef] tracking-tight flex items-center gap-1.5">
+                            <Briefcase className="h-3.5 w-3.5 text-[#00a884]" />
+                            Dados Contratuais & CRM
+                        </span>
+                        <span className="text-[#8696a0]">
+                            {isCrmOpen ? <Minus className="h-3.5 w-3.5" /> : <Plus className="h-3.5 w-3.5" />}
+                        </span>
+                    </button>
+
+                    {isCrmOpen && (
+                        <div className="p-4 pt-1 border-t border-[#222d34]/60 space-y-2.5">
+                            <div className="flex items-center justify-between py-1 border-b border-[#222d34]/50">
+                                <span className="text-[#8696a0] text-[11px]">CPF / CNPJ:</span>
+                                <span className="font-mono text-[11px] text-[#e9edef]">
+                                    {contact?.document || <span className="text-[#8696a0]/50 italic">Não informado</span>}
+                                </span>
+                            </div>
+
+                            <div className="flex items-center justify-between py-1 border-b border-[#222d34]/50">
+                                <span className="text-[#8696a0] text-[11px]">Plano / Contrato:</span>
+                                <span className="font-semibold text-[11px] text-[#00a884]">
+                                    {contact?.plan || <span className="text-[#8696a0]/50 italic font-normal">Nenhum</span>}
+                                </span>
+                            </div>
+
+                            <div className="flex items-center justify-between py-1 border-b border-[#222d34]/50">
+                                <span className="text-[#8696a0] text-[11px]">Mensalidade:</span>
+                                <span className="font-medium text-[11px] text-[#e9edef]">
+                                    {contact?.planValue || <span className="text-[#8696a0]/50 italic">--</span>}
+                                </span>
+                            </div>
+
+                            <div className="space-y-1 pt-1">
+                                <span className="text-[#8696a0] text-[11px] block">Observações do Cliente:</span>
+                                <div className="p-2.5 rounded-xl bg-[#202c33]/70 border border-[#2a3942]/60 text-[11px] text-[#e9edef] whitespace-pre-wrap min-h-12 max-h-28 overflow-y-auto styled-scrollbar">
+                                    {contact?.notes || <span className="text-[#8696a0]/50 italic">Nenhuma anotação privada cadastrada.</span>}
+                                </div>
+                            </div>
+
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => setIsEditDialogOpen(true)}
+                                className="w-full h-8 text-xs font-semibold bg-[#202c33] hover:bg-[#2a3942] text-[#e9edef] border-[#2a3942] rounded-xl mt-2 cursor-pointer"
+                            >
+                                <Edit3 className="h-3.5 w-3.5 mr-1.5" /> Editar Cadastro
+                            </Button>
+                        </div>
+                    )}
+                </div>
+
+                {/* CSAT Rating Preview (se houver avaliação do cliente) */}
+                {ticket?.csatScore && (
+                    <div className="p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/25 text-[#e9edef] space-y-1.5">
+                        <div className="flex items-center justify-between text-xs font-bold text-amber-400">
+                            <span className="flex items-center gap-1.5">
+                                <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
+                                Avaliação de Atendimento
+                            </span>
+                            <span>{ticket.csatScore}/5</span>
+                        </div>
+                        <div className="flex gap-1">
+                            {[1, 2, 3, 4, 5].map(star => (
+                                <Star
+                                    key={star}
+                                    className={cn(
+                                        "h-3.5 w-3.5",
+                                        star <= ticket.csatScore
+                                            ? "fill-amber-400 text-amber-400"
+                                            : "text-[#8696a0]/30"
+                                    )}
+                                />
+                            ))}
+                        </div>
+                        {ticket.csatComment && (
+                            <p className="text-[11px] italic text-[#8696a0] pt-1">
+                                &ldquo;{ticket.csatComment}&rdquo;
+                            </p>
+                        )}
+                    </div>
+                )}
             </div>
 
             {/* Edit Contact Modal */}
             <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-                <DialogContent className="sm:max-w-md">
+                <DialogContent className="sm:max-w-md bg-[#111b21] border-[#222d34] text-[#e9edef]">
                     <DialogHeader>
-                        <DialogTitle className="text-sm font-semibold flex items-center gap-2">
-                            <User className="h-4 w-4 text-primary" />
-                            Editar Cadastro & Mini-CRM
+                        <DialogTitle className="text-sm font-bold flex items-center gap-2 text-[#e9edef]">
+                            <User className="h-4 w-4 text-[#00a884]" />
+                            Editar Contato & Mini-CRM
                         </DialogTitle>
-                        <DialogDescription className="text-xs">
-                            Atualize os dados comerciais e de identificação deste contato.
+                        <DialogDescription className="text-xs text-[#8696a0]">
+                            Atualize os dados comerciais, profissionais e de localização do contato.
                         </DialogDescription>
                     </DialogHeader>
 
                     <div className="space-y-3 py-2 text-xs">
                         <div className="space-y-1">
-                            <label className="font-medium text-foreground">Nome Completo</label>
+                            <label className="font-semibold text-[#8696a0]">Nome Completo</label>
                             <Input
                                 value={editForm.name}
                                 onChange={(e) => setEditForm(prev => ({ ...prev, name: e.target.value }))}
                                 placeholder="Nome do cliente"
-                                className="h-8 text-xs"
+                                className="h-8 text-xs bg-[#202c33] border-[#2a3942] text-[#e9edef] rounded-lg focus:ring-[#00a884]"
                             />
                         </div>
 
                         <div className="grid grid-cols-2 gap-2">
                             <div className="space-y-1">
-                                <label className="font-medium text-foreground">E-mail</label>
+                                <label className="font-semibold text-[#8696a0]">Empresa</label>
+                                <Input
+                                    value={editForm.company}
+                                    onChange={(e) => setEditForm(prev => ({ ...prev, company: e.target.value }))}
+                                    placeholder="Ex: Aurora Comércio Ltda."
+                                    className="h-8 text-xs bg-[#202c33] border-[#2a3942] text-[#e9edef] rounded-lg"
+                                />
+                            </div>
+                            <div className="space-y-1">
+                                <label className="font-semibold text-[#8696a0]">Localização</label>
+                                <Input
+                                    value={editForm.location}
+                                    onChange={(e) => setEditForm(prev => ({ ...prev, location: e.target.value }))}
+                                    placeholder="Ex: São Paulo, Brasil 🇧🇷"
+                                    className="h-8 text-xs bg-[#202c33] border-[#2a3942] text-[#e9edef] rounded-lg"
+                                />
+                            </div>
+                        </div>
+
+                        <div className="space-y-1">
+                            <label className="font-semibold text-[#8696a0]">Bio / Cargo / Descrição</label>
+                            <Input
+                                value={editForm.bio}
+                                onChange={(e) => setEditForm(prev => ({ ...prev, bio: e.target.value }))}
+                                placeholder="Ex: Chefe de Operações. Cliente desde 2023."
+                                className="h-8 text-xs bg-[#202c33] border-[#2a3942] text-[#e9edef] rounded-lg"
+                            />
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-2">
+                            <div className="space-y-1">
+                                <label className="font-semibold text-[#8696a0]">E-mail</label>
                                 <Input
                                     value={editForm.email}
                                     onChange={(e) => setEditForm(prev => ({ ...prev, email: e.target.value }))}
                                     placeholder="cliente@empresa.com"
                                     type="email"
-                                    className="h-8 text-xs"
+                                    className="h-8 text-xs bg-[#202c33] border-[#2a3942] text-[#e9edef] rounded-lg"
                                 />
                             </div>
                             <div className="space-y-1">
-                                <label className="font-medium text-foreground">CPF / CNPJ</label>
+                                <label className="font-semibold text-[#8696a0]">CPF / CNPJ</label>
                                 <Input
                                     value={editForm.document}
                                     onChange={(e) => setEditForm(prev => ({ ...prev, document: e.target.value }))}
                                     placeholder="000.000.000-00"
-                                    className="h-8 text-xs font-mono"
+                                    className="h-8 text-xs font-mono bg-[#202c33] border-[#2a3942] text-[#e9edef] rounded-lg"
                                 />
                             </div>
                         </div>
 
                         <div className="grid grid-cols-2 gap-2">
                             <div className="space-y-1">
-                                <label className="font-medium text-foreground">Plano / Contrato</label>
+                                <label className="font-semibold text-[#8696a0]">Plano / Contrato</label>
                                 <Input
                                     value={editForm.plan}
                                     onChange={(e) => setEditForm(prev => ({ ...prev, plan: e.target.value }))}
                                     placeholder="Ex: Essencial, Pro, VIP"
-                                    className="h-8 text-xs"
+                                    className="h-8 text-xs bg-[#202c33] border-[#2a3942] text-[#e9edef] rounded-lg"
                                 />
                             </div>
                             <div className="space-y-1">
-                                <label className="font-medium text-foreground">Valor Mensal</label>
+                                <label className="font-semibold text-[#8696a0]">Valor Mensal</label>
                                 <Input
                                     value={editForm.planValue}
                                     onChange={(e) => setEditForm(prev => ({ ...prev, planValue: e.target.value }))}
                                     placeholder="Ex: R$ 197,00/mês"
-                                    className="h-8 text-xs"
+                                    className="h-8 text-xs bg-[#202c33] border-[#2a3942] text-[#e9edef] rounded-lg"
                                 />
                             </div>
                         </div>
 
                         <div className="space-y-1">
-                            <label className="font-medium text-foreground">Anotações Internas do Cliente</label>
+                            <label className="font-semibold text-[#8696a0]">Anotações Privadas</label>
                             <Textarea
                                 value={editForm.notes}
                                 onChange={(e) => setEditForm(prev => ({ ...prev, notes: e.target.value }))}
-                                placeholder="Informações comerciais, preferências, histórico ou observações sobre o cliente..."
-                                rows={3}
-                                className="text-xs resize-none"
+                                placeholder="Informações comerciais, preferências ou notas internas da equipe..."
+                                rows={2}
+                                className="text-xs resize-none bg-[#202c33] border-[#2a3942] text-[#e9edef] rounded-lg"
                             />
                         </div>
                     </div>
@@ -721,7 +1015,7 @@ export function ChatSidebarPanel({
                             variant="outline"
                             size="sm"
                             onClick={() => setIsEditDialogOpen(false)}
-                            className="text-xs h-8"
+                            className="text-xs h-8 bg-[#202c33] hover:bg-[#2a3942] text-[#e9edef] border-[#2a3942] rounded-lg cursor-pointer"
                         >
                             Cancelar
                         </Button>
@@ -729,7 +1023,7 @@ export function ChatSidebarPanel({
                             size="sm"
                             onClick={handleSaveContact}
                             disabled={savingContact}
-                            className="text-xs h-8"
+                            className="text-xs h-8 bg-[#00a884] hover:bg-[#008f6f] text-white font-semibold rounded-lg shadow-sm cursor-pointer"
                         >
                             {savingContact ? "Salvando..." : "Salvar Alterações"}
                         </Button>
