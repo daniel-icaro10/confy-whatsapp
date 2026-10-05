@@ -654,7 +654,7 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
             )}
 
             {/* Header */}
-            <div className="shrink-0 px-3 py-2 border-b bg-background/80 backdrop-blur-sm flex items-center justify-between gap-2 sm:gap-3 z-10">
+            <div className="shrink-0 px-3 py-2 border-b border-[#222d34] bg-[#202c33] flex items-center justify-between gap-2 sm:gap-3 z-10">
                 <div className="flex items-center gap-2 sm:gap-3 min-w-0">
                     {onBack && (
                         <Button variant="ghost" size="icon" className="h-8 w-8 md:hidden shrink-0 text-muted-foreground hover:text-foreground" onClick={onBack}>
@@ -1069,7 +1069,7 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
             )}
 
             {/* Input */}
-            <div className="shrink-0 px-3 py-2 bg-background/80 backdrop-blur-sm border-t space-y-1.5">
+            <div className="shrink-0 px-3 py-2 bg-[#202c33] border-t border-[#222d34] space-y-1.5">
                 {/* Mode Switcher & Tools Bar */}
                 <div className="flex items-center justify-between max-w-3xl mx-auto px-1">
                     <div className="flex items-center gap-1 text-xs">
