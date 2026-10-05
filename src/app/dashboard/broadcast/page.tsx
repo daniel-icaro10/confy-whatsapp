@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -8,11 +8,13 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Slider } from "@/components/ui/slider";
 import { Progress } from "@/components/ui/progress";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
-import { RefreshCw, Send, CheckCircle2, XCircle, Radio, Clock, AlertTriangle, History, Eye, Calendar, Pause, Play, Square } from "lucide-react";
+import { RefreshCw, Send, CheckCircle2, XCircle, Radio, Clock, AlertTriangle, History, Eye, Calendar, Pause, Play, Square, Sparkles, Plus, Trash2, Shuffle, ArrowRightLeft, HelpCircle, Dices } from "lucide-react";
 import { toast } from "sonner";
 import { useSession } from "@/components/dashboard/session-provider";
 import { SessionGuard } from "@/components/dashboard/session-guard";
 import { useSocket } from "@/components/chat/socket-context";
+import { parseBulkRecipients } from "@/lib/phone-utils";
+import { getMessageForContact, parseStoredMessages, resolveSpintax } from "@/lib/spintax";
 
 interface BroadcastProgress {
     broadcastId: string;
@@ -53,12 +55,47 @@ interface BroadcastRecipient {
 export default function BroadcastPage() {
     const { sessionId } = useSession();
     const [contacts, setContacts] = useState("");
-    const [message, setMessage] = useState("");
+    const [messages, setMessages] = useState<string[]>([""]);
+    const [distributionMode, setDistributionMode] = useState<"random" | "round_robin">("random");
+    const [showSpintaxHelp, setShowSpintaxHelp] = useState(false);
+    const [simulationPreviews, setSimulationPreviews] = useState<string[]>([]);
     const [delay, setDelay] = useState([2000]);
     const [loading, setLoading] = useState(false);
     const [actionLoading, setActionLoading] = useState(false);
     const [broadcastProgress, setBroadcastProgress] = useState<BroadcastProgress | null>(null);
     const [activeTab, setActiveTab] = useState<"new" | "history">("new");
+
+    const handleUpdateMessage = (index: number, val: string) => {
+        setMessages(prev => {
+            const next = [...prev];
+            next[index] = val;
+            return next;
+        });
+    };
+
+    const handleAddVariation = () => {
+        setMessages(prev => [...prev, ""]);
+    };
+
+    const handleRemoveVariation = (index: number) => {
+        setMessages(prev => {
+            if (prev.length <= 1) return prev;
+            return prev.filter((_, i) => i !== index);
+        });
+    };
+
+    const validMessageCount = messages.filter(m => m.trim().length > 0).length;
+
+    const handleSimulate = () => {
+        const valid = messages.map(m => m.trim()).filter(Boolean);
+        if (valid.length === 0) return;
+        const count = 3;
+        const samples: string[] = [];
+        for (let i = 0; i < count; i++) {
+            samples.push(getMessageForContact(valid, i, distributionMode));
+        }
+        setSimulationPreviews(samples);
+    };
 
     // History
     const [history, setHistory] = useState<BroadcastLog[]>([]);
@@ -214,20 +251,22 @@ export default function BroadcastPage() {
         }
     };
 
+    const parsedContacts = useMemo(() => {
+        return parseBulkRecipients(contacts);
+    }, [contacts]);
+
     const handleSend = async () => {
         if (!sessionId) return toast.error("Nenhuma sessão ativa encontrada");
-        if (!message.trim()) return toast.error("A mensagem não pode ficar vazia");
+        const validMessages = messages.map(m => m.trim()).filter(Boolean);
+        if (validMessages.length === 0) return toast.error("A mensagem não pode ficar vazia. Preencha ao menos uma variação.");
         setLoading(true);
         setBroadcastProgress(null);
 
         try {
-            const recipients = contacts.split(/[\n,]+/).map(s => s.trim()).filter(Boolean).map(s => {
-                if (!s.includes('@')) return `${s}@s.whatsapp.net`;
-                return s;
-            });
+            const recipients = parsedContacts.jids;
 
             if (recipients.length === 0) {
-                toast.error("Nenhum destinatário informado");
+                toast.error("Nenhum destinatário válido informado");
                 setLoading(false);
                 return;
             }
@@ -237,7 +276,8 @@ export default function BroadcastPage() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     recipients,
-                    message,
+                    messages: validMessages,
+                    distributionMode,
                     delay: delay[0]
                 })
             });
@@ -257,7 +297,7 @@ export default function BroadcastPage() {
         }
     };
 
-    const recipientCount = contacts.split(/[\n,]+/).map(s => s.trim()).filter(Boolean).length;
+    const recipientCount = parsedContacts.total;
     const formatJid = (jid: string) => {
         if (!jid) return "-";
         return jid.replace("@s.whatsapp.net", "").replace("@g.us", " (Grupo)");
@@ -365,20 +405,73 @@ export default function BroadcastPage() {
                             {/* Recipients Card */}
                             <Card>
                                 <CardHeader>
-                                    <CardTitle>Destinatários</CardTitle>
-                                    <CardDescription>Informe os números de telefone separados por vírgula ou quebra de linha.</CardDescription>
+                                    <CardTitle className="flex items-center justify-between">
+                                        <span>Destinatários</span>
+                                        {recipientCount > 0 && (
+                                            <span className="text-xs font-normal px-2.5 py-0.5 rounded-full bg-primary/10 text-primary font-medium">
+                                                {recipientCount} válido(s)
+                                            </span>
+                                        )}
+                                    </CardTitle>
+                                    <CardDescription>
+                                        Cole sua lista de números (linhas, vírgulas ou ponto-e-vírgula). Aceita com ou sem 9, com ou sem +55, espaços e traços.
+                                    </CardDescription>
                                 </CardHeader>
                                 <CardContent className="space-y-4">
                                     <div className="space-y-2">
-                                        <Label>Números de destino (ex.: 5511987654321)</Label>
+                                        <div className="flex items-center justify-between">
+                                            <Label>Lista de telefones</Label>
+                                            {parsedContacts.ninthDigitCount > 0 && (
+                                                <span className="text-[11px] text-emerald-600 dark:text-emerald-400 font-medium flex items-center gap-1">
+                                                    <Sparkles className="h-3 w-3" />
+                                                    {parsedContacts.ninthDigitCount} com 9º dígito / DDI corrigidos
+                                                </span>
+                                            )}
+                                        </div>
                                         <Textarea
-                                            placeholder={"5511987654321\n5521987654321"}
-                                            className="min-h-[200px] font-mono text-sm"
+                                            placeholder={"+55 31 85759690\n(31) 98575-9690\n3185759690\n5531985759690"}
+                                            className="min-h-[200px] font-mono text-sm leading-relaxed"
                                             value={contacts}
                                             onChange={e => setContacts(e.target.value)}
                                             disabled={loading}
                                         />
-                                        <p className="text-xs text-muted-foreground">{recipientCount} número(s) identificado(s)</p>
+                                        <div className="flex flex-col gap-1.5 pt-1">
+                                            <div className="flex items-center justify-between text-xs text-muted-foreground">
+                                                <span>{recipientCount} número(s) identificado(s) e prontos para envio</span>
+                                                {parsedContacts.invalidCount > 0 && (
+                                                    <span className="text-amber-500 font-medium">
+                                                        {parsedContacts.invalidCount} inválido(s) ignorados
+                                                    </span>
+                                                )}
+                                            </div>
+
+                                            {/* Preview sample if numbers entered */}
+                                            {parsedContacts.analyzed.length > 0 && (
+                                                <div className="p-2.5 rounded-lg bg-muted/40 border text-xs space-y-1">
+                                                    <p className="font-semibold text-muted-foreground text-[11px] uppercase tracking-wider">
+                                                        Exemplo do formato que será enviado ao WhatsApp:
+                                                    </p>
+                                                    <div className="flex flex-wrap gap-1.5 pt-0.5">
+                                                        {parsedContacts.analyzed.slice(0, 3).map((item, idx) => (
+                                                            <span
+                                                                key={idx}
+                                                                className="px-2 py-0.5 rounded bg-background border font-mono text-[11px] flex items-center gap-1.5"
+                                                            >
+                                                                <span>{item.formatted}</span>
+                                                                {item.hasNinthDigitAdded && (
+                                                                    <span className="text-[10px] text-emerald-500 font-bold" title="9º dígito adicionado">+9</span>
+                                                                )}
+                                                            </span>
+                                                        ))}
+                                                        {parsedContacts.analyzed.length > 3 && (
+                                                            <span className="text-muted-foreground self-center text-[11px]">
+                                                                +{parsedContacts.analyzed.length - 3} outros
+                                                            </span>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
                                 </CardContent>
                             </Card>
@@ -386,21 +479,197 @@ export default function BroadcastPage() {
                             {/* Message Card */}
                             <Card>
                                 <CardHeader>
-                                    <CardTitle>Conteúdo da mensagem</CardTitle>
+                                    <div className="flex items-start justify-between gap-2">
+                                        <div>
+                                            <CardTitle className="flex items-center gap-2">
+                                                <span>Conteúdo da mensagem</span>
+                                                {messages.length > 1 && (
+                                                    <span className="text-xs font-normal px-2.5 py-0.5 rounded-full bg-primary/10 text-primary font-medium">
+                                                        {messages.length} variações
+                                                    </span>
+                                                )}
+                                            </CardTitle>
+                                            <CardDescription className="mt-1">
+                                                Crie múltiplas variações e use Spintax para que cada contato receba um texto diferente, evitando bloqueios do WhatsApp.
+                                            </CardDescription>
+                                        </div>
+                                        <Button
+                                            type="button"
+                                            variant="ghost"
+                                            size="sm"
+                                            className="h-8 text-xs text-muted-foreground hover:text-foreground shrink-0 cursor-pointer"
+                                            onClick={() => setShowSpintaxHelp(!showSpintaxHelp)}
+                                        >
+                                            <HelpCircle className="h-3.5 w-3.5 mr-1 text-primary" /> Spintax
+                                        </Button>
+                                    </div>
                                 </CardHeader>
                                 <CardContent className="space-y-4">
-                                    <div className="space-y-2">
-                                        <Label>Mensagem</Label>
-                                        <Textarea
-                                            placeholder="Digite sua mensagem aqui..."
-                                            className="min-h-[150px]"
-                                            value={message}
-                                            onChange={e => setMessage(e.target.value)}
-                                            disabled={loading}
-                                        />
+                                    {/* Spintax Help Box */}
+                                    {showSpintaxHelp && (
+                                        <div className="p-3 rounded-lg bg-blue-50/50 dark:bg-blue-950/20 border border-blue-500/20 text-xs space-y-2 animate-in fade-in">
+                                            <p className="font-semibold text-blue-700 dark:text-blue-300 flex items-center gap-1.5">
+                                                <Sparkles className="h-3.5 w-3.5" />
+                                                Como variar mensagens para evitar spam?
+                                            </p>
+                                            <p className="text-muted-foreground">
+                                                1. <strong>Múltiplas Variações:</strong> Adicione 2 ou mais versões completas da mensagem clicando no botão abaixo. O sistema alternará ou sorteará entre elas para cada contato.
+                                            </p>
+                                            <p className="text-muted-foreground">
+                                                2. <strong>Spintax no texto:</strong> Use chaves com barras verticais para sortear palavras no meio da frase. Exemplo: <code className="px-1.5 py-0.5 rounded bg-background border font-mono">{"{Olá|Oi|Bom dia}"}</code> {"{tudo bem|como vai}?"}
+                                            </p>
+                                        </div>
+                                    )}
+
+                                    {/* Message Variations List */}
+                                    <div className="space-y-3">
+                                        {messages.map((msg, index) => {
+                                            const hasSpintax = /\{([^{}]+)\}/.test(msg);
+                                            return (
+                                                <div key={index} className="p-3.5 rounded-xl border bg-card/60 space-y-2.5 relative group">
+                                                    <div className="flex items-center justify-between">
+                                                        <div className="flex items-center gap-2">
+                                                            <span className="text-xs font-semibold text-foreground px-2 py-0.5 rounded-md bg-muted">
+                                                                Variação #{index + 1}
+                                                            </span>
+                                                            {hasSpintax && (
+                                                                <span className="text-[10px] text-purple-600 dark:text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded-full font-medium flex items-center gap-1">
+                                                                    <Shuffle className="h-2.5 w-2.5" /> Spintax ativo
+                                                                </span>
+                                                            )}
+                                                        </div>
+                                                        {messages.length > 1 && (
+                                                            <Button
+                                                                type="button"
+                                                                variant="ghost"
+                                                                size="sm"
+                                                                className="h-7 w-7 p-0 text-muted-foreground hover:text-red-500 hover:bg-red-500/10 cursor-pointer"
+                                                                onClick={() => handleRemoveVariation(index)}
+                                                                disabled={loading}
+                                                                title="Remover esta variação"
+                                                            >
+                                                                <Trash2 className="h-3.5 w-3.5" />
+                                                            </Button>
+                                                        )}
+                                                    </div>
+
+                                                    <Textarea
+                                                        placeholder={index === 0 ? "{Olá|Oi|Bom dia}! Passando para compartilhar uma novidade especial com você..." : `Escreva a variação #${index + 1} aqui...`}
+                                                        className="min-h-[110px] text-sm leading-relaxed"
+                                                        value={msg}
+                                                        onChange={e => handleUpdateMessage(index, e.target.value)}
+                                                        disabled={loading}
+                                                    />
+
+                                                    <div className="flex items-center justify-between text-[11px] text-muted-foreground">
+                                                        <span>{msg.length} caracteres</span>
+                                                        {hasSpintax && (
+                                                            <span className="italic text-muted-foreground/80 truncate max-w-[280px]">
+                                                                Exemplo sorteado: &quot;{resolveSpintax(msg.slice(0, 40))}&quot;...
+                                                            </span>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            );
+                                        })}
                                     </div>
 
-                                    <div className="space-y-4 pt-4">
+                                    {/* Action: Add Variation Button & Test simulation */}
+                                    <div className="flex flex-wrap items-center justify-between gap-2">
+                                        <Button
+                                            type="button"
+                                            variant="outline"
+                                            size="sm"
+                                            className="border-dashed text-xs cursor-pointer hover:border-primary hover:text-primary"
+                                            onClick={handleAddVariation}
+                                            disabled={loading || messages.length >= 10}
+                                        >
+                                            <Plus className="h-3.5 w-3.5 mr-1" /> Adicionar outra variação de mensagem
+                                        </Button>
+
+                                        {validMessageCount > 0 && (
+                                            <Button
+                                                type="button"
+                                                variant="ghost"
+                                                size="sm"
+                                                className="text-xs text-muted-foreground hover:text-foreground cursor-pointer"
+                                                onClick={handleSimulate}
+                                            >
+                                                <Dices className="h-3.5 w-3.5 mr-1 text-primary" /> Testar sorteio das mensagens
+                                            </Button>
+                                        )}
+                                    </div>
+
+                                    {/* Live Simulation Preview */}
+                                    {simulationPreviews.length > 0 && (
+                                        <div className="p-3 rounded-xl bg-muted/40 border text-xs space-y-2 animate-in fade-in">
+                                            <div className="flex items-center justify-between font-semibold text-muted-foreground text-[11px] uppercase tracking-wider">
+                                                <span>Simulação de envio para 3 contatos:</span>
+                                                <button
+                                                    type="button"
+                                                    className="text-[10px] text-primary hover:underline cursor-pointer font-medium"
+                                                    onClick={handleSimulate}
+                                                >
+                                                    Sortear novamente
+                                                </button>
+                                            </div>
+                                            <div className="space-y-1.5">
+                                                {simulationPreviews.map((sample, i) => (
+                                                    <div key={i} className="p-2.5 rounded bg-background border text-xs space-y-1">
+                                                        <span className="text-[10px] text-muted-foreground font-semibold">Contato #{i + 1} receberá:</span>
+                                                        <p className="text-foreground whitespace-pre-wrap">{sample}</p>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* Distribution Mode (when more than 1 variation) */}
+                                    {messages.length > 1 && (
+                                        <div className="p-3 rounded-xl bg-muted/30 border space-y-2">
+                                            <Label className="text-xs font-semibold">Como distribuir entre as {messages.length} variações?</Label>
+                                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setDistributionMode("random")}
+                                                    className={`p-2.5 rounded-lg border text-left text-xs transition-all cursor-pointer ${
+                                                        distributionMode === "random"
+                                                            ? "border-primary bg-primary/10 text-primary font-medium shadow-sm"
+                                                            : "border-border bg-background hover:bg-muted/50 text-muted-foreground"
+                                                    }`}
+                                                >
+                                                    <div className="flex items-center gap-1.5 font-semibold text-foreground">
+                                                        <Shuffle className="h-3.5 w-3.5 text-primary" />
+                                                        <span>Aleatório (Recomendado Antiban)</span>
+                                                    </div>
+                                                    <p className="text-[11px] text-muted-foreground mt-1">
+                                                        Sorteia aleatoriamente entre as variações para cada destinatário.
+                                                    </p>
+                                                </button>
+
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setDistributionMode("round_robin")}
+                                                    className={`p-2.5 rounded-lg border text-left text-xs transition-all cursor-pointer ${
+                                                        distributionMode === "round_robin"
+                                                            ? "border-primary bg-primary/10 text-primary font-medium shadow-sm"
+                                                            : "border-border bg-background hover:bg-muted/50 text-muted-foreground"
+                                                    }`}
+                                                >
+                                                    <div className="flex items-center gap-1.5 font-semibold text-foreground">
+                                                        <ArrowRightLeft className="h-3.5 w-3.5 text-primary" />
+                                                        <span>Alternado (Sequencial)</span>
+                                                    </div>
+                                                    <p className="text-[11px] text-muted-foreground mt-1">
+                                                        Distribui igualmente: Variação 1 para o contato 1, Variação 2 para o contato 2, etc.
+                                                    </p>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* Delay and Submit */}
+                                    <div className="space-y-4 pt-4 border-t">
                                         <div className="space-y-2">
                                             <Label>Intervalo: {(delay[0] / 1000).toFixed(1)}s</Label>
                                             <Slider
@@ -412,16 +681,16 @@ export default function BroadcastPage() {
                                                 onValueChange={setDelay}
                                                 disabled={loading}
                                             />
-                                            <p className="text-xs text-muted-foreground">Intervalo entre mensagens (+ aleatório).</p>
+                                            <p className="text-xs text-muted-foreground">Intervalo entre mensagens (+ variação aleatória de segurança).</p>
                                         </div>
 
                                         <Button
-                                            className="w-full"
+                                            className="w-full cursor-pointer font-semibold"
                                             onClick={handleSend}
-                                            disabled={loading || !sessionId || recipientCount === 0 || !message.trim()}
+                                            disabled={loading || !sessionId || recipientCount === 0 || validMessageCount === 0}
                                         >
                                             {loading ? <RefreshCw className="mr-2 h-4 w-4 animate-spin" /> : <Send className="mr-2 h-4 w-4" />}
-                                            {loading ? "Disparando..." : "Iniciar disparo"}
+                                            {loading ? "Disparando..." : `Iniciar disparo (${recipientCount} contato${recipientCount === 1 ? '' : 's'})`}
                                         </Button>
                                     </div>
                                 </CardContent>
@@ -627,7 +896,20 @@ export default function BroadcastPage() {
                                                 {/* Info */}
                                                 <div className="flex-1 min-w-0">
                                                     <div className="flex items-center gap-2">
-                                                        <p className="text-sm font-medium truncate">{log.message}</p>
+                                                        {(() => {
+                                                            const variations = parseStoredMessages(log.message);
+                                                            if (variations.length > 1) {
+                                                                return (
+                                                                    <p className="text-sm font-medium truncate flex items-center gap-1.5">
+                                                                        <span className="text-[10px] px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-600 dark:text-blue-400 font-semibold shrink-0">
+                                                                            {variations.length} variações
+                                                                        </span>
+                                                                        <span className="truncate">{variations[0]}</span>
+                                                                    </p>
+                                                                );
+                                                            }
+                                                            return <p className="text-sm font-medium truncate">{log.message}</p>;
+                                                        })()}
                                                         {log.status === "cancelled" && (
                                                             <span className="text-[10px] px-1.5 py-0.5 rounded bg-red-500/10 text-red-600 font-semibold shrink-0">Cancelado</span>
                                                         )}
@@ -741,10 +1023,37 @@ export default function BroadcastPage() {
                                 </div>
 
                                 {/* Message */}
-                                <div className="bg-muted/30 rounded-lg p-3">
-                                    <p className="text-xs text-muted-foreground mb-1">Mensagem:</p>
-                                    <p className="text-sm whitespace-pre-wrap break-words">{selectedLog.message}</p>
-                                </div>
+                                {(() => {
+                                    const variations = parseStoredMessages(selectedLog.message);
+                                    if (variations.length > 1) {
+                                        return (
+                                            <div className="bg-muted/30 rounded-lg p-3 space-y-2">
+                                                <div className="flex items-center justify-between">
+                                                    <p className="text-xs text-muted-foreground font-semibold flex items-center gap-1.5">
+                                                        <Shuffle className="h-3.5 w-3.5 text-primary" />
+                                                        {variations.length} variações configuradas neste disparo:
+                                                    </p>
+                                                </div>
+                                                <div className="space-y-1.5 max-h-44 overflow-y-auto pr-1">
+                                                    {variations.map((v, idx) => (
+                                                        <div key={idx} className="p-2 rounded bg-background border text-xs space-y-1">
+                                                            <span className="text-[10px] font-semibold text-muted-foreground uppercase">
+                                                                Variação #{idx + 1}
+                                                            </span>
+                                                            <p className="text-foreground whitespace-pre-wrap break-words">{v}</p>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        );
+                                    }
+                                    return (
+                                        <div className="bg-muted/30 rounded-lg p-3">
+                                            <p className="text-xs text-muted-foreground mb-1">Mensagem:</p>
+                                            <p className="text-sm whitespace-pre-wrap break-words">{selectedLog.message}</p>
+                                        </div>
+                                    );
+                                })()}
 
                                 {/* Time */}
                                 <div className="flex gap-4 text-xs text-muted-foreground">

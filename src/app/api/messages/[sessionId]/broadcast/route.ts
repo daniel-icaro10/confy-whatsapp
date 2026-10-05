@@ -3,11 +3,15 @@ import { prisma } from "@/lib/prisma";
 import { waManager } from "@/modules/whatsapp/manager";
 import { getAuthenticatedUser, canAccessSession } from "@/lib/api-auth";
 import type { AnyMessageContent } from "@whiskeysockets/baileys";
+import { formatToWhatsAppJid } from "@/lib/phone-utils";
+import { getMessageForContact } from "@/lib/spintax";
 import { z } from "zod";
 
 const broadcastBodySchema = z.object({
     recipients: z.array(z.string()),
-    message: z.string().min(1),
+    message: z.string().optional(),
+    messages: z.array(z.string()).optional(),
+    distributionMode: z.enum(["random", "round_robin"]).optional(),
     delay: z.number().optional()
 });
 
@@ -36,7 +40,35 @@ export async function POST(
             return NextResponse.json({ error: parseResult.error.flatten() }, { status: 400 });
         }
 
-        const { recipients, message, delay } = parseResult.data;
+        const { recipients: rawRecipients, delay } = parseResult.data;
+        const messageVariations: string[] = [];
+        if (parseResult.data.messages && Array.isArray(parseResult.data.messages)) {
+            messageVariations.push(...parseResult.data.messages.map(m => m.trim()).filter(Boolean));
+        }
+        if (messageVariations.length === 0 && parseResult.data.message && parseResult.data.message.trim()) {
+            messageVariations.push(parseResult.data.message.trim());
+        }
+
+        if (messageVariations.length === 0) {
+            return NextResponse.json({ status: false, message: "A mensagem não pode ficar vazia", error: "Message required" }, { status: 400 });
+        }
+
+        const distributionMode = parseResult.data.distributionMode || "random";
+        const storedMessage = messageVariations.length > 1
+            ? JSON.stringify(messageVariations)
+            : messageVariations[0];
+
+        const recipients = Array.from(
+            new Set(
+                rawRecipients
+                    .map(r => formatToWhatsAppJid(r))
+                    .filter(Boolean)
+            )
+        );
+
+        if (recipients.length === 0) {
+            return NextResponse.json({ status: false, message: "Nenhum destinatário válido informado", error: "No valid recipients" }, { status: 400 });
+        }
 
         const canAccess = await canAccessSession(user.id, user.role, sessionId);
         if (!canAccess) {
@@ -52,7 +84,7 @@ export async function POST(
         const log = await prisma.broadcastLog.create({
             data: {
                 sessionId,
-                message,
+                message: storedMessage,
                 total: recipients.length,
                 delay: delay || 2000,
                 status: "running",
@@ -66,7 +98,6 @@ export async function POST(
             include: { recipients: true }
         });
 
-        const messageContent: AnyMessageContent = { text: message };
         const io = (global as any).io;
         const broadcastId = log.id;
 
@@ -148,8 +179,59 @@ export async function POST(
                 }
 
                 const jid = recipients[i];
+                let targetJid = jid;
+
                 try {
-                    await instance.socket!.sendMessage(jid, messageContent);
+                    // Verify recipient on WhatsApp if available and not a group/broadcast
+                    if (instance.socket?.onWhatsApp && !jid.endsWith("@g.us") && !jid.endsWith("@broadcast")) {
+                        try {
+                            const check = await instance.socket.onWhatsApp(jid);
+                            const res = Array.isArray(check) && check.length > 0 ? check[0] : null;
+
+                            if (res?.exists && res.jid) {
+                                targetJid = res.jid;
+                            } else {
+                                // Fallback check for Brazilian numbers (9th digit divergence)
+                                const digits = jid.replace("@s.whatsapp.net", "");
+                                let resolved = false;
+
+                                if (digits.startsWith("55") && digits.length === 13) {
+                                    // Try checking without 9th digit (legacy 8-digit registrations)
+                                    const altJid = `55${digits.slice(2, 4)}${digits.slice(5)}@s.whatsapp.net`;
+                                    const altCheck = await instance.socket.onWhatsApp(altJid);
+                                    const altRes = Array.isArray(altCheck) && altCheck.length > 0 ? altCheck[0] : null;
+                                    if (altRes?.exists && altRes.jid) {
+                                        targetJid = altRes.jid;
+                                        resolved = true;
+                                    }
+                                } else if (digits.startsWith("55") && digits.length === 12) {
+                                    // Try checking with 9th digit
+                                    const altJid = `55${digits.slice(2, 4)}9${digits.slice(4)}@s.whatsapp.net`;
+                                    const altCheck = await instance.socket.onWhatsApp(altJid);
+                                    const altRes = Array.isArray(altCheck) && altCheck.length > 0 ? altCheck[0] : null;
+                                    if (altRes?.exists && altRes.jid) {
+                                        targetJid = altRes.jid;
+                                        resolved = true;
+                                    }
+                                }
+
+                                if (!resolved) {
+                                    throw new Error("Número não cadastrado no WhatsApp");
+                                }
+                            }
+                        } catch (checkErr: any) {
+                            if (checkErr.message === "Número não cadastrado no WhatsApp") {
+                                throw checkErr;
+                            }
+                            // In case of transient onWhatsApp network error, proceed with targetJid
+                        }
+                    }
+
+                    // Dynamically resolve message variation & spintax for this contact
+                    const individualMessage = getMessageForContact(messageVariations, i, distributionMode);
+                    const messageContent: AnyMessageContent = { text: individualMessage };
+
+                    await instance.socket!.sendMessage(targetJid, messageContent);
                     sent++;
 
                     // Update recipient status in DB
@@ -185,7 +267,7 @@ export async function POST(
                         total: recipients.length,
                         sent,
                         failed,
-                        current: jid,
+                        current: targetJid,
                         progress
                     });
                 }

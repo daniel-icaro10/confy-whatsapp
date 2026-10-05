@@ -16,6 +16,7 @@ import { getChatsStatus } from "@/app/dashboard/chat/actions";
 import { useSocket } from "./socket-context";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
+import { formatToWhatsAppJid } from "@/lib/phone-utils";
 
 interface ChatContact {
     jid: string;
@@ -581,11 +582,14 @@ export function ChatList({ sessionId, onSelectChat, selectedJid }: ChatListProps
 
     const handleStartNewChat = () => {
         if (!newChatNumber) return;
-        let clean = newChatNumber.replace(/\D/g, '');
-        if (clean.startsWith('0')) clean = '62' + clean.substring(1);
-        onSelectChat(`${clean}@s.whatsapp.net`);
-        setIsNewChatOpen(false);
-        setNewChatNumber("");
+        const jid = formatToWhatsAppJid(newChatNumber);
+        if (jid) {
+            onSelectChat(jid);
+            setIsNewChatOpen(false);
+            setNewChatNumber("");
+        } else {
+            toast.error("Número de telefone inválido");
+        }
     };
 
     if (loading && chats.length === 0) {

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { ChatList } from "./chat-list";
 import { ChatWindow } from "./chat-window";
 import { MessageCircle } from "lucide-react";
+import { formatToWhatsAppJid } from "@/lib/phone-utils";
 
 interface ChatLayoutClientProps {
     sessionId: string;
@@ -43,9 +44,8 @@ export function ChatLayoutClient({ sessionId, initialJid }: ChatLayoutClientProp
             const path = window.location.pathname;
             if (path.startsWith("/dashboard/chat/")) {
                 const rawJid = path.replace("/dashboard/chat/", "");
-                let clean = rawJid.replace(/\D/g, "");
-                if (clean.startsWith("0")) clean = "62" + clean.substring(1);
-                setSelectedChat({ jid: `${clean}@s.whatsapp.net` });
+                const jid = formatToWhatsAppJid(decodeURIComponent(rawJid));
+                setSelectedChat({ jid });
             } else {
                 setSelectedChat(null);
             }
