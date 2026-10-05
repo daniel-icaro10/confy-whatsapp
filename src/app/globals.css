@@ -210,10 +210,10 @@
   }
 
   .whatsapp-chat-wallpaper {
-    background-color: #0c1317;
-    background-image: url("/whatsapp-doodle.svg");
+    background-color: #0b141a;
+    background-image: url("/whatsapp-bg-dark.jpg");
     background-repeat: repeat;
-    background-size: 460px 460px;
+    background-size: 412px auto;
   }
   
   .text-gradient {
