@@ -53,6 +53,7 @@ model User {
   userDepartments UserDepartment[]
   quickReplies    QuickReply[]
   ticketNotes     TicketNote[]
+  ticketActivities TicketActivity[]
 }
 
 model Session {
@@ -481,6 +482,7 @@ model Ticket {
   assignedUser    User?          @relation("AssignedTickets", fields: [assignedUserId], references: [id], onDelete: SetNull)
   department      Department?    @relation(fields: [departmentId], references: [id], onDelete: SetNull)
   notes           TicketNote[]
+  activities      TicketActivity[]
 
   @@unique([sessionId, jid])
   @@index([sessionId, status])
@@ -534,5 +536,20 @@ model BusinessHour {
 
   @@unique([sessionId, dayOfWeek])
   @@index([sessionId])
+}
+
+model TicketActivity {
+  id        String   @id @default(cuid())
+  ticketId  String
+  userId    String?
+  type      String   // ASSIGNED, TRANSFERRED, PRIORITY_CHANGED, STATUS_CHANGED, CSAT_ANSWERED
+  content   String   @db.Text
+  createdAt DateTime @default(now())
+
+  ticket    Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([ticketId])
+  @@index([createdAt])
 }
 

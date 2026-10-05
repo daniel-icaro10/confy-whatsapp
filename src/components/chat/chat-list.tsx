@@ -7,8 +7,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import { MessageSquarePlus, Search, MessageCircle, X, Tag, MoreHorizontal, CornerUpLeft, Trash2, Info, Check, Volume2, VolumeX } from "lucide-react";
+import { MessageSquarePlus, Search, MessageCircle, X, Tag, MoreHorizontal, CornerUpLeft, Trash2, Info, Check, Volume2, VolumeX, User } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { getChatsStatus } from "@/app/dashboard/chat/actions";
@@ -24,6 +25,7 @@ interface ChatContact {
     ticket?: {
         id: string;
         status: "OPEN" | "IN_PROGRESS" | "RESOLVED";
+        priority?: "LOW" | "MEDIUM" | "HIGH" | "URGENT";
         assignedUser?: { id: string; name: string | null; email: string } | null;
         department?: { id: string; name: string; colorHex: string } | null;
     } | null;
@@ -246,33 +248,55 @@ function ChatRow({
                             <span className="text-[10px] text-muted-foreground flex-shrink-0">{getTimeLabel(chat.lastMessage.timestamp)}</span>
                         )}
                     </div>
-                    <div className="flex items-center justify-between gap-1.5 mt-1">
+
+                    {/* Middle preview line + Priority tag */}
+                    <div className="flex items-center justify-between gap-1.5 mt-0.5">
                         <p className="text-xs text-muted-foreground truncate flex-1">{getMessagePreview(chat)}</p>
-                        {/* Status Badge */}
-                        {chat.ticket?.status === "IN_PROGRESS" ? (
-                            <span className="text-[9px] px-1.5 py-0.5 rounded-md bg-blue-500/15 text-blue-600 dark:text-blue-400 font-medium shrink-0 flex items-center gap-1">
-                                <span className="h-1.5 w-1.5 rounded-full bg-blue-500 animate-pulse" />
-                                {chat.ticket.assignedUser?.name?.split(' ')[0] || "Em atendimento"}
-                            </span>
-                        ) : chat.ticket?.status === "RESOLVED" ? (
-                            <span className="text-[9px] px-1.5 py-0.5 rounded-md bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 font-medium shrink-0">
-                                Resolvido
-                            </span>
-                        ) : (
-                            <span className="text-[9px] px-1.5 py-0.5 rounded-md bg-amber-500/15 text-amber-600 dark:text-amber-400 font-medium shrink-0">
-                                Na fila
+                        {chat.ticket?.priority === "URGENT" && (
+                            <span className="text-[9px] px-1.5 py-0.2 rounded-md bg-red-500/15 text-red-600 dark:text-red-400 font-bold border border-red-500/25 shrink-0">
+                                Urgente
                             </span>
                         )}
+                        {chat.ticket?.priority === "HIGH" && (
+                            <span className="text-[9px] px-1.5 py-0.2 rounded-md bg-amber-500/15 text-amber-600 dark:text-amber-400 font-semibold border border-amber-500/25 shrink-0">
+                                Alta
+                            </span>
+                        )}
+                    </div>
+
+                    {/* Bottom Metadata Badges */}
+                    <div className="flex items-center gap-1.5 mt-1.5 flex-wrap">
+                        {/* Assigned Attendant Badge */}
+                        {chat.ticket?.assignedUser ? (
+                            <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-secondary/80 text-foreground/80 font-medium flex items-center gap-1 shrink-0">
+                                <User className="h-2.5 w-2.5 text-primary" />
+                                <span className="truncate max-w-[90px]">{chat.ticket.assignedUser.name?.split(' ')[0] || chat.ticket.assignedUser.email.split('@')[0]}</span>
+                            </span>
+                        ) : (
+                            <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-amber-500/10 text-amber-600 dark:text-amber-400 font-medium shrink-0 flex items-center gap-1">
+                                <span className="h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse" />
+                                Não atribuído
+                            </span>
+                        )}
+
                         {/* Department Badge */}
                         {chat.ticket?.department && (
                             <span
-                                className="text-[9px] px-1.5 py-0.5 rounded-md font-medium shrink-0"
+                                className="text-[10px] px-1.5 py-0.5 rounded-md font-medium shrink-0 truncate max-w-[90px]"
                                 style={{
                                     backgroundColor: `${chat.ticket.department.colorHex}20`,
                                     color: chat.ticket.department.colorHex
                                 }}
                             >
                                 {chat.ticket.department.name}
+                            </span>
+                        )}
+
+                        {/* Resolved Badge */}
+                        {chat.ticket?.status === "RESOLVED" && (
+                            <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 font-medium shrink-0 flex items-center gap-0.5">
+                                <Check className="h-2.5 w-2.5" />
+                                Resolvido
                             </span>
                         )}
                     </div>
@@ -315,7 +339,8 @@ export function ChatList({ sessionId, onSelectChat, selectedJid }: ChatListProps
     // Label dots per JID — {colorHex}[]
     const { data: authSession } = useSession();
     const currentUserId = authSession?.user?.id;
-    const [ticketFilter, setTicketFilter] = useState<"ALL" | "OPEN" | "MINE" | "RESOLVED">("ALL");
+    const [statusFilter, setStatusFilter] = useState<"OPEN" | "RESOLVED" | "ALL">("OPEN");
+    const [triageTab, setTriageTab] = useState<"MINE" | "UNASSIGNED" | "ALL">("MINE");
 
     const [chatLabelMap, setChatLabelMap] = useState<Map<string, { colorHex: string }[]>>(new Map());
     const [soundEnabled, setSoundEnabled] = useState(() => {
@@ -497,17 +522,37 @@ export function ChatList({ sessionId, onSelectChat, selectedJid }: ChatListProps
         }, 300);
     };
 
-    const queueCount = useMemo(() => chats.filter(c => c.ticket?.status === "OPEN" || !c.ticket).length, [chats]);
-    const mineCount = useMemo(() => chats.filter(c => c.ticket?.assignedUser?.id === currentUserId && c.ticket?.status !== "RESOLVED").length, [chats, currentUserId]);
+    const isChatMatchingStatus = useCallback((chat: ChatContact, status: "OPEN" | "RESOLVED" | "ALL") => {
+        if (status === "OPEN") {
+            return !chat.ticket || chat.ticket.status !== "RESOLVED";
+        }
+        if (status === "RESOLVED") {
+            return chat.ticket?.status === "RESOLVED";
+        }
+        return true;
+    }, []);
+
+    const statusFilteredChats = useMemo(() => {
+        return chats.filter(c => isChatMatchingStatus(c, statusFilter));
+    }, [chats, statusFilter, isChatMatchingStatus]);
+
+    const mineCount = useMemo(() => {
+        return statusFilteredChats.filter(c => c.ticket?.assignedUser?.id === currentUserId).length;
+    }, [statusFilteredChats, currentUserId]);
+
+    const unassignedCount = useMemo(() => {
+        return statusFilteredChats.filter(c => !c.ticket?.assignedUser?.id).length;
+    }, [statusFilteredChats]);
+
+    const allCount = statusFilteredChats.length;
 
     const filteredChats = useMemo(() => {
-        let result = chats;
-        if (ticketFilter === "OPEN") {
-            result = result.filter(c => c.ticket?.status === "OPEN" || !c.ticket);
-        } else if (ticketFilter === "MINE") {
-            result = result.filter(c => c.ticket?.assignedUser?.id === currentUserId && c.ticket?.status !== "RESOLVED");
-        } else if (ticketFilter === "RESOLVED") {
-            result = result.filter(c => c.ticket?.status === "RESOLVED");
+        let result = statusFilteredChats;
+
+        if (triageTab === "MINE") {
+            result = result.filter(c => c.ticket?.assignedUser?.id === currentUserId);
+        } else if (triageTab === "UNASSIGNED") {
+            result = result.filter(c => !c.ticket?.assignedUser?.id);
         }
 
         if (searchQuery.trim()) {
@@ -519,7 +564,7 @@ export function ChatList({ sessionId, onSelectChat, selectedJid }: ChatListProps
             });
         }
         return result;
-    }, [chats, ticketFilter, searchQuery, currentUserId]);
+    }, [statusFilteredChats, triageTab, searchQuery, currentUserId]);
 
     const handleEndReached = useCallback(() => {
         if (hasMore && !loading && !searchQuery.trim()) {
@@ -558,12 +603,40 @@ export function ChatList({ sessionId, onSelectChat, selectedJid }: ChatListProps
         <div className="flex flex-col h-full overflow-hidden bg-background">
             {/* Header */}
             <div className="shrink-0 px-3 pt-3 pb-2 space-y-2 border-b border-border/10">
-                <div className="flex justify-between items-center">
-                    <h3 className="font-semibold text-base text-foreground">
-                        Conversas
-                        {chats.length > 0 && <span className="ml-1.5 text-xs font-normal text-muted-foreground">({chats.length})</span>}
-                    </h3>
-                    <div className="flex items-center gap-0.5">
+                <div className="flex justify-between items-center gap-2">
+                    <div className="flex items-center gap-2 min-w-0">
+                        <h3 className="font-semibold text-base text-foreground shrink-0">
+                            Conversas
+                        </h3>
+                        {/* Status Filter Dropdown */}
+                        <Select value={statusFilter} onValueChange={(val: any) => setStatusFilter(val)}>
+                            <SelectTrigger className="h-7 text-xs font-medium bg-muted/60 hover:bg-muted border border-border/40 rounded-lg px-2 gap-1 focus:ring-0 shadow-none cursor-pointer">
+                                <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="OPEN" className="text-xs cursor-pointer">
+                                    <span className="flex items-center gap-1.5">
+                                        <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                                        <span>Abertas</span>
+                                    </span>
+                                </SelectItem>
+                                <SelectItem value="RESOLVED" className="text-xs cursor-pointer">
+                                    <span className="flex items-center gap-1.5">
+                                        <span className="h-2 w-2 rounded-full bg-slate-400" />
+                                        <span>Resolvidas</span>
+                                    </span>
+                                </SelectItem>
+                                <SelectItem value="ALL" className="text-xs cursor-pointer">
+                                    <span className="flex items-center gap-1.5">
+                                        <span className="h-2 w-2 rounded-full bg-blue-500" />
+                                        <span>Todas</span>
+                                    </span>
+                                </SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </div>
+
+                    <div className="flex items-center gap-0.5 shrink-0">
                         <Button
                             variant="ghost"
                             size="icon"
@@ -597,53 +670,66 @@ export function ChatList({ sessionId, onSelectChat, selectedJid }: ChatListProps
                         className="h-8 pl-8 text-sm bg-muted/50 border-0 rounded-lg focus-visible:ring-1" />
                 </div>
 
-                {/* Attendance Filter Tabs */}
+                {/* Triaging Tabs (Chatwoot style: Minhas, Não atribuídas, Todas) */}
                 <div className="flex items-center gap-1 p-0.5 bg-muted/40 rounded-lg text-xs">
                     <button
-                        onClick={() => setTicketFilter("ALL")}
+                        onClick={() => setTriageTab("MINE")}
                         className={cn(
-                            "flex-1 py-1 px-1 rounded-md font-medium text-center transition-all text-[11px]",
-                            ticketFilter === "ALL" ? "bg-background text-foreground shadow-xs font-semibold" : "text-muted-foreground hover:text-foreground"
+                            "flex-1 py-1.5 px-2 rounded-md font-medium text-center transition-all text-[11px] flex items-center justify-center gap-1.5 cursor-pointer",
+                            triageTab === "MINE"
+                                ? "bg-background text-foreground shadow-xs font-semibold"
+                                : "text-muted-foreground hover:text-foreground"
                         )}
                     >
-                        Todas
+                        <span>Minhas</span>
+                        <span className={cn(
+                            "px-1.5 py-0.2 rounded-full text-[10px] font-bold",
+                            triageTab === "MINE"
+                                ? "bg-primary/15 text-primary"
+                                : "bg-muted-foreground/15 text-muted-foreground"
+                        )}>
+                            {mineCount}
+                        </span>
                     </button>
+
                     <button
-                        onClick={() => setTicketFilter("OPEN")}
+                        onClick={() => setTriageTab("UNASSIGNED")}
                         className={cn(
-                            "flex-1 py-1 px-1 rounded-md font-medium text-center transition-all text-[11px] flex items-center justify-center gap-1",
-                            ticketFilter === "OPEN" ? "bg-background text-foreground shadow-xs font-semibold" : "text-muted-foreground hover:text-foreground"
+                            "flex-1 py-1.5 px-2 rounded-md font-medium text-center transition-all text-[11px] flex items-center justify-center gap-1.5 cursor-pointer",
+                            triageTab === "UNASSIGNED"
+                                ? "bg-background text-foreground shadow-xs font-semibold"
+                                : "text-muted-foreground hover:text-foreground"
                         )}
                     >
-                        Fila
-                        {queueCount > 0 && (
-                            <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-amber-500/20 text-amber-600 dark:text-amber-400 font-bold">
-                                {queueCount}
-                            </span>
-                        )}
+                        <span className="truncate">Não atribuídas</span>
+                        <span className={cn(
+                            "px-1.5 py-0.2 rounded-full text-[10px] font-bold",
+                            unassignedCount > 0
+                                ? "bg-amber-500/20 text-amber-600 dark:text-amber-400"
+                                : "bg-muted-foreground/15 text-muted-foreground"
+                        )}>
+                            {unassignedCount}
+                        </span>
                     </button>
+
                     <button
-                        onClick={() => setTicketFilter("MINE")}
+                        onClick={() => setTriageTab("ALL")}
                         className={cn(
-                            "flex-1 py-1 px-1 rounded-md font-medium text-center transition-all text-[11px] flex items-center justify-center gap-1",
-                            ticketFilter === "MINE" ? "bg-background text-foreground shadow-xs font-semibold" : "text-muted-foreground hover:text-foreground"
+                            "flex-1 py-1.5 px-2 rounded-md font-medium text-center transition-all text-[11px] flex items-center justify-center gap-1.5 cursor-pointer",
+                            triageTab === "ALL"
+                                ? "bg-background text-foreground shadow-xs font-semibold"
+                                : "text-muted-foreground hover:text-foreground"
                         )}
                     >
-                        Minhas
-                        {mineCount > 0 && (
-                            <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-blue-500/20 text-blue-600 dark:text-blue-400 font-bold">
-                                {mineCount}
-                            </span>
-                        )}
-                    </button>
-                    <button
-                        onClick={() => setTicketFilter("RESOLVED")}
-                        className={cn(
-                            "flex-1 py-1 px-1 rounded-md font-medium text-center transition-all text-[11px]",
-                            ticketFilter === "RESOLVED" ? "bg-background text-foreground shadow-xs font-semibold" : "text-muted-foreground hover:text-foreground"
-                        )}
-                    >
-                        Resolvidas
+                        <span>Todas</span>
+                        <span className={cn(
+                            "px-1.5 py-0.2 rounded-full text-[10px] font-bold",
+                            triageTab === "ALL"
+                                ? "bg-primary/15 text-primary"
+                                : "bg-muted-foreground/15 text-muted-foreground"
+                        )}>
+                            {allCount}
+                        </span>
                     </button>
                 </div>
 

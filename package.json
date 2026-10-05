@@ -10,6 +10,7 @@
     "lint": "eslint",
     "db:push": "prisma db push && prisma generate",
     "db:studio": "prisma studio",
+    "stop-broadcast": "npx tsx scripts/stop-broadcast.ts",
     "make-admin": "node scripts/setup-admin.js",
     "postinstall": "patch-package"
   },

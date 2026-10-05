@@ -92,6 +92,7 @@ export class ChatService {
                 ticket: ticket ? {
                     id: ticket.id,
                     status: ticket.status,
+                    priority: ticket.priority,
                     assignedUser: ticket.assignedUser,
                     department: ticket.department
                 } : null,

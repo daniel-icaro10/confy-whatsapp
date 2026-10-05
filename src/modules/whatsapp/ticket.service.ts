@@ -128,6 +128,10 @@ export class TicketService {
 
         // Emit socket event for real-time sync across attendants
         (global as any).io?.to(sessionId).emit("ticket.updated", ticket);
+
+        const userName = ticket.assignedUser?.name || ticket.assignedUser?.email || "Um atendente";
+        this.logActivity(sessionId, ticket.id, jid, "ASSIGNED", `${userName} assumiu o atendimento`, userId).catch(() => {});
+
         return ticket;
     }
 
@@ -166,6 +170,19 @@ export class TicketService {
         });
 
         (global as any).io?.to(sessionId).emit("ticket.updated", ticket);
+
+        let transferMsg = "";
+        if (ticket.department && ticket.assignedUser) {
+            transferMsg = `Transferido para o setor ${ticket.department.name} (${ticket.assignedUser.name || ticket.assignedUser.email})`;
+        } else if (ticket.department) {
+            transferMsg = `Transferido para o setor ${ticket.department.name}`;
+        } else if (ticket.assignedUser) {
+            transferMsg = `Transferido para ${ticket.assignedUser.name || ticket.assignedUser.email}`;
+        } else {
+            transferMsg = `Atendimento movido para a fila geral`;
+        }
+        this.logActivity(sessionId, ticket.id, jid, "TRANSFERRED", transferMsg, target.userId || null).catch(() => {});
+
         return ticket;
     }
 
@@ -200,6 +217,9 @@ export class TicketService {
             });
         }
 
+        const statusMsg = status === TicketStatus.RESOLVED ? "Atendimento finalizado" : "Atendimento reaberto";
+        this.logActivity(sessionId, ticket.id, jid, "STATUS_CHANGED", statusMsg).catch(() => {});
+
         (global as any).io?.to(sessionId).emit("ticket.updated", ticket);
         return ticket;
     }
@@ -230,6 +250,14 @@ export class TicketService {
                 department: { select: { id: true, name: true, colorHex: true } }
             }
         });
+
+        const prioNames: Record<string, string> = {
+            LOW: "Baixa",
+            MEDIUM: "Média",
+            HIGH: "Alta",
+            URGENT: "Urgente"
+        };
+        this.logActivity(sessionId, ticket.id, jid, "PRIORITY_CHANGED", `Prioridade alterada para ${prioNames[priority] || priority}`).catch(() => {});
 
         (global as any).io?.to(sessionId).emit("ticket.updated", ticket);
         return ticket;
@@ -266,6 +294,7 @@ export class TicketService {
                     });
 
                     (global as any).io?.to(sessionId).emit("ticket.updated", updated);
+                    this.logActivity(sessionId, existing.id, jid, "CSAT_ANSWERED", `Cliente avaliou o atendimento com ⭐ ${score}/5 estrelas`).catch(() => {});
 
                     const thankYou = `⭐ *Obrigado pela sua avaliação!*\nRegistramos sua nota ${score}/5 com sucesso. Seu feedback é fundamental para continuarmos evoluindo nosso atendimento! 🙏`;
                     setTimeout(async () => {
@@ -750,6 +779,59 @@ export class TicketService {
             where: { ticketId: ticket.id },
             include: {
                 user: { select: { id: true, name: true, email: true, role: true } }
+            },
+            orderBy: { createdAt: "asc" }
+        });
+    }
+
+    /**
+     * Record a system activity event on a ticket and broadcast it
+     */
+    static async logActivity(sessionId: string, ticketId: string, jid: string, type: string, content: string, userId?: string | null) {
+        try {
+            const activity = await prisma.ticketActivity.create({
+                data: {
+                    ticketId,
+                    userId: userId || null,
+                    type,
+                    content
+                },
+                include: {
+                    user: { select: { id: true, name: true, email: true } }
+                }
+            });
+
+            (global as any).io?.to(sessionId).emit("ticket.activity_added", {
+                jid,
+                activity
+            });
+
+            return activity;
+        } catch (e) {
+            logger.error("TicketService", "Error logging ticket activity", e);
+        }
+    }
+
+    /**
+     * List all activity events for a ticket
+     */
+    static async listActivities(sessionId: string, jid: string) {
+        const dbSessionId = await this.getDbSessionId(sessionId);
+        if (!dbSessionId) return [];
+
+        const ticket = await prisma.ticket.findUnique({
+            where: {
+                sessionId_jid: { sessionId: dbSessionId, jid }
+            },
+            select: { id: true }
+        });
+
+        if (!ticket) return [];
+
+        return await prisma.ticketActivity.findMany({
+            where: { ticketId: ticket.id },
+            include: {
+                user: { select: { id: true, name: true, email: true } }
             },
             orderBy: { createdAt: "asc" }
         });

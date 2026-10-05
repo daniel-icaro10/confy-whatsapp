@@ -7,7 +7,7 @@ import {
     Send, Paperclip, ArrowLeft, FileText, Image as ImageIcon, Music, Video,
     Download, ArrowDown, CornerUpLeft, Copy, Trash2, Info, X,
     UserCheck, ArrowRightLeft, CheckCircle2, RotateCcw, Zap, Tag, Lock,
-    PanelRight, User
+    PanelRight, User, AlertCircle, Star
 } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
@@ -50,7 +50,8 @@ import {
     getTransferOptions,
     getQuickReplies,
     addTicketNote,
-    getTicketNotes
+    getTicketNotes,
+    getTicketActivities
 } from "@/app/dashboard/chat/actions";
 import { useSocket } from "./socket-context";
 import { LabelAssignPopover } from "./chat-list";
@@ -250,6 +251,7 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
 
     // Internal Notes state
     const [notes, setNotes] = useState<any[]>([]);
+    const [activities, setActivities] = useState<any[]>([]);
     const [inputMode, setInputMode] = useState<"message" | "note">("message");
     const [showRightPanel, setShowRightPanel] = useState(true);
 
@@ -273,9 +275,12 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
     const { getSocket, joinSession } = useSocket();
     const getDateLabel = useDateLabel();
 
-    // Fetch Ticket details, Quick Replies and Internal Notes
+    // Fetch Ticket details, Quick Replies, Internal Notes, and Activities
     useEffect(() => {
         let mounted = true;
+        setActivities([]);
+        setNotes([]);
+
         getTicketDetails(sessionId, jid).then(t => {
             if (mounted) setTicket(t);
         }).catch(console.error);
@@ -288,10 +293,14 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
             if (mounted) setNotes(n || []);
         }).catch(console.error);
 
+        getTicketActivities(sessionId, jid).then(act => {
+            if (mounted) setActivities(act || []);
+        }).catch(console.error);
+
         return () => { mounted = false; };
     }, [sessionId, jid]);
 
-    // Real-time Ticket updates & Notes
+    // Real-time Ticket updates, Notes & Activities
     useEffect(() => {
         const socket = getSocket();
         if (!socket) return;
@@ -308,12 +317,22 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
                 });
             }
         };
+        const activityHandler = (data: any) => {
+            if (data?.jid === jid && data?.activity) {
+                setActivities(prev => {
+                    if (prev.some(a => a.id === data.activity.id)) return prev;
+                    return [...prev, data.activity];
+                });
+            }
+        };
 
         socket.on("ticket.updated", handler);
         socket.on("ticket.note_added", noteHandler);
+        socket.on("ticket.activity_added", activityHandler);
         return () => {
             socket.off("ticket.updated", handler);
             socket.off("ticket.note_added", noteHandler);
+            socket.off("ticket.activity_added", activityHandler);
         };
     }, [jid, getSocket]);
 
@@ -556,12 +575,14 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
         const items: Array<
             | { kind: "message"; data: Message; time: number }
             | { kind: "note"; data: any; time: number }
+            | { kind: "activity"; data: any; time: number }
         > = [];
         messages.forEach(m => items.push({ kind: "message", data: m, time: new Date(m.timestamp).getTime() }));
         notes.forEach(n => items.push({ kind: "note", data: n, time: new Date(n.createdAt).getTime() }));
+        activities.forEach(a => items.push({ kind: "activity", data: a, time: new Date(a.createdAt).getTime() }));
         items.sort((a, b) => a.time - b.time);
         return items;
-    }, [messages, notes]);
+    }, [messages, notes, activities]);
 
     const displayName = name || jid.split('@')[0];
 
@@ -843,6 +864,35 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
                             : null;
                         const showDate = idx === 0 || (prevTimeStr ? getDateLabel(itemTimeStr) !== getDateLabel(prevTimeStr) : true);
 
+                        if (item.kind === "activity") {
+                            const act = item.data;
+                            return (
+                                <div key={`activity-${act.id}`} className="my-2.5 flex flex-col items-center">
+                                    {showDate && (
+                                        <div className="flex justify-center mb-2.5">
+                                            <span className="text-[10px] font-medium text-muted-foreground bg-background/80 backdrop-blur-sm px-3 py-1 rounded-full shadow-xs border border-border/30">
+                                                {getDateLabel(act.createdAt)}
+                                            </span>
+                                        </div>
+                                    )}
+                                    <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted/80 hover:bg-muted border border-border/50 text-xs text-muted-foreground shadow-xs max-w-[90%] sm:max-w-md text-center transition-colors">
+                                        {act.type === "ASSIGNED" && <UserCheck className="h-3.5 w-3.5 text-blue-500 shrink-0" />}
+                                        {act.type === "TRANSFERRED" && <ArrowRightLeft className="h-3.5 w-3.5 text-indigo-500 shrink-0" />}
+                                        {act.type === "STATUS_CHANGED" && <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 shrink-0" />}
+                                        {act.type === "PRIORITY_CHANGED" && <AlertCircle className="h-3.5 w-3.5 text-amber-500 shrink-0" />}
+                                        {act.type === "CSAT_ANSWERED" && <Star className="h-3.5 w-3.5 text-amber-400 fill-amber-400 shrink-0" />}
+                                        {!["ASSIGNED", "TRANSFERRED", "STATUS_CHANGED", "PRIORITY_CHANGED", "CSAT_ANSWERED"].includes(act.type) && (
+                                            <Info className="h-3.5 w-3.5 text-primary shrink-0" />
+                                        )}
+                                        <span className="text-foreground/90 font-medium">{act.content}</span>
+                                        <span className="text-[10px] text-muted-foreground/60 shrink-0 ml-1">
+                                            {new Date(act.createdAt).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}
+                                        </span>
+                                    </div>
+                                </div>
+                            );
+                        }
+
                         if (item.kind === "note") {
                             const note = item.data;
                             return (
@@ -1007,32 +1057,23 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
             <div className="shrink-0 px-3 py-2 bg-background/80 backdrop-blur-sm border-t space-y-1.5">
                 {/* Mode Switcher & Tools Bar */}
                 <div className="flex items-center justify-between max-w-3xl mx-auto px-1">
-                    <div className="flex items-center gap-1 bg-muted/60 p-0.5 rounded-lg text-xs">
+                    <div className="flex items-center gap-1 text-xs">
                         <button
                             type="button"
-                            onClick={() => setInputMode("message")}
+                            onClick={() => setInputMode(prev => prev === "note" ? "message" : "note")}
                             className={cn(
-                                "px-2.5 py-1 rounded-md font-medium transition-all text-xs flex items-center gap-1.5 cursor-pointer",
-                                inputMode === "message" 
-                                    ? "bg-background text-foreground shadow-xs font-semibold" 
-                                    : "text-muted-foreground hover:text-foreground"
-                            )}
-                        >
-                            <Send className="h-3 w-3" />
-                            <span>Mensagem WhatsApp</span>
-                        </button>
-                        <button
-                            type="button"
-                            onClick={() => setInputMode("note")}
-                            className={cn(
-                                "px-2.5 py-1 rounded-md font-medium transition-all text-xs flex items-center gap-1.5 cursor-pointer",
+                                "px-2.5 py-1 rounded-md font-medium transition-all text-xs flex items-center gap-1.5 cursor-pointer border",
                                 inputMode === "note" 
-                                    ? "bg-amber-500/20 text-amber-700 dark:text-amber-300 shadow-xs font-semibold" 
-                                    : "text-muted-foreground hover:text-amber-600"
+                                    ? "bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/30 shadow-xs font-semibold" 
+                                    : "border-border/40 text-muted-foreground hover:text-foreground hover:border-border"
                             )}
+                            title="Alternar para nota interna visível apenas para a equipe"
                         >
-                            <Lock className="h-3 w-3 text-amber-500" />
+                            <Lock className={cn("h-3 w-3", inputMode === "note" ? "text-amber-500" : "text-muted-foreground")} />
                             <span>Nota Interna</span>
+                            {inputMode === "note" && (
+                                <span className="text-[9px] px-1 rounded bg-amber-500 text-white font-bold">ATIVA</span>
+                            )}
                         </button>
                     </div>
 

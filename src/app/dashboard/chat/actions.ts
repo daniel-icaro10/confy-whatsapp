@@ -257,6 +257,20 @@ export async function getTicketNotes(sessionId: string, jid: string) {
     return await TicketService.listNotes(sessionId, jid);
 }
 
+export async function getTicketActivities(sessionId: string, jid: string) {
+    const user = await getAuthenticatedUserForAction();
+    if (!user) throw new Error("Unauthorized");
+
+    const canAccess = await canAccessSession(user.id, user.role, sessionId);
+    if (!canAccess) throw new Error("Forbidden");
+
+    const activities = await TicketService.listActivities(sessionId, jid);
+    return activities.map((a: any) => ({
+        ...a,
+        createdAt: a.createdAt instanceof Date ? a.createdAt.toISOString() : String(a.createdAt)
+    }));
+}
+
 export async function updateTicketPriority(
     sessionId: string,
     jid: string,

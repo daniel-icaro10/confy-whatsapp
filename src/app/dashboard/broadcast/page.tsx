@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Slider } from "@/components/ui/slider";
 import { Progress } from "@/components/ui/progress";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
-import { RefreshCw, Send, CheckCircle2, XCircle, Radio, Clock, AlertTriangle, History, Eye, Calendar } from "lucide-react";
+import { RefreshCw, Send, CheckCircle2, XCircle, Radio, Clock, AlertTriangle, History, Eye, Calendar, Pause, Play, Square } from "lucide-react";
 import { toast } from "sonner";
 import { useSession } from "@/components/dashboard/session-provider";
 import { SessionGuard } from "@/components/dashboard/session-guard";
@@ -16,7 +16,7 @@ import { useSocket } from "@/components/chat/socket-context";
 
 interface BroadcastProgress {
     broadcastId: string;
-    status: "running" | "completed";
+    status: "running" | "paused" | "completed" | "cancelled";
     total: number;
     sent: number;
     failed: number;
@@ -56,6 +56,7 @@ export default function BroadcastPage() {
     const [message, setMessage] = useState("");
     const [delay, setDelay] = useState([2000]);
     const [loading, setLoading] = useState(false);
+    const [actionLoading, setActionLoading] = useState(false);
     const [broadcastProgress, setBroadcastProgress] = useState<BroadcastProgress | null>(null);
     const [activeTab, setActiveTab] = useState<"new" | "history">("new");
 
@@ -67,6 +68,37 @@ export default function BroadcastPage() {
     const [detailLoading, setDetailLoading] = useState(false);
 
     const { getSocket, joinSession } = useSocket();
+
+    // Check for active broadcast on mount/session change
+    const checkCurrentBroadcast = useCallback(async () => {
+        if (!sessionId) return;
+        try {
+            const res = await fetch(`/api/messages/${sessionId}/broadcast/current`);
+            if (res.ok) {
+                const data = await res.json();
+                if (data.data) {
+                    const log = data.data;
+                    const progress = log.total > 0 ? Math.round(((log.sent + log.failed) / log.total) * 100) : 0;
+                    setBroadcastProgress({
+                        broadcastId: log.id,
+                        status: log.status,
+                        total: log.total,
+                        sent: log.sent,
+                        failed: log.failed,
+                        progress,
+                        startedAt: log.startedAt
+                    });
+                    setLoading(log.status === "running");
+                }
+            }
+        } catch (e) {
+            console.error("Failed to fetch current broadcast", e);
+        }
+    }, [sessionId]);
+
+    useEffect(() => {
+        checkCurrentBroadcast();
+    }, [checkCurrentBroadcast]);
 
     // Socket for progress updates
     useEffect(() => {
@@ -81,13 +113,21 @@ export default function BroadcastPage() {
             setBroadcastProgress(data);
             if (data.status === "completed") {
                 setLoading(false);
-                // Refresh history after completion
                 fetchHistory();
                 if (data.failed === 0) {
                     toast.success(`Disparo concluído! ${data.sent} enviada(s).`);
                 } else {
                     toast.warning(`Disparo concluído. ${data.sent} enviada(s), ${data.failed} com falha.`);
                 }
+            } else if (data.status === "cancelled") {
+                setLoading(false);
+                fetchHistory();
+                toast.warning(`Disparo cancelado e interrompido. ${data.sent} enviada(s).`);
+            } else if (data.status === "paused") {
+                setLoading(false);
+                toast.info("Disparo pausado.");
+            } else if (data.status === "running") {
+                setLoading(true);
             }
         };
 
@@ -134,6 +174,43 @@ export default function BroadcastPage() {
             console.error("Failed to fetch broadcast detail", e);
         } finally {
             setDetailLoading(false);
+        }
+    };
+
+    // Control broadcast (Pause, Resume, Cancel)
+    const handleControlBroadcast = async (broadcastId?: string, action: "pause" | "resume" | "cancel" = "cancel") => {
+        if (!sessionId) return;
+        setActionLoading(true);
+        try {
+            const res = await fetch(`/api/messages/${sessionId}/broadcast/control`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ broadcastId, action })
+            });
+            const data = await res.json();
+            if (res.ok) {
+                if (action === "pause") {
+                    toast.info("Disparo pausado com sucesso");
+                    setBroadcastProgress(prev => prev ? { ...prev, status: "paused" } : null);
+                    setLoading(false);
+                } else if (action === "resume") {
+                    toast.success("Disparo retomado com sucesso");
+                    setBroadcastProgress(prev => prev ? { ...prev, status: "running" } : null);
+                    setLoading(true);
+                } else if (action === "cancel") {
+                    toast.warning("Disparo interrompido e cancelado!");
+                    setBroadcastProgress(prev => prev ? { ...prev, status: "cancelled" } : null);
+                    setLoading(false);
+                    fetchHistory();
+                }
+            } else {
+                toast.error(data.message || "Falha ao controlar disparo");
+            }
+        } catch (e) {
+            console.error("Control error", e);
+            toast.error("Erro ao enviar comando de controle");
+        } finally {
+            setActionLoading(false);
         }
     };
 
@@ -195,6 +272,7 @@ export default function BroadcastPage() {
         sent: "enviada",
         failed: "falhou",
         pending: "pendente",
+        cancelled: "cancelada"
     };
 
     const tabs = [
@@ -202,13 +280,66 @@ export default function BroadcastPage() {
         { id: "history" as const, label: "Histórico", icon: History },
     ];
 
+    const hasActiveBroadcast = broadcastProgress && (broadcastProgress.status === "running" || broadcastProgress.status === "paused");
+
     return (
         <SessionGuard>
             <div className="space-y-6">
                 <div>
                     <h2 className="text-xl sm:text-3xl font-bold tracking-tight">Disparo em massa</h2>
-                    <p className="text-muted-foreground text-sm mt-1">Envie mensagens em massa para vários destinatários de uma só vez.</p>
+                    <p className="text-muted-foreground text-sm mt-1">Envie mensagens em massa para vários destinatários com controle total de pausa e cancelamento.</p>
                 </div>
+
+                {/* Emergency Active Broadcast Banner */}
+                {hasActiveBroadcast && (
+                    <div className="p-3.5 rounded-xl border border-amber-500/30 bg-amber-500/10 flex flex-col sm:flex-row items-center justify-between gap-3 animate-in fade-in">
+                        <div className="flex items-center gap-3">
+                            <AlertTriangle className="h-5 w-5 text-amber-500 shrink-0 animate-bounce" />
+                            <div>
+                                <p className="text-sm font-semibold text-foreground flex items-center gap-2">
+                                    <span>{broadcastProgress.status === "running" ? "Disparo ativo em andamento!" : "Disparo pausado!"}</span>
+                                    <span className="text-xs px-2 py-0.5 rounded-full font-mono font-medium bg-background/80 border">
+                                        ID: {broadcastProgress.broadcastId}
+                                    </span>
+                                </p>
+                                <p className="text-xs text-muted-foreground">
+                                    {broadcastProgress.sent} de {broadcastProgress.total} enviadas ({broadcastProgress.progress || 0}%) • {broadcastProgress.failed} falha(s)
+                                </p>
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-2 w-full sm:w-auto">
+                            {broadcastProgress.status === "running" ? (
+                                <Button
+                                    size="sm"
+                                    variant="outline"
+                                    className="flex-1 sm:flex-none border-amber-500/50 text-amber-600 dark:text-amber-400 hover:bg-amber-500/10 cursor-pointer"
+                                    onClick={() => handleControlBroadcast(broadcastProgress.broadcastId, "pause")}
+                                    disabled={actionLoading}
+                                >
+                                    <Pause className="h-3.5 w-3.5 mr-1" /> Pausar
+                                </Button>
+                            ) : (
+                                <Button
+                                    size="sm"
+                                    className="flex-1 sm:flex-none bg-emerald-600 hover:bg-emerald-700 text-white cursor-pointer"
+                                    onClick={() => handleControlBroadcast(broadcastProgress.broadcastId, "resume")}
+                                    disabled={actionLoading}
+                                >
+                                    <Play className="h-3.5 w-3.5 mr-1" /> Retomar
+                                </Button>
+                            )}
+                            <Button
+                                size="sm"
+                                variant="destructive"
+                                className="flex-1 sm:flex-none cursor-pointer"
+                                onClick={() => handleControlBroadcast(broadcastProgress.broadcastId, "cancel")}
+                                disabled={actionLoading}
+                            >
+                                <Square className="h-3.5 w-3.5 mr-1" /> Parar agora
+                            </Button>
+                        </div>
+                    </div>
+                )}
 
                 {/* Tabs */}
                 <div className="flex gap-1 bg-muted/50 p-1 rounded-lg w-fit">
@@ -216,7 +347,7 @@ export default function BroadcastPage() {
                         <button
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id)}
-                            className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md transition-all ${
+                            className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md transition-all cursor-pointer ${
                                 activeTab === tab.id
                                     ? "bg-background shadow-sm text-foreground"
                                     : "text-muted-foreground hover:text-foreground"
@@ -302,18 +433,73 @@ export default function BroadcastPage() {
                             <Card className={`border-2 transition-colors ${
                                 broadcastProgress.status === "completed"
                                     ? (broadcastProgress.failed === 0 ? "border-green-500/30 bg-green-50/30 dark:bg-green-950/10" : "border-yellow-500/30 bg-yellow-50/30 dark:bg-yellow-950/10")
+                                    : broadcastProgress.status === "cancelled"
+                                    ? "border-red-500/30 bg-red-50/30 dark:bg-red-950/10"
+                                    : broadcastProgress.status === "paused"
+                                    ? "border-amber-500/30 bg-amber-50/30 dark:bg-amber-950/10"
                                     : "border-blue-500/30 bg-blue-50/30 dark:bg-blue-950/10"
                             }`}>
                                 <CardHeader className="pb-3">
-                                    <CardTitle className="flex items-center gap-2 text-lg">
-                                        {broadcastProgress.status === "running" ? (
-                                            <><Radio className="h-5 w-5 text-blue-500 animate-pulse" /><span>Disparo em andamento</span></>
-                                        ) : broadcastProgress.failed === 0 ? (
-                                            <><CheckCircle2 className="h-5 w-5 text-green-500" /><span>Disparo concluído</span></>
-                                        ) : (
-                                            <><AlertTriangle className="h-5 w-5 text-yellow-500" /><span>Disparo concluído com erros</span></>
-                                        )}
-                                    </CardTitle>
+                                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                                        <CardTitle className="flex items-center gap-2 text-lg">
+                                            {broadcastProgress.status === "running" ? (
+                                                <><Radio className="h-5 w-5 text-blue-500 animate-pulse" /><span>Disparo em andamento</span></>
+                                            ) : broadcastProgress.status === "paused" ? (
+                                                <><Pause className="h-5 w-5 text-amber-500 animate-pulse" /><span>Disparo pausado</span></>
+                                            ) : broadcastProgress.status === "cancelled" ? (
+                                                <><XCircle className="h-5 w-5 text-red-500" /><span>Disparo cancelado / interrompido</span></>
+                                            ) : broadcastProgress.failed === 0 ? (
+                                                <><CheckCircle2 className="h-5 w-5 text-green-500" /><span>Disparo concluído</span></>
+                                            ) : (
+                                                <><AlertTriangle className="h-5 w-5 text-yellow-500" /><span>Disparo concluído com erros</span></>
+                                            )}
+                                        </CardTitle>
+                                        <div className="flex items-center gap-2">
+                                            {broadcastProgress.status === "running" && (
+                                                <>
+                                                    <Button
+                                                        variant="outline"
+                                                        size="sm"
+                                                        className="border-amber-500/40 text-amber-600 dark:text-amber-400 hover:bg-amber-500/10 cursor-pointer"
+                                                        onClick={() => handleControlBroadcast(broadcastProgress.broadcastId, "pause")}
+                                                        disabled={actionLoading}
+                                                    >
+                                                        <Pause className="h-3.5 w-3.5 mr-1" /> Pausar
+                                                    </Button>
+                                                    <Button
+                                                        variant="destructive"
+                                                        size="sm"
+                                                        className="cursor-pointer"
+                                                        onClick={() => handleControlBroadcast(broadcastProgress.broadcastId, "cancel")}
+                                                        disabled={actionLoading}
+                                                    >
+                                                        <Square className="h-3.5 w-3.5 mr-1" /> Parar
+                                                    </Button>
+                                                </>
+                                            )}
+                                            {broadcastProgress.status === "paused" && (
+                                                <>
+                                                    <Button
+                                                        size="sm"
+                                                        className="bg-emerald-600 hover:bg-emerald-700 text-white cursor-pointer"
+                                                        onClick={() => handleControlBroadcast(broadcastProgress.broadcastId, "resume")}
+                                                        disabled={actionLoading}
+                                                    >
+                                                        <Play className="h-3.5 w-3.5 mr-1" /> Retomar
+                                                    </Button>
+                                                    <Button
+                                                        variant="destructive"
+                                                        size="sm"
+                                                        className="cursor-pointer"
+                                                        onClick={() => handleControlBroadcast(broadcastProgress.broadcastId, "cancel")}
+                                                        disabled={actionLoading}
+                                                    >
+                                                        <Square className="h-3.5 w-3.5 mr-1" /> Parar
+                                                    </Button>
+                                                </>
+                                            )}
+                                        </div>
+                                    </div>
                                     <CardDescription>ID: {broadcastProgress.broadcastId}</CardDescription>
                                 </CardHeader>
                                 <CardContent className="space-y-4">
@@ -342,7 +528,7 @@ export default function BroadcastPage() {
                                         </div>
                                         <div className="bg-background rounded-lg p-3 text-center border">
                                             <div className="text-2xl font-bold text-muted-foreground">
-                                                {broadcastProgress.total - broadcastProgress.sent - broadcastProgress.failed}
+                                                {Math.max(0, broadcastProgress.total - broadcastProgress.sent - broadcastProgress.failed)}
                                             </div>
                                             <div className="text-xs text-muted-foreground flex items-center justify-center gap-1 mt-1">
                                                 <Clock className="h-3 w-3" /> Pendentes
@@ -358,7 +544,21 @@ export default function BroadcastPage() {
                                         </div>
                                     )}
 
-                                    {broadcastProgress.status === "completed" && broadcastProgress.errors && broadcastProgress.errors.length > 0 && (
+                                    {broadcastProgress.status === "paused" && (
+                                        <div className="flex items-center gap-2 text-sm px-3 py-2 bg-amber-500/10 text-amber-700 dark:text-amber-400 rounded-lg border border-amber-500/20">
+                                            <Pause className="h-4 w-4 shrink-0" />
+                                            <span>O disparo está pausado. Nenhuma mensagem será enviada até você clicar em <strong>Retomar</strong> ou <strong>Parar</strong>.</span>
+                                        </div>
+                                    )}
+
+                                    {broadcastProgress.status === "cancelled" && (
+                                        <div className="flex items-center gap-2 text-sm px-3 py-2 bg-red-500/10 text-red-700 dark:text-red-400 rounded-lg border border-red-500/20">
+                                            <XCircle className="h-4 w-4 shrink-0" />
+                                            <span>Este disparo foi cancelado. As mensagens restantes não foram enviadas.</span>
+                                        </div>
+                                    )}
+
+                                    {broadcastProgress.errors && broadcastProgress.errors.length > 0 && (
                                         <div className="space-y-2">
                                             <h4 className="text-sm font-semibold text-red-600 flex items-center gap-1.5">
                                                 <XCircle className="h-4 w-4" /> Com falha ({broadcastProgress.errors.length})
@@ -399,43 +599,104 @@ export default function BroadcastPage() {
                                 </div>
                             ) : (
                                 <div className="space-y-2">
-                                    {history.map(log => (
-                                        <div key={log.id}
-                                            className="flex items-center gap-4 p-3 rounded-lg border hover:bg-muted/30 transition-colors"
-                                        >
-                                            {/* Status icon */}
-                                            <div className="shrink-0">
-                                                {log.status === "completed" ? (
-                                                    log.failed === 0
-                                                        ? <CheckCircle2 className="h-8 w-8 text-green-500" />
-                                                        : <AlertTriangle className="h-8 w-8 text-yellow-500" />
-                                                ) : (
-                                                    <Radio className="h-8 w-8 text-blue-500 animate-pulse" />
-                                                )}
-                                            </div>
+                                    {history.map(log => {
+                                        const isLogActive = log.status === "running" || log.status === "paused";
+                                        return (
+                                            <div key={log.id}
+                                                className={`flex items-center gap-4 p-3 rounded-lg border transition-colors ${
+                                                    log.status === "cancelled" ? "bg-red-50/20 border-red-500/20" :
+                                                    log.status === "paused" ? "bg-amber-50/20 border-amber-500/20" :
+                                                    log.status === "running" ? "bg-blue-50/20 border-blue-500/20" : "hover:bg-muted/30"
+                                                }`}
+                                            >
+                                                {/* Status icon */}
+                                                <div className="shrink-0">
+                                                    {log.status === "completed" ? (
+                                                        log.failed === 0
+                                                            ? <CheckCircle2 className="h-8 w-8 text-green-500" />
+                                                            : <AlertTriangle className="h-8 w-8 text-yellow-500" />
+                                                    ) : log.status === "cancelled" ? (
+                                                        <XCircle className="h-8 w-8 text-red-500" />
+                                                    ) : log.status === "paused" ? (
+                                                        <Pause className="h-8 w-8 text-amber-500" />
+                                                    ) : (
+                                                        <Radio className="h-8 w-8 text-blue-500 animate-pulse" />
+                                                    )}
+                                                </div>
 
-                                            {/* Info */}
-                                            <div className="flex-1 min-w-0">
-                                                <p className="text-sm font-medium truncate">{log.message}</p>
-                                                <div className="flex items-center gap-3 text-xs text-muted-foreground mt-1">
-                                                    <span className="flex items-center gap-1">
-                                                        <CheckCircle2 className="h-3 w-3 text-green-500" /> {log.sent}
-                                                    </span>
-                                                    <span className="flex items-center gap-1">
-                                                        <XCircle className="h-3 w-3 text-red-500" /> {log.failed}
-                                                    </span>
-                                                    <span className="flex items-center gap-1">
-                                                        <Calendar className="h-3 w-3" /> {formatTime(log.startedAt)}
-                                                    </span>
+                                                {/* Info */}
+                                                <div className="flex-1 min-w-0">
+                                                    <div className="flex items-center gap-2">
+                                                        <p className="text-sm font-medium truncate">{log.message}</p>
+                                                        {log.status === "cancelled" && (
+                                                            <span className="text-[10px] px-1.5 py-0.5 rounded bg-red-500/10 text-red-600 font-semibold shrink-0">Cancelado</span>
+                                                        )}
+                                                        {log.status === "paused" && (
+                                                            <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-600 font-semibold shrink-0">Pausado</span>
+                                                        )}
+                                                        {log.status === "running" && (
+                                                            <span className="text-[10px] px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-600 font-semibold shrink-0">Disparando</span>
+                                                        )}
+                                                    </div>
+                                                    <div className="flex items-center gap-3 text-xs text-muted-foreground mt-1">
+                                                        <span className="flex items-center gap-1">
+                                                            <CheckCircle2 className="h-3 w-3 text-green-500" /> {log.sent} / {log.total}
+                                                        </span>
+                                                        {log.failed > 0 && (
+                                                            <span className="flex items-center gap-1">
+                                                                <XCircle className="h-3 w-3 text-red-500" /> {log.failed}
+                                                            </span>
+                                                        )}
+                                                        <span className="flex items-center gap-1">
+                                                            <Calendar className="h-3 w-3" /> {formatTime(log.startedAt)}
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                                {/* Actions */}
+                                                <div className="flex items-center gap-1.5 shrink-0">
+                                                    {isLogActive && (
+                                                        <>
+                                                            {log.status === "running" ? (
+                                                                <Button
+                                                                    variant="outline"
+                                                                    size="sm"
+                                                                    className="h-8 border-amber-500/40 text-amber-600 dark:text-amber-400 hover:bg-amber-500/10 cursor-pointer text-xs"
+                                                                    onClick={() => handleControlBroadcast(log.id, "pause")}
+                                                                    disabled={actionLoading}
+                                                                >
+                                                                    <Pause className="h-3 w-3 mr-1" /> Pausar
+                                                                </Button>
+                                                            ) : (
+                                                                <Button
+                                                                    size="sm"
+                                                                    className="h-8 bg-emerald-600 hover:bg-emerald-700 text-white cursor-pointer text-xs"
+                                                                    onClick={() => handleControlBroadcast(log.id, "resume")}
+                                                                    disabled={actionLoading}
+                                                                >
+                                                                    <Play className="h-3 w-3 mr-1" /> Retomar
+                                                                </Button>
+                                                            )}
+                                                            <Button
+                                                                variant="destructive"
+                                                                size="sm"
+                                                                className="h-8 cursor-pointer text-xs"
+                                                                onClick={() => handleControlBroadcast(log.id, "cancel")}
+                                                                disabled={actionLoading}
+                                                            >
+                                                                <Square className="h-3 w-3 mr-1" /> Parar
+                                                            </Button>
+                                                        </>
+                                                    )}
+
+                                                    {/* View button */}
+                                                    <Button variant="ghost" size="sm" className="h-8 cursor-pointer" onClick={() => openDetail(log)}>
+                                                        <Eye className="h-4 w-4 mr-1" /> Detalhes
+                                                    </Button>
                                                 </div>
                                             </div>
-
-                                            {/* View button */}
-                                            <Button variant="ghost" size="sm" className="shrink-0" onClick={() => openDetail(log)}>
-                                                <Eye className="h-4 w-4 mr-1" /> Detalhes
-                                            </Button>
-                                        </div>
-                                    ))}
+                                        );
+                                    })}
                                 </div>
                             )}
                         </CardContent>
@@ -449,6 +710,8 @@ export default function BroadcastPage() {
                             <DialogTitle className="flex items-center gap-2">
                                 {selectedLog?.status === "completed"
                                     ? <CheckCircle2 className="h-5 w-5 text-green-500" />
+                                    : selectedLog?.status === "cancelled"
+                                    ? <XCircle className="h-5 w-5 text-red-500" />
                                     : <Radio className="h-5 w-5 text-blue-500 animate-pulse" />
                                 }
                                 Detalhes do disparo
