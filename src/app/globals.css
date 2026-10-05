@@ -101,50 +101,49 @@
 }
 
 .dark {
-  /* Dark Mode - Deep, rich blue-black */
-  --background: oklch(0.15 0.02 240);
-  --foreground: oklch(0.98 0.01 240);
+  /* WhatsApp Dark Theme Official Palette */
+  --background: #111b21;
+  --foreground: #e9edef;
   
-  /* Slightly elevated surfaces for cards */
-  --card: oklch(0.18 0.03 240);
-  --card-foreground: oklch(0.98 0.01 240);
+  --card: #111b21;
+  --card-foreground: #e9edef;
   
-  --popover: oklch(0.18 0.03 240);
-  --popover-foreground: oklch(0.98 0.01 240);
+  --popover: #202c33;
+  --popover-foreground: #e9edef;
   
-  /* Primary - Bright, glowing Emerald/Teal */
-  --primary: oklch(0.7 0.18 160);
-  --primary-foreground: oklch(0.15 0.05 160);
+  --primary: #00a884;
+  --primary-foreground: #ffffff;
   
-  --secondary: oklch(0.22 0.04 240);
-  --secondary-foreground: oklch(0.95 0.02 240);
+  --secondary: #202c33;
+  --secondary-foreground: #e9edef;
   
-  --muted: oklch(0.2 0.03 240);
-  --muted-foreground: oklch(0.65 0.04 240);
+  --muted: #202c33;
+  --muted-foreground: #8696a0;
   
-  --accent: oklch(0.25 0.05 240);
-  --accent-foreground: oklch(0.98 0.01 240);
+  --accent: #182229;
+  --accent-foreground: #e9edef;
   
-  --destructive: oklch(0.5 0.25 25);
+  --destructive: #ea3943;
+  --destructive-foreground: #ffffff;
   
-  --border: oklch(0.25 0.04 240);
-  --input: oklch(0.25 0.04 240);
-  --ring: oklch(0.7 0.18 160);
+  --border: #222d34;
+  --input: #2a3942;
+  --ring: #00a884;
 
-  --chart-1: oklch(0.7 0.2 160);
-  --chart-2: oklch(0.75 0.15 200);
-  --chart-3: oklch(0.6 0.1 260);
-  --chart-4: oklch(0.85 0.15 80);
-  --chart-5: oklch(0.8 0.18 40);
+  --chart-1: #00a884;
+  --chart-2: #53bdeb;
+  --chart-3: #f15c6d;
+  --chart-4: #ffbc38;
+  --chart-5: #9b59b6;
 
-  --sidebar: oklch(0.16 0.02 240);
-  --sidebar-foreground: oklch(0.95 0.01 240);
-  --sidebar-primary: oklch(0.7 0.18 160);
-  --sidebar-primary-foreground: oklch(0.15 0.05 160);
-  --sidebar-accent: oklch(0.22 0.04 240);
-  --sidebar-accent-foreground: oklch(0.98 0.01 240);
-  --sidebar-border: oklch(0.25 0.04 240);
-  --sidebar-ring: oklch(0.7 0.18 160);
+  --sidebar: #111b21;
+  --sidebar-foreground: #e9edef;
+  --sidebar-primary: #00a884;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #202c33;
+  --sidebar-accent-foreground: #e9edef;
+  --sidebar-border: #222d34;
+  --sidebar-ring: #00a884;
 }
 
 @layer base {
@@ -164,6 +163,13 @@
   
   .glass-panel {
     @apply bg-white/50 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200/50 dark:border-slate-800/50;
+  }
+
+  .whatsapp-chat-wallpaper {
+    background-color: #0b141a;
+    background-image: radial-gradient(rgba(11, 20, 26, 0.93), rgba(11, 20, 26, 0.93)), url("/whatsapp-doodle.svg");
+    background-repeat: repeat;
+    background-size: auto, 420px 420px;
   }
   
   .text-gradient {

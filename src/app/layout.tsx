@@ -99,7 +99,7 @@ export default function RootLayout({
   const allowIndexing = process.env.NEXT_PUBLIC_ALLOW_INDEXING === "true";
 
   return (
-    <html lang="pt-BR" suppressHydrationWarning className="scroll-smooth">
+    <html lang="pt-BR" suppressHydrationWarning className="dark scroll-smooth">
       <head>
         {/* Conditional robots meta (noindex for staging/dev) */}
         {!allowIndexing && <meta name="robots" content="noindex, nofollow" />}

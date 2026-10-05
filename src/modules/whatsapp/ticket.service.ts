@@ -361,14 +361,9 @@ export class TicketService {
                 });
             }
 
-            // URA Menu evaluation: if ticket has no department
-            if (ticket && !ticket.departmentId) {
-                const routed = text ? await this.evaluateUraRouting(sessionId, dbSessionId, ticket.id, jid, text.trim()) : false;
-
-                // If not routed yet, and this is first contact (or reopened), send the welcome menu!
-                if (!routed && isNewOrReopened) {
-                    await this.sendUraWelcomeMenu(sessionId, dbSessionId, jid);
-                }
+            // URA Welcome Menu: disabled per user request (no automatic greeting menu)
+            if (ticket && !ticket.departmentId && text) {
+                await this.evaluateUraRouting(sessionId, dbSessionId, ticket.id, jid, text.trim());
             }
 
             // Re-fetch ticket to get updated department if routed
@@ -485,31 +480,8 @@ export class TicketService {
      * Send URA welcome menu listing available departments
      */
     private static async sendUraWelcomeMenu(sessionId: string, dbSessionId: string, jid: string) {
-        try {
-            const departments = await prisma.department.findMany({
-                where: { sessionId: dbSessionId },
-                orderBy: { createdAt: "asc" }
-            });
-
-            if (departments.length === 0) return;
-
-            const optionsList = departments
-                .map((dept, idx) => `${idx + 1}️⃣ *${dept.name}*`)
-                .join("\n");
-
-            const menuText = `👋 *Olá! Seja bem-vindo ao nosso atendimento.*\n\nPor favor, escolha uma das opções abaixo:\n\n${optionsList}\n\n_Digite o *número* da opção correspondente para falar com o setor._`;
-
-            // Wait 500ms before sending to feel natural
-            setTimeout(async () => {
-                try {
-                    await ChatService.sendTextMessage(sessionId, jid, { text: menuText });
-                } catch (e) {
-                    logger.error("TicketService", "Failed to send URA welcome menu", e);
-                }
-            }, 600);
-        } catch (error) {
-            logger.error("TicketService", "Error in sendUraWelcomeMenu", error);
-        }
+        // Disabled per user request (no automated greeting menu)
+        return;
     }
 
     /**

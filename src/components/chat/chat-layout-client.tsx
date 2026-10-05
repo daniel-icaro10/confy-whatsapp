@@ -92,14 +92,22 @@ export function ChatLayoutClient({ sessionId, initialJid }: ChatLayoutClientProp
                         onBack={handleBack}
                     />
                 ) : (
-                    <div className="flex-1 flex items-center justify-center min-w-0 min-h-0">
-                        <div className="text-center p-6">
-                            <div className="h-16 w-16 rounded-2xl bg-muted/50 flex items-center justify-center mx-auto mb-4">
-                                <MessageCircle className="h-8 w-8 text-muted-foreground/40" />
+                    <div className="flex-1 flex flex-col items-center justify-center min-w-0 min-h-0 whatsapp-chat-wallpaper relative p-6 border-l border-border/40 text-center select-none">
+                        <div className="max-w-md mx-auto space-y-4">
+                            <div className="h-16 w-16 rounded-full bg-[#202c33] text-[#00a884] flex items-center justify-center mx-auto shadow-md border border-white/[0.05]">
+                                <MessageCircle className="h-8 w-8" />
                             </div>
-                            <p className="text-sm text-muted-foreground">
-                                Selecione uma conversa para começar
-                            </p>
+                            <div className="space-y-1.5">
+                                <h2 className="text-xl font-semibold text-[#e9edef] tracking-tight">
+                                    WhatsApp Web
+                                </h2>
+                                <p className="text-xs text-[#8696a0] leading-relaxed">
+                                    Envie e receba mensagens sem precisar manter seu celular conectado. Selecione uma conversa ao lado para começar.
+                                </p>
+                            </div>
+                        </div>
+                        <div className="absolute bottom-6 flex items-center gap-1.5 text-[11px] text-[#8696a0]/70">
+                            <span>🔒 Protegido com criptografia de ponta a ponta</span>
                         </div>
                     </div>
                 )}

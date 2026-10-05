@@ -7,7 +7,7 @@ import {
     Send, Paperclip, ArrowLeft, FileText, Image as ImageIcon, Music, Video,
     Download, ArrowDown, CornerUpLeft, Copy, Trash2, Info, X,
     UserCheck, ArrowRightLeft, CheckCircle2, RotateCcw, Zap, Tag, Lock,
-    PanelRight, User, AlertCircle, Star
+    PanelRight, User, AlertCircle, Star, Check, CheckCheck, Clock
 } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
@@ -839,10 +839,8 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
                 </DialogContent>
             </Dialog>
 
-            {/* Messages */}
-            <div ref={scrollRef} className="flex-1 overflow-y-auto px-3 sm:px-4 py-3 min-h-0 styled-scrollbar" onScroll={handleScroll}
-                style={{ backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--muted-foreground) / 0.04) 1px, transparent 0)`, backgroundSize: '24px 24px' }}
-            >
+            {/* Messages Container with WhatsApp Web Doodle Wallpaper */}
+            <div ref={scrollRef} className="flex-1 overflow-y-auto px-3 sm:px-4 py-3 min-h-0 styled-scrollbar whatsapp-chat-wallpaper" onScroll={handleScroll}>
                 <div className="flex flex-col gap-3 max-w-3xl mx-auto">
                     {loading && messages.length === 0 && (
                         <div className="flex-1 flex items-center justify-center py-32">
@@ -929,7 +927,7 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
                             <div key={msg.keyId} id={`msg-${msg.keyId}`}>
                                 {showDate && (
                                     <div className="flex justify-center my-3">
-                                        <span className="text-[10px] font-medium text-muted-foreground bg-background/80 backdrop-blur-sm px-3 py-1 rounded-full shadow-sm border border-border/30">
+                                        <span className="text-[10px] font-semibold text-[#8696a0] bg-[#182229]/90 backdrop-blur-sm px-3 py-1 rounded-lg shadow-xs border border-white/[0.06]">
                                             {getDateLabel(msg.timestamp)}
                                         </span>
                                     </div>
@@ -944,8 +942,10 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
                                         </button>
                                     )}
                                     <div className={cn(
-                                        "flex flex-col max-w-[85%] sm:max-w-[70%] rounded-2xl px-3 py-2 shadow-sm overflow-hidden cursor-context-menu",
-                                        msg.fromMe ? "bg-primary text-primary-foreground rounded-br-sm" : "bg-background border border-border/40 rounded-bl-sm"
+                                        "flex flex-col max-w-[85%] sm:max-w-[70%] rounded-2xl px-3 py-2 shadow-xs overflow-hidden cursor-context-menu relative select-text",
+                                        msg.fromMe 
+                                            ? "bg-[#005c4b] text-[#e9edef] rounded-tr-xs" 
+                                            : "bg-[#202c33] text-[#e9edef] border border-white/[0.05] rounded-tl-xs"
                                     )} onContextMenu={(e) => handleContextMenu(e, msg)}>
                                         {!msg.fromMe && jid.endsWith("@g.us") && msg.pushName && (
                                             <span className="text-[10px] font-semibold text-primary block mb-0.5">{msg.pushName}</span>
@@ -953,10 +953,10 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
                                         {msg.quoted && (
                                             <div 
                                                 className={cn(
-                                                    "mb-1.5 px-2 py-1 rounded-lg border-l-4 text-xs select-none cursor-pointer text-left bg-muted/40",
+                                                    "mb-1.5 px-2 py-1 rounded-lg border-l-4 text-xs select-none cursor-pointer text-left",
                                                     msg.fromMe 
-                                                        ? "border-primary-foreground/30 bg-primary-foreground/10 text-primary-foreground/90 hover:bg-primary-foreground/15" 
-                                                        : "border-primary bg-muted text-muted-foreground hover:bg-muted/60"
+                                                        ? "border-emerald-300 bg-black/20 text-[#e9edef]/90 hover:bg-black/25" 
+                                                        : "border-[#00a884] bg-black/20 text-[#e9edef]/90 hover:bg-black/25"
                                                 )}
                                                 onClick={(e) => {
                                                     e.stopPropagation();
@@ -1021,12 +1021,27 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
                                                 {msg.mediaUrl && <Button size="icon" variant="ghost" className="h-7 w-7 rounded-full shrink-0" onClick={() => handleDownload(msg.mediaUrl!, `${msg.type}-${msg.keyId}`)}><Download className="h-3.5 w-3.5" /></Button>}
                                             </div>
                                         )}
-                                        {/* Text */}
-                                        <div className="flex items-end gap-2">
-                                            <span className="flex-1 text-sm break-all whitespace-pre-wrap">{msg.content}</span>
-                                            <span className={cn("text-[9px] shrink-0 leading-none", msg.fromMe ? "text-primary-foreground/60" : "text-muted-foreground")}>
-                                                {new Date(msg.timestamp).toLocaleTimeString("pt-BR", { hour: '2-digit', minute: '2-digit' })}
-                                            </span>
+                                        {/* Text and Timestamp */}
+                                        <div className="flex items-end justify-between gap-3">
+                                            <span className="flex-1 text-sm break-all whitespace-pre-wrap leading-relaxed">{msg.content}</span>
+                                            <div className="flex items-center gap-1 shrink-0 self-end select-none pt-0.5">
+                                                <span className="text-[10px] text-[#8696a0] leading-none">
+                                                    {new Date(msg.timestamp).toLocaleTimeString("pt-BR", { hour: '2-digit', minute: '2-digit' })}
+                                                </span>
+                                                {msg.fromMe && (
+                                                    <span className="inline-flex items-center ml-0.5">
+                                                        {msg.status === "READ" ? (
+                                                            <CheckCheck className="h-3.5 w-3.5 text-[#53bdeb]" />
+                                                        ) : msg.status === "DELIVERED" ? (
+                                                            <CheckCheck className="h-3.5 w-3.5 text-[#8696a0]" />
+                                                        ) : msg.status === "SENT" ? (
+                                                            <Check className="h-3.5 w-3.5 text-[#8696a0]" />
+                                                        ) : (
+                                                            <Clock className="h-3 w-3 text-[#8696a0]" />
+                                                        )}
+                                                    </span>
+                                                )}
+                                            </div>
                                         </div>
                                     </div>
                                     {/* Reply button: other msg on right */}
