@@ -2,17 +2,17 @@ import Link from "next/link";
 import { ArrowLeft, Lock, Shield } from "lucide-react";
 
 export const metadata = {
-    title: "Política de Privacidade | WA-AKG",
-    description: "Política de Privacidade do WA-AKG, gateway de WhatsApp auto-hospedado. Arquitetura sem rastreamento, propriedade dos dados e práticas de segurança.",
+    title: "Política de Privacidade | Confy WhatsApp",
+    description: "Política de Privacidade do Confy WhatsApp, gateway de WhatsApp auto-hospedado. Arquitetura sem rastreamento, propriedade dos dados e práticas de segurança.",
     openGraph: {
-        title: "Política de Privacidade | WA-AKG",
-        description: "Política de Privacidade do WA-AKG, gateway de WhatsApp auto-hospedado.",
+        title: "Política de Privacidade | Confy WhatsApp",
+        description: "Política de Privacidade do Confy WhatsApp, gateway de WhatsApp auto-hospedado.",
         type: "website",
     },
     twitter: {
         card: "summary_large_image",
-        title: "Política de Privacidade | WA-AKG",
-        description: "Política de Privacidade do WA-AKG, gateway de WhatsApp auto-hospedado.",
+        title: "Política de Privacidade | Confy WhatsApp",
+        description: "Política de Privacidade do Confy WhatsApp, gateway de WhatsApp auto-hospedado.",
     },
 };
 
@@ -44,7 +44,7 @@ export default function PrivacyPage() {
                     <div className="prose prose-slate dark:prose-invert max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-primary hover:prose-a:text-primary/80 prose-p:leading-relaxed">
 
                         <p className="lead text-lg text-muted-foreground mb-8">
-                            No WA-AKG, acreditamos que seus dados são propriedade sua. Esta Política de Privacidade detalha os limites rigorosos sobre como as informações são tratadas ao usar nosso gateway de WhatsApp open-source e auto-hospedado.
+                            No Confy WhatsApp, acreditamos que seus dados são propriedade sua. Esta Política de Privacidade detalha os limites rigorosos sobre como as informações são tratadas ao usar nosso gateway de WhatsApp open-source e auto-hospedado.
                         </p>
 
                         <h2 className="flex items-center gap-2 mt-8 text-2xl border-b pb-2">
@@ -52,10 +52,10 @@ export default function PrivacyPage() {
                             1. Arquitetura sem rastreamento
                         </h2>
                         <p>
-                            Como o WA-AKG foi projetado para ser <strong>auto-hospedado</strong>, todo o processamento principal de dados ocorre exclusivamente no hardware onde você implanta o aplicativo.
+                            Como o Confy WhatsApp foi projetado para ser <strong>auto-hospedado</strong>, todo o processamento principal de dados ocorre exclusivamente no hardware onde você implanta o aplicativo.
                         </p>
                         <ul>
-                            <li><strong>Sem telemetria centralizada:</strong> Os criadores do WA-AKG não recebem telemetria, análises ou relatórios de uso sobre suas interações no WhatsApp.</li>
+                            <li><strong>Sem telemetria centralizada:</strong> Os criadores do Confy WhatsApp não recebem telemetria, análises ou relatórios de uso sobre suas interações no WhatsApp.</li>
                             <li><strong>Propriedade total dos dados:</strong> Seus contatos, mensagens, agendamentos e respostas automáticas permanecem no seu próprio banco de dados. Não podemos e não vamos acessá-lo.</li>
                         </ul>
 
@@ -65,13 +65,13 @@ export default function PrivacyPage() {
                         </p>
                         <ul>
                             <li><strong>Credenciais de autenticação:</strong> As senhas que você cria para o painel são protegidas com hash bcrypt antes de serem armazenadas no seu banco de dados local.</li>
-                            <li><strong>Sessões do WhatsApp:</strong> O WA-AKG funciona como uma ponte para o WhatsApp Web. Os tokens de sessão (chaves) necessários para manter essa conexão ficam armazenados localmente no seu servidor.</li>
+                            <li><strong>Sessões do WhatsApp:</strong> O Confy WhatsApp funciona como uma ponte para o WhatsApp Web. Os tokens de sessão (chaves) necessários para manter essa conexão ficam armazenados localmente no seu servidor.</li>
                             <li><strong>Logs de comunicação:</strong> As mensagens enviadas e recebidas pelo gateway são registradas no seu banco de dados local para fornecer histórico e a funcionalidade de webhooks.</li>
                         </ul>
 
                         <h2 className="mt-8 text-2xl border-b pb-2">3. Proteção das suas informações</h2>
                         <p>
-                            Embora o WA-AKG seja construído com práticas modernas de segurança, a proteção final dos seus dados depende do seu ambiente de hospedagem. Recomendamos fortemente:
+                            Embora o Confy WhatsApp seja construído com práticas modernas de segurança, a proteção final dos seus dados depende do seu ambiente de hospedagem. Recomendamos fortemente:
                         </p>
                         <ul>
                             <li>Implantar o aplicativo atrás de um proxy reverso com <strong>criptografia SSL/TLS</strong> obrigatória (HTTPS).</li>
@@ -81,12 +81,12 @@ export default function PrivacyPage() {
 
                         <h2 className="mt-8 text-2xl border-b pb-2">4. Integrações de terceiros</h2>
                         <p>
-                            O WA-AKG utiliza a biblioteca <code>@whiskeysockets/baileys</code> para se comunicar diretamente com os servidores do WhatsApp. Ao usar este gateway, seu servidor estabelecerá uma conexão WebSocket direta com o WhatsApp. Lembre-se de que o seu uso do WhatsApp continua sujeito à Política de Privacidade da Meta.
+                            O Confy WhatsApp utiliza a biblioteca <code>@whiskeysockets/baileys</code> para se comunicar diretamente com os servidores do WhatsApp. Ao usar este gateway, seu servidor estabelecerá uma conexão WebSocket direta com o WhatsApp. Lembre-se de que o seu uso do WhatsApp continua sujeito à Política de Privacidade da Meta.
                         </p>
 
                         <div className="mt-12 p-6 bg-blue-500/5 rounded-2xl border border-blue-500/10">
                             <p className="font-semibold mb-2">Precisa de mais detalhes?</p>
-                            <p className="text-sm text-muted-foreground mb-0">Se você tiver dúvidas específicas sobre o tratamento de dados ou quiser auditar o código, visite nosso <Link href="https://github.com/mrifqidaffaaditya/WA-AKG">repositório no GitHub</Link>.</p>
+                            <p className="text-sm text-muted-foreground mb-0">Se você tiver dúvidas específicas sobre o tratamento de dados ou segurança, entre em contato com nossa equipe de suporte.</p>
                         </div>
                     </div>
                 </div>

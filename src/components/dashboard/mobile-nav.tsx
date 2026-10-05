@@ -14,12 +14,8 @@ import {
     QrCode,
     Webhook,
     Bot,
-    Bell,
-    FileText,
-    Code,
     UserCheck,
     Megaphone,
-    HardDrive,
     Activity,
     Tag,
     MessageCircleReply,
@@ -62,11 +58,11 @@ const navGroups: NavGroup[] = [
         items: [
             { href: "/dashboard", label: "Painel Geral", icon: LayoutDashboard, allowedRoles: ["SUPERADMIN", "OWNER"] },
             { href: "/dashboard/sessions", label: "Sessões / QR Code", icon: QrCode, allowedRoles: ["SUPERADMIN", "OWNER"] },
-            { href: "/dashboard/broadcast", label: "Disparos", icon: Megaphone, allowedRoles: ["SUPERADMIN", "OWNER"] },
+            { href: "/dashboard/broadcast", label: "Disparos em Massa", icon: Megaphone, allowedRoles: ["SUPERADMIN", "OWNER"] },
         ],
     },
     {
-        label: "Contatos",
+        label: "Contatos & CRM",
         items: [
             { href: "/dashboard/contacts", label: "Contatos", icon: UserCheck },
             { href: "/dashboard/groups", label: "Grupos", icon: Users },
@@ -76,32 +72,23 @@ const navGroups: NavGroup[] = [
     {
         label: "Automação",
         items: [
-            { href: "/dashboard/bot-settings", label: "Configurações do bot", icon: Bot, allowedRoles: ["SUPERADMIN", "OWNER"] },
-            { href: "/dashboard/autoreply", label: "Resposta automática (URA)", icon: MessageCircleReply, allowedRoles: ["SUPERADMIN", "OWNER"] },
-            { href: "/dashboard/webhooks", label: "Webhooks e API", icon: Webhook, allowedRoles: ["SUPERADMIN", "OWNER"] },
-        ],
-    },
-    {
-        label: "Desenvolvedor",
-        items: [
-            { href: "/docs", label: "Documentação da API", icon: FileText, allowedRoles: ["SUPERADMIN", "OWNER"] },
-            { href: "/swagger", label: "Swagger UI", icon: Code, external: true, allowedRoles: ["SUPERADMIN", "OWNER"] },
+            { href: "/dashboard/bot-settings", label: "Configurações do Bot", icon: Bot, allowedRoles: ["SUPERADMIN", "OWNER"] },
+            { href: "/dashboard/autoreply", label: "Gatilhos de Palavras-Chave", icon: MessageCircleReply, allowedRoles: ["SUPERADMIN", "OWNER"] },
+            { href: "/dashboard/webhooks", label: "Webhooks e Integrações", icon: Webhook, allowedRoles: ["SUPERADMIN", "OWNER"] },
         ],
     },
     {
         label: "Administração",
         items: [
-            { href: "/dashboard/media", label: "Gerenciador de mídia", icon: HardDrive, allowedRoles: ["SUPERADMIN", "OWNER"] },
-            { href: "/dashboard/sessions/access", label: "Equipe / Acessos", icon: UserPlus, allowedRoles: ["SUPERADMIN", "OWNER"] },
-            { href: "/dashboard/users", label: "Usuários Globais", icon: Users, superadminOnly: true },
-            { href: "/dashboard/settings", label: "Configurações", icon: Settings },
-            { href: "/dashboard/system-monitor", label: "Monitor do sistema", icon: Activity, superadminOnly: true },
-            { href: "/dashboard/notifications", label: "Notificações", icon: Bell, superadminOnly: true },
+            { href: "/dashboard/users", label: "Atendentes & Equipe", icon: Users, superadminOnly: true },
+            { href: "/dashboard/sessions/access", label: "Permissões de Sessão", icon: UserPlus, allowedRoles: ["SUPERADMIN", "OWNER"] },
+            { href: "/dashboard/settings", label: "Configurações Gerais", icon: Settings },
+            { href: "/dashboard/system-monitor", label: "Monitor do Sistema", icon: Activity, superadminOnly: true },
         ],
     },
 ];
 
-export function MobileNav({ appName = "WA-AKG" }: { appName?: string }) {
+export function MobileNav({ appName = "Confy WhatsApp" }: { appName?: string }) {
     const [open, setOpen] = useState(false);
     const pathname = usePathname();
     const { data: session } = useSession();

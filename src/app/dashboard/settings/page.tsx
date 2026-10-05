@@ -14,7 +14,7 @@ export default function SettingsPage() {
     const isSuperAdmin = (authSession?.user as any)?.role === "SUPERADMIN";
 
     const [systemConfig, setSystemConfig] = useState({
-        appName: "WA-AKG",
+        appName: "Confy WhatsApp",
         logoUrl: "",
         timezone: "America/Sao_Paulo",
         enableRegistration: true
@@ -44,7 +44,7 @@ export default function SettingsPage() {
                 const data = responseData?.data;
                 if (data && !responseData.error) {
                     setSystemConfig({
-                        appName: data.appName || "WA-AKG",
+                        appName: data.appName || "Confy WhatsApp",
                         logoUrl: data.logoUrl || "",
                         // @ts-ignore
                         faviconUrl: data.faviconUrl || "/favicon.ico",

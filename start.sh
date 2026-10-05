@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ==============================================================================
-# 🚀 WA-AKG Auto Deployment & Startup Script
+# 🚀 Confy WhatsApp Auto Deployment & Startup Script
 # ==============================================================================
 
 # Text Colors
@@ -12,7 +12,7 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 echo -e "${BLUE}====================================================${NC}"
-echo -e "${BLUE}       ⚡ WA-AKG PM2 AUTO STARTUP SCRIPT ⚡        ${NC}"
+echo -e "${BLUE}    ⚡ CONFY WHATSAPP AUTO STARTUP SCRIPT ⚡        ${NC}"
 echo -e "${BLUE}====================================================${NC}"
 
 # Step 1: Check for .env file & Security Auditing
@@ -157,11 +157,15 @@ if ! command -v pm2 &> /dev/null; then
 fi
 
 # Check if application is already running in PM2
-if pm2 show wa-akg &> /dev/null; then
-    echo -e "${YELLOW}🔄 Application 'wa-akg' is already running. Reloading to apply changes...${NC}"
-    pm2 reload wa-akg
+if pm2 show confy-whatsapp &> /dev/null; then
+    echo -e "${YELLOW}🔄 Application 'confy-whatsapp' is already running. Reloading to apply changes...${NC}"
+    pm2 reload confy-whatsapp
+elif pm2 show wa-akg &> /dev/null; then
+    echo -e "${YELLOW}🔄 Legacy application 'wa-akg' found. Migrating to 'confy-whatsapp'...${NC}"
+    pm2 delete wa-akg &> /dev/null || true
+    pm2 start ecosystem.config.js
 else
-    echo -e "${GREEN}🚀 Starting 'wa-akg' process using ecosystem.config.js...${NC}"
+    echo -e "${GREEN}🚀 Starting 'confy-whatsapp' process using ecosystem.config.js...${NC}"
     pm2 start ecosystem.config.js
 fi
 
@@ -171,14 +175,14 @@ if [ $? -ne 0 ]; then
 fi
 
 echo -e "\n${GREEN}====================================================${NC}"
-echo -e "${GREEN}       🎉 WA-AKG DEPLOYED SUCCESSFULLY! 🎉         ${NC}"
+echo -e "${GREEN}    🎉 CONFY WHATSAPP DEPLOYED SUCCESSFULLY! 🎉     ${NC}"
 echo -e "${GREEN}====================================================${NC}"
 echo -e "\n${BLUE}Useful PM2 Commands:${NC}"
 echo -e "  - View status:           ${YELLOW}pm2 status${NC}"
-echo -e "  - View real-time logs:   ${YELLOW}pm2 logs wa-akg${NC}"
+echo -e "  - View real-time logs:   ${YELLOW}pm2 logs confy-whatsapp${NC}"
 echo -e "  - Monitor resources:     ${YELLOW}pm2 monit${NC}"
-echo -e "  - Stop gateway service:  ${YELLOW}pm2 stop wa-akg${NC}"
-echo -e "  - Restart service:       ${YELLOW}pm2 restart wa-akg${NC}"
+echo -e "  - Stop gateway service:  ${YELLOW}pm2 stop confy-whatsapp${NC}"
+echo -e "  - Restart service:       ${YELLOW}pm2 restart confy-whatsapp${NC}"
 
 echo -e "\n${BLUE}Useful Project Script Commands:${NC}"
 echo -e "  - Run Dev Mode:          ${YELLOW}npm run dev${NC}"
