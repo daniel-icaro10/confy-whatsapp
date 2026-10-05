@@ -11,7 +11,6 @@ import {
     Users,
     Settings,
     QrCode,
-    ImageIcon,
     Webhook,
     CalendarClock,
     Bot,
@@ -72,7 +71,6 @@ const navGroups: NavGroup[] = [
             { href: "/dashboard", label: "Painel Geral", icon: LayoutDashboard, allowedRoles: ["SUPERADMIN", "OWNER"] },
             { href: "/dashboard/sessions", label: "Sessões / QR Code", icon: QrCode, allowedRoles: ["SUPERADMIN", "OWNER"] },
             { href: "/dashboard/broadcast", label: "Disparos", icon: Megaphone, allowedRoles: ["SUPERADMIN", "OWNER"] },
-            { href: "/dashboard/sticker", label: "Criador de figurinhas", icon: ImageIcon },
         ],
     },
     {
