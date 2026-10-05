@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { MobileNav } from "@/components/dashboard/mobile-nav";
 import { SessionSelector } from "@/components/dashboard/session-selector";
 import { Button } from "@/components/ui/button";
-import { RealtimeClock } from "@/components/dashboard/realtime-clock";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Bell, Inbox, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -145,7 +144,6 @@ export function Navbar({ appName }: NavbarProps) {
             </div>
 
             <div className="flex items-center gap-2 sm:gap-4 min-w-0">
-                <span className="hidden sm:inline"><RealtimeClock /></span>
                 <SessionSelector />
                 <div className="h-6 w-px bg-border/50 hidden sm:block" />
 
