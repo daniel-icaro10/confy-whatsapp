@@ -149,14 +149,58 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(134, 150, 160, 0.25) transparent;
   }
   body {
     @apply bg-background text-foreground tracking-tight scroll-smooth;
+  }
+
+  /* Ultra-sleek WhatsApp-style custom scrollbars */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(134, 150, 160, 0.22);
+    border-radius: 9999px;
+    transition: background-color 0.15s ease;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(134, 150, 160, 0.45);
+  }
+  ::-webkit-scrollbar-thumb:active {
+    background: rgba(134, 150, 160, 0.65);
+  }
+  ::-webkit-scrollbar-corner {
+    background: transparent;
   }
 }
 
 /* Custom Utilities for Glassmorphism & Micro-animations */
 @layer utilities {
+  .styled-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(134, 150, 160, 0.25) transparent;
+  }
+  .styled-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .styled-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .styled-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(134, 150, 160, 0.22);
+    border-radius: 9999px;
+  }
+  .styled-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(134, 150, 160, 0.45);
+  }
+
   .glass {
     @apply bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-xl;
   }
@@ -166,10 +210,10 @@
   }
 
   .whatsapp-chat-wallpaper {
-    background-color: #0b141a;
-    background-image: radial-gradient(rgba(11, 20, 26, 0.93), rgba(11, 20, 26, 0.93)), url("/whatsapp-doodle.svg");
+    background-color: #0c1317;
+    background-image: url("/whatsapp-doodle.svg");
     background-repeat: repeat;
-    background-size: auto, 420px 420px;
+    background-size: 460px 460px;
   }
   
   .text-gradient {

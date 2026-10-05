@@ -808,9 +808,14 @@ export function ChatList({ sessionId, onSelectChat, selectedJid }: ChatListProps
                         <p className="text-sm text-muted-foreground">{searchQuery ? "Nenhuma conversa corresponde à sua busca" : "Nenhuma conversa ainda"}</p>
                     </div>
                 ) : (
-                    <Virtuoso style={{ height: "100%" }} data={filteredChats}
-                        computeItemKey={(_: number, chat: ChatContact) => chat.jid} itemContent={itemContent}
-                        endReached={handleEndReached} increaseViewportBy={200}
+                    <Virtuoso 
+                        className="styled-scrollbar overflow-x-hidden"
+                        style={{ height: "100%" }} 
+                        data={filteredChats}
+                        computeItemKey={(_: number, chat: ChatContact) => chat.jid} 
+                        itemContent={itemContent}
+                        endReached={handleEndReached} 
+                        increaseViewportBy={200}
                         components={{ Footer: () => hasMore && !loading ? (
                             <div className="py-4 text-center">
                                 <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">Role para ver mais</span>
