@@ -54,6 +54,9 @@ model User {
   quickReplies    QuickReply[]
   ticketNotes     TicketNote[]
   ticketActivities TicketActivity[]
+  assignedDeals   Deal[]          @relation("AssignedDeals")
+  smtpSetting     SmtpSetting?
+  emailCampaigns  EmailCampaign[]
 }
 
 model Session {
@@ -87,6 +90,11 @@ model Session {
   businessHoursEnabled Boolean  @default(false)
   outOfOfficeMessage  String?  @db.Text
   timezone            String   @default("America/Sao_Paulo")
+  pipelines           Pipeline[]
+  deals               Deal[]
+  aiAgentConfig       AiAgentConfig?
+  aiKnowledgeDocuments AiKnowledgeDocument[]
+  webchatConfig       WebchatConfig?
 }
 
 model Contact {
@@ -111,6 +119,7 @@ model Contact {
 
   session     Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
   messages    Message[]
+  deals       Deal[]
 
   @@unique([sessionId, jid])
 }
@@ -552,4 +561,204 @@ model TicketActivity {
   @@index([ticketId])
   @@index([createdAt])
 }
+
+// ==========================================
+// CRM Funil Kanban Models (Zapply Flow)
+// ==========================================
+
+model Pipeline {
+  id          String   @id @default(cuid())
+  sessionId   String
+  name        String
+  isDefault   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  session     Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  stages      Stage[]
+
+  @@index([sessionId])
+}
+
+model Stage {
+  id          String   @id @default(cuid())
+  pipelineId  String
+  name        String
+  order       Int      @default(0)
+  color       String   @default("#3b82f6")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  pipeline    Pipeline @relation(fields: [pipelineId], references: [id], onDelete: Cascade)
+  deals       Deal[]
+
+  @@index([pipelineId])
+  @@index([order])
+}
+
+enum DealPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum DealStatus {
+  OPEN
+  WON
+  LOST
+}
+
+model Deal {
+  id              String        @id @default(cuid())
+  sessionId       String
+  stageId         String
+  contactId       String?
+  assignedUserId  String?
+  title           String
+  value           Float         @default(0)
+  priority        DealPriority  @default(MEDIUM)
+  status          DealStatus    @default(OPEN)
+  notes           String?       @db.Text
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  session         Session       @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  stage           Stage         @relation(fields: [stageId], references: [id], onDelete: Cascade)
+  contact         Contact?      @relation(fields: [contactId], references: [id], onDelete: SetNull)
+  assignedUser    User?         @relation("AssignedDeals", fields: [assignedUserId], references: [id], onDelete: SetNull)
+
+  @@index([sessionId])
+  @@index([stageId])
+  @@index([contactId])
+  @@index([assignedUserId])
+  @@index([status])
+}
+
+// ==========================================
+// AI Agent & Knowledge Base (RAG)
+// ==========================================
+
+enum AiProvider {
+  OPENAI
+  GEMINI
+  GROQ
+}
+
+model AiAgentConfig {
+  id                  String     @id @default(cuid())
+  sessionId           String     @unique
+  enabled             Boolean    @default(false)
+  provider            AiProvider @default(OPENAI)
+  apiKey              String?    @db.Text
+  model               String     @default("gpt-4o-mini")
+  systemPrompt        String?    @db.Text
+  temperature         Float      @default(0.7)
+  transferKeywords    String?    @default("humano, atendente, suporte, pessoa, falar com alguem")
+  outOfScopeMessage   String?    @db.Text
+  createdAt           DateTime   @default(now())
+  updatedAt           DateTime   @updatedAt
+
+  session             Session    @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
+
+model AiKnowledgeDocument {
+  id          String   @id @default(cuid())
+  sessionId   String
+  title       String
+  content     String   @db.LongText
+  category    String?  @default("Geral")
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  session     Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId])
+  @@index([active])
+}
+
+// ==========================================
+// Webchat Widget (Sites & Landing Pages)
+// ==========================================
+
+model WebchatConfig {
+  id             String   @id @default(cuid())
+  sessionId      String   @unique
+  enabled        Boolean  @default(true)
+  title          String   @default("Atendimento Online")
+  subtitle       String?  @default("Converse com a nossa equipe em tempo real")
+  primaryColor   String   @default("#2563eb")
+  welcomeMessage String?  @db.Text
+  requireEmail   Boolean  @default(false)
+  requireName    Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  session        Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
+
+// ==========================================
+// Email Campaigns (Email Marketing)
+// ==========================================
+
+model SmtpSetting {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  host      String
+  port      Int      @default(587)
+  secure    Boolean  @default(false)
+  user      String
+  pass      String
+  fromEmail String
+  fromName  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userRef   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum EmailCampaignStatus {
+  DRAFT
+  SENDING
+  COMPLETED
+  CANCELLED
+}
+
+model EmailCampaign {
+  id          String              @id @default(cuid())
+  userId      String
+  title       String
+  subject     String
+  content     String              @db.LongText
+  status      EmailCampaignStatus @default(DRAFT)
+  targetCount Int                 @default(0)
+  sentCount   Int                 @default(0)
+  failedCount Int                 @default(0)
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+
+  user        User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  logs        EmailCampaignLog[]
+
+  @@index([userId])
+  @@index([status])
+}
+
+model EmailCampaignLog {
+  id             String        @id @default(cuid())
+  campaignId     String
+  recipientEmail String
+  recipientName  String?
+  status         String        @default("PENDING") // PENDING, SENT, FAILED
+  error          String?       @db.Text
+  sentAt         DateTime?
+  createdAt      DateTime      @default(now())
+
+  campaign       EmailCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId])
+  @@index([status])
+}
+
 

@@ -29,6 +29,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
 import { SessionGuard } from "@/components/dashboard/session-guard";
+import { RoleGuard } from "@/components/dashboard/role-guard";
 import { getTransferOptions } from "@/app/dashboard/chat/actions";
 import { cn } from "@/lib/utils";
 
@@ -55,9 +56,11 @@ interface Department {
 
 export default function DepartmentsPage() {
     return (
-        <SessionGuard>
-            <DepartmentsContent />
-        </SessionGuard>
+        <RoleGuard allowedRoles={["SUPERADMIN", "OWNER"]}>
+            <SessionGuard>
+                <DepartmentsContent />
+            </SessionGuard>
+        </RoleGuard>
     );
 }
 

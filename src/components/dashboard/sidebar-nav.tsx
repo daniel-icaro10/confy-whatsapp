@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { ChevronDown, PanelLeftClose, PanelLeft, Sparkles } from "lucide-react";
+import { ChevronDown, PanelLeftClose, PanelLeft, Sparkles, Kanban, Brain, Globe, Mail } from "lucide-react";
 import {
   LayoutDashboard,
   MessageSquare,
@@ -59,24 +59,28 @@ const navGroups: NavGroup[] = [
     ],
   },
   {
-    label: "WhatsApp",
+    label: "WhatsApp & Marketing",
     items: [
       { href: "/dashboard", label: "Painel Geral", icon: LayoutDashboard, allowedRoles: ["SUPERADMIN", "OWNER"] },
       { href: "/dashboard/sessions", label: "Sessões / QR Code", icon: QrCode, allowedRoles: ["SUPERADMIN", "OWNER"] },
       { href: "/dashboard/broadcast", label: "Disparos em Massa", icon: Megaphone, allowedRoles: ["SUPERADMIN", "OWNER"] },
+      { href: "/dashboard/email-campaigns", label: "Campanhas de E-mail", icon: Mail, badge: "Novo", allowedRoles: ["SUPERADMIN", "OWNER"] },
     ],
   },
   {
     label: "Contatos & CRM",
     items: [
+      { href: "/dashboard/crm", label: "Funil de Vendas", icon: Kanban, badge: "Flow" },
       { href: "/dashboard/contacts", label: "Contatos", icon: UserCheck },
       { href: "/dashboard/groups", label: "Grupos", icon: Users },
       { href: "/dashboard/labels", label: "Etiquetas", icon: Tag },
     ],
   },
   {
-    label: "Automação",
+    label: "Automação & IA",
     items: [
+      { href: "/dashboard/ai-agent", label: "Agente de IA & RAG", icon: Brain, badge: "IA", allowedRoles: ["SUPERADMIN", "OWNER"] },
+      { href: "/dashboard/webchat", label: "Widget de Webchat", icon: Globe, allowedRoles: ["SUPERADMIN", "OWNER"] },
       { href: "/dashboard/bot-settings", label: "Configurações do Bot", icon: Bot, allowedRoles: ["SUPERADMIN", "OWNER"] },
       { href: "/dashboard/autoreply", label: "Gatilhos Automáticos", icon: MessageCircleReply, allowedRoles: ["SUPERADMIN", "OWNER"] },
       { href: "/dashboard/webhooks", label: "Webhooks e APIs", icon: Webhook, allowedRoles: ["SUPERADMIN", "OWNER"] },
@@ -89,7 +93,7 @@ const navGroups: NavGroup[] = [
       { href: "/dashboard/sessions/access", label: "Permissões de Sessão", icon: UserPlus, allowedRoles: ["SUPERADMIN", "OWNER"] },
       { href: "/dashboard/settings", label: "Configurações Gerais", icon: Settings },
       { href: "/dashboard/system-monitor", label: "Monitor do Sistema", icon: Activity, superadminOnly: true },
-      { href: "/dashboard/design-system", label: "Design System", icon: Sparkles, badge: "Gr8r" },
+      { href: "/dashboard/design-system", label: "Design System", icon: Sparkles, badge: "Gr8r", superadminOnly: true },
     ],
   },
 ];

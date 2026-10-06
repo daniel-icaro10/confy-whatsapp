@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useTheme, AccentColor, ThemeMode } from "@/components/theme-provider";
+import { RoleGuard } from "@/components/dashboard/role-guard";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
@@ -75,7 +76,8 @@ export default function DesignSystemPage() {
   ];
 
   return (
-    <div className="space-y-10 max-w-6xl pb-16">
+    <RoleGuard allowedRoles={["SUPERADMIN"]} fallbackTitle="Acesso Restrito ao Design System" fallbackDescription="O catálogo do Design System é restrito exclusivamente ao Super Administrador.">
+      <div className="space-y-10 max-w-6xl pb-16">
       {/* Page Header */}
       <div className="ph border-b border-[var(--border)] pb-6">
         <div>
@@ -778,5 +780,6 @@ export default function DesignSystemPage() {
         </div>
       </section>
     </div>
+    </RoleGuard>
   );
 }

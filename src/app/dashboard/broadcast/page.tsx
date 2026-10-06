@@ -12,6 +12,7 @@ import { RefreshCw, Send, CheckCircle2, XCircle, Radio, Clock, AlertTriangle, Hi
 import { toast } from "sonner";
 import { useSession } from "@/components/dashboard/session-provider";
 import { SessionGuard } from "@/components/dashboard/session-guard";
+import { RoleGuard } from "@/components/dashboard/role-guard";
 import { useSocket } from "@/components/chat/socket-context";
 import { parseBulkRecipients } from "@/lib/phone-utils";
 import { getMessageForContact, parseStoredMessages, resolveSpintax } from "@/lib/spintax";
@@ -323,8 +324,9 @@ export default function BroadcastPage() {
     const hasActiveBroadcast = broadcastProgress && (broadcastProgress.status === "running" || broadcastProgress.status === "paused");
 
     return (
-        <SessionGuard>
-            <div className="space-y-6">
+        <RoleGuard allowedRoles={["SUPERADMIN", "OWNER"]}>
+            <SessionGuard>
+                <div className="space-y-6">
                 <div>
                     <h2 className="text-xl sm:text-3xl font-bold tracking-tight">Disparo em massa</h2>
                     <p className="text-muted-foreground text-sm mt-1">Envie mensagens em massa para vários destinatários com controle total de pausa e cancelamento.</p>
@@ -1096,5 +1098,6 @@ export default function BroadcastPage() {
                 </Dialog>
             </div>
         </SessionGuard>
+        </RoleGuard>
     );
 }

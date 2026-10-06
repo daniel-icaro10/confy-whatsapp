@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SessionGuard } from "@/components/dashboard/session-guard";
+import { RoleGuard } from "@/components/dashboard/role-guard";
 import {
     BarChart3,
     Clock,
@@ -149,9 +150,11 @@ interface AttendanceMetricsData {
 
 export default function AttendanceReportsPage() {
     return (
-        <SessionGuard>
-            <AttendanceReportsContent />
-        </SessionGuard>
+        <RoleGuard allowedRoles={["SUPERADMIN", "OWNER"]}>
+            <SessionGuard>
+                <AttendanceReportsContent />
+            </SessionGuard>
+        </RoleGuard>
     );
 }
 

@@ -38,6 +38,7 @@ import {
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { SessionGuard } from "@/components/dashboard/session-guard";
+import { RoleGuard } from "@/components/dashboard/role-guard";
 
 type AntiSpamPreset = "safe" | "broadcast" | "fast" | "custom";
 
@@ -249,7 +250,8 @@ export default function BotSettingsPage() {
     };
 
     return (
-        <SessionGuard>
+        <RoleGuard allowedRoles={["SUPERADMIN", "OWNER"]}>
+            <SessionGuard>
             <div className="space-y-6 max-w-5xl mx-auto pb-16">
                 {/* Header & Sticky Actions Bar */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl border border-[#222d34] bg-gradient-to-r from-[#182229] to-[#111b21] shadow-sm">
@@ -939,5 +941,6 @@ export default function BotSettingsPage() {
                 </Tabs>
             </div>
         </SessionGuard>
+        </RoleGuard>
     );
 }

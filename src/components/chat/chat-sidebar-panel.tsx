@@ -54,7 +54,8 @@ import {
     UserX,
     Wrench,
     Headphones,
-    Users
+    Users,
+    Kanban
 } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
@@ -535,6 +536,15 @@ export function ChatSidebarPanel({
                             <Trash2 className="h-3.5 w-3.5" />
                         </button>
                     </div>
+
+                    <a
+                        href="/dashboard/crm"
+                        className="w-full mt-2 h-8 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary flex items-center justify-center gap-1.5 text-xs font-semibold transition-colors border border-primary/20 cursor-pointer"
+                        title="Abrir no Funil de Vendas CRM"
+                    >
+                        <Kanban className="h-3.5 w-3.5" />
+                        Ver no Funil de Vendas (CRM)
+                    </a>
                 </div>
 
                 {/* 2. Section: Ações da conversa (Chatwoot style) */}

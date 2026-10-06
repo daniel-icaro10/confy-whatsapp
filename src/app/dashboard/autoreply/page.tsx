@@ -33,6 +33,7 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { getAutoReplies, createAutoReply, deleteAutoReply, updateAutoReply } from "./actions";
 import { SessionGuard } from "@/components/dashboard/session-guard";
+import { RoleGuard } from "@/components/dashboard/role-guard";
 
 interface AutoReply {
     id: string;
@@ -202,7 +203,8 @@ export default function AutoReplyPage() {
     };
 
     return (
-        <SessionGuard>
+        <RoleGuard allowedRoles={["SUPERADMIN", "OWNER"]}>
+            <SessionGuard>
             <div className="max-w-5xl space-y-6">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div>
@@ -475,5 +477,6 @@ export default function AutoReplyPage() {
             </Dialog>
         </div>
         </SessionGuard>
+        </RoleGuard>
     );
 }

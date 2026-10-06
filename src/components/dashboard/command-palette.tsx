@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import {
   Search,
   Command,
@@ -24,6 +25,10 @@ import {
   Building2,
   Clock,
   Sparkles,
+  Kanban,
+  Brain,
+  Globe,
+  Mail,
 } from "lucide-react";
 import { useTheme, AccentColor, ThemeMode } from "@/components/theme-provider";
 
@@ -34,6 +39,8 @@ interface CommandItem {
   icon: React.ElementType;
   kbd?: string;
   category: "Navegação" | "Tema & Estilo" | "Ações";
+  allowedRoles?: string[];
+  superadminOnly?: boolean;
   run: () => void;
 }
 
@@ -44,6 +51,8 @@ interface CommandPaletteProps {
 
 export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
   const router = useRouter();
+  const { data: session } = useSession();
+  const userRole = (session?.user as any)?.role || "STAFF";
   const { theme, setTheme, accent, setAccent, resolvedTheme } = useTheme();
   const [query, setQuery] = useState("");
   const [selectedIdx, setSelectedIdx] = useState(0);
@@ -75,6 +84,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       icon: LayoutDashboard,
       kbd: "G D",
       category: "Navegação",
+      allowedRoles: ["SUPERADMIN", "OWNER"],
       run: () => router.push("/dashboard"),
     },
     {
@@ -93,6 +103,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       icon: QrCode,
       kbd: "G S",
       category: "Navegação",
+      allowedRoles: ["SUPERADMIN", "OWNER"],
       run: () => router.push("/dashboard/sessions"),
     },
     {
@@ -110,7 +121,43 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       icon: Megaphone,
       kbd: "G B",
       category: "Navegação",
+      allowedRoles: ["SUPERADMIN", "OWNER"],
       run: () => router.push("/dashboard/broadcast"),
+    },
+    {
+      id: "nav-crm",
+      name: "Funil de Vendas (CRM)",
+      sub: "Kanban de oportunidades e Zapply Flow",
+      icon: Kanban,
+      category: "Navegação",
+      run: () => router.push("/dashboard/crm"),
+    },
+    {
+      id: "nav-ai-agent",
+      name: "Agente de IA & RAG",
+      sub: "Treinamento com documentos e assistente virtual",
+      icon: Brain,
+      category: "Navegação",
+      allowedRoles: ["SUPERADMIN", "OWNER"],
+      run: () => router.push("/dashboard/ai-agent"),
+    },
+    {
+      id: "nav-webchat",
+      name: "Widget de Webchat",
+      sub: "Chat flutuante para sites e landing pages",
+      icon: Globe,
+      category: "Navegação",
+      allowedRoles: ["SUPERADMIN", "OWNER"],
+      run: () => router.push("/dashboard/webchat"),
+    },
+    {
+      id: "nav-email",
+      name: "Campanhas de E-mail",
+      sub: "Disparos em lote e configuração SMTP",
+      icon: Mail,
+      category: "Navegação",
+      allowedRoles: ["SUPERADMIN", "OWNER"],
+      run: () => router.push("/dashboard/email-campaigns"),
     },
     {
       id: "nav-contacts",
@@ -142,6 +189,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       sub: "Inteligência e automações",
       icon: Bot,
       category: "Navegação",
+      allowedRoles: ["SUPERADMIN", "OWNER"],
       run: () => router.push("/dashboard/bot-settings"),
     },
     {
@@ -150,6 +198,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       sub: "Métricas de atendimento e CSAT",
       icon: BarChart3,
       category: "Navegação",
+      allowedRoles: ["SUPERADMIN", "OWNER"],
       run: () => router.push("/dashboard/attendance-reports"),
     },
     {
@@ -167,6 +216,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       icon: Sparkles,
       kbd: "G Y",
       category: "Navegação",
+      superadminOnly: true,
       run: () => router.push("/dashboard/design-system"),
     },
 
@@ -239,6 +289,8 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
   ];
 
   const filtered = items.filter((item) => {
+    if (item.superadminOnly && userRole !== "SUPERADMIN") return false;
+    if (item.allowedRoles && !item.allowedRoles.includes(userRole)) return false;
     if (!query) return true;
     const q = query.toLowerCase();
     return (

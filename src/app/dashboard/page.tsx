@@ -38,7 +38,12 @@ export default async function DashboardPage() {
         redirect("/login");
     }
 
-    const sessions = await getAccessibleSessions(session.user.id!, session.user.role || "OWNER");
+    const userRole = session.user.role || "OWNER";
+    if (userRole === "STAFF") {
+        redirect("/dashboard/chat");
+    }
+
+    const sessions = await getAccessibleSessions(session.user.id!, userRole);
 
     const totalSessions = sessions.length;
     const connectedSessions = sessions.filter(s => s.status === 'CONNECTED').length;

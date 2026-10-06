@@ -9,7 +9,7 @@ export const authConfig = {
             const isLoggedIn = !!auth?.user;
             const isOnDashboard = nextUrl.pathname.startsWith('/dashboard');
             const isDesignSystem = nextUrl.pathname.startsWith('/dashboard/design-system');
-            
+
             if (isOnDashboard && !isDesignSystem) {
                 if (isLoggedIn) return true;
                 return false; // Redirect unauthenticated users to login page

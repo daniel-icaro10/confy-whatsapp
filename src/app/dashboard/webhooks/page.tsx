@@ -30,6 +30,7 @@ import {
 } from "@/components/ui/dialog";
 
 import { SessionGuard } from "@/components/dashboard/session-guard";
+import { RoleGuard } from "@/components/dashboard/role-guard";
 import WebhookLogDialog from "@/components/dashboard/webhook-log-dialog";
 
 interface WebhookConfig {
@@ -342,7 +343,8 @@ export default function WebhooksPage() {
     };
 
     return (
-        <div className="space-y-6">
+        <RoleGuard allowedRoles={["SUPERADMIN", "OWNER"]}>
+            <div className="space-y-6">
             <div>
                 <h1 className="text-xl sm:text-2xl font-bold">Webhooks e API</h1>
             </div>
@@ -672,5 +674,6 @@ export default function WebhooksPage() {
                 />
             )}
         </div>
+        </RoleGuard>
     );
 }

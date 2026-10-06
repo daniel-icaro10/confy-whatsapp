@@ -30,6 +30,7 @@ import {
 import { toast } from "sonner";
 import { useSession } from "@/components/dashboard/session-provider";
 import { SessionGuard } from "@/components/dashboard/session-guard";
+import { RoleGuard } from "@/components/dashboard/role-guard";
 import { getAttendanceSettings, updateAttendanceSettings } from "@/app/dashboard/chat/actions";
 import { cn } from "@/lib/utils";
 
@@ -52,9 +53,11 @@ interface BusinessHourItem {
 
 export default function AttendanceSettingsPage() {
     return (
-        <SessionGuard>
-            <AttendanceSettingsContent />
-        </SessionGuard>
+        <RoleGuard allowedRoles={["SUPERADMIN", "OWNER"]}>
+            <SessionGuard>
+                <AttendanceSettingsContent />
+            </SessionGuard>
+        </RoleGuard>
     );
 }
 

@@ -1,8 +1,14 @@
 import { auth } from "@/lib/auth";
 import { SessionManager } from "@/components/dashboard/session-manager";
 
+import { redirect } from "next/navigation";
+
 export default async function SessionsPage() {
     const session = await auth();
+
+    if (!session?.user || session.user.role === "STAFF") {
+        redirect("/dashboard/chat");
+    }
 
     return (
         <div className="space-y-6 pb-8">
