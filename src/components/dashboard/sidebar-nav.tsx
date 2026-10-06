@@ -23,6 +23,7 @@ import {
   BarChart3,
   Zap,
   Clock,
+  Key,
 } from "lucide-react";
 import { useSidebar } from "./sidebar-context";
 import {
@@ -47,24 +48,56 @@ interface NavItem {
   badge?: string;
 }
 
-const navGroups: NavGroup[] = [
+// Menu exclusivo para o Super Administrador (Master da VPS & Empresas)
+const superadminNavGroups: NavGroup[] = [
+  {
+    label: "Painel Master",
+    items: [
+      { href: "/dashboard", label: "Visão Geral & VPS", icon: LayoutDashboard },
+      { href: "/dashboard/system-monitor", label: "Monitor da VPS", icon: Activity, badge: "Ao vivo" },
+    ],
+  },
+  {
+    label: "Gestão de Clientes",
+    items: [
+      { href: "/dashboard/companies", label: "Empresas Cadastradas", icon: Building2, badge: "Tenants" },
+    ],
+  },
+  {
+    label: "Desenvolvedor & API",
+    items: [
+      { href: "/dashboard/api-keys", label: "Chaves de API Master", icon: Key, badge: "API" },
+      { href: "/dashboard/api-docs", label: "Documentação da API", icon: Globe },
+    ],
+  },
+  {
+    label: "Plataforma",
+    items: [
+      { href: "/dashboard/settings", label: "Configurações Globais", icon: Settings },
+      { href: "/dashboard/design-system", label: "Design System", icon: Sparkles, badge: "Gr8r" },
+    ],
+  },
+];
+
+// Menu operacional para Empresas Clientes (OWNER) e seus Atendentes (STAFF)
+const tenantNavGroups: NavGroup[] = [
   {
     label: "Atendimento",
     items: [
       { href: "/dashboard/chat", label: "Conversas / Fila", icon: MessageSquare },
       { href: "/dashboard/quick-replies", label: "Respostas Rápidas", icon: Zap },
-      { href: "/dashboard/departments", label: "Setores & Filas", icon: Building2, allowedRoles: ["SUPERADMIN", "OWNER"] },
-      { href: "/dashboard/attendance-settings", label: "Horários & CSAT", icon: Clock, allowedRoles: ["SUPERADMIN", "OWNER"] },
-      { href: "/dashboard/attendance-reports", label: "Relatórios & Análises", icon: BarChart3, allowedRoles: ["SUPERADMIN", "OWNER"] },
+      { href: "/dashboard/departments", label: "Setores & Filas", icon: Building2, allowedRoles: ["OWNER"] },
+      { href: "/dashboard/attendance-settings", label: "Horários & CSAT", icon: Clock, allowedRoles: ["OWNER"] },
+      { href: "/dashboard/attendance-reports", label: "Relatórios & Análises", icon: BarChart3, allowedRoles: ["OWNER"] },
     ],
   },
   {
     label: "WhatsApp & Marketing",
     items: [
-      { href: "/dashboard", label: "Painel Geral", icon: LayoutDashboard, allowedRoles: ["SUPERADMIN", "OWNER"] },
-      { href: "/dashboard/sessions", label: "Sessões / QR Code", icon: QrCode, allowedRoles: ["SUPERADMIN", "OWNER"] },
-      { href: "/dashboard/broadcast", label: "Disparos em Massa", icon: Megaphone, allowedRoles: ["SUPERADMIN", "OWNER"] },
-      { href: "/dashboard/email-campaigns", label: "Campanhas de E-mail", icon: Mail, badge: "Novo", allowedRoles: ["SUPERADMIN", "OWNER"] },
+      { href: "/dashboard", label: "Painel Geral", icon: LayoutDashboard, allowedRoles: ["OWNER"] },
+      { href: "/dashboard/sessions", label: "Sessões / QR Code", icon: QrCode, allowedRoles: ["OWNER"] },
+      { href: "/dashboard/broadcast", label: "Disparos em Massa", icon: Megaphone, allowedRoles: ["OWNER"] },
+      { href: "/dashboard/email-campaigns", label: "Campanhas de E-mail", icon: Mail, badge: "Novo", allowedRoles: ["OWNER"] },
     ],
   },
   {
@@ -79,21 +112,19 @@ const navGroups: NavGroup[] = [
   {
     label: "Automação & IA",
     items: [
-      { href: "/dashboard/ai-agent", label: "Agente de IA & RAG", icon: Brain, badge: "IA", allowedRoles: ["SUPERADMIN", "OWNER"] },
-      { href: "/dashboard/webchat", label: "Widget de Webchat", icon: Globe, allowedRoles: ["SUPERADMIN", "OWNER"] },
-      { href: "/dashboard/bot-settings", label: "Configurações do Bot", icon: Bot, allowedRoles: ["SUPERADMIN", "OWNER"] },
-      { href: "/dashboard/autoreply", label: "Gatilhos Automáticos", icon: MessageCircleReply, allowedRoles: ["SUPERADMIN", "OWNER"] },
-      { href: "/dashboard/webhooks", label: "Webhooks e APIs", icon: Webhook, allowedRoles: ["SUPERADMIN", "OWNER"] },
+      { href: "/dashboard/ai-agent", label: "Agente de IA & RAG", icon: Brain, badge: "IA", allowedRoles: ["OWNER"] },
+      { href: "/dashboard/webchat", label: "Widget de Webchat", icon: Globe, allowedRoles: ["OWNER"] },
+      { href: "/dashboard/bot-settings", label: "Configurações do Bot", icon: Bot, allowedRoles: ["OWNER"] },
+      { href: "/dashboard/autoreply", label: "Gatilhos Automáticos", icon: MessageCircleReply, allowedRoles: ["OWNER"] },
+      { href: "/dashboard/webhooks", label: "Webhooks e APIs", icon: Webhook, allowedRoles: ["OWNER"] },
     ],
   },
   {
     label: "Administração",
     items: [
-      { href: "/dashboard/users", label: "Atendentes & Equipe", icon: Users, superadminOnly: true },
-      { href: "/dashboard/sessions/access", label: "Permissões de Sessão", icon: UserPlus, allowedRoles: ["SUPERADMIN", "OWNER"] },
-      { href: "/dashboard/settings", label: "Configurações Gerais", icon: Settings },
-      { href: "/dashboard/system-monitor", label: "Monitor do Sistema", icon: Activity, superadminOnly: true },
-      { href: "/dashboard/design-system", label: "Design System", icon: Sparkles, badge: "Gr8r", superadminOnly: true },
+      { href: "/dashboard/users", label: "Atendentes & Equipe", icon: Users, allowedRoles: ["OWNER"] },
+      { href: "/dashboard/sessions/access", label: "Permissões de Sessão", icon: UserPlus, allowedRoles: ["OWNER"] },
+      { href: "/dashboard/settings", label: "Configurações da Conta", icon: Settings },
     ],
   },
 ];
@@ -104,6 +135,8 @@ export function SidebarNav() {
   const { isCollapsed, toggleCollapse } = useSidebar();
   // @ts-ignore
   const userRole = session?.user?.role;
+
+  const currentNavGroups = userRole === "SUPERADMIN" ? superadminNavGroups : tenantNavGroups;
 
   const [collapsedGroups, setCollapsedGroups] = useState<Record<string, boolean>>({});
 
@@ -119,7 +152,7 @@ export function SidebarNav() {
   return (
     <TooltipProvider delayDuration={0}>
       <nav className="flex-1 px-2 py-1.5 overflow-y-auto overflow-x-hidden space-y-1 styled-scrollbar">
-        {navGroups.map((group) => {
+        {currentNavGroups.map((group) => {
           const visibleItems = group.items.filter((item) => {
             if (item.superadminOnly && userRole !== "SUPERADMIN") return false;
             if (item.allowedRoles && (!userRole || !item.allowedRoles.includes(userRole))) return false;

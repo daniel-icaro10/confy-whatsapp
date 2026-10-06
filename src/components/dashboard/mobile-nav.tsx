@@ -23,6 +23,7 @@ import {
   BarChart3,
   Zap,
   Clock,
+  Key,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
@@ -40,23 +41,53 @@ interface NavGroup {
   }[];
 }
 
-const navGroups: NavGroup[] = [
+const superadminNavGroups: NavGroup[] = [
+  {
+    label: "Painel Master",
+    items: [
+      { href: "/dashboard", label: "Visão Geral & VPS", icon: LayoutDashboard },
+      { href: "/dashboard/system-monitor", label: "Monitor da VPS", icon: Activity },
+    ],
+  },
+  {
+    label: "Gestão de Clientes",
+    items: [
+      { href: "/dashboard/companies", label: "Empresas Cadastradas", icon: Building2 },
+    ],
+  },
+  {
+    label: "Desenvolvedor & API",
+    items: [
+      { href: "/dashboard/api-keys", label: "Chaves de API Master", icon: Key },
+      { href: "/dashboard/api-docs", label: "Documentação da API", icon: Webhook },
+    ],
+  },
+  {
+    label: "Plataforma",
+    items: [
+      { href: "/dashboard/settings", label: "Configurações Globais", icon: Settings },
+      { href: "/dashboard/design-system", label: "Design System", icon: Sparkles },
+    ],
+  },
+];
+
+const tenantNavGroups: NavGroup[] = [
   {
     label: "Atendimento",
     items: [
       { href: "/dashboard/chat", label: "Conversas / Fila", icon: MessageSquare },
       { href: "/dashboard/quick-replies", label: "Respostas Rápidas", icon: Zap },
-      { href: "/dashboard/departments", label: "Setores & Filas", icon: Building2, allowedRoles: ["SUPERADMIN", "OWNER"] },
-      { href: "/dashboard/attendance-settings", label: "Horários & CSAT", icon: Clock, allowedRoles: ["SUPERADMIN", "OWNER"] },
-      { href: "/dashboard/attendance-reports", label: "Relatórios & Análises", icon: BarChart3, allowedRoles: ["SUPERADMIN", "OWNER"] },
+      { href: "/dashboard/departments", label: "Setores & Filas", icon: Building2, allowedRoles: ["OWNER"] },
+      { href: "/dashboard/attendance-settings", label: "Horários & CSAT", icon: Clock, allowedRoles: ["OWNER"] },
+      { href: "/dashboard/attendance-reports", label: "Relatórios & Análises", icon: BarChart3, allowedRoles: ["OWNER"] },
     ],
   },
   {
     label: "WhatsApp",
     items: [
-      { href: "/dashboard", label: "Painel Geral", icon: LayoutDashboard, allowedRoles: ["SUPERADMIN", "OWNER"] },
-      { href: "/dashboard/sessions", label: "Sessões / QR Code", icon: QrCode, allowedRoles: ["SUPERADMIN", "OWNER"] },
-      { href: "/dashboard/broadcast", label: "Disparos em Massa", icon: Megaphone, allowedRoles: ["SUPERADMIN", "OWNER"] },
+      { href: "/dashboard", label: "Painel Geral", icon: LayoutDashboard, allowedRoles: ["OWNER"] },
+      { href: "/dashboard/sessions", label: "Sessões / QR Code", icon: QrCode, allowedRoles: ["OWNER"] },
+      { href: "/dashboard/broadcast", label: "Disparos em Massa", icon: Megaphone, allowedRoles: ["OWNER"] },
     ],
   },
   {
@@ -70,19 +101,17 @@ const navGroups: NavGroup[] = [
   {
     label: "Automação",
     items: [
-      { href: "/dashboard/bot-settings", label: "Configurações do Bot", icon: Bot, allowedRoles: ["SUPERADMIN", "OWNER"] },
-      { href: "/dashboard/autoreply", label: "Gatilhos Automáticos", icon: MessageCircleReply, allowedRoles: ["SUPERADMIN", "OWNER"] },
-      { href: "/dashboard/webhooks", label: "Webhooks e APIs", icon: Webhook, allowedRoles: ["SUPERADMIN", "OWNER"] },
+      { href: "/dashboard/bot-settings", label: "Configurações do Bot", icon: Bot, allowedRoles: ["OWNER"] },
+      { href: "/dashboard/autoreply", label: "Gatilhos Automáticos", icon: MessageCircleReply, allowedRoles: ["OWNER"] },
+      { href: "/dashboard/webhooks", label: "Webhooks e APIs", icon: Webhook, allowedRoles: ["OWNER"] },
     ],
   },
   {
     label: "Administração",
     items: [
-      { href: "/dashboard/users", label: "Atendentes & Equipe", icon: Users, superadminOnly: true },
-      { href: "/dashboard/sessions/access", label: "Permissões de Sessão", icon: UserPlus, allowedRoles: ["SUPERADMIN", "OWNER"] },
-      { href: "/dashboard/settings", label: "Configurações Gerais", icon: Settings },
-      { href: "/dashboard/system-monitor", label: "Monitor do Sistema", icon: Activity, superadminOnly: true },
-      { href: "/dashboard/design-system", label: "Design System", icon: Sparkles },
+      { href: "/dashboard/users", label: "Atendentes & Equipe", icon: Users, allowedRoles: ["OWNER"] },
+      { href: "/dashboard/sessions/access", label: "Permissões de Sessão", icon: UserPlus, allowedRoles: ["OWNER"] },
+      { href: "/dashboard/settings", label: "Configurações da Conta", icon: Settings },
     ],
   },
 ];
@@ -93,6 +122,8 @@ export function MobileNav({ appName = "Confy WhatsApp" }: { appName?: string }) 
   const { data: session } = useSession();
   // @ts-ignore
   const userRole = session?.user?.role;
+
+  const currentNavGroups = userRole === "SUPERADMIN" ? superadminNavGroups : tenantNavGroups;
 
   const isActive = (href: string) => {
     if (href === "/dashboard") return pathname === "/dashboard";
@@ -133,7 +164,7 @@ export function MobileNav({ appName = "Confy WhatsApp" }: { appName?: string }) 
         </SheetHeader>
 
         <nav className="flex-1 px-2 py-2 overflow-y-auto space-y-1 styled-scrollbar">
-          {navGroups.map((group) => {
+          {currentNavGroups.map((group) => {
             const visibleItems = group.items.filter((item) => {
               if (item.superadminOnly && userRole !== "SUPERADMIN") return false;
               if (item.allowedRoles && (!userRole || !item.allowedRoles.includes(userRole))) return false;

@@ -46,10 +46,10 @@ export function RoleGuard({
                 </div>
 
                 <div className="flex gap-2">
-                    <Link href="/dashboard/chat">
+                    <Link href={userRole === "SUPERADMIN" ? "/dashboard" : "/dashboard/chat"}>
                         <Button className="gap-2 text-xs" size="sm">
-                            <MessageSquare className="h-4 w-4" />
-                            Ir para o Atendimento / Chat
+                            <ArrowLeft className="h-4 w-4" />
+                            {userRole === "SUPERADMIN" ? "Voltar ao Painel Master" : "Ir para o Atendimento / Chat"}
                         </Button>
                     </Link>
                 </div>

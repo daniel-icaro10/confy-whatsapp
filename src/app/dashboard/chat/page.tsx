@@ -1,4 +1,5 @@
 import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
 import { ChatInterface } from "@/components/chat/chat-interface";
 import { ChatLayoutClient } from "@/components/chat/chat-layout-client";
 import { cookies } from "next/headers";
@@ -7,7 +8,10 @@ import { SessionGuard } from "@/components/dashboard/session-guard";
 
 export default async function ChatPage() {
     const session = await auth();
-    console.log("ChatPage Session (Role debug):", session?.user?.role);
+
+    if (session?.user?.role === "SUPERADMIN") {
+        redirect("/dashboard");
+    }
 
     if (!session?.user?.id) return <div>Não autorizado</div>;
 

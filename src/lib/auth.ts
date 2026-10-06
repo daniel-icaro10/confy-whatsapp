@@ -24,6 +24,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           const user = await prisma.user.findUnique({ where: { email } });
           if (!user) return null;
 
+          if (user.isActive === false) {
+            throw new Error("Sua conta ou empresa foi desativada pelo administrador.");
+          }
+
           const passwordsMatch = await bcrypt.compare(password, user.password);
 
           if (passwordsMatch) {

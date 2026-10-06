@@ -5,7 +5,7 @@ import { MobileNav } from "@/components/dashboard/mobile-nav";
 import { SessionSelector } from "@/components/dashboard/session-selector";
 import { CommandPalette } from "@/components/dashboard/command-palette";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Bell, Inbox, Trash2, Search, Sun, Moon, Sparkles } from "lucide-react";
+import { Bell, Inbox, Trash2, Search, Sun, Moon, Sparkles, ShieldCheck } from "lucide-react";
 import { useRouter, usePathname } from "next/navigation";
 import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
@@ -30,6 +30,9 @@ interface Notification {
 
 const sectionNames: Record<string, string> = {
   "/dashboard": "Painel Geral",
+  "/dashboard/companies": "Empresas Cadastradas",
+  "/dashboard/api-keys": "Chaves de API Master",
+  "/dashboard/api-docs": "Documentação da API",
   "/dashboard/chat": "Conversas / Fila",
   "/dashboard/sessions": "Sessões / QR Code",
   "/dashboard/broadcast": "Disparos em Massa",
@@ -193,7 +196,14 @@ export function Navbar({ appName = "Confy WhatsApp" }: NavbarProps) {
 
         {/* Right: Session Selector, Theme Switcher, Notifications */}
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-          <SessionSelector />
+          {(session?.user as any)?.role === "SUPERADMIN" ? (
+            <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/10 border border-primary/20 text-[11px] font-semibold text-primary">
+              <ShieldCheck className="w-3.5 h-3.5 text-primary" />
+              <span>Painel Master</span>
+            </div>
+          ) : (
+            <SessionSelector />
+          )}
 
           <div className="h-4 w-px bg-[var(--border)] mx-1 hidden sm:block" />
 

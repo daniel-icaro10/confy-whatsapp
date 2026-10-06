@@ -29,6 +29,7 @@ import {
   Brain,
   Globe,
   Mail,
+  Key,
 } from "lucide-react";
 import { useTheme, AccentColor, ThemeMode } from "@/components/theme-provider";
 
@@ -41,6 +42,7 @@ interface CommandItem {
   category: "Navegação" | "Tema & Estilo" | "Ações";
   allowedRoles?: string[];
   superadminOnly?: boolean;
+  tenantOnly?: boolean;
   run: () => void;
 }
 
@@ -87,6 +89,39 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       allowedRoles: ["SUPERADMIN", "OWNER"],
       run: () => router.push("/dashboard"),
     },
+    // Superadmin Specific Navigation
+    {
+      id: "nav-companies",
+      name: "Empresas Cadastradas",
+      sub: "Gerenciar clientes, planos e limites de instâncias",
+      icon: Building2,
+      kbd: "G E",
+      category: "Navegação",
+      superadminOnly: true,
+      run: () => router.push("/dashboard/companies"),
+    },
+    {
+      id: "nav-api-keys",
+      name: "Chaves de API Master",
+      sub: "Geração de tokens e integração REST",
+      icon: Key,
+      kbd: "G K",
+      category: "Navegação",
+      superadminOnly: true,
+      run: () => router.push("/dashboard/api-keys"),
+    },
+    {
+      id: "nav-vps-monitor",
+      name: "Monitor da VPS",
+      sub: "CPU, Memória, Disco e Uptime em tempo real",
+      icon: Activity,
+      kbd: "G M",
+      category: "Navegação",
+      superadminOnly: true,
+      run: () => router.push("/dashboard/system-monitor"),
+    },
+
+    // Operational Items (Tenants / Staff)
     {
       id: "nav-chat",
       name: "Conversas / Fila",
@@ -94,6 +129,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       icon: MessageSquare,
       kbd: "G C",
       category: "Navegação",
+      tenantOnly: true,
       run: () => router.push("/dashboard/chat"),
     },
     {
@@ -103,7 +139,8 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       icon: QrCode,
       kbd: "G S",
       category: "Navegação",
-      allowedRoles: ["SUPERADMIN", "OWNER"],
+      tenantOnly: true,
+      allowedRoles: ["OWNER"],
       run: () => router.push("/dashboard/sessions"),
     },
     {
@@ -112,6 +149,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       sub: "Atalhos de texto e templates",
       icon: Zap,
       category: "Navegação",
+      tenantOnly: true,
       run: () => router.push("/dashboard/quick-replies"),
     },
     {
@@ -121,7 +159,8 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       icon: Megaphone,
       kbd: "G B",
       category: "Navegação",
-      allowedRoles: ["SUPERADMIN", "OWNER"],
+      tenantOnly: true,
+      allowedRoles: ["OWNER"],
       run: () => router.push("/dashboard/broadcast"),
     },
     {
@@ -130,6 +169,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       sub: "Kanban de oportunidades e Zapply Flow",
       icon: Kanban,
       category: "Navegação",
+      tenantOnly: true,
       run: () => router.push("/dashboard/crm"),
     },
     {
@@ -138,7 +178,8 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       sub: "Treinamento com documentos e assistente virtual",
       icon: Brain,
       category: "Navegação",
-      allowedRoles: ["SUPERADMIN", "OWNER"],
+      tenantOnly: true,
+      allowedRoles: ["OWNER"],
       run: () => router.push("/dashboard/ai-agent"),
     },
     {
@@ -147,7 +188,8 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       sub: "Chat flutuante para sites e landing pages",
       icon: Globe,
       category: "Navegação",
-      allowedRoles: ["SUPERADMIN", "OWNER"],
+      tenantOnly: true,
+      allowedRoles: ["OWNER"],
       run: () => router.push("/dashboard/webchat"),
     },
     {
@@ -156,7 +198,8 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       sub: "Disparos em lote e configuração SMTP",
       icon: Mail,
       category: "Navegação",
-      allowedRoles: ["SUPERADMIN", "OWNER"],
+      tenantOnly: true,
+      allowedRoles: ["OWNER"],
       run: () => router.push("/dashboard/email-campaigns"),
     },
     {
@@ -165,6 +208,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       sub: "Base de contatos e CRM",
       icon: UserCheck,
       category: "Navegação",
+      tenantOnly: true,
       run: () => router.push("/dashboard/contacts"),
     },
     {
@@ -173,6 +217,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       sub: "Listagem e participantes",
       icon: Users,
       category: "Navegação",
+      tenantOnly: true,
       run: () => router.push("/dashboard/groups"),
     },
     {
@@ -181,6 +226,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       sub: "Tags e categorização",
       icon: Tag,
       category: "Navegação",
+      tenantOnly: true,
       run: () => router.push("/dashboard/labels"),
     },
     {
@@ -189,7 +235,8 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       sub: "Inteligência e automações",
       icon: Bot,
       category: "Navegação",
-      allowedRoles: ["SUPERADMIN", "OWNER"],
+      tenantOnly: true,
+      allowedRoles: ["OWNER"],
       run: () => router.push("/dashboard/bot-settings"),
     },
     {
@@ -198,7 +245,8 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       sub: "Métricas de atendimento e CSAT",
       icon: BarChart3,
       category: "Navegação",
-      allowedRoles: ["SUPERADMIN", "OWNER"],
+      tenantOnly: true,
+      allowedRoles: ["OWNER"],
       run: () => router.push("/dashboard/attendance-reports"),
     },
     {
@@ -290,6 +338,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
 
   const filtered = items.filter((item) => {
     if (item.superadminOnly && userRole !== "SUPERADMIN") return false;
+    if (userRole === "SUPERADMIN" && item.tenantOnly) return false;
     if (item.allowedRoles && !item.allowedRoles.includes(userRole)) return false;
     if (!query) return true;
     const q = query.toLowerCase();

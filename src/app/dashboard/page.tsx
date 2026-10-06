@@ -32,6 +32,8 @@ const STATUS_LABELS: Record<string, string> = {
     LOGGED_OUT: "Sessão encerrada",
 };
 
+import { SuperadminDashboard } from "@/components/dashboard/superadmin-dashboard";
+
 export default async function DashboardPage() {
     const session = await auth();
     if (!session?.user) {
@@ -41,6 +43,10 @@ export default async function DashboardPage() {
     const userRole = session.user.role || "OWNER";
     if (userRole === "STAFF") {
         redirect("/dashboard/chat");
+    }
+
+    if (userRole === "SUPERADMIN") {
+        return <SuperadminDashboard adminName={session.user.name} />;
     }
 
     const sessions = await getAccessibleSessions(session.user.id!, userRole);

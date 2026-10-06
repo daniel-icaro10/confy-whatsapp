@@ -36,17 +36,25 @@ enum MessageStatus {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  name      String?
-  email     String   @unique
-  password  String
-  role      Role     @default(OWNER)
-  apiKey    String?  @unique // API Key for authentication
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String   @id @default(cuid())
+  name        String?
+  email       String   @unique
+  password    String
+  role        Role     @default(OWNER)
+  apiKey      String?  @unique // API Key for authentication
+  companyName String?  // Nome da Empresa / Tenant
+  phone       String?  // WhatsApp / Telefone de Contato
+  document    String?  // CNPJ ou CPF
+  plan        String?  @default("PRO") // FREE, STARTER, PRO, ENTERPRISE
+  maxSessions Int?     @default(5)     // Limite de instâncias WhatsApp
+  isActive    Boolean  @default(true)  // Status: ativa ou bloqueada
+  notes       String?  @db.Text        // Observações internas do Superadmin
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
   
-  sessions  Session[]
-  webhooks  Webhook[]
+  apiKeys     ApiKey[]
+  sessions    Session[]
+  webhooks    Webhook[]
   notifications Notification[]
   sessionAccesses SessionAccess[]
   assignedTickets Ticket[]        @relation("AssignedTickets")
@@ -57,6 +65,20 @@ model User {
   assignedDeals   Deal[]          @relation("AssignedDeals")
   smtpSetting     SmtpSetting?
   emailCampaigns  EmailCampaign[]
+}
+
+model ApiKey {
+  id          String    @id @default(cuid())
+  name        String    // Identificador da chave, ex: "Integração SaaS", "Kiwify Webhook"
+  key         String    @unique
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lastUsedAt  DateTime?
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([userId])
 }
 
 model Session {

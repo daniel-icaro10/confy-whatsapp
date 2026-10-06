@@ -23,12 +23,41 @@ export async function validateApiKey(request: NextRequest) {
     }
 
     try {
-        const user = await prisma.user.findUnique({
-            where: { apiKey },
-            select: { id: true, email: true, name: true, role: true }
+        // 1. Check dedicated ApiKey table
+        const keyRecord = await (prisma as any).apiKey?.findUnique({
+            where: { key: apiKey },
+            include: { user: { select: { id: true, email: true, name: true, role: true, isActive: true } } }
         });
 
-        return user;
+        if (keyRecord && keyRecord.isActive && keyRecord.user?.isActive !== false) {
+            (prisma as any).apiKey?.update({
+                where: { id: keyRecord.id },
+                data: { lastUsedAt: new Date() }
+            }).catch(() => {});
+            return {
+                id: keyRecord.user.id,
+                email: keyRecord.user.email,
+                name: keyRecord.user.name,
+                role: keyRecord.user.role
+            };
+        }
+
+        // 2. Fallback to legacy User.apiKey
+        const user = await prisma.user.findUnique({
+            where: { apiKey },
+            select: { id: true, email: true, name: true, role: true, isActive: true }
+        });
+
+        if (user && user.isActive !== false) {
+            return {
+                id: user.id,
+                email: user.email,
+                name: user.name,
+                role: user.role
+            };
+        }
+
+        return null;
     } catch (error) {
         logger.error("Auth", "API key validation error:", error);
         return null;
