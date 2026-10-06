@@ -8,9 +8,11 @@ function Input({ className, type, ...props }: React.ComponentProps<"input">) {
       type={type}
       data-slot="input"
       className={cn(
-        "file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-        "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
-        "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+        "h-[30px] w-full min-w-0 rounded-[6px] border border-[var(--border-strong)] bg-[var(--surface)] px-2.5 py-1 text-[13px] text-[var(--text)] placeholder:text-[var(--text-3)] transition-[border-color,box-shadow] duration-150 outline-none",
+        "hover:border-[color-mix(in_srgb,var(--border-strong)_60%,var(--text-3))]",
+        "focus:border-[var(--accent)] focus:ring-[3px] focus:ring-[var(--accent-soft)]",
+        "disabled:bg-[var(--surface-2)] disabled:text-[var(--text-3)] disabled:cursor-not-allowed disabled:opacity-75",
+        "aria-invalid:border-[var(--red)] aria-invalid:ring-[3px] aria-invalid:ring-[var(--red-soft)]",
         className
       )}
       {...props}

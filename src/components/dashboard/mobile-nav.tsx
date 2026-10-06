@@ -3,189 +3,197 @@
 import { useState } from "react";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Menu, ChevronDown } from "lucide-react";
+import { Menu, LogOut, Sparkles } from "lucide-react";
 import Link from "next/link";
 import {
-    LayoutDashboard,
-    MessageSquare,
-    Users,
-    Settings,
-    LogOut,
-    QrCode,
-    Webhook,
-    Bot,
-    UserCheck,
-    Megaphone,
-    Activity,
-    Tag,
-    MessageCircleReply,
-    UserPlus,
-    Building2,
-    BarChart3,
-    Zap,
-    Clock
+  LayoutDashboard,
+  MessageSquare,
+  Users,
+  Settings,
+  QrCode,
+  Webhook,
+  Bot,
+  UserCheck,
+  Megaphone,
+  Activity,
+  Tag,
+  MessageCircleReply,
+  UserPlus,
+  Building2,
+  BarChart3,
+  Zap,
+  Clock,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import pkg from "../../../package.json";
 
 interface NavGroup {
+  label: string;
+  items: {
+    href: string;
     label: string;
-    items: {
-        href: string;
-        label: string;
-        icon: React.ElementType;
-        external?: boolean;
-        superadminOnly?: boolean;
-        allowedRoles?: string[];
-    }[];
+    icon: React.ElementType;
+    external?: boolean;
+    superadminOnly?: boolean;
+    allowedRoles?: string[];
+  }[];
 }
 
-// Keep in sync with sidebar-nav.tsx
 const navGroups: NavGroup[] = [
-    {
-        label: "Atendimento",
-        items: [
-            { href: "/dashboard/chat", label: "Conversas / Fila", icon: MessageSquare },
-            { href: "/dashboard/quick-replies", label: "Respostas Rápidas", icon: Zap },
-            { href: "/dashboard/departments", label: "Setores & Filas", icon: Building2, allowedRoles: ["SUPERADMIN", "OWNER"] },
-            { href: "/dashboard/attendance-settings", label: "Horários & CSAT", icon: Clock, allowedRoles: ["SUPERADMIN", "OWNER"] },
-            { href: "/dashboard/attendance-reports", label: "Relatórios & Análises", icon: BarChart3, allowedRoles: ["SUPERADMIN", "OWNER"] },
-        ],
-    },
-    {
-        label: "WhatsApp",
-        items: [
-            { href: "/dashboard", label: "Painel Geral", icon: LayoutDashboard, allowedRoles: ["SUPERADMIN", "OWNER"] },
-            { href: "/dashboard/sessions", label: "Sessões / QR Code", icon: QrCode, allowedRoles: ["SUPERADMIN", "OWNER"] },
-            { href: "/dashboard/broadcast", label: "Disparos em Massa", icon: Megaphone, allowedRoles: ["SUPERADMIN", "OWNER"] },
-        ],
-    },
-    {
-        label: "Contatos & CRM",
-        items: [
-            { href: "/dashboard/contacts", label: "Contatos", icon: UserCheck },
-            { href: "/dashboard/groups", label: "Grupos", icon: Users },
-            { href: "/dashboard/labels", label: "Etiquetas", icon: Tag },
-        ],
-    },
-    {
-        label: "Automação",
-        items: [
-            { href: "/dashboard/bot-settings", label: "Configurações do Bot", icon: Bot, allowedRoles: ["SUPERADMIN", "OWNER"] },
-            { href: "/dashboard/autoreply", label: "Gatilhos de Palavras-Chave", icon: MessageCircleReply, allowedRoles: ["SUPERADMIN", "OWNER"] },
-            { href: "/dashboard/webhooks", label: "Webhooks e Integrações", icon: Webhook, allowedRoles: ["SUPERADMIN", "OWNER"] },
-        ],
-    },
-    {
-        label: "Administração",
-        items: [
-            { href: "/dashboard/users", label: "Atendentes & Equipe", icon: Users, superadminOnly: true },
-            { href: "/dashboard/sessions/access", label: "Permissões de Sessão", icon: UserPlus, allowedRoles: ["SUPERADMIN", "OWNER"] },
-            { href: "/dashboard/settings", label: "Configurações Gerais", icon: Settings },
-            { href: "/dashboard/system-monitor", label: "Monitor do Sistema", icon: Activity, superadminOnly: true },
-        ],
-    },
+  {
+    label: "Atendimento",
+    items: [
+      { href: "/dashboard/chat", label: "Conversas / Fila", icon: MessageSquare },
+      { href: "/dashboard/quick-replies", label: "Respostas Rápidas", icon: Zap },
+      { href: "/dashboard/departments", label: "Setores & Filas", icon: Building2, allowedRoles: ["SUPERADMIN", "OWNER"] },
+      { href: "/dashboard/attendance-settings", label: "Horários & CSAT", icon: Clock, allowedRoles: ["SUPERADMIN", "OWNER"] },
+      { href: "/dashboard/attendance-reports", label: "Relatórios & Análises", icon: BarChart3, allowedRoles: ["SUPERADMIN", "OWNER"] },
+    ],
+  },
+  {
+    label: "WhatsApp",
+    items: [
+      { href: "/dashboard", label: "Painel Geral", icon: LayoutDashboard, allowedRoles: ["SUPERADMIN", "OWNER"] },
+      { href: "/dashboard/sessions", label: "Sessões / QR Code", icon: QrCode, allowedRoles: ["SUPERADMIN", "OWNER"] },
+      { href: "/dashboard/broadcast", label: "Disparos em Massa", icon: Megaphone, allowedRoles: ["SUPERADMIN", "OWNER"] },
+    ],
+  },
+  {
+    label: "Contatos & CRM",
+    items: [
+      { href: "/dashboard/contacts", label: "Contatos", icon: UserCheck },
+      { href: "/dashboard/groups", label: "Grupos", icon: Users },
+      { href: "/dashboard/labels", label: "Etiquetas", icon: Tag },
+    ],
+  },
+  {
+    label: "Automação",
+    items: [
+      { href: "/dashboard/bot-settings", label: "Configurações do Bot", icon: Bot, allowedRoles: ["SUPERADMIN", "OWNER"] },
+      { href: "/dashboard/autoreply", label: "Gatilhos Automáticos", icon: MessageCircleReply, allowedRoles: ["SUPERADMIN", "OWNER"] },
+      { href: "/dashboard/webhooks", label: "Webhooks e APIs", icon: Webhook, allowedRoles: ["SUPERADMIN", "OWNER"] },
+    ],
+  },
+  {
+    label: "Administração",
+    items: [
+      { href: "/dashboard/users", label: "Atendentes & Equipe", icon: Users, superadminOnly: true },
+      { href: "/dashboard/sessions/access", label: "Permissões de Sessão", icon: UserPlus, allowedRoles: ["SUPERADMIN", "OWNER"] },
+      { href: "/dashboard/settings", label: "Configurações Gerais", icon: Settings },
+      { href: "/dashboard/system-monitor", label: "Monitor do Sistema", icon: Activity, superadminOnly: true },
+      { href: "/dashboard/design-system", label: "Design System", icon: Sparkles },
+    ],
+  },
 ];
 
 export function MobileNav({ appName = "Confy WhatsApp" }: { appName?: string }) {
-    const [open, setOpen] = useState(false);
-    const pathname = usePathname();
-    const { data: session } = useSession();
-    // @ts-ignore
-    const userRole = session?.user?.role;
+  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const { data: session } = useSession();
+  // @ts-ignore
+  const userRole = session?.user?.role;
 
-    const isActive = (href: string) => {
-        if (href === "/dashboard") return pathname === "/dashboard";
-        return pathname.startsWith(href);
-    };
+  const isActive = (href: string) => {
+    if (href === "/dashboard") return pathname === "/dashboard";
+    return pathname.startsWith(href);
+  };
 
-    return (
-        <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="md:hidden">
-                    <Menu className="h-5 w-5" />
-                </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="w-[85vw] sm:w-[320px] p-0 flex flex-col">
-                <SheetHeader className="px-5 py-4 text-left border-b border-slate-100">
-                    <SheetTitle className="text-xl font-bold text-slate-800">{appName}</SheetTitle>
-                    <SheetDescription className="text-[11px] text-slate-400 -mt-1">Gateway de WhatsApp</SheetDescription>
-                </SheetHeader>
+  return (
+    <Sheet open={open} onOpenChange={setOpen}>
+      <SheetTrigger asChild>
+        <button
+          type="button"
+          className="ibtn ibtn-sm md:hidden text-[var(--text-2)]"
+          aria-label="Abrir menu"
+        >
+          <Menu size={16} />
+        </button>
+      </SheetTrigger>
+      <SheetContent side="left" className="w-[85vw] sm:w-[300px] p-0 flex flex-col bg-[var(--bg-side)] border-r border-[var(--border)]">
+        <SheetHeader className="px-4 py-3 text-left border-b border-[var(--border)] bg-[var(--surface)]">
+          <div className="flex items-center gap-2">
+            <div
+              className="ws-logo"
+              style={{
+                width: "22px",
+                height: "22px",
+                borderRadius: "6px",
+                background: "var(--accent)",
+                color: "var(--on-accent)",
+                fontSize: "11px",
+                fontWeight: 600,
+              }}
+            >
+              {appName.charAt(0)}
+            </div>
+            <SheetTitle className="text-[14px] font-semibold text-[var(--text)]">{appName}</SheetTitle>
+          </div>
+          <SheetDescription className="text-[11px] text-[var(--text-3)]">Gateway de WhatsApp</SheetDescription>
+        </SheetHeader>
 
-                <nav className="flex-1 px-3 py-3 overflow-y-auto space-y-1">
-                    {navGroups.map((group) => {
-                        const visibleItems = group.items.filter((item) => {
-                            if (item.superadminOnly && userRole !== "SUPERADMIN") return false;
-                            if (item.allowedRoles && (!userRole || !item.allowedRoles.includes(userRole))) return false;
-                            return true;
-                        });
-                        if (visibleItems.length === 0) return null;
+        <nav className="flex-1 px-2 py-2 overflow-y-auto space-y-1 styled-scrollbar">
+          {navGroups.map((group) => {
+            const visibleItems = group.items.filter((item) => {
+              if (item.superadminOnly && userRole !== "SUPERADMIN") return false;
+              if (item.allowedRoles && (!userRole || !item.allowedRoles.includes(userRole))) return false;
+              return true;
+            });
+            if (visibleItems.length === 0) return null;
 
-                        return (
-                            <div key={group.label} className="mb-1">
-                                {group.label !== "Main" && (
-                                    <p className="px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
-                                        {group.label}
-                                    </p>
-                                )}
-                                <div className="space-y-0.5">
-                                    {visibleItems.map(({ href, label, icon: Icon, external }) => (
-                                        <Link
-                                            key={href}
-                                            href={href}
-                                            target={external ? "_blank" : undefined}
-                                            onClick={() => setOpen(false)}
-                                            className={`
-                                                flex items-center rounded-lg text-sm font-medium
-                                                transition-all duration-200 group relative
-                                                gap-3 px-3 py-2
-                                                ${isActive(href)
-                                                    ? "text-primary bg-primary/10 shadow-sm"
-                                                    : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
-                                                }
-                                            `}
-                                        >
-                                            {isActive(href) && (
-                                                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-6 bg-primary rounded-r-full" />
-                                            )}
-                                            <Icon
-                                                size={17}
-                                                className={`flex-shrink-0 transition-colors duration-200 ${isActive(href) ? "text-primary" : "text-muted-foreground/70 group-hover:text-foreground"}`}
-                                            />
-                                            <span className="truncate">{label}</span>
-                                        </Link>
-                                    ))}
-                                </div>
-                            </div>
-                        );
-                    })}
-                </nav>
-
-                <div className="p-4 border-t border-slate-100 bg-slate-50/50">
-                    <div className="flex items-center gap-3 mb-3">
-                        <div className="h-8 w-8 rounded-full bg-slate-200 flex items-center justify-center text-xs font-semibold text-slate-600">
-                            {session?.user?.name?.charAt(0)?.toUpperCase() || "U"}
-                        </div>
-                        <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium text-slate-700 truncate">{session?.user?.name || "Usuário"}</p>
-                            <p className="text-[11px] text-slate-400 truncate">{session?.user?.email}</p>
-                        </div>
-                    </div>
-                    <Button
-                        variant="outline"
-                        size="sm"
-                        className="w-full flex items-center justify-center gap-2 text-xs h-8"
-                        onClick={async () => {
-                            setOpen(false);
-                            await signOut({ callbackUrl: "/auth/login" });
-                        }}
+            return (
+              <div key={group.label} className="sgroup">
+                <p className="sgroup-h">
+                  {group.label}
+                </p>
+                <div className="space-y-0.5">
+                  {visibleItems.map(({ href, label, icon: Icon, external }) => (
+                    <Link
+                      key={href}
+                      href={href}
+                      target={external ? "_blank" : undefined}
+                      onClick={() => setOpen(false)}
+                      className={`sitem ${isActive(href) ? "on" : ""}`}
                     >
-                        <LogOut size={14} /> Sair
-                    </Button>
-                    <p className="text-[10px] text-slate-300 text-center mt-2 font-mono">v{pkg.version}</p>
+                      <span className="pico" style={{ "--c": "var(--accent)" } as React.CSSProperties}>
+                        <Icon size={13} className="i" />
+                      </span>
+                      <span className="truncate">{label}</span>
+                    </Link>
+                  ))}
                 </div>
-            </SheetContent>
-        </Sheet>
-    );
+              </div>
+            );
+          })}
+        </nav>
+
+        <div className="p-3 border-t border-[var(--border)] bg-[var(--surface-2)]">
+          <div className="flex items-center gap-2.5 mb-2.5 px-1">
+            <div
+              className="av md"
+              style={{ "--c": "var(--accent)" } as React.CSSProperties}
+            >
+              {session?.user?.name?.charAt(0)?.toUpperCase() || "U"}
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-[12.5px] font-medium text-[var(--text)] truncate">{session?.user?.name || "Usuário"}</p>
+              <p className="text-[11px] text-[var(--text-3)] truncate">{session?.user?.email}</p>
+            </div>
+          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            className="w-full flex items-center justify-center gap-2 text-xs"
+            onClick={async () => {
+              setOpen(false);
+              await signOut({ callbackUrl: "/auth/login" });
+            }}
+          >
+            <LogOut size={13} /> Sair
+          </Button>
+          <p className="text-[10px] text-[var(--text-4)] text-center mt-2 mono">v{pkg.version}</p>
+        </div>
+      </SheetContent>
+    </Sheet>
+  );
 }

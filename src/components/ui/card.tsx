@@ -7,7 +7,7 @@ function Card({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="card"
       className={cn(
-        "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm",
+        "bg-[var(--surface)] text-[var(--text)] flex flex-col rounded-[10px] border border-[var(--border)] shadow-[var(--shadow-card)] transition-[border-color,box-shadow] duration-150",
         className
       )}
       suppressHydrationWarning={true}
@@ -21,7 +21,7 @@ function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="card-header"
       className={cn(
-        "@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-2 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6",
+        "flex flex-col gap-1.5 p-4 sm:p-5 [.border-b]:border-[var(--border)]",
         className
       )}
       suppressHydrationWarning={true}
@@ -34,7 +34,7 @@ function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-title"
-      className={cn("leading-none font-semibold", className)}
+      className={cn("text-[14.5px] font-semibold tracking-[-0.01em] text-[var(--text)] leading-snug", className)}
       suppressHydrationWarning={true}
       {...props}
     />
@@ -45,7 +45,7 @@ function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-description"
-      className={cn("text-muted-foreground text-sm", className)}
+      className={cn("text-[12.5px] text-[var(--text-2)] leading-normal", className)}
       suppressHydrationWarning={true}
       {...props}
     />
@@ -57,10 +57,9 @@ function CardAction({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="card-action"
       className={cn(
-        "col-start-2 row-span-2 row-start-1 self-start justify-self-end",
+        "ml-auto flex items-center gap-2",
         className
       )}
-      suppressHydrationWarning={true}
       {...props}
     />
   )
@@ -70,7 +69,7 @@ function CardContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-content"
-      className={cn("px-6", className)}
+      className={cn("p-4 sm:p-5 pt-0", className)}
       suppressHydrationWarning={true}
       {...props}
     />
@@ -81,7 +80,7 @@ function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-footer"
-      className={cn("flex items-center px-6 [.border-t]:pt-6", className)}
+      className={cn("flex items-center p-4 sm:p-5 pt-0 border-t border-[var(--divider)] mt-2", className)}
       suppressHydrationWarning={true}
       {...props}
     />

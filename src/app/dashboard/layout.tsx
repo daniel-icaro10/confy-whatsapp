@@ -17,7 +17,12 @@ export default async function DashboardLayout({
 }) {
     const session = await auth();
     // @ts-ignore
-    const systemConfig = await prisma.systemConfig.findUnique({ where: { id: "default" } });
+    let systemConfig = null;
+    try {
+        systemConfig = await prisma.systemConfig.findUnique({ where: { id: "default" } });
+    } catch {
+        // Database connection fallback
+    }
     const appName = (systemConfig?.appName && systemConfig.appName !== "WA-AKG") ? systemConfig.appName : (process.env.APP_NAME || "Confy WhatsApp");
     const registrationEnabled = systemConfig?.enableRegistration ?? true;
 

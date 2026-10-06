@@ -2,94 +2,146 @@
 
 import { SidebarNav } from "./sidebar-nav";
 import { useSidebar } from "./sidebar-context";
-import { Button } from "@/components/ui/button";
-import { LogOut } from "lucide-react";
+import { LogOut, ChevronDown } from "lucide-react";
 import { signOut } from "next-auth/react";
 
 interface SidebarShellProps {
-    appName: string;
-    userName?: string | null;
-    userEmail?: string | null;
-    version: string;
+  appName: string;
+  userName?: string | null;
+  userEmail?: string | null;
+  version: string;
 }
 
-export function SidebarShell({ appName, userName, userEmail, version }: SidebarShellProps) {
-    const { isCollapsed } = useSidebar();
+export function SidebarShell({
+  appName,
+  userName,
+  userEmail,
+  version,
+}: SidebarShellProps) {
+  const { isCollapsed } = useSidebar();
 
-    return (
-        <aside
-            className={`
-                bg-background/80 backdrop-blur-xl border-r border-border/40
-                hidden md:flex flex-col h-full sticky left-0 top-0 z-20
-                shadow-[1px_0_12px_-4px_rgba(0,0,0,0.08)]
-                transition-all duration-300 ease-in-out
-                ${isCollapsed ? "w-[72px]" : "w-[260px]"}
-            `}
-        >
-            {/* Logo / Brand */}
-            <div className={`border-b border-border/30 transition-all duration-300 ${isCollapsed ? "px-3 py-4" : "px-5 py-5"}`}>
-                {isCollapsed ? (
-                    <div className="flex justify-center">
-                        <div className="h-9 w-9 rounded-lg bg-gradient-to-br from-primary to-blue-500 flex items-center justify-center text-white font-bold text-sm shadow-md">
-                            {appName.charAt(0)}
-                        </div>
-                    </div>
-                ) : (
-                    <>
-                        <h1 className="text-xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">
-                            {appName}
-                        </h1>
-                        <p className="text-[10px] text-muted-foreground mt-0.5 font-medium">Gateway de WhatsApp</p>
-                    </>
-                )}
-            </div>
-
-            {/* Navigation */}
-            <SidebarNav />
-
-            {/* User Footer */}
-            <div 
-                suppressHydrationWarning={true}
-                className={`border-t border-border/30 bg-background/40 transition-all duration-300 ${isCollapsed ? "p-2" : "p-4"}`}
+  return (
+    <aside
+      className={`
+        bg-[var(--bg-side)] border-r border-[var(--border)]
+        hidden md:flex flex-col h-full sticky left-0 top-0 z-20
+        transition-all duration-200 ease-[var(--ease)]
+        ${isCollapsed ? "w-[52px]" : "w-[252px]"}
+      `}
+    >
+      {/* Workspace Brand Header */}
+      <div className={`p-2 border-b border-[var(--border)] transition-all ${isCollapsed ? "px-1.5" : "px-2.5"}`}>
+        {isCollapsed ? (
+          <div className="flex justify-center py-1">
+            <div
+              className="ws-logo"
+              style={{
+                width: "26px",
+                height: "26px",
+                borderRadius: "7px",
+                background: "var(--accent)",
+                color: "var(--on-accent)",
+                fontSize: "12px",
+                fontWeight: 600,
+              }}
+              title={appName}
             >
-                {isCollapsed ? (
-                    <div suppressHydrationWarning={true} className="flex flex-col items-center gap-2">
-                        <div suppressHydrationWarning={true} className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary/20 to-blue-500/20 flex items-center justify-center text-xs font-bold text-primary">
-                            {userName?.charAt(0)?.toUpperCase() || "U"}
-                        </div>
-                        <button
-                            onClick={() => signOut({ callbackUrl: "/auth/login" })}
-                            className="p-2 rounded-lg text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
-                        >
-                            <LogOut size={16} />
-                        </button>
-                    </div>
-                ) : (
-                    <>
-                        <div suppressHydrationWarning={true} className="flex items-center gap-2.5 mb-3">
-                            <div 
-                                suppressHydrationWarning={true}
-                                className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary/20 to-blue-500/20 flex items-center justify-center text-xs font-bold text-primary border border-primary/10"
-                            >
-                                {userName?.charAt(0)?.toUpperCase() || "U"}
-                            </div>
-                            <div suppressHydrationWarning={true} className="flex-1 min-w-0">
-                                <p className="text-sm font-semibold text-foreground truncate">{userName || "Usuário"}</p>
-                                <p className="text-[10px] text-muted-foreground truncate">{userEmail}</p>
-                            </div>
-                        </div>
-                        <Button
-                            variant="outline"
-                            size="sm"
-                            className="w-full flex items-center justify-center gap-2 text-xs h-8 rounded-lg border-border/40 hover:bg-destructive/10 hover:text-destructive hover:border-destructive/30 transition-colors"
-                            onClick={() => signOut({ callbackUrl: "/auth/login" })}
-                        >
-                            <LogOut size={14} /> Sair
-                        </Button>
-                        <p className="text-[9px] text-muted-foreground/50 text-center mt-2 font-mono">v{version}</p>
-                    </>
-                )}
+              {appName.charAt(0)}
             </div>
-        </aside>
-    );
+          </div>
+        ) : (
+          <div className="ws py-1 px-2 rounded-[6px] hover:bg-[var(--surface-3)] transition-colors">
+            <div
+              className="ws-logo"
+              style={{
+                width: "22px",
+                height: "22px",
+                borderRadius: "6px",
+                background: "var(--accent)",
+                color: "var(--on-accent)",
+                fontSize: "11px",
+                fontWeight: 600,
+              }}
+            >
+              {appName.charAt(0)}
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="ws-name text-[13.5px] font-semibold text-[var(--text)] truncate leading-tight">
+                {appName}
+              </div>
+              <div className="text-[10.5px] text-[var(--text-3)] truncate">
+                Workspace · Gateway
+              </div>
+            </div>
+            <ChevronDown size={13} className="text-[var(--text-4)] shrink-0" />
+          </div>
+        )}
+      </div>
+
+      {/* Navigation */}
+      <SidebarNav />
+
+      {/* User Footer */}
+      <div
+        suppressHydrationWarning={true}
+        className={`border-t border-[var(--border)] bg-[var(--bg-side)] transition-all ${
+          isCollapsed ? "p-1.5" : "p-2.5"
+        }`}
+      >
+        {isCollapsed ? (
+          <div suppressHydrationWarning={true} className="flex flex-col items-center gap-2 py-1">
+            <div
+              suppressHydrationWarning={true}
+              className="av sm"
+              style={{ "--c": "var(--accent)" } as React.CSSProperties}
+              title={userName || "Usuário"}
+            >
+              {userName?.charAt(0)?.toUpperCase() || "U"}
+            </div>
+            <button
+              onClick={() => signOut({ callbackUrl: "/auth/login" })}
+              className="ibtn ibtn-xs text-[var(--text-3)] hover:text-[var(--red)]"
+              title="Sair"
+              aria-label="Sair"
+            >
+              <LogOut size={13} />
+            </button>
+          </div>
+        ) : (
+          <>
+            <div suppressHydrationWarning={true} className="flex items-center gap-2 px-1 mb-2">
+              <div
+                suppressHydrationWarning={true}
+                className="av md"
+                style={{ "--c": "var(--accent)" } as React.CSSProperties}
+              >
+                {userName?.charAt(0)?.toUpperCase() || "U"}
+              </div>
+              <div suppressHydrationWarning={true} className="flex-1 min-w-0">
+                <p className="text-[12.5px] font-medium text-[var(--text)] truncate leading-tight">
+                  {userName || "Usuário"}
+                </p>
+                <p className="text-[11px] text-[var(--text-3)] truncate">
+                  {userEmail || "online"}
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => signOut({ callbackUrl: "/auth/login" })}
+                className="ibtn ibtn-xs text-[var(--text-4)] hover:text-[var(--red)]"
+                title="Sair do sistema"
+                aria-label="Sair"
+              >
+                <LogOut size={13} />
+              </button>
+            </div>
+            <div className="flex items-center justify-between px-1 text-[10px] text-[var(--text-4)] mono">
+              <span>Gr8r System</span>
+              <span>v{version}</span>
+            </div>
+          </>
+        )}
+      </div>
+    </aside>
+  );
 }
