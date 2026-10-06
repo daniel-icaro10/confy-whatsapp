@@ -49,6 +49,7 @@ model User {
   maxSessions Int?     @default(5)     // Limite de instâncias WhatsApp
   isActive    Boolean  @default(true)  // Status: ativa ou bloqueada
   notes       String?  @db.Text        // Observações internas do Superadmin
+  ownerId     String?  // ID do OWNER (Empresa) ao qual este atendente pertence
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   

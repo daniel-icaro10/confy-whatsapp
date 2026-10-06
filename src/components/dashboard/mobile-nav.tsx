@@ -23,6 +23,12 @@ import {
   BarChart3,
   Zap,
   Clock,
+  Kanban,
+  Brain,
+  Globe,
+  Mail,
+  FolderOpen,
+  Bell,
   Key,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
@@ -59,7 +65,13 @@ const superadminNavGroups: NavGroup[] = [
     label: "Desenvolvedor & API",
     items: [
       { href: "/dashboard/api-keys", label: "Chaves de API Master", icon: Key },
-      { href: "/dashboard/api-docs", label: "Documentação da API", icon: Webhook },
+      { href: "/dashboard/api-docs", label: "Documentação da API", icon: Globe },
+    ],
+  },
+  {
+    label: "Comunicação Global",
+    items: [
+      { href: "/dashboard/notifications", label: "Notificações do Sistema", icon: Bell },
     ],
   },
   {
@@ -83,24 +95,29 @@ const tenantNavGroups: NavGroup[] = [
     ],
   },
   {
-    label: "WhatsApp",
+    label: "WhatsApp & Marketing",
     items: [
       { href: "/dashboard", label: "Painel Geral", icon: LayoutDashboard, allowedRoles: ["OWNER"] },
       { href: "/dashboard/sessions", label: "Sessões / QR Code", icon: QrCode, allowedRoles: ["OWNER"] },
       { href: "/dashboard/broadcast", label: "Disparos em Massa", icon: Megaphone, allowedRoles: ["OWNER"] },
+      { href: "/dashboard/email-campaigns", label: "Campanhas de E-mail", icon: Mail, allowedRoles: ["OWNER"] },
+      { href: "/dashboard/media", label: "Galeria de Mídias", icon: FolderOpen },
     ],
   },
   {
     label: "Contatos & CRM",
     items: [
+      { href: "/dashboard/crm", label: "Funil de Vendas", icon: Kanban },
       { href: "/dashboard/contacts", label: "Contatos", icon: UserCheck },
       { href: "/dashboard/groups", label: "Grupos", icon: Users },
       { href: "/dashboard/labels", label: "Etiquetas", icon: Tag },
     ],
   },
   {
-    label: "Automação",
+    label: "Automação & IA",
     items: [
+      { href: "/dashboard/ai-agent", label: "Agente de IA & RAG", icon: Brain, allowedRoles: ["OWNER"] },
+      { href: "/dashboard/webchat", label: "Widget de Webchat", icon: Globe, allowedRoles: ["OWNER"] },
       { href: "/dashboard/bot-settings", label: "Configurações do Bot", icon: Bot, allowedRoles: ["OWNER"] },
       { href: "/dashboard/autoreply", label: "Gatilhos Automáticos", icon: MessageCircleReply, allowedRoles: ["OWNER"] },
       { href: "/dashboard/webhooks", label: "Webhooks e APIs", icon: Webhook, allowedRoles: ["OWNER"] },

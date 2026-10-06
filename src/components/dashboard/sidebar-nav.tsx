@@ -24,6 +24,8 @@ import {
   Zap,
   Clock,
   Key,
+  FolderOpen,
+  Bell,
 } from "lucide-react";
 import { useSidebar } from "./sidebar-context";
 import {
@@ -71,6 +73,12 @@ const superadminNavGroups: NavGroup[] = [
     ],
   },
   {
+    label: "Comunicação Global",
+    items: [
+      { href: "/dashboard/notifications", label: "Notificações do Sistema", icon: Bell },
+    ],
+  },
+  {
     label: "Plataforma",
     items: [
       { href: "/dashboard/settings", label: "Configurações Globais", icon: Settings },
@@ -98,6 +106,7 @@ const tenantNavGroups: NavGroup[] = [
       { href: "/dashboard/sessions", label: "Sessões / QR Code", icon: QrCode, allowedRoles: ["OWNER"] },
       { href: "/dashboard/broadcast", label: "Disparos em Massa", icon: Megaphone, allowedRoles: ["OWNER"] },
       { href: "/dashboard/email-campaigns", label: "Campanhas de E-mail", icon: Mail, badge: "Novo", allowedRoles: ["OWNER"] },
+      { href: "/dashboard/media", label: "Galeria de Mídias", icon: FolderOpen },
     ],
   },
   {
