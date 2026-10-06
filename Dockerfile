@@ -16,7 +16,7 @@ RUN npx prisma generate && npm run build
 
 # Strip devDeps from node_modules after build
 # tsx & prisma needed at runtime, kept explicitly
-RUN npm prune --omit=dev --legacy-peer-deps && npm install --no-save --legacy-peer-deps tsx typescript prisma
+RUN npm prune --omit=dev --legacy-peer-deps && npm install --no-save --legacy-peer-deps tsx typescript prisma && npm cache clean --force
 
 # Production image
 FROM node:26-alpine AS runner

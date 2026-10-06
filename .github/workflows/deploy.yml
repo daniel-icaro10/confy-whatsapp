@@ -63,6 +63,14 @@ jobs:
           script: |
             set -e
             cd /var/www/confy-wa-gateway
+
+            # 1. Liberar espaco em disco antes de puxar a nova imagem (evita "no space left on device")
+            journalctl --vacuum-size=50M 2>/dev/null || true
+            apt-get clean 2>/dev/null || true
+            docker system prune -af --volumes=false || true
+            df -h /
+
+            # 2. Atualizar repositorio e subir nova versao
             git pull -q
             docker compose pull app
             docker compose up -d --no-build
