@@ -115,6 +115,22 @@ export const bindSessionStore = (sock: WASocket, sessionId: string, io: Server |
             logger.success("Store", `Finished syncing ${messages.length} historical messages`);
         }
 
+        // If chats have unreadCount === 0 or read === true, sync them as read in DB
+        if (chats && chats.length > 0) {
+            for (const chat of chats) {
+                if (chat.id && (chat.unreadCount === 0 || (chat as any).read === true || (typeof chat.unreadCount === 'number' && chat.unreadCount <= 0))) {
+                    await prisma.message.updateMany({
+                        where: {
+                            sessionId: dbSessionId,
+                            remoteJid: chat.id,
+                            fromMe: false,
+                            status: { not: 'READ' }
+                        },
+                        data: { status: 'READ' }
+                    }).catch(() => {});
+                }
+            }
+        }
 
         // Note: Contacts and Chats are synced by src/modules/whatsapp/store/contacts.ts
         // We only handle messages here to avoid P2002 Unique Constraint Race Conditions.
@@ -171,34 +187,210 @@ export const bindSessionStore = (sock: WASocket, sessionId: string, io: Server |
     sock.ev.on('messages.update', async (updates) => {
         if (!dbSessionId) return;
 
+        const updatedMessagesForSocket: any[] = [];
+        const affectedChatJids = new Set<string>();
+
         for (const update of updates) {
             try {
                 const keyId = update.key?.id;
                 if (!keyId) continue;
 
-                const statusMap: Record<number, string> = {
-                    0: 'PENDING',
-                    1: 'SENT',
-                    2: 'DELIVERED',
-                    3: 'READ',
-                    4: 'READ', // Played
-                };
+                // Baileys proto.WebMessageInfo.Status:
+                // 0: ERROR -> FAILED
+                // 1: PENDING -> PENDING
+                // 2: SERVER_ACK -> SENT
+                // 3: DELIVERY_ACK -> DELIVERED
+                // 4: READ -> READ
+                // 5: PLAYED -> READ
+                let status: string = 'PENDING';
+                const rawStatus = (update.update as any)?.status;
 
-                const status = statusMap[update.update?.status || 0] || 'PENDING';
+                if (typeof rawStatus === 'number') {
+                    const statusMap: Record<number, string> = {
+                        0: 'FAILED',
+                        1: 'PENDING',
+                        2: 'SENT',
+                        3: 'DELIVERED',
+                        4: 'READ',
+                        5: 'READ', // Played
+                    };
+                    status = statusMap[rawStatus] || 'PENDING';
+                } else if (typeof rawStatus === 'string') {
+                    const upper = rawStatus.toUpperCase();
+                    if (['READ', 'PLAYED'].includes(upper)) status = 'READ';
+                    else if (['DELIVERY_ACK', 'DELIVERED'].includes(upper)) status = 'DELIVERED';
+                    else if (['SERVER_ACK', 'SENT'].includes(upper)) status = 'SENT';
+                    else if (['FAILED', 'ERROR'].includes(upper)) status = 'FAILED';
+                    else status = upper;
+                }
+
+                // If receipt timestamp indicates read
+                if ((update.update as any)?.receipt?.readTimestamp || (update.update as any)?.read) {
+                    status = 'READ';
+                }
 
                 await prisma.message.updateMany({
                     where: { sessionId: dbSessionId, keyId },
                     data: { status: status as any }
                 });
 
+                const remoteJid = update.key?.remoteJid;
+                if (remoteJid) {
+                    affectedChatJids.add(remoteJid);
+                }
+
+                const existing = await prisma.message.findFirst({
+                    where: { sessionId: dbSessionId, keyId }
+                });
+
+                if (existing) {
+                    updatedMessagesForSocket.push({
+                        ...existing,
+                        timestamp: existing.timestamp instanceof Date ? existing.timestamp.toISOString() : existing.timestamp
+                    });
+                }
+
                 // Dispatch webhook for message status update
                 dispatchWebhook(sessionId, "message.status", {
                     keyId,
-                    remoteJid: update.key?.remoteJid,
+                    remoteJid,
                     status
                 });
             } catch (e) {
                 logger.error("Store", "Error updating message status", e);
+            }
+        }
+
+        // Emit real-time message updates to frontend (so checkmarks change in real time!)
+        if (updatedMessagesForSocket.length > 0) {
+            io?.to(sessionId).emit("message.update", updatedMessagesForSocket);
+        }
+
+        // If any messages were marked as READ, broadcast chat.read with updated unread counts
+        for (const jid of affectedChatJids) {
+            try {
+                const unreadCount = await prisma.message.count({
+                    where: {
+                        sessionId: dbSessionId,
+                        remoteJid: jid,
+                        fromMe: false,
+                        status: { not: 'READ' }
+                    }
+                });
+                io?.to(sessionId).emit("chat.read", { remoteJid: jid, unreadCount });
+            } catch {}
+        }
+    });
+
+    // Handle Message Receipt Updates (Read / Played / Delivered receipts)
+    sock.ev.on('message-receipt.update', async (receipts) => {
+        if (!dbSessionId) return;
+
+        const updatedMessagesForSocket: any[] = [];
+        const affectedChatJids = new Set<string>();
+
+        for (const item of receipts) {
+            try {
+                const keyId = item.key?.id;
+                if (!keyId) continue;
+
+                const isRead = !!(item.receipt?.readTimestamp || (item.receipt as any)?.playedTimestamp);
+                const isDelivered = !!item.receipt?.receiptTimestamp;
+
+                const newStatus = isRead ? 'READ' : (isDelivered ? 'DELIVERED' : null);
+                if (!newStatus) continue;
+
+                await prisma.message.updateMany({
+                    where: { sessionId: dbSessionId, keyId },
+                    data: { status: newStatus as any }
+                });
+
+                const remoteJid = item.key?.remoteJid;
+                if (remoteJid) affectedChatJids.add(remoteJid);
+
+                const existing = await prisma.message.findFirst({
+                    where: { sessionId: dbSessionId, keyId }
+                });
+
+                if (existing) {
+                    updatedMessagesForSocket.push({
+                        ...existing,
+                        timestamp: existing.timestamp instanceof Date ? existing.timestamp.toISOString() : existing.timestamp
+                    });
+                }
+            } catch (e) {
+                logger.error("Store", "Error updating message receipt", e);
+            }
+        }
+
+        if (updatedMessagesForSocket.length > 0) {
+            io?.to(sessionId).emit("message.update", updatedMessagesForSocket);
+        }
+
+        for (const jid of affectedChatJids) {
+            try {
+                const unreadCount = await prisma.message.count({
+                    where: {
+                        sessionId: dbSessionId,
+                        remoteJid: jid,
+                        fromMe: false,
+                        status: { not: 'READ' }
+                    }
+                });
+                io?.to(sessionId).emit("chat.read", { remoteJid: jid, unreadCount });
+            } catch {}
+        }
+    });
+
+    // Handle Chat Updates (Synchronizes when someone visualizes the chat on WhatsApp mobile app)
+    sock.ev.on('chats.update', async (updates) => {
+        if (!dbSessionId) return;
+
+        for (const update of updates) {
+            try {
+                const chatJid = update.id;
+                if (!chatJid) continue;
+
+                // When user reads the chat on WhatsApp phone: unreadCount is 0 or read is true
+                const isMarkedRead = update.unreadCount === 0 || (update as any).read === true || (typeof update.unreadCount === 'number' && update.unreadCount <= 0);
+
+                if (isMarkedRead) {
+                    // Update all unread incoming messages for this chat in DB to READ
+                    await prisma.message.updateMany({
+                        where: {
+                            sessionId: dbSessionId,
+                            remoteJid: chatJid,
+                            fromMe: false,
+                            status: { not: 'READ' }
+                        },
+                        data: { status: 'READ' }
+                    });
+
+                    // Emit chat.read event so sidebar badge clears immediately
+                    io?.to(sessionId).emit('chat.read', {
+                        remoteJid: chatJid,
+                        unreadCount: 0
+                    });
+
+                    // Re-emit message.update for recent messages in this chat so chat-window reflects READ in real time
+                    const recentReadMessages = await prisma.message.findMany({
+                        where: {
+                            sessionId: dbSessionId,
+                            remoteJid: chatJid
+                        },
+                        orderBy: { timestamp: 'desc' },
+                        take: 20
+                    });
+
+                    if (recentReadMessages.length > 0) {
+                        io?.to(sessionId).emit('message.update', recentReadMessages.map(m => ({
+                            ...m,
+                            timestamp: m.timestamp instanceof Date ? m.timestamp.toISOString() : m.timestamp
+                        })));
+                    }
+                }
+            } catch (e) {
+                logger.error("Store", "Error handling chats.update", e);
             }
         }
     });
@@ -494,6 +686,21 @@ async function processAndSaveMessage(
     }
 
     try {
+        let initialStatus: "PENDING" | "SENT" | "DELIVERED" | "READ" | "FAILED" = fromMe ? "SENT" : "PENDING";
+        const rawMsgStatus = (msg as any)?.status;
+        if (typeof rawMsgStatus === 'number') {
+            if (rawMsgStatus === 4 || rawMsgStatus === 5) initialStatus = "READ";
+            else if (rawMsgStatus === 3) initialStatus = "DELIVERED";
+            else if (rawMsgStatus === 2) initialStatus = "SENT";
+            else if (rawMsgStatus === 0) initialStatus = "FAILED";
+        } else if (typeof rawMsgStatus === 'string') {
+            const s = rawMsgStatus.toUpperCase();
+            if (['READ', 'PLAYED'].includes(s)) initialStatus = "READ";
+            else if (['DELIVERED', 'DELIVERY_ACK'].includes(s)) initialStatus = "DELIVERED";
+            else if (['SENT', 'SERVER_ACK'].includes(s)) initialStatus = "SENT";
+            else if (['FAILED', 'ERROR'].includes(s)) initialStatus = "FAILED";
+        }
+
         const newMessage = await prisma.message.create({
             data: {
                 sessionId: dbSessionId,
@@ -505,7 +712,7 @@ async function processAndSaveMessage(
                 type: messageType as any,
                 content: text,
                 mediaUrl: fileUrl, // Save Media URL
-                status: fromMe ? "SENT" : "PENDING",
+                status: initialStatus,
                 timestamp,
                 quoteId
             }

@@ -381,10 +381,15 @@ export function ChatList({ sessionId, onSelectChat, selectedJid }: ChatListProps
     selectedJidRef.current = selectedJid;
 
     useEffect(() => {
-        if (selectedJid) {
+        if (selectedJid && sessionId) {
             setChats(prev => prev.map(c => c.jid === selectedJid ? { ...c, unreadCount: 0 } : c));
+            fetch(`/api/chat/${sessionId}/${encodeURIComponent(selectedJid)}/read`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({})
+            }).catch(() => {});
         }
-    }, [selectedJid]);
+    }, [selectedJid, sessionId]);
 
     const playSoundNotification = useCallback(() => {
         if (!soundEnabled) return;
@@ -488,11 +493,12 @@ export function ChatList({ sessionId, onSelectChat, selectedJid }: ChatListProps
                 const updated = [...prev];
                 newMessages.forEach(msg => {
                     const jid = msg.remoteJid;
-                    const idx = updated.findIndex(c => c.jid === jid);
+                    const idx = updated.findIndex(c => c.jid === jid || c.jid.replace("@c.us", "@s.whatsapp.net") === jid || jid.replace("@c.us", "@s.whatsapp.net") === c.jid);
                     if (idx !== -1) {
                         const isCurrent = jid === selectedJidRef.current;
                         const prevUnread = updated[idx].unreadCount || 0;
-                        const newUnread = isCurrent ? 0 : (!msg.fromMe ? prevUnread + 1 : prevUnread);
+                        const isReadStatus = msg.status === "READ";
+                        const newUnread = isCurrent || isReadStatus ? 0 : (!msg.fromMe ? prevUnread + 1 : prevUnread);
                         updated[idx] = { 
                             ...updated[idx], 
                             lastMessage: { content: msg.content, timestamp: msg.timestamp, type: msg.type },
@@ -510,6 +516,17 @@ export function ChatList({ sessionId, onSelectChat, selectedJid }: ChatListProps
             if (needsReload) fetchChats();
         };
 
+        const chatReadHandler = (data: { remoteJid: string; unreadCount?: number }) => {
+            if (!data?.remoteJid) return;
+            const targetJid = data.remoteJid;
+            setChats(prev => prev.map(c => {
+                if (c.jid === targetJid || c.jid.replace("@c.us", "@s.whatsapp.net") === targetJid || targetJid.replace("@c.us", "@s.whatsapp.net") === c.jid) {
+                    return { ...c, unreadCount: data.unreadCount ?? 0 };
+                }
+                return c;
+            }));
+        };
+
         const ticketHandler = (ticket: any) => {
             if (!ticket?.jid) return;
             if (ticket.status === "OPEN" && !ticket.assignedUserId) {
@@ -525,11 +542,13 @@ export function ChatList({ sessionId, onSelectChat, selectedJid }: ChatListProps
             });
         };
 
+        socket.on("chat.read", chatReadHandler);
         socket.on("message.update", handler);
         socket.on("ticket.updated", ticketHandler);
 
         return () => {
             socket.off("connect", onConnect);
+            socket.off("chat.read", chatReadHandler);
             socket.off("message.update", handler);
             socket.off("ticket.updated", ticketHandler);
         };
@@ -619,8 +638,15 @@ export function ChatList({ sessionId, onSelectChat, selectedJid }: ChatListProps
 
     const handleSelectChat = useCallback((jid: string, name?: string) => {
         setChats(prev => prev.map(c => c.jid === jid ? { ...c, unreadCount: 0 } : c));
+        if (sessionId) {
+            fetch(`/api/chat/${sessionId}/${encodeURIComponent(jid)}/read`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({})
+            }).catch(() => {});
+        }
         onSelectChat(jid, name);
-    }, [onSelectChat]);
+    }, [onSelectChat, sessionId]);
 
     const itemContent = useCallback(
         (_: number, chat: ChatContact) => <ChatRow key={chat.jid} chat={chat} isSelected={selectedJid === chat.jid} onSelect={handleSelectChat} sessionId={sessionId} labelDots={chatLabelMap.get(chat.jid) || []} />,

@@ -181,17 +181,9 @@ export class ChatService {
         const hasMore = messages.length > limit;
         if (hasMore) messages.pop();
 
-        // Mark incoming messages as READ when opening/viewing the chat
+        // Mark incoming messages as READ when opening/viewing the chat and sync with WhatsApp
         if (!before) {
-            prisma.message.updateMany({
-                where: {
-                    sessionId: dbSessionId,
-                    remoteJid: { in: Array.from(queryJids) },
-                    fromMe: false,
-                    status: { not: 'READ' }
-                },
-                data: { status: 'READ' }
-            }).catch(() => {});
+            ChatService.markAsRead(dbSessionId, jid).catch(() => {});
         }
 
         // Fetch quoted messages
@@ -235,6 +227,98 @@ export class ChatService {
             messages: messagesWithQuote.reverse(),
             hasMore
         };
+    }
+
+    /**
+     * Mark all incoming messages in a chat as read.
+     * Synchronizes to WhatsApp (sends blue receipts to sender and app-state sync to phone),
+     * updates MySQL database, and emits real-time chat.read event via Socket.IO.
+     */
+    static async markAsRead(dbSessionId: string, jid: string) {
+        const normalizedJid = normalizeJid(jid);
+
+        // Find contact variations (LID, alt JIDs)
+        const contact = await prisma.contact.findFirst({
+            where: {
+                sessionId: dbSessionId,
+                OR: [{ jid }, { lid: jid }, { remoteJidAlt: jid }, { jid: normalizedJid }]
+            },
+            select: { jid: true, lid: true, remoteJidAlt: true }
+        });
+
+        const queryJids = new Set([jid, normalizedJid]);
+        if (contact) {
+            if (contact.jid) queryJids.add(contact.jid);
+            if (contact.lid) queryJids.add(contact.lid);
+            if (contact.remoteJidAlt) queryJids.add(contact.remoteJidAlt);
+        }
+
+        // Find unread messages to send receipts
+        const unreadMsgs = await prisma.message.findMany({
+            where: {
+                sessionId: dbSessionId,
+                remoteJid: { in: Array.from(queryJids) },
+                fromMe: false,
+                status: { not: 'READ' }
+            },
+            select: { keyId: true, remoteJid: true, senderJid: true }
+        });
+
+        if (unreadMsgs.length > 0) {
+            await prisma.message.updateMany({
+                where: {
+                    sessionId: dbSessionId,
+                    remoteJid: { in: Array.from(queryJids) },
+                    fromMe: false,
+                    status: { not: 'READ' }
+                },
+                data: { status: 'READ' }
+            });
+        }
+
+        // Get session record to find string sessionId
+        const session = await prisma.session.findUnique({
+            where: { id: dbSessionId },
+            select: { sessionId: true }
+        });
+
+        if (session) {
+            const instance = waManager.getInstance(session.sessionId);
+            if (instance) {
+                // Emit socket event to frontend so badge clears everywhere
+                instance.io?.to(session.sessionId).emit("chat.read", {
+                    remoteJid: jid,
+                    unreadCount: 0
+                });
+
+                if (normalizedJid !== jid) {
+                    instance.io?.to(session.sessionId).emit("chat.read", {
+                        remoteJid: normalizedJid,
+                        unreadCount: 0
+                    });
+                }
+
+                // Send read receipts to WhatsApp
+                if (instance.socket) {
+                    try {
+                        if (unreadMsgs.length > 0) {
+                            const keys = unreadMsgs.map(m => ({
+                                remoteJid: m.remoteJid || normalizedJid,
+                                id: m.keyId,
+                                participant: m.senderJid || undefined
+                            }));
+                            await instance.socket.readMessages(keys);
+                        }
+                        await instance.socket.chatModify(
+                            { markRead: true, lastMessages: [] },
+                            normalizedJid
+                        );
+                    } catch (e) {
+                        // Ignore Baileys socket error if disconnected
+                    }
+                }
+            }
+        }
     }
 
     static async sendTextMessage(sessionId: string, jid: string, messagePayload: any, mentions?: string[], quotedMessageId?: string) {

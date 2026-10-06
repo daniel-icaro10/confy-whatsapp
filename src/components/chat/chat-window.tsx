@@ -424,7 +424,19 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
         finally { setLoading(false); setLoadingMore(false); }
     }, [sessionId, jid]);
 
-    useEffect(() => { setMessages([]); setOldestTimestamp(null); setHasMore(false); fetchMessages(); }, [fetchMessages]);
+    useEffect(() => { 
+        setMessages([]); 
+        setOldestTimestamp(null); 
+        setHasMore(false); 
+        fetchMessages(); 
+        if (sessionId && jid) {
+            fetch(`/api/chat/${sessionId}/${encodeURIComponent(jid)}/read`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({})
+            }).catch(() => {});
+        }
+    }, [fetchMessages, sessionId, jid]);
 
     // Auto focus input when chat changes and finished loading
     useEffect(() => {
@@ -453,8 +465,18 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
                 return unique.sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime());
             });
         };
+        const onChatRead = (data: { remoteJid: string }) => {
+            if (data?.remoteJid === normalizedJid || data?.remoteJid === jid) {
+                setMessages(prev => prev.map(m => (!m.fromMe && m.status !== "READ" ? { ...m, status: "READ" } : m)));
+            }
+        };
         socket.on("message.update", handler);
-        return () => { socket.off("connect", onConnect); socket.off("message.update", handler); };
+        socket.on("chat.read", onChatRead);
+        return () => { 
+            socket.off("connect", onConnect); 
+            socket.off("message.update", handler); 
+            socket.off("chat.read", onChatRead);
+        };
     }, [sessionId, jid, getSocket, joinSession]);
 
     useEffect(() => { if (autoScroll) scrollToBottom(false); }, [messages, autoScroll, scrollToBottom]);

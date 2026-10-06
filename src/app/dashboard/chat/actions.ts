@@ -513,5 +513,23 @@ export async function updateAttendanceSettings(
     return { success: true };
 }
 
+export async function markChatRead(sessionId: string, jid: string) {
+    const user = await getAuthenticatedUserForAction();
+    if (!user) throw new Error("Unauthorized");
+
+    const canAccess = await canAccessSession(user.id, user.role, sessionId);
+    if (!canAccess) throw new Error("Forbidden");
+
+    const session = await prisma.session.findUnique({
+        where: { sessionId },
+        select: { id: true }
+    });
+
+    if (!session) throw new Error("Session not found");
+
+    await ChatService.markAsRead(session.id, jid);
+    return { success: true };
+}
+
 
 
