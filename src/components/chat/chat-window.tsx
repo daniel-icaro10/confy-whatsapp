@@ -654,7 +654,7 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
             )}
 
             {/* Header */}
-            <div className="shrink-0 px-3 py-2 border-b border-[#222d34] bg-[#202c33] flex items-center justify-between gap-2 sm:gap-3 z-10">
+            <div className="shrink-0 px-3 py-2 border-b border-border/20 bg-background/95 backdrop-blur-sm flex items-center justify-between gap-2 sm:gap-3 z-10">
                 <div 
                     className="flex items-center gap-2 sm:gap-3 min-w-0 cursor-pointer hover:opacity-90 transition-opacity"
                     onClick={() => setShowRightPanel(prev => !prev)}
@@ -1081,7 +1081,7 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
             )}
 
             {/* Input */}
-            <div className="shrink-0 px-3 py-2 bg-[#202c33] border-t border-[#222d34] space-y-1.5">
+            <div className="shrink-0 px-3 py-2 bg-background/95 backdrop-blur-sm border-t border-border/20 space-y-1.5">
                 {/* Mode Switcher & Tools Bar */}
                 <div className="flex items-center justify-between max-w-3xl mx-auto px-1">
                     <div className="flex items-center gap-1 text-xs">

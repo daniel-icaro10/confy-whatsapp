@@ -368,17 +368,17 @@ export function ChatSidebarPanel({
     }, [ticket, transferOptions.departments]);
 
     return (
-        <aside className="w-80 lg:w-[340px] border-l border-[#222d34] bg-[#111b21] flex flex-col h-full overflow-hidden shrink-0 select-none animate-in slide-in-from-right duration-200">
+        <aside className="w-80 lg:w-[340px] border-l border-border/20 bg-background flex flex-col h-full overflow-hidden shrink-0 select-none animate-in slide-in-from-right duration-200">
             {/* Header: clean title matching Chatwoot "Contatos" */}
-            <div className="h-14 px-4 border-b border-[#222d34] flex items-center justify-between shrink-0 bg-[#182229]/60">
-                <span className="text-sm font-bold text-[#e9edef] tracking-tight">
+            <div className="h-14 px-4 border-b border-border/10 flex items-center justify-between shrink-0 bg-background">
+                <span className="text-sm font-semibold text-foreground tracking-tight">
                     Contatos
                 </span>
                 <Button
                     variant="ghost"
                     size="icon"
                     onClick={onClose}
-                    className="h-8 w-8 rounded-full text-[#8696a0] hover:text-[#e9edef] hover:bg-[#202c33] cursor-pointer"
+                    className="h-8 w-8 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/40 cursor-pointer"
                     title="Fechar painel"
                 >
                     <X className="h-4 w-4" />
@@ -386,18 +386,18 @@ export function ChatSidebarPanel({
             </div>
 
             {/* Scrollable Content */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 text-xs styled-scrollbar">
+            <div className="flex-1 overflow-y-auto p-3 space-y-3 text-xs styled-scrollbar">
                 {/* 1. Contact Profile Card (left-aligned squircle avatar like Chatwoot) */}
-                <div className="p-4 rounded-2xl border border-[#222d34] bg-[#182229]/50 shadow-sm space-y-3">
+                <div className="p-3.5 rounded-2xl border border-border/30 bg-muted/20 hover:bg-muted/30 transition-colors space-y-3">
                     {/* Top Row: Squircle Avatar + Actions */}
                     <div className="flex items-start justify-between">
-                        <Avatar className="h-14 w-14 rounded-2xl border border-white/[0.08] shadow-md shrink-0">
+                        <Avatar className="h-14 w-14 rounded-2xl border border-border/40 shadow-xs shrink-0">
                             <AvatarImage 
                                 src={`/api/chat/${sessionId}/${encodeURIComponent(jid)}/avatar`} 
                                 alt={displayName} 
                                 className="object-cover rounded-2xl"
                             />
-                            <AvatarFallback className="bg-gradient-to-br from-[#00a884]/20 to-blue-500/20 text-[#00a884] font-bold text-base rounded-2xl">
+                            <AvatarFallback className="bg-gradient-to-br from-primary/20 to-blue-500/20 text-primary font-bold text-base rounded-2xl">
                                 {displayName.slice(0, 2).toUpperCase()}
                             </AvatarFallback>
                         </Avatar>
@@ -405,7 +405,7 @@ export function ChatSidebarPanel({
                         <div className="flex items-center gap-1">
                             <button
                                 onClick={() => handleCopy(rawPhone, "Telefone")}
-                                className="p-1.5 rounded-lg text-[#8696a0] hover:text-[#e9edef] hover:bg-[#202c33] transition-colors cursor-pointer"
+                                className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors cursor-pointer"
                                 title="Informações do contato"
                             >
                                 <Info className="h-3.5 w-3.5" />
@@ -414,7 +414,7 @@ export function ChatSidebarPanel({
                                 href={`https://wa.me/${rawPhone}`}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="p-1.5 rounded-lg text-[#8696a0] hover:text-[#e9edef] hover:bg-[#202c33] transition-colors cursor-pointer"
+                                className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors cursor-pointer"
                                 title="Abrir conversa no WhatsApp Web"
                             >
                                 <ExternalLink className="h-3.5 w-3.5" />
@@ -424,178 +424,178 @@ export function ChatSidebarPanel({
 
                     {/* Name & Bio */}
                     <div className="space-y-1">
-                        <h3 className="font-bold text-base text-[#e9edef] leading-tight flex items-center gap-1.5">
+                        <h3 className="font-semibold text-sm text-foreground leading-tight flex items-center gap-1.5">
                             <span className="truncate">{displayName}</span>
                         </h3>
-                        <p className="text-[11px] text-[#8696a0] leading-relaxed line-clamp-2">
+                        <p className="text-[11px] text-muted-foreground leading-relaxed line-clamp-2">
                             {bioText}
                         </p>
                     </div>
 
                     {/* Contact Detail Rows with Clean Icons & Copy */}
-                    <div className="pt-2 border-t border-[#222d34]/60 space-y-2">
+                    <div className="pt-2 border-t border-border/20 space-y-2">
                         {/* Email */}
-                        <div className="flex items-center justify-between text-[#8696a0] group/row hover:text-[#e9edef] transition-colors">
+                        <div className="flex items-center justify-between text-muted-foreground group/row hover:text-foreground transition-colors">
                             <div className="flex items-center gap-2 truncate">
-                                <Mail className="h-3.5 w-3.5 shrink-0 text-[#8696a0]" />
-                                <span className="text-[11px] text-[#e9edef] truncate">
-                                    {contact?.email || <span className="text-[#8696a0]/60 italic">Sem e-mail cadastrado</span>}
+                                <Mail className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+                                <span className="text-[11px] text-foreground truncate">
+                                    {contact?.email || <span className="text-muted-foreground/60 italic">Sem e-mail cadastrado</span>}
                                 </span>
                             </div>
                             {contact?.email && (
                                 <button
                                     onClick={() => handleCopy(contact.email!, "E-mail")}
-                                    className="p-1 text-[#8696a0] hover:text-[#00a884] opacity-0 group-hover/row:opacity-100 transition-opacity cursor-pointer"
+                                    className="p-1 text-muted-foreground hover:text-primary opacity-0 group-hover/row:opacity-100 transition-opacity cursor-pointer"
                                     title="Copiar e-mail"
                                 >
-                                    {copiedField === "E-mail" ? <Check className="h-3 w-3 text-[#00a884]" /> : <Copy className="h-3 w-3" />}
+                                    {copiedField === "E-mail" ? <Check className="h-3 w-3 text-primary" /> : <Copy className="h-3 w-3" />}
                                 </button>
                             )}
                         </div>
 
                         {/* Phone */}
-                        <div className="flex items-center justify-between text-[#8696a0] group/row hover:text-[#e9edef] transition-colors">
+                        <div className="flex items-center justify-between text-muted-foreground group/row hover:text-foreground transition-colors">
                             <div className="flex items-center gap-2 truncate">
-                                <Phone className="h-3.5 w-3.5 shrink-0 text-[#8696a0]" />
-                                <span className="font-mono text-[11px] text-[#e9edef] truncate">
+                                <Phone className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+                                <span className="font-mono text-[11px] text-foreground truncate">
                                     {formatPhoneNumber(jid)}
                                 </span>
                             </div>
                             <button
                                 onClick={() => handleCopy(rawPhone, "Telefone")}
-                                className="p-1 text-[#8696a0] hover:text-[#00a884] opacity-0 group-hover/row:opacity-100 transition-opacity cursor-pointer"
+                                className="p-1 text-muted-foreground hover:text-primary opacity-0 group-hover/row:opacity-100 transition-opacity cursor-pointer"
                                 title="Copiar telefone"
                             >
-                                {copiedField === "Telefone" ? <Check className="h-3 w-3 text-[#00a884]" /> : <Copy className="h-3 w-3" />}
+                                {copiedField === "Telefone" ? <Check className="h-3 w-3 text-primary" /> : <Copy className="h-3 w-3" />}
                             </button>
                         </div>
 
                         {/* Company */}
                         {companyText && (
-                            <div className="flex items-center gap-2 text-[#8696a0]">
-                                <Building2 className="h-3.5 w-3.5 shrink-0 text-[#8696a0]" />
-                                <span className="text-[11px] text-[#e9edef] truncate">{companyText}</span>
+                            <div className="flex items-center gap-2 text-muted-foreground">
+                                <Building2 className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+                                <span className="text-[11px] text-foreground truncate">{companyText}</span>
                             </div>
                         )}
 
                         {/* Location */}
-                        <div className="flex items-center gap-2 text-[#8696a0]">
-                            <MapPin className="h-3.5 w-3.5 shrink-0 text-[#8696a0]" />
-                            <span className="text-[11px] text-[#e9edef] truncate">{locationText}</span>
+                        <div className="flex items-center gap-2 text-muted-foreground">
+                            <MapPin className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+                            <span className="text-[11px] text-foreground truncate">{locationText}</span>
                         </div>
                     </div>
 
                     {/* Social Media Row (Twitter/X, LinkedIn, GitHub, Instagram) */}
-                    <div className="pt-2 border-t border-[#222d34]/60 flex items-center gap-3 text-[#8696a0]">
-                        <button className="hover:text-[#00a884] transition-colors cursor-pointer" title="Twitter / X">
+                    <div className="pt-2 border-t border-border/20 flex items-center gap-3 text-muted-foreground">
+                        <button className="hover:text-primary transition-colors cursor-pointer" title="Twitter / X">
                             <Twitter className="h-3.5 w-3.5" />
                         </button>
-                        <button className="hover:text-[#00a884] transition-colors cursor-pointer" title="LinkedIn">
+                        <button className="hover:text-primary transition-colors cursor-pointer" title="LinkedIn">
                             <Linkedin className="h-3.5 w-3.5" />
                         </button>
-                        <button className="hover:text-[#00a884] transition-colors cursor-pointer" title="GitHub">
+                        <button className="hover:text-primary transition-colors cursor-pointer" title="GitHub">
                             <Github className="h-3.5 w-3.5" />
                         </button>
-                        <button className="hover:text-[#00a884] transition-colors cursor-pointer" title="Instagram">
+                        <button className="hover:text-primary transition-colors cursor-pointer" title="Instagram">
                             <Instagram className="h-3.5 w-3.5" />
                         </button>
                     </div>
 
                     {/* 4 Quick Action Buttons (Message, Edit, Link, Delete) */}
-                    <div className="grid grid-cols-4 gap-2 pt-2 border-t border-[#222d34]/60">
+                    <div className="grid grid-cols-4 gap-2 pt-2 border-t border-border/20">
                         <button
                             onClick={() => {
                                 const input = document.querySelector("textarea") as HTMLTextAreaElement | null;
                                 input?.focus();
                             }}
-                            className="h-9 rounded-xl bg-[#202c33] hover:bg-[#2a3942] text-[#e9edef] flex items-center justify-center transition-colors border border-white/[0.04] cursor-pointer"
+                            className="h-8 rounded-lg bg-muted/40 hover:bg-muted text-foreground flex items-center justify-center transition-colors border border-border/30 cursor-pointer"
                             title="Conversar / Focar mensagem"
                         >
-                            <MessageSquare className="h-4 w-4" />
+                            <MessageSquare className="h-3.5 w-3.5" />
                         </button>
                         <button
                             onClick={() => setIsEditDialogOpen(true)}
-                            className="h-9 rounded-xl bg-[#202c33] hover:bg-[#2a3942] text-[#e9edef] flex items-center justify-center transition-colors border border-white/[0.04] cursor-pointer"
+                            className="h-8 rounded-lg bg-muted/40 hover:bg-muted text-foreground flex items-center justify-center transition-colors border border-border/30 cursor-pointer"
                             title="Editar cadastro do contato"
                         >
-                            <Edit3 className="h-4 w-4" />
+                            <Edit3 className="h-3.5 w-3.5" />
                         </button>
                         <button
                             onClick={() => handleCopy(jid, "JID do Contato")}
-                            className="h-9 rounded-xl bg-[#202c33] hover:bg-[#2a3942] text-[#e9edef] flex items-center justify-center transition-colors border border-white/[0.04] cursor-pointer"
+                            className="h-8 rounded-lg bg-muted/40 hover:bg-muted text-foreground flex items-center justify-center transition-colors border border-border/30 cursor-pointer"
                             title="Copiar JID do contato"
                         >
-                            <LinkIcon className="h-4 w-4" />
+                            <LinkIcon className="h-3.5 w-3.5" />
                         </button>
                         <button
                             onClick={() => toast.info("Histórico protegido")}
-                            className="h-9 rounded-xl bg-[#202c33] hover:bg-red-500/20 text-[#8696a0] hover:text-red-400 flex items-center justify-center transition-colors border border-white/[0.04] cursor-pointer"
+                            className="h-8 rounded-lg bg-muted/40 hover:bg-red-500/15 text-muted-foreground hover:text-red-400 flex items-center justify-center transition-colors border border-border/30 cursor-pointer"
                             title="Opções de exclusão"
                         >
-                            <Trash2 className="h-4 w-4" />
+                            <Trash2 className="h-3.5 w-3.5" />
                         </button>
                     </div>
                 </div>
 
                 {/* 2. Section: Ações da conversa (Chatwoot style) */}
-                <div className="rounded-2xl border border-[#222d34] bg-[#182229]/50 shadow-sm overflow-hidden">
+                <div className="rounded-2xl border border-border/30 bg-muted/20 overflow-hidden">
                     <button
                         onClick={() => setIsActionsOpen(prev => !prev)}
-                        className="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-[#202c33]/40 transition-colors cursor-pointer"
+                        className="w-full px-3.5 py-2.5 flex items-center justify-between text-left hover:bg-muted/40 transition-colors cursor-pointer"
                     >
-                        <span className="font-bold text-xs text-[#e9edef] tracking-tight">
+                        <span className="font-semibold text-xs text-foreground tracking-tight">
                             Ações da conversa
                         </span>
-                        <span className="text-[#8696a0]">
+                        <span className="text-muted-foreground">
                             {isActionsOpen ? <Minus className="h-3.5 w-3.5" /> : <Plus className="h-3.5 w-3.5" />}
                         </span>
                     </button>
 
                     {isActionsOpen && (
-                        <div className="p-4 pt-1 border-t border-[#222d34]/60 space-y-3.5">
+                        <div className="p-3.5 pt-1 border-t border-border/20 space-y-3">
                             {/* Agente atribuído */}
                             <div className="space-y-1.5">
-                                <label className="text-[11px] font-semibold text-[#8696a0]">
+                                <label className="text-[11px] font-medium text-muted-foreground">
                                     Agente atribuído
                                 </label>
                                 <Select
                                     value={ticket?.assignedUserId || "unassigned"}
                                     onValueChange={handleAttendantChange}
                                 >
-                                    <SelectTrigger className="h-9 text-xs bg-[#202c33] border-[#2a3942] text-[#e9edef] rounded-xl focus:ring-[#00a884]">
+                                    <SelectTrigger className="h-8 text-xs bg-muted/50 hover:bg-muted border border-border/40 text-foreground rounded-lg focus:ring-0">
                                         <SelectValue>
                                             {currentAttendant ? (
                                                 <div className="flex items-center gap-2 truncate">
                                                     <div className="relative">
-                                                        <div className="h-5 w-5 rounded-full bg-[#00a884]/20 text-[#00a884] font-bold text-[10px] flex items-center justify-center border border-[#00a884]/30">
+                                                        <div className="h-4.5 w-4.5 rounded-full bg-primary/20 text-primary font-bold text-[9px] flex items-center justify-center border border-primary/30">
                                                             {(currentAttendant.name || currentAttendant.email).charAt(0).toUpperCase()}
                                                         </div>
-                                                        <span className="absolute bottom-0 right-0 h-1.5 w-1.5 rounded-full bg-emerald-500 ring-1 ring-[#202c33]" />
+                                                        <span className="absolute bottom-0 right-0 h-1.5 w-1.5 rounded-full bg-emerald-500 ring-1 ring-background" />
                                                     </div>
                                                     <span className="truncate">{currentAttendant.name || currentAttendant.email}</span>
                                                 </div>
                                             ) : (
-                                                <span className="text-[#8696a0]">Não atribuído</span>
+                                                <span className="text-muted-foreground">Não atribuído</span>
                                             )}
                                         </SelectValue>
                                     </SelectTrigger>
-                                    <SelectContent className="bg-[#202c33] border-[#2a3942] text-[#e9edef] text-xs">
-                                        <SelectItem value="unassigned" className="text-[#8696a0] focus:bg-[#182229]">
+                                    <SelectContent className="bg-popover border border-border text-popover-foreground text-xs shadow-md">
+                                        <SelectItem value="unassigned" className="text-muted-foreground focus:bg-muted focus:text-foreground">
                                             <div className="flex items-center gap-2">
-                                                <div className="h-5 w-5 rounded-full bg-[#2a3942] text-[#8696a0] flex items-center justify-center">
+                                                <div className="h-4.5 w-4.5 rounded-full bg-muted text-muted-foreground flex items-center justify-center">
                                                     <UserX className="h-3 w-3" />
                                                 </div>
                                                 <span>Não atribuído (Fila geral)</span>
                                             </div>
                                         </SelectItem>
                                         {transferOptions.attendants.map(att => (
-                                            <SelectItem key={att.id} value={att.id} className="focus:bg-[#182229]">
+                                            <SelectItem key={att.id} value={att.id} className="focus:bg-muted focus:text-foreground">
                                                 <div className="flex items-center gap-2">
                                                     <div className="relative">
-                                                        <div className="h-5 w-5 rounded-full bg-[#00a884]/20 text-[#00a884] font-bold text-[10px] flex items-center justify-center border border-[#00a884]/30">
+                                                        <div className="h-4.5 w-4.5 rounded-full bg-primary/20 text-primary font-bold text-[9px] flex items-center justify-center border border-primary/30">
                                                             {(att.name || att.email).charAt(0).toUpperCase()}
                                                         </div>
-                                                        <span className="absolute bottom-0 right-0 h-1.5 w-1.5 rounded-full bg-emerald-500 ring-1 ring-[#202c33]" />
+                                                        <span className="absolute bottom-0 right-0 h-1.5 w-1.5 rounded-full bg-emerald-500 ring-1 ring-background" />
                                                     </div>
                                                     <span>{att.name || att.email}</span>
                                                 </div>
@@ -607,14 +607,14 @@ export function ChatSidebarPanel({
 
                             {/* Time atribuído */}
                             <div className="space-y-1.5">
-                                <label className="text-[11px] font-semibold text-[#8696a0]">
+                                <label className="text-[11px] font-medium text-muted-foreground">
                                     Time atribuído
                                 </label>
                                 <Select
                                     value={ticket?.departmentId || "none"}
                                     onValueChange={handleDepartmentChange}
                                 >
-                                    <SelectTrigger className="h-9 text-xs bg-[#202c33] border-[#2a3942] text-[#e9edef] rounded-xl focus:ring-[#00a884]">
+                                    <SelectTrigger className="h-8 text-xs bg-muted/50 hover:bg-muted border border-border/40 text-foreground rounded-lg focus:ring-0">
                                         <SelectValue>
                                             {currentDepartment ? (
                                                 <div className="flex items-center gap-2 truncate">
@@ -632,24 +632,24 @@ export function ChatSidebarPanel({
                                                     <span className="truncate">{currentDepartment.name}</span>
                                                 </div>
                                             ) : (
-                                                <span className="text-[#8696a0]">Sem time definido</span>
+                                                <span className="text-muted-foreground">Sem time definido</span>
                                             )}
                                         </SelectValue>
                                     </SelectTrigger>
-                                    <SelectContent className="bg-[#202c33] border-[#2a3942] text-[#e9edef] text-xs">
-                                        <SelectItem value="none" className="text-[#8696a0] focus:bg-[#182229]">
+                                    <SelectContent className="bg-popover border border-border text-popover-foreground text-xs shadow-md">
+                                        <SelectItem value="none" className="text-muted-foreground focus:bg-muted focus:text-foreground">
                                             <div className="flex items-center gap-2">
-                                                <div className="h-5 w-5 rounded-full bg-[#2a3942] text-[#8696a0] flex items-center justify-center">
+                                                <div className="h-4.5 w-4.5 rounded-full bg-muted text-muted-foreground flex items-center justify-center">
                                                     <Building2 className="h-3 w-3" />
                                                 </div>
                                                 <span>Sem time atribuído</span>
                                             </div>
                                         </SelectItem>
                                         {transferOptions.departments.map(dept => (
-                                            <SelectItem key={dept.id} value={dept.id} className="focus:bg-[#182229]">
+                                            <SelectItem key={dept.id} value={dept.id} className="focus:bg-muted focus:text-foreground">
                                                 <div className="flex items-center gap-2">
                                                     <div
-                                                        className="h-5 w-5 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0"
+                                                        className="h-4.5 w-4.5 rounded-full flex items-center justify-center text-[9px] font-bold shrink-0"
                                                         style={{
                                                             backgroundColor: `${dept.colorHex}25`,
                                                             color: dept.colorHex,
@@ -669,14 +669,14 @@ export function ChatSidebarPanel({
 
                             {/* Prioridade */}
                             <div className="space-y-1.5">
-                                <label className="text-[11px] font-semibold text-[#8696a0]">
+                                <label className="text-[11px] font-medium text-muted-foreground">
                                     Prioridade
                                 </label>
                                 <Select
                                     value={ticket?.priority || "MEDIUM"}
                                     onValueChange={handlePriorityChange}
                                 >
-                                    <SelectTrigger className="h-9 text-xs bg-[#202c33] border-[#2a3942] text-[#e9edef] rounded-xl focus:ring-[#00a884]">
+                                    <SelectTrigger className="h-8 text-xs bg-muted/50 hover:bg-muted border border-border/40 text-foreground rounded-lg focus:ring-0">
                                         <SelectValue>
                                             <div className="flex items-center gap-2">
                                                 <PriorityBars priority={ticket?.priority || "MEDIUM"} />
@@ -686,29 +686,29 @@ export function ChatSidebarPanel({
                                             </div>
                                         </SelectValue>
                                     </SelectTrigger>
-                                    <SelectContent className="bg-[#202c33] border-[#2a3942] text-[#e9edef] text-xs">
-                                        <SelectItem value="LOW" className="focus:bg-[#182229]">
+                                    <SelectContent className="bg-popover border border-border text-popover-foreground text-xs shadow-md">
+                                        <SelectItem value="LOW" className="focus:bg-muted focus:text-foreground">
                                             <div className="flex items-center gap-2">
                                                 <PriorityBars priority="LOW" />
                                                 <span>Baixa</span>
                                             </div>
                                         </SelectItem>
-                                        <SelectItem value="MEDIUM" className="focus:bg-[#182229]">
+                                        <SelectItem value="MEDIUM" className="focus:bg-muted focus:text-foreground">
                                             <div className="flex items-center gap-2">
                                                 <PriorityBars priority="MEDIUM" />
                                                 <span>Média</span>
                                             </div>
                                         </SelectItem>
-                                        <SelectItem value="HIGH" className="focus:bg-[#182229]">
+                                        <SelectItem value="HIGH" className="focus:bg-muted focus:text-foreground">
                                             <div className="flex items-center gap-2">
                                                 <PriorityBars priority="HIGH" />
                                                 <span>Alta</span>
                                             </div>
                                         </SelectItem>
-                                        <SelectItem value="URGENT" className="focus:bg-[#182229]">
+                                        <SelectItem value="URGENT" className="focus:bg-muted focus:text-foreground">
                                             <div className="flex items-center gap-2">
                                                 <PriorityBars priority="URGENT" />
-                                                <span className="text-rose-400 font-semibold">Urgente</span>
+                                                <span className="text-red-500 font-semibold">Urgente</span>
                                             </div>
                                         </SelectItem>
                                     </SelectContent>
@@ -717,7 +717,7 @@ export function ChatSidebarPanel({
 
                             {/* Etiquetas da conversa */}
                             <div className="space-y-2 pt-1">
-                                <label className="text-[11px] font-semibold text-[#8696a0] block">
+                                <label className="text-[11px] font-medium text-muted-foreground block">
                                     Etiquetas da conversa
                                 </label>
 
@@ -725,7 +725,7 @@ export function ChatSidebarPanel({
                                     <Button
                                         variant="outline"
                                         size="sm"
-                                        className="h-7 px-2.5 text-xs font-semibold text-[#00a884] bg-[#00a884]/10 hover:bg-[#00a884]/20 border-[#00a884]/30 rounded-lg w-full justify-center gap-1.5 cursor-pointer"
+                                        className="h-7 px-2.5 text-xs font-medium text-primary bg-primary/10 hover:bg-primary/20 border-primary/25 rounded-lg w-full justify-center gap-1.5 cursor-pointer"
                                         onClick={() => setTimeout(loadLabels, 600)}
                                     >
                                         <Plus className="h-3 w-3" />
@@ -737,7 +737,7 @@ export function ChatSidebarPanel({
                                     {assignedLabels.map(label => (
                                         <span
                                             key={label.id}
-                                            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-medium border transition-colors shadow-2xs"
+                                            className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg text-[11px] font-medium border transition-colors shadow-2xs"
                                             style={{
                                                 backgroundColor: `${label.colorHex}15`,
                                                 borderColor: `${label.colorHex}40`,
@@ -745,7 +745,7 @@ export function ChatSidebarPanel({
                                             }}
                                         >
                                             <span
-                                                className="h-2 w-2 rounded-full shrink-0"
+                                                className="h-1.5 w-1.5 rounded-full shrink-0"
                                                 style={{ backgroundColor: label.colorHex }}
                                             />
                                             <span className="truncate max-w-[120px]">{label.name}</span>
@@ -759,7 +759,7 @@ export function ChatSidebarPanel({
                                         </span>
                                     ))}
                                     {assignedLabels.length === 0 && !loadingLabels && (
-                                        <p className="text-[10px] text-[#8696a0] italic py-0.5">
+                                        <p className="text-[10px] text-muted-foreground italic py-0.5">
                                             Nenhuma etiqueta adicionada.
                                         </p>
                                     )}
@@ -770,89 +770,89 @@ export function ChatSidebarPanel({
                 </div>
 
                 {/* 3. Section: Macros (collapsible with +) */}
-                <div className="rounded-2xl border border-[#222d34] bg-[#182229]/50 shadow-sm overflow-hidden">
+                <div className="rounded-2xl border border-border/30 bg-muted/20 overflow-hidden">
                     <button
                         onClick={() => setIsMacrosOpen(prev => !prev)}
-                        className="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-[#202c33]/40 transition-colors cursor-pointer"
+                        className="w-full px-3.5 py-2.5 flex items-center justify-between text-left hover:bg-muted/40 transition-colors cursor-pointer"
                     >
-                        <span className="font-bold text-xs text-[#e9edef] tracking-tight flex items-center gap-1.5">
-                            <Zap className="h-3.5 w-3.5 text-amber-400" />
+                        <span className="font-semibold text-xs text-foreground tracking-tight flex items-center gap-1.5">
+                            <Zap className="h-3.5 w-3.5 text-amber-500" />
                             Macros
                         </span>
-                        <span className="text-[#8696a0]">
+                        <span className="text-muted-foreground">
                             {isMacrosOpen ? <Minus className="h-3.5 w-3.5" /> : <Plus className="h-3.5 w-3.5" />}
                         </span>
                     </button>
 
                     {isMacrosOpen && (
-                        <div className="p-4 pt-1 border-t border-[#222d34]/60 space-y-2">
+                        <div className="p-3.5 pt-1 border-t border-border/20 space-y-2">
                             <button
                                 onClick={() => handleRunMacro("high_priority")}
-                                className="w-full text-left p-2 rounded-xl bg-[#202c33] hover:bg-[#2a3942] text-[#e9edef] text-xs transition-colors flex items-center justify-between border border-white/[0.04] cursor-pointer"
+                                className="w-full text-left p-2 rounded-lg bg-muted/40 hover:bg-muted text-foreground text-xs transition-colors flex items-center justify-between border border-border/30 cursor-pointer"
                             >
                                 <span className="font-medium">Definir como Prioridade Alta</span>
                                 <PriorityBars priority="HIGH" />
                             </button>
                             <button
                                 onClick={() => handleRunMacro("transfer_support")}
-                                className="w-full text-left p-2 rounded-xl bg-[#202c33] hover:bg-[#2a3942] text-[#e9edef] text-xs transition-colors flex items-center justify-between border border-white/[0.04] cursor-pointer"
+                                className="w-full text-left p-2 rounded-lg bg-muted/40 hover:bg-muted text-foreground text-xs transition-colors flex items-center justify-between border border-border/30 cursor-pointer"
                             >
                                 <span className="font-medium">Transferir p/ Suporte Técnico</span>
-                                <Wrench className="h-3.5 w-3.5 text-blue-400" />
+                                <Wrench className="h-3.5 w-3.5 text-blue-500" />
                             </button>
                             <button
                                 onClick={() => handleRunMacro("resolve")}
-                                className="w-full text-left p-2 rounded-xl bg-[#202c33] hover:bg-emerald-500/15 hover:text-emerald-400 text-[#e9edef] text-xs transition-colors flex items-center justify-between border border-white/[0.04] cursor-pointer"
+                                className="w-full text-left p-2 rounded-lg bg-muted/40 hover:bg-emerald-500/15 hover:text-emerald-500 text-foreground text-xs transition-colors flex items-center justify-between border border-border/30 cursor-pointer"
                             >
                                 <span className="font-medium">Resolver e Enviar CSAT</span>
-                                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
+                                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
                             </button>
                         </div>
                     )}
                 </div>
 
                 {/* 4. Section: Mini-CRM & Dados Comerciais */}
-                <div className="rounded-2xl border border-[#222d34] bg-[#182229]/50 shadow-sm overflow-hidden">
+                <div className="rounded-2xl border border-border/30 bg-muted/20 overflow-hidden">
                     <button
                         onClick={() => setIsCrmOpen(prev => !prev)}
-                        className="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-[#202c33]/40 transition-colors cursor-pointer"
+                        className="w-full px-3.5 py-2.5 flex items-center justify-between text-left hover:bg-muted/40 transition-colors cursor-pointer"
                     >
-                        <span className="font-bold text-xs text-[#e9edef] tracking-tight flex items-center gap-1.5">
-                            <Briefcase className="h-3.5 w-3.5 text-[#00a884]" />
+                        <span className="font-semibold text-xs text-foreground tracking-tight flex items-center gap-1.5">
+                            <Briefcase className="h-3.5 w-3.5 text-primary" />
                             Dados Contratuais & CRM
                         </span>
-                        <span className="text-[#8696a0]">
+                        <span className="text-muted-foreground">
                             {isCrmOpen ? <Minus className="h-3.5 w-3.5" /> : <Plus className="h-3.5 w-3.5" />}
                         </span>
                     </button>
 
                     {isCrmOpen && (
-                        <div className="p-4 pt-1 border-t border-[#222d34]/60 space-y-2.5">
-                            <div className="flex items-center justify-between py-1 border-b border-[#222d34]/50">
-                                <span className="text-[#8696a0] text-[11px]">CPF / CNPJ:</span>
-                                <span className="font-mono text-[11px] text-[#e9edef]">
-                                    {contact?.document || <span className="text-[#8696a0]/50 italic">Não informado</span>}
+                        <div className="p-3.5 pt-1 border-t border-border/20 space-y-2.5">
+                            <div className="flex items-center justify-between py-1 border-b border-border/15">
+                                <span className="text-muted-foreground text-[11px]">CPF / CNPJ:</span>
+                                <span className="font-mono text-[11px] text-foreground">
+                                    {contact?.document || <span className="text-muted-foreground/50 italic">Não informado</span>}
                                 </span>
                             </div>
 
-                            <div className="flex items-center justify-between py-1 border-b border-[#222d34]/50">
-                                <span className="text-[#8696a0] text-[11px]">Plano / Contrato:</span>
-                                <span className="font-semibold text-[11px] text-[#00a884]">
-                                    {contact?.plan || <span className="text-[#8696a0]/50 italic font-normal">Nenhum</span>}
+                            <div className="flex items-center justify-between py-1 border-b border-border/15">
+                                <span className="text-muted-foreground text-[11px]">Plano / Contrato:</span>
+                                <span className="font-semibold text-[11px] text-primary">
+                                    {contact?.plan || <span className="text-muted-foreground/50 italic font-normal">Nenhum</span>}
                                 </span>
                             </div>
 
-                            <div className="flex items-center justify-between py-1 border-b border-[#222d34]/50">
-                                <span className="text-[#8696a0] text-[11px]">Mensalidade:</span>
-                                <span className="font-medium text-[11px] text-[#e9edef]">
-                                    {contact?.planValue || <span className="text-[#8696a0]/50 italic">--</span>}
+                            <div className="flex items-center justify-between py-1 border-b border-border/15">
+                                <span className="text-muted-foreground text-[11px]">Mensalidade:</span>
+                                <span className="font-medium text-[11px] text-foreground">
+                                    {contact?.planValue || <span className="text-muted-foreground/50 italic">--</span>}
                                 </span>
                             </div>
 
                             <div className="space-y-1 pt-1">
-                                <span className="text-[#8696a0] text-[11px] block">Observações do Cliente:</span>
-                                <div className="p-2.5 rounded-xl bg-[#202c33]/70 border border-[#2a3942]/60 text-[11px] text-[#e9edef] whitespace-pre-wrap min-h-12 max-h-28 overflow-y-auto styled-scrollbar">
-                                    {contact?.notes || <span className="text-[#8696a0]/50 italic">Nenhuma anotação privada cadastrada.</span>}
+                                <span className="text-muted-foreground text-[11px] block">Observações do Cliente:</span>
+                                <div className="p-2.5 rounded-xl bg-muted/30 border border-border/30 text-[11px] text-foreground whitespace-pre-wrap min-h-12 max-h-28 overflow-y-auto styled-scrollbar">
+                                    {contact?.notes || <span className="text-muted-foreground/50 italic">Nenhuma anotação privada cadastrada.</span>}
                                 </div>
                             </div>
 
@@ -860,7 +860,7 @@ export function ChatSidebarPanel({
                                 variant="outline"
                                 size="sm"
                                 onClick={() => setIsEditDialogOpen(true)}
-                                className="w-full h-8 text-xs font-semibold bg-[#202c33] hover:bg-[#2a3942] text-[#e9edef] border-[#2a3942] rounded-xl mt-2 cursor-pointer"
+                                className="w-full h-8 text-xs font-medium bg-muted/50 hover:bg-muted text-foreground border border-border/40 rounded-lg mt-2 cursor-pointer"
                             >
                                 <Edit3 className="h-3.5 w-3.5 mr-1.5" /> Editar Cadastro
                             </Button>
@@ -870,10 +870,10 @@ export function ChatSidebarPanel({
 
                 {/* CSAT Rating Preview (se houver avaliação do cliente) */}
                 {ticket?.csatScore && (
-                    <div className="p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/25 text-[#e9edef] space-y-1.5">
-                        <div className="flex items-center justify-between text-xs font-bold text-amber-400">
+                    <div className="p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/25 text-foreground space-y-1.5">
+                        <div className="flex items-center justify-between text-xs font-semibold text-amber-500">
                             <span className="flex items-center gap-1.5">
-                                <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
+                                <Star className="h-3.5 w-3.5 fill-amber-500 text-amber-500" />
                                 Avaliação de Atendimento
                             </span>
                             <span>{ticket.csatScore}/5</span>
@@ -885,14 +885,14 @@ export function ChatSidebarPanel({
                                     className={cn(
                                         "h-3.5 w-3.5",
                                         star <= ticket.csatScore
-                                            ? "fill-amber-400 text-amber-400"
-                                            : "text-[#8696a0]/30"
+                                            ? "fill-amber-500 text-amber-500"
+                                            : "text-muted-foreground/30"
                                     )}
                                 />
                             ))}
                         </div>
                         {ticket.csatComment && (
-                            <p className="text-[11px] italic text-[#8696a0] pt-1">
+                            <p className="text-[11px] italic text-muted-foreground pt-1">
                                 &ldquo;{ticket.csatComment}&rdquo;
                             </p>
                         )}
@@ -902,110 +902,110 @@ export function ChatSidebarPanel({
 
             {/* Edit Contact Modal */}
             <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-                <DialogContent className="sm:max-w-md bg-[#111b21] border-[#222d34] text-[#e9edef]">
+                <DialogContent className="sm:max-w-md bg-background border-border text-foreground">
                     <DialogHeader>
-                        <DialogTitle className="text-sm font-bold flex items-center gap-2 text-[#e9edef]">
-                            <User className="h-4 w-4 text-[#00a884]" />
+                        <DialogTitle className="text-sm font-semibold flex items-center gap-2 text-foreground">
+                            <User className="h-4 w-4 text-primary" />
                             Editar Contato & Mini-CRM
                         </DialogTitle>
-                        <DialogDescription className="text-xs text-[#8696a0]">
+                        <DialogDescription className="text-xs text-muted-foreground">
                             Atualize os dados comerciais, profissionais e de localização do contato.
                         </DialogDescription>
                     </DialogHeader>
 
                     <div className="space-y-3 py-2 text-xs">
                         <div className="space-y-1">
-                            <label className="font-semibold text-[#8696a0]">Nome Completo</label>
+                            <label className="font-medium text-muted-foreground">Nome Completo</label>
                             <Input
                                 value={editForm.name}
                                 onChange={(e) => setEditForm(prev => ({ ...prev, name: e.target.value }))}
                                 placeholder="Nome do cliente"
-                                className="h-8 text-xs bg-[#202c33] border-[#2a3942] text-[#e9edef] rounded-lg focus:ring-[#00a884]"
+                                className="h-8 text-xs bg-muted/50 border border-border/40 text-foreground rounded-lg focus-visible:ring-1"
                             />
                         </div>
 
                         <div className="grid grid-cols-2 gap-2">
                             <div className="space-y-1">
-                                <label className="font-semibold text-[#8696a0]">Empresa</label>
+                                <label className="font-medium text-muted-foreground">Empresa</label>
                                 <Input
                                     value={editForm.company}
                                     onChange={(e) => setEditForm(prev => ({ ...prev, company: e.target.value }))}
                                     placeholder="Ex: Aurora Comércio Ltda."
-                                    className="h-8 text-xs bg-[#202c33] border-[#2a3942] text-[#e9edef] rounded-lg"
+                                    className="h-8 text-xs bg-muted/50 border border-border/40 text-foreground rounded-lg focus-visible:ring-1"
                                 />
                             </div>
                             <div className="space-y-1">
-                                <label className="font-semibold text-[#8696a0]">Localização</label>
+                                <label className="font-medium text-muted-foreground">Localização</label>
                                 <Input
                                     value={editForm.location}
                                     onChange={(e) => setEditForm(prev => ({ ...prev, location: e.target.value }))}
                                     placeholder="Ex: São Paulo, Brasil 🇧🇷"
-                                    className="h-8 text-xs bg-[#202c33] border-[#2a3942] text-[#e9edef] rounded-lg"
+                                    className="h-8 text-xs bg-muted/50 border border-border/40 text-foreground rounded-lg focus-visible:ring-1"
                                 />
                             </div>
                         </div>
 
                         <div className="space-y-1">
-                            <label className="font-semibold text-[#8696a0]">Bio / Cargo / Descrição</label>
+                            <label className="font-medium text-muted-foreground">Bio / Cargo / Descrição</label>
                             <Input
                                 value={editForm.bio}
                                 onChange={(e) => setEditForm(prev => ({ ...prev, bio: e.target.value }))}
                                 placeholder="Ex: Chefe de Operações. Cliente desde 2023."
-                                className="h-8 text-xs bg-[#202c33] border-[#2a3942] text-[#e9edef] rounded-lg"
+                                className="h-8 text-xs bg-muted/50 border border-border/40 text-foreground rounded-lg focus-visible:ring-1"
                             />
                         </div>
 
                         <div className="grid grid-cols-2 gap-2">
                             <div className="space-y-1">
-                                <label className="font-semibold text-[#8696a0]">E-mail</label>
+                                <label className="font-medium text-muted-foreground">E-mail</label>
                                 <Input
                                     value={editForm.email}
                                     onChange={(e) => setEditForm(prev => ({ ...prev, email: e.target.value }))}
                                     placeholder="cliente@empresa.com"
                                     type="email"
-                                    className="h-8 text-xs bg-[#202c33] border-[#2a3942] text-[#e9edef] rounded-lg"
+                                    className="h-8 text-xs bg-muted/50 border border-border/40 text-foreground rounded-lg focus-visible:ring-1"
                                 />
                             </div>
                             <div className="space-y-1">
-                                <label className="font-semibold text-[#8696a0]">CPF / CNPJ</label>
+                                <label className="font-medium text-muted-foreground">CPF / CNPJ</label>
                                 <Input
                                     value={editForm.document}
                                     onChange={(e) => setEditForm(prev => ({ ...prev, document: e.target.value }))}
                                     placeholder="000.000.000-00"
-                                    className="h-8 text-xs font-mono bg-[#202c33] border-[#2a3942] text-[#e9edef] rounded-lg"
+                                    className="h-8 text-xs font-mono bg-muted/50 border border-border/40 text-foreground rounded-lg focus-visible:ring-1"
                                 />
                             </div>
                         </div>
 
                         <div className="grid grid-cols-2 gap-2">
                             <div className="space-y-1">
-                                <label className="font-semibold text-[#8696a0]">Plano / Contrato</label>
+                                <label className="font-medium text-muted-foreground">Plano / Contrato</label>
                                 <Input
                                     value={editForm.plan}
                                     onChange={(e) => setEditForm(prev => ({ ...prev, plan: e.target.value }))}
                                     placeholder="Ex: Essencial, Pro, VIP"
-                                    className="h-8 text-xs bg-[#202c33] border-[#2a3942] text-[#e9edef] rounded-lg"
+                                    className="h-8 text-xs bg-muted/50 border border-border/40 text-foreground rounded-lg focus-visible:ring-1"
                                 />
                             </div>
                             <div className="space-y-1">
-                                <label className="font-semibold text-[#8696a0]">Valor Mensal</label>
+                                <label className="font-medium text-muted-foreground">Valor Mensal</label>
                                 <Input
                                     value={editForm.planValue}
                                     onChange={(e) => setEditForm(prev => ({ ...prev, planValue: e.target.value }))}
                                     placeholder="Ex: R$ 197,00/mês"
-                                    className="h-8 text-xs bg-[#202c33] border-[#2a3942] text-[#e9edef] rounded-lg"
+                                    className="h-8 text-xs bg-muted/50 border border-border/40 text-foreground rounded-lg focus-visible:ring-1"
                                 />
                             </div>
                         </div>
 
                         <div className="space-y-1">
-                            <label className="font-semibold text-[#8696a0]">Anotações Privadas</label>
+                            <label className="font-medium text-muted-foreground">Anotações Privadas</label>
                             <Textarea
                                 value={editForm.notes}
                                 onChange={(e) => setEditForm(prev => ({ ...prev, notes: e.target.value }))}
                                 placeholder="Informações comerciais, preferências ou notas internas da equipe..."
                                 rows={2}
-                                className="text-xs resize-none bg-[#202c33] border-[#2a3942] text-[#e9edef] rounded-lg"
+                                className="text-xs resize-none bg-muted/50 border border-border/40 text-foreground rounded-lg focus-visible:ring-1"
                             />
                         </div>
                     </div>
@@ -1015,7 +1015,7 @@ export function ChatSidebarPanel({
                             variant="outline"
                             size="sm"
                             onClick={() => setIsEditDialogOpen(false)}
-                            className="text-xs h-8 bg-[#202c33] hover:bg-[#2a3942] text-[#e9edef] border-[#2a3942] rounded-lg cursor-pointer"
+                            className="text-xs h-8 bg-muted/50 hover:bg-muted text-foreground border border-border/40 rounded-lg cursor-pointer"
                         >
                             Cancelar
                         </Button>
@@ -1023,7 +1023,7 @@ export function ChatSidebarPanel({
                             size="sm"
                             onClick={handleSaveContact}
                             disabled={savingContact}
-                            className="text-xs h-8 bg-[#00a884] hover:bg-[#008f6f] text-white font-semibold rounded-lg shadow-sm cursor-pointer"
+                            className="text-xs h-8 font-medium rounded-lg shadow-sm cursor-pointer"
                         >
                             {savingContact ? "Salvando..." : "Salvar Alterações"}
                         </Button>
