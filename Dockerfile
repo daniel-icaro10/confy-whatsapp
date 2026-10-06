@@ -15,8 +15,8 @@ ENV NODE_OPTIONS=--max-old-space-size=2560
 RUN npx prisma generate && npm run build
 
 # Strip devDeps from node_modules after build
-# tsx needed at runtime, kept explicitly
-RUN npm prune --omit=dev && npm install --no-save tsx typescript
+# tsx & prisma needed at runtime, kept explicitly
+RUN npm prune --omit=dev --legacy-peer-deps && npm install --no-save --legacy-peer-deps tsx typescript prisma
 
 # Production image
 FROM node:26-alpine AS runner
