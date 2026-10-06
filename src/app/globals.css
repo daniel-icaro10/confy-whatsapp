@@ -1430,3 +1430,14 @@ kbd, .kbd {
     background: var(--accent);
   }
 }
+
+/* ============================================================
+   WHATSAPP CHAT WALLPAPER (Official Dark Doodle Pattern)
+   ============================================================ */
+.whatsapp-chat-wallpaper {
+  background-color: #0b141a;
+  background-image: url("/whatsapp-bg-dark.jpg");
+  background-repeat: repeat;
+  background-position: center top;
+  background-size: 412px auto;
+}

@@ -30,6 +30,12 @@ import {
   User,
   Calendar,
   Lock,
+  CheckCheck,
+  Send,
+  Paperclip,
+  Smile,
+  MessageSquare,
+  Bot,
 } from "lucide-react";
 
 export default function DesignSystemPage() {
@@ -667,6 +673,108 @@ export default function DesignSystemPage() {
           >
             <Command size={14} /> Abrir Menu de Comandos (⌘K)
           </Button>
+        </div>
+      </section>
+
+      {/* 9. WhatsApp Conversation Background & Chat UI */}
+      <section className="space-y-4">
+        <div>
+          <h2 className="text-[15px] font-semibold text-[var(--text)] tracking-[-0.01em] flex items-center gap-2">
+            <MessageSquare size={16} className="text-[#00a884]" />
+            Plano de Fundo Oficial das Conversas (WhatsApp Wallpaper)
+          </h2>
+          <p className="text-[12.5px] text-[var(--text-3)]">
+            Fundo escuro oficial com doodle de ícones (câmera, notas musicais, emojis, café) aplicado na tela de chat (/dashboard/chat).
+          </p>
+        </div>
+
+        <div className="rounded-2xl border border-[#222d34] overflow-hidden shadow-2xl shadow-black/40 max-w-3xl">
+          {/* Mock Header */}
+          <div className="bg-[#202c33] px-4 py-3 border-b border-[#222d34] flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="relative">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#00a884] to-[#005c4b] text-white flex items-center justify-center font-semibold text-sm">
+                  JD
+                </div>
+                <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-[#00a884] border-2 border-[#202c33]" />
+              </div>
+              <div>
+                <h3 className="text-sm font-semibold text-[#e9edef] leading-tight">João Silva</h3>
+                <p className="text-[11px] text-[#8696a0]">online • Suporte ao Cliente</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-[11px] px-2.5 py-0.5 rounded-full bg-[#00a884]/15 text-[#00a884] font-medium border border-[#00a884]/20">
+                Fila Atendimento
+              </span>
+            </div>
+          </div>
+
+          {/* Wallpaper Chat Container */}
+          <div className="whatsapp-chat-wallpaper p-4 space-y-3.5 min-h-[340px] flex flex-col justify-end">
+            {/* Date Tag */}
+            <div className="flex justify-center">
+              <span className="text-[10px] font-semibold text-[#8696a0] bg-[#182229]/90 backdrop-blur-sm px-3 py-1 rounded-lg border border-white/[0.06] shadow-xs">
+                HOJE
+              </span>
+            </div>
+
+            {/* Received Message */}
+            <div className="flex justify-start">
+              <div className="bg-[#202c33] text-[#e9edef] border border-white/[0.05] rounded-2xl rounded-tl-xs px-3.5 py-2 max-w-[80%] shadow-xs space-y-1">
+                <p className="text-[13px] leading-relaxed">
+                  Olá! Gostaria de tirar uma dúvida sobre o plano de integração do WhatsApp.
+                </p>
+                <div className="flex justify-end">
+                  <span className="text-[10px] text-[#8696a0]">13:20</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Sent Message */}
+            <div className="flex justify-end">
+              <div className="bg-[#005c4b] text-[#e9edef] rounded-2xl rounded-tr-xs px-3.5 py-2 max-w-[80%] shadow-xs space-y-1">
+                <p className="text-[13px] leading-relaxed">
+                  Com certeza! O plano de fundo escuro com doodles e o design system do Gr8r Studio já estão 100% integrados no sistema!
+                </p>
+                <div className="flex items-center justify-end gap-1 select-none">
+                  <span className="text-[10px] text-[#8696a0]">13:21</span>
+                  <CheckCheck size={14} className="text-[#53bdeb]" />
+                </div>
+              </div>
+            </div>
+
+            {/* Received Message with Bot Tag */}
+            <div className="flex justify-start">
+              <div className="bg-[#202c33] text-[#e9edef] border border-white/[0.05] rounded-2xl rounded-tl-xs px-3.5 py-2 max-w-[80%] shadow-xs space-y-1">
+                <div className="flex items-center gap-1.5 text-[10px] text-[#00a884] font-medium pb-0.5">
+                  <Bot size={12} /> Confy Auto-Reply
+                </div>
+                <p className="text-[13px] leading-relaxed">
+                  Você precisa de mais algum ajuste ou deseja atualizar na VPS?
+                </p>
+                <div className="flex justify-end">
+                  <span className="text-[10px] text-[#8696a0]">13:22</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Mock Input Bar */}
+          <div className="bg-[#202c33] px-3 py-2.5 border-t border-[#222d34] flex items-center gap-2">
+            <button className="text-[#8696a0] hover:text-[#e9edef] p-1.5 rounded-lg transition-colors">
+              <Smile size={18} />
+            </button>
+            <button className="text-[#8696a0] hover:text-[#e9edef] p-1.5 rounded-lg transition-colors">
+              <Paperclip size={18} />
+            </button>
+            <div className="flex-1 bg-[#2a3942] rounded-lg px-3 py-1.5 text-xs text-[#e9edef] flex items-center justify-between">
+              <span className="text-[#8696a0]">Digite uma mensagem...</span>
+            </div>
+            <button className="bg-[#00a884] hover:bg-[#00a884]/90 text-[#111b21] p-2 rounded-lg transition-all shadow-sm">
+              <Send size={15} />
+            </button>
+          </div>
         </div>
       </section>
     </div>
