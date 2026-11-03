@@ -3,19 +3,6 @@
 import { useState, useEffect, Suspense } from "react";
 import { useParams, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import {
-    ArrowLeft,
-    Heart,
-    Lock,
-    Play,
-    SkipForward,
-    SkipBack,
-    CheckCircle2,
-    Crown,
-    Sparkles,
-    ListVideo,
-    Share2
-} from "lucide-react";
 import { extractYoutubeId } from "@/lib/segredos-defaults";
 import { VipAccessModal } from "@/components/streaming/vip-access-modal";
 
@@ -52,9 +39,7 @@ function WatchDramaContent() {
     const [drama, setDrama] = useState<Drama | null>(null);
     const [loading, setLoading] = useState(true);
     const [currentEpNumber, setCurrentEpNumber] = useState<number>(1);
-    const [liked, setLiked] = useState(false);
 
-    // Controle de acesso VIP
     const [viewerPhone, setViewerPhone] = useState("");
     const [isVip, setIsVip] = useState(false);
     const [planPrice, setPlanPrice] = useState(19.9);
@@ -88,7 +73,6 @@ function WatchDramaContent() {
         if (dramaIdOrSlug) fetchDrama();
     }, [dramaIdOrSlug]);
 
-    // Auto-verificação de VIP via ?phone= ou localStorage
     useEffect(() => {
         const urlPhone = searchParams.get("phone");
         const storedPhone = localStorage.getItem("sdc_viewer_phone");
@@ -114,24 +98,21 @@ function WatchDramaContent() {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-[#070409] text-white flex items-center justify-center">
-                <div className="flex flex-col items-center gap-3">
-                    <div className="w-10 h-10 rounded-full border-2 border-rose-500 border-t-transparent animate-spin" />
-                    <span className="text-xs text-white/60">Carregando episódios...</span>
-                </div>
+            <div className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center">
+                <span className="text-xs text-neutral-400">Carregando...</span>
             </div>
         );
     }
 
     if (!drama) {
         return (
-            <div className="min-h-screen bg-[#070409] text-white flex flex-col items-center justify-center p-4 text-center">
-                <h1 className="text-xl font-bold mb-2">Novela não encontrada</h1>
+            <div className="min-h-screen bg-[#0a0a0a] text-white flex flex-col items-center justify-center p-4 text-center">
+                <h1 className="text-lg font-semibold mb-3">Novela não encontrada</h1>
                 <Link
                     href="/"
-                    className="px-5 py-2.5 rounded-xl bg-rose-600 text-sm font-semibold mt-2"
+                    className="px-4 py-2 rounded bg-white text-black text-xs font-medium"
                 >
-                    Voltar ao Catálogo
+                    Voltar ao catálogo
                 </Link>
             </div>
         );
@@ -164,22 +145,21 @@ function WatchDramaContent() {
     const nextEp = currentIndex >= 0 && currentIndex < episodes.length - 1 ? episodes[currentIndex + 1] : null;
 
     return (
-        <div className="min-h-screen bg-[#070409] text-white flex flex-col">
-            {/* Barra Superior */}
-            <header className="sticky top-0 z-30 border-b border-white/10 bg-[#070409]/90 backdrop-blur-xl">
-                <div className="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between gap-3">
+        <div className="min-h-screen bg-[#0a0a0a] text-white flex flex-col">
+            <header className="sticky top-0 z-30 border-b border-neutral-800 bg-[#0a0a0a]/95 backdrop-blur">
+                <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between gap-3">
                     <div className="flex items-center gap-3 min-w-0">
                         <Link
                             href="/"
-                            className="w-9 h-9 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center shrink-0 transition"
+                            className="px-2.5 py-1 rounded border border-neutral-800 hover:border-neutral-600 text-xs text-neutral-300 shrink-0"
                         >
-                            <ArrowLeft className="w-4 h-4" />
+                            Voltar
                         </Link>
                         <div className="min-w-0">
-                            <h1 className="text-sm sm:text-base font-bold truncate">
+                            <h1 className="text-sm font-medium truncate">
                                 {drama.title}
                             </h1>
-                            <p className="text-[11px] text-rose-400 font-medium">
+                            <p className="text-[11px] text-neutral-400">
                                 Episódio {currentEpisode?.number || 1} de {episodes.length}
                             </p>
                         </div>
@@ -187,9 +167,8 @@ function WatchDramaContent() {
 
                     <div className="flex items-center gap-2 shrink-0">
                         {isVip ? (
-                            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-semibold">
-                                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                                VIP Ativo
+                            <span className="px-2.5 py-1 rounded bg-neutral-900 border border-neutral-800 text-neutral-300 text-xs">
+                                Acesso ativo ({viewerPhone})
                             </span>
                         ) : (
                             <>
@@ -199,9 +178,9 @@ function WatchDramaContent() {
                                         setVipModalTab("login");
                                         setVipModalOpen(true);
                                     }}
-                                    className="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-xs font-semibold"
+                                    className="px-3 py-1.5 rounded border border-neutral-800 hover:border-neutral-600 text-xs text-neutral-300"
                                 >
-                                    Já Paguei
+                                    Entrar
                                 </button>
                                 <button
                                     type="button"
@@ -209,10 +188,9 @@ function WatchDramaContent() {
                                         setVipModalTab("pix");
                                         setVipModalOpen(true);
                                     }}
-                                    className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 text-xs font-bold flex items-center gap-1 shadow-lg shadow-rose-600/30"
+                                    className="px-3 py-1.5 rounded bg-white text-black text-xs font-medium"
                                 >
-                                    <Crown className="w-3.5 h-3.5" />
-                                    Destravar VIP
+                                    Liberar episódios
                                 </button>
                             </>
                         )}
@@ -220,16 +198,14 @@ function WatchDramaContent() {
                 </div>
             </header>
 
-            {/* Área Principal: Player Vertical 9:16 + Lista de Episódios */}
-            <main className="max-w-7xl mx-auto w-full px-0 sm:px-4 py-0 sm:py-6 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-                {/* Coluna do Player Vertical (Estilo ReelShort / TikTok) */}
+            <main className="max-w-6xl mx-auto w-full px-0 sm:px-4 py-0 sm:py-6 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
                 <div className="lg:col-span-7 flex flex-col items-center">
                     <div
                         className={`relative w-full ${
                             drama.isVertical
-                                ? "max-w-[420px] aspect-[9/16]"
+                                ? "max-w-[400px] aspect-[9/16]"
                                 : "aspect-video"
-                        } bg-black sm:rounded-3xl overflow-hidden border-y sm:border border-white/15 shadow-2xl shadow-rose-950/50`}
+                        } bg-black sm:rounded-lg overflow-hidden border-y sm:border border-neutral-800`}
                     >
                         {currentUnlocked && currentEpisode ? (
                             currentEpisode.videoUrl ? (
@@ -251,35 +227,23 @@ function WatchDramaContent() {
                                     className="w-full h-full border-0"
                                 />
                             ) : (
-                                <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center">
-                                    <p className="text-sm text-white/70">
-                                        Link de vídeo inválido para este episódio.
+                                <div className="w-full h-full flex items-center justify-center p-6 text-center">
+                                    <p className="text-xs text-neutral-400">
+                                        Vídeo indisponível.
                                     </p>
                                 </div>
                             )
                         ) : (
-                            /* Tela de Episódio Bloqueado (VIP) */
-                            <div className="w-full h-full relative flex flex-col items-center justify-center p-6 text-center">
-                                <img
-                                    src={drama.coverUrl}
-                                    alt={drama.title}
-                                    className="absolute inset-0 w-full h-full object-cover opacity-25 blur-md scale-110"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/60" />
-
-                                <div className="relative z-10 flex flex-col items-center max-w-xs">
-                                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center shadow-2xl shadow-rose-600/40 mb-4">
-                                        <Lock className="w-8 h-8 text-white" />
-                                    </div>
-                                    <span className="px-3 py-1 rounded-full bg-rose-500/20 border border-rose-500/40 text-rose-300 text-[11px] font-bold uppercase tracking-wider mb-2">
-                                        Episódio {currentEpisode?.number} Exclusivo VIP
+                            <div className="w-full h-full relative flex flex-col items-center justify-center p-6 text-center bg-[#111111]">
+                                <div className="max-w-xs">
+                                    <span className="inline-block px-2.5 py-0.5 rounded bg-neutral-800 text-neutral-300 text-[11px] mb-3">
+                                        Episódio {currentEpisode?.number} bloqueado
                                     </span>
-                                    <h2 className="text-xl font-extrabold mb-2">
-                                        O melhor da história acontece agora! 😱
+                                    <h2 className="text-lg font-semibold mb-2">
+                                        Libere o acesso para continuar assistindo
                                     </h2>
-                                    <p className="text-xs text-white/70 mb-6 leading-relaxed">
-                                        Libere agora todos os episódios de{" "}
-                                        <strong className="text-white">{drama.title}</strong> + todo o nosso catálogo de novelas verticais no seu celular.
+                                    <p className="text-xs text-neutral-400 mb-6 leading-relaxed">
+                                        Desbloqueie todos os episódios de {drama.title} e todo o catálogo por R$ {planPrice.toFixed(2).replace(".", ",")}.
                                     </p>
 
                                     <button
@@ -288,10 +252,9 @@ function WatchDramaContent() {
                                             setVipModalTab("pix");
                                             setVipModalOpen(true);
                                         }}
-                                        className="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white font-bold text-sm shadow-xl shadow-rose-600/30 flex items-center justify-center gap-2 mb-3 transition"
+                                        className="w-full py-2.5 px-4 rounded bg-white hover:bg-neutral-200 text-black font-medium text-xs mb-2.5 transition"
                                     >
-                                        <Sparkles className="w-4 h-4" />
-                                        Destravar Agora por R$ {planPrice.toFixed(2).replace(".", ",")}
+                                        Liberar com Pix
                                     </button>
 
                                     <button
@@ -300,95 +263,56 @@ function WatchDramaContent() {
                                             setVipModalTab("login");
                                             setVipModalOpen(true);
                                         }}
-                                        className="w-full py-2.5 px-4 rounded-xl bg-white/10 hover:bg-white/15 text-xs font-semibold text-white/85 transition"
+                                        className="w-full py-2 px-4 rounded border border-neutral-700 hover:border-neutral-500 text-xs text-neutral-300 transition"
                                     >
-                                        Já paguei no WhatsApp (Digitar meu número)
+                                        Já tenho acesso
                                     </button>
                                 </div>
                             </div>
                         )}
                     </div>
 
-                    {/* Barra de Controles Abaixo do Player (Anterior / Próximo Episódio / Curtir) */}
-                    <div className="w-full max-w-[420px] px-4 sm:px-0 mt-4 flex items-center justify-between gap-2">
+                    <div className="w-full max-w-[400px] px-4 sm:px-0 mt-3 flex items-center justify-between gap-2">
                         <button
                             type="button"
                             disabled={!prevEp}
                             onClick={() => prevEp && handleSelectEpisode(prevEp)}
-                            className="px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold flex items-center gap-1.5 disabled:opacity-35 transition"
+                            className="px-3.5 py-2 rounded border border-neutral-800 hover:border-neutral-600 text-xs text-neutral-300 disabled:opacity-30 transition"
                         >
-                            <SkipBack className="w-4 h-4" /> Anterior
+                            Episódio anterior
                         </button>
-
-                        <div className="flex items-center gap-2">
-                            <button
-                                type="button"
-                                onClick={() => setLiked(!liked)}
-                                className={`px-3.5 py-2.5 rounded-xl border text-xs font-semibold flex items-center gap-1.5 transition ${
-                                    liked
-                                        ? "bg-rose-500/20 border-rose-500/50 text-rose-300"
-                                        : "bg-white/5 border-white/10 text-white/75"
-                                }`}
-                            >
-                                <Heart className={`w-4 h-4 ${liked ? "fill-rose-500 text-rose-500" : ""}`} />
-                                {(drama.likesCount + (liked ? 1 : 0)).toLocaleString("pt-BR")}
-                            </button>
-
-                            <button
-                                type="button"
-                                onClick={() => {
-                                    if (navigator.share) {
-                                        navigator.share({
-                                            title: drama.title,
-                                            url: window.location.href
-                                        }).catch(() => {});
-                                    } else {
-                                        navigator.clipboard.writeText(window.location.href);
-                                    }
-                                }}
-                                className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white/75"
-                                title="Compartilhar"
-                            >
-                                <Share2 className="w-4 h-4" />
-                            </button>
-                        </div>
 
                         <button
                             type="button"
                             disabled={!nextEp}
                             onClick={() => nextEp && handleSelectEpisode(nextEp)}
-                            className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-xs font-bold flex items-center gap-1.5 disabled:opacity-35 shadow-lg shadow-rose-600/25 transition"
+                            className="px-3.5 py-2 rounded bg-white hover:bg-neutral-200 text-black text-xs font-medium disabled:opacity-30 transition"
                         >
-                            Próximo Ep. <SkipForward className="w-4 h-4" />
+                            Próximo episódio
                         </button>
                     </div>
                 </div>
 
-                {/* Coluna Lateral: Detalhes da Novela e Grade de Episódios */}
-                <div className="lg:col-span-5 px-4 sm:px-0 pb-12 space-y-6">
-                    {/* Card da Novela */}
-                    <div className="p-5 rounded-3xl bg-[#120c18] border border-white/10">
-                        <span className="inline-block px-2.5 py-0.5 rounded-md bg-rose-500/15 text-rose-300 text-[11px] font-bold mb-2">
+                <div className="lg:col-span-5 px-4 sm:px-0 pb-12 space-y-5">
+                    <div className="p-4 rounded-lg bg-[#121212] border border-neutral-800">
+                        <div className="text-[11px] text-neutral-400 mb-1">
                             {drama.category}
-                        </span>
-                        <h2 className="text-lg font-bold mb-1.5">{drama.title}</h2>
-                        <p className="text-xs text-white/65 leading-relaxed">{drama.synopsis}</p>
+                        </div>
+                        <h2 className="text-base font-semibold mb-1.5">{drama.title}</h2>
+                        <p className="text-xs text-neutral-400 leading-relaxed">{drama.synopsis}</p>
                     </div>
 
-                    {/* Lista / Seletor de Episódios */}
-                    <div className="p-5 rounded-3xl bg-[#120c18] border border-white/10">
-                        <div className="flex items-center justify-between mb-4">
-                            <h3 className="text-sm font-bold flex items-center gap-2">
-                                <ListVideo className="w-4 h-4 text-rose-400" />
+                    <div className="p-4 rounded-lg bg-[#121212] border border-neutral-800">
+                        <div className="flex items-center justify-between mb-3">
+                            <h3 className="text-sm font-medium">
                                 Episódios ({episodes.length})
                             </h3>
-                            <span className="text-[11px] text-emerald-400 font-semibold">
-                                Ep. 1 a {drama.freeEpisodesCount} Grátis
+                            <span className="text-[11px] text-neutral-400">
+                                1 a {drama.freeEpisodesCount} gratuitos
                             </span>
                         </div>
 
-                        {/* Grade Rápida de Botões de Episódio */}
-                        <div className="grid grid-cols-4 sm:grid-cols-5 gap-2 mb-5">
+                        <div className="grid grid-cols-5 gap-1.5 mb-4">
                             {episodes.map((ep) => {
                                 const unlocked = isEpisodeUnlocked(ep);
                                 const active = ep.number === currentEpNumber;
@@ -397,25 +321,21 @@ function WatchDramaContent() {
                                         key={ep.id}
                                         type="button"
                                         onClick={() => handleSelectEpisode(ep)}
-                                        className={`relative py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-1 border transition ${
+                                        className={`py-2 rounded text-xs font-medium border transition ${
                                             active
-                                                ? "bg-rose-600 border-rose-400 text-white shadow-lg shadow-rose-600/30"
+                                                ? "bg-white border-white text-black"
                                                 : unlocked
-                                                ? "bg-white/5 hover:bg-white/10 border-white/10 text-white/90"
-                                                : "bg-black/40 hover:bg-rose-950/30 border-rose-500/20 text-white/50"
+                                                ? "bg-[#0a0a0a] hover:bg-neutral-800 border-neutral-800 text-neutral-200"
+                                                : "bg-[#0a0a0a] border-neutral-900 text-neutral-500"
                                         }`}
                                     >
-                                        <span>{ep.number}</span>
-                                        {!unlocked && (
-                                            <Lock className="w-3 h-3 text-amber-400 absolute top-1 right-1" />
-                                        )}
+                                        {ep.number}
                                     </button>
                                 );
                             })}
                         </div>
 
-                        {/* Lista Detalhada de Episódios */}
-                        <div className="space-y-2 max-h-96 overflow-y-auto pr-1">
+                        <div className="divide-y divide-neutral-800 max-h-80 overflow-y-auto">
                             {episodes.map((ep) => {
                                 const unlocked = isEpisodeUnlocked(ep);
                                 const active = ep.number === currentEpNumber;
@@ -424,44 +344,23 @@ function WatchDramaContent() {
                                         key={ep.id}
                                         type="button"
                                         onClick={() => handleSelectEpisode(ep)}
-                                        className={`w-full text-left p-3 rounded-2xl border flex items-center justify-between gap-3 transition ${
-                                            active
-                                                ? "bg-rose-500/15 border-rose-500/40"
-                                                : "bg-white/[0.03] hover:bg-white/[0.06] border-white/10"
+                                        className={`w-full text-left py-2.5 px-2 flex items-center justify-between gap-3 transition ${
+                                            active ? "bg-neutral-800/50 rounded" : ""
                                         }`}
                                     >
-                                        <div className="flex items-center gap-3 min-w-0">
-                                            <div
-                                                className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 text-xs font-bold ${
-                                                    active
-                                                        ? "bg-rose-600 text-white"
-                                                        : unlocked
-                                                        ? "bg-white/10 text-white"
-                                                        : "bg-amber-500/15 text-amber-400"
-                                                }`}
-                                            >
-                                                {unlocked ? <Play className="w-3.5 h-3.5 fill-current" /> : <Lock className="w-3.5 h-3.5" />}
+                                        <div className="min-w-0">
+                                            <div className="text-xs font-medium text-white truncate">
+                                                {ep.title}
                                             </div>
-                                            <div className="min-w-0">
-                                                <div className="text-xs font-bold truncate">
-                                                    {ep.title}
+                                            {ep.description && (
+                                                <div className="text-[11px] text-neutral-500 truncate">
+                                                    {ep.description}
                                                 </div>
-                                                {ep.description && (
-                                                    <div className="text-[11px] text-white/50 truncate">
-                                                        {ep.description}
-                                                    </div>
-                                                )}
-                                            </div>
+                                            )}
                                         </div>
 
-                                        <span
-                                            className={`px-2 py-0.5 rounded text-[10px] font-bold shrink-0 ${
-                                                unlocked
-                                                    ? "bg-emerald-500/15 text-emerald-300"
-                                                    : "bg-amber-500/15 text-amber-300"
-                                            }`}
-                                        >
-                                            {unlocked ? "Liberado" : "VIP"}
+                                        <span className="text-[11px] text-neutral-400 shrink-0">
+                                            {unlocked ? "Liberado" : "Bloqueado"}
                                         </span>
                                     </button>
                                 );
@@ -490,9 +389,8 @@ function WatchDramaContent() {
 
 export default function WatchDramaPage() {
     return (
-        <Suspense fallback={<div className="min-h-screen bg-[#070409]" />}>
+        <Suspense fallback={<div className="min-h-screen bg-[#0a0a0a]" />}>
             <WatchDramaContent />
         </Suspense>
     );
 }
-

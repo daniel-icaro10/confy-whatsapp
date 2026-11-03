@@ -1,17 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import {
-    Crown,
-    UserPlus,
-    Trash2,
-    CheckCircle2,
-    Clock,
-    Copy,
-    Loader2,
-    CreditCard,
-    Send
-} from "lucide-react";
 import { toast } from "sonner";
 
 interface Subscriber {
@@ -39,7 +28,6 @@ export default function AdminAssinantesPage() {
     const [orders, setOrders] = useState<PixOrderItem[]>([]);
     const [loading, setLoading] = useState(true);
 
-    // Liberação manual
     const [newPhone, setNewPhone] = useState("");
     const [newName, setNewName] = useState("");
     const [adding, setAdding] = useState(false);
@@ -53,7 +41,7 @@ export default function AdminAssinantesPage() {
             if (data?.subscribers) setSubscribers(data.subscribers);
             if (data?.orders) setOrders(data.orders);
         } catch {
-            toast.error("Erro ao carregar assinantes e pedidos");
+            toast.error("Erro ao carregar dados");
         } finally {
             setLoading(false);
         }
@@ -72,12 +60,12 @@ export default function AdminAssinantesPage() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     phone: newPhone,
-                    name: newName || "Cliente VIP"
+                    name: newName || "Cliente"
                 })
             });
             const data = await res.json();
             if (!res.ok) throw new Error(data?.error || "Erro ao liberar");
-            toast.success(`Número ${data.viewer.phone} liberado como VIP!`);
+            toast.success(`Acesso liberado para ${data.viewer.phone}`);
             setNewPhone("");
             setNewName("");
             await loadData();
@@ -89,7 +77,7 @@ export default function AdminAssinantesPage() {
     };
 
     const handleRemoveSubscriber = async (id: string) => {
-        if (!confirm("Remover acesso VIP deste número?")) return;
+        if (!confirm("Remover acesso deste número?")) return;
         try {
             await fetch(`/api/viewer/access?id=${id}`, { method: "DELETE" });
             toast.success("Acesso removido");
@@ -112,7 +100,7 @@ export default function AdminAssinantesPage() {
             });
             const data = await res.json();
             if (!res.ok) throw new Error(data?.error || "Erro ao aprovar");
-            toast.success("Pagamento aprovado! Acesso liberado no site e enviado no WhatsApp!");
+            toast.success("Pedido aprovado e enviado no WhatsApp");
             await loadData();
         } catch (err: any) {
             toast.error(err?.message || "Falha ao aprovar pedido");
@@ -125,113 +113,102 @@ export default function AdminAssinantesPage() {
         const origin = typeof window !== "undefined" ? window.location.origin : "";
         const link = `${origin}/?phone=${phone}`;
         navigator.clipboard.writeText(link);
-        toast.success("Link de acesso direto copiado!");
+        toast.success("Link copiado");
     };
 
     return (
-        <div className="space-y-6">
-            <div>
-                <h1 className="text-2xl font-bold flex items-center gap-2.5">
-                    <Crown className="w-6 h-6 text-amber-400" />
-                    Assinantes VIP & Pedidos Pix (Mangofy)
+        <div className="space-y-6 max-w-6xl">
+            <div className="border-b border-neutral-800 pb-5">
+                <h1 className="text-xl font-semibold text-white">
+                    Assinantes e pedidos
                 </h1>
-                <p className="text-sm text-muted-foreground mt-1">
-                    Acompanhe os pagamentos gerados no funil do WhatsApp ou libere qualquer número manualmente em 1 clique.
+                <p className="text-xs text-neutral-400 mt-1">
+                    Gerencie números liberados e pagamentos Pix.
                 </p>
             </div>
 
-            {/* Card de Liberação Rápida Manual */}
             <form
                 onSubmit={handleManualGrant}
-                className="p-5 rounded-2xl border border-border bg-card flex flex-col sm:flex-row items-end gap-3"
+                className="p-4 rounded-lg border border-neutral-800 bg-[#111111] flex flex-col sm:flex-row items-end gap-3"
             >
                 <div className="w-full sm:flex-1">
-                    <label className="block text-xs font-medium mb-1">
-                        Liberar Número de WhatsApp Manualmente (com DDD)
+                    <label className="block text-xs text-neutral-400 mb-1">
+                        Telefone com DDD
                     </label>
                     <input
                         type="text"
                         required
-                        placeholder="Ex: 11999999999"
+                        placeholder="11999999999"
                         value={newPhone}
                         onChange={(e) => setNewPhone(e.target.value)}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-background border border-border text-sm"
+                        className="w-full px-3 py-2 rounded bg-[#0a0a0a] border border-neutral-800 text-sm text-white"
                     />
                 </div>
                 <div className="w-full sm:flex-1">
-                    <label className="block text-xs font-medium mb-1">Nome da Cliente (opcional)</label>
+                    <label className="block text-xs text-neutral-400 mb-1">Nome (opcional)</label>
                     <input
                         type="text"
-                        placeholder="Ex: Maria Silva"
                         value={newName}
                         onChange={(e) => setNewName(e.target.value)}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-background border border-border text-sm"
+                        className="w-full px-3 py-2 rounded bg-[#0a0a0a] border border-neutral-800 text-sm text-white"
                     />
                 </div>
                 <button
                     type="submit"
                     disabled={adding}
-                    className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold flex items-center justify-center gap-2 shrink-0 h-[42px]"
+                    className="w-full sm:w-auto px-4 py-2 rounded bg-white hover:bg-neutral-200 text-black text-xs font-medium shrink-0 h-[38px]"
                 >
-                    {adding ? <Loader2 className="w-4 h-4 animate-spin" /> : <UserPlus className="w-4 h-4" />}
-                    Liberar Acesso VIP
+                    {adding ? "Liberando..." : "Liberar acesso"}
                 </button>
             </form>
 
             {loading ? (
-                <div className="p-12 flex justify-center">
-                    <Loader2 className="w-6 h-6 animate-spin text-rose-500" />
+                <div className="p-8 text-xs text-neutral-400">
+                    Carregando...
                 </div>
             ) : (
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-                    {/* Coluna 1: Assinantes VIP Liberados */}
-                    <div className="lg:col-span-6 p-5 rounded-2xl border border-border bg-card space-y-4">
-                        <div className="flex items-center justify-between border-b border-border pb-3">
-                            <h2 className="font-bold text-base flex items-center gap-2">
-                                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                                Clientes com Acesso VIP Liberado ({subscribers.length})
+                    <div className="lg:col-span-6 p-5 rounded-lg border border-neutral-800 bg-[#111111] space-y-4">
+                        <div className="border-b border-neutral-800 pb-3">
+                            <h2 className="font-medium text-sm text-white">
+                                Números liberados ({subscribers.length})
                             </h2>
                         </div>
 
                         {subscribers.length === 0 ? (
-                            <p className="text-xs text-muted-foreground py-6 text-center">
-                                Nenhum assinante VIP liberado ainda.
+                            <p className="text-xs text-neutral-500 py-6 text-center">
+                                Nenhum assinante cadastrado.
                             </p>
                         ) : (
-                            <div className="space-y-2.5 max-h-[480px] overflow-y-auto pr-1">
+                            <div className="divide-y divide-neutral-800 max-h-[480px] overflow-y-auto">
                                 {subscribers.map((sub) => (
                                     <div
                                         key={sub.id}
-                                        className="p-3.5 rounded-xl border border-border bg-background/60 flex items-center justify-between gap-3"
+                                        className="py-3 flex items-center justify-between gap-3"
                                     >
                                         <div>
-                                            <div className="font-bold text-sm flex items-center gap-2">
-                                                <span>+{sub.phone}</span>
-                                                <span className="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-400 text-[10px] font-bold">
-                                                    VIP Ativo
-                                                </span>
+                                            <div className="font-medium text-xs text-white">
+                                                +{sub.phone}
                                             </div>
-                                            <div className="text-xs text-muted-foreground">
-                                                {sub.name || "Cliente"} • {sub.planName}
+                                            <div className="text-[11px] text-neutral-500">
+                                                {sub.name || "Cliente"}
                                             </div>
                                         </div>
 
-                                        <div className="flex items-center gap-1.5">
+                                        <div className="flex items-center gap-3">
                                             <button
                                                 type="button"
                                                 onClick={() => copyMagicLink(sub.phone)}
-                                                className="px-2.5 py-1.5 rounded-lg border border-border hover:bg-accent text-xs font-medium flex items-center gap-1"
-                                                title="Copiar link mágico já logado"
+                                                className="text-xs text-neutral-300 hover:text-white"
                                             >
-                                                <Copy className="w-3.5 h-3.5" /> Link Mágico
+                                                Copiar link
                                             </button>
                                             <button
                                                 type="button"
                                                 onClick={() => handleRemoveSubscriber(sub.id)}
-                                                className="p-1.5 rounded-lg text-rose-400 hover:bg-rose-500/10"
-                                                title="Revogar acesso"
+                                                className="text-xs text-red-400 hover:text-red-300"
                                             >
-                                                <Trash2 className="w-4 h-4" />
+                                                Remover
                                             </button>
                                         </div>
                                     </div>
@@ -240,52 +217,42 @@ export default function AdminAssinantesPage() {
                         )}
                     </div>
 
-                    {/* Coluna 2: Pedidos Pix (Mangofy) */}
-                    <div className="lg:col-span-6 p-5 rounded-2xl border border-border bg-card space-y-4">
-                        <div className="flex items-center justify-between border-b border-border pb-3">
-                            <h2 className="font-bold text-base flex items-center gap-2">
-                                <CreditCard className="w-4 h-4 text-rose-400" />
-                                Últimos Pedidos Pix Gerados ({orders.length})
+                    <div className="lg:col-span-6 p-5 rounded-lg border border-neutral-800 bg-[#111111] space-y-4">
+                        <div className="border-b border-neutral-800 pb-3">
+                            <h2 className="font-medium text-sm text-white">
+                                Pedidos Pix ({orders.length})
                             </h2>
                         </div>
 
                         {orders.length === 0 ? (
-                            <p className="text-xs text-muted-foreground py-6 text-center">
-                                Nenhum pedido Pix gerado ainda no funil ou no site.
+                            <p className="text-xs text-neutral-500 py-6 text-center">
+                                Nenhum pedido registrado.
                             </p>
                         ) : (
-                            <div className="space-y-2.5 max-h-[480px] overflow-y-auto pr-1">
+                            <div className="divide-y divide-neutral-800 max-h-[480px] overflow-y-auto">
                                 {orders.map((order) => (
                                     <div
                                         key={order.id}
-                                        className="p-3.5 rounded-xl border border-border bg-background/60 flex items-center justify-between gap-3"
+                                        className="py-3 flex items-center justify-between gap-3"
                                     >
                                         <div>
-                                            <div className="flex items-center gap-2">
-                                                <span className="font-bold text-sm">+{order.phone}</span>
-                                                <span className="text-xs font-extrabold text-emerald-400">
+                                            <div className="flex items-center gap-2 text-xs">
+                                                <span className="font-medium text-white">+{order.phone}</span>
+                                                <span className="text-neutral-300">
                                                     R$ {order.amount.toFixed(2).replace(".", ",")}
                                                 </span>
                                                 <span
-                                                    className={`px-2 py-0.5 rounded text-[10px] font-bold flex items-center gap-1 ${
+                                                    className={`px-1.5 py-0.5 rounded text-[10px] ${
                                                         order.status === "PAID"
-                                                            ? "bg-emerald-500/15 text-emerald-400"
-                                                            : "bg-amber-500/15 text-amber-400"
+                                                            ? "bg-emerald-950 text-emerald-300"
+                                                            : "bg-neutral-800 text-neutral-400"
                                                     }`}
                                                 >
-                                                    {order.status === "PAID" ? (
-                                                        <>
-                                                            <CheckCircle2 className="w-3 h-3" /> PAGO
-                                                        </>
-                                                    ) : (
-                                                        <>
-                                                            <Clock className="w-3 h-3" /> AGUARDANDO PIX
-                                                        </>
-                                                    )}
+                                                    {order.status === "PAID" ? "Pago" : "Pendente"}
                                                 </span>
                                             </div>
-                                            <div className="text-[11px] text-muted-foreground mt-0.5">
-                                                {order.customerName || "Cliente"} •{" "}
+                                            <div className="text-[11px] text-neutral-500 mt-0.5">
+                                                {order.customerName || "Cliente"} ·{" "}
                                                 {new Date(order.createdAt).toLocaleString("pt-BR")}
                                             </div>
                                         </div>
@@ -295,15 +262,9 @@ export default function AdminAssinantesPage() {
                                                 type="button"
                                                 disabled={approvingId === order.id}
                                                 onClick={() => handleApproveOrder(order.id)}
-                                                className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center gap-1.5 shrink-0"
-                                                title="Aprovar pagamento e enviar link no WhatsApp"
+                                                className="px-3 py-1.5 rounded bg-white hover:bg-neutral-200 text-black text-xs font-medium shrink-0"
                                             >
-                                                {approvingId === order.id ? (
-                                                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                                                ) : (
-                                                    <Send className="w-3.5 h-3.5" />
-                                                )}
-                                                Aprovar & Entregar
+                                                {approvingId === order.id ? "Aprovando..." : "Aprovar"}
                                             </button>
                                         )}
                                     </div>
@@ -316,4 +277,3 @@ export default function AdminAssinantesPage() {
         </div>
     );
 }
-

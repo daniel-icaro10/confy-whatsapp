@@ -2,22 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import {
-    Film,
-    Plus,
-    Trash2,
-    Edit3,
-    Play,
-    Star,
-    ListVideo,
-    ExternalLink,
-    Save,
-    X,
-    Youtube,
-    Lock,
-    Unlock,
-    Loader2
-} from "lucide-react";
 import { toast } from "sonner";
 
 interface Episode {
@@ -52,20 +36,18 @@ export default function AdminNovelasPage() {
     const [loading, setLoading] = useState(true);
     const [selectedDrama, setSelectedDrama] = useState<Drama | null>(null);
 
-    // Modal Nova / Editar Novela
     const [showDramaForm, setShowDramaForm] = useState(false);
     const [editingDramaId, setEditingDramaId] = useState<string | null>(null);
     const [title, setTitle] = useState("");
     const [synopsis, setSynopsis] = useState("");
     const [coverUrl, setCoverUrl] = useState("");
     const [bannerUrl, setBannerUrl] = useState("");
-    const [category, setCategory] = useState("CEO & Vingança");
+    const [category, setCategory] = useState("Drama");
     const [totalEpisodes, setTotalEpisodes] = useState(40);
     const [freeEpisodesCount, setFreeEpisodesCount] = useState(2);
     const [isFeatured, setIsFeatured] = useState(false);
     const [savingDrama, setSavingDrama] = useState(false);
 
-    // Formulário de Episódio
     const [epNumber, setEpNumber] = useState(1);
     const [epTitle, setEpTitle] = useState("");
     const [epYoutubeUrl, setEpYoutubeUrl] = useState("");
@@ -100,9 +82,9 @@ export default function AdminNovelasPage() {
         setEditingDramaId(null);
         setTitle("");
         setSynopsis("");
-        setCoverUrl("https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=800&q=80");
+        setCoverUrl("");
         setBannerUrl("");
-        setCategory("CEO & Vingança");
+        setCategory("Drama");
         setTotalEpisodes(45);
         setFreeEpisodesCount(2);
         setIsFeatured(false);
@@ -145,7 +127,7 @@ export default function AdminNovelasPage() {
             });
 
             if (!res.ok) throw new Error("Falha ao salvar");
-            toast.success(editingDramaId ? "Novela atualizada!" : "Novela cadastrada com sucesso!");
+            toast.success(editingDramaId ? "Novela atualizada" : "Novela cadastrada");
             setShowDramaForm(false);
             await loadDramas();
         } catch {
@@ -156,7 +138,7 @@ export default function AdminNovelasPage() {
     };
 
     const handleDeleteDrama = async (id: string) => {
-        if (!confirm("Tem certeza que deseja excluir esta novela e todos os seus episódios?")) return;
+        if (!confirm("Deseja excluir esta novela e todos os episódios?")) return;
         try {
             await fetch(`/api/dramas/${id}`, { method: "DELETE" });
             toast.success("Novela excluída");
@@ -171,7 +153,7 @@ export default function AdminNovelasPage() {
         setSelectedDrama(d);
         const nextEp = (d.episodes?.length || 0) + 1;
         setEpNumber(nextEp);
-        setEpTitle(`Ep. ${String(nextEp).padStart(2, "0")} — `);
+        setEpTitle(`Episódio ${nextEp}`);
         setEpYoutubeUrl("");
         setEpDescription("");
         setEpIsFree(nextEp <= d.freeEpisodesCount);
@@ -194,11 +176,11 @@ export default function AdminNovelasPage() {
                 })
             });
             if (!res.ok) throw new Error("Erro ao salvar episódio");
-            toast.success(`Episódio ${epNumber} salvo!`);
+            toast.success(`Episódio ${epNumber} salvo`);
             await loadDramas();
             const nextNum = epNumber + 1;
             setEpNumber(nextNum);
-            setEpTitle(`Ep. ${String(nextNum).padStart(2, "0")} — `);
+            setEpTitle(`Episódio ${nextNum}`);
             setEpYoutubeUrl("");
             setEpDescription("");
             setEpIsFree(nextNum <= selectedDrama.freeEpisodesCount);
@@ -223,116 +205,99 @@ export default function AdminNovelasPage() {
     };
 
     return (
-        <div className="space-y-6">
-            {/* Cabeçalho */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="space-y-6 max-w-6xl">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-neutral-800 pb-5">
                 <div>
-                    <h1 className="text-2xl font-bold flex items-center gap-2.5">
-                        <Film className="w-6 h-6 text-rose-500" />
-                        Catálogo de Novelas & Episódios (YouTube)
+                    <h1 className="text-xl font-semibold text-white">
+                        Novelas e episódios
                     </h1>
-                    <p className="text-sm text-muted-foreground mt-1">
-                        Cadastre suas novelas verticais e adicione os links dos vídeos do YouTube sem consumir espaço na VPS.
+                    <p className="text-xs text-neutral-400 mt-1">
+                        Gerencie o catálogo e os links de vídeo do YouTube.
                     </p>
                 </div>
 
-                <div className="flex items-center gap-2.5">
-                    <Link
-                        href="/"
-                        target="_blank"
-                        className="px-4 py-2.5 rounded-xl border border-border bg-card hover:bg-accent text-xs font-semibold flex items-center gap-1.5 transition"
-                    >
-                        <ExternalLink className="w-4 h-4" />
-                        Ver Site ao Vivo
-                    </Link>
+                <div className="flex items-center gap-2">
                     <button
                         type="button"
                         onClick={openNewDramaModal}
-                        className="px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-lg shadow-rose-600/20 transition"
+                        className="px-4 py-2 rounded bg-white hover:bg-neutral-200 text-black text-xs font-medium transition"
                     >
-                        <Plus className="w-4 h-4" />
-                        Nova Novela
+                        Nova novela
                     </button>
                 </div>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-                {/* Lista de Novelas */}
-                <div className="lg:col-span-7 space-y-4">
+                <div className="lg:col-span-7 space-y-3">
                     {loading ? (
-                        <div className="p-12 rounded-2xl border border-border bg-card flex items-center justify-center">
-                            <Loader2 className="w-6 h-6 animate-spin text-rose-500" />
+                        <div className="p-8 rounded-lg border border-neutral-800 bg-[#111111] text-center text-xs text-neutral-400">
+                            Carregando...
                         </div>
                     ) : (
                         dramas.map((drama) => (
                             <div
                                 key={drama.id}
-                                className={`p-4 rounded-2xl border transition flex flex-col sm:flex-row gap-4 ${
+                                className={`p-4 rounded-lg border transition flex flex-col sm:flex-row gap-4 ${
                                     selectedDrama?.id === drama.id
-                                        ? "border-rose-500 bg-rose-500/5"
-                                        : "border-border bg-card hover:border-rose-500/40"
+                                        ? "border-neutral-500 bg-[#161616]"
+                                        : "border-neutral-800 bg-[#111111]"
                                 }`}
                             >
                                 <img
                                     src={drama.coverUrl}
                                     alt={drama.title}
-                                    className="w-24 h-36 object-cover rounded-xl shrink-0 border border-white/10"
+                                    className="w-20 h-28 object-cover rounded shrink-0 border border-neutral-800"
                                 />
 
                                 <div className="flex-1 min-w-0 flex flex-col justify-between">
                                     <div>
-                                        <div className="flex flex-wrap items-center gap-2 mb-1">
-                                            <span className="px-2 py-0.5 rounded bg-rose-500/15 text-rose-400 text-[11px] font-bold">
-                                                {drama.category}
-                                            </span>
+                                        <div className="flex flex-wrap items-center gap-2 mb-1 text-[11px] text-neutral-400">
+                                            <span>{drama.category}</span>
+                                            <span>·</span>
+                                            <span>{drama.episodes?.length || 0} episódios ({drama.freeEpisodesCount} grátis)</span>
                                             {drama.isFeatured && (
-                                                <span className="px-2 py-0.5 rounded bg-amber-500/15 text-amber-400 text-[11px] font-bold flex items-center gap-1">
-                                                    <Star className="w-3 h-3 fill-amber-400" /> Destaque na Capa
+                                                <span className="px-1.5 py-0.5 rounded bg-neutral-800 text-white text-[10px]">
+                                                    Destaque
                                                 </span>
                                             )}
-                                            <span className="text-xs text-muted-foreground">
-                                                • {drama.episodes?.length || 0} episódios cadastrados (Ep 1-{drama.freeEpisodesCount} grátis)
-                                            </span>
                                         </div>
-                                        <h3 className="font-bold text-base truncate">{drama.title}</h3>
-                                        <p className="text-xs text-muted-foreground line-clamp-2 mt-1">
+                                        <h3 className="font-medium text-sm text-white truncate">{drama.title}</h3>
+                                        <p className="text-xs text-neutral-400 line-clamp-2 mt-1">
                                             {drama.synopsis}
                                         </p>
                                     </div>
 
-                                    <div className="flex flex-wrap items-center gap-2 mt-4 pt-3 border-t border-border">
+                                    <div className="flex flex-wrap items-center gap-2 mt-4 pt-3 border-t border-neutral-800">
                                         <button
                                             type="button"
                                             onClick={() => handleOpenEpisodes(drama)}
-                                            className="px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-500 text-white text-xs font-semibold flex items-center gap-1.5 transition"
+                                            className="px-3 py-1.5 rounded bg-white hover:bg-neutral-200 text-black text-xs font-medium transition"
                                         >
-                                            <ListVideo className="w-3.5 h-3.5" />
-                                            Gerenciar Episódios ({drama.episodes?.length || 0})
+                                            Episódios ({drama.episodes?.length || 0})
                                         </button>
 
                                         <button
                                             type="button"
                                             onClick={() => openEditDramaModal(drama)}
-                                            className="px-3 py-1.5 rounded-lg border border-border hover:bg-accent text-xs font-medium flex items-center gap-1"
+                                            className="px-3 py-1.5 rounded border border-neutral-700 hover:border-neutral-500 text-xs text-neutral-200"
                                         >
-                                            <Edit3 className="w-3.5 h-3.5" /> Editar
+                                            Editar
                                         </button>
 
                                         <Link
                                             href={`/assistir/${drama.slug}`}
                                             target="_blank"
-                                            className="px-3 py-1.5 rounded-lg border border-border hover:bg-accent text-xs font-medium flex items-center gap-1"
+                                            className="px-3 py-1.5 rounded border border-neutral-700 hover:border-neutral-500 text-xs text-neutral-200"
                                         >
-                                            <Play className="w-3.5 h-3.5" /> Assistir
+                                            Visualizar
                                         </Link>
 
                                         <button
                                             type="button"
                                             onClick={() => handleDeleteDrama(drama.id)}
-                                            className="p-1.5 rounded-lg text-rose-400 hover:bg-rose-500/10 ml-auto"
-                                            title="Excluir novela"
+                                            className="px-2.5 py-1.5 rounded text-xs text-red-400 hover:bg-red-950/30 ml-auto"
                                         >
-                                            <Trash2 className="w-4 h-4" />
+                                            Excluir
                                         </button>
                                     </div>
                                 </div>
@@ -341,39 +306,36 @@ export default function AdminNovelasPage() {
                     )}
                 </div>
 
-                {/* Painel Lateral: Gerenciador de Episódios do YouTube */}
                 <div className="lg:col-span-5">
                     {selectedDrama ? (
-                        <div className="p-5 rounded-2xl border border-border bg-card space-y-5 sticky top-4">
-                            <div className="flex items-center justify-between border-b border-border pb-3">
+                        <div className="p-5 rounded-lg border border-neutral-800 bg-[#111111] space-y-5 sticky top-4">
+                            <div className="flex items-center justify-between border-b border-neutral-800 pb-3">
                                 <div>
-                                    <span className="text-[11px] uppercase tracking-wider text-rose-400 font-bold">
-                                        Episódios da Novela
+                                    <span className="text-[11px] text-neutral-400">
+                                        Gerenciar episódios
                                     </span>
-                                    <h3 className="font-bold text-base leading-snug">
+                                    <h3 className="font-medium text-sm text-white">
                                         {selectedDrama.title}
                                     </h3>
                                 </div>
                                 <button
                                     type="button"
                                     onClick={() => setSelectedDrama(null)}
-                                    className="p-1.5 rounded-lg hover:bg-accent"
+                                    className="text-xs text-neutral-400 hover:text-white"
                                 >
-                                    <X className="w-4 h-4" />
+                                    Fechar
                                 </button>
                             </div>
 
-                            {/* Formulário para Adicionar / Atualizar Episódio */}
-                            <form onSubmit={handleSaveEpisode} className="space-y-3 bg-accent/30 p-3.5 rounded-xl border border-border">
-                                <div className="text-xs font-bold flex items-center gap-1.5 text-rose-400">
-                                    <Youtube className="w-4 h-4" />
-                                    Adicionar / Editar Episódio (Link do YouTube)
+                            <form onSubmit={handleSaveEpisode} className="space-y-3 bg-[#0a0a0a] p-3.5 rounded border border-neutral-800">
+                                <div className="text-xs font-medium text-white">
+                                    Adicionar ou atualizar episódio
                                 </div>
 
                                 <div className="grid grid-cols-3 gap-2">
                                     <div>
-                                        <label className="block text-[11px] text-muted-foreground mb-1">
-                                            Nº Episódio
+                                        <label className="block text-[11px] text-neutral-400 mb-1">
+                                            Número
                                         </label>
                                         <input
                                             type="number"
@@ -381,96 +343,77 @@ export default function AdminNovelasPage() {
                                             required
                                             value={epNumber}
                                             onChange={(e) => setEpNumber(Number(e.target.value))}
-                                            className="w-full px-3 py-2 rounded-lg bg-background border border-border text-xs"
+                                            className="w-full px-2.5 py-1.5 rounded bg-[#111111] border border-neutral-800 text-xs text-white"
                                         />
                                     </div>
                                     <div className="col-span-2">
-                                        <label className="block text-[11px] text-muted-foreground mb-1">
-                                            Título do Episódio
+                                        <label className="block text-[11px] text-neutral-400 mb-1">
+                                            Título
                                         </label>
                                         <input
                                             type="text"
                                             required
-                                            placeholder="Ex: Ep. 01 — O Casamento"
                                             value={epTitle}
                                             onChange={(e) => setEpTitle(e.target.value)}
-                                            className="w-full px-3 py-2 rounded-lg bg-background border border-border text-xs"
+                                            className="w-full px-2.5 py-1.5 rounded bg-[#111111] border border-neutral-800 text-xs text-white"
                                         />
                                     </div>
                                 </div>
 
                                 <div>
-                                    <label className="block text-[11px] text-muted-foreground mb-1">
-                                        Link do Vídeo no YouTube (Normal, Shorts ou Não Listado)
+                                    <label className="block text-[11px] text-neutral-400 mb-1">
+                                        URL do vídeo no YouTube
                                     </label>
                                     <input
                                         type="text"
                                         required
-                                        placeholder="https://www.youtube.com/watch?v=... ou https://youtu.be/..."
+                                        placeholder="https://www.youtube.com/watch?v=..."
                                         value={epYoutubeUrl}
                                         onChange={(e) => setEpYoutubeUrl(e.target.value)}
-                                        className="w-full px-3 py-2 rounded-lg bg-background border border-border text-xs"
+                                        className="w-full px-2.5 py-1.5 rounded bg-[#111111] border border-neutral-800 text-xs text-white"
                                     />
                                 </div>
 
                                 <div className="flex items-center justify-between pt-1">
-                                    <label className="flex items-center gap-2 text-xs cursor-pointer">
+                                    <label className="flex items-center gap-2 text-xs text-neutral-300 cursor-pointer">
                                         <input
                                             type="checkbox"
                                             checked={epIsFree}
                                             onChange={(e) => setEpIsFree(e.target.checked)}
-                                            className="rounded border-border"
                                         />
-                                        <span>Episódio Grátis (Aberto para todos)</span>
+                                        <span>Episódio gratuito</span>
                                     </label>
 
                                     <button
                                         type="submit"
                                         disabled={savingEp}
-                                        className="px-4 py-2 rounded-lg bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold flex items-center gap-1.5"
+                                        className="px-3.5 py-1.5 rounded bg-white hover:bg-neutral-200 text-black text-xs font-medium"
                                     >
-                                        {savingEp ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5" />}
-                                        Salvar Episódio
+                                        {savingEp ? "Salvando..." : "Salvar"}
                                     </button>
                                 </div>
                             </form>
 
-                            {/* Lista de Episódios Cadastrados */}
-                            <div className="space-y-2 max-h-80 overflow-y-auto pr-1">
+                            <div className="divide-y divide-neutral-800 max-h-80 overflow-y-auto">
                                 {(selectedDrama.episodes || []).map((ep) => (
                                     <div
                                         key={ep.id}
-                                        className="p-2.5 rounded-xl border border-border bg-background/60 flex items-center justify-between gap-2 text-xs"
+                                        className="py-2.5 flex items-center justify-between gap-2 text-xs"
                                     >
-                                        <div className="flex items-center gap-2.5 min-w-0">
-                                            <span className="w-6 h-6 rounded-lg bg-rose-500/15 text-rose-400 font-bold flex items-center justify-center shrink-0">
-                                                {ep.number}
-                                            </span>
-                                            <div className="min-w-0">
-                                                <div className="font-semibold truncate">{ep.title}</div>
-                                                <div className="text-[11px] text-muted-foreground truncate">
-                                                    {ep.youtubeUrl}
-                                                </div>
+                                        <div className="min-w-0">
+                                            <div className="font-medium text-white truncate">
+                                                {ep.number}. {ep.title}
+                                            </div>
+                                            <div className="text-[11px] text-neutral-500 truncate">
+                                                {ep.youtubeUrl}
                                             </div>
                                         </div>
 
-                                        <div className="flex items-center gap-1.5 shrink-0">
-                                            <span
-                                                className={`px-2 py-0.5 rounded text-[10px] font-bold flex items-center gap-1 ${
-                                                    ep.isFree || ep.number <= selectedDrama.freeEpisodesCount
-                                                        ? "bg-emerald-500/15 text-emerald-400"
-                                                        : "bg-amber-500/15 text-amber-400"
-                                                }`}
-                                            >
-                                                {ep.isFree || ep.number <= selectedDrama.freeEpisodesCount ? (
-                                                    <>
-                                                        <Unlock className="w-3 h-3" /> Grátis
-                                                    </>
-                                                ) : (
-                                                    <>
-                                                        <Lock className="w-3 h-3" /> VIP
-                                                    </>
-                                                )}
+                                        <div className="flex items-center gap-2 shrink-0">
+                                            <span className="text-[11px] text-neutral-400">
+                                                {ep.isFree || ep.number <= selectedDrama.freeEpisodesCount
+                                                    ? "Grátis"
+                                                    : "Pago"}
                                             </span>
                                             <button
                                                 type="button"
@@ -481,18 +424,16 @@ export default function AdminNovelasPage() {
                                                     setEpDescription(ep.description || "");
                                                     setEpIsFree(ep.isFree);
                                                 }}
-                                                className="p-1.5 rounded hover:bg-accent text-muted-foreground"
-                                                title="Editar episódio"
+                                                className="text-xs text-neutral-400 hover:text-white"
                                             >
-                                                <Edit3 className="w-3.5 h-3.5" />
+                                                Editar
                                             </button>
                                             <button
                                                 type="button"
                                                 onClick={() => handleDeleteEpisode(ep.id)}
-                                                className="p-1.5 rounded hover:bg-rose-500/10 text-rose-400"
-                                                title="Remover episódio"
+                                                className="text-xs text-red-400 hover:text-red-300"
                                             >
-                                                <Trash2 className="w-3.5 h-3.5" />
+                                                Remover
                                             </button>
                                         </div>
                                     </div>
@@ -500,122 +441,115 @@ export default function AdminNovelasPage() {
                             </div>
                         </div>
                     ) : (
-                        <div className="p-8 rounded-2xl border border-dashed border-border bg-card/50 text-center">
-                            <ListVideo className="w-8 h-8 text-muted-foreground mx-auto mb-2 opacity-60" />
-                            <h3 className="font-semibold text-sm">Selecione uma Novela</h3>
-                            <p className="text-xs text-muted-foreground mt-1">
-                                Clique em &ldquo;Gerenciar Episódios&rdquo; em qualquer novela ao lado para colar os links do YouTube de cada episódio.
+                        <div className="p-8 rounded-lg border border-neutral-800 bg-[#111111] text-center">
+                            <p className="text-xs text-neutral-400">
+                                Selecione uma novela ao lado para cadastrar ou editar os episódios.
                             </p>
                         </div>
                     )}
                 </div>
             </div>
 
-            {/* Modal Criar / Editar Novela */}
             {showDramaForm && (
-                <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
-                    <div className="w-full max-w-lg rounded-2xl border border-border bg-card p-6 space-y-4 shadow-2xl">
-                        <div className="flex items-center justify-between border-b border-border pb-3">
-                            <h3 className="font-bold text-lg">
-                                {editingDramaId ? "Editar Novela" : "Cadastrar Nova Novela Vertical"}
+                <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
+                    <div className="w-full max-w-lg rounded-lg border border-neutral-800 bg-[#111111] p-6 space-y-4">
+                        <div className="flex items-center justify-between border-b border-neutral-800 pb-3">
+                            <h3 className="font-semibold text-base text-white">
+                                {editingDramaId ? "Editar novela" : "Nova novela"}
                             </h3>
                             <button
                                 type="button"
                                 onClick={() => setShowDramaForm(false)}
-                                className="p-1.5 rounded-lg hover:bg-accent"
+                                className="text-xs text-neutral-400 hover:text-white"
                             >
-                                <X className="w-4 h-4" />
+                                Fechar
                             </button>
                         </div>
 
                         <form onSubmit={handleSaveDrama} className="space-y-3.5">
                             <div>
-                                <label className="block text-xs font-medium mb-1">Título da Novela</label>
+                                <label className="block text-xs text-neutral-300 mb-1">Título</label>
                                 <input
                                     type="text"
                                     required
-                                    placeholder="Ex: O Bilionário Disfarçado e a Noiva Rejeitada"
                                     value={title}
                                     onChange={(e) => setTitle(e.target.value)}
-                                    className="w-full px-3.5 py-2.5 rounded-xl bg-background border border-border text-sm"
+                                    className="w-full px-3 py-2 rounded bg-[#0a0a0a] border border-neutral-800 text-sm text-white"
                                 />
                             </div>
 
                             <div>
-                                <label className="block text-xs font-medium mb-1">Sinopse Envolvente</label>
+                                <label className="block text-xs text-neutral-300 mb-1">Sinopse</label>
                                 <textarea
                                     rows={3}
                                     required
-                                    placeholder="Resumo dramático que deixa o público curioso..."
                                     value={synopsis}
                                     onChange={(e) => setSynopsis(e.target.value)}
-                                    className="w-full px-3.5 py-2.5 rounded-xl bg-background border border-border text-sm"
+                                    className="w-full px-3 py-2 rounded bg-[#0a0a0a] border border-neutral-800 text-sm text-white"
                                 />
                             </div>
 
                             <div className="grid grid-cols-2 gap-3">
                                 <div>
-                                    <label className="block text-xs font-medium mb-1">Categoria</label>
+                                    <label className="block text-xs text-neutral-300 mb-1">Categoria</label>
                                     <input
                                         type="text"
                                         value={category}
                                         onChange={(e) => setCategory(e.target.value)}
-                                        placeholder="Ex: CEO & Vingança"
-                                        className="w-full px-3.5 py-2 rounded-xl bg-background border border-border text-sm"
+                                        className="w-full px-3 py-2 rounded bg-[#0a0a0a] border border-neutral-800 text-sm text-white"
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium mb-1">
-                                        Episódios Grátis (Degustação)
+                                    <label className="block text-xs text-neutral-300 mb-1">
+                                        Episódios gratuitos
                                     </label>
                                     <input
                                         type="number"
                                         min={0}
                                         value={freeEpisodesCount}
                                         onChange={(e) => setFreeEpisodesCount(Number(e.target.value))}
-                                        className="w-full px-3.5 py-2 rounded-xl bg-background border border-border text-sm"
+                                        className="w-full px-3 py-2 rounded bg-[#0a0a0a] border border-neutral-800 text-sm text-white"
                                     />
                                 </div>
                             </div>
 
                             <div>
-                                <label className="block text-xs font-medium mb-1">URL da Imagem de Capa (Vertical)</label>
+                                <label className="block text-xs text-neutral-300 mb-1">URL da capa</label>
                                 <input
                                     type="url"
                                     required
                                     placeholder="https://..."
                                     value={coverUrl}
                                     onChange={(e) => setCoverUrl(e.target.value)}
-                                    className="w-full px-3.5 py-2 rounded-xl bg-background border border-border text-sm"
+                                    className="w-full px-3 py-2 rounded bg-[#0a0a0a] border border-neutral-800 text-sm text-white"
                                 />
                             </div>
 
-                            <div className="flex items-center gap-3 pt-1">
-                                <label className="flex items-center gap-2 text-xs font-medium cursor-pointer">
+                            <div className="pt-1">
+                                <label className="flex items-center gap-2 text-xs text-neutral-300 cursor-pointer">
                                     <input
                                         type="checkbox"
                                         checked={isFeatured}
                                         onChange={(e) => setIsFeatured(e.target.checked)}
                                     />
-                                    <span>Destacar no Topo do Site (Banner Principal)</span>
+                                    <span>Exibir como destaque principal</span>
                                 </label>
                             </div>
 
-                            <div className="flex justify-end gap-2 pt-3 border-t border-border">
+                            <div className="flex justify-end gap-2 pt-3 border-t border-neutral-800">
                                 <button
                                     type="button"
                                     onClick={() => setShowDramaForm(false)}
-                                    className="px-4 py-2 rounded-xl border border-border text-xs font-semibold"
+                                    className="px-4 py-2 rounded border border-neutral-700 text-xs text-neutral-300"
                                 >
                                     Cancelar
                                 </button>
                                 <button
                                     type="submit"
                                     disabled={savingDrama}
-                                    className="px-5 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold flex items-center gap-1.5"
+                                    className="px-4 py-2 rounded bg-white hover:bg-neutral-200 text-black text-xs font-medium"
                                 >
-                                    {savingDrama && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
-                                    Salvar Novela
+                                    {savingDrama ? "Salvando..." : "Salvar"}
                                 </button>
                             </div>
                         </form>
@@ -625,4 +559,3 @@ export default function AdminNovelasPage() {
         </div>
     );
 }
-

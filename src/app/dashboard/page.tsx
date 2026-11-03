@@ -1,21 +1,5 @@
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
-import {
-    Film,
-    Zap,
-    Crown,
-    QrCode,
-    MessageSquare,
-    CreditCard,
-    CheckCircle2,
-    Clock,
-    Play,
-    Sparkles,
-    ArrowRight,
-    ExternalLink,
-    Wifi,
-    Bot
-} from "lucide-react";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { ensureFunnelConfig, ensureInitialDramas } from "@/lib/segredos-defaults";
@@ -40,7 +24,7 @@ export default async function DashboardPage() {
     ] = await Promise.all([
         prisma.drama.findMany({
             orderBy: { createdAt: "desc" },
-            take: 5,
+            take: 6,
             include: {
                 _count: { select: { episodes: true } }
             }
@@ -57,7 +41,6 @@ export default async function DashboardPage() {
         prisma.funnelConfig.findUnique({ where: { id: "default" } })
     ]);
 
-    const paidOrders = orders.filter((o) => o.status === "PAID");
     const pendingOrders = orders.filter((o) => o.status === "PENDING");
 
     const allPaidAggregate = await prisma.pixOrder.aggregate({
@@ -71,246 +54,124 @@ export default async function DashboardPage() {
     const connectedWaCount = waSessions.filter((s) => s.status === "CONNECTED").length;
 
     return (
-        <div className="space-y-6 pb-10">
-            {/* Banner Principal do Painel */}
-            <div className="relative overflow-hidden rounded-3xl border border-rose-500/25 bg-gradient-to-r from-[#170b1c] via-[#120918] to-[#0d0712] p-6 sm:p-8 shadow-xl">
-                <div className="absolute -top-24 -right-24 w-72 h-72 bg-rose-600/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="space-y-6 max-w-6xl">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-neutral-800 pb-5">
+                <div>
+                    <h1 className="text-xl font-semibold text-white">
+                        Resumo da operação
+                    </h1>
+                    <p className="text-xs text-neutral-400 mt-1">
+                        Acompanhamento de vendas, assinantes e catálogo.
+                    </p>
+                </div>
 
-                <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-                    <div>
-                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs font-bold mb-3">
-                            <Sparkles className="w-3.5 h-3.5" /> Operação Segredos do Coração
-                        </div>
-                        <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                            Olá, {session.user.name || "Daniel"}! 👋
-                        </h1>
-                        <p className="text-xs sm:text-sm text-white/65 mt-1 max-w-2xl">
-                            Gerencie o seu catálogo de novelas verticais (YouTube), acompanhe os leads que chegam dos anúncios de 3 minutos no WhatsApp e veja os pagamentos Pix da Mangofy em tempo real.
-                        </p>
-                    </div>
-
-                    <div className="flex flex-wrap items-center gap-2.5 shrink-0">
-                        <Link
-                            href="/dashboard/novelas"
-                            className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white text-xs font-bold flex items-center gap-2 shadow-lg shadow-rose-600/25 transition"
-                        >
-                            <Film className="w-4 h-4" />
-                            Gerenciar Novelas
-                        </Link>
-                        <Link
-                            href="/dashboard/funil"
-                            className="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center gap-2 shadow-lg shadow-emerald-600/20 transition"
-                        >
-                            <Zap className="w-4 h-4" />
-                            Funil X1 & Mangofy
-                        </Link>
-                        <Link
-                            href="/dashboard/sessions"
-                            className="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-white text-xs font-semibold flex items-center gap-2 transition"
-                        >
-                            <QrCode className="w-4 h-4 text-rose-400" />
-                            Conectar WhatsApp
-                        </Link>
-                    </div>
+                <div className="flex flex-wrap items-center gap-2">
+                    <Link
+                        href="/dashboard/novelas"
+                        className="px-3.5 py-2 rounded bg-white hover:bg-neutral-200 text-black text-xs font-medium transition"
+                    >
+                        Gerenciar novelas
+                    </Link>
+                    <Link
+                        href="/dashboard/funil"
+                        className="px-3.5 py-2 rounded border border-neutral-700 hover:border-neutral-500 text-xs font-medium text-neutral-200 transition"
+                    >
+                        Configurar funil
+                    </Link>
+                    <Link
+                        href="/dashboard/sessions"
+                        className="px-3.5 py-2 rounded border border-neutral-700 hover:border-neutral-500 text-xs font-medium text-neutral-200 transition"
+                    >
+                        Conexões WhatsApp
+                    </Link>
                 </div>
             </div>
 
-            {/* 4 Cards de Métricas Principais */}
+            {/* Indicadores */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                {/* Faturamento Pix */}
-                <div className="p-5 rounded-2xl border border-white/10 bg-[#110a17] flex items-start justify-between">
-                    <div>
-                        <span className="text-[11px] font-bold uppercase tracking-wider text-white/50">
-                            Vendas Aprovadas (Pix)
-                        </span>
-                        <div className="text-2xl sm:text-3xl font-extrabold text-emerald-400 mt-1">
-                            R$ {totalRevenue.toFixed(2).replace(".", ",")}
-                        </div>
-                        <p className="text-xs text-white/50 mt-1">
-                            {totalPaidCount} pagos • {pendingOrders.length} aguardando
-                        </p>
+                <div className="p-4 rounded-lg border border-neutral-800 bg-[#111111]">
+                    <span className="text-xs text-neutral-400">Receita aprovada</span>
+                    <div className="text-2xl font-semibold text-white mt-1">
+                        R$ {totalRevenue.toFixed(2).replace(".", ",")}
                     </div>
-                    <div className="w-11 h-11 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
-                        <CreditCard className="w-5 h-5" />
-                    </div>
+                    <p className="text-xs text-neutral-500 mt-1">
+                        {totalPaidCount} pagos · {pendingOrders.length} pendentes
+                    </p>
                 </div>
 
-                {/* Assinantes VIP */}
-                <div className="p-5 rounded-2xl border border-white/10 bg-[#110a17] flex items-start justify-between">
-                    <div>
-                        <span className="text-[11px] font-bold uppercase tracking-wider text-white/50">
-                            Assinantes VIP Ativos
-                        </span>
-                        <div className="text-2xl sm:text-3xl font-extrabold text-white mt-1">
-                            {subscribersCount}
-                        </div>
-                        <p className="text-xs text-amber-400/90 mt-1">
-                            Liberados pelo número de WhatsApp
-                        </p>
+                <div className="p-4 rounded-lg border border-neutral-800 bg-[#111111]">
+                    <span className="text-xs text-neutral-400">Assinantes ativos</span>
+                    <div className="text-2xl font-semibold text-white mt-1">
+                        {subscribersCount}
                     </div>
-                    <div className="w-11 h-11 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400">
-                        <Crown className="w-5 h-5" />
-                    </div>
+                    <p className="text-xs text-neutral-500 mt-1">
+                        Liberados por telefone
+                    </p>
                 </div>
 
-                {/* Catálogo de Novelas */}
-                <div className="p-5 rounded-2xl border border-white/10 bg-[#110a17] flex items-start justify-between">
-                    <div>
-                        <span className="text-[11px] font-bold uppercase tracking-wider text-white/50">
-                            Catálogo no Ar
-                        </span>
-                        <div className="text-2xl sm:text-3xl font-extrabold text-white mt-1">
-                            {dramas.length} Novelas
-                        </div>
-                        <p className="text-xs text-rose-400 mt-1">
-                            {episodesCount} episódios do YouTube
-                        </p>
+                <div className="p-4 rounded-lg border border-neutral-800 bg-[#111111]">
+                    <span className="text-xs text-neutral-400">Catálogo</span>
+                    <div className="text-2xl font-semibold text-white mt-1">
+                        {dramas.length} novelas
                     </div>
-                    <div className="w-11 h-11 rounded-2xl bg-rose-500/15 border border-rose-500/30 flex items-center justify-center text-rose-400">
-                        <Film className="w-5 h-5" />
-                    </div>
+                    <p className="text-xs text-neutral-500 mt-1">
+                        {episodesCount} episódios cadastrados
+                    </p>
                 </div>
 
-                {/* Status WhatsApp + Funil */}
-                <div className="p-5 rounded-2xl border border-white/10 bg-[#110a17] flex items-start justify-between">
-                    <div>
-                        <span className="text-[11px] font-bold uppercase tracking-wider text-white/50">
-                            WhatsApp & Funil X1
-                        </span>
-                        <div className="text-2xl sm:text-3xl font-extrabold text-white mt-1">
-                            {connectedWaCount}/{waSessions.length} Online
-                        </div>
-                        <p className="text-xs text-emerald-400 mt-1">
-                            {funnelConfig?.enabled ? "Funil Automático Ativo" : "Funil Pausado"}
-                        </p>
+                <div className="p-4 rounded-lg border border-neutral-800 bg-[#111111]">
+                    <span className="text-xs text-neutral-400">WhatsApp e Funil</span>
+                    <div className="text-2xl font-semibold text-white mt-1">
+                        {connectedWaCount}/{waSessions.length} online
                     </div>
-                    <div className="w-11 h-11 rounded-2xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-400">
-                        <Wifi className="w-5 h-5" />
-                    </div>
+                    <p className="text-xs text-neutral-500 mt-1">
+                        {funnelConfig?.enabled ? "Atendimento automático ativo" : "Atendimento pausado"}
+                    </p>
                 </div>
             </div>
 
-            {/* Grade de Módulos Principais */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <Link
-                    href="/dashboard/novelas"
-                    className="group p-5 rounded-2xl border border-white/10 hover:border-rose-500/50 bg-[#110a17] transition flex flex-col justify-between"
-                >
-                    <div>
-                        <div className="w-10 h-10 rounded-xl bg-rose-500/15 text-rose-400 flex items-center justify-center mb-3">
-                            <Film className="w-5 h-5" />
-                        </div>
-                        <h3 className="font-bold text-base text-white group-hover:text-rose-300 transition">
-                            1. Catálogo de Novelas & YouTube
-                        </h3>
-                        <p className="text-xs text-white/55 mt-1 leading-relaxed">
-                            Cadastre novelas verticais, escolha quantos episódios são grátis e adicione os links dos vídeos do YouTube.
-                        </p>
-                    </div>
-                    <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-bold text-rose-400">
-                        <span>Abrir Gerenciador de Novelas</span>
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
-                    </div>
-                </Link>
-
-                <Link
-                    href="/dashboard/funil"
-                    className="group p-5 rounded-2xl border border-white/10 hover:border-emerald-500/50 bg-[#110a17] transition flex flex-col justify-between"
-                >
-                    <div>
-                        <div className="w-10 h-10 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center mb-3">
-                            <Bot className="w-5 h-5" />
-                        </div>
-                        <h3 className="font-bold text-base text-white group-hover:text-emerald-300 transition">
-                            2. Funil X1 + Mangofy + IA Sofia
-                        </h3>
-                        <p className="text-xs text-white/55 mt-1 leading-relaxed">
-                            Configure as mensagens automáticas para quem vem do anúncio de 3 min, chave da Mangofy e a IA Vendedora.
-                        </p>
-                    </div>
-                    <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-bold text-emerald-400">
-                        <span>Configurar Funil e Pix</span>
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
-                    </div>
-                </Link>
-
-                <Link
-                    href="/dashboard/assinantes"
-                    className="group p-5 rounded-2xl border border-white/10 hover:border-amber-500/50 bg-[#110a17] transition flex flex-col justify-between"
-                >
-                    <div>
-                        <div className="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center mb-3">
-                            <Crown className="w-5 h-5" />
-                        </div>
-                        <h3 className="font-bold text-base text-white group-hover:text-amber-300 transition">
-                            3. Assinantes VIP & Pedidos Pix
-                        </h3>
-                        <p className="text-xs text-white/55 mt-1 leading-relaxed">
-                            Veja todos os clientes liberados, aprove pedidos Pix manualmente em 1 clique ou libere números de WhatsApp.
-                        </p>
-                    </div>
-                    <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-bold text-amber-400">
-                        <span>Ver Assinantes e Vendas</span>
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
-                    </div>
-                </Link>
-            </div>
-
-            {/* Duas Colunas: Últimos Pedidos Pix + Novelas Publicadas */}
+            {/* Tabelas */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                {/* Últimos Pedidos Pix */}
-                <div className="lg:col-span-6 p-5 rounded-2xl border border-white/10 bg-[#110a17] space-y-4">
-                    <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                        <h2 className="font-bold text-sm sm:text-base text-white flex items-center gap-2">
-                            <CreditCard className="w-4 h-4 text-emerald-400" />
-                            Últimos Pedidos Pix (Funil & Site)
+                <div className="lg:col-span-6 rounded-lg border border-neutral-800 bg-[#111111] p-5 space-y-4">
+                    <div className="flex items-center justify-between border-b border-neutral-800 pb-3">
+                        <h2 className="font-medium text-sm text-white">
+                            Últimos pedidos Pix
                         </h2>
                         <Link
                             href="/dashboard/assinantes"
-                            className="text-xs font-semibold text-rose-400 hover:text-rose-300"
+                            className="text-xs text-neutral-400 hover:text-white"
                         >
                             Ver todos
                         </Link>
                     </div>
 
                     {orders.length === 0 ? (
-                        <div className="py-8 text-center text-xs text-white/45">
-                            Nenhum pedido Pix gerado ainda.
+                        <div className="py-8 text-center text-xs text-neutral-500">
+                            Nenhum pedido registrado.
                         </div>
                     ) : (
-                        <div className="space-y-2.5">
+                        <div className="divide-y divide-neutral-800">
                             {orders.map((order) => (
                                 <div
                                     key={order.id}
-                                    className="p-3 rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-between gap-3"
+                                    className="py-2.5 flex items-center justify-between gap-3"
                                 >
                                     <div>
-                                        <div className="text-xs font-bold text-white flex items-center gap-2">
-                                            <span>+{order.phone}</span>
-                                            <span className="text-emerald-400">
-                                                R$ {order.amount.toFixed(2).replace(".", ",")}
-                                            </span>
+                                        <div className="text-xs font-medium text-white">
+                                            +{order.phone} · R$ {order.amount.toFixed(2).replace(".", ",")}
                                         </div>
-                                        <div className="text-[11px] text-white/45">
-                                            {order.customerName || "Cliente WhatsApp"}
+                                        <div className="text-[11px] text-neutral-500">
+                                            {order.customerName || "Cliente"}
                                         </div>
                                     </div>
                                     <span
-                                        className={`px-2.5 py-1 rounded-full text-[10px] font-bold flex items-center gap-1 ${
+                                        className={`px-2 py-0.5 rounded text-[11px] font-medium ${
                                             order.status === "PAID"
-                                                ? "bg-emerald-500/15 text-emerald-300 border border-emerald-500/30"
-                                                : "bg-amber-500/15 text-amber-300 border border-amber-500/30"
+                                                ? "bg-emerald-950 text-emerald-300 border border-emerald-800/50"
+                                                : "bg-neutral-800 text-neutral-300"
                                         }`}
                                     >
-                                        {order.status === "PAID" ? (
-                                            <>
-                                                <CheckCircle2 className="w-3 h-3" /> PAGO
-                                            </>
-                                        ) : (
-                                            <>
-                                                <Clock className="w-3 h-3" /> PENDENTE
-                                            </>
-                                        )}
+                                        {order.status === "PAID" ? "Pago" : "Pendente"}
                                     </span>
                                 </div>
                             ))}
@@ -318,49 +179,40 @@ export default async function DashboardPage() {
                     )}
                 </div>
 
-                {/* Novelas Ativas */}
-                <div className="lg:col-span-6 p-5 rounded-2xl border border-white/10 bg-[#110a17] space-y-4">
-                    <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                        <h2 className="font-bold text-sm sm:text-base text-white flex items-center gap-2">
-                            <Film className="w-4 h-4 text-rose-400" />
-                            Novelas Publicadas no Catálogo
+                <div className="lg:col-span-6 rounded-lg border border-neutral-800 bg-[#111111] p-5 space-y-4">
+                    <div className="flex items-center justify-between border-b border-neutral-800 pb-3">
+                        <h2 className="font-medium text-sm text-white">
+                            Novelas cadastradas
                         </h2>
                         <Link
                             href="/dashboard/novelas"
-                            className="text-xs font-semibold text-rose-400 hover:text-rose-300"
+                            className="text-xs text-neutral-400 hover:text-white"
                         >
-                            Gerenciar
+                            Editar catálogo
                         </Link>
                     </div>
 
-                    <div className="space-y-2.5">
+                    <div className="divide-y divide-neutral-800">
                         {dramas.map((drama) => (
                             <div
                                 key={drama.id}
-                                className="p-3 rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-between gap-3"
+                                className="py-2.5 flex items-center justify-between gap-3"
                             >
-                                <div className="flex items-center gap-3 min-w-0">
-                                    <img
-                                        src={drama.coverUrl}
-                                        alt={drama.title}
-                                        className="w-10 h-14 object-cover rounded-lg shrink-0 border border-white/10"
-                                    />
-                                    <div className="min-w-0">
-                                        <div className="text-xs font-bold text-white truncate">
-                                            {drama.title}
-                                        </div>
-                                        <div className="text-[11px] text-white/50">
-                                            {drama.category} • {drama._count.episodes} episódios (Ep 1-{drama.freeEpisodesCount} grátis)
-                                        </div>
+                                <div className="min-w-0">
+                                    <div className="text-xs font-medium text-white truncate">
+                                        {drama.title}
+                                    </div>
+                                    <div className="text-[11px] text-neutral-500">
+                                        {drama.category} · {drama._count.episodes} episódios ({drama.freeEpisodesCount} grátis)
                                     </div>
                                 </div>
 
                                 <Link
                                     href={`/assistir/${drama.slug}`}
                                     target="_blank"
-                                    className="px-3 py-1.5 rounded-lg bg-rose-600/20 hover:bg-rose-600 text-rose-300 hover:text-white text-xs font-semibold flex items-center gap-1 shrink-0 transition"
+                                    className="px-2.5 py-1 rounded border border-neutral-700 hover:border-neutral-500 text-xs text-neutral-300 hover:text-white shrink-0 transition"
                                 >
-                                    <Play className="w-3 h-3 fill-current" /> Ver
+                                    Abrir
                                 </Link>
                             </div>
                         ))}
