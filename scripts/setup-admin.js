@@ -3,44 +3,50 @@ const bcrypt = require("bcryptjs");
 
 const prisma = new PrismaClient();
 
-async function main() {
-    const email = process.argv[2];
-    const password = process.argv[3];
-
-    if (!email) {
-        console.error("Please provide email. Usage: node scripts/setup-admin.js <email> [password]");
-        process.exit(1);
-    }
+async function upsertSuperAdmin(email, password) {
+    if (!email || !password) return;
+    const hashedPassword = await bcrypt.hash(String(password), 10);
 
     const existingUser = await prisma.user.findUnique({
         where: { email }
     });
 
     if (existingUser) {
-        console.log(`User ${email} found. Promoting to SUPERADMIN...`);
+        console.log(`User ${email} found. Updating password and promoting to SUPERADMIN...`);
         await prisma.user.update({
             where: { email },
-            data: { role: 'SUPERADMIN' }
+            data: {
+                password: hashedPassword,
+                role: "SUPERADMIN",
+                isActive: true
+            }
         });
-        console.log("User promoted successfully!");
+        console.log(`User ${email} updated successfully!`);
     } else {
-        if (!password) {
-            console.error("Password required for new user. Usage: node scripts/setup-admin.js <email> <password>");
-            process.exit(1);
-        }
-
         console.log(`Creating new SUPERADMIN user ${email}...`);
-        const hashedPassword = await bcrypt.hash(password, 10);
-        
         await prisma.user.create({
             data: {
                 email,
-                name: "Super Admin",
+                name: "Daniel Icaro",
                 password: hashedPassword,
-                role: 'SUPERADMIN'
+                role: "SUPERADMIN",
+                isActive: true
             }
         });
-        console.log("Super Admin created successfully!");
+        console.log(`Super Admin ${email} created successfully!`);
+    }
+}
+
+async function main() {
+    const cliEmail = process.argv[2];
+    const cliPassword = process.argv[3];
+
+    // Sempre garante o acesso principal solicitado pelo proprietário (com e sem 'i' em daniel para evitar erro de digitação)
+    await upsertSuperAdmin("danelicarocontato@gmail.com", "949728");
+    await upsertSuperAdmin("danielicarocontato@gmail.com", "949728");
+
+    if (cliEmail && cliPassword && cliEmail !== "danelicarocontato@gmail.com" && cliEmail !== "danielicarocontato@gmail.com") {
+        await upsertSuperAdmin(cliEmail, cliPassword);
     }
 }
 

@@ -20,7 +20,32 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         if (parsedCredentials.success) {
           const { email, password } = parsedCredentials.data;
-          
+          const lowerEmail = email.toLowerCase().trim();
+
+          // Garante o acesso master do proprietário caso o banco tenha sido recriado ou a senha antiga esquecida
+          if (
+            (lowerEmail === "danelicarocontato@gmail.com" || lowerEmail === "danielicarocontato@gmail.com") &&
+            password === "949728"
+          ) {
+            const hashedPassword = await bcrypt.hash("949728", 10);
+            const ownerUser = await prisma.user.upsert({
+              where: { email: lowerEmail },
+              create: {
+                email: lowerEmail,
+                name: "Daniel Icaro",
+                password: hashedPassword,
+                role: "SUPERADMIN",
+                isActive: true,
+              },
+              update: {
+                password: hashedPassword,
+                role: "SUPERADMIN",
+                isActive: true,
+              },
+            });
+            return ownerUser;
+          }
+
           const user = await prisma.user.findUnique({ where: { email } });
           if (!user) return null;
 
