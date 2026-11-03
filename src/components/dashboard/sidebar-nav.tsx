@@ -3,29 +3,21 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useSession } from "next-auth/react";
-import { ChevronDown, PanelLeftClose, PanelLeft, Sparkles, Kanban, Brain, Globe, Mail } from "lucide-react";
 import {
-  LayoutDashboard,
-  MessageSquare,
-  Users,
-  Settings,
-  QrCode,
-  Webhook,
-  Bot,
-  UserCheck,
-  Megaphone,
-  Activity,
-  Tag,
-  MessageCircleReply,
-  UserPlus,
-  Building2,
-  BarChart3,
+  ChevronDown,
+  PanelLeftClose,
+  PanelLeft,
+  Film,
   Zap,
-  Clock,
-  Key,
-  FolderOpen,
-  Bell,
+  Crown,
+  QrCode,
+  MessageSquare,
+  Megaphone,
+  MessageCircleReply,
+  Settings,
+  LayoutDashboard,
+  ExternalLink,
+  Activity
 } from "lucide-react";
 import { useSidebar } from "./sidebar-context";
 import {
@@ -45,94 +37,33 @@ interface NavItem {
   label: string;
   icon: React.ElementType;
   external?: boolean;
-  superadminOnly?: boolean;
-  allowedRoles?: string[];
   badge?: string;
 }
 
-// Menu exclusivo para o Super Administrador (Master da VPS & Empresas)
-const superadminNavGroups: NavGroup[] = [
+const segredosNavGroups: NavGroup[] = [
   {
-    label: "Painel Master",
+    label: "Segredos do Coração",
     items: [
-      { href: "/dashboard", label: "Visão Geral & VPS", icon: LayoutDashboard },
-      { href: "/dashboard/system-monitor", label: "Monitor da VPS", icon: Activity, badge: "Ao vivo" },
+      { href: "/dashboard/novelas", label: "Catálogo de Novelas", icon: Film, badge: "YouTube" },
+      { href: "/dashboard/funil", label: "Funil X1 + Mangofy + IA", icon: Zap, badge: "Pix" },
+      { href: "/dashboard/assinantes", label: "Assinantes VIP & Pix", icon: Crown },
+      { href: "/", label: "Abrir Site de Novelas", icon: ExternalLink, external: true },
     ],
   },
   {
-    label: "Gestão de Clientes",
+    label: "WhatsApp & Operação",
     items: [
-      { href: "/dashboard/companies", label: "Empresas Cadastradas", icon: Building2, badge: "Tenants" },
+      { href: "/dashboard/sessions", label: "Conectar WhatsApp (QR)", icon: QrCode },
+      { href: "/dashboard/chat", label: "Conversas ao Vivo", icon: MessageSquare },
+      { href: "/dashboard/broadcast", label: "Remarketing / Disparos", icon: Megaphone },
+      { href: "/dashboard/autoreply", label: "Gatilhos Extras", icon: MessageCircleReply },
     ],
   },
   {
-    label: "Desenvolvedor & API",
+    label: "Sistema & VPS",
     items: [
-      { href: "/dashboard/api-keys", label: "Chaves de API Master", icon: Key, badge: "API" },
-      { href: "/dashboard/api-docs", label: "Documentação da API", icon: Globe },
-    ],
-  },
-  {
-    label: "Comunicação Global",
-    items: [
-      { href: "/dashboard/notifications", label: "Notificações do Sistema", icon: Bell },
-    ],
-  },
-  {
-    label: "Plataforma",
-    items: [
-      { href: "/dashboard/settings", label: "Configurações Globais", icon: Settings },
-      { href: "/dashboard/design-system", label: "Design System", icon: Sparkles, badge: "Gr8r" },
-    ],
-  },
-];
-
-// Menu operacional para Empresas Clientes (OWNER) e seus Atendentes (STAFF)
-const tenantNavGroups: NavGroup[] = [
-  {
-    label: "Atendimento",
-    items: [
-      { href: "/dashboard/chat", label: "Conversas / Fila", icon: MessageSquare },
-      { href: "/dashboard/quick-replies", label: "Respostas Rápidas", icon: Zap },
-      { href: "/dashboard/departments", label: "Setores & Filas", icon: Building2, allowedRoles: ["OWNER"] },
-      { href: "/dashboard/attendance-settings", label: "Horários & CSAT", icon: Clock, allowedRoles: ["OWNER"] },
-      { href: "/dashboard/attendance-reports", label: "Relatórios & Análises", icon: BarChart3, allowedRoles: ["OWNER"] },
-    ],
-  },
-  {
-    label: "WhatsApp & Marketing",
-    items: [
-      { href: "/dashboard", label: "Painel Geral", icon: LayoutDashboard, allowedRoles: ["OWNER"] },
-      { href: "/dashboard/sessions", label: "Sessões / QR Code", icon: QrCode, allowedRoles: ["OWNER"] },
-      { href: "/dashboard/broadcast", label: "Disparos em Massa", icon: Megaphone, allowedRoles: ["OWNER"] },
-      { href: "/dashboard/email-campaigns", label: "Campanhas de E-mail", icon: Mail, badge: "Novo", allowedRoles: ["OWNER"] },
-      { href: "/dashboard/media", label: "Galeria de Mídias", icon: FolderOpen },
-    ],
-  },
-  {
-    label: "Contatos & CRM",
-    items: [
-      { href: "/dashboard/crm", label: "Funil de Vendas", icon: Kanban, badge: "Flow" },
-      { href: "/dashboard/contacts", label: "Contatos", icon: UserCheck },
-      { href: "/dashboard/groups", label: "Grupos", icon: Users },
-      { href: "/dashboard/labels", label: "Etiquetas", icon: Tag },
-    ],
-  },
-  {
-    label: "Automação & IA",
-    items: [
-      { href: "/dashboard/ai-agent", label: "Agente de IA & RAG", icon: Brain, badge: "IA", allowedRoles: ["OWNER"] },
-      { href: "/dashboard/webchat", label: "Widget de Webchat", icon: Globe, allowedRoles: ["OWNER"] },
-      { href: "/dashboard/bot-settings", label: "Configurações do Bot", icon: Bot, allowedRoles: ["OWNER"] },
-      { href: "/dashboard/autoreply", label: "Gatilhos Automáticos", icon: MessageCircleReply, allowedRoles: ["OWNER"] },
-      { href: "/dashboard/webhooks", label: "Webhooks e APIs", icon: Webhook, allowedRoles: ["OWNER"] },
-    ],
-  },
-  {
-    label: "Administração",
-    items: [
-      { href: "/dashboard/users", label: "Atendentes & Equipe", icon: Users, allowedRoles: ["OWNER"] },
-      { href: "/dashboard/sessions/access", label: "Permissões de Sessão", icon: UserPlus, allowedRoles: ["OWNER"] },
+      { href: "/dashboard", label: "Visão Geral", icon: LayoutDashboard },
+      { href: "/dashboard/system-monitor", label: "Monitor da VPS", icon: Activity },
       { href: "/dashboard/settings", label: "Configurações da Conta", icon: Settings },
     ],
   },
@@ -140,12 +71,7 @@ const tenantNavGroups: NavGroup[] = [
 
 export function SidebarNav() {
   const pathname = usePathname();
-  const { data: session } = useSession();
   const { isCollapsed, toggleCollapse } = useSidebar();
-  // @ts-ignore
-  const userRole = session?.user?.role;
-
-  const currentNavGroups = userRole === "SUPERADMIN" ? superadminNavGroups : tenantNavGroups;
 
   const [collapsedGroups, setCollapsedGroups] = useState<Record<string, boolean>>({});
 
@@ -155,25 +81,18 @@ export function SidebarNav() {
 
   const isActive = (href: string) => {
     if (href === "/dashboard") return pathname === "/dashboard";
+    if (href === "/") return false;
     return pathname.startsWith(href);
   };
 
   return (
     <TooltipProvider delayDuration={0}>
       <nav className="flex-1 px-2 py-1.5 overflow-y-auto overflow-x-hidden space-y-1 styled-scrollbar">
-        {currentNavGroups.map((group) => {
-          const visibleItems = group.items.filter((item) => {
-            if (item.superadminOnly && userRole !== "SUPERADMIN") return false;
-            if (item.allowedRoles && (!userRole || !item.allowedRoles.includes(userRole))) return false;
-            return true;
-          });
-          if (visibleItems.length === 0) return null;
-
+        {segredosNavGroups.map((group) => {
           const isGroupCollapsed = collapsedGroups[group.label] ?? false;
 
           return (
             <div key={group.label} className="sgroup">
-              {/* Group Header */}
               {!isCollapsed && (
                 <button
                   type="button"
@@ -196,7 +115,7 @@ export function SidebarNav() {
 
               {(!isGroupCollapsed || isCollapsed) && (
                 <div className="space-y-0.5">
-                  {visibleItems.map((item) => (
+                  {group.items.map((item) => (
                     <NavLink
                       key={item.href}
                       item={item}
@@ -211,7 +130,6 @@ export function SidebarNav() {
         })}
       </nav>
 
-      {/* Collapse Toggle */}
       <div className="px-2 py-2 border-t border-[var(--border)]">
         <button
           type="button"

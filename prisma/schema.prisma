@@ -785,3 +785,139 @@ model EmailCampaignLog {
 }
 
 
+
+// ==========================================
+// Segredos do Coração — Streaming & Funil X1
+// ==========================================
+
+enum DramaStatus {
+  PUBLISHED
+  DRAFT
+}
+
+model Drama {
+  id                String      @id @default(cuid())
+  title             String
+  slug              String      @unique
+  synopsis          String      @db.Text
+  coverUrl          String      @db.Text
+  bannerUrl         String?     @db.Text
+  trailerYoutubeUrl String?     @db.Text
+  category          String      @default("Romance & Drama")
+  tags              String?     @default("Vertical, Emocionante, Vingança")
+  totalEpisodes     Int         @default(1)
+  freeEpisodesCount Int         @default(2)
+  isFeatured        Boolean     @default(false)
+  isVertical        Boolean     @default(true)
+  status            DramaStatus @default(PUBLISHED)
+  viewsCount        Int         @default(1240)
+  likesCount        Int         @default(450)
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+
+  episodes          Episode[]
+
+  @@index([status])
+  @@index([isFeatured])
+}
+
+model Episode {
+  id              String   @id @default(cuid())
+  dramaId         String
+  number          Int
+  title           String
+  description     String?  @db.Text
+  youtubeUrl      String   @db.Text
+  videoUrl        String?  @db.Text
+  thumbnailUrl    String?  @db.Text
+  durationSeconds Int      @default(180)
+  isFree          Boolean  @default(false)
+  viewsCount      Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  drama           Drama    @relation(fields: [dramaId], references: [id], onDelete: Cascade)
+
+  @@unique([dramaId, number])
+  @@index([dramaId])
+}
+
+model ViewerAccess {
+  id                 String    @id @default(cuid())
+  phone              String    @unique
+  name               String?
+  email              String?
+  cpf                String?
+  planName           String    @default("Acesso VIP Vitalício")
+  isVip              Boolean   @default(true)
+  expiresAt          DateTime?
+  lastWatchedDramaId String?
+  lastWatchedEpisode Int?      @default(1)
+  notes              String?   @db.Text
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  @@index([phone])
+  @@index([isVip])
+}
+
+enum PixOrderStatus {
+  PENDING
+  PAID
+  EXPIRED
+  CANCELLED
+}
+
+model PixOrder {
+  id              String         @id @default(cuid())
+  externalId      String?        @unique
+  phone           String
+  jid             String?
+  sessionId       String?
+  customerName    String?
+  customerEmail   String?
+  customerCpf     String?
+  planName        String         @default("Acesso Completo VIP - Segredos do Coração")
+  amount          Float          @default(19.90)
+  status          PixOrderStatus @default(PENDING)
+  pixCopyPaste    String?        @db.Text
+  pixQrCodeBase64 String?        @db.LongText
+  dramaId         String?
+  paidAt          DateTime?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  @@index([phone])
+  @@index([status])
+  @@index([externalId])
+}
+
+model FunnelConfig {
+  id                     String   @id @default("default")
+  enabled                Boolean  @default(true)
+  sessionId              String?
+  planName               String   @default("Acesso VIP Completo — Segredos do Coração")
+  planPrice              Float    @default(19.90)
+  siteUrl                String   @default("https://segredosdocoracao.com")
+
+  mangofyApiUrl          String   @default("https://checkout.mangofy.com.br/api/v1")
+  mangofyApiKey          String?  @db.Text
+  mangofyStoreCode       String?  @db.Text
+  mangofyWebhookSecret   String?  @db.Text
+
+  step1Greeting          String   @db.Text
+  step1MediaUrl          String?  @db.Text
+  step1MediaType         String   @default("none")
+  step2OfferMessage      String   @db.Text
+  pixTriggerKeywords     String   @default("pix, quero, sim, continuar, assistir, liberar, pagar, acesso, parte 2, completo, novela, valor, preco")
+  pixGeneratedMessage    String   @db.Text
+  paymentApprovedMessage String   @db.Text
+
+  useAiSaleswoman        Boolean  @default(true)
+  aiProvider             AiProvider @default(GROQ)
+  aiApiKey               String?  @db.Text
+  aiModel                String   @default("llama-3.3-70b-versatile")
+  aiSystemPrompt         String   @db.Text
+
+  updatedAt              DateTime @updatedAt
+}
