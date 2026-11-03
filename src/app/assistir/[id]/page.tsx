@@ -5,6 +5,7 @@ import { useParams, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { extractYoutubeId } from "@/lib/segredos-defaults";
 import { VipAccessModal } from "@/components/streaming/vip-access-modal";
+import { PwaInstallModal } from "@/components/streaming/pwa-install-modal";
 
 interface Episode {
     id: string;
@@ -45,6 +46,7 @@ function WatchDramaContent() {
     const [planPrice, setPlanPrice] = useState(19.9);
     const [vipModalOpen, setVipModalOpen] = useState(false);
     const [vipModalTab, setVipModalTab] = useState<"login" | "pix">("pix");
+    const [pwaModalOpen, setPwaModalOpen] = useState(false);
 
     useEffect(() => {
         async function fetchDrama() {
@@ -56,7 +58,10 @@ function WatchDramaContent() {
                 const data = await dramaRes.json();
                 if (data?.drama) {
                     setDrama(data.drama);
-                    if (data.drama.episodes?.length > 0) {
+                    const epParam = Number(searchParams.get("ep"));
+                    if (epParam && epParam > 0) {
+                        setCurrentEpNumber(epParam);
+                    } else if (data.drama.episodes?.length > 0) {
                         setCurrentEpNumber(data.drama.episodes[0].number);
                     }
                 }
@@ -71,7 +76,7 @@ function WatchDramaContent() {
             }
         }
         if (dramaIdOrSlug) fetchDrama();
-    }, [dramaIdOrSlug]);
+    }, [dramaIdOrSlug, searchParams]);
 
     useEffect(() => {
         const urlPhone = searchParams.get("phone");
@@ -98,20 +103,17 @@ function WatchDramaContent() {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center">
-                <span className="text-xs text-neutral-400">Carregando...</span>
+            <div className="min-h-dvh bg-[#151413] text-[#efe9de] hd-theme flex items-center justify-center">
+                <span className="text-xs text-[#efe9de]/55">Carregando episódio...</span>
             </div>
         );
     }
 
     if (!drama) {
         return (
-            <div className="min-h-screen bg-[#0a0a0a] text-white flex flex-col items-center justify-center p-4 text-center">
+            <div className="min-h-dvh bg-[#151413] text-[#efe9de] hd-theme flex flex-col items-center justify-center p-4 text-center">
                 <h1 className="text-lg font-semibold mb-3">Novela não encontrada</h1>
-                <Link
-                    href="/"
-                    className="px-4 py-2 rounded bg-white text-black text-xs font-medium"
-                >
+                <Link href="/" className="hd-btn-sm hd-button-cream">
                     Voltar ao catálogo
                 </Link>
             </div>
@@ -142,33 +144,45 @@ function WatchDramaContent() {
 
     const currentIndex = episodes.findIndex((e) => e.number === currentEpNumber);
     const prevEp = currentIndex > 0 ? episodes[currentIndex - 1] : null;
-    const nextEp = currentIndex >= 0 && currentIndex < episodes.length - 1 ? episodes[currentIndex + 1] : null;
+    const nextEp =
+        currentIndex >= 0 && currentIndex < episodes.length - 1
+            ? episodes[currentIndex + 1]
+            : null;
 
     return (
-        <div className="min-h-screen bg-[#0a0a0a] text-white flex flex-col">
-            <header className="sticky top-0 z-30 border-b border-neutral-800 bg-[#0a0a0a]/95 backdrop-blur">
-                <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between gap-3">
+        <div className="min-h-dvh bg-[#0e0d0c] text-[#efe9de] hd-theme flex flex-col">
+            <header className="sticky top-0 z-30 border-b border-[rgb(239_233_222/0.08)] bg-[#151413]/92 backdrop-blur-md">
+                <div className="max-w-6xl mx-auto px-4 h-15 flex items-center justify-between gap-3">
                     <div className="flex items-center gap-3 min-w-0">
                         <Link
                             href="/"
-                            className="px-2.5 py-1 rounded border border-neutral-800 hover:border-neutral-600 text-xs text-neutral-300 shrink-0"
+                            className="hd-btn-sm hd-button-quiet text-xs shrink-0"
                         >
-                            Voltar
+                            ← Catálogo
                         </Link>
                         <div className="min-w-0">
-                            <h1 className="text-sm font-medium truncate">
+                            <h1 className="text-sm font-semibold text-[#efe9de] truncate">
                                 {drama.title}
                             </h1>
-                            <p className="text-[11px] text-neutral-400">
-                                Episódio {currentEpisode?.number || 1} de {episodes.length}
+                            <p className="text-[11px] text-[#efe9de]/55 tabular-nums">
+                                Episódio {String(currentEpisode?.number || 1).padStart(2, "0")} de{" "}
+                                {episodes.length}
                             </p>
                         </div>
                     </div>
 
                     <div className="flex items-center gap-2 shrink-0">
+                        <button
+                            type="button"
+                            onClick={() => setPwaModalOpen(true)}
+                            className="hd-btn-sm hd-button-quiet text-xs hidden sm:inline-flex"
+                        >
+                            Baixar App (PWA)
+                        </button>
+
                         {isVip ? (
-                            <span className="px-2.5 py-1 rounded bg-neutral-900 border border-neutral-800 text-neutral-300 text-xs">
-                                Acesso ativo ({viewerPhone})
+                            <span className="px-3 py-1.5 rounded-full hd-surface text-[#e2b383] text-xs tabular-nums">
+                                VIP · {viewerPhone.slice(-4)}
                             </span>
                         ) : (
                             <>
@@ -178,7 +192,7 @@ function WatchDramaContent() {
                                         setVipModalTab("login");
                                         setVipModalOpen(true);
                                     }}
-                                    className="px-3 py-1.5 rounded border border-neutral-800 hover:border-neutral-600 text-xs text-neutral-300"
+                                    className="hd-btn-sm hd-button-quiet text-xs"
                                 >
                                     Entrar
                                 </button>
@@ -188,7 +202,7 @@ function WatchDramaContent() {
                                         setVipModalTab("pix");
                                         setVipModalOpen(true);
                                     }}
-                                    className="px-3 py-1.5 rounded bg-white text-black text-xs font-medium"
+                                    className="hd-btn-sm hd-button-cream text-xs"
                                 >
                                     Liberar episódios
                                 </button>
@@ -203,9 +217,9 @@ function WatchDramaContent() {
                     <div
                         className={`relative w-full ${
                             drama.isVertical
-                                ? "max-w-[400px] aspect-[9/16]"
+                                ? "max-w-[410px] aspect-[9/16]"
                                 : "aspect-video"
-                        } bg-black sm:rounded-lg overflow-hidden border-y sm:border border-neutral-800`}
+                        } bg-black sm:rounded-[22px] overflow-hidden sm:hd-shell`}
                     >
                         {currentUnlocked && currentEpisode ? (
                             currentEpisode.videoUrl ? (
@@ -228,91 +242,97 @@ function WatchDramaContent() {
                                 />
                             ) : (
                                 <div className="w-full h-full flex items-center justify-center p-6 text-center">
-                                    <p className="text-xs text-neutral-400">
+                                    <p className="text-xs text-[#efe9de]/55">
                                         Vídeo indisponível.
                                     </p>
                                 </div>
                             )
                         ) : (
-                            <div className="w-full h-full relative flex flex-col items-center justify-center p-6 text-center bg-[#111111]">
+                            <div className="w-full h-full relative flex flex-col items-center justify-center p-6 text-center bg-[#151413]">
                                 <div className="max-w-xs">
-                                    <span className="inline-block px-2.5 py-0.5 rounded bg-neutral-800 text-neutral-300 text-[11px] mb-3">
-                                        Episódio {currentEpisode?.number} bloqueado
+                                    <span className="inline-block px-3 py-1 rounded-full hd-surface text-[#e2b383] text-[11px] font-medium mb-3 tabular-nums">
+                                        Episódio {String(currentEpisode?.number || 1).padStart(2, "0")} · Exclusivo Assinantes
                                     </span>
-                                    <h2 className="text-lg font-semibold mb-2">
-                                        Libere o acesso para continuar assistindo
+                                    <h2 className="text-xl font-semibold tracking-[-0.015em] text-[#efe9de] mb-2">
+                                        Continue assistindo sem limites
                                     </h2>
-                                    <p className="text-xs text-neutral-400 mb-6 leading-relaxed">
-                                        Desbloqueie todos os episódios de {drama.title} e todo o catálogo por R$ {planPrice.toFixed(2).replace(".", ",")}.
+                                    <p className="text-xs text-[#efe9de]/64 mb-6 leading-relaxed">
+                                        Desbloqueie todos os episódios de {drama.title}, todo o catálogo e o aplicativo PWA por R$ {planPrice.toFixed(2).replace(".", ",")}.
                                     </p>
 
-                                    <button
-                                        type="button"
-                                        onClick={() => {
-                                            setVipModalTab("pix");
-                                            setVipModalOpen(true);
-                                        }}
-                                        className="w-full py-2.5 px-4 rounded bg-white hover:bg-neutral-200 text-black font-medium text-xs mb-2.5 transition"
-                                    >
-                                        Liberar com Pix
-                                    </button>
+                                    <div className="space-y-2.5">
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                setVipModalTab("pix");
+                                                setVipModalOpen(true);
+                                            }}
+                                            className="w-full hd-btn hd-button-cream text-xs"
+                                        >
+                                            Liberar com Pix
+                                        </button>
 
-                                    <button
-                                        type="button"
-                                        onClick={() => {
-                                            setVipModalTab("login");
-                                            setVipModalOpen(true);
-                                        }}
-                                        className="w-full py-2 px-4 rounded border border-neutral-700 hover:border-neutral-500 text-xs text-neutral-300 transition"
-                                    >
-                                        Já tenho acesso
-                                    </button>
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                setVipModalTab("login");
+                                                setVipModalOpen(true);
+                                            }}
+                                            className="w-full hd-btn hd-button-quiet text-xs"
+                                        >
+                                            Já sou assinante
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         )}
                     </div>
 
-                    <div className="w-full max-w-[400px] px-4 sm:px-0 mt-3 flex items-center justify-between gap-2">
+                    <div className="w-full max-w-[410px] px-4 sm:px-0 mt-3.5 flex items-center justify-between gap-2">
                         <button
                             type="button"
                             disabled={!prevEp}
                             onClick={() => prevEp && handleSelectEpisode(prevEp)}
-                            className="px-3.5 py-2 rounded border border-neutral-800 hover:border-neutral-600 text-xs text-neutral-300 disabled:opacity-30 transition"
+                            className="hd-btn-sm hd-button-quiet disabled:opacity-35"
                         >
-                            Episódio anterior
+                            ← Episódio anterior
                         </button>
 
                         <button
                             type="button"
                             disabled={!nextEp}
                             onClick={() => nextEp && handleSelectEpisode(nextEp)}
-                            className="px-3.5 py-2 rounded bg-white hover:bg-neutral-200 text-black text-xs font-medium disabled:opacity-30 transition"
+                            className="hd-btn-sm hd-button-cream disabled:opacity-35"
                         >
-                            Próximo episódio
+                            Próximo episódio →
                         </button>
                     </div>
                 </div>
 
                 <div className="lg:col-span-5 px-4 sm:px-0 pb-12 space-y-5">
-                    <div className="p-4 rounded-lg bg-[#121212] border border-neutral-800">
-                        <div className="text-[11px] text-neutral-400 mb-1">
+                    <div className="p-5 rounded-[20px] hd-card">
+                        <div className="text-[11px] text-[#e2b383] font-medium mb-1">
                             {drama.category}
                         </div>
-                        <h2 className="text-base font-semibold mb-1.5">{drama.title}</h2>
-                        <p className="text-xs text-neutral-400 leading-relaxed">{drama.synopsis}</p>
+                        <h2 className="text-lg font-semibold tracking-[-0.012em] text-[#efe9de] mb-1.5">
+                            {drama.title}
+                        </h2>
+                        <p className="text-xs text-[#efe9de]/64 leading-relaxed">
+                            {drama.synopsis}
+                        </p>
                     </div>
 
-                    <div className="p-4 rounded-lg bg-[#121212] border border-neutral-800">
-                        <div className="flex items-center justify-between mb-3">
-                            <h3 className="text-sm font-medium">
+                    <div className="p-5 rounded-[20px] hd-card">
+                        <div className="flex items-center justify-between mb-3.5">
+                            <h3 className="text-sm font-semibold text-[#efe9de]">
                                 Episódios ({episodes.length})
                             </h3>
-                            <span className="text-[11px] text-neutral-400">
-                                1 a {drama.freeEpisodesCount} gratuitos
+                            <span className="text-[11px] text-[#e2b383] tabular-nums">
+                                Ep. 01 a 0{drama.freeEpisodesCount} grátis
                             </span>
                         </div>
 
-                        <div className="grid grid-cols-5 gap-1.5 mb-4">
+                        <div className="grid grid-cols-5 gap-2 mb-5">
                             {episodes.map((ep) => {
                                 const unlocked = isEpisodeUnlocked(ep);
                                 const active = ep.number === currentEpNumber;
@@ -321,21 +341,21 @@ function WatchDramaContent() {
                                         key={ep.id}
                                         type="button"
                                         onClick={() => handleSelectEpisode(ep)}
-                                        className={`py-2 rounded text-xs font-medium border transition ${
+                                        className={`py-2 rounded-[12px] text-xs font-medium tabular-nums transition ${
                                             active
-                                                ? "bg-white border-white text-black"
+                                                ? "hd-button-cream text-[#151413]"
                                                 : unlocked
-                                                ? "bg-[#0a0a0a] hover:bg-neutral-800 border-neutral-800 text-neutral-200"
-                                                : "bg-[#0a0a0a] border-neutral-900 text-neutral-500"
+                                                ? "hd-surface text-[#efe9de] hover:border-[rgb(239_233_222/0.25)]"
+                                                : "bg-[#151413]/60 border border-[rgb(239_233_222/0.06)] text-[#efe9de]/35"
                                         }`}
                                     >
-                                        {ep.number}
+                                        {String(ep.number).padStart(2, "0")}
                                     </button>
                                 );
                             })}
                         </div>
 
-                        <div className="divide-y divide-neutral-800 max-h-80 overflow-y-auto">
+                        <div className="divide-y divide-[rgb(239_233_222/0.08)] max-h-72 overflow-y-auto styled-scrollbar">
                             {episodes.map((ep) => {
                                 const unlocked = isEpisodeUnlocked(ep);
                                 const active = ep.number === currentEpNumber;
@@ -344,28 +364,50 @@ function WatchDramaContent() {
                                         key={ep.id}
                                         type="button"
                                         onClick={() => handleSelectEpisode(ep)}
-                                        className={`w-full text-left py-2.5 px-2 flex items-center justify-between gap-3 transition ${
-                                            active ? "bg-neutral-800/50 rounded" : ""
+                                        className={`w-full text-left py-2.5 px-2.5 flex items-center justify-between gap-3 transition ${
+                                            active ? "bg-[#efe9de]/[0.06] rounded-[10px]" : ""
                                         }`}
                                     >
                                         <div className="min-w-0">
-                                            <div className="text-xs font-medium text-white truncate">
+                                            <div className="text-xs font-medium text-[#efe9de] truncate">
                                                 {ep.title}
                                             </div>
                                             {ep.description && (
-                                                <div className="text-[11px] text-neutral-500 truncate">
+                                                <div className="text-[11px] text-[#efe9de]/45 truncate">
                                                     {ep.description}
                                                 </div>
                                             )}
                                         </div>
 
-                                        <span className="text-[11px] text-neutral-400 shrink-0">
-                                            {unlocked ? "Liberado" : "Bloqueado"}
+                                        <span
+                                            className={`text-[11px] shrink-0 tabular-nums ${
+                                                unlocked ? "text-[#e2b383]" : "text-[#efe9de]/40"
+                                            }`}
+                                        >
+                                            {unlocked ? "Liberado" : "Assinantes"}
                                         </span>
                                     </button>
                                 );
                             })}
                         </div>
+                    </div>
+
+                    <div className="p-4 rounded-[18px] hd-plan flex items-center justify-between gap-3">
+                        <div>
+                            <div className="text-xs font-semibold text-[#efe9de]">
+                                Versão Aplicativo (PWA)
+                            </div>
+                            <div className="text-[11px] text-[#efe9de]/60">
+                                Assista em tela cheia direto da tela inicial
+                            </div>
+                        </div>
+                        <button
+                            type="button"
+                            onClick={() => setPwaModalOpen(true)}
+                            className="hd-btn-sm hd-button-quiet text-xs shrink-0"
+                        >
+                            Baixar App
+                        </button>
                     </div>
                 </div>
             </main>
@@ -383,13 +425,24 @@ function WatchDramaContent() {
                 defaultTab={vipModalTab}
                 planPrice={planPrice}
             />
+
+            <PwaInstallModal
+                isOpen={pwaModalOpen}
+                onClose={() => setPwaModalOpen(false)}
+                isVip={isVip}
+                viewerPhone={viewerPhone}
+                onRequestVipModal={(tab) => {
+                    setVipModalTab(tab);
+                    setVipModalOpen(true);
+                }}
+            />
         </div>
     );
 }
 
 export default function WatchDramaPage() {
     return (
-        <Suspense fallback={<div className="min-h-screen bg-[#0a0a0a]" />}>
+        <Suspense fallback={<div className="min-h-dvh bg-[#151413]" />}>
             <WatchDramaContent />
         </Suspense>
     );

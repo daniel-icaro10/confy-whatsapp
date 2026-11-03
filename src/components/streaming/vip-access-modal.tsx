@@ -82,9 +82,7 @@ export function VipAccessModal({
                 localStorage.setItem("sdc_viewer_vip", "true");
                 onUnlocked(data.phone);
             } else {
-                setError(
-                    "Nenhuma assinatura ativa encontrada para este número."
-                );
+                setError("Nenhuma assinatura ativa encontrada para este número.");
             }
         } catch {
             setError("Erro ao verificar seu número. Tente novamente.");
@@ -146,174 +144,180 @@ export function VipAccessModal({
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80">
-            <div className="relative w-full max-w-md rounded-lg border border-neutral-800 bg-[#121212] text-white p-6">
-                <div className="flex items-start justify-between gap-4 mb-5">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hd-theme">
+            <div className="relative w-full max-w-md rounded-[22px] hd-shell overflow-hidden">
+                <div className="px-6 pt-6 pb-4 border-b border-[rgb(239_233_222/0.12)] flex items-start justify-between gap-4">
                     <div>
-                        <h3 className="text-lg font-semibold">
+                        <span className="text-[11px] uppercase tracking-[0.06em] text-[#efe9de]/45 font-medium block">
+                            Assinatura & Catálogo Completo
+                        </span>
+                        <h3 className="text-[19px] font-semibold tracking-[-0.012em] text-[#efe9de] mt-0.5">
                             {dramaTitle || "Liberar acesso completo"}
                         </h3>
-                        <p className="text-xs text-neutral-400 mt-1">
-                            Assista a todos os episódios no celular ou entre com seu número já cadastrado.
-                        </p>
                     </div>
                     <button
+                        type="button"
                         onClick={onClose}
-                        className="text-xs text-neutral-400 hover:text-white"
+                        className="hd-btn-sm hd-button-quiet text-xs shrink-0"
                     >
                         Fechar
                     </button>
                 </div>
 
-                <div className="grid grid-cols-2 gap-1 p-1 rounded bg-[#0a0a0a] border border-neutral-800 mb-5">
-                    <button
-                        type="button"
-                        onClick={() => {
-                            setTab("pix");
-                            setError("");
-                        }}
-                        className={`py-2 px-3 rounded text-xs font-medium transition ${
-                            tab === "pix"
-                                ? "bg-neutral-800 text-white"
-                                : "text-neutral-400 hover:text-white"
-                        }`}
-                    >
-                        Liberar com Pix
-                    </button>
-                    <button
-                        type="button"
-                        onClick={() => {
-                            setTab("login");
-                            setError("");
-                        }}
-                        className={`py-2 px-3 rounded text-xs font-medium transition ${
-                            tab === "login"
-                                ? "bg-neutral-800 text-white"
-                                : "text-neutral-400 hover:text-white"
-                        }`}
-                    >
-                        Já tenho acesso
-                    </button>
-                </div>
-
-                {error && (
-                    <div className="mb-4 p-3 rounded bg-red-950/40 border border-red-900/50 text-xs text-red-300">
-                        {error}
-                    </div>
-                )}
-
-                {tab === "login" ? (
-                    <form onSubmit={handleCheckAccess} className="space-y-4">
-                        <div>
-                            <label className="block text-xs text-neutral-300 mb-1.5">
-                                WhatsApp com DDD
-                            </label>
-                            <input
-                                type="tel"
-                                required
-                                placeholder="(11) 99999-9999"
-                                value={phone}
-                                onChange={(e) => setPhone(e.target.value)}
-                                className="w-full px-3.5 py-2.5 rounded bg-[#0a0a0a] border border-neutral-800 text-white text-sm focus:outline-none focus:border-neutral-500"
-                            />
-                        </div>
-
+                <div className="p-6">
+                    <div className="grid grid-cols-2 gap-1.5 p-1 rounded-full hd-surface mb-5">
                         <button
-                            type="submit"
-                            disabled={loading}
-                            className="w-full py-2.5 rounded bg-white hover:bg-neutral-200 text-black font-medium text-sm transition disabled:opacity-50"
+                            type="button"
+                            onClick={() => {
+                                setTab("pix");
+                                setError("");
+                            }}
+                            className={`py-2 px-3 rounded-full text-xs font-medium transition ${
+                                tab === "pix"
+                                    ? "bg-[#efe9de] text-[#151413]"
+                                    : "text-[#efe9de]/64 hover:text-[#efe9de]"
+                            }`}
                         >
-                            {loading ? "Verificando..." : "Entrar"}
+                            Liberar com Pix
                         </button>
-                    </form>
-                ) : !pixOrder ? (
-                    <form onSubmit={handleGeneratePix} className="space-y-4">
-                        <div className="p-3.5 rounded bg-[#0a0a0a] border border-neutral-800 flex items-center justify-between">
+                        <button
+                            type="button"
+                            onClick={() => {
+                                setTab("login");
+                                setError("");
+                            }}
+                            className={`py-2 px-3 rounded-full text-xs font-medium transition ${
+                                tab === "login"
+                                    ? "bg-[#efe9de] text-[#151413]"
+                                    : "text-[#efe9de]/64 hover:text-[#efe9de]"
+                            }`}
+                        >
+                            Já sou assinante
+                        </button>
+                    </div>
+
+                    {error && (
+                        <div className="mb-4 p-3.5 rounded-[14px] bg-[#ff8a7a]/10 border border-[#ff8a7a]/25 text-xs text-[#ff8a7a]">
+                            {error}
+                        </div>
+                    )}
+
+                    {tab === "login" ? (
+                        <form onSubmit={handleCheckAccess} className="space-y-4">
                             <div>
-                                <div className="text-xs font-medium text-white">
-                                    Acesso completo ao catálogo
+                                <label className="block text-xs text-[#efe9de]/75 mb-1.5">
+                                    WhatsApp cadastrado (com DDD)
+                                </label>
+                                <input
+                                    type="tel"
+                                    required
+                                    placeholder="(11) 99999-9999"
+                                    value={phone}
+                                    onChange={(e) => setPhone(e.target.value)}
+                                    className="w-full px-4 py-3 rounded-[14px] hd-pill-field text-sm placeholder:text-[#efe9de]/35"
+                                />
+                            </div>
+
+                            <button
+                                type="submit"
+                                disabled={loading}
+                                className="w-full hd-btn hd-button-cream disabled:opacity-50"
+                            >
+                                {loading ? "Verificando..." : "Validar acesso"}
+                            </button>
+                        </form>
+                    ) : !pixOrder ? (
+                        <form onSubmit={handleGeneratePix} className="space-y-4">
+                            <div className="p-4 rounded-[16px] hd-plan flex items-center justify-between gap-3">
+                                <div>
+                                    <div className="text-sm font-medium text-[#efe9de]">
+                                        Passaporte Ilimitado + App PWA
+                                    </div>
+                                    <div className="text-xs text-[#efe9de]/60 mt-0.5">
+                                        Todas as novelas liberadas + download do App
+                                    </div>
                                 </div>
-                                <div className="text-[11px] text-neutral-400">
-                                    Liberação imediata após o pagamento
+                                <div className="text-lg font-semibold text-[#e2b383] tabular-nums shrink-0">
+                                    R$ {planPrice.toFixed(2).replace(".", ",")}
                                 </div>
                             </div>
-                            <div className="text-base font-semibold text-white">
-                                R$ {planPrice.toFixed(2).replace(".", ",")}
+
+                            <div>
+                                <label className="block text-xs text-[#efe9de]/75 mb-1.5">
+                                    Seu WhatsApp com DDD (para liberar o acesso)
+                                </label>
+                                <input
+                                    type="tel"
+                                    required
+                                    placeholder="(11) 99999-9999"
+                                    value={phone}
+                                    onChange={(e) => setPhone(e.target.value)}
+                                    className="w-full px-4 py-3 rounded-[14px] hd-pill-field text-sm placeholder:text-[#efe9de]/35"
+                                />
                             </div>
-                        </div>
 
-                        <div>
-                            <label className="block text-xs text-neutral-300 mb-1">
-                                WhatsApp com DDD
-                            </label>
-                            <input
-                                type="tel"
-                                required
-                                placeholder="(11) 99999-9999"
-                                value={phone}
-                                onChange={(e) => setPhone(e.target.value)}
-                                className="w-full px-3.5 py-2.5 rounded bg-[#0a0a0a] border border-neutral-800 text-white text-sm focus:outline-none focus:border-neutral-500"
-                            />
-                        </div>
-
-                        <div>
-                            <label className="block text-xs text-neutral-300 mb-1">
-                                Nome (opcional)
-                            </label>
-                            <input
-                                type="text"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                className="w-full px-3.5 py-2 rounded bg-[#0a0a0a] border border-neutral-800 text-white text-sm focus:outline-none focus:border-neutral-500"
-                            />
-                        </div>
-
-                        <button
-                            type="submit"
-                            disabled={loading}
-                            className="w-full py-2.5 rounded bg-white hover:bg-neutral-200 text-black font-medium text-sm transition disabled:opacity-50"
-                        >
-                            {loading ? "Gerando Pix..." : `Gerar Pix — R$ ${planPrice.toFixed(2).replace(".", ",")}`}
-                        </button>
-                    </form>
-                ) : (
-                    <div className="space-y-4">
-                        <div className="p-3 rounded bg-[#0a0a0a] border border-neutral-800">
-                            <div className="text-xs font-medium text-white mb-1">
-                                Aguardando pagamento — R$ {pixOrder.amount.toFixed(2).replace(".", ",")}
+                            <div>
+                                <label className="block text-xs text-[#efe9de]/75 mb-1.5">
+                                    Seu nome (opcional)
+                                </label>
+                                <input
+                                    type="text"
+                                    placeholder="Como prefere ser chamado"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    className="w-full px-4 py-2.5 rounded-[14px] hd-pill-field text-sm placeholder:text-[#efe9de]/35"
+                                />
                             </div>
-                            <p className="text-[11px] text-neutral-400">
-                                Copie o código abaixo e realize o pagamento no aplicativo do seu banco. O acesso será liberado automaticamente.
-                            </p>
-                        </div>
 
-                        <div>
-                            <label className="block text-[11px] text-neutral-400 mb-1">
-                                Pix Copia e Cola:
-                            </label>
-                            <div className="p-3 rounded bg-[#0a0a0a] border border-neutral-800 text-[11px] font-mono text-neutral-300 break-all max-h-24 overflow-y-auto">
-                                {pixOrder.pixCopyPaste}
+                            <button
+                                type="submit"
+                                disabled={loading}
+                                className="w-full hd-btn hd-button-cream disabled:opacity-50"
+                            >
+                                {loading
+                                    ? "Gerando Pix..."
+                                    : `Gerar Pix — R$ ${planPrice.toFixed(2).replace(".", ",")}`}
+                            </button>
+                        </form>
+                    ) : (
+                        <div className="space-y-4">
+                            <div className="p-4 rounded-[16px] hd-plan">
+                                <div className="text-xs font-medium text-[#e2b383] mb-1 tabular-nums">
+                                    Aguardando pagamento · R$ {pixOrder.amount.toFixed(2).replace(".", ",")}
+                                </div>
+                                <p className="text-xs text-[#efe9de]/64 leading-relaxed">
+                                    Copie o código abaixo e pague via Pix Copia e Cola no seu banco. Seu número ({pixOrder.phone}) será liberado automaticamente em segundos.
+                                </p>
                             </div>
+
+                            <div>
+                                <label className="block text-xs text-[#efe9de]/64 mb-1.5">
+                                    Código Pix Copia e Cola
+                                </label>
+                                <div className="p-3.5 rounded-[14px] hd-surface text-[11px] font-mono text-[#efe9de]/80 break-all max-h-24 overflow-y-auto">
+                                    {pixOrder.pixCopyPaste}
+                                </div>
+                            </div>
+
+                            <button
+                                type="button"
+                                onClick={handleCopyPix}
+                                className="w-full hd-btn hd-button-cream"
+                            >
+                                {copied ? "Código Pix copiado" : "Copiar código Pix"}
+                            </button>
+
+                            <button
+                                type="button"
+                                onClick={handleManualVerify}
+                                disabled={checkingPayment}
+                                className="w-full hd-btn hd-button-quiet text-xs"
+                            >
+                                {checkingPayment ? "Verificando pagamento..." : "Já realizei o pagamento"}
+                            </button>
                         </div>
-
-                        <button
-                            type="button"
-                            onClick={handleCopyPix}
-                            className="w-full py-2.5 rounded bg-white hover:bg-neutral-200 text-black font-medium text-sm"
-                        >
-                            {copied ? "Código copiado" : "Copiar código Pix"}
-                        </button>
-
-                        <button
-                            type="button"
-                            onClick={handleManualVerify}
-                            disabled={checkingPayment}
-                            className="w-full py-2 rounded border border-neutral-700 hover:border-neutral-500 text-xs text-neutral-300 transition"
-                        >
-                            {checkingPayment ? "Verificando..." : "Já realizei o pagamento"}
-                        </button>
-                    </div>
-                )}
+                    )}
+                </div>
             </div>
         </div>
     );

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Inter_Tight } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/providers";
 import { TopLoader } from "@/components/ui/top-loader";
@@ -15,16 +15,22 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const APP_DESCRIPTION = "Assista às melhores novelas verticais, romances proibidos e dramas intensos direto no seu celular.";
+const interTight = Inter_Tight({
+  variable: "--font-inter-tight",
+  subsets: ["latin"],
+});
+
+const APP_DESCRIPTION = "Novelas verticais, romances proibidos e séries curtas em alta definição feitas para assistir no celular.";
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://segredosdocoracao.com";
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#09060a" },
-    { media: "(prefers-color-scheme: dark)", color: "#09060a" },
+    { media: "(prefers-color-scheme: light)", color: "#151413" },
+    { media: "(prefers-color-scheme: dark)", color: "#151413" },
   ],
   width: "device-width",
   initialScale: 1,
+  viewportFit: "cover",
 };
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -39,7 +45,7 @@ export async function generateMetadata(): Promise<Metadata> {
     // fallback
   }
 
-  const appDefaultTitle = `${appName} | Novelas Verticais & Dramas Exclusivos`;
+  const appDefaultTitle = `${appName} — Novelas Verticais & Dramas Exclusivos`;
 
   return {
     metadataBase: new URL(APP_URL),
@@ -49,16 +55,21 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     description: APP_DESCRIPTION,
     applicationName: appName,
+    manifest: "/manifest.json",
     generator: "Next.js",
     keywords: [
       "novelas verticais", "dramas", "doramas", "segredos do coracao",
-      "series curtas", "romance", "novela completa"
+      "series curtas", "romance", "novela completa", "dramawave"
     ],
     referrer: "origin-when-cross-origin",
     authors: [{ name: appName }],
     creator: appName,
     publisher: appName,
     formatDetection: { telephone: false },
+    icons: {
+      icon: "/icon.svg",
+      apple: "/icon.svg",
+    },
     openGraph: {
       type: "website",
       locale: "pt_BR",
@@ -91,12 +102,12 @@ export default function RootLayout({
       <head>
         <link rel="dns-prefetch" href={APP_URL} />
         <link rel="preconnect" href={APP_URL} crossOrigin="anonymous" />
+        <link rel="manifest" href="/manifest.json" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased text-foreground bg-background selection:bg-rose-500/30 selection:text-white min-h-screen flex flex-col`}
+        className={`${geistSans.variable} ${geistMono.variable} ${interTight.variable} font-sans antialiased text-foreground bg-[#151413] min-h-screen flex flex-col`}
         suppressHydrationWarning
       >
-        <div className="fixed inset-0 -z-50 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-rose-950/20 via-background to-background pointer-events-none" suppressHydrationWarning={true} />
         <Providers>
           <TopLoader />
           {children}
