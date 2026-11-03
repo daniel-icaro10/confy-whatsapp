@@ -1,147 +1,136 @@
-'use client';
+"use client";
 
-import { useState, Suspense } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { signIn } from 'next-auth/react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { Button } from "@/components/ui/button"
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Bot, ArrowRight, Loader2 } from "lucide-react";
-import Link from 'next/link';
-
-const formSchema = z.object({
-  email: z.string().email("Informe um endereço de e-mail válido"),
-  password: z.string().min(1, "A senha é obrigatória"),
-});
+import { useState, Suspense } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Heart, ArrowRight, Loader2, Lock, Mail, Sparkles, ExternalLink } from "lucide-react";
+import Link from "next/link";
 
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get('callbackUrl') || '/dashboard';
+  const callbackUrl = searchParams.get("callbackUrl") || "/dashboard";
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
-
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
     setLoading(true);
     setError(null);
     try {
-      const result = await signIn('credentials', {
+      const result = await signIn("credentials", {
         redirect: false,
-        email: values.email,
-        password: values.password,
+        email: email.trim(),
+        password,
       });
 
       if (result?.error) {
-        setError("E-mail ou senha inválidos");
+        setError("E-mail ou senha incorretos. Verifique seus dados.");
       } else {
         window.location.href = callbackUrl;
         router.refresh();
       }
-    } catch (err) {
-      setError("Ocorreu um erro inesperado");
+    } catch {
+      setError("Ocorreu um erro ao conectar. Tente novamente.");
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen relative overflow-hidden bg-background">
-      {/* Background Orbs */}
-      <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[40rem] bg-primary/20 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 right-0 translate-x-1/3 translate-y-1/3 w-[30rem] h-[30rem] bg-blue-500/20 rounded-full blur-[100px] pointer-events-none" />
+    <div className="min-h-screen bg-[#08050a] text-white flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Glows de fundo */}
+      <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[38rem] h-[24rem] bg-rose-600/20 rounded-full blur-[130px] pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[28rem] h-[28rem] bg-pink-600/10 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="relative z-10 w-full max-w-md p-4 animate-in fade-in zoom-in-95 duration-500">
-        <div className="flex flex-col items-center mb-8">
-          <div className="relative flex h-16 w-16 mb-4 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-400 to-primary text-white shadow-lg shadow-primary/30">
-            <Bot className="h-8 w-8" />
+      <div className="relative z-10 w-full max-w-md">
+        {/* Identidade Segredos do Coração */}
+        <div className="flex flex-col items-center text-center mb-7">
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-rose-500 via-pink-600 to-purple-700 flex items-center justify-center shadow-2xl shadow-rose-600/40 mb-4 border border-white/15">
+            <Heart className="w-8 h-8 text-white fill-white" />
           </div>
-          <h1 className="text-3xl font-bold tracking-tight text-foreground">Bem-vindo de volta</h1>
-          <p className="text-muted-foreground mt-2">Entre na sua conta WA-AKG</p>
+          <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider bg-rose-500/15 text-rose-300 border border-rose-500/30 mb-2">
+            <Sparkles className="w-3 h-3" /> Central de Controle
+          </span>
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+            Segredos do Coração
+          </h1>
+          <p className="text-xs sm:text-sm text-white/60 mt-1">
+            Gerencie suas novelas verticais, funil X1 no WhatsApp e vendas Pix.
+          </p>
         </div>
 
-        <div className="glass-panel rounded-3xl p-8 shadow-2xl shadow-black/5 dark:shadow-black/40">
+        {/* Card de Login */}
+        <div className="rounded-3xl border border-white/10 bg-[#120b17]/90 backdrop-blur-xl p-6 sm:p-8 shadow-2xl shadow-black/60">
           {error && (
-            <div className="mb-6 p-4 rounded-xl bg-destructive/10 border border-destructive/20 text-destructive text-sm text-center font-medium animate-in shake duration-300">
+            <div className="mb-5 p-3.5 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-200 text-xs font-medium text-center">
               {error}
             </div>
           )}
 
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-foreground/80">E-mail</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="nome@exemplo.com"
-                        className="h-12 px-4 rounded-xl bg-background/50 border-white/20 dark:border-white/10 focus-visible:ring-primary/50 transition-all font-medium"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-foreground/80">Senha</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="password"
-                        placeholder="••••••••"
-                        className="h-12 px-4 rounded-xl bg-background/50 border-white/20 dark:border-white/10 focus-visible:ring-primary/50 transition-all font-medium"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block text-xs font-semibold text-white/80 mb-1.5">
+                E-mail do Administrador
+              </label>
+              <div className="relative">
+                <Mail className="w-4 h-4 text-white/40 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <input
+                  type="email"
+                  required
+                  placeholder="danelicarocontato@gmail.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full pl-10 pr-4 py-3 rounded-xl bg-white/5 border border-white/15 text-sm text-white placeholder:text-white/35 focus:outline-none focus:border-rose-500 transition"
+                />
+              </div>
+            </div>
 
-              <Button
-                type="submit"
-                size="lg"
-                className="w-full h-12 rounded-xl text-base shadow-lg shadow-primary/20 hover:shadow-primary/30 mt-2"
-                disabled={loading}
-              >
-                {loading ? (
-                  <><Loader2 className="mr-2 h-5 w-5 animate-spin" /> Autenticando...</>
-                ) : (
-                  <>Entrar <ArrowRight className="ml-2 h-5 w-5" /></>
-                )}
-              </Button>
-            </form>
-          </Form>
+            <div>
+              <label className="block text-xs font-semibold text-white/80 mb-1.5">
+                Senha de Acesso
+              </label>
+              <div className="relative">
+                <Lock className="w-4 h-4 text-white/40 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <input
+                  type="password"
+                  required
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full pl-10 pr-4 py-3 rounded-xl bg-white/5 border border-white/15 text-sm text-white placeholder:text-white/35 focus:outline-none focus:border-rose-500 transition"
+                />
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-3.5 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white font-bold text-sm shadow-lg shadow-rose-600/30 flex items-center justify-center gap-2 transition disabled:opacity-50 mt-2"
+            >
+              {loading ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" /> Entrando no Painel...
+                </>
+              ) : (
+                <>
+                  Acessar Painel Admin <ArrowRight className="w-4 h-4" />
+                </>
+              )}
+            </button>
+          </form>
         </div>
 
-        <div className="mt-8 text-center text-sm text-muted-foreground">
-          Não tem uma conta?{" "}
-          <Link href="/auth/register" className="font-semibold text-primary hover:text-primary/80 transition-colors">
-            Criar uma conta
+        <div className="mt-6 text-center">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-1.5 text-xs text-white/50 hover:text-rose-300 transition"
+          >
+            <ExternalLink className="w-3.5 h-3.5" />
+            Voltar para o site público de novelas
           </Link>
         </div>
       </div>
@@ -151,11 +140,13 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <Suspense fallback={
-      <div className="flex items-center justify-center min-h-screen bg-background">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
-      </div>
-    }>
+    <Suspense
+      fallback={
+        <div className="flex items-center justify-center min-h-screen bg-[#08050a]">
+          <Loader2 className="h-8 w-8 animate-spin text-rose-500" />
+        </div>
+      }
+    >
       <LoginForm />
     </Suspense>
   );

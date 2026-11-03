@@ -1,149 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { Menu, LogOut, Sparkles } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { Menu, LogOut, Heart } from "lucide-react";
 import Link from "next/link";
-import {
-  LayoutDashboard,
-  MessageSquare,
-  Users,
-  Settings,
-  QrCode,
-  Webhook,
-  Bot,
-  UserCheck,
-  Megaphone,
-  Activity,
-  Tag,
-  MessageCircleReply,
-  UserPlus,
-  Building2,
-  BarChart3,
-  Zap,
-  Clock,
-  Kanban,
-  Brain,
-  Globe,
-  Mail,
-  FolderOpen,
-  Bell,
-  Key,
-} from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
-import pkg from "../../../package.json";
+import { segredosNavGroups } from "./sidebar-nav";
 
-interface NavGroup {
-  label: string;
-  items: {
-    href: string;
-    label: string;
-    icon: React.ElementType;
-    external?: boolean;
-    superadminOnly?: boolean;
-    allowedRoles?: string[];
-  }[];
-}
-
-const superadminNavGroups: NavGroup[] = [
-  {
-    label: "Painel Master",
-    items: [
-      { href: "/dashboard", label: "Visão Geral & VPS", icon: LayoutDashboard },
-      { href: "/dashboard/system-monitor", label: "Monitor da VPS", icon: Activity },
-    ],
-  },
-  {
-    label: "Gestão de Clientes",
-    items: [
-      { href: "/dashboard/companies", label: "Empresas Cadastradas", icon: Building2 },
-    ],
-  },
-  {
-    label: "Desenvolvedor & API",
-    items: [
-      { href: "/dashboard/api-keys", label: "Chaves de API Master", icon: Key },
-      { href: "/dashboard/api-docs", label: "Documentação da API", icon: Globe },
-    ],
-  },
-  {
-    label: "Comunicação Global",
-    items: [
-      { href: "/dashboard/notifications", label: "Notificações do Sistema", icon: Bell },
-    ],
-  },
-  {
-    label: "Plataforma",
-    items: [
-      { href: "/dashboard/settings", label: "Configurações Globais", icon: Settings },
-      { href: "/dashboard/design-system", label: "Design System", icon: Sparkles },
-    ],
-  },
-];
-
-const tenantNavGroups: NavGroup[] = [
-  {
-    label: "Atendimento",
-    items: [
-      { href: "/dashboard/chat", label: "Conversas / Fila", icon: MessageSquare },
-      { href: "/dashboard/quick-replies", label: "Respostas Rápidas", icon: Zap },
-      { href: "/dashboard/departments", label: "Setores & Filas", icon: Building2, allowedRoles: ["OWNER"] },
-      { href: "/dashboard/attendance-settings", label: "Horários & CSAT", icon: Clock, allowedRoles: ["OWNER"] },
-      { href: "/dashboard/attendance-reports", label: "Relatórios & Análises", icon: BarChart3, allowedRoles: ["OWNER"] },
-    ],
-  },
-  {
-    label: "WhatsApp & Marketing",
-    items: [
-      { href: "/dashboard", label: "Painel Geral", icon: LayoutDashboard, allowedRoles: ["OWNER"] },
-      { href: "/dashboard/sessions", label: "Sessões / QR Code", icon: QrCode, allowedRoles: ["OWNER"] },
-      { href: "/dashboard/broadcast", label: "Disparos em Massa", icon: Megaphone, allowedRoles: ["OWNER"] },
-      { href: "/dashboard/email-campaigns", label: "Campanhas de E-mail", icon: Mail, allowedRoles: ["OWNER"] },
-      { href: "/dashboard/media", label: "Galeria de Mídias", icon: FolderOpen },
-    ],
-  },
-  {
-    label: "Contatos & CRM",
-    items: [
-      { href: "/dashboard/crm", label: "Funil de Vendas", icon: Kanban },
-      { href: "/dashboard/contacts", label: "Contatos", icon: UserCheck },
-      { href: "/dashboard/groups", label: "Grupos", icon: Users },
-      { href: "/dashboard/labels", label: "Etiquetas", icon: Tag },
-    ],
-  },
-  {
-    label: "Automação & IA",
-    items: [
-      { href: "/dashboard/ai-agent", label: "Agente de IA & RAG", icon: Brain, allowedRoles: ["OWNER"] },
-      { href: "/dashboard/webchat", label: "Widget de Webchat", icon: Globe, allowedRoles: ["OWNER"] },
-      { href: "/dashboard/bot-settings", label: "Configurações do Bot", icon: Bot, allowedRoles: ["OWNER"] },
-      { href: "/dashboard/autoreply", label: "Gatilhos Automáticos", icon: MessageCircleReply, allowedRoles: ["OWNER"] },
-      { href: "/dashboard/webhooks", label: "Webhooks e APIs", icon: Webhook, allowedRoles: ["OWNER"] },
-    ],
-  },
-  {
-    label: "Administração",
-    items: [
-      { href: "/dashboard/users", label: "Atendentes & Equipe", icon: Users, allowedRoles: ["OWNER"] },
-      { href: "/dashboard/sessions/access", label: "Permissões de Sessão", icon: UserPlus, allowedRoles: ["OWNER"] },
-      { href: "/dashboard/settings", label: "Configurações da Conta", icon: Settings },
-    ],
-  },
-];
-
-export function MobileNav({ appName = "Confy WhatsApp" }: { appName?: string }) {
+export function MobileNav({ appName = "Segredos do Coração" }: { appName?: string }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const { data: session } = useSession();
-  // @ts-ignore
-  const userRole = session?.user?.role;
-
-  const currentNavGroups = userRole === "SUPERADMIN" ? superadminNavGroups : tenantNavGroups;
 
   const isActive = (href: string) => {
     if (href === "/dashboard") return pathname === "/dashboard";
+    if (href === "/") return false;
     return pathname.startsWith(href);
   };
 
@@ -152,94 +24,89 @@ export function MobileNav({ appName = "Confy WhatsApp" }: { appName?: string }) 
       <SheetTrigger asChild>
         <button
           type="button"
-          className="ibtn ibtn-sm md:hidden text-[var(--text-2)]"
+          className="p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 md:hidden text-white"
           aria-label="Abrir menu"
         >
           <Menu size={16} />
         </button>
       </SheetTrigger>
-      <SheetContent side="left" className="w-[85vw] sm:w-[300px] p-0 flex flex-col bg-[var(--bg-side)] border-r border-[var(--border)]">
-        <SheetHeader className="px-4 py-3 text-left border-b border-[var(--border)] bg-[var(--surface)]">
-          <div className="flex items-center gap-2">
-            <div
-              className="ws-logo"
-              style={{
-                width: "22px",
-                height: "22px",
-                borderRadius: "6px",
-                background: "var(--accent)",
-                color: "var(--on-accent)",
-                fontSize: "11px",
-                fontWeight: 600,
-              }}
-            >
-              {appName.charAt(0)}
+      <SheetContent
+        side="left"
+        className="w-[85vw] sm:w-[300px] p-0 flex flex-col bg-[#0c0712] border-r border-white/10 text-white"
+      >
+        <SheetHeader className="px-4 py-4 text-left border-b border-white/10">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center shadow">
+              <Heart className="w-4 h-4 text-white fill-white" />
             </div>
-            <SheetTitle className="text-[14px] font-semibold text-[var(--text)]">{appName}</SheetTitle>
+            <div>
+              <SheetTitle className="text-sm font-extrabold text-white">
+                {appName}
+              </SheetTitle>
+              <p className="text-[10px] font-semibold text-rose-400 uppercase tracking-wider">
+                Streaming & Funil X1
+              </p>
+            </div>
           </div>
-          <SheetDescription className="text-[11px] text-[var(--text-3)]">Gateway de WhatsApp</SheetDescription>
         </SheetHeader>
 
-        <nav className="flex-1 px-2 py-2 overflow-y-auto space-y-1 styled-scrollbar">
-          {currentNavGroups.map((group) => {
-            const visibleItems = group.items.filter((item) => {
-              if (item.superadminOnly && userRole !== "SUPERADMIN") return false;
-              if (item.allowedRoles && (!userRole || !item.allowedRoles.includes(userRole))) return false;
-              return true;
-            });
-            if (visibleItems.length === 0) return null;
-
-            return (
-              <div key={group.label} className="sgroup">
-                <p className="sgroup-h">
-                  {group.label}
-                </p>
-                <div className="space-y-0.5">
-                  {visibleItems.map(({ href, label, icon: Icon, external }) => (
+        <nav className="flex-1 px-3 py-4 overflow-y-auto space-y-5">
+          {segredosNavGroups.map((group) => (
+            <div key={group.label}>
+              <p className="px-2.5 mb-2 text-[10px] font-extrabold uppercase tracking-widest text-white/40">
+                {group.label}
+              </p>
+              <div className="space-y-1">
+                {group.items.map(({ href, label, icon: Icon, external, badge }) => {
+                  const active = isActive(href);
+                  return (
                     <Link
                       key={href}
                       href={href}
                       target={external ? "_blank" : undefined}
                       onClick={() => setOpen(false)}
-                      className={`sitem ${isActive(href) ? "on" : ""}`}
+                      className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition ${
+                        active
+                          ? "bg-gradient-to-r from-rose-600 to-pink-600 text-white"
+                          : "text-white/70 hover:text-white hover:bg-white/5"
+                      }`}
                     >
-                      <span className="pico" style={{ "--c": "var(--accent)" } as React.CSSProperties}>
-                        <Icon size={13} className="i" />
-                      </span>
-                      <span className="truncate">{label}</span>
+                      <Icon className="w-4 h-4 shrink-0 text-rose-400" />
+                      <span className="truncate flex-1">{label}</span>
+                      {badge && (
+                        <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-white/10 text-white">
+                          {badge}
+                        </span>
+                      )}
                     </Link>
-                  ))}
-                </div>
+                  );
+                })}
               </div>
-            );
-          })}
+            </div>
+          ))}
         </nav>
 
-        <div className="p-3 border-t border-[var(--border)] bg-[var(--surface-2)]">
-          <div className="flex items-center gap-2.5 mb-2.5 px-1">
-            <div
-              className="av md"
-              style={{ "--c": "var(--accent)" } as React.CSSProperties}
+        <div className="p-4 border-t border-white/10 bg-[#08050a]">
+          <div className="flex items-center justify-between gap-2">
+            <div className="min-w-0">
+              <p className="text-xs font-bold text-white truncate">
+                {session?.user?.name || "Administrador"}
+              </p>
+              <p className="text-[11px] text-white/45 truncate">
+                {session?.user?.email}
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={async () => {
+                setOpen(false);
+                await signOut({ callbackUrl: "/auth/login" });
+              }}
+              className="px-3 py-2 rounded-xl bg-rose-500/15 text-rose-300 text-xs font-bold flex items-center gap-1.5"
             >
-              {session?.user?.name?.charAt(0)?.toUpperCase() || "U"}
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-[12.5px] font-medium text-[var(--text)] truncate">{session?.user?.name || "Usuário"}</p>
-              <p className="text-[11px] text-[var(--text-3)] truncate">{session?.user?.email}</p>
-            </div>
+              <LogOut size={13} /> Sair
+            </button>
           </div>
-          <Button
-            variant="outline"
-            size="sm"
-            className="w-full flex items-center justify-center gap-2 text-xs"
-            onClick={async () => {
-              setOpen(false);
-              await signOut({ callbackUrl: "/auth/login" });
-            }}
-          >
-            <LogOut size={13} /> Sair
-          </Button>
-          <p className="text-[10px] text-[var(--text-4)] text-center mt-2 mono">v{pkg.version}</p>
         </div>
       </SheetContent>
     </Sheet>

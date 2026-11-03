@@ -2,8 +2,9 @@
 
 import { SidebarNav } from "./sidebar-nav";
 import { useSidebar } from "./sidebar-context";
-import { LogOut, ChevronDown } from "lucide-react";
+import { LogOut, Heart, ExternalLink } from "lucide-react";
 import { signOut } from "next-auth/react";
+import Link from "next/link";
 
 interface SidebarShellProps {
   appName: string;
@@ -16,130 +17,100 @@ export function SidebarShell({
   appName,
   userName,
   userEmail,
-  version,
 }: SidebarShellProps) {
   const { isCollapsed } = useSidebar();
 
   return (
     <aside
       className={`
-        bg-[var(--bg-side)] border-r border-[var(--border)]
+        bg-[#0c0712] border-r border-white/10
         hidden md:flex flex-col h-full sticky left-0 top-0 z-20
-        transition-all duration-200 ease-[var(--ease)]
-        ${isCollapsed ? "w-[52px]" : "w-[252px]"}
+        transition-all duration-200
+        ${isCollapsed ? "w-[64px]" : "w-[260px]"}
       `}
     >
-      {/* Workspace Brand Header */}
-      <div className={`p-2 border-b border-[var(--border)] transition-all ${isCollapsed ? "px-1.5" : "px-2.5"}`}>
-        {isCollapsed ? (
-          <div className="flex justify-center py-1">
-            <div
-              className="ws-logo"
-              style={{
-                width: "26px",
-                height: "26px",
-                borderRadius: "7px",
-                background: "var(--accent)",
-                color: "var(--on-accent)",
-                fontSize: "12px",
-                fontWeight: 600,
-              }}
-              title={appName}
-            >
-              {appName.charAt(0)}
-            </div>
+      {/* Topo da Marca Segredos do Coração */}
+      <div className={`h-16 border-b border-white/10 flex items-center ${isCollapsed ? "justify-center px-2" : "px-4 justify-between"}`}>
+        <Link href="/dashboard" className="flex items-center gap-2.5 min-w-0">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-rose-500 via-pink-600 to-purple-700 flex items-center justify-center shadow-lg shadow-rose-600/30 shrink-0">
+            <Heart className="w-4 h-4 text-white fill-white" />
           </div>
-        ) : (
-          <div className="ws py-1 px-2 rounded-[6px] hover:bg-[var(--surface-3)] transition-colors">
-            <div
-              className="ws-logo"
-              style={{
-                width: "22px",
-                height: "22px",
-                borderRadius: "6px",
-                background: "var(--accent)",
-                color: "var(--on-accent)",
-                fontSize: "11px",
-                fontWeight: 600,
-              }}
-            >
-              {appName.charAt(0)}
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="ws-name text-[13.5px] font-semibold text-[var(--text)] truncate leading-tight">
-                {appName}
+          {!isCollapsed && (
+            <div className="min-w-0">
+              <div className="text-sm font-extrabold text-white truncate leading-tight">
+                {appName || "Segredos do Coração"}
               </div>
-              <div className="text-[10.5px] text-[var(--text-3)] truncate">
-                Workspace · Gateway
+              <div className="text-[10px] font-semibold text-rose-400 uppercase tracking-wider truncate">
+                Streaming & Funil X1
               </div>
             </div>
-            <ChevronDown size={13} className="text-[var(--text-4)] shrink-0" />
-          </div>
+          )}
+        </Link>
+
+        {!isCollapsed && (
+          <Link
+            href="/"
+            target="_blank"
+            title="Abrir site público de novelas"
+            className="w-7 h-7 rounded-lg bg-white/5 hover:bg-rose-500/20 border border-white/10 flex items-center justify-center text-white/60 hover:text-rose-300 transition shrink-0"
+          >
+            <ExternalLink className="w-3.5 h-3.5" />
+          </Link>
         )}
       </div>
 
-      {/* Navigation */}
+      {/* Menu de Navegação */}
       <SidebarNav />
 
-      {/* User Footer */}
+      {/* Rodapé do Usuário */}
       <div
         suppressHydrationWarning={true}
-        className={`border-t border-[var(--border)] bg-[var(--bg-side)] transition-all ${
-          isCollapsed ? "p-1.5" : "p-2.5"
+        className={`border-t border-white/10 bg-[#09050e] transition-all ${
+          isCollapsed ? "p-2" : "p-3.5"
         }`}
       >
         {isCollapsed ? (
-          <div suppressHydrationWarning={true} className="flex flex-col items-center gap-2 py-1">
+          <div suppressHydrationWarning={true} className="flex flex-col items-center gap-2">
             <div
               suppressHydrationWarning={true}
-              className="av sm"
-              style={{ "--c": "var(--accent)" } as React.CSSProperties}
-              title={userName || "Usuário"}
+              className="w-8 h-8 rounded-xl bg-gradient-to-br from-rose-600 to-pink-600 text-white text-xs font-bold flex items-center justify-center"
+              title={userName || "Admin"}
             >
-              {userName?.charAt(0)?.toUpperCase() || "U"}
+              {userName?.charAt(0)?.toUpperCase() || "A"}
             </div>
             <button
               onClick={() => signOut({ callbackUrl: "/auth/login" })}
-              className="ibtn ibtn-xs text-[var(--text-3)] hover:text-[var(--red)]"
+              className="p-1.5 rounded-lg text-white/50 hover:text-rose-400 hover:bg-rose-500/10 transition"
               title="Sair"
-              aria-label="Sair"
             >
-              <LogOut size={13} />
+              <LogOut size={14} />
             </button>
           </div>
         ) : (
-          <>
-            <div suppressHydrationWarning={true} className="flex items-center gap-2 px-1 mb-2">
-              <div
-                suppressHydrationWarning={true}
-                className="av md"
-                style={{ "--c": "var(--accent)" } as React.CSSProperties}
-              >
-                {userName?.charAt(0)?.toUpperCase() || "U"}
-              </div>
-              <div suppressHydrationWarning={true} className="flex-1 min-w-0">
-                <p className="text-[12.5px] font-medium text-[var(--text)] truncate leading-tight">
-                  {userName || "Usuário"}
-                </p>
-                <p className="text-[11px] text-[var(--text-3)] truncate">
-                  {userEmail || "online"}
-                </p>
-              </div>
-              <button
-                type="button"
-                onClick={() => signOut({ callbackUrl: "/auth/login" })}
-                className="ibtn ibtn-xs text-[var(--text-4)] hover:text-[var(--red)]"
-                title="Sair do sistema"
-                aria-label="Sair"
-              >
-                <LogOut size={13} />
-              </button>
+          <div suppressHydrationWarning={true} className="flex items-center gap-2.5">
+            <div
+              suppressHydrationWarning={true}
+              className="w-9 h-9 rounded-xl bg-gradient-to-br from-rose-600 to-pink-600 text-white text-xs font-extrabold flex items-center justify-center shrink-0 shadow-md shadow-rose-600/20"
+            >
+              {userName?.charAt(0)?.toUpperCase() || "A"}
             </div>
-            <div className="flex items-center justify-between px-1 text-[10px] text-[var(--text-4)] mono">
-              <span>Gr8r System</span>
-              <span>v{version}</span>
+            <div suppressHydrationWarning={true} className="flex-1 min-w-0">
+              <p className="text-xs font-bold text-white truncate">
+                {userName || "Administrador"}
+              </p>
+              <p className="text-[11px] text-white/45 truncate">
+                {userEmail || "Admin Master"}
+              </p>
             </div>
-          </>
+            <button
+              type="button"
+              onClick={() => signOut({ callbackUrl: "/auth/login" })}
+              className="p-2 rounded-xl bg-white/5 hover:bg-rose-500/15 text-white/60 hover:text-rose-400 transition shrink-0"
+              title="Sair do painel"
+            >
+              <LogOut size={14} />
+            </button>
+          </div>
         )}
       </div>
     </aside>
