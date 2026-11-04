@@ -7,10 +7,10 @@ import { waManager } from "@/modules/whatsapp/manager";
 async function resolveSessionPhone(sessionId?: string | null): Promise<string> {
     if (!sessionId) return "";
     try {
-        const sock = waManager.getInstance(sessionId);
-        const rawUserId = sock?.user?.id || "";
+        const inst = waManager.getInstance(sessionId) as any;
+        const rawUserId = inst?.sock?.user?.id || inst?.user?.id || "";
         if (rawUserId) {
-            const jidPart = rawUserId.split(":")[0].split("@")[0];
+            const jidPart = String(rawUserId).split(":")[0].split("@")[0];
             const clean = normalizeBrPhone(jidPart);
             if (clean) return clean;
         }

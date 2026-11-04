@@ -31,7 +31,424 @@ export interface Drama {
     viewsCount: number;
     likesCount: number;
     episodes: Episode[];
+    isShowcaseOnly?: boolean;
 }
+
+const TOPDORAMAX_SHOWCASE_DRAMAS: Drama[] = [
+    {
+        id: "tdx-1",
+        title: "Minha Chefe Viciada em Sexo",
+        slug: "minha-chefe-viciada-em-sexo-bxu4",
+        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
+        coverUrl: "https://topdoramax.pro/midia/capas-p/minha-chefe-viciada-em-sexo-bxu4.jpg",
+        bannerUrl: "https://topdoramax.pro/midia/capas/minha-chefe-viciada-em-sexo-bxu4.png",
+        category: "Dublado",
+        tags: "anuncio,bombando,dublado",
+        totalEpisodes: 65,
+        freeEpisodesCount: 0,
+        isFeatured: true,
+        isVertical: true,
+        viewsCount: 9850,
+        likesCount: 4120,
+        episodes: [],
+        isShowcaseOnly: true
+    },
+    {
+        id: "tdx-2",
+        title: "A Cuidadora do Bilionário Deficiente",
+        slug: "a-cuidadora-do-bilionario-deficiente-dublado-rxp8",
+        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
+        coverUrl: "https://topdoramax.pro/midia/capas-p/a-cuidadora-do-bilionario-deficiente-dublado-rxp8.jpg",
+        bannerUrl: "https://topdoramax.pro/midia/capas/a-cuidadora-do-bilionario-deficiente-dublado-rxp8.jpg",
+        category: "Dublado",
+        tags: "anuncio,bombando,dublado",
+        totalEpisodes: 72,
+        freeEpisodesCount: 0,
+        isFeatured: true,
+        isVertical: true,
+        viewsCount: 9420,
+        likesCount: 3890,
+        episodes: [],
+        isShowcaseOnly: true
+    },
+    {
+        id: "tdx-3",
+        title: "O Pai do meu Filho é o Arquimago",
+        slug: "o-pai-do-meu-filho-e-o-arquimago-dublado-eta9",
+        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
+        coverUrl: "https://topdoramax.pro/midia/capas-p/o-pai-do-meu-filho-e-o-arquimago-dublado-eta9.jpg",
+        bannerUrl: "https://topdoramax.pro/midia/capas/o-pai-do-meu-filho-e-o-arquimago-dublado-eta9.jpg",
+        category: "Dublado",
+        tags: "anuncio,bombando,dublado",
+        totalEpisodes: 80,
+        freeEpisodesCount: 0,
+        isFeatured: true,
+        isVertical: true,
+        viewsCount: 9100,
+        likesCount: 3650,
+        episodes: [],
+        isShowcaseOnly: true
+    },
+    {
+        id: "tdx-4",
+        title: "Você Mexeu com o Mago Errado",
+        slug: "voce-mexeu-com-o-mago-errado-dublado-neb9",
+        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
+        coverUrl: "https://topdoramax.pro/midia/capas-p/voce-mexeu-com-o-mago-errado-dublado-neb9.jpg",
+        bannerUrl: "https://topdoramax.pro/midia/capas/voce-mexeu-com-o-mago-errado-dublado-neb9.jpg",
+        category: "Dublado",
+        tags: "anuncio,bombando,dublado",
+        totalEpisodes: 68,
+        freeEpisodesCount: 0,
+        isFeatured: true,
+        isVertical: true,
+        viewsCount: 8890,
+        likesCount: 3410,
+        episodes: [],
+        isShowcaseOnly: true
+    },
+    {
+        id: "tdx-5",
+        title: "Meu Deus meu Marido Lenhador é um Bilionário",
+        slug: "meu-deus-meu-marido-lenhador-e-um-bilionario-dublado-pqx6",
+        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
+        coverUrl: "https://topdoramax.pro/midia/capas-p/meu-deus-meu-marido-lenhador-e-um-bilionario-dublado-pqx6.jpg",
+        bannerUrl: "https://topdoramax.pro/midia/capas/meu-deus-meu-marido-lenhador-e-um-bilionario-dublado-pqx6.jpg",
+        category: "Dublado",
+        tags: "anuncio,bombando,dublado",
+        totalEpisodes: 75,
+        freeEpisodesCount: 0,
+        isFeatured: true,
+        isVertical: true,
+        viewsCount: 8650,
+        likesCount: 3200,
+        episodes: [],
+        isShowcaseOnly: true
+    },
+    {
+        id: "tdx-6",
+        title: "Uma Noite de Paixão com minha Chefe",
+        slug: "uma-noite-de-paixao-com-minha-chefe-pyb9",
+        synopsis: "Legendado · Todos os episódios completos liberados após o desbloqueio.",
+        coverUrl: "https://topdoramax.pro/midia/capas-p/uma-noite-de-paixao-com-minha-chefe-pyb9.jpg",
+        category: "Legendado",
+        tags: "anuncio,tendencias,legendado",
+        totalEpisodes: 60,
+        freeEpisodesCount: 0,
+        isFeatured: false,
+        isVertical: true,
+        viewsCount: 9900,
+        likesCount: 4100,
+        episodes: [],
+        isShowcaseOnly: true
+    },
+    {
+        id: "tdx-7",
+        title: "O Chefão da Máfia Não Vai Mais se Esconder",
+        slug: "o-chefao-da-mafia-nao-vai-mais-se-esconder---dublado-cbd5",
+        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
+        coverUrl: "https://topdoramax.pro/midia/capas-p/o-chefao-da-mafia-nao-vai-mais-se-esconder---dublado-cbd5.jpg",
+        category: "Dublado",
+        tags: "anuncio,bombando,em_alta,dublado",
+        totalEpisodes: 70,
+        freeEpisodesCount: 0,
+        isFeatured: false,
+        isVertical: true,
+        viewsCount: 8400,
+        likesCount: 2950,
+        episodes: [],
+        isShowcaseOnly: true
+    },
+    {
+        id: "tdx-8",
+        title: "O Segredo do Rei dos Elfos",
+        slug: "o-segredo-do-rei-dos-elfos-dublado-jvc4",
+        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
+        coverUrl: "https://topdoramax.pro/midia/capas-p/o-segredo-do-rei-dos-elfos-dublado-jvc4.jpg",
+        category: "Dublado",
+        tags: "anuncio,bombando,dublado",
+        totalEpisodes: 64,
+        freeEpisodesCount: 0,
+        isFeatured: false,
+        isVertical: true,
+        viewsCount: 8200,
+        likesCount: 2800,
+        episodes: [],
+        isShowcaseOnly: true
+    },
+    {
+        id: "tdx-9",
+        title: "O Ceo Alfa Dominador é meu Cachorrinho Fofo",
+        slug: "o-ceo-alfa-dominador-e-meu-cachorrinho-fofo-wzu6",
+        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
+        coverUrl: "https://topdoramax.pro/midia/capas-p/o-ceo-alfa-dominador-e-meu-cachorrinho-fofo-wzu6.jpg",
+        category: "Dublado",
+        tags: "anuncio,tendencias,em_alta,dublado",
+        totalEpisodes: 58,
+        freeEpisodesCount: 0,
+        isFeatured: false,
+        isVertical: true,
+        viewsCount: 9500,
+        likesCount: 3700,
+        episodes: [],
+        isShowcaseOnly: true
+    },
+    {
+        id: "tdx-10",
+        title: "Meu Pai é um Herói, Não um Mendigo",
+        slug: "meu-pai-e-um-heroi-nao-um-mendigo-jjy9",
+        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
+        coverUrl: "https://topdoramax.pro/midia/capas-p/meu-pai-e-um-heroi-nao-um-mendigo-jjy9.jpg",
+        category: "Dublado",
+        tags: "anuncio,tendencias,dublado",
+        totalEpisodes: 62,
+        freeEpisodesCount: 0,
+        isFeatured: false,
+        isVertical: true,
+        viewsCount: 9300,
+        likesCount: 3500,
+        episodes: [],
+        isShowcaseOnly: true
+    },
+    {
+        id: "tdx-11",
+        title: "Sincronia Sensorial",
+        slug: "sincronia-sensorial-dublado-snm5",
+        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
+        coverUrl: "https://topdoramax.pro/midia/capas-p/sincronia-sensorial-dublado-snm5.jpg",
+        category: "Dublado",
+        tags: "anuncio,tendencias,em_alta,dublado",
+        totalEpisodes: 55,
+        freeEpisodesCount: 0,
+        isFeatured: false,
+        isVertical: true,
+        viewsCount: 9150,
+        likesCount: 3300,
+        episodes: [],
+        isShowcaseOnly: true
+    },
+    {
+        id: "tdx-12",
+        title: "Despertar da Herdeira de Poseidon",
+        slug: "despertar-da-herdeira-de-poseidon-zyp3",
+        synopsis: "Legendado · Todos os episódios completos liberados após o desbloqueio.",
+        coverUrl: "https://topdoramax.pro/midia/capas-p/despertar-da-herdeira-de-poseidon-zyp3.jpg",
+        category: "Legendado",
+        tags: "anuncio,tendencias,em_alta,legendado",
+        totalEpisodes: 66,
+        freeEpisodesCount: 0,
+        isFeatured: false,
+        isVertical: true,
+        viewsCount: 9020,
+        likesCount: 3150,
+        episodes: [],
+        isShowcaseOnly: true
+    },
+    {
+        id: "tdx-13",
+        title: "Me Chamaram de Feia Agora Vão se Arrepender!",
+        slug: "me-chamaram-de-feia-agora-vao-se-arrepender---dublado-ayd6",
+        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
+        coverUrl: "https://topdoramax.pro/midia/capas-p/me-chamaram-de-feia-agora-vao-se-arrepender---dublado-ayd6.jpg",
+        category: "Dublado",
+        tags: "anuncio,tendencias,em_alta,dublado",
+        totalEpisodes: 70,
+        freeEpisodesCount: 0,
+        isFeatured: false,
+        isVertical: true,
+        viewsCount: 8950,
+        likesCount: 3100,
+        episodes: [],
+        isShowcaseOnly: true
+    },
+    {
+        id: "tdx-14",
+        title: "Grande Erro: Torturando o Bilionário Oculto",
+        slug: "grande-erro-torturando-o-bilionario-oculto-dublado-czk5",
+        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
+        coverUrl: "https://topdoramax.pro/midia/capas-p/grande-erro-torturando-o-bilionario-oculto-dublado-czk5.jpg",
+        category: "Dublado",
+        tags: "anuncio,tendencias,dublado",
+        totalEpisodes: 68,
+        freeEpisodesCount: 0,
+        isFeatured: false,
+        isVertical: true,
+        viewsCount: 8800,
+        likesCount: 3020,
+        episodes: [],
+        isShowcaseOnly: true
+    },
+    {
+        id: "tdx-15",
+        title: "Para Viver Tenho que Conquistar a Noiva Sangrenta",
+        slug: "para-viver-tenho-que-conquistar-a-noiva-sangrenta---dublado-spu2",
+        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
+        coverUrl: "https://topdoramax.pro/midia/capas-p/para-viver-tenho-que-conquistar-a-noiva-sangrenta---dublado-spu2.jpg",
+        category: "Dublado",
+        tags: "anuncio,tendencias,dublado",
+        totalEpisodes: 74,
+        freeEpisodesCount: 0,
+        isFeatured: false,
+        isVertical: true,
+        viewsCount: 8740,
+        likesCount: 2980,
+        episodes: [],
+        isShowcaseOnly: true
+    },
+    {
+        id: "tdx-16",
+        title: "O Ceo que Sentiu minha Gravidez",
+        slug: "o-ceo-que-sentiu-minha-gravidez-dublado-jwk3",
+        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
+        coverUrl: "https://topdoramax.pro/midia/capas-p/o-ceo-que-sentiu-minha-gravidez-dublado-jwk3.jpg",
+        category: "Dublado",
+        tags: "anuncio,tendencias,nova,dublado",
+        totalEpisodes: 64,
+        freeEpisodesCount: 0,
+        isFeatured: false,
+        isVertical: true,
+        viewsCount: 8700,
+        likesCount: 2910,
+        episodes: [],
+        isShowcaseOnly: true
+    },
+    {
+        id: "tdx-17",
+        title: "A Ex-capitã de Torcida me Chamou de Gordo, Agora Sou Meio Armador",
+        slug: "a-ex-capita-de-torcida-me-chamou-de-gordo-agora-sou-meio-armador-dublado-cqe4",
+        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
+        coverUrl: "https://topdoramax.pro/midia/capas-p/a-ex-capita-de-torcida-me-chamou-de-gordo-agora-sou-meio-armador-dublado-cqe4.jpg",
+        category: "Dublado",
+        tags: "anuncio,tendencias,em_alta,dublado",
+        totalEpisodes: 60,
+        freeEpisodesCount: 0,
+        isFeatured: false,
+        isVertical: true,
+        viewsCount: 8620,
+        likesCount: 2890,
+        episodes: [],
+        isShowcaseOnly: true
+    },
+    {
+        id: "tdx-18",
+        title: "Destinada a Te Encontrar",
+        slug: "destinada-a-te-encontrar-dublado-cng1",
+        synopsis: "Brasileira · Dublado · Todos os episódios completos liberados após o desbloqueio.",
+        coverUrl: "https://topdoramax.pro/midia/capas-p/destinada-a-te-encontrar-dublado-cng1.jpg",
+        category: "Brasileira",
+        tags: "nova,brasileiro,dublado",
+        totalEpisodes: 52,
+        freeEpisodesCount: 0,
+        isFeatured: false,
+        isVertical: true,
+        viewsCount: 8100,
+        likesCount: 2740,
+        episodes: [],
+        isShowcaseOnly: true
+    },
+    {
+        id: "tdx-19",
+        title: "De Repente Casados",
+        slug: "de-repente-casados-brasileira-mvk3",
+        synopsis: "Brasileira · Todos os episódios completos liberados após o desbloqueio.",
+        coverUrl: "https://topdoramax.pro/midia/capas-p/de-repente-casados-brasileira.jpg",
+        category: "Brasileira",
+        tags: "brasileiro",
+        totalEpisodes: 48,
+        freeEpisodesCount: 0,
+        isFeatured: false,
+        isVertical: true,
+        viewsCount: 7900,
+        likesCount: 2600,
+        episodes: [],
+        isShowcaseOnly: true
+    },
+    {
+        id: "tdx-20",
+        title: "O Doutor que Despertou do Proibido",
+        slug: "o-doutor-que-despertou-do-proibido-legendado-bcg6",
+        synopsis: "LGBT · Legendado · Todos os episódios completos liberados após o desbloqueio.",
+        coverUrl: "https://topdoramax.pro/midia/capas-p/o-doutor-que-despertou-do-proibido-legendado.jpg",
+        category: "LGBT",
+        tags: "lgbt,legendado",
+        totalEpisodes: 56,
+        freeEpisodesCount: 0,
+        isFeatured: false,
+        isVertical: true,
+        viewsCount: 7750,
+        likesCount: 2510,
+        episodes: [],
+        isShowcaseOnly: true
+    },
+    {
+        id: "tdx-21",
+        title: "Meu Rival no Gelo",
+        slug: "meu-rival-no-gelo-dublado-xcu1",
+        synopsis: "LGBT · Dublado · Todos os episódios completos liberados após o desbloqueio.",
+        coverUrl: "https://topdoramax.pro/midia/capas-p/meu-rival-no-gelo-dublado.jpg",
+        category: "LGBT",
+        tags: "lgbt,dublado",
+        totalEpisodes: 54,
+        freeEpisodesCount: 0,
+        isFeatured: false,
+        isVertical: true,
+        viewsCount: 7600,
+        likesCount: 2480,
+        episodes: [],
+        isShowcaseOnly: true
+    },
+    {
+        id: "tdx-22",
+        title: "Depois do Divórcio Casei com o Chefão e Tive Quatro Filhos",
+        slug: "casei-com-o-chefao-e-tive-quatro-filhos-jpn1",
+        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
+        coverUrl: "https://topdoramax.pro/midia/capas-p/casei-com-o-chefao-e-tive-quatro-filhos-jpn1.jpg",
+        category: "Dublado",
+        tags: "anuncio,bombando,dublado",
+        totalEpisodes: 78,
+        freeEpisodesCount: 0,
+        isFeatured: false,
+        isVertical: true,
+        viewsCount: 8510,
+        likesCount: 2890,
+        episodes: [],
+        isShowcaseOnly: true
+    },
+    {
+        id: "tdx-23",
+        title: "A Babá Máxima dos Chefões da Máfia",
+        slug: "a-baba-maxima-dos-chefoes-da-mafia-dublado-imh6",
+        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
+        coverUrl: "https://topdoramax.pro/midia/capas-p/a-baba-maxima-dos-chefoes-da-mafia-dublado-imh6.jpg",
+        category: "Dublado",
+        tags: "anuncio,bombando,dublado",
+        totalEpisodes: 69,
+        freeEpisodesCount: 0,
+        isFeatured: false,
+        isVertical: true,
+        viewsCount: 8480,
+        likesCount: 2830,
+        episodes: [],
+        isShowcaseOnly: true
+    },
+    {
+        id: "tdx-24",
+        title: "Refém do Padrasto do meu Ex",
+        slug: "refem-do-padrasto-do-meu-ex---dublado-tbk6",
+        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
+        coverUrl: "https://topdoramax.pro/midia/capas-p/refem-do-padrasto-do-meu-ex---dublado-tbk6.jpg",
+        category: "Dublado",
+        tags: "anuncio,bombando,em_alta,dublado",
+        totalEpisodes: 66,
+        freeEpisodesCount: 0,
+        isFeatured: false,
+        isVertical: true,
+        viewsCount: 8390,
+        likesCount: 2770,
+        episodes: [],
+        isShowcaseOnly: true
+    }
+];
 
 function semAcento(t: string): string {
     return (t || "")
@@ -66,7 +483,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
     const router = useRouter();
     const searchParams = useSearchParams();
 
-    const [dramas, setDramas] = useState<Drama[]>([]);
+    const [dbDramas, setDbDramas] = useState<Drama[]>([]);
     const [loading, setLoading] = useState(true);
     const [activeCategory, setActiveCategory] = useState<string>("todos");
     const [searchQuery, setSearchQuery] = useState<string>("");
@@ -103,7 +520,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
         return () => window.removeEventListener("scroll", onScroll);
     }, []);
 
-    // Busca inicial de novelas e configurações do funil
+    // Busca inicial de novelas do banco e configurações do funil
     useEffect(() => {
         async function loadData() {
             try {
@@ -115,7 +532,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                 const funnelData = await funnelRes.json();
 
                 if (Array.isArray(dramasData?.dramas)) {
-                    setDramas(dramasData.dramas);
+                    setDbDramas(dramasData.dramas);
                 }
                 if (Array.isArray(funnelData?.plans) && funnelData.plans.length > 0) {
                     setPlans(funnelData.plans);
@@ -134,6 +551,18 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
         }
         loadData();
     }, []);
+
+    // Combina as novelas cadastradas no painel (/dashboard/novelas) com a vitrine TopDoramax
+    const dramas = useMemo(() => {
+        if (dbDramas.length > 0) {
+            const dbSlugs = new Set(dbDramas.map((d) => d.slug));
+            return [
+                ...dbDramas,
+                ...TOPDORAMAX_SHOWCASE_DRAMAS.filter((s) => !dbSlugs.has(s.slug))
+            ];
+        }
+        return TOPDORAMAX_SHOWCASE_DRAMAS;
+    }, [dbDramas]);
 
     // Verifica acesso VIP (retorno Stripe, parâmetro ?phone= do robô do WhatsApp ou localStorage)
     useEffect(() => {
@@ -192,7 +621,6 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
         if (forceCatalogView) return;
         if (loading) return;
 
-        // Se o cliente veio pelo link liberado do WhatsApp (?phone=) ou retorno da Stripe ou pediu ?catalogo=1, mantém no catálogo
         if (
             searchParams.get("phone") ||
             searchParams.get("stripe_session_id") ||
@@ -270,10 +698,20 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
     }, [dramas, searchQuery]);
 
     const top10Dramas = useMemo(() => {
-        return [...dramas]
-            .sort((a, b) => (b.viewsCount || 0) - (a.viewsCount || 0))
-            .slice(0, 10);
+        const tend = dramas.filter((d) => (d.tags || "").includes("tendencias") || !d.isShowcaseOnly);
+        const base = tend.length >= 6 ? tend : dramas;
+        return base.slice(0, 10);
     }, [dramas]);
+
+    const bombandoDramas = useMemo(
+        () => dramas.filter((d) => (d.tags || "").includes("bombando") || !d.isShowcaseOnly),
+        [dramas]
+    );
+
+    const emAltaDramas = useMemo(
+        () => dramas.filter((d) => (d.tags || "").includes("em_alta") || !d.isShowcaseOnly),
+        [dramas]
+    );
 
     const dubladosDramas = useMemo(
         () => dramas.filter((d) => detectLanguageTag(d) === "Dublado"),
@@ -282,6 +720,16 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
 
     const legendadosDramas = useMemo(
         () => dramas.filter((d) => detectLanguageTag(d) === "Legendado"),
+        [dramas]
+    );
+
+    const lgbtDramas = useMemo(
+        () => dramas.filter((d) => matchesFilterCategory(d, "lgbt")),
+        [dramas]
+    );
+
+    const brasileirasDramas = useMemo(
+        () => dramas.filter((d) => matchesFilterCategory(d, "brasileiro")),
         [dramas]
     );
 
@@ -297,11 +745,18 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
     }, [viewerExpiresAt]);
 
     const handleSelectDrama = (drama: Drama) => {
-        if (isVip) {
+        if (isVip && !drama.isShowcaseOnly) {
             router.push(`/assistir/${drama.slug}`);
             return;
         }
-        // Visitante fora do tráfego: abre a tela de Série Bloqueada estilo TopDoramax com opção de liberar o display após o pagamento
+        if (isVip && drama.isShowcaseOnly) {
+            // Se for uma série da vitrine e já houver novela real cadastrada no banco, leva para a primeira novela ou exibe aviso de episódios
+            if (dbDramas.length > 0) {
+                router.push(`/assistir/${dbDramas[0].slug}`);
+                return;
+            }
+        }
+        // Visitante fora do tráfego: abre a tela de Série Bloqueada idêntica ao TopDoramax
         setLockedSerieModal(drama);
     };
 
@@ -317,7 +772,6 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
         setVipModalOpen(true);
     };
 
-    // Tela de redirecionamento automático quando o clique vem do Anúncio -> Funil WhatsApp
     if (isRedirectingToWhatsapp) {
         return (
             <div className="min-h-dvh bg-black text-[#f5f5f5] flex flex-col items-center justify-center p-6 text-center">
@@ -347,7 +801,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                 className={`fixed top-0 left-0 right-0 z-40 flex items-center justify-between gap-3 px-4 sm:px-10 h-[66px] transition-all ${
                     scrolled
                         ? "bg-[#060606]/90 backdrop-blur-xl shadow-[0_1px_0_rgba(255,255,255,0.06)]"
-                        : "bg-[#060606]/85 sm:bg-gradient-to-b sm:from-black/80 sm:to-transparent backdrop-blur-md sm:backdrop-blur-none"
+                        : "bg-[#060606]/88 sm:bg-gradient-to-b sm:from-black/80 sm:to-transparent backdrop-blur-md sm:backdrop-blur-none"
                 }`}
             >
                 <div className="flex items-center gap-3 min-w-0">
@@ -425,7 +879,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                             fill="none"
                             stroke="currentColor"
                             strokeWidth="2"
-                            className="w-4 h-4"
+                            className="w-5 h-5"
                         >
                             <circle cx="11" cy="11" r="7" />
                             <path d="m20 20-3.5-3.5" strokeLinecap="round" />
@@ -435,41 +889,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
             </header>
 
             {/* CONTEÚDO PRINCIPAL (.conteudo) */}
-            <main className="pt-[74px] max-w-[1440px] mx-auto">
-                {/* FAIXA DE AVISO DE DISPLAY LIBERADO OU OFERTA DE DESBLOQUEIO */}
-                {isVip ? (
-                    <div className="mx-4 sm:mx-10 mb-3 px-4 py-2.5 rounded-xl bg-[#22b868]/12 border border-[#22b868]/30 flex flex-wrap items-center justify-between gap-2">
-                        <div className="text-xs text-[#e6e6eb]">
-                            <strong className="text-[#4ade8a] font-bold">Catálogo completo liberado!</strong>{" "}
-                            Toque em qualquer série abaixo para assistir todos os episódios sem limites.
-                        </div>
-                        <button
-                            type="button"
-                            onClick={() => setPwaModalOpen(true)}
-                            className="px-3 py-1 rounded-full bg-white text-black text-[11px] font-bold"
-                        >
-                            Instalar Aplicativo (PWA)
-                        </button>
-                    </div>
-                ) : (
-                    <div
-                        onClick={() => handleOpenPlanCheckout("annual")}
-                        className="mx-4 sm:mx-10 mb-3 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#e11d48]/20 via-[#e11d48]/10 to-[#0e0e11] border border-[#e11d48]/35 flex items-center justify-between gap-3 cursor-pointer hover:border-[#e11d48]/60 transition"
-                    >
-                        <div className="min-w-0">
-                            <div className="text-xs font-bold text-white truncate">
-                                Libere o display com todas as séries + Aplicativo PWA
-                            </div>
-                            <div className="text-[11px] text-[#9a9a9a] truncate">
-                                Planos a partir de R$ {monthlyPlan.price.toFixed(2).replace(".", ",")}/mês no Pix ou Cartão · Liberação imediata
-                            </div>
-                        </div>
-                        <span className="shrink-0 px-3 py-1 rounded-full bg-[#e11d48] text-white text-[11px] font-bold">
-                            Liberar ›
-                        </span>
-                    </div>
-                )}
-
+            <main className="pt-[70px] sm:pt-[78px] max-w-[1440px] mx-auto">
                 {/* 1. PÍLULAS DE FILTRO (.filtros) */}
                 <nav
                     aria-label="Categorias do catálogo"
@@ -509,7 +929,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                 featuredDramas[0];
                             const langTag = detectLanguageTag(currentBanner);
                             return (
-                                <div className="relative grid grid-cols-1 md:grid-cols-[1fr_auto] items-center gap-6 min-h-[410px] sm:min-h-[450px] p-5 sm:p-10 pb-11 overflow-hidden bg-black">
+                                <div className="relative grid grid-cols-1 md:grid-cols-[1fr_auto] items-center gap-6 min-h-[410px] sm:min-h-[460px] p-5 sm:p-10 pb-11 overflow-hidden bg-black">
                                     {/* Fundo desfocado (.destaque-fundo) */}
                                     <div
                                         aria-hidden="true"
@@ -535,10 +955,10 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                         <p className="text-[13px] font-extrabold tracking-[0.08em] uppercase text-[#f43f5e]">
                                             Bombando · Nº {(bannerIndex % featuredDramas.length) + 1} hoje
                                         </p>
-                                        <h2 className="font-black text-[30px] sm:text-[48px] leading-[0.98] tracking-[-0.02em] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.5)] line-clamp-3">
+                                        <h2 className="font-black text-[32px] sm:text-[52px] leading-[0.96] tracking-[-0.02em] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.5)] line-clamp-3">
                                             {currentBanner.title}
                                         </h2>
-                                        <p className="flex flex-wrap items-center justify-center md:justify-start gap-2.5 text-[14px] font-semibold text-[#f5f5f5]">
+                                        <p className="flex flex-wrap items-center justify-center md:justify-start gap-2.5 text-[15px] font-semibold text-[#f5f5f5]">
                                             <span
                                                 className={`px-2 py-0.5 rounded text-[12px] font-extrabold uppercase tracking-[0.03em] ${
                                                     langTag === "Dublado"
@@ -550,19 +970,13 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                             </span>
                                             <span className="text-[#9a9a9a]">•</span>
                                             <span>Minissérie</span>
-                                            <span className="text-[#9a9a9a]">•</span>
-                                            <span>
-                                                {currentBanner.episodes?.length ||
-                                                    currentBanner.totalEpisodes}{" "}
-                                                episódios
-                                            </span>
                                         </p>
 
                                         <div className="flex flex-wrap justify-center md:justify-start gap-3 mt-1">
                                             <button
                                                 type="button"
                                                 onClick={() => handleSelectDrama(currentBanner)}
-                                                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-white hover:bg-[#e8e8e8] text-black font-semibold text-[16px] transition transform hover:scale-[1.03]"
+                                                className="inline-flex items-center justify-center gap-2 px-[26px] py-[11px] rounded-full bg-white hover:bg-[#e8e8e8] text-black font-semibold text-[17px] transition transform hover:scale-[1.03]"
                                             >
                                                 <svg
                                                     viewBox="0 0 24 24"
@@ -571,13 +985,13 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                                 >
                                                     <path d="M7 4.5v15l12.5-7.5z" />
                                                 </svg>
-                                                {isVip ? "Assistir" : "Assistir agora"}
+                                                Assistir
                                             </button>
 
                                             <button
                                                 type="button"
                                                 onClick={() => setLockedSerieModal(currentBanner)}
-                                                className="inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-[#8c91a0]/35 hover:bg-[#8c91a0]/50 backdrop-blur-md text-white font-semibold text-[16px] transition transform hover:scale-[1.03]"
+                                                className="inline-flex items-center justify-center px-[26px] py-[11px] rounded-full bg-[#8c91a0]/35 hover:bg-[#8c91a0]/50 backdrop-blur-md text-white font-semibold text-[17px] transition transform hover:scale-[1.03]"
                                             >
                                                 Mais informações
                                             </button>
@@ -588,18 +1002,18 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                     <button
                                         type="button"
                                         onClick={() => handleSelectDrama(currentBanner)}
-                                        className="relative z-10 order-1 md:order-2 justify-self-center w-[44vw] max-w-[200px] md:w-[220px] md:max-w-none aspect-[2/3] rounded-[14px] overflow-hidden bg-[#121212] shadow-[0_30px_60px_rgba(0,0,0,0.8),0_0_0_1px_rgba(255,255,255,0.08)] rotate-[2deg] hover:rotate-0 hover:scale-[1.03] transition duration-300"
+                                        className="relative z-10 order-1 md:order-2 justify-self-center w-[46vw] max-w-[220px] md:w-[220px] md:max-w-none aspect-[2/3] rounded-[14px] overflow-hidden bg-[#121212] shadow-[0_30px_60px_rgba(0,0,0,0.8),0_0_0_1px_rgba(255,255,255,0.08)] rotate-[2deg] hover:rotate-0 hover:scale-[1.03] transition duration-300"
                                     >
                                         <img
-                                            src={currentBanner.coverUrl}
+                                            src={currentBanner.bannerUrl || currentBanner.coverUrl}
                                             alt={currentBanner.title}
                                             className="absolute inset-0 w-full h-full object-cover"
                                         />
-                                        <span className="absolute top-2 left-2 z-20 px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-sm text-white text-[9px] font-extrabold uppercase tracking-wider">
+                                        <span className="absolute top-2 left-2 z-20 px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-sm text-white text-[8.5px] font-extrabold uppercase tracking-wider">
                                             {langTag}
                                         </span>
-                                        <span className="absolute left-2 right-2 bottom-2 z-20 py-1.5 px-2.5 rounded-lg bg-black/75 backdrop-blur-md text-white text-[11px] font-bold text-center">
-                                            {isVip ? "Liberado para você" : "Em alta agora"}
+                                        <span className="absolute left-2 right-2 bottom-2 z-20 py-1.5 px-2.5 rounded-lg bg-black/75 backdrop-blur-md text-white text-[12px] font-bold text-center">
+                                            Em alta agora
                                         </span>
                                     </button>
                                 </div>
@@ -635,7 +1049,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                 )}
 
                 {/* 3. CAMPO DE BUSCA RÁPIDA (.busca) */}
-                <div className="mx-4 sm:mx-10 mt-4 mb-2 flex items-center gap-2.5 px-4 py-3.5 rounded-[12px] bg-[#0f0f10] border border-white/12 focus-within:border-white/30 text-[#9a9a9a] focus-within:text-white transition">
+                <div className="mx-4 sm:mx-10 mt-4 mb-1 flex items-center gap-2.5 px-[18px] py-[14px] rounded-[12px] bg-[#0f0f10] border border-white/12 focus-within:border-white/30 text-[#9a9a9a] focus-within:text-white transition">
                     <svg
                         viewBox="0 0 24 24"
                         fill="none"
@@ -695,53 +1109,66 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                     </section>
                 )}
 
-                {/* 4. FILEIRAS HORIZONTAIS (.faixa) QUANDO FILTRO = TODOS */}
+                {/* 4. FILEIRAS HORIZONTAIS (.faixa) IDÊNTICAS AO TOPDORAMAX */}
                 {activeCategory === "todos" && searchQuery.trim() === "" && dramas.length > 0 && (
-                    <div className="mt-4 space-y-6">
-                        {/* Fileira: Do anúncio */}
-                        <section className="relative">
-                            <div className="flex items-baseline justify-between px-4 sm:px-10 mb-2">
-                                <button
-                                    type="button"
-                                    onClick={() =>
-                                        setExpandedRow({
-                                            title: "Do anúncio",
-                                            items: dramas
-                                        })
-                                    }
-                                    className="inline-flex items-baseline gap-3 text-left group"
-                                >
-                                    <span className="font-bold text-[18px] sm:text-[21px] text-[#f5f5f5]">
-                                        Do anúncio
-                                    </span>
-                                    <span className="text-[13px] font-semibold text-[#9a9a9a] group-hover:text-white">
-                                        Ver tudo ›
-                                    </span>
-                                </button>
-                            </div>
+                    <div id="principal" className="mt-4 space-y-5">
+                        {/* Fileira 1: Do anúncio */}
+                        <HorizontalRowSection
+                            title="Do anúncio"
+                            items={dramas}
+                            isVip={isVip}
+                            onSelect={handleSelectDrama}
+                            onExpand={() =>
+                                setExpandedRow({ title: "Do anúncio", items: dramas })
+                            }
+                        />
 
-                            <div className="grid grid-flow-col auto-cols-[calc((100%-32px-20px)/3.3)] sm:auto-cols-[calc((100%-80px-40px)/5)] lg:auto-cols-[calc((100%-80px-60px)/7)] gap-2.5 overflow-x-auto no-scrollbar px-4 sm:px-10 pb-2 snap-x snap-mandatory">
-                                {dramas.map((drama) => (
-                                    <CatalogPosterCard
-                                        key={drama.id}
-                                        drama={drama}
-                                        isVip={isVip}
-                                        onSelect={handleSelectDrama}
-                                    />
-                                ))}
-                            </div>
-                        </section>
+                        {/* Fileira 2: Bombando */}
+                        <HorizontalRowSection
+                            title="Bombando"
+                            items={bombandoDramas}
+                            isVip={isVip}
+                            onSelect={handleSelectDrama}
+                            onExpand={() =>
+                                setExpandedRow({ title: "Bombando", items: bombandoDramas })
+                            }
+                        />
 
-                        {/* Fileira Ranking Top 10 (.faixa-ranking estilo Netflix/TopDoramax) */}
+                        {/* Fileira 3: Em Alta Agora */}
+                        <HorizontalRowSection
+                            title="Em Alta Agora"
+                            items={emAltaDramas}
+                            isVip={isVip}
+                            onSelect={handleSelectDrama}
+                            onExpand={() =>
+                                setExpandedRow({ title: "Em Alta Agora", items: emAltaDramas })
+                            }
+                        />
+
+                        {/* Fileira 4: Tendências — Top 10 (.faixa-ranking com número gigante vazado atrás da capa) */}
                         {top10Dramas.length > 0 && (
                             <section className="relative">
                                 <div className="flex items-baseline justify-between px-4 sm:px-10 mb-2">
-                                    <h2 className="font-bold text-[18px] sm:text-[21px] text-[#f5f5f5]">
-                                        Top 10 · Bombando hoje
-                                    </h2>
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            setExpandedRow({
+                                                title: "Tendências",
+                                                items: top10Dramas
+                                            })
+                                        }
+                                        className="inline-flex items-baseline gap-3.5 text-left group"
+                                    >
+                                        <span className="font-bold text-[17px] sm:text-[21px] text-[#f5f5f5]">
+                                            Tendências
+                                        </span>
+                                        <span className="text-[14px] font-semibold text-[#9a9a9a] group-hover:text-white">
+                                            Ver tudo ›
+                                        </span>
+                                    </button>
                                 </div>
 
-                                <div className="grid grid-flow-col auto-cols-[calc((100%-32px-20px)/2.3)] sm:auto-cols-[calc((100%-80px-30px)/4)] lg:auto-cols-[calc((100%-80px-40px)/5)] gap-2.5 overflow-x-auto no-scrollbar px-4 sm:px-10 pb-3 snap-x snap-mandatory">
+                                <div className="grid grid-flow-col auto-cols-[calc((100%-32px-20px)/2.3)] sm:auto-cols-[calc((100%-80px-30px)/4)] lg:auto-cols-[calc((100%-80px-40px)/5)] gap-2.5 overflow-x-auto no-scrollbar px-4 sm:px-10 pb-4 snap-x snap-mandatory">
                                     {top10Dramas.map((drama, idx) => {
                                         const langTag = detectLanguageTag(drama);
                                         return (
@@ -757,7 +1184,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                                         WebkitTextStroke:
                                                             "2px rgba(255,255,255,0.82)"
                                                     }}
-                                                    className="absolute left-0 bottom-0 z-10 font-black text-[96px] sm:text-[122px] leading-[0.74] tracking-[-0.06em] text-black select-none pointer-events-none"
+                                                    className="absolute left-0 bottom-0 z-10 font-black text-[96px] sm:text-[128px] leading-[0.74] tracking-[-0.06em] text-black select-none pointer-events-none"
                                                 >
                                                     {idx + 1}
                                                 </span>
@@ -779,76 +1206,65 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                             </section>
                         )}
 
-                        {/* Fileira: Dublados */}
+                        {/* Fileira 5: Dublados em português */}
                         {dubladosDramas.length > 0 && (
-                            <section className="relative">
-                                <div className="flex items-baseline justify-between px-4 sm:px-10 mb-2">
-                                    <button
-                                        type="button"
-                                        onClick={() =>
-                                            setExpandedRow({
-                                                title: "Dublados",
-                                                items: dubladosDramas
-                                            })
-                                        }
-                                        className="inline-flex items-baseline gap-3 text-left group"
-                                    >
-                                        <span className="font-bold text-[18px] sm:text-[21px] text-[#f5f5f5]">
-                                            Dublados
-                                        </span>
-                                        <span className="text-[13px] font-semibold text-[#9a9a9a] group-hover:text-white">
-                                            Ver tudo ›
-                                        </span>
-                                    </button>
-                                </div>
-
-                                <div className="grid grid-flow-col auto-cols-[calc((100%-32px-20px)/3.3)] sm:auto-cols-[calc((100%-80px-40px)/5)] lg:auto-cols-[calc((100%-80px-60px)/7)] gap-2.5 overflow-x-auto no-scrollbar px-4 sm:px-10 pb-2 snap-x snap-mandatory">
-                                    {dubladosDramas.map((drama) => (
-                                        <CatalogPosterCard
-                                            key={drama.id}
-                                            drama={drama}
-                                            isVip={isVip}
-                                            onSelect={handleSelectDrama}
-                                        />
-                                    ))}
-                                </div>
-                            </section>
+                            <HorizontalRowSection
+                                title="Dublados em português"
+                                items={dubladosDramas}
+                                isVip={isVip}
+                                onSelect={handleSelectDrama}
+                                onExpand={() =>
+                                    setExpandedRow({
+                                        title: "Dublados em português",
+                                        items: dubladosDramas
+                                    })
+                                }
+                            />
                         )}
 
-                        {/* Fileira: Legendados */}
+                        {/* Fileira 6: Legendados */}
                         {legendadosDramas.length > 0 && (
-                            <section className="relative">
-                                <div className="flex items-baseline justify-between px-4 sm:px-10 mb-2">
-                                    <button
-                                        type="button"
-                                        onClick={() =>
-                                            setExpandedRow({
-                                                title: "Legendados",
-                                                items: legendadosDramas
-                                            })
-                                        }
-                                        className="inline-flex items-baseline gap-3 text-left group"
-                                    >
-                                        <span className="font-bold text-[18px] sm:text-[21px] text-[#f5f5f5]">
-                                            Legendados
-                                        </span>
-                                        <span className="text-[13px] font-semibold text-[#9a9a9a] group-hover:text-white">
-                                            Ver tudo ›
-                                        </span>
-                                    </button>
-                                </div>
+                            <HorizontalRowSection
+                                title="Legendados"
+                                items={legendadosDramas}
+                                isVip={isVip}
+                                onSelect={handleSelectDrama}
+                                onExpand={() =>
+                                    setExpandedRow({
+                                        title: "Legendados",
+                                        items: legendadosDramas
+                                    })
+                                }
+                            />
+                        )}
 
-                                <div className="grid grid-flow-col auto-cols-[calc((100%-32px-20px)/3.3)] sm:auto-cols-[calc((100%-80px-40px)/5)] lg:auto-cols-[calc((100%-80px-60px)/7)] gap-2.5 overflow-x-auto no-scrollbar px-4 sm:px-10 pb-2 snap-x snap-mandatory">
-                                    {legendadosDramas.map((drama) => (
-                                        <CatalogPosterCard
-                                            key={drama.id}
-                                            drama={drama}
-                                            isVip={isVip}
-                                            onSelect={handleSelectDrama}
-                                        />
-                                    ))}
-                                </div>
-                            </section>
+                        {/* Fileira 7: LGBT */}
+                        {lgbtDramas.length > 0 && (
+                            <HorizontalRowSection
+                                title="LGBT"
+                                items={lgbtDramas}
+                                isVip={isVip}
+                                onSelect={handleSelectDrama}
+                                onExpand={() =>
+                                    setExpandedRow({ title: "LGBT", items: lgbtDramas })
+                                }
+                            />
+                        )}
+
+                        {/* Fileira 8: Brasileiras */}
+                        {brasileirasDramas.length > 0 && (
+                            <HorizontalRowSection
+                                title="Brasileiras"
+                                items={brasileirasDramas}
+                                isVip={isVip}
+                                onSelect={handleSelectDrama}
+                                onExpand={() =>
+                                    setExpandedRow({
+                                        title: "Brasileiras",
+                                        items: brasileirasDramas
+                                    })
+                                }
+                            />
                         )}
                     </div>
                 )}
@@ -859,33 +1275,20 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                         <h2 className="font-bold text-[22px] text-[#f5f5f5]">Catálogo</h2>
                     </div>
                     <p className="text-[14px] text-[#9a9a9a] mb-3.5">
-                        {loading
-                            ? "Carregando catálogo..."
-                            : `${filteredCatalog.length} ${
-                                  filteredCatalog.length === 1
-                                      ? "série disponível"
-                                      : "séries disponíveis"
-                              }`}
+                        {filteredCatalog.length}{" "}
+                        {filteredCatalog.length === 1 ? "série" : "séries"}
                     </p>
 
-                    {!loading && filteredCatalog.length === 0 ? (
-                        <div className="p-10 rounded-2xl bg-[#0e0e11] border border-white/10 text-center">
-                            <p className="text-sm text-[#9a9a9a]">
-                                Nenhuma série cadastrada nesta categoria ainda.
-                            </p>
-                        </div>
-                    ) : (
-                        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 sm:gap-3.5">
-                            {filteredCatalog.map((drama) => (
-                                <CatalogPosterCard
-                                    key={drama.id}
-                                    drama={drama}
-                                    isVip={isVip}
-                                    onSelect={handleSelectDrama}
-                                />
-                            ))}
-                        </div>
-                    )}
+                    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 sm:gap-3.5">
+                        {filteredCatalog.map((drama) => (
+                            <CatalogPosterCard
+                                key={drama.id}
+                                drama={drama}
+                                isVip={isVip}
+                                onSelect={handleSelectDrama}
+                            />
+                        ))}
+                    </div>
                 </section>
             </main>
 
@@ -1293,15 +1696,16 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                 <div className="px-4 py-2 rounded-full bg-black/80 border border-white/15 backdrop-blur-md text-white text-sm font-bold mb-2">
                                     Série bloqueada
                                 </div>
-                                {lockedSerieModal.freeEpisodesCount > 0 && (
-                                    <Link
-                                        href={`/assistir/${lockedSerieModal.slug}?ep=1`}
-                                        className="mt-1 px-4 py-1.5 rounded-full bg-white/15 hover:bg-white/25 border border-white/25 text-white text-xs font-semibold transition"
-                                    >
-                                        Assistir prévia grátis (Ep. 01 a 0
-                                        {lockedSerieModal.freeEpisodesCount}) ›
-                                    </Link>
-                                )}
+                                {!lockedSerieModal.isShowcaseOnly &&
+                                    lockedSerieModal.freeEpisodesCount > 0 && (
+                                        <Link
+                                            href={`/assistir/${lockedSerieModal.slug}?ep=1`}
+                                            className="mt-1 px-4 py-1.5 rounded-full bg-white/15 hover:bg-white/25 border border-white/25 text-white text-xs font-semibold transition"
+                                        >
+                                            Assistir prévia grátis (Ep. 01 a 0
+                                            {lockedSerieModal.freeEpisodesCount}) ›
+                                        </Link>
+                                    )}
                             </div>
                         </div>
 
@@ -1309,13 +1713,11 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                             {lockedSerieModal.title}
                         </h1>
                         <p className="text-xs font-semibold text-[#9a9a9a] text-center mt-1 mb-5">
-                            {detectLanguageTag(lockedSerieModal)} · Todos os{" "}
-                            {lockedSerieModal.episodes?.length || lockedSerieModal.totalEpisodes}{" "}
-                            episódios completos
+                            {detectLanguageTag(lockedSerieModal)} · Todos os episódios
                         </p>
 
                         <p className="text-sm font-bold text-white mb-3">
-                            Desbloqueie o display para assistir agora:
+                            Desbloqueie para assistir agora:
                         </p>
 
                         {/* 3 BOTÕES DE PLANOS ESTILO TICKET.CSS DO TOPDORAMAX */}
@@ -1332,11 +1734,11 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                     Mais escolhido · {annualPlan.discountBadge}
                                 </span>
                                 <strong className="block text-[17px] font-extrabold text-white">
-                                    Catálogo Completo (1 Ano) · R${" "}
+                                    Todas as séries (Plano Anual) · R${" "}
                                     {annualPlan.price.toFixed(2).replace(".", ",")}
                                 </strong>
                                 <span className="block text-xs text-[#e6e6eb] mt-0.5">
-                                    365 dias · Todas as séries liberadas + App PWA ·{" "}
+                                    365 dias · O catálogo completo + App PWA ·{" "}
                                     {annualPlan.savingsText}
                                 </span>
                             </button>
@@ -1359,7 +1761,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                     </span>
                                 </div>
                                 <span className="block text-xs text-[#9a9a9a] mt-0.5">
-                                    30 dias · Libera todas as séries na hora · Pix ou Cartão
+                                    30 dias · Catálogo completo liberado · Pix ou Cartão
                                 </span>
                             </button>
 
@@ -1387,7 +1789,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                         </div>
 
                         <p className="text-center text-xs text-[#9a9a9a] mt-4">
-                            Já pagou no WhatsApp ou Pix?{" "}
+                            Já pagou?{" "}
                             <button
                                 type="button"
                                 onClick={() => {
@@ -1434,10 +1836,12 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                     setViewerPhone(phone);
                     setIsVip(true);
                     setVipModalOpen(false);
-                    if (lockedSerieModal) {
+                    if (lockedSerieModal && !lockedSerieModal.isShowcaseOnly) {
                         const targetSlug = lockedSerieModal.slug;
                         setLockedSerieModal(null);
                         router.push(`/assistir/${targetSlug}`);
+                    } else {
+                        setLockedSerieModal(null);
                     }
                 }}
                 dramaId={lockedSerieModal?.slug}
@@ -1459,6 +1863,51 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                 }}
             />
         </div>
+    );
+}
+
+function HorizontalRowSection({
+    title,
+    items,
+    isVip,
+    onSelect,
+    onExpand
+}: {
+    title: string;
+    items: Drama[];
+    isVip: boolean;
+    onSelect: (drama: Drama) => void;
+    onExpand: () => void;
+}) {
+    if (items.length === 0) return null;
+    return (
+        <section className="relative">
+            <div className="flex items-baseline justify-between px-4 sm:px-10 mb-2">
+                <button
+                    type="button"
+                    onClick={onExpand}
+                    className="inline-flex items-baseline gap-3.5 text-left group"
+                >
+                    <span className="font-bold text-[17px] sm:text-[21px] text-[#f5f5f5]">
+                        {title}
+                    </span>
+                    <span className="text-[14px] font-semibold text-[#9a9a9a] group-hover:text-white">
+                        Ver tudo ›
+                    </span>
+                </button>
+            </div>
+
+            <div className="grid grid-flow-col auto-cols-[calc((100%-32px-20px)/3.3)] sm:auto-cols-[calc((100%-80px-40px)/5)] lg:auto-cols-[calc((100%-80px-60px)/7)] gap-2.5 overflow-x-auto no-scrollbar px-4 sm:px-10 pb-2 snap-x snap-mandatory">
+                {items.map((drama) => (
+                    <CatalogPosterCard
+                        key={drama.id}
+                        drama={drama}
+                        isVip={isVip}
+                        onSelect={onSelect}
+                    />
+                ))}
+            </div>
+        </section>
     );
 }
 
@@ -1485,16 +1934,14 @@ function CatalogPosterCard({
                 decoding="async"
                 className="absolute inset-0 w-full h-full object-cover"
             />
-            <div className="absolute inset-x-0 top-[65%] bottom-0 bg-gradient-to-t from-black/75 to-transparent pointer-events-none" />
+            <div className="absolute inset-x-0 top-[68%] bottom-0 bg-gradient-to-t from-black/75 to-transparent pointer-events-none" />
 
-            {/* Etiqueta de status no topo direito */}
             {isVip && (
                 <span className="absolute top-1.5 right-1.5 z-20 px-1.5 py-0.5 rounded bg-[#22b868] text-black text-[8px] font-extrabold uppercase">
                     Liberado
                 </span>
             )}
 
-            {/* Hover de computador com botão Play + Nome */}
             <div className="hidden sm:flex absolute inset-0 z-10 p-2.5 pb-7 flex-col justify-end items-start gap-1.5 bg-gradient-to-t from-black/95 via-black/70 to-black/20 opacity-0 group-hover:opacity-100 transition-opacity">
                 <span className="w-8 h-8 rounded-full bg-white text-black grid place-items-center text-xs font-bold pl-0.5">
                     ▶
@@ -1504,11 +1951,9 @@ function CatalogPosterCard({
                 </span>
             </div>
 
-            {/* Etiqueta de idioma embaixo à esquerda (.card-idioma do TopDoramax) */}
             <span className="absolute left-1.5 bottom-1.5 z-20 px-1.5 py-0.5 rounded-full bg-black/75 backdrop-blur-sm text-white text-[8.5px] font-extrabold uppercase tracking-[0.04em]">
                 {langTag}
             </span>
         </button>
     );
 }
-
