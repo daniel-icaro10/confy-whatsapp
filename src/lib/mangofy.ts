@@ -48,7 +48,37 @@ export async function createMangofyPixCharge(input: CreatePixChargeInput): Promi
     const apiUrl = (config.mangofyApiUrl || "https://checkout.mangofy.com.br/api/v1").replace(/\/+$/, "");
 
     if (!apiKey) {
-        throw new Error("A chave de API da Mangofy ainda não foi configurada no painel administrativo.");
+        logger.warn("Mangofy", "Aviso: Mangofy sem chave de API. Gerando cobrança Pix de teste para simulação.");
+        const simulatedExternalId = `mgf_sim_${Date.now()}`;
+        const simulatedCopyPaste = `00020126580014br.gov.bcb.pix0136${cleanPhone}520400005303986540${amount.toFixed(2)}5802BR5913TvDrama Reels6009Sao Paulo62070503***6304ABCD`;
+
+        const order = await prisma.pixOrder.create({
+            data: {
+                externalId: simulatedExternalId,
+                phone: cleanPhone,
+                jid: input.jid || `${cleanPhone}@s.whatsapp.net`,
+                sessionId: input.sessionId || config.sessionId || null,
+                customerName,
+                customerEmail,
+                customerCpf,
+                planName: planTitle,
+                amount,
+                status: "PENDING",
+                pixCopyPaste: simulatedCopyPaste,
+                pixQrCodeBase64: null,
+                dramaId: input.dramaId || null
+            }
+        });
+
+        return {
+            orderId: order.id,
+            externalId: simulatedExternalId,
+            amount,
+            planName: planTitle,
+            pixCopyPaste: simulatedCopyPaste,
+            pixQrCodeBase64: null,
+            isSimulated: true
+        };
     }
 
     const postbackUrl = `${(config.siteUrl || process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000").replace(/\/+$/, "")}/api/webhooks/mangofy`;

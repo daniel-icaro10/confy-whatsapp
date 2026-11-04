@@ -379,11 +379,11 @@ export function extractYoutubeId(input: string): string | null {
 
 export const DEFAULT_FUNNEL_CONFIG = {
     id: "default",
-    enabled: false,
-    sessionId: null as string | null,
-    planName: "Plano Mensal — TvDrama Reels",
-    planPrice: 9.90,
-    siteUrl: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
+    enabled: true,
+    sessionId: "kb3786" as string | null,
+    planName: "Catálogo Completo — TvDrama Reels",
+    planPrice: 19.90,
+    siteUrl: process.env.NEXT_PUBLIC_APP_URL || "http://2.24.89.184:3000",
     mangofyApiUrl: "https://checkout.mangofy.com.br/api/v1",
     mangofyApiKey: "",
     mangofyStoreCode: "",
@@ -394,18 +394,18 @@ export const DEFAULT_FUNNEL_CONFIG = {
     plansJson: DEFAULT_OFFER_PLANS as unknown as any,
     whatsappNumber: "",
     adRedirectMessage: "Olá! Vi o anúncio e quero liberar meu acesso para assistir.",
-    step1Greeting: "",
+    step1Greeting: `Qual das duas vc prefere? 😊\n\n🎬 *3 Séries por R$ 9,90*\n✅ Você que escolhe as séries\n✅ Acesso enviado no WhatsApp após o pagamento\n\n🚀 *Catálogo Completo por R$ 19,90* ⭐\n✅ Todas as +501 séries liberadas\n✅ Assista quantas quiser por 30 dias\n✅ TODO DIA entra série nova\n✅ Melhor custo-benefício\n\n📌 Catálogo:\n{{LINK_CATALOGO}}\n\n✅ Depois do pagamento a série chega aqui na hora`,
     step1MediaUrl: "",
     step1MediaType: "none",
     step2OfferMessage: "",
-    pixTriggerKeywords: "",
-    pixGeneratedMessage: "",
-    paymentApprovedMessage: "",
+    pixTriggerKeywords: "1, 2, 3 series, 3 séries, catalogo, catálogo, completo, pix, quero, sim, pagar, assistir, liberar, 9.90, 9,90, 19.90, 19,90",
+    pixGeneratedMessage: "Aqui está a sua chave Pix Copia e Cola no valor de R$ {{VALOR}}:\n\n{{PIX_COPIA_E_COLA}}\n\n📱 Copie o código acima e pague no app do seu banco.\n⚡ Assim que o pagamento for confirmado, seu acesso é liberado aqui mesmo na hora!",
+    paymentApprovedMessage: "🎉 Pagamento confirmado com sucesso, {{NOME}}!\n\nSeu acesso exclusivo já está liberado! 🎬🍿\nClique no link abaixo para assistir agora:\n👉 {{LINK_ACESSO}}\n\n✅ Assista no celular, tablet, computador ou TV\n✅ Sem anúncios e episódios completos em HD\nBom entretenimento! ❤️",
     useAiSaleswoman: false,
     aiProvider: "GROQ" as const,
     aiApiKey: "",
     aiModel: "llama-3.3-70b-versatile",
-    aiSystemPrompt: ""
+    aiSystemPrompt: "Você é a assistente de vendas do TvDrama Reels. Seu objetivo é tirar dúvidas e orientar o cliente a escolher entre a Opção 1 (3 Séries por R$ 9,90) e a Opção 2 (Catálogo Completo por R$ 19,90). Responda com simpatia e clareza."
 };
 
 const LEGACY_MOCK_DRAMA_SLUGS = [
@@ -427,23 +427,18 @@ export async function ensureFunnelConfig() {
             return config;
         }
 
-        if (
-            config.step1Greeting?.includes("Oiê, meu amor!") ||
-            config.aiSystemPrompt?.includes("Você é a Sofia, atendente")
-        ) {
+        // Se os textos principais estiverem vazios, atualiza com a mensagem oficial da oferta
+        if (!config.step1Greeting?.trim()) {
             config = await prisma.funnelConfig.update({
                 where: { id: "default" },
                 data: {
-                    enabled: false,
-                    planName: "Plano Mensal — TvDrama Reels",
-                    planPrice: 9.90,
-                    step1Greeting: "",
-                    step2OfferMessage: "",
-                    pixTriggerKeywords: "",
-                    pixGeneratedMessage: "",
-                    paymentApprovedMessage: "",
-                    useAiSaleswoman: false,
-                    aiSystemPrompt: ""
+                    enabled: true,
+                    sessionId: config.sessionId || "kb3786",
+                    siteUrl: config.siteUrl?.includes("142.93") ? "http://2.24.89.184:3000" : config.siteUrl || "http://2.24.89.184:3000",
+                    step1Greeting: DEFAULT_FUNNEL_CONFIG.step1Greeting,
+                    pixTriggerKeywords: DEFAULT_FUNNEL_CONFIG.pixTriggerKeywords,
+                    pixGeneratedMessage: DEFAULT_FUNNEL_CONFIG.pixGeneratedMessage,
+                    paymentApprovedMessage: DEFAULT_FUNNEL_CONFIG.paymentApprovedMessage
                 }
             });
         }
