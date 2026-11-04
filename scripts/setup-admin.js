@@ -12,12 +12,14 @@ async function upsertSuperAdmin(email, password) {
     });
 
     if (existingUser) {
-        console.log(`User ${email} found. Updating password and promoting to SUPERADMIN...`);
+        console.log(`User ${email} found. Updating password and promoting to SUPERADMIN (ENTERPRISE)...`);
         await prisma.user.update({
             where: { email },
             data: {
                 password: hashedPassword,
                 role: "SUPERADMIN",
+                plan: "ENTERPRISE",
+                maxSessions: 99,
                 isActive: true
             }
         });
@@ -27,9 +29,11 @@ async function upsertSuperAdmin(email, password) {
         await prisma.user.create({
             data: {
                 email,
-                name: "Daniel Icaro",
+                name: email.includes("admin") ? "Administrador Master" : "Daniel Icaro",
                 password: hashedPassword,
                 role: "SUPERADMIN",
+                plan: "ENTERPRISE",
+                maxSessions: 99,
                 isActive: true
             }
         });

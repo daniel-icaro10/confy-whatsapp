@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense } from "react";
 import { useParams, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 import { DEFAULT_OFFER_PLANS, extractYoutubeId, OfferPlan } from "@/lib/segredos-defaults";
 import { INITIAL_YOUTUBE_DRAMAS } from "@/lib/initial-dramas-data";
 import { VipAccessModal } from "@/components/streaming/vip-access-modal";
@@ -39,6 +40,8 @@ function WatchDramaContent() {
     const params = useParams();
     const searchParams = useSearchParams();
     const dramaIdOrSlug = String(params?.id || "");
+    const { data: session } = useSession();
+    const isAdmin = Boolean(session?.user);
 
     const [drama, setDrama] = useState<Drama | null>(null);
     const [loading, setLoading] = useState(true);
@@ -141,6 +144,13 @@ function WatchDramaContent() {
     }, [dramaIdOrSlug, searchParams]);
 
     useEffect(() => {
+        if (session?.user) {
+            setIsVip(true);
+            setViewerPhone(session.user.name || session.user.email || "Admin");
+            localStorage.setItem("sdc_viewer_vip", "true");
+            return;
+        }
+
         const stripeSessionId = searchParams.get("stripe_session_id");
         if (stripeSessionId) {
             fetch(`/api/stripe/checkout?session_id=${encodeURIComponent(stripeSessionId)}`)
@@ -212,7 +222,7 @@ function WatchDramaContent() {
         episodes.find((ep) => ep.number === currentEpNumber) || episodes[0];
 
     const isEpisodeUnlocked = (ep: Episode) => {
-        if (isVip) return true;
+        if (isAdmin || isVip) return true;
         if (ep.isFree) return true;
         if (ep.number <= (drama.freeEpisodesCount || 2)) return true;
         return false;
@@ -285,7 +295,19 @@ function WatchDramaContent() {
                             Baixar App
                         </button>
 
-                        {isVip ? (
+                        {isAdmin ? (
+                            <div className="flex items-center gap-1.5 sm:gap-2">
+                                <span className="px-2.5 sm:px-3 py-1.5 rounded-full bg-rose-600/20 border border-rose-500/40 text-rose-400 text-[11px] sm:text-xs font-bold">
+                                    👑 Admin Master · Liberado
+                                </span>
+                                <Link
+                                    href="/dashboard"
+                                    className="px-2.5 sm:px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-white text-[11px] sm:text-xs font-semibold transition"
+                                >
+                                    Painel Admin
+                                </Link>
+                            </div>
+                        ) : isVip ? (
                             <span className="px-2.5 sm:px-3 py-1.5 rounded-full bg-[#22b868]/15 border border-[#22b868]/30 text-[#4ade8a] text-[11px] sm:text-xs font-bold tabular-nums">
                                 Display Liberado{viewerPhone ? ` · ${viewerPhone.slice(-4)}` : ""}
                             </span>

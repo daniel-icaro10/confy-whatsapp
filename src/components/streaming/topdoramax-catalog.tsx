@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { DEFAULT_OFFER_PLANS, OfferPlan } from "@/lib/segredos-defaults";
 import { INITIAL_YOUTUBE_DRAMAS } from "@/lib/initial-dramas-data";
@@ -509,6 +510,8 @@ interface TopDoramaxCatalogProps {
 export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalogProps) {
     const router = useRouter();
     const searchParams = useSearchParams();
+    const { data: session } = useSession();
+    const isAdmin = Boolean(session?.user);
 
     const [dbDramas, setDbDramas] = useState<Drama[]>([]);
     const [loading, setLoading] = useState(true);
@@ -595,8 +598,17 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
         ];
     }, [dbDramas]);
 
-    // Verifica acesso VIP (retorno Stripe, parâmetro ?phone= do robô do WhatsApp ou localStorage)
+    // Verifica acesso VIP (sessão Admin, retorno Stripe, parâmetro ?phone= do robô do WhatsApp ou localStorage)
     useEffect(() => {
+        if (session?.user) {
+            setIsVip(true);
+            setViewerPhone(session.user.name || session.user.email || "Admin");
+            setViewerPlanName("Acesso Administrador Master");
+            localStorage.setItem("sdc_viewer_vip", "true");
+            setLockedSerieModal(null);
+            return;
+        }
+
         const qBusca = searchParams.get("busca");
         if (qBusca !== null) {
             setSearchQuery(qBusca);
@@ -814,7 +826,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
     }, [viewerExpiresAt]);
 
     const handleSelectDrama = (drama: Drama, forceWatch = false) => {
-        if (isVip && !drama.isShowcaseOnly) {
+        if ((isVip || isAdmin) && !drama.isShowcaseOnly) {
             router.push(`/assistir/${drama.slug}`);
             return;
         }
@@ -822,7 +834,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
             router.push(`/assistir/${drama.slug}?ep=1`);
             return;
         }
-        if (isVip && drama.isShowcaseOnly) {
+        if ((isVip || isAdmin) && drama.isShowcaseOnly) {
             // Se for uma série da vitrine e já houver novela real cadastrada no banco, leva para a primeira novela
             if (dbDramas.length > 0) {
                 router.push(`/assistir/${dbDramas[0].slug}`);
@@ -897,15 +909,35 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                         </span>
                     </button>
 
-                    {isVip && (
+                    {isAdmin ? (
+                        <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-rose-600/20 border border-rose-500/40 text-rose-400 text-[11px] font-bold">
+                            👑 Admin Master · Liberado
+                        </span>
+                    ) : isVip ? (
                         <span className="hidden sm:inline-flex items-center px-2.5 py-1 rounded-full bg-[#22b868]/15 border border-[#22b868]/30 text-[#4ade8a] text-[11px] font-bold">
                             Display Liberado{daysRemaining !== null ? ` · ${daysRemaining}d` : ""}
                         </span>
-                    )}
+                    ) : null}
                 </div>
 
                 <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-                    {isVip ? (
+                    {isAdmin ? (
+                        <>
+                            <Link
+                                href="/dashboard"
+                                className="px-3 sm:px-3.5 py-1.5 rounded-full bg-[#e11d48] hover:bg-[#f43f5e] text-white text-[11px] sm:text-xs font-bold shadow-[0_6px_20px_rgba(225,29,72,0.35)] transition"
+                            >
+                                ⚙️ Painel Admin
+                            </Link>
+                            <button
+                                type="button"
+                                onClick={() => setActiveOverlay("conta")}
+                                className="px-2.5 sm:px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 text-white text-[11px] sm:text-xs font-semibold tabular-nums transition"
+                            >
+                                Conta
+                            </button>
+                        </>
+                    ) : isVip ? (
                         <>
                             <button
                                 type="button"
