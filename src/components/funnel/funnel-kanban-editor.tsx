@@ -298,7 +298,7 @@ export function FunnelKanbanEditor({
 
             {/* MODO 1: QUADRO KANBAN POR ESTÁGIOS */}
             {viewMode === "kanban" && (
-                <div className="grid grid-cols-1 md:grid-cols-5 gap-4 overflow-x-auto pb-4">
+                <div className="flex gap-4 overflow-x-auto pb-6 pt-1 snap-x scroll-smooth xl:grid xl:grid-cols-5">
                     {FUNNEL_STAGES.map((stage) => {
                         const stageNodes = nodes.filter((n) => n.stage === stage.id);
                         return (
@@ -306,10 +306,16 @@ export function FunnelKanbanEditor({
                                 key={stage.id}
                                 onDragOver={(e) => e.preventDefault()}
                                 onDrop={(e) => handleDropOnStage(e, stage.id)}
-                                className="flex flex-col bg-[#0b0b0e] border border-neutral-800/80 rounded-xl p-3 min-w-[260px] min-h-[520px]"
+                                className="flex flex-col bg-[#101014] border border-white/10 rounded-2xl p-3.5 min-w-[290px] w-[310px] xl:w-auto xl:min-w-0 flex-shrink-0 min-h-[580px] shadow-sm relative overflow-hidden"
                             >
+                                {/* Barra colorida da etapa */}
+                                <div
+                                    className="absolute top-0 left-0 right-0 h-1"
+                                    style={{ backgroundColor: stage.color }}
+                                />
+
                                 {/* Topo da Coluna */}
-                                <div className="flex items-center justify-between pb-3 border-b border-neutral-800 mb-3">
+                                <div className="flex items-center justify-between pb-3 border-b border-white/10 mb-3 pt-1">
                                     <div className="flex items-center gap-2">
                                         <span
                                             className="w-2.5 h-2.5 rounded-full"
@@ -319,12 +325,12 @@ export function FunnelKanbanEditor({
                                             {stage.label}
                                         </h3>
                                     </div>
-                                    <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-neutral-900 text-neutral-400 border border-neutral-800">
+                                    <span className="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-[#18181f] text-neutral-300 border border-white/10">
                                         {stageNodes.length}
                                     </span>
                                 </div>
 
-                                <p className="text-[11px] text-neutral-500 mb-3 leading-tight">
+                                <p className="text-[11px] text-neutral-400 mb-3 leading-tight">
                                     {stage.description}
                                 </p>
 
@@ -344,16 +350,16 @@ export function FunnelKanbanEditor({
                                                 key={node.id}
                                                 draggable
                                                 onDragStart={(e) => handleDragStart(e, node.id)}
-                                                className={`relative p-3.5 rounded-xl border transition group cursor-grab active:cursor-grabbing ${
+                                                className={`relative p-3.5 rounded-xl border transition-all duration-200 group cursor-grab active:cursor-grabbing ${
                                                     node.enabled
-                                                        ? "bg-[#141418] border-neutral-700/80 hover:border-neutral-500 shadow-md"
-                                                        : "bg-[#0f0f12] border-neutral-800/60 opacity-60"
+                                                        ? "bg-[#16161c] border-white/10 hover:border-white/25 shadow-md"
+                                                        : "bg-[#0c0c0e] border-white/5 opacity-60"
                                                 }`}
                                             >
                                                 {/* Cabeçalho do Card */}
-                                                <div className="flex items-start justify-between gap-2 mb-2">
+                                                <div className="flex items-center justify-between gap-2 mb-2">
                                                     <div className="flex items-center gap-1.5 min-w-0">
-                                                        <GripVertical className="w-3.5 h-3.5 text-neutral-600 shrink-0" />
+                                                        <GripVertical className="w-3.5 h-3.5 text-neutral-500 shrink-0" />
                                                         <span
                                                             className={`inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full border ${typeCfg.badgeBg}`}
                                                         >
@@ -367,7 +373,7 @@ export function FunnelKanbanEditor({
                                                         onClick={() => handleToggleEnabled(node.id)}
                                                         className={`text-[10px] font-bold px-2 py-0.5 rounded transition ${
                                                             node.enabled
-                                                                ? "bg-emerald-500/15 text-emerald-400 hover:bg-emerald-500/25"
+                                                                ? "bg-emerald-500/15 text-emerald-400 hover:bg-emerald-500/25 border border-emerald-500/30"
                                                                 : "bg-neutral-800 text-neutral-500 hover:text-neutral-300"
                                                         }`}
                                                     >
@@ -375,14 +381,16 @@ export function FunnelKanbanEditor({
                                                     </button>
                                                 </div>
 
-                                                <h4 className="font-bold text-xs text-white mb-1.5 line-clamp-1">
+                                                <h4 className="font-bold text-xs text-white mb-2 line-clamp-1">
                                                     {node.title}
                                                 </h4>
 
                                                 {/* Frase do Bot (Preview) */}
-                                                <div className="p-2.5 rounded-lg bg-[#09090b] border border-neutral-800/80 text-[11px] text-neutral-300 line-clamp-3 mb-2.5 font-sans leading-relaxed">
-                                                    {node.message || (
-                                                        <span className="italic text-neutral-600">
+                                                <div className="p-2.5 rounded-lg bg-[#0c0c10] border border-white/10 text-[11px] text-neutral-300 line-clamp-3 mb-2.5 font-sans leading-relaxed">
+                                                    {node.message ? (
+                                                        node.message
+                                                    ) : (
+                                                        <span className="italic text-neutral-500">
                                                             Nenhuma mensagem configurada.
                                                         </span>
                                                     )}
@@ -390,19 +398,19 @@ export function FunnelKanbanEditor({
 
                                                 {/* Mídia anexada */}
                                                 {node.mediaType && node.mediaType !== "none" && (
-                                                    <div className="mb-2 text-[10px] font-semibold text-purple-400 flex items-center gap-1 bg-purple-500/10 px-2 py-1 rounded border border-purple-500/20">
-                                                        <Video className="w-3 h-3" />
-                                                        Mídia ({node.mediaType}):{" "}
-                                                        <span className="truncate max-w-[140px] text-neutral-300">
-                                                            {node.mediaUrl || "Sem URL"}
+                                                    <div className="mb-2 text-[10px] font-semibold text-purple-400 flex items-center gap-1.5 bg-purple-500/10 px-2.5 py-1 rounded-lg border border-purple-500/20">
+                                                        <Video className="w-3.5 h-3.5 shrink-0" />
+                                                        <span>Mídia:</span>
+                                                        <span className="truncate text-neutral-300">
+                                                            {node.mediaType.toUpperCase()} {node.mediaUrl ? `· ${node.mediaUrl}` : ""}
                                                         </span>
                                                     </div>
                                                 )}
 
                                                 {/* Palavras-chave do Pix */}
                                                 {node.keywords && (
-                                                    <div className="mb-2 text-[10px] text-rose-400 flex items-center gap-1 bg-rose-500/10 px-2 py-1 rounded border border-rose-500/20 truncate">
-                                                        <Zap className="w-3 h-3 shrink-0" />
+                                                    <div className="mb-2 text-[10px] text-rose-400 flex items-center gap-1.5 bg-rose-500/10 px-2.5 py-1 rounded-lg border border-rose-500/20">
+                                                        <Zap className="w-3.5 h-3.5 shrink-0" />
                                                         <span className="truncate">
                                                             Gatilhos: {node.keywords}
                                                         </span>
@@ -410,86 +418,80 @@ export function FunnelKanbanEditor({
                                                 )}
 
                                                 {/* LIGAÇÃO / CONECTOR COM O PRÓXIMO PASSO */}
-                                                <div className="pt-2 border-t border-neutral-800 flex flex-col gap-1.5">
+                                                <div className="p-2.5 rounded-lg bg-[#0c0c10] border border-white/10 space-y-1.5">
                                                     <div className="flex items-center justify-between text-[11px]">
-                                                        <span className="text-neutral-500 flex items-center gap-1">
-                                                            <Link2 className="w-3 h-3 text-[#e11d48]" />
-                                                            Ligar para:
+                                                        <span className="text-neutral-400 font-semibold flex items-center gap-1.5">
+                                                            <Link2 className="w-3.5 h-3.5 text-[#e11d48]" />
+                                                            Ligar para o passo:
                                                         </span>
-                                                        <select
-                                                            value={node.nextStepId || ""}
-                                                            onChange={(e) =>
-                                                                handleConnectNext(
-                                                                    node.id,
-                                                                    e.target.value || null
-                                                                )
-                                                            }
-                                                            className="text-[10px] font-bold bg-[#0a0a0d] border border-neutral-800 text-neutral-200 rounded px-2 py-0.5 max-w-[130px] truncate outline-none focus:border-neutral-500"
-                                                        >
-                                                            <option value="">
-                                                                — Fim do fluxo —
-                                                            </option>
-                                                            {nodes
-                                                                .filter((n) => n.id !== node.id)
-                                                                .map((other) => (
-                                                                    <option
-                                                                        key={other.id}
-                                                                        value={other.id}
-                                                                    >
-                                                                        → {other.title}
-                                                                    </option>
-                                                                ))}
-                                                        </select>
-                                                    </div>
-
-                                                    {nextNode && (
-                                                        <div className="text-[10px] font-semibold text-neutral-400 flex items-center gap-1 bg-neutral-900 px-2 py-0.5 rounded truncate">
-                                                            <ArrowRight className="w-3 h-3 text-[#e11d48]" />
-                                                            <span>
-                                                                Dispara: {nextNode.title}{" "}
-                                                                {node.delaySeconds
-                                                                    ? `(após ${node.delaySeconds}s)`
-                                                                    : ""}
+                                                        {node.delaySeconds ? (
+                                                            <span className="text-[10px] text-neutral-400 font-mono flex items-center gap-1">
+                                                                <Clock className="w-3 h-3 text-neutral-500" />
+                                                                +{node.delaySeconds}s
                                                             </span>
-                                                        </div>
-                                                    )}
+                                                        ) : null}
+                                                    </div>
+                                                    <select
+                                                        value={node.nextStepId || ""}
+                                                        onChange={(e) =>
+                                                            handleConnectNext(
+                                                                node.id,
+                                                                e.target.value || null
+                                                            )
+                                                        }
+                                                        className="w-full text-xs font-semibold bg-[#18181f] border border-white/15 text-white rounded-md px-2.5 py-1.5 outline-none focus:border-[#e11d48] cursor-pointer"
+                                                    >
+                                                        <option value="">
+                                                            — Finalizar fluxo aqui —
+                                                        </option>
+                                                        {nodes
+                                                            .filter((n) => n.id !== node.id)
+                                                            .map((other) => (
+                                                                <option
+                                                                    key={other.id}
+                                                                    value={other.id}
+                                                                >
+                                                                    → {other.title}
+                                                                </option>
+                                                            ))}
+                                                    </select>
                                                 </div>
 
                                                 {/* Ações do Card */}
-                                                <div className="flex items-center justify-between gap-1 mt-3 pt-2 border-t border-neutral-800/80">
+                                                <div className="flex items-center justify-between gap-2 mt-3 pt-2.5 border-t border-white/10">
                                                     <button
                                                         type="button"
-                                                        onClick={() => setPreviewNode(node)}
-                                                        className="text-[11px] text-neutral-400 hover:text-white flex items-center gap-1 px-2 py-1 rounded hover:bg-neutral-800/60 transition"
+                                                        onClick={() => openEditModal(node)}
+                                                        className="flex-1 py-1.5 px-3 rounded-lg bg-white/10 hover:bg-white/15 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition cursor-pointer"
                                                     >
-                                                        <Eye className="w-3 h-3" />
-                                                        Ver balão
+                                                        <Edit3 className="w-3.5 h-3.5 text-[#e11d48]" />
+                                                        Editar Frase
                                                     </button>
 
                                                     <div className="flex items-center gap-1">
                                                         <button
                                                             type="button"
-                                                            onClick={() => openEditModal(node)}
-                                                            className="p-1 rounded hover:bg-neutral-800 text-neutral-400 hover:text-white transition"
-                                                            title="Editar Frase e Ação"
+                                                            onClick={() => setPreviewNode(node)}
+                                                            className="p-1.5 rounded-lg hover:bg-white/10 text-neutral-400 hover:text-white transition cursor-pointer"
+                                                            title="Pré-visualizar no WhatsApp"
                                                         >
-                                                            <Edit3 className="w-3.5 h-3.5" />
+                                                            <Eye className="w-4 h-4" />
                                                         </button>
                                                         <button
                                                             type="button"
                                                             onClick={() => handleDuplicateNode(node)}
-                                                            className="p-1 rounded hover:bg-neutral-800 text-neutral-400 hover:text-white transition"
+                                                            className="p-1.5 rounded-lg hover:bg-white/10 text-neutral-400 hover:text-white transition cursor-pointer"
                                                             title="Duplicar Passo"
                                                         >
-                                                            <Copy className="w-3.5 h-3.5" />
+                                                            <Copy className="w-4 h-4" />
                                                         </button>
                                                         <button
                                                             type="button"
                                                             onClick={() => handleDeleteNode(node.id)}
-                                                            className="p-1 rounded hover:bg-red-950/40 text-neutral-400 hover:text-red-400 transition"
-                                                            title="Excluir"
+                                                            className="p-1.5 rounded-lg hover:bg-red-500/20 text-neutral-400 hover:text-red-400 transition cursor-pointer"
+                                                            title="Excluir Passo"
                                                         >
-                                                            <Trash2 className="w-3.5 h-3.5" />
+                                                            <Trash2 className="w-4 h-4" />
                                                         </button>
                                                     </div>
                                                 </div>
@@ -501,7 +503,7 @@ export function FunnelKanbanEditor({
                                     <button
                                         type="button"
                                         onClick={() => openCreateModal(stage.id)}
-                                        className="w-full py-2.5 rounded-xl border border-dashed border-neutral-800 hover:border-neutral-600 text-neutral-500 hover:text-white text-xs font-semibold flex items-center justify-center gap-1 transition"
+                                        className="w-full py-2.5 rounded-xl border border-dashed border-white/15 hover:border-white/30 text-neutral-400 hover:text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition cursor-pointer mt-2"
                                     >
                                         <Plus className="w-3.5 h-3.5" />
                                         Novo nesta coluna
@@ -778,42 +780,49 @@ export function FunnelKanbanEditor({
                             </div>
 
                             {/* Botões de variáveis com 1 clique */}
-                            <div className="flex flex-wrap items-center gap-1.5 text-[11px]">
-                                <span className="text-neutral-500 text-[10px]">Variáveis:</span>
+                            <div className="flex flex-wrap items-center gap-1.5 text-xs">
+                                <span className="text-neutral-400 text-[11px] font-semibold mr-1">
+                                    Tags dinâmicas:
+                                </span>
                                 <button
                                     type="button"
                                     onClick={() => insertVariable("{{NOME}}")}
-                                    className="px-2 py-0.5 rounded bg-neutral-800 hover:bg-neutral-700 text-neutral-300 font-mono text-[10px]"
+                                    className="px-2.5 py-1 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 border border-rose-500/30 font-mono text-[11px] transition flex items-center gap-1 cursor-pointer"
+                                    title="Substitui pelo primeiro nome do lead"
                                 >
-                                    + {"{{NOME}}"}
+                                    <span className="font-bold">+</span> {"{{NOME}}"}
                                 </button>
                                 <button
                                     type="button"
                                     onClick={() => insertVariable("{{VALOR}}")}
-                                    className="px-2 py-0.5 rounded bg-neutral-800 hover:bg-neutral-700 text-neutral-300 font-mono text-[10px]"
+                                    className="px-2.5 py-1 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 font-mono text-[11px] transition flex items-center gap-1 cursor-pointer"
+                                    title="Substitui pelo valor do plano"
                                 >
-                                    + {"{{VALOR}}"}
+                                    <span className="font-bold">+</span> {"{{VALOR}}"}
                                 </button>
                                 <button
                                     type="button"
                                     onClick={() => insertVariable("{{PIX_COPIA_E_COLA}}")}
-                                    className="px-2 py-0.5 rounded bg-neutral-800 hover:bg-neutral-700 text-neutral-300 font-mono text-[10px]"
+                                    className="px-2.5 py-1 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-mono text-[11px] transition flex items-center gap-1 cursor-pointer"
+                                    title="Insere a chave Pix Copia e Cola gerada na Mangofy"
                                 >
-                                    + {"{{PIX_COPIA_E_COLA}}"}
+                                    <span className="font-bold">+</span> {"{{PIX_COPIA_E_COLA}}"}
                                 </button>
                                 <button
                                     type="button"
                                     onClick={() => insertVariable("{{LINK_ACESSO}}")}
-                                    className="px-2 py-0.5 rounded bg-neutral-800 hover:bg-neutral-700 text-neutral-300 font-mono text-[10px]"
+                                    className="px-2.5 py-1 rounded-lg bg-sky-500/10 hover:bg-sky-500/20 text-sky-300 border border-sky-500/30 font-mono text-[11px] transition flex items-center gap-1 cursor-pointer"
+                                    title="Insere o link do catálogo de novelas com liberação"
                                 >
-                                    + {"{{LINK_ACESSO}}"}
+                                    <span className="font-bold">+</span> {"{{LINK_ACESSO}}"}
                                 </button>
                                 <button
                                     type="button"
                                     onClick={() => insertVariable("{{TELEFONE}}")}
-                                    className="px-2 py-0.5 rounded bg-neutral-800 hover:bg-neutral-700 text-neutral-300 font-mono text-[10px]"
+                                    className="px-2.5 py-1 rounded-lg bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/30 font-mono text-[11px] transition flex items-center gap-1 cursor-pointer"
+                                    title="Insere o número do cliente formatado"
                                 >
-                                    + {"{{TELEFONE}}"}
+                                    <span className="font-bold">+</span> {"{{TELEFONE}}"}
                                 </button>
                             </div>
 
@@ -822,23 +831,98 @@ export function FunnelKanbanEditor({
                                 value={formMessage}
                                 onChange={(e) => setFormMessage(e.target.value)}
                                 placeholder="Digite a mensagem do bot..."
-                                className="w-full px-3.5 py-2.5 rounded-xl bg-[#09090b] border border-neutral-800 text-sm text-white focus:border-neutral-500 outline-none font-sans leading-relaxed"
+                                className="w-full px-3.5 py-2.5 rounded-xl bg-[#09090b] border border-neutral-800 text-sm text-white focus:border-rose-500/60 focus:ring-1 focus:ring-rose-500/30 outline-none font-sans leading-relaxed transition"
                             />
                         </div>
 
                         {/* SIMULADOR WHATSAPP AO VIVO */}
-                        <div className="p-4 rounded-xl bg-[#06140e] border border-emerald-950/60 space-y-2">
-                            <span className="text-[11px] font-bold text-emerald-400 flex items-center gap-1.5 uppercase tracking-wider">
-                                <Eye className="w-3.5 h-3.5" />
-                                Como o cliente vai ver no WhatsApp:
-                            </span>
+                        <div className="rounded-2xl bg-[#0b141a] border border-white/10 overflow-hidden shadow-2xl">
+                            {/* Barra superior de conversa do WhatsApp */}
+                            <div className="bg-[#202c33] px-3.5 py-2.5 flex items-center justify-between border-b border-[#2a3942]">
+                                <div className="flex items-center gap-2.5">
+                                    <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#e11d48] to-purple-600 grid place-items-center text-white text-xs font-bold shadow">
+                                        SC
+                                    </div>
+                                    <div>
+                                        <div className="text-xs font-semibold text-[#e9edef] leading-tight">
+                                            Segredos do Coração · TvDrama
+                                        </div>
+                                        <div className="text-[10px] text-[#25d366] font-medium leading-none flex items-center gap-1">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-[#25d366] inline-block animate-pulse" />
+                                            online
+                                        </div>
+                                    </div>
+                                </div>
+                                <span className="text-[10px] font-mono text-[#8696a0] bg-[#111b21] px-2 py-0.5 rounded">
+                                    Prévia ao vivo
+                                </span>
+                            </div>
 
-                            <div className="flex justify-start">
-                                <div className="max-w-[85%] rounded-2xl rounded-tl-sm px-4 py-3 bg-[#005c4b] text-white text-xs leading-relaxed shadow-md whitespace-pre-wrap">
-                                    {getFormattedPreview(formMessage) || "Mensagem em branco"}
-                                    <div className="flex items-center justify-end gap-1 text-[9px] text-emerald-200/70 mt-1">
-                                        <span>12:00</span>
-                                        <span>✓✓</span>
+                            {/* Área do chat com fundo WhatsApp */}
+                            <div className="p-4 space-y-3 bg-[#0b141a] min-h-[140px]">
+                                <div className="flex justify-center">
+                                    <span className="text-[9.5px] bg-[#182229] text-[#ffd279] px-2.5 py-0.5 rounded-md text-center max-w-xs shadow-sm">
+                                        🔒 As mensagens são protegidas com criptografia de ponta a ponta
+                                    </span>
+                                </div>
+
+                                {/* Balão de mensagem enviada pelo Bot */}
+                                <div className="flex justify-start">
+                                    <div className="max-w-[90%] sm:max-w-[80%] rounded-2xl rounded-tl-sm px-3.5 py-2.5 bg-[#005c4b] text-[#e9edef] text-xs leading-relaxed shadow-lg whitespace-pre-wrap space-y-2">
+                                        {/* Prévia de Mídia se configurada */}
+                                        {formMediaType === "image" && (
+                                            <div className="rounded-lg overflow-hidden bg-black/40 border border-white/10 p-1">
+                                                {formMediaUrl ? (
+                                                    <img
+                                                        src={formMediaUrl}
+                                                        alt="Mídia"
+                                                        className="w-full max-h-48 object-cover rounded"
+                                                        onError={(e) => {
+                                                            (e.target as HTMLElement).style.display = "none";
+                                                        }}
+                                                    />
+                                                ) : (
+                                                    <div className="h-28 flex items-center justify-center text-neutral-400 text-xs">
+                                                        🖼️ [Imagem anexada]
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
+
+                                        {formMediaType === "audio" && (
+                                            <div className="flex items-center gap-2.5 bg-[#00483a] p-2.5 rounded-xl border border-white/10">
+                                                <div className="w-8 h-8 rounded-full bg-[#25d366] grid place-items-center text-black shadow cursor-pointer">
+                                                    ▶
+                                                </div>
+                                                <div className="flex-1 space-y-1">
+                                                    <div className="h-1.5 rounded-full bg-emerald-300/40 w-full overflow-hidden">
+                                                        <div className="h-full bg-emerald-300 w-1/3 rounded-full" />
+                                                    </div>
+                                                    <div className="flex justify-between text-[9px] text-emerald-200/80">
+                                                        <span>0:14</span>
+                                                        <span>🎙️ Áudio de voz</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        {formMediaType === "video" && (
+                                            <div className="relative rounded-lg overflow-hidden bg-black/50 border border-white/10 h-32 flex items-center justify-center">
+                                                <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm grid place-items-center text-white text-base">
+                                                    ▶
+                                                </div>
+                                                <span className="absolute bottom-1.5 left-2 text-[9px] text-white/80 font-mono">
+                                                    🎬 Vídeo MP4
+                                                </span>
+                                            </div>
+                                        )}
+
+                                        <div>{getFormattedPreview(formMessage) || "Mensagem em branco"}</div>
+
+                                        <div className="flex items-center justify-end gap-1 text-[9.5px] text-[#8696a0] pt-0.5">
+                                            <span>12:00</span>
+                                            <span className="text-[#53bdeb] font-bold">✓✓</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -851,6 +935,7 @@ export function FunnelKanbanEditor({
                                     type="checkbox"
                                     checked={formEnabled}
                                     onChange={(e) => setFormEnabled(e.target.checked)}
+                                    className="accent-[#e11d48]"
                                 />
                                 <span>Passo ativo no atendimento</span>
                             </label>
@@ -859,14 +944,14 @@ export function FunnelKanbanEditor({
                                 <button
                                     type="button"
                                     onClick={() => setEditingNode(null)}
-                                    className="px-4 py-2 rounded-lg border border-neutral-700 hover:border-neutral-500 text-xs font-semibold text-neutral-300"
+                                    className="px-4 py-2 rounded-lg border border-neutral-700 hover:border-neutral-500 text-xs font-semibold text-neutral-300 cursor-pointer transition"
                                 >
                                     Cancelar
                                 </button>
                                 <button
                                     type="button"
                                     onClick={handleSaveNode}
-                                    className="px-5 py-2 rounded-lg bg-[#e11d48] hover:bg-[#f43f5e] text-white text-xs font-bold transition shadow-[0_4px_16px_rgba(225,29,72,0.3)]"
+                                    className="px-5 py-2 rounded-lg bg-[#e11d48] hover:bg-[#f43f5e] text-white text-xs font-bold transition shadow-[0_4px_16px_rgba(225,29,72,0.3)] cursor-pointer"
                                 >
                                     Salvar Alterações
                                 </button>
@@ -880,46 +965,86 @@ export function FunnelKanbanEditor({
             {previewNode && (
                 <div
                     onClick={() => setPreviewNode(null)}
-                    className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+                    className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md"
                 >
                     <div
                         onClick={(e) => e.stopPropagation()}
-                        className="w-full max-w-sm rounded-2xl bg-[#111114] border border-neutral-800 p-5 space-y-4"
+                        className="w-full max-w-md rounded-2xl bg-[#111114] border border-neutral-800 overflow-hidden shadow-[0_24px_60px_rgba(0,0,0,0.85)]"
                     >
-                        <div className="flex items-center justify-between border-b border-neutral-800 pb-2">
-                            <span className="font-bold text-xs text-white">
-                                {previewNode.title}
-                            </span>
+                        {/* Header */}
+                        <div className="bg-[#202c33] px-4 py-3 flex items-center justify-between border-b border-[#2a3942]">
+                            <div className="flex items-center gap-2.5">
+                                <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#e11d48] to-purple-600 grid place-items-center text-white text-xs font-bold">
+                                    SC
+                                </div>
+                                <div>
+                                    <div className="text-xs font-semibold text-[#e9edef] leading-tight">
+                                        {previewNode.title}
+                                    </div>
+                                    <div className="text-[10px] text-[#25d366] font-medium leading-none">
+                                        online
+                                    </div>
+                                </div>
+                            </div>
                             <button
                                 type="button"
                                 onClick={() => setPreviewNode(null)}
-                                className="text-xs text-neutral-400 hover:text-white"
+                                className="w-6 h-6 rounded-full bg-white/10 hover:bg-white/20 grid place-items-center text-xs text-neutral-300 hover:text-white cursor-pointer"
                             >
                                 ✕
                             </button>
                         </div>
 
-                        <div className="p-4 rounded-xl bg-[#0b1c14] border border-emerald-950/60 flex justify-start">
-                            <div className="max-w-[95%] rounded-2xl rounded-tl-sm px-4 py-3 bg-[#005c4b] text-white text-xs leading-relaxed shadow whitespace-pre-wrap">
-                                {getFormattedPreview(previewNode.message)}
-                                <div className="flex items-center justify-end gap-1 text-[9px] text-emerald-200/70 mt-1">
-                                    <span>Agora</span>
-                                    <span>✓✓</span>
+                        {/* Conversa */}
+                        <div className="p-4 space-y-3 bg-[#0b141a]">
+                            <div className="flex justify-center">
+                                <span className="text-[9.5px] bg-[#182229] text-[#ffd279] px-2.5 py-0.5 rounded-md text-center max-w-xs shadow-sm">
+                                    🔒 As mensagens são protegidas de ponta a ponta
+                                </span>
+                            </div>
+
+                            <div className="flex justify-start">
+                                <div className="max-w-[90%] rounded-2xl rounded-tl-sm px-3.5 py-2.5 bg-[#005c4b] text-[#e9edef] text-xs leading-relaxed shadow-lg whitespace-pre-wrap space-y-2">
+                                    {previewNode.mediaType === "audio" && (
+                                        <div className="flex items-center gap-2 bg-[#00483a] p-2 rounded-lg">
+                                            <span className="text-xs">▶</span>
+                                            <div className="flex-1 h-1 bg-emerald-300/40 rounded-full" />
+                                            <span className="text-[9px] text-emerald-200">0:14</span>
+                                        </div>
+                                    )}
+                                    {previewNode.mediaType === "image" && previewNode.mediaUrl && (
+                                        <img
+                                            src={previewNode.mediaUrl}
+                                            alt="Mídia"
+                                            className="w-full max-h-48 object-cover rounded"
+                                        />
+                                    )}
+
+                                    <div>{getFormattedPreview(previewNode.message)}</div>
+
+                                    <div className="flex items-center justify-end gap-1 text-[9.5px] text-[#8696a0] pt-0.5">
+                                        <span>Agora</span>
+                                        <span className="text-[#53bdeb] font-bold">✓✓</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <button
-                            type="button"
-                            onClick={() => {
-                                const n = previewNode;
-                                setPreviewNode(null);
-                                openEditModal(n);
-                            }}
-                            className="w-full py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-white text-xs font-bold transition"
-                        >
-                            Editar esta mensagem
-                        </button>
+                        {/* Botão de ação */}
+                        <div className="p-3 bg-[#111114] border-t border-neutral-800 flex gap-2">
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    const n = previewNode;
+                                    setPreviewNode(null);
+                                    openEditModal(n);
+                                }}
+                                className="flex-1 py-2 rounded-lg bg-[#e11d48] hover:bg-[#f43f5e] text-white text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer shadow-[0_4px_16px_rgba(225,29,72,0.3)]"
+                            >
+                                <Edit3 className="w-3.5 h-3.5" />
+                                Editar esta mensagem
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}

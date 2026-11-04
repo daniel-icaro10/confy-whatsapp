@@ -21,7 +21,8 @@ import {
     CheckCircle2,
     AlertCircle,
     Copy,
-    Sparkles
+    Sparkles,
+    Zap
 } from "lucide-react";
 
 interface WaSessionOption {
@@ -224,9 +225,9 @@ export default function AdminFunilPage() {
     const currentSession = sessions.find((s) => s.sessionId === config.sessionId);
 
     return (
-        <div className="space-y-6 max-w-6xl pb-16">
+        <div className="space-y-6 w-full max-w-[1600px] mx-auto pb-16">
             {/* Topbar com Título, Status e Salvar */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-neutral-800 pb-5">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-[#101014] border border-white/10 shadow-lg">
                 <div>
                     <div className="flex items-center gap-2 mb-1">
                         <span className="font-bold text-xs uppercase tracking-wider text-[#e11d48]">
@@ -235,26 +236,34 @@ export default function AdminFunilPage() {
                         <span className="text-neutral-600">·</span>
                         <span className="text-xs text-neutral-400">Automação de Vendas X1</span>
                     </div>
-                    <h1 className="text-xl font-bold text-white">
-                        Funil no WhatsApp, Kanban &amp; Ofertas
+                    <h1 className="text-xl sm:text-2xl font-black tracking-tight text-white">
+                        Funil no WhatsApp, Quadro Kanban &amp; Ofertas
                     </h1>
                 </div>
 
                 <div className="flex items-center gap-3">
-                    <label className="inline-flex items-center gap-2 cursor-pointer text-xs font-semibold px-3 py-1.5 rounded-lg bg-[#141418] border border-neutral-800 text-neutral-200">
+                    <label className="inline-flex items-center gap-2.5 cursor-pointer text-xs font-semibold px-3.5 py-2 rounded-xl bg-[#09090b] border border-white/10 hover:border-white/20 text-neutral-200 transition">
                         <input
                             type="checkbox"
                             checked={config.enabled}
                             onChange={(e) => setConfig({ ...config, enabled: e.target.checked })}
+                            className="w-4 h-4 accent-[#e11d48] rounded cursor-pointer"
                         />
-                        <span>{config.enabled ? "Funil Ativo" : "Funil Pausado"}</span>
+                        <span className="flex items-center gap-1.5">
+                            <span
+                                className={`w-2 h-2 rounded-full ${
+                                    config.enabled ? "bg-emerald-400 animate-pulse" : "bg-neutral-600"
+                                }`}
+                            />
+                            {config.enabled ? "Funil Ativo" : "Funil Pausado"}
+                        </span>
                     </label>
 
                     <button
                         type="button"
                         onClick={() => handleSave()}
                         disabled={saving}
-                        className="px-4 py-2 rounded-lg bg-[#e11d48] hover:bg-[#f43f5e] text-white text-xs font-bold flex items-center gap-2 shadow-[0_4px_16px_rgba(225,29,72,0.35)] transition disabled:opacity-50"
+                        className="px-5 py-2.5 rounded-xl bg-[#e11d48] hover:bg-[#f43f5e] text-white text-xs font-bold flex items-center gap-2 shadow-[0_6px_20px_rgba(225,29,72,0.35)] transition transform active:scale-95 disabled:opacity-50 cursor-pointer"
                     >
                         <Save className="w-4 h-4" />
                         {saving ? "Salvando..." : "Salvar Funil"}
@@ -264,7 +273,7 @@ export default function AdminFunilPage() {
 
             {/* Alerta de Sessão do Baileys */}
             {!config.sessionId ? (
-                <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/25 flex items-center justify-between gap-4">
+                <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/25 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div className="flex items-center gap-3 text-xs text-amber-200">
                         <AlertCircle className="w-5 h-5 text-amber-400 shrink-0" />
                         <span>
@@ -276,54 +285,57 @@ export default function AdminFunilPage() {
                     <button
                         type="button"
                         onClick={() => setActiveTab("whatsapp")}
-                        className="px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs shrink-0"
+                        className="px-3.5 py-2 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs shrink-0 transition"
                     >
                         Vincular Sessão
                     </button>
                 </div>
             ) : (
-                <div className="px-4 py-2.5 rounded-xl bg-[#111114] border border-neutral-800 flex items-center justify-between text-xs">
-                    <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                        <span className="text-neutral-400">Sessão conectada:</span>
-                        <strong className="text-white">
+                <div className="px-4 py-3 rounded-xl bg-[#101014] border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+                    <div className="flex flex-wrap items-center gap-2">
+                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                        <span className="text-neutral-400">Sessão dedicada:</span>
+                        <strong className="text-white font-bold">
                             {currentSession?.name || config.sessionId} ({config.sessionId})
                         </strong>
                         {detectedWhatsapp && (
-                            <span className="text-neutral-500">· {detectedWhatsapp}</span>
+                            <span className="text-neutral-400 font-mono">· {detectedWhatsapp}</span>
                         )}
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                            Isolada (não afeta outros projetos)
+                        </span>
                     </div>
                     <Link
                         href="/dashboard/sessions"
-                        className="text-neutral-400 hover:text-white flex items-center gap-1 text-[11px]"
+                        className="text-neutral-400 hover:text-white flex items-center gap-1.5 text-xs font-semibold transition"
                     >
-                        Gerenciar QR Codes <ExternalLink className="w-3 h-3" />
+                        Ver QR Codes <ExternalLink className="w-3.5 h-3.5" />
                     </Link>
                 </div>
             )}
 
             {/* SELETOR DE ABAS PRINCIPAIS */}
-            <div className="flex items-center gap-2 border-b border-neutral-800 overflow-x-auto pb-1">
+            <div className="flex items-center gap-1.5 p-1.5 rounded-2xl bg-[#101014] border border-white/10 overflow-x-auto no-scrollbar">
                 <button
                     type="button"
                     onClick={() => setActiveTab("kanban")}
-                    className={`px-4 py-2.5 rounded-t-lg text-xs font-bold transition flex items-center gap-2 border-b-2 ${
+                    className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 shrink-0 cursor-pointer ${
                         activeTab === "kanban"
-                            ? "border-[#e11d48] text-white bg-neutral-900/60"
-                            : "border-transparent text-neutral-400 hover:text-white hover:bg-neutral-900/30"
+                            ? "bg-white text-black shadow-md"
+                            : "text-neutral-400 hover:text-white hover:bg-white/5"
                     }`}
                 >
-                    <Kanban className="w-4 h-4 text-[#e11d48]" />
+                    <Kanban className={`w-4 h-4 ${activeTab === "kanban" ? "text-[#e11d48]" : "text-neutral-400"}`} />
                     Quadro Kanban &amp; Frases do Bot
                 </button>
 
                 <button
                     type="button"
                     onClick={() => setActiveTab("whatsapp")}
-                    className={`px-4 py-2.5 rounded-t-lg text-xs font-bold transition flex items-center gap-2 border-b-2 ${
+                    className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 shrink-0 cursor-pointer ${
                         activeTab === "whatsapp"
-                            ? "border-[#e11d48] text-white bg-neutral-900/60"
-                            : "border-transparent text-neutral-400 hover:text-white hover:bg-neutral-900/30"
+                            ? "bg-white text-black shadow-md"
+                            : "text-neutral-400 hover:text-white hover:bg-white/5"
                     }`}
                 >
                     <Smartphone className="w-4 h-4" />
@@ -333,10 +345,10 @@ export default function AdminFunilPage() {
                 <button
                     type="button"
                     onClick={() => setActiveTab("plans")}
-                    className={`px-4 py-2.5 rounded-t-lg text-xs font-bold transition flex items-center gap-2 border-b-2 ${
+                    className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 shrink-0 cursor-pointer ${
                         activeTab === "plans"
-                            ? "border-[#e11d48] text-white bg-neutral-900/60"
-                            : "border-transparent text-neutral-400 hover:text-white hover:bg-neutral-900/30"
+                            ? "bg-white text-black shadow-md"
+                            : "text-neutral-400 hover:text-white hover:bg-white/5"
                     }`}
                 >
                     <CreditCard className="w-4 h-4" />
@@ -346,10 +358,10 @@ export default function AdminFunilPage() {
                 <button
                     type="button"
                     onClick={() => setActiveTab("ai")}
-                    className={`px-4 py-2.5 rounded-t-lg text-xs font-bold transition flex items-center gap-2 border-b-2 ${
+                    className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 shrink-0 cursor-pointer ${
                         activeTab === "ai"
-                            ? "border-[#e11d48] text-white bg-neutral-900/60"
-                            : "border-transparent text-neutral-400 hover:text-white hover:bg-neutral-900/30"
+                            ? "bg-white text-black shadow-md"
+                            : "text-neutral-400 hover:text-white hover:bg-white/5"
                     }`}
                 >
                     <Bot className="w-4 h-4" />
@@ -371,16 +383,20 @@ export default function AdminFunilPage() {
             {activeTab === "whatsapp" && (
                 <div className="space-y-6">
                     {/* Sessão Baileys */}
-                    <div className="p-5 rounded-xl border border-neutral-800 bg-[#111114] space-y-4">
-                        <div>
-                            <h2 className="font-bold text-sm text-white">
-                                Sessão exclusiva do Baileys
-                            </h2>
-                            <p className="text-xs text-neutral-400 mt-0.5">
-                                O robô do TvDrama Reels atenderá apenas nas conexões vinculadas a
-                                esta sessão, sem interferir em nenhum outro projeto ou número do seu
-                                servidor.
-                            </p>
+                    <div className="p-6 rounded-2xl border border-white/10 bg-[#101014] shadow-xl space-y-5">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/5 pb-4">
+                            <div>
+                                <h2 className="font-bold text-sm sm:text-base text-white flex items-center gap-2">
+                                    <Smartphone className="w-4 h-4 text-emerald-400" />
+                                    Sessão Exclusiva do Baileys
+                                </h2>
+                                <p className="text-xs text-neutral-400 mt-1">
+                                    O robô do TvDrama Reels atenderá apenas nas conexões vinculadas a esta sessão, sem interferir em nenhum outro projeto.
+                                </p>
+                            </div>
+                            <span className="text-[11px] font-bold px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 self-start sm:self-auto">
+                                Instância Isolada
+                            </span>
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -393,13 +409,13 @@ export default function AdminFunilPage() {
                                     onChange={(e) =>
                                         setConfig({ ...config, sessionId: e.target.value })
                                     }
-                                    className="w-full px-3 py-2.5 rounded-lg bg-[#09090b] border border-neutral-800 text-sm text-white focus:border-neutral-500 outline-none"
+                                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#0a0a0d] border border-white/10 text-sm text-white focus:border-[#e11d48]/60 focus:ring-1 focus:ring-[#e11d48]/20 transition outline-none cursor-pointer"
                                 >
                                     <option value="">— Selecione uma sessão específica —</option>
                                     {sessions.map((s) => (
                                         <option key={s.id} value={s.sessionId}>
                                             {s.name} ({s.sessionId}) —{" "}
-                                            {s.status === "CONNECTED" ? "Conectada" : s.status}
+                                            {s.status === "CONNECTED" ? "Conectada 🟢" : s.status}
                                         </option>
                                     ))}
                                 </select>
@@ -407,7 +423,7 @@ export default function AdminFunilPage() {
 
                             <div>
                                 <label className="block text-xs font-semibold text-neutral-300 mb-1.5">
-                                    URL pública do site
+                                    URL pública do site (Domínio ou IP)
                                 </label>
                                 <input
                                     type="text"
@@ -416,32 +432,27 @@ export default function AdminFunilPage() {
                                     onChange={(e) =>
                                         setConfig({ ...config, siteUrl: e.target.value })
                                     }
-                                    className="w-full px-3 py-2.5 rounded-lg bg-[#09090b] border border-neutral-800 text-sm text-white focus:border-neutral-500 outline-none"
+                                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#0a0a0d] border border-white/10 text-sm text-white focus:border-[#e11d48]/60 focus:ring-1 focus:ring-[#e11d48]/20 transition outline-none"
                                 />
                             </div>
                         </div>
                     </div>
 
                     {/* Tráfego Pago & Anúncios */}
-                    <div className="p-5 rounded-xl border border-neutral-800 bg-[#111114] space-y-4">
-                        <div>
-                            <h3 className="font-bold text-sm text-white">
+                    <div className="p-6 rounded-2xl border border-white/10 bg-[#101014] shadow-xl space-y-5">
+                        <div className="border-b border-white/5 pb-4">
+                            <h3 className="font-bold text-sm sm:text-base text-white">
                                 Redirecionamento de Tráfego Pago (Anúncios → WhatsApp)
                             </h3>
-                            <p className="text-xs text-neutral-400 mt-0.5 leading-relaxed">
-                                Quem acessa o site de forma direta fora do tráfego vê o catálogo
-                                liberado após o pagamento. Quem clica nos seus anúncios (pelo link{" "}
-                                <code className="text-neutral-200">/anuncio</code> ou com parâmetros{" "}
-                                <code className="text-neutral-200">?anuncio=1</code>,{" "}
-                                <code className="text-neutral-200">fbclid</code>, etc.) é
-                                redirecionado imediatamente para o atendimento automático no WhatsApp.
+                            <p className="text-xs text-neutral-400 mt-1 leading-relaxed">
+                                Leads que clicam nos anúncios (pelo link <code className="text-rose-400 font-mono">/anuncio</code> ou com parâmetros <code className="text-neutral-200">?anuncio=1</code>, <code className="text-neutral-200">fbclid</code>, etc.) são redirecionados imediatamente para o atendimento no WhatsApp. Visitantes orgânicos navegam direto no catálogo.
                             </p>
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label className="block text-xs font-semibold text-neutral-300 mb-1.5">
-                                    Número do WhatsApp (com DDD)
+                                    Número do WhatsApp (com DDD e DDI)
                                 </label>
                                 <input
                                     type="text"
@@ -454,9 +465,9 @@ export default function AdminFunilPage() {
                                     onChange={(e) =>
                                         setConfig({ ...config, whatsappNumber: e.target.value })
                                     }
-                                    className="w-full px-3 py-2.5 rounded-lg bg-[#09090b] border border-neutral-800 text-sm text-white focus:border-neutral-500 outline-none"
+                                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#0a0a0d] border border-white/10 text-sm text-white focus:border-[#e11d48]/60 focus:ring-1 focus:ring-[#e11d48]/20 transition outline-none"
                                 />
-                                <p className="text-[11px] text-neutral-500 mt-1">
+                                <p className="text-[11px] text-neutral-500 mt-1.5">
                                     Se em branco, puxa o telefone logado na sessão selecionada acima
                                     {detectedWhatsapp ? ` (${detectedWhatsapp})` : ""}.
                                 </p>
@@ -476,18 +487,17 @@ export default function AdminFunilPage() {
                                             adRedirectMessage: e.target.value
                                         })
                                     }
-                                    className="w-full px-3 py-2.5 rounded-lg bg-[#09090b] border border-neutral-800 text-sm text-white focus:border-neutral-500 outline-none"
+                                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#0a0a0d] border border-white/10 text-sm text-white focus:border-[#e11d48]/60 focus:ring-1 focus:ring-[#e11d48]/20 transition outline-none"
                                 />
                             </div>
                         </div>
 
-                        <div className="p-3.5 rounded-xl bg-[#09090b] border border-neutral-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div className="p-4 rounded-xl bg-[#0a0a0d] border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                             <div className="text-xs text-neutral-300">
-                                <span className="font-semibold text-white">
-                                    Link para o Gerenciador de Anúncios (Facebook / TikTok /
-                                    Google):
+                                <span className="font-semibold text-white block mb-0.5">
+                                    Link para o Gerenciador de Anúncios (Facebook / TikTok / Google):
                                 </span>
-                                <div className="font-mono text-neutral-200 mt-0.5 select-all">
+                                <div className="font-mono text-emerald-400 select-all font-semibold">
                                     {baseOrigin}/anuncio
                                 </div>
                             </div>
@@ -499,9 +509,10 @@ export default function AdminFunilPage() {
                                     toast.success("Link de anúncio copiado!");
                                     setTimeout(() => setCopiedAdUrl(false), 3000);
                                 }}
-                                className="px-3.5 py-1.5 rounded-lg border border-neutral-700 hover:border-neutral-500 text-xs font-semibold text-white shrink-0"
+                                className="px-4 py-2 rounded-xl border border-white/15 hover:border-white/30 bg-white/5 hover:bg-white/10 text-xs font-bold text-white shrink-0 cursor-pointer transition flex items-center justify-center gap-1.5"
                             >
-                                {copiedAdUrl ? "✓ Copiado" : "Copiar Link de Anúncio"}
+                                <Copy className="w-3.5 h-3.5" />
+                                {copiedAdUrl ? "✓ Copiado!" : "Copiar Link de Anúncio"}
                             </button>
                         </div>
                     </div>
@@ -512,14 +523,14 @@ export default function AdminFunilPage() {
             {activeTab === "plans" && (
                 <div className="space-y-6">
                     {/* Planos De/Por */}
-                    <div className="p-5 rounded-xl border border-neutral-800 bg-[#111114] space-y-4">
-                        <div>
-                            <h2 className="font-bold text-sm text-white">
+                    <div className="p-6 rounded-2xl border border-white/10 bg-[#101014] shadow-xl space-y-5">
+                        <div className="border-b border-white/5 pb-4">
+                            <h2 className="font-bold text-sm sm:text-base text-white flex items-center gap-2">
+                                <CreditCard className="w-4 h-4 text-[#e11d48]" />
                                 Planos Promocionais de Assinatura
                             </h2>
-                            <p className="text-xs text-neutral-400 mt-0.5">
-                                Configure os preços De/Por, selos de economia e IDs da Stripe para cada
-                                período.
+                            <p className="text-xs text-neutral-400 mt-1">
+                                Configure os preços De/Por, selos de economia e IDs da Stripe para cada período.
                             </p>
                         </div>
 
@@ -527,13 +538,13 @@ export default function AdminFunilPage() {
                             {plans.map((plan) => (
                                 <div
                                     key={plan.key}
-                                    className="p-4 rounded-xl border border-neutral-800 bg-[#09090b] space-y-3"
+                                    className="p-4 rounded-xl border border-white/10 bg-[#0a0a0d] hover:border-white/20 transition space-y-3 shadow-md"
                                 >
-                                    <div className="flex items-center justify-between border-b border-neutral-800 pb-2">
+                                    <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
                                         <span className="text-xs font-bold text-white">
                                             {plan.name}
                                         </span>
-                                        <span className="text-[11px] text-neutral-400">
+                                        <span className="text-[11px] font-mono text-neutral-400 bg-white/5 px-2 py-0.5 rounded">
                                             {plan.durationDays} dias
                                         </span>
                                     </div>
@@ -554,11 +565,11 @@ export default function AdminFunilPage() {
                                                         Number(e.target.value)
                                                     )
                                                 }
-                                                className="w-full px-2.5 py-1.5 rounded bg-[#111114] border border-neutral-800 text-xs text-white"
+                                                className="w-full px-2.5 py-1.5 rounded-lg bg-[#141419] border border-white/10 text-xs text-neutral-300 focus:border-rose-500/50 outline-none"
                                             />
                                         </div>
                                         <div>
-                                            <label className="block text-[11px] text-neutral-400 mb-1">
+                                            <label className="block text-[11px] text-neutral-400 mb-1 font-semibold text-rose-400">
                                                 Por (R$)
                                             </label>
                                             <input
@@ -572,14 +583,14 @@ export default function AdminFunilPage() {
                                                         Number(e.target.value)
                                                     )
                                                 }
-                                                className="w-full px-2.5 py-1.5 rounded bg-[#111114] border border-neutral-800 text-xs text-white font-bold"
+                                                className="w-full px-2.5 py-1.5 rounded-lg bg-[#141419] border border-rose-500/30 text-xs text-white font-bold focus:border-rose-500 outline-none"
                                             />
                                         </div>
                                     </div>
 
                                     <div>
                                         <label className="block text-[11px] text-neutral-400 mb-1">
-                                            Selo de Economia
+                                            Selo de Destaque / Economia
                                         </label>
                                         <input
                                             type="text"
@@ -587,7 +598,8 @@ export default function AdminFunilPage() {
                                             onChange={(e) =>
                                                 updatePlanField(plan.key, "badge", e.target.value)
                                             }
-                                            className="w-full px-2.5 py-1.5 rounded bg-[#111114] border border-neutral-800 text-xs text-white"
+                                            placeholder="Ex: Mais Popular, Economize 50%"
+                                            className="w-full px-2.5 py-1.5 rounded-lg bg-[#141419] border border-white/10 text-xs text-white focus:border-rose-500/50 outline-none"
                                         />
                                     </div>
 
@@ -606,7 +618,7 @@ export default function AdminFunilPage() {
                                                     e.target.value
                                                 )
                                             }
-                                            className="w-full px-2.5 py-1.5 rounded bg-[#111114] border border-neutral-800 text-xs font-mono text-white"
+                                            className="w-full px-2.5 py-1.5 rounded-lg bg-[#141419] border border-white/10 text-xs font-mono text-white focus:border-rose-500/50 outline-none"
                                         />
                                     </div>
                                 </div>
@@ -615,21 +627,21 @@ export default function AdminFunilPage() {
                     </div>
 
                     {/* Mangofy (Pix) */}
-                    <div className="p-5 rounded-xl border border-neutral-800 bg-[#111114] space-y-4">
-                        <div>
-                            <h2 className="font-bold text-sm text-white">
-                                Integração Mangofy (Pix Imediato)
+                    <div className="p-6 rounded-2xl border border-white/10 bg-[#101014] shadow-xl space-y-5">
+                        <div className="border-b border-white/5 pb-4">
+                            <h2 className="font-bold text-sm sm:text-base text-white flex items-center gap-2">
+                                <Zap className="w-4 h-4 text-emerald-400" />
+                                Integração Mangofy (Pix Imediato no Funil)
                             </h2>
-                            <p className="text-xs text-neutral-400 mt-0.5">
-                                Gera cobrança Pix Copia e Cola instantânea no site e no WhatsApp do
-                                lead.
+                            <p className="text-xs text-neutral-400 mt-1">
+                                Gera cobrança Pix Copia e Cola instantânea no site e no WhatsApp do lead através do gateway Mangofy.
                             </p>
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             <div>
-                                <label className="block text-xs text-neutral-400 mb-1">
-                                    URL da API
+                                <label className="block text-xs text-neutral-400 mb-1.5 font-medium">
+                                    URL da API Mangofy
                                 </label>
                                 <input
                                     type="text"
@@ -637,12 +649,12 @@ export default function AdminFunilPage() {
                                     onChange={(e) =>
                                         setConfig({ ...config, mangofyApiUrl: e.target.value })
                                     }
-                                    className="w-full px-3 py-2 rounded bg-[#09090b] border border-neutral-800 text-xs font-mono text-white"
+                                    className="w-full px-3 py-2 rounded-xl bg-[#0a0a0d] border border-white/10 text-xs font-mono text-white focus:border-rose-500/50 outline-none"
                                 />
                             </div>
                             <div>
-                                <label className="block text-xs text-neutral-400 mb-1">
-                                    Chave da API (Token)
+                                <label className="block text-xs text-neutral-400 mb-1.5 font-medium">
+                                    Chave da API (Token Secret)
                                 </label>
                                 <input
                                     type="password"
@@ -650,11 +662,11 @@ export default function AdminFunilPage() {
                                     onChange={(e) =>
                                         setConfig({ ...config, mangofyApiKey: e.target.value })
                                     }
-                                    className="w-full px-3 py-2 rounded bg-[#09090b] border border-neutral-800 text-xs font-mono text-white"
+                                    className="w-full px-3 py-2 rounded-xl bg-[#0a0a0d] border border-white/10 text-xs font-mono text-white focus:border-rose-500/50 outline-none"
                                 />
                             </div>
                             <div>
-                                <label className="block text-xs text-neutral-400 mb-1">
+                                <label className="block text-xs text-neutral-400 mb-1.5 font-medium">
                                     Código da Loja (Store Code)
                                 </label>
                                 <input
@@ -663,42 +675,46 @@ export default function AdminFunilPage() {
                                     onChange={(e) =>
                                         setConfig({ ...config, mangofyStoreCode: e.target.value })
                                     }
-                                    className="w-full px-3 py-2 rounded bg-[#09090b] border border-neutral-800 text-xs font-mono text-white"
+                                    className="w-full px-3 py-2 rounded-xl bg-[#0a0a0d] border border-white/10 text-xs font-mono text-white focus:border-rose-500/50 outline-none"
                                 />
                             </div>
                         </div>
 
-                        <div className="p-3.5 rounded-xl bg-[#09090b] border border-neutral-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div className="p-4 rounded-xl bg-[#0a0a0d] border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                             <div className="text-xs">
-                                <span className="text-neutral-400">
+                                <span className="text-neutral-400 block mb-0.5">
                                     URL de Postback / Webhook da Mangofy:
                                 </span>
-                                <div className="font-mono text-white mt-0.5">{webhookUrl}</div>
+                                <div className="font-mono text-emerald-400 font-semibold select-all">
+                                    {webhookUrl}
+                                </div>
                             </div>
                             <button
                                 type="button"
                                 onClick={copyWebhook}
-                                className="px-3.5 py-1.5 rounded-lg border border-neutral-700 hover:border-neutral-500 text-xs font-semibold text-white shrink-0"
+                                className="px-4 py-2 rounded-xl border border-white/15 hover:border-white/30 bg-white/5 hover:bg-white/10 text-xs font-bold text-white shrink-0 cursor-pointer transition flex items-center justify-center gap-1.5"
                             >
+                                <Copy className="w-3.5 h-3.5" />
                                 {copiedWebhook ? "✓ Copiado" : "Copiar URL Mangofy"}
                             </button>
                         </div>
                     </div>
 
                     {/* Stripe (Cartão) */}
-                    <div className="p-5 rounded-xl border border-neutral-800 bg-[#111114] space-y-4">
-                        <div>
-                            <h2 className="font-bold text-sm text-white">
-                                Integração Stripe (Assinatura Recorrente / Cartão)
+                    <div className="p-6 rounded-2xl border border-white/10 bg-[#101014] shadow-xl space-y-5">
+                        <div className="border-b border-white/5 pb-4">
+                            <h2 className="font-bold text-sm sm:text-base text-white flex items-center gap-2">
+                                <CreditCard className="w-4 h-4 text-sky-400" />
+                                Integração Stripe (Assinatura Recorrente no Cartão)
                             </h2>
-                            <p className="text-xs text-neutral-400 mt-0.5">
-                                Permite ao cliente assinar no cartão com renovação automática.
+                            <p className="text-xs text-neutral-400 mt-1">
+                                Permite aos clientes assinar com cartão de crédito internacional e nacional com renovação automática.
                             </p>
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             <div>
-                                <label className="block text-xs text-neutral-400 mb-1">
+                                <label className="block text-xs text-neutral-400 mb-1.5 font-medium">
                                     Secret Key (sk_live_...)
                                 </label>
                                 <input
@@ -707,11 +723,11 @@ export default function AdminFunilPage() {
                                     onChange={(e) =>
                                         setConfig({ ...config, stripeSecretKey: e.target.value })
                                     }
-                                    className="w-full px-3 py-2 rounded bg-[#09090b] border border-neutral-800 text-xs font-mono text-white"
+                                    className="w-full px-3 py-2 rounded-xl bg-[#0a0a0d] border border-white/10 text-xs font-mono text-white focus:border-rose-500/50 outline-none"
                                 />
                             </div>
                             <div>
-                                <label className="block text-xs text-neutral-400 mb-1">
+                                <label className="block text-xs text-neutral-400 mb-1.5 font-medium">
                                     Publishable Key (pk_live_...)
                                 </label>
                                 <input
@@ -723,11 +739,11 @@ export default function AdminFunilPage() {
                                             stripePublishableKey: e.target.value
                                         })
                                     }
-                                    className="w-full px-3 py-2 rounded bg-[#09090b] border border-neutral-800 text-xs font-mono text-white"
+                                    className="w-full px-3 py-2 rounded-xl bg-[#0a0a0d] border border-white/10 text-xs font-mono text-white focus:border-rose-500/50 outline-none"
                                 />
                             </div>
                             <div>
-                                <label className="block text-xs text-neutral-400 mb-1">
+                                <label className="block text-xs text-neutral-400 mb-1.5 font-medium">
                                     Webhook Signing Secret (whsec_...)
                                 </label>
                                 <input
@@ -739,26 +755,26 @@ export default function AdminFunilPage() {
                                             stripeWebhookSecret: e.target.value
                                         })
                                     }
-                                    className="w-full px-3 py-2 rounded bg-[#09090b] border border-neutral-800 text-xs font-mono text-white"
+                                    className="w-full px-3 py-2 rounded-xl bg-[#0a0a0d] border border-white/10 text-xs font-mono text-white focus:border-rose-500/50 outline-none"
                                 />
                             </div>
                         </div>
 
-                        <div className="p-3.5 rounded-xl bg-[#09090b] border border-neutral-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div className="p-4 rounded-xl bg-[#0a0a0d] border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                             <div className="text-xs">
-                                <span className="text-neutral-400">
-                                    URL de Webhook da Stripe (evento{" "}
-                                    <code>checkout.session.completed</code>):
+                                <span className="text-neutral-400 block mb-0.5">
+                                    URL de Webhook da Stripe (evento <code className="text-sky-300">checkout.session.completed</code>):
                                 </span>
-                                <div className="font-mono text-white mt-0.5">
+                                <div className="font-mono text-sky-400 font-semibold select-all">
                                     {stripeWebhookUrl}
                                 </div>
                             </div>
                             <button
                                 type="button"
                                 onClick={copyStripeWebhook}
-                                className="px-3.5 py-1.5 rounded-lg border border-neutral-700 hover:border-neutral-500 text-xs font-semibold text-white shrink-0"
+                                className="px-4 py-2 rounded-xl border border-white/15 hover:border-white/30 bg-white/5 hover:bg-white/10 text-xs font-bold text-white shrink-0 cursor-pointer transition flex items-center justify-center gap-1.5"
                             >
+                                <Copy className="w-3.5 h-3.5" />
                                 {copiedStripeWebhook ? "✓ Copiado" : "Copiar URL Stripe"}
                             </button>
                         </div>
@@ -768,26 +784,26 @@ export default function AdminFunilPage() {
 
             {/* CONTEÚDO DA ABA 4: INTELIGÊNCIA ARTIFICIAL */}
             {activeTab === "ai" && (
-                <div className="p-5 rounded-xl border border-neutral-800 bg-[#111114] space-y-4">
-                    <div className="flex items-center justify-between border-b border-neutral-800 pb-3">
+                <div className="p-6 rounded-2xl border border-white/10 bg-[#101014] shadow-xl space-y-5">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/5 pb-4">
                         <div>
-                            <h2 className="font-bold text-sm text-white flex items-center gap-2">
+                            <h2 className="font-bold text-sm sm:text-base text-white flex items-center gap-2">
                                 <Bot className="w-4 h-4 text-cyan-400" />
-                                Atendente Virtual com IA
+                                Atendente Virtual com Inteligência Artificial
                             </h2>
-                            <p className="text-xs text-neutral-400 mt-0.5">
-                                Responde dúvidas abertas de clientes no WhatsApp e conduz o lead para
-                                o pagamento do Pix.
+                            <p className="text-xs text-neutral-400 mt-1">
+                                Responde dúvidas abertas de clientes no WhatsApp e conduz o lead para o pagamento do Pix caso ele tenha objeções.
                             </p>
                         </div>
 
-                        <label className="inline-flex items-center gap-2 text-xs text-neutral-300 cursor-pointer">
+                        <label className="inline-flex items-center gap-2 text-xs font-semibold text-neutral-300 cursor-pointer bg-white/5 px-3 py-1.5 rounded-xl border border-white/10 hover:border-white/20 transition self-start sm:self-auto">
                             <input
                                 type="checkbox"
                                 checked={config.useAiSaleswoman}
                                 onChange={(e) =>
                                     setConfig({ ...config, useAiSaleswoman: e.target.checked })
                                 }
+                                className="accent-[#e11d48]"
                             />
                             <span>Ativar IA no Funil</span>
                         </label>
@@ -795,53 +811,58 @@ export default function AdminFunilPage() {
 
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div>
-                            <label className="block text-xs text-neutral-400 mb-1">Provedor</label>
+                            <label className="block text-xs font-medium text-neutral-400 mb-1.5">Provedor</label>
                             <select
                                 value={config.aiProvider}
                                 onChange={(e) =>
                                     setConfig({ ...config, aiProvider: e.target.value })
                                 }
-                                className="w-full px-3 py-2 rounded-lg bg-[#09090b] border border-neutral-800 text-xs text-white"
+                                className="w-full px-3.5 py-2.5 rounded-xl bg-[#0a0a0d] border border-white/10 text-xs text-white focus:border-rose-500/50 outline-none cursor-pointer"
                             >
-                                <option value="GROQ">Groq (Mais Rápido)</option>
+                                <option value="GROQ">Groq (Mais Rápido / Baixa Latência)</option>
                                 <option value="OPENAI">OpenAI (GPT-4o mini)</option>
                                 <option value="GEMINI">Google Gemini</option>
                             </select>
                         </div>
                         <div>
-                            <label className="block text-xs text-neutral-400 mb-1">Modelo</label>
+                            <label className="block text-xs font-medium text-neutral-400 mb-1.5">Modelo</label>
                             <input
                                 type="text"
                                 value={config.aiModel}
                                 onChange={(e) => setConfig({ ...config, aiModel: e.target.value })}
-                                className="w-full px-3 py-2 rounded-lg bg-[#09090b] border border-neutral-800 text-xs text-white"
+                                className="w-full px-3.5 py-2.5 rounded-xl bg-[#0a0a0d] border border-white/10 text-xs text-white focus:border-rose-500/50 outline-none"
                             />
                         </div>
                         <div>
-                            <label className="block text-xs text-neutral-400 mb-1">
+                            <label className="block text-xs font-medium text-neutral-400 mb-1.5">
                                 Chave de API
                             </label>
                             <input
                                 type="password"
                                 value={config.aiApiKey}
                                 onChange={(e) => setConfig({ ...config, aiApiKey: e.target.value })}
-                                className="w-full px-3 py-2 rounded-lg bg-[#09090b] border border-neutral-800 text-xs font-mono text-white"
+                                className="w-full px-3.5 py-2.5 rounded-xl bg-[#0a0a0d] border border-white/10 text-xs font-mono text-white focus:border-rose-500/50 outline-none"
                             />
                         </div>
                     </div>
 
                     <div>
-                        <label className="block text-xs text-neutral-400 mb-1">
-                            Prompt / Instruções do Atendimento
-                        </label>
+                        <div className="flex items-center justify-between mb-1.5">
+                            <label className="block text-xs font-medium text-neutral-400">
+                                Prompt / Instruções do Atendimento
+                            </label>
+                            <span className="text-[11px] text-neutral-500 font-mono">
+                                {config.aiSystemPrompt.length} caracteres
+                            </span>
+                        </div>
                         <textarea
-                            rows={5}
+                            rows={6}
                             value={config.aiSystemPrompt}
                             onChange={(e) =>
                                 setConfig({ ...config, aiSystemPrompt: e.target.value })
                             }
-                            placeholder="Você é a Sofia, consultora do TvDrama Reels. Seja simpática e responda dúvidas sobre as novelas e ajude o cliente a gerar o Pix..."
-                            className="w-full px-3.5 py-2.5 rounded-lg bg-[#09090b] border border-neutral-800 text-sm text-white"
+                            placeholder="Você é a Sofia, consultora do Segredos do Coração / TvDrama Reels. Seja simpática e responda dúvidas sobre as novelas e ajude o cliente a gerar o Pix..."
+                            className="w-full px-3.5 py-2.5 rounded-xl bg-[#0a0a0d] border border-white/10 text-sm text-white focus:border-rose-500/50 outline-none leading-relaxed"
                         />
                     </div>
                 </div>
