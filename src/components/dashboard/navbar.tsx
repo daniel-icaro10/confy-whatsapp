@@ -12,7 +12,7 @@ interface NavbarProps {
 const sectionNames: Record<string, string> = {
   "/dashboard": "Visão geral",
   "/dashboard/novelas": "Novelas e episódios",
-  "/dashboard/funil": "Funil e pagamentos",
+  "/dashboard/funil": "Funil WhatsApp (Kanban)",
   "/dashboard/assinantes": "Assinantes e pedidos",
   "/dashboard/chat": "Atendimento",
   "/dashboard/sessions": "Conexões WhatsApp",

@@ -21,7 +21,7 @@ export const segredosNavGroups: NavGroup[] = [
     items: [
       { href: "/dashboard", label: "Visão geral" },
       { href: "/dashboard/novelas", label: "Novelas e episódios" },
-      { href: "/dashboard/funil", label: "Funil e pagamentos" },
+      { href: "/dashboard/funil", label: "Funil WhatsApp (Kanban)" },
       { href: "/dashboard/assinantes", label: "Assinantes e pedidos" },
     ],
   },
