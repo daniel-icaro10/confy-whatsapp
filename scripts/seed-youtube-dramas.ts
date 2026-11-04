@@ -10,7 +10,7 @@ const LEGACY_MOCK_DRAMA_SLUGS = [
 ];
 
 async function main() {
-    console.log("🎬 Iniciando cadastro e atualização do catálogo com os 36 vídeos...");
+    console.log("🎬 Iniciando cadastro e atualização do catálogo com as 206 séries...");
 
     // Limpar slugs de exemplo antigos
     const deleted = await prisma.drama.deleteMany({
@@ -85,28 +85,24 @@ async function main() {
                 }
             });
 
-            // Recriar episódios se a contagem divergir
-            if (existing.episodes.length !== item.episodes.length) {
-                await prisma.episode.deleteMany({
-                    where: { dramaId: existing.id }
-                });
-                await prisma.episode.createMany({
-                    data: item.episodes.map((ep) => ({
-                        dramaId: existing.id,
-                        number: ep.number,
-                        title: ep.title,
-                        description: ep.description,
-                        youtubeUrl: ep.youtubeUrl,
-                        thumbnailUrl: item.coverUrl,
-                        durationSeconds: ep.durationSeconds || 900,
-                        isFree: ep.isFree,
-                        viewsCount: 0
-                    }))
-                });
-                console.log(`🔄 Episódios atualizados para série "${item.title}" (${item.episodes.length} eps).`);
-            } else {
-                console.log(`✔️ Série "${item.title}" já está em dia.`);
-            }
+            // Garantir episódios 100% atualizados
+            await prisma.episode.deleteMany({
+                where: { dramaId: existing.id }
+            });
+            await prisma.episode.createMany({
+                data: item.episodes.map((ep) => ({
+                    dramaId: existing.id,
+                    number: ep.number,
+                    title: ep.title,
+                    description: ep.description,
+                    youtubeUrl: ep.youtubeUrl,
+                    thumbnailUrl: item.coverUrl,
+                    durationSeconds: ep.durationSeconds || 900,
+                    isFree: ep.isFree,
+                    viewsCount: 0
+                }))
+            });
+            console.log(`🔄 Série atualizada: "${item.title}" (${item.episodes.length} eps).`);
             updatedCount++;
             totalEpisodes += item.episodes.length;
         }

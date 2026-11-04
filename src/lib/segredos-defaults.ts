@@ -497,7 +497,17 @@ export async function ensureInitialDramas() {
                         }
                     }
                 });
-            } else if (existing.episodes.length === 0 && item.episodes.length > 0) {
+            } else if (existing.episodes.length !== item.episodes.length) {
+                await prisma.drama.update({
+                    where: { id: existing.id },
+                    data: {
+                        totalEpisodes: item.totalEpisodes,
+                        freeEpisodesCount: item.freeEpisodesCount
+                    }
+                });
+                await prisma.episode.deleteMany({
+                    where: { dramaId: existing.id }
+                });
                 await prisma.episode.createMany({
                     data: item.episodes.map((ep) => ({
                         dramaId: existing.id,
