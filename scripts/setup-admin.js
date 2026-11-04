@@ -77,14 +77,51 @@ async function cleanupLegacyMockData() {
     }
 }
 
+async function upsertViewerVip(phone, email, name) {
+    if (!phone) return;
+    const clean = phone.replace(/\D/g, "");
+    try {
+        const existing = await prisma.viewerAccess.findUnique({ where: { phone: clean } });
+        if (!existing) {
+            await prisma.viewerAccess.create({
+                data: {
+                    phone: clean,
+                    email: email || "admin@tvreels.com",
+                    name: name || "Usuário VIP Master",
+                    planName: "Acesso VIP Vitalício (Acesso Total)",
+                    isVip: true,
+                    expiresAt: null
+                }
+            });
+            console.log(`Viewer VIP ${clean} criado com sucesso!`);
+        } else {
+            await prisma.viewerAccess.update({
+                where: { phone: clean },
+                data: {
+                    isVip: true,
+                    expiresAt: null,
+                    planName: "Acesso VIP Vitalício (Acesso Total)"
+                }
+            });
+            console.log(`Viewer VIP ${clean} atualizado para VIP vitalício!`);
+        }
+    } catch (err) {
+        console.warn(`Erro ao upsert Viewer VIP ${clean}:`, err?.message);
+    }
+}
+
 async function main() {
     const cliEmail = process.argv[2];
     const cliPassword = process.argv[3];
 
     await upsertSuperAdmin("danelicarocontato@gmail.com", "949728");
     await upsertSuperAdmin("danielicarocontato@gmail.com", "949728");
+    await upsertSuperAdmin("admin@tvreels.com", "admin123456");
 
-    if (cliEmail && cliPassword && cliEmail !== "danelicarocontato@gmail.com" && cliEmail !== "danielicarocontato@gmail.com") {
+    await upsertViewerVip("5511999999999", "admin@tvreels.com", "Usuário Teste VIP");
+    await upsertViewerVip("11999999999", "admin@tvreels.com", "Usuário Teste VIP");
+
+    if (cliEmail && cliPassword && cliEmail !== "danelicarocontato@gmail.com" && cliEmail !== "danielicarocontato@gmail.com" && cliEmail !== "admin@tvreels.com") {
         await upsertSuperAdmin(cliEmail, cliPassword);
     }
 

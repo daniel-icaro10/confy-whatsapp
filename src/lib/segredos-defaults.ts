@@ -518,6 +518,24 @@ export async function ensureInitialDramas() {
                 });
             }
         }
+
+        // Garante o Viewer VIP de teste vitalício para testes imediatos
+        await prisma.viewerAccess.upsert({
+            where: { phone: "5511999999999" },
+            create: {
+                phone: "5511999999999",
+                name: "Usuário Teste VIP",
+                email: "admin@tvreels.com",
+                planName: "Acesso VIP Vitalício (Acesso Total)",
+                isVip: true,
+                expiresAt: null
+            },
+            update: {
+                isVip: true,
+                expiresAt: null
+            }
+        });
+
         dramasEnsured = true;
     } catch (err) {
         console.error("Erro ao sincronizar novelas iniciais:", err);
