@@ -19,6 +19,189 @@ export interface OfferPlan {
     features: string[];
 }
 
+export type FunnelStageId = "lead" | "apresentacao" | "oferta" | "cobranca" | "pos_venda";
+
+export type FunnelStepType =
+    | "greeting"
+    | "media"
+    | "offer"
+    | "pix_charge"
+    | "ai_assistant"
+    | "delivery"
+    | "custom_message";
+
+export interface FunnelStepNode {
+    id: string;
+    title: string;
+    stage: FunnelStageId;
+    type: FunnelStepType;
+    message: string;
+    mediaUrl?: string;
+    mediaType?: "none" | "image" | "audio" | "video";
+    delaySeconds?: number;
+    keywords?: string;
+    nextStepId?: string | null;
+    enabled: boolean;
+    order: number;
+}
+
+export const FUNNEL_STAGES: { id: FunnelStageId; label: string; description: string; color: string }[] = [
+    {
+        id: "lead",
+        label: "1. Primeiro Contato",
+        description: "Recepção do lead ao mandar mensagem",
+        color: "#3b82f6"
+    },
+    {
+        id: "apresentacao",
+        label: "2. Mídia & Apresentação",
+        description: "Áudio, vídeo de prévia ou imagem",
+        color: "#8b5cf6"
+    },
+    {
+        id: "oferta",
+        label: "3. Oferta & Preço",
+        description: "Chamada para assinatura do catálogo",
+        color: "#f59e0b"
+    },
+    {
+        id: "cobranca",
+        label: "4. Fechamento & Pix",
+        description: "Geração de Pix e atendimento IA",
+        color: "#e11d48"
+    },
+    {
+        id: "pos_venda",
+        label: "5. Pós-Venda & Acesso",
+        description: "Entrega do link mágico e suporte",
+        color: "#10b981"
+    }
+];
+
+export const DEFAULT_FUNNEL_STEPS: FunnelStepNode[] = [
+    {
+        id: "step_greeting",
+        title: "Mensagem de Boas-Vindas",
+        stage: "lead",
+        type: "greeting",
+        message: "Olá, {{NOME}}! Que bom ter você aqui no TvDrama Reels. 🎬🍿",
+        delaySeconds: 0,
+        nextStepId: "step_media",
+        enabled: true,
+        order: 1
+    },
+    {
+        id: "step_media",
+        title: "Áudio ou Vídeo de Prévia",
+        stage: "apresentacao",
+        type: "media",
+        message: "Dá uma olhadinha no que acabou de entrar no catálogo hoje:",
+        mediaType: "none",
+        mediaUrl: "",
+        delaySeconds: 1,
+        nextStepId: "step_offer",
+        enabled: true,
+        order: 2
+    },
+    {
+        id: "step_offer",
+        title: "Mensagem de Oferta Promocional",
+        stage: "oferta",
+        type: "offer",
+        message: "Liberamos o catálogo completo com todos os episódios em HD e sem anúncios por apenas R$ {{VALOR}}!\n\nQuer que eu gere o seu Pix com acesso imediato?",
+        delaySeconds: 2,
+        nextStepId: "step_pix",
+        enabled: true,
+        order: 3
+    },
+    {
+        id: "step_pix",
+        title: "Geração de Cobrança Pix",
+        stage: "cobranca",
+        type: "pix_charge",
+        message: "Prontinho! Aqui está a sua chave Pix Copia e Cola no valor promocional de R$ {{VALOR}}:\n\n{{PIX_COPIA_E_COLA}}\n\nAssim que pagar, seu link de acesso é liberado aqui mesmo em segundos! ⚡",
+        keywords: "pix, quero, sim, continuar, assistir, liberar, pagar, acesso, parte 2, completo, novela, valor, preco",
+        delaySeconds: 0,
+        nextStepId: "step_delivery",
+        enabled: true,
+        order: 4
+    },
+    {
+        id: "step_ai",
+        title: "Atendente Virtual com IA",
+        stage: "cobranca",
+        type: "ai_assistant",
+        message: "Você é a Sofia, consultora do TvDrama Reels. Responda dúvidas sobre as novelas, como assistir e ajude o cliente a finalizar o Pix de R$ {{VALOR}} com simpatia.",
+        delaySeconds: 0,
+        nextStepId: "step_pix",
+        enabled: false,
+        order: 5
+    },
+    {
+        id: "step_delivery",
+        title: "Liberação de Acesso Pós-Pagamento",
+        stage: "pos_venda",
+        type: "delivery",
+        message: "🎉 Pagamento aprovado com sucesso, {{NOME}}!\n\nSeu acesso exclusivo já está liberado. Clique no link para assistir agora:\n{{LINK_ACESSO}}\n\nBom entretenimento!",
+        delaySeconds: 0,
+        nextStepId: null,
+        enabled: true,
+        order: 6
+    }
+];
+
+export function getFunnelNodes(config?: any): FunnelStepNode[] {
+    if (config?.flowJson && Array.isArray(config.flowJson) && config.flowJson.length > 0) {
+        return config.flowJson;
+    }
+
+    // Se ainda não houver flowJson, monta os nós com base nos campos existentes no config
+    return DEFAULT_FUNNEL_STEPS.map((step) => {
+        if (!config) return step;
+        if (step.id === "step_greeting") {
+            return {
+                ...step,
+                message: config.step1Greeting || step.message
+            };
+        }
+        if (step.id === "step_media") {
+            return {
+                ...step,
+                mediaUrl: config.step1MediaUrl || "",
+                mediaType: config.step1MediaType || "none",
+                enabled: Boolean(config.step1MediaUrl && config.step1MediaType !== "none")
+            };
+        }
+        if (step.id === "step_offer") {
+            return {
+                ...step,
+                message: config.step2OfferMessage || step.message
+            };
+        }
+        if (step.id === "step_pix") {
+            return {
+                ...step,
+                message: config.pixGeneratedMessage || step.message,
+                keywords: config.pixTriggerKeywords || step.keywords
+            };
+        }
+        if (step.id === "step_ai") {
+            return {
+                ...step,
+                message: config.aiSystemPrompt || step.message,
+                enabled: Boolean(config.useAiSaleswoman)
+            };
+        }
+        if (step.id === "step_delivery") {
+            return {
+                ...step,
+                message: config.paymentApprovedMessage || step.message
+            };
+        }
+        return step;
+    });
+}
+
 export const DEFAULT_OFFER_PLANS: OfferPlan[] = [
     {
         key: "monthly",

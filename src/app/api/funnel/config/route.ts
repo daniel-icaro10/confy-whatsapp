@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { ensureFunnelConfig, getOfferPlans, normalizeBrPhone } from "@/lib/segredos-defaults";
+import { ensureFunnelConfig, getFunnelNodes, getOfferPlans, normalizeBrPhone } from "@/lib/segredos-defaults";
 import { auth } from "@/lib/auth";
 import { waManager } from "@/modules/whatsapp/manager";
 
@@ -57,6 +57,7 @@ export async function GET() {
         ]);
 
         const plans = getOfferPlans(config);
+        const nodes = getFunnelNodes(config);
         const manualPhone = normalizeBrPhone(config.whatsappNumber || "");
         const detectedPhone = manualPhone || (await resolveSessionPhone(config.sessionId));
 
@@ -71,6 +72,7 @@ export async function GET() {
                     "Olá! Vi o anúncio e quero liberar meu acesso para assistir."
             },
             plans,
+            nodes,
             sessions
         });
     } catch (error: any) {
@@ -111,6 +113,7 @@ export async function PUT(request: Request) {
                 stripePublishableKey: body.stripePublishableKey,
                 stripeWebhookSecret: body.stripeWebhookSecret,
                 plansJson: body.plansJson !== undefined ? body.plansJson : undefined,
+                flowJson: body.flowJson !== undefined ? body.flowJson : undefined,
                 step1Greeting: body.step1Greeting,
                 step1MediaUrl: body.step1MediaUrl,
                 step1MediaType: body.step1MediaType,
@@ -126,7 +129,11 @@ export async function PUT(request: Request) {
             }
         });
 
-        return NextResponse.json({ config: updated, plans: getOfferPlans(updated) });
+        return NextResponse.json({
+            config: updated,
+            plans: getOfferPlans(updated),
+            nodes: getFunnelNodes(updated)
+        });
     } catch (error: any) {
         return NextResponse.json(
             { error: "Erro ao salvar configuração do funil", details: error?.message },

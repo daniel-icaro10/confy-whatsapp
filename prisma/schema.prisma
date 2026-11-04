@@ -909,6 +909,7 @@ model FunnelConfig {
   stripePublishableKey   String?  @db.Text
   stripeWebhookSecret    String?  @db.Text
   plansJson              Json?
+  flowJson               Json?
 
   whatsappNumber         String?
   adRedirectMessage      String?  @db.Text
