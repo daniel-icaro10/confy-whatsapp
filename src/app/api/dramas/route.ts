@@ -75,16 +75,18 @@ export async function POST(request: Request) {
             data: {
                 title,
                 slug,
-                synopsis: synopsis || "Uma história emocionante cheia de reviravoltas.",
+                synopsis: synopsis || "",
                 coverUrl,
                 bannerUrl: bannerUrl || coverUrl,
                 trailerYoutubeUrl: trailerYoutubeUrl || null,
-                category: category || "Romance & Drama",
-                tags: tags || "Vertical, Drama, Romance",
-                totalEpisodes: Number(totalEpisodes) || 20,
+                category: category || "Drama",
+                tags: tags || "",
+                totalEpisodes: Number(totalEpisodes) || 1,
                 freeEpisodesCount: Number(freeEpisodesCount ?? 2),
                 isFeatured: Boolean(isFeatured),
                 isVertical: isVertical !== false,
+                viewsCount: 0,
+                likesCount: 0,
                 status: status === "DRAFT" ? "DRAFT" : "PUBLISHED"
             },
             include: {

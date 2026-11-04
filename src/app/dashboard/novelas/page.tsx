@@ -233,6 +233,10 @@ export default function AdminNovelasPage() {
                         <div className="p-8 rounded-lg border border-neutral-800 bg-[#111111] text-center text-xs text-neutral-400">
                             Carregando...
                         </div>
+                    ) : dramas.length === 0 ? (
+                        <div className="p-8 rounded-lg border border-neutral-800 bg-[#111111] text-center text-xs text-neutral-400">
+                            Nenhuma novela cadastrada. Clique em &quot;Nova novela&quot; acima para adicionar a primeira.
+                        </div>
                     ) : (
                         dramas.map((drama) => (
                             <div

@@ -192,31 +192,37 @@ export default async function DashboardPage() {
                         </Link>
                     </div>
 
-                    <div className="divide-y divide-neutral-800">
-                        {dramas.map((drama) => (
-                            <div
-                                key={drama.id}
-                                className="py-2.5 flex items-center justify-between gap-3"
-                            >
-                                <div className="min-w-0">
-                                    <div className="text-xs font-medium text-white truncate">
-                                        {drama.title}
-                                    </div>
-                                    <div className="text-[11px] text-neutral-500">
-                                        {drama.category} · {drama._count.episodes} episódios ({drama.freeEpisodesCount} grátis)
-                                    </div>
-                                </div>
-
-                                <Link
-                                    href={`/assistir/${drama.slug}`}
-                                    target="_blank"
-                                    className="px-2.5 py-1 rounded border border-neutral-700 hover:border-neutral-500 text-xs text-neutral-300 hover:text-white shrink-0 transition"
+                    {dramas.length === 0 ? (
+                        <div className="py-8 text-center text-xs text-neutral-500">
+                            Nenhuma novela cadastrada.
+                        </div>
+                    ) : (
+                        <div className="divide-y divide-neutral-800">
+                            {dramas.map((drama) => (
+                                <div
+                                    key={drama.id}
+                                    className="py-2.5 flex items-center justify-between gap-3"
                                 >
-                                    Abrir
-                                </Link>
-                            </div>
-                        ))}
-                    </div>
+                                    <div className="min-w-0">
+                                        <div className="text-xs font-medium text-white truncate">
+                                            {drama.title}
+                                        </div>
+                                        <div className="text-[11px] text-neutral-500">
+                                            {drama.category} · {drama._count.episodes} episódios ({drama.freeEpisodesCount} grátis)
+                                        </div>
+                                    </div>
+
+                                    <Link
+                                        href={`/assistir/${drama.slug}`}
+                                        target="_blank"
+                                        className="px-2.5 py-1 rounded border border-neutral-700 hover:border-neutral-500 text-xs text-neutral-300 hover:text-white shrink-0 transition"
+                                    >
+                                        Abrir
+                                    </Link>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

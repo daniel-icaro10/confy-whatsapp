@@ -122,7 +122,7 @@ function SegredosCatalogContent() {
     const totalEpisodesCount = dramas.reduce((acc, d) => acc + (d.totalEpisodes || 0), 0);
 
     function formatViews(views: number) {
-        if (!views || views < 1000) return `${views || 950} visualizações`;
+        if (!views || views < 1000) return `${views || 0} visualizações`;
         return `${(views / 1000).toFixed(1).replace(".", ",")} mil`;
     }
 
@@ -238,7 +238,7 @@ function SegredosCatalogContent() {
                     <div className="mt-8 grid grid-cols-3 gap-2.5">
                         <div className="rounded-[14px] p-3 hd-surface">
                             <div className="text-base font-semibold text-[#efe9de] tabular-nums">
-                                {totalEpisodesCount || 180}+
+                                {totalEpisodesCount}
                             </div>
                             <div className="text-[11px] text-[#efe9de]/50 mt-0.5">
                                 Episódios HD

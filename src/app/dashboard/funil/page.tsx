@@ -10,9 +10,9 @@ export default function AdminFunilPage() {
     const [copiedWebhook, setCopiedWebhook] = useState(false);
 
     const [config, setConfig] = useState({
-        enabled: true,
+        enabled: false,
         sessionId: "",
-        planName: "Acesso completo — Segredos do Coração",
+        planName: "Acesso Completo — TvDrama Reels",
         planPrice: 19.9,
         siteUrl: "",
         mangofyApiUrl: "https://checkout.mangofy.com.br/api/v1",
@@ -26,7 +26,7 @@ export default function AdminFunilPage() {
         pixTriggerKeywords: "",
         pixGeneratedMessage: "",
         paymentApprovedMessage: "",
-        useAiSaleswoman: true,
+        useAiSaleswoman: false,
         aiProvider: "GROQ",
         aiApiKey: "",
         aiModel: "llama-3.3-70b-versatile",

@@ -37,17 +37,58 @@ async function upsertSuperAdmin(email, password) {
     }
 }
 
+async function cleanupLegacyMockData() {
+    try {
+        await prisma.drama.deleteMany({
+            where: {
+                slug: {
+                    in: [
+                        "o-bilionario-disfarcado-e-a-noiva-rejeitada",
+                        "a-vinganca-da-herdeira-esquecida",
+                        "gravida-do-ceo-amor-alem-do-contrato"
+                    ]
+                }
+            }
+        });
+
+        const funnel = await prisma.funnelConfig.findUnique({ where: { id: "default" } });
+        if (
+            funnel &&
+            (funnel.step1Greeting?.includes("Oiê, meu amor!") ||
+                funnel.aiSystemPrompt?.includes("Você é a Sofia, atendente"))
+        ) {
+            await prisma.funnelConfig.update({
+                where: { id: "default" },
+                data: {
+                    enabled: false,
+                    planName: "Acesso Completo — TvDrama Reels",
+                    step1Greeting: "",
+                    step2OfferMessage: "",
+                    pixTriggerKeywords: "",
+                    pixGeneratedMessage: "",
+                    paymentApprovedMessage: "",
+                    useAiSaleswoman: false,
+                    aiSystemPrompt: ""
+                }
+            });
+        }
+    } catch (err) {
+        console.warn("Cleanup skipped:", err?.message);
+    }
+}
+
 async function main() {
     const cliEmail = process.argv[2];
     const cliPassword = process.argv[3];
 
-    // Sempre garante o acesso principal solicitado pelo proprietário (com e sem 'i' em daniel para evitar erro de digitação)
     await upsertSuperAdmin("danelicarocontato@gmail.com", "949728");
     await upsertSuperAdmin("danielicarocontato@gmail.com", "949728");
 
     if (cliEmail && cliPassword && cliEmail !== "danelicarocontato@gmail.com" && cliEmail !== "danielicarocontato@gmail.com") {
         await upsertSuperAdmin(cliEmail, cliPassword);
     }
+
+    await cleanupLegacyMockData();
 }
 
 main()
