@@ -124,21 +124,9 @@ async function main() {
 
     const funnelApprovedMsg = `🎉 Pagamento confirmado com sucesso, {{NOME}}!\n\nSeu acesso exclusivo já está liberado! 🎬🍿\nClique no link abaixo para assistir agora:\n👉 {{LINK_ACESSO}}\n\n✅ Assista no celular, tablet, computador ou TV\n✅ Sem anúncios e episódios completos em HD\nBom entretenimento! ❤️`;
 
-    await prisma.funnelConfig.upsert({
+    await prisma.funnelConfig.updateMany({
         where: { id: "default" },
-        create: {
-            id: "default",
-            enabled: true,
-            sessionId: "kb3786",
-            planName: "Catálogo Completo — TvDrama Reels",
-            planPrice: 19.90,
-            siteUrl: process.env.NEXT_PUBLIC_APP_URL || "http://2.24.89.184:3000",
-            step1Greeting: funnelGreeting,
-            pixTriggerKeywords: "1, 2, 3 series, 3 séries, catalogo, catálogo, completo, pix, quero, sim, pagar, assistir, liberar, 9.90, 9,90, 19.90, 19,90",
-            pixGeneratedMessage: funnelPixMsg,
-            paymentApprovedMessage: funnelApprovedMsg
-        },
-        update: {
+        data: {
             enabled: true,
             sessionId: "kb3786",
             siteUrl: process.env.NEXT_PUBLIC_APP_URL || "http://2.24.89.184:3000",
