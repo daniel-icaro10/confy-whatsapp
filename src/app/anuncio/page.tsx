@@ -75,10 +75,10 @@ function AnuncioRedirectContent() {
                 </a>
             ) : (
                 <Link
-                    href="/catalogo"
+                    href="/"
                     className="inline-flex items-center justify-center min-h-[48px] px-7 rounded-full bg-white text-black font-bold text-sm transition"
                 >
-                    Ver Catálogo
+                    Ir para a Página Inicial
                 </Link>
             )}
         </div>
@@ -92,3 +92,4 @@ export default function AnuncioPage() {
         </Suspense>
     );
 }
+

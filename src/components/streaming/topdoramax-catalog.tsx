@@ -1511,3 +1511,4 @@ function CatalogPosterCard({
         </button>
     );
 }
+
