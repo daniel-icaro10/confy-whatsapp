@@ -486,7 +486,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                         </span>
                     ) : isVip ? (
                         <span className="hidden sm:inline-flex items-center px-2.5 py-1 rounded-full bg-[#22b868]/15 border border-[#22b868]/30 text-[#4ade8a] text-[11px] font-bold">
-                            Display Liberado{daysRemaining !== null ? ` · ${daysRemaining}d` : ""}
+                            Acesso Liberado{daysRemaining !== null ? ` · ${daysRemaining}d` : ""}
                         </span>
                     ) : null}
                 </div>
@@ -1357,7 +1357,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
 
                         <div className="p-4 rounded-2xl bg-gradient-to-br from-[#e11d48]/22 to-[#e11d48]/5 border border-[#e11d48]/35 space-y-1.5">
                             <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#e11d48] text-white text-[11px] font-bold">
-                                DISPLAY LIBERADO · VIP
+                                ACESSO LIBERADO · VIP
                             </span>
                             <div className="text-sm font-bold text-white">{viewerPlanName}</div>
                             <div className="text-xs text-[#c9c9d1]">

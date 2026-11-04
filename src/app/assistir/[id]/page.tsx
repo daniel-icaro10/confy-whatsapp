@@ -224,7 +224,11 @@ function WatchDramaContent() {
     const isEpisodeUnlocked = (ep: Episode) => {
         if (isAdmin || isVip) return true;
         if (ep.isFree) return true;
-        if (ep.number <= (drama.freeEpisodesCount || 2)) return true;
+        const freeCount =
+            typeof drama.freeEpisodesCount === "number" && drama.freeEpisodesCount >= 0
+                ? drama.freeEpisodesCount
+                : 1;
+        if (ep.number <= freeCount) return true;
         return false;
     };
 
