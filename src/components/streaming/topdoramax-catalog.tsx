@@ -1726,7 +1726,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                 className="relative w-full text-left p-4 rounded-2xl border-2 border-[#e11d48] bg-[#e11d48]/14 hover:bg-[#e11d48]/22 shadow-[0_6px_20px_rgba(225,29,72,0.35)] transition block"
                             >
                                 <span className="absolute -top-2.5 right-3 px-2.5 py-0.5 rounded-full bg-white text-[#e11d48] text-[11px] font-extrabold uppercase">
-                                    Mais escolhido · {annualPlan.discountBadge}
+                                    Mais escolhido · {annualPlan.topTag}
                                 </span>
                                 <strong className="block text-[17px] font-extrabold text-white">
                                     Todas as séries (Plano Anual) · R${" "}
@@ -1734,7 +1734,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                 </strong>
                                 <span className="block text-xs text-[#e6e6eb] mt-0.5">
                                     365 dias · O catálogo completo + App PWA ·{" "}
-                                    {annualPlan.savingsText}
+                                    {annualPlan.badge}
                                 </span>
                             </button>
 
@@ -1752,7 +1752,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                         {monthlyPlan.price.toFixed(2).replace(".", ",")}/mês
                                     </strong>
                                     <span className="text-[11px] font-bold text-[#f43f5e]">
-                                        {monthlyPlan.discountBadge}
+                                        {monthlyPlan.topTag}
                                     </span>
                                 </div>
                                 <span className="block text-xs text-[#9a9a9a] mt-0.5">
@@ -1778,7 +1778,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                     </span>
                                 </div>
                                 <span className="block text-xs text-[#9a9a9a] mt-0.5">
-                                    90 dias · Catálogo completo · {quarterlyPlan.savingsText}
+                                    90 dias · Catálogo completo · {quarterlyPlan.badge}
                                 </span>
                             </button>
                         </div>

@@ -6,6 +6,8 @@ export interface OfferPlan {
     subtitle: string;
     topTag: string;
     badge: string;
+    discountBadge?: string;
+    savingsText?: string;
     originalPrice: number;
     price: number;
     periodLabel: string;
