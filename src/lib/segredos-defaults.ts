@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { INITIAL_YOUTUBE_DRAMAS } from "@/lib/initial-dramas-data";
 
 export interface OfferPlan {
     key: "monthly" | "quarterly" | "annual";
@@ -453,14 +454,72 @@ export async function ensureFunnelConfig() {
     }
 }
 
+let dramasEnsured = false;
+
 export async function ensureInitialDramas() {
+    if (dramasEnsured) return;
     try {
         await prisma.drama.deleteMany({
             where: {
                 slug: { in: LEGACY_MOCK_DRAMA_SLUGS }
             }
         });
-    } catch {
-        // Ignora caso a tabela ainda não exista
+
+        for (const item of INITIAL_YOUTUBE_DRAMAS) {
+            const existing = await prisma.drama.findUnique({
+                where: { slug: item.slug },
+                include: { episodes: true }
+            });
+
+            if (!existing) {
+                await prisma.drama.create({
+                    data: {
+                        title: item.title,
+                        slug: item.slug,
+                        synopsis: item.synopsis,
+                        coverUrl: item.coverUrl,
+                        bannerUrl: item.bannerUrl || item.coverUrl,
+                        category: item.category,
+                        tags: item.tags,
+                        totalEpisodes: item.totalEpisodes,
+                        freeEpisodesCount: item.freeEpisodesCount,
+                        isFeatured: item.isFeatured,
+                        isVertical: item.isVertical,
+                        viewsCount: item.viewsCount,
+                        likesCount: item.likesCount,
+                        status: "PUBLISHED",
+                        episodes: {
+                            create: item.episodes.map((ep) => ({
+                                number: ep.number,
+                                title: ep.title,
+                                description: ep.description,
+                                youtubeUrl: ep.youtubeUrl,
+                                thumbnailUrl: item.coverUrl,
+                                durationSeconds: ep.durationSeconds || 900,
+                                isFree: ep.isFree,
+                                viewsCount: 0
+                            }))
+                        }
+                    }
+                });
+            } else if (existing.episodes.length === 0 && item.episodes.length > 0) {
+                await prisma.episode.createMany({
+                    data: item.episodes.map((ep) => ({
+                        dramaId: existing.id,
+                        number: ep.number,
+                        title: ep.title,
+                        description: ep.description,
+                        youtubeUrl: ep.youtubeUrl,
+                        thumbnailUrl: item.coverUrl,
+                        durationSeconds: ep.durationSeconds || 900,
+                        isFree: ep.isFree,
+                        viewsCount: 0
+                    }))
+                });
+            }
+        }
+        dramasEnsured = true;
+    } catch (err) {
+        console.error("Erro ao sincronizar novelas iniciais:", err);
     }
 }

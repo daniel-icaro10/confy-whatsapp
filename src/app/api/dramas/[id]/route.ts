@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { ensureInitialDramas } from "@/lib/segredos-defaults";
 import { auth } from "@/lib/auth";
 
 export async function GET(
@@ -7,6 +8,7 @@ export async function GET(
     { params }: { params: Promise<{ id: string }> }
 ) {
     try {
+        await ensureInitialDramas();
         const { id } = await params;
 
         const drama = await prisma.drama.findFirst({

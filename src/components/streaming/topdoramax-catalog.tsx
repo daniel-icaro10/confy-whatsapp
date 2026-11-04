@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { DEFAULT_OFFER_PLANS, OfferPlan } from "@/lib/segredos-defaults";
+import { INITIAL_YOUTUBE_DRAMAS } from "@/lib/initial-dramas-data";
 import { VipAccessModal } from "@/components/streaming/vip-access-modal";
 import { PwaInstallModal } from "@/components/streaming/pwa-install-modal";
 
@@ -34,6 +35,31 @@ export interface Drama {
     episodes: Episode[];
     isShowcaseOnly?: boolean;
 }
+
+const DEFAULT_CATALOG_DRAMAS: Drama[] = INITIAL_YOUTUBE_DRAMAS.map((d) => ({
+    id: d.id,
+    title: d.title,
+    slug: d.slug,
+    synopsis: d.synopsis,
+    coverUrl: d.coverUrl,
+    bannerUrl: d.bannerUrl || d.coverUrl,
+    category: d.category,
+    tags: d.tags,
+    totalEpisodes: d.totalEpisodes,
+    freeEpisodesCount: d.freeEpisodesCount,
+    isFeatured: d.isFeatured,
+    isVertical: d.isVertical,
+    viewsCount: d.viewsCount,
+    likesCount: d.likesCount,
+    episodes: d.episodes.map((ep) => ({
+        id: `${d.id}-ep-${ep.number}`,
+        number: ep.number,
+        title: ep.title,
+        isFree: ep.isFree,
+        durationSeconds: ep.durationSeconds || 900
+    })),
+    isShowcaseOnly: false
+}));
 
 const TOPDORAMAX_SHOWCASE_DRAMAS: Drama[] = [
     {
@@ -553,16 +579,20 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
         loadData();
     }, []);
 
-    // Combina as novelas cadastradas no painel (/dashboard/novelas) com a vitrine TopDoramax
+    // Combina as novelas cadastradas no painel (/dashboard/novelas) com o catálogo padrão e vitrine
     const dramas = useMemo(() => {
         if (dbDramas.length > 0) {
             const dbSlugs = new Set(dbDramas.map((d) => d.slug));
             return [
                 ...dbDramas,
+                ...DEFAULT_CATALOG_DRAMAS.filter((d) => !dbSlugs.has(d.slug)),
                 ...TOPDORAMAX_SHOWCASE_DRAMAS.filter((s) => !dbSlugs.has(s.slug))
             ];
         }
-        return TOPDORAMAX_SHOWCASE_DRAMAS;
+        return [
+            ...DEFAULT_CATALOG_DRAMAS,
+            ...TOPDORAMAX_SHOWCASE_DRAMAS
+        ];
     }, [dbDramas]);
 
     // Verifica acesso VIP (retorno Stripe, parâmetro ?phone= do robô do WhatsApp ou localStorage)
@@ -783,19 +813,27 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
         return Math.ceil(diffMs / (1000 * 60 * 60 * 24));
     }, [viewerExpiresAt]);
 
-    const handleSelectDrama = (drama: Drama) => {
+    const handleSelectDrama = (drama: Drama, forceWatch = false) => {
         if (isVip && !drama.isShowcaseOnly) {
             router.push(`/assistir/${drama.slug}`);
             return;
         }
+        if (forceWatch && !drama.isShowcaseOnly) {
+            router.push(`/assistir/${drama.slug}?ep=1`);
+            return;
+        }
         if (isVip && drama.isShowcaseOnly) {
-            // Se for uma série da vitrine e já houver novela real cadastrada no banco, leva para a primeira novela ou exibe aviso de episódios
+            // Se for uma série da vitrine e já houver novela real cadastrada no banco, leva para a primeira novela
             if (dbDramas.length > 0) {
                 router.push(`/assistir/${dbDramas[0].slug}`);
                 return;
             }
+            if (DEFAULT_CATALOG_DRAMAS.length > 0) {
+                router.push(`/assistir/${DEFAULT_CATALOG_DRAMAS[0].slug}`);
+                return;
+            }
         }
-        // Visitante fora do tráfego: abre a tela de Série Bloqueada idêntica ao TopDoramax
+        // Abre a tela de Série Bloqueada com opção de assistir ep 1 grátis e planos VIP
         setLockedSerieModal(drama);
     };
 
@@ -1015,7 +1053,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                         <div className="flex flex-wrap items-center justify-center md:justify-start gap-2.5 w-full mt-1">
                                             <button
                                                 type="button"
-                                                onClick={() => handleSelectDrama(currentBanner)}
+                                                onClick={() => handleSelectDrama(currentBanner, true)}
                                                 className="min-w-[130px] sm:min-w-[140px] inline-flex items-center justify-center gap-2 px-6 py-2.5 sm:py-3 rounded-full bg-white hover:bg-[#e8e8e8] text-black font-bold text-sm sm:text-base transition transform active:scale-95 cursor-pointer shadow-md"
                                             >
                                                 <svg
