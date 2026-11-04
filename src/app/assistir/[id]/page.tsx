@@ -25,6 +25,7 @@ interface Drama {
     slug: string;
     synopsis: string;
     coverUrl: string;
+    bannerUrl?: string | null;
     category: string;
     totalEpisodes: number;
     freeEpisodesCount: number;
@@ -47,6 +48,7 @@ function WatchDramaContent() {
     const [plans, setPlans] = useState<OfferPlan[]>(DEFAULT_OFFER_PLANS);
     const [vipModalOpen, setVipModalOpen] = useState(false);
     const [vipModalTab, setVipModalTab] = useState<"login" | "pix">("pix");
+    const [vipInitialPlan, setVipInitialPlan] = useState<"monthly" | "quarterly" | "annual">("annual");
     const [pwaModalOpen, setPwaModalOpen] = useState(false);
 
     useEffect(() => {
@@ -119,18 +121,28 @@ function WatchDramaContent() {
 
     if (loading) {
         return (
-            <div className="min-h-dvh bg-[#151413] text-[#efe9de] hd-theme flex items-center justify-center">
-                <span className="text-xs text-[#efe9de]/55">Carregando episódio...</span>
+            <div className="min-h-dvh bg-black text-[#f5f5f5] flex items-center justify-center">
+                <span className="text-xs font-semibold text-[#9a9a9a]">
+                    Carregando episódio...
+                </span>
             </div>
         );
     }
 
     if (!drama) {
         return (
-            <div className="min-h-dvh bg-[#151413] text-[#efe9de] hd-theme flex flex-col items-center justify-center p-4 text-center">
-                <h1 className="text-lg font-semibold mb-3">Novela não encontrada</h1>
-                <Link href="/" className="hd-btn-sm hd-button-cream">
-                    Voltar ao catálogo
+            <div className="min-h-dvh bg-black text-[#f5f5f5] flex flex-col items-center justify-center p-6 text-center">
+                <span className="text-[11px] font-extrabold uppercase tracking-[0.08em] text-[#e11d48] mb-2">
+                    TVDRAMA REELS
+                </span>
+                <h1 className="text-xl font-black text-white mb-4">
+                    Série não encontrada
+                </h1>
+                <Link
+                    href="/"
+                    className="inline-flex items-center justify-center min-h-[44px] px-6 rounded-full bg-[#e11d48] hover:bg-[#f43f5e] text-white font-bold text-sm transition"
+                >
+                    ← Voltar ao catálogo
                 </Link>
             </div>
         );
@@ -153,9 +165,16 @@ function WatchDramaContent() {
     const handleSelectEpisode = (ep: Episode) => {
         setCurrentEpNumber(ep.number);
         if (!isEpisodeUnlocked(ep)) {
+            setVipInitialPlan("annual");
             setVipModalTab("pix");
             setVipModalOpen(true);
         }
+    };
+
+    const openPlanModal = (planKey: "monthly" | "quarterly" | "annual") => {
+        setVipInitialPlan(planKey);
+        setVipModalTab("pix");
+        setVipModalOpen(true);
     };
 
     const currentIndex = episodes.findIndex((e) => e.number === currentEpNumber);
@@ -165,24 +184,33 @@ function WatchDramaContent() {
             ? episodes[currentIndex + 1]
             : null;
 
-    const monthlyPlan = plans.find((p) => p.key === "monthly") || plans[0];
+    const annualPlan = plans.find((p) => p.key === "annual") || DEFAULT_OFFER_PLANS[1];
+    const monthlyPlan = plans.find((p) => p.key === "monthly") || DEFAULT_OFFER_PLANS[0];
+    const quarterlyPlan = plans.find((p) => p.key === "quarterly") || DEFAULT_OFFER_PLANS[2];
 
     return (
-        <div className="min-h-dvh bg-[#0e0d0c] text-[#efe9de] hd-theme flex flex-col">
-            <header className="sticky top-0 z-30 border-b border-[rgb(239_233_222/0.08)] bg-[#151413]/92 backdrop-blur-md">
-                <div className="max-w-6xl mx-auto px-4 h-15 flex items-center justify-between gap-3">
+        <div className="min-h-dvh bg-black text-[#f5f5f5] flex flex-col select-none">
+            {/* CABEÇALHO FIXO PADRÃO TOPDORAMAX */}
+            <header className="sticky top-0 z-30 border-b border-white/[0.06] bg-[#060606]/90 backdrop-blur-xl">
+                <div className="max-w-[1280px] mx-auto px-4 sm:px-8 h-[64px] flex items-center justify-between gap-3">
                     <div className="flex items-center gap-3 min-w-0">
                         <Link
                             href="/"
-                            className="hd-btn-sm hd-button-quiet text-xs shrink-0"
+                            className="px-3.5 py-1.5 rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/15 text-white text-xs font-semibold shrink-0 transition"
                         >
                             ← Catálogo
                         </Link>
                         <div className="min-w-0">
-                            <h1 className="text-sm font-semibold text-[#efe9de] truncate">
-                                {drama.title}
-                            </h1>
-                            <p className="text-[11px] text-[#efe9de]/55 tabular-nums">
+                            <div className="flex items-center gap-2">
+                                <span className="hidden sm:inline font-black text-xs tracking-[0.06em] uppercase text-[#e11d48]">
+                                    TVDRAMA REELS
+                                </span>
+                                <span className="hidden sm:inline text-white/25">·</span>
+                                <h1 className="text-sm font-bold text-white truncate">
+                                    {drama.title}
+                                </h1>
+                            </div>
+                            <p className="text-[11px] text-[#9a9a9a] tabular-nums">
                                 Episódio {String(currentEpisode?.number || 1).padStart(2, "0")} de{" "}
                                 {episodes.length}
                             </p>
@@ -193,14 +221,14 @@ function WatchDramaContent() {
                         <button
                             type="button"
                             onClick={() => setPwaModalOpen(true)}
-                            className="hd-btn-sm hd-button-quiet text-xs hidden sm:inline-flex"
+                            className="hidden sm:inline-flex px-3 py-1.5 rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/15 text-white text-xs font-semibold transition"
                         >
-                            Baixar App (PWA)
+                            Baixar App
                         </button>
 
                         {isVip ? (
-                            <span className="px-3 py-1.5 rounded-full hd-surface text-[#e2b383] text-xs tabular-nums">
-                                VIP · {viewerPhone.slice(-4)}
+                            <span className="px-3 py-1.5 rounded-full bg-[#22b868]/15 border border-[#22b868]/30 text-[#4ade8a] text-xs font-bold tabular-nums">
+                                Display Liberado · {viewerPhone.slice(-4)}
                             </span>
                         ) : (
                             <>
@@ -210,19 +238,16 @@ function WatchDramaContent() {
                                         setVipModalTab("login");
                                         setVipModalOpen(true);
                                     }}
-                                    className="hd-btn-sm hd-button-quiet text-xs"
+                                    className="px-3 py-1.5 rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/15 text-white text-xs font-semibold transition"
                                 >
-                                    Entrar
+                                    Já paguei
                                 </button>
                                 <button
                                     type="button"
-                                    onClick={() => {
-                                        setVipModalTab("pix");
-                                        setVipModalOpen(true);
-                                    }}
-                                    className="hd-btn-sm hd-button-cream text-xs"
+                                    onClick={() => openPlanModal("annual")}
+                                    className="px-3.5 py-1.5 rounded-full bg-[#e11d48] hover:bg-[#f43f5e] text-white text-xs font-bold shadow-[0_6px_20px_rgba(225,29,72,0.35)] transition"
                                 >
-                                    Assinar
+                                    Liberar Catálogo
                                 </button>
                             </>
                         )}
@@ -230,14 +255,15 @@ function WatchDramaContent() {
                 </div>
             </header>
 
-            <main className="max-w-6xl mx-auto w-full px-0 sm:px-4 py-0 sm:py-6 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            <main className="max-w-[1280px] mx-auto w-full px-0 sm:px-8 py-0 sm:py-6 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                {/* COLUNA DO PLAYER */}
                 <div className="lg:col-span-7 flex flex-col items-center">
                     <div
                         className={`relative w-full ${
                             drama.isVertical
                                 ? "max-w-[410px] aspect-[9/16]"
                                 : "aspect-video"
-                        } bg-black sm:rounded-[22px] overflow-hidden sm:hd-shell`}
+                        } bg-[#09090b] sm:rounded-[20px] overflow-hidden sm:border sm:border-white/12 shadow-[0_24px_60px_rgba(0,0,0,0.85)]`}
                     >
                         {currentUnlocked && currentEpisode ? (
                             currentEpisode.videoUrl ? (
@@ -261,58 +287,114 @@ function WatchDramaContent() {
                                 />
                             ) : (
                                 <div className="w-full h-full flex items-center justify-center p-6 text-center">
-                                    <p className="text-xs text-[#efe9de]/55">
-                                        Vídeo indisponível.
+                                    <p className="text-xs text-[#9a9a9a]">
+                                        Vídeo indisponível neste episódio.
                                     </p>
                                 </div>
                             )
                         ) : (
-                            <div className="w-full h-full relative flex flex-col items-center justify-center p-6 text-center bg-[#151413]">
-                                <div className="max-w-xs">
-                                    <span className="inline-block px-3 py-1 rounded-full hd-surface text-[#e2b383] text-[11px] font-medium mb-3 tabular-nums">
-                                        Episódio {String(currentEpisode?.number || 1).padStart(2, "0")} · Exclusivo Assinantes
+                            /* TELA DE EPISÓDIO BLOQUEADO PADRÃO TOPDORAMAX */
+                            <div className="w-full h-full relative flex flex-col items-center justify-center p-5 text-center bg-black overflow-y-auto">
+                                <img
+                                    src={drama.bannerUrl || drama.coverUrl}
+                                    alt=""
+                                    className="absolute inset-0 w-full h-full object-cover opacity-25 blur-sm pointer-events-none"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/85 to-black/60 pointer-events-none" />
+
+                                <div className="relative z-10 w-full max-w-sm space-y-3">
+                                    <span className="inline-block px-3.5 py-1 rounded-full bg-black/80 border border-white/15 text-white text-xs font-bold tabular-nums">
+                                        Episódio {String(currentEpisode?.number || 1).padStart(2, "0")} bloqueado
                                     </span>
-                                    <h2 className="text-xl font-semibold tracking-[-0.015em] text-[#efe9de] mb-2">
-                                        Continue assistindo sem limites
+                                    <h2 className="text-xl font-black uppercase tracking-tight text-white">
+                                        {drama.title}
                                     </h2>
-                                    <p className="text-xs text-[#efe9de]/64 mb-6 leading-relaxed">
-                                        Desbloqueie todos os episódios de {drama.title}, todo o catálogo e o aplicativo PWA a partir de R$ {(monthlyPlan?.price || 9.9).toFixed(2).replace(".", ",")}/mês.
+                                    <p className="text-xs text-[#9a9a9a] leading-relaxed">
+                                        Desbloqueie agora para assistir a todos os episódios desta série e liberar todo o catálogo:
                                     </p>
 
-                                    <div className="space-y-2.5">
+                                    <div className="space-y-2 text-left pt-1">
                                         <button
                                             type="button"
-                                            onClick={() => {
-                                                setVipModalTab("pix");
-                                                setVipModalOpen(true);
-                                            }}
-                                            className="w-full hd-btn hd-button-cream text-xs"
+                                            onClick={() => openPlanModal("annual")}
+                                            className="relative w-full p-3.5 rounded-2xl border-2 border-[#e11d48] bg-[#e11d48]/15 hover:bg-[#e11d48]/25 shadow-[0_6px_20px_rgba(225,29,72,0.3)] transition block"
                                         >
-                                            Ver planos (Pix ou Cartão)
+                                            <span className="absolute -top-2 right-2.5 px-2 py-0.5 rounded-full bg-white text-[#e11d48] text-[10px] font-extrabold uppercase">
+                                                Mais escolhido · {annualPlan.topTag}
+                                            </span>
+                                            <strong className="block text-sm font-extrabold text-white">
+                                                Todas as séries (Anual) · R${" "}
+                                                {annualPlan.price.toFixed(2).replace(".", ",")}
+                                            </strong>
+                                            <span className="block text-[11px] text-[#d4d4d8] mt-0.5">
+                                                365 dias · Catálogo completo · {annualPlan.badge}
+                                            </span>
                                         </button>
 
+                                        <button
+                                            type="button"
+                                            onClick={() => openPlanModal("monthly")}
+                                            className="w-full px-3.5 py-2.5 rounded-xl border border-white/15 bg-[#0e0e11] hover:bg-[#16161a] transition block"
+                                        >
+                                            <div className="flex items-center justify-between gap-2">
+                                                <strong className="text-xs font-bold text-white">
+                                                    {monthlyPlan.name} · R${" "}
+                                                    {monthlyPlan.price.toFixed(2).replace(".", ",")}/mês
+                                                </strong>
+                                                <span className="text-[10px] font-bold text-[#f43f5e]">
+                                                    {monthlyPlan.topTag}
+                                                </span>
+                                            </div>
+                                            <span className="block text-[11px] text-[#9a9a9a] mt-0.5">
+                                                30 dias · {monthlyPlan.badge}
+                                            </span>
+                                        </button>
+
+                                        <button
+                                            type="button"
+                                            onClick={() => openPlanModal("quarterly")}
+                                            className="w-full px-3.5 py-2.5 rounded-xl border border-white/15 bg-[#0e0e11] hover:bg-[#16161a] transition block"
+                                        >
+                                            <div className="flex items-center justify-between gap-2">
+                                                <strong className="text-xs font-bold text-white">
+                                                    {quarterlyPlan.name} · R${" "}
+                                                    {quarterlyPlan.price.toFixed(2).replace(".", ",")}
+                                                </strong>
+                                                <span className="text-[10px] font-bold text-[#4ade8a]">
+                                                    3 meses
+                                                </span>
+                                            </div>
+                                            <span className="block text-[11px] text-[#9a9a9a] mt-0.5">
+                                                90 dias · {quarterlyPlan.badge}
+                                            </span>
+                                        </button>
+                                    </div>
+
+                                    <p className="text-center text-xs text-[#9a9a9a] pt-1">
+                                        Já pagou?{" "}
                                         <button
                                             type="button"
                                             onClick={() => {
                                                 setVipModalTab("login");
                                                 setVipModalOpen(true);
                                             }}
-                                            className="w-full hd-btn hd-button-quiet text-xs"
+                                            className="text-white font-bold underline"
                                         >
-                                            Já sou assinante
+                                            Entre na sua conta
                                         </button>
-                                    </div>
+                                    </p>
                                 </div>
                             </div>
                         )}
                     </div>
 
+                    {/* Botões Anterior / Próximo */}
                     <div className="w-full max-w-[410px] px-4 sm:px-0 mt-3.5 flex items-center justify-between gap-2">
                         <button
                             type="button"
                             disabled={!prevEp}
                             onClick={() => prevEp && handleSelectEpisode(prevEp)}
-                            className="hd-btn-sm hd-button-quiet disabled:opacity-35"
+                            className="px-4 py-2 rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/15 text-white text-xs font-semibold transition disabled:opacity-35"
                         >
                             ← Episódio anterior
                         </button>
@@ -321,33 +403,38 @@ function WatchDramaContent() {
                             type="button"
                             disabled={!nextEp}
                             onClick={() => nextEp && handleSelectEpisode(nextEp)}
-                            className="hd-btn-sm hd-button-cream disabled:opacity-35"
+                            className="px-4 py-2 rounded-full bg-[#e11d48] hover:bg-[#f43f5e] text-white text-xs font-bold shadow-[0_6px_20px_rgba(225,29,72,0.3)] transition disabled:opacity-35"
                         >
                             Próximo episódio →
                         </button>
                     </div>
                 </div>
 
-                <div className="lg:col-span-5 px-4 sm:px-0 pb-12 space-y-5">
-                    <div className="p-5 rounded-[20px] hd-card">
-                        <div className="text-[11px] text-[#e2b383] font-medium mb-1">
+                {/* COLUNA LATERAL DE INFORMAÇÕES E LISTA DE EPISÓDIOS */}
+                <div className="lg:col-span-5 px-4 sm:px-0 pb-12 space-y-4">
+                    <div className="p-5 rounded-2xl bg-[#0e0e11] border border-white/10">
+                        <div className="text-[11px] font-extrabold uppercase tracking-[0.06em] text-[#e11d48] mb-1">
                             {drama.category}
                         </div>
-                        <h2 className="text-lg font-semibold tracking-[-0.012em] text-[#efe9de] mb-1.5">
+                        <h2 className="text-lg font-black tracking-tight text-white mb-1.5">
                             {drama.title}
                         </h2>
-                        <p className="text-xs text-[#efe9de]/64 leading-relaxed">
+                        <p className="text-xs text-[#9a9a9a] leading-relaxed">
                             {drama.synopsis}
                         </p>
                     </div>
 
-                    <div className="p-5 rounded-[20px] hd-card">
+                    <div className="p-5 rounded-2xl bg-[#0e0e11] border border-white/10">
                         <div className="flex items-center justify-between mb-3.5">
-                            <h3 className="text-sm font-semibold text-[#efe9de]">
+                            <h3 className="text-sm font-bold text-white">
                                 Episódios ({episodes.length})
                             </h3>
-                            <span className="text-[11px] text-[#e2b383] tabular-nums">
-                                Ep. 01 a 0{drama.freeEpisodesCount} grátis
+                            <span className="text-[11px] font-semibold text-[#4ade8a] tabular-nums">
+                                {isVip
+                                    ? "Todos os episódios liberados"
+                                    : drama.freeEpisodesCount > 0
+                                    ? `Ep. 01 a 0${drama.freeEpisodesCount} grátis`
+                                    : "Acesso mediante desbloqueio"}
                             </span>
                         </div>
 
@@ -360,12 +447,12 @@ function WatchDramaContent() {
                                         key={ep.id}
                                         type="button"
                                         onClick={() => handleSelectEpisode(ep)}
-                                        className={`py-2 rounded-[12px] text-xs font-medium tabular-nums transition ${
+                                        className={`py-2 rounded-xl text-xs font-bold tabular-nums transition ${
                                             active
-                                                ? "hd-button-cream text-[#151413]"
+                                                ? "bg-[#e11d48] text-white shadow-[0_4px_14px_rgba(225,29,72,0.35)]"
                                                 : unlocked
-                                                ? "hd-surface text-[#efe9de] hover:border-[rgb(239_233_222/0.25)]"
-                                                : "bg-[#151413]/60 border border-[rgb(239_233_222/0.06)] text-[#efe9de]/35"
+                                                ? "bg-[#16161b] border border-white/15 text-white hover:border-white/35"
+                                                : "bg-[#09090b] border border-white/[0.06] text-[#6e6e77]"
                                         }`}
                                     >
                                         {String(ep.number).padStart(2, "0")}
@@ -374,7 +461,7 @@ function WatchDramaContent() {
                             })}
                         </div>
 
-                        <div className="divide-y divide-[rgb(239_233_222/0.08)] max-h-72 overflow-y-auto styled-scrollbar">
+                        <div className="divide-y divide-white/[0.06] max-h-72 overflow-y-auto styled-scrollbar">
                             {episodes.map((ep) => {
                                 const unlocked = isEpisodeUnlocked(ep);
                                 const active = ep.number === currentEpNumber;
@@ -384,26 +471,26 @@ function WatchDramaContent() {
                                         type="button"
                                         onClick={() => handleSelectEpisode(ep)}
                                         className={`w-full text-left py-2.5 px-2.5 flex items-center justify-between gap-3 transition ${
-                                            active ? "bg-[#efe9de]/[0.06] rounded-[10px]" : ""
+                                            active ? "bg-white/[0.06] rounded-xl" : ""
                                         }`}
                                     >
                                         <div className="min-w-0">
-                                            <div className="text-xs font-medium text-[#efe9de] truncate">
+                                            <div className="text-xs font-semibold text-white truncate">
                                                 {ep.title}
                                             </div>
                                             {ep.description && (
-                                                <div className="text-[11px] text-[#efe9de]/45 truncate">
+                                                <div className="text-[11px] text-[#9a9a9a] truncate">
                                                     {ep.description}
                                                 </div>
                                             )}
                                         </div>
 
                                         <span
-                                            className={`text-[11px] shrink-0 tabular-nums ${
-                                                unlocked ? "text-[#e2b383]" : "text-[#efe9de]/40"
+                                            className={`text-[11px] font-bold shrink-0 tabular-nums ${
+                                                unlocked ? "text-[#4ade8a]" : "text-[#9a9a9a]"
                                             }`}
                                         >
-                                            {unlocked ? "Liberado" : "Assinantes"}
+                                            {unlocked ? "Liberado" : "Bloqueado"}
                                         </span>
                                     </button>
                                 );
@@ -411,19 +498,19 @@ function WatchDramaContent() {
                         </div>
                     </div>
 
-                    <div className="p-4 rounded-[18px] hd-plan flex items-center justify-between gap-3">
+                    <div className="p-4 rounded-2xl bg-[#0e0e11] border border-white/10 flex items-center justify-between gap-3">
                         <div>
-                            <div className="text-xs font-semibold text-[#efe9de]">
-                                Versão Aplicativo (PWA)
+                            <div className="text-xs font-bold text-white">
+                                Aplicativo TvDrama Reels (PWA)
                             </div>
-                            <div className="text-[11px] text-[#efe9de]/60">
-                                Assista em tela cheia direto da tela inicial
+                            <div className="text-[11px] text-[#9a9a9a]">
+                                Instale na tela inicial para assistir em tela cheia
                             </div>
                         </div>
                         <button
                             type="button"
                             onClick={() => setPwaModalOpen(true)}
-                            className="hd-btn-sm hd-button-quiet text-xs shrink-0"
+                            className="px-3.5 py-2 rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/15 text-white text-xs font-semibold shrink-0 transition"
                         >
                             Baixar App
                         </button>
@@ -442,6 +529,7 @@ function WatchDramaContent() {
                 dramaId={drama.slug}
                 dramaTitle={drama.title}
                 defaultTab={vipModalTab}
+                initialPlanKey={vipInitialPlan}
                 plans={plans}
             />
 
@@ -461,7 +549,7 @@ function WatchDramaContent() {
 
 export default function WatchDramaPage() {
     return (
-        <Suspense fallback={<div className="min-h-dvh bg-[#151413]" />}>
+        <Suspense fallback={<div className="min-h-dvh bg-black" />}>
             <WatchDramaContent />
         </Suspense>
     );

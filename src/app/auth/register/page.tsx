@@ -1,63 +1,36 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { useRouter } from 'next/navigation';
-import { Button } from "@/components/ui/button"
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Bot, ArrowRight, Loader2 } from "lucide-react";
-import Link from 'next/link';
-
-const formSchema = z.object({
-    name: z.string().min(2, "O nome deve ter pelo menos 2 caracteres"),
-    email: z.string().email("Informe um endereço de e-mail válido"),
-    password: z.string().min(6, "A senha deve ter pelo menos 6 caracteres"),
-    confirmPassword: z.string()
-}).refine((data) => data.password === data.confirmPassword, {
-    message: "As senhas não coincidem",
-    path: ["confirmPassword"],
-});
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function RegisterPage() {
     const router = useRouter();
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-            name: "",
-            email: "",
-            password: "",
-            confirmPassword: ""
-        },
-    });
-
-    async function onSubmit(values: z.infer<typeof formSchema>) {
+    async function handleSubmit(e: React.FormEvent) {
+        e.preventDefault();
+        if (password.length < 6) {
+            setError("A senha deve ter pelo menos 6 caracteres.");
+            return;
+        }
+        if (password !== confirmPassword) {
+            setError("As senhas não coincidem.");
+            return;
+        }
         setLoading(true);
         setError(null);
         try {
-            const response = await fetch('/api/auth/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    name: values.name,
-                    email: values.email,
-                    password: values.password,
-                }),
+            const response = await fetch("/api/auth/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, email, password })
             });
 
             if (!response.ok) {
@@ -67,9 +40,8 @@ export default function RegisterPage() {
 
             setSuccess(true);
             setTimeout(() => {
-                router.push('/auth/login');
-            }, 2000);
-
+                router.push("/auth/login");
+            }, 1800);
         } catch (err: any) {
             setError(err.message || "Ocorreu um erro inesperado");
         } finally {
@@ -77,145 +49,135 @@ export default function RegisterPage() {
         }
     }
 
-    if (success) {
-        return (
-            <div className="flex flex-col items-center justify-center min-h-screen bg-background relative overflow-hidden">
-                <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[40rem] bg-primary/20 rounded-full blur-[120px] pointer-events-none" />
-                <div className="glass-panel p-10 rounded-3xl flex flex-col items-center text-center max-w-sm animate-in zoom-in duration-500">
-                    <div className="h-16 w-16 bg-emerald-500 rounded-full flex items-center justify-center mb-6 shadow-lg shadow-emerald-500/30">
-                        <Bot className="h-8 w-8 text-white" />
-                    </div>
-                    <h2 className="text-2xl font-bold text-foreground mb-2">Cadastro realizado com sucesso!</h2>
-                    <p className="text-muted-foreground">Redirecionando para a página de login...</p>
-                </div>
-            </div>
-        );
-    }
-
     return (
-        <div className="flex items-center justify-center min-h-screen relative overflow-hidden bg-background py-12">
-            {/* Background Orbs */}
-            <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
-                <div className="absolute top-0 right-0 translate-x-1/3 -translate-y-1/4 w-[40rem] h-[40rem] bg-emerald-500/10 rounded-full blur-[120px]" />
-                <div className="absolute bottom-0 left-0 -translate-x-1/4 translate-y-1/4 w-[30rem] h-[30rem] bg-primary/20 rounded-full blur-[100px]" />
-            </div>
+        <div className="min-h-dvh bg-black text-[#f5f5f5] flex flex-col select-none">
+            <header className="fixed top-0 left-0 right-0 z-30 flex items-center justify-between px-4 sm:px-10 h-[66px] bg-[#060606]/90 backdrop-blur-xl border-b border-white/[0.06]">
+                <Link
+                    href="/"
+                    className="font-black text-[20px] sm:text-[22px] tracking-[0.06em] uppercase text-[#e11d48]"
+                >
+                    TVDRAMA REELS
+                </Link>
+                <Link
+                    href="/auth/login"
+                    className="px-3.5 py-1.5 rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/15 text-white text-xs font-semibold transition"
+                >
+                    Já tenho conta
+                </Link>
+            </header>
 
-            <div className="relative z-10 w-full max-w-md p-4 animate-in fade-in zoom-in-95 duration-500">
-                <div className="flex flex-col items-center mb-8">
-                    <div className="relative flex h-16 w-16 mb-4 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-400 to-primary text-white shadow-lg shadow-primary/30">
-                        <Bot className="h-8 w-8" />
+            <main className="flex-1 flex items-center justify-center p-4 pt-24 pb-12 relative overflow-hidden">
+                <div
+                    aria-hidden="true"
+                    className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] h-[380px] rounded-full bg-[#e11d48]/12 blur-[110px] pointer-events-none"
+                />
+
+                <div className="relative z-10 w-full max-w-[420px]">
+                    <div className="text-center mb-5">
+                        <span className="text-[11px] font-extrabold uppercase tracking-[0.08em] text-[#e11d48] block">
+                            TVDRAMA REELS · CADASTRO
+                        </span>
+                        <h1 className="text-2xl font-black tracking-tight text-white mt-1">
+                            Criar conta
+                        </h1>
+                        <p className="text-xs text-[#9a9a9a] mt-1">
+                            Preencha os dados abaixo para criar seu acesso
+                        </p>
                     </div>
-                    <h1 className="text-3xl font-bold tracking-tight text-foreground">Criar conta</h1>
-                    <p className="text-muted-foreground mt-2">Comece a usar o WA-AKG hoje</p>
-                </div>
 
-                <div className="glass-panel rounded-3xl p-8 shadow-2xl shadow-black/5 dark:shadow-black/40">
-                    {error && (
-                        <div className="mb-6 p-4 rounded-xl bg-destructive/10 border border-destructive/20 text-destructive text-sm text-center font-medium animate-in shake duration-300">
-                            {error}
-                        </div>
-                    )}
+                    <div className="rounded-[22px] border border-white/12 bg-[#101014] p-5 sm:p-6 shadow-[0_24px_60px_rgba(0,0,0,0.85)]">
+                        {success ? (
+                            <div className="py-6 text-center space-y-2">
+                                <div className="inline-flex px-3 py-1 rounded-full bg-[#22b868]/15 border border-[#22b868]/30 text-[#4ade8a] text-xs font-bold">
+                                    Conta criada com sucesso!
+                                </div>
+                                <p className="text-xs text-[#9a9a9a]">
+                                    Redirecionando para a tela de login...
+                                </p>
+                            </div>
+                        ) : (
+                            <form onSubmit={handleSubmit} className="space-y-3.5">
+                                {error && (
+                                    <div className="p-3.5 rounded-xl bg-[#e11d48]/15 border border-[#e11d48]/35 text-xs font-medium text-[#fda4af]">
+                                        {error}
+                                    </div>
+                                )}
 
-                    <Form {...form}>
-                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                            <FormField
-                                control={form.control}
-                                name="name"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel className="text-foreground/80">Nome completo</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                placeholder="João da Silva"
-                                                className="h-12 px-4 rounded-xl bg-background/50 border-white/20 dark:border-white/10 focus-visible:ring-primary/50 transition-all font-medium"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name="email"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel className="text-foreground/80">E-mail</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                placeholder="nome@exemplo.com"
-                                                className="h-12 px-4 rounded-xl bg-background/50 border-white/20 dark:border-white/10 focus-visible:ring-primary/50 transition-all font-medium"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name="password"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel className="text-foreground/80">Senha</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                type="password"
-                                                placeholder="••••••••"
-                                                className="h-12 px-4 rounded-xl bg-background/50 border-white/20 dark:border-white/10 focus-visible:ring-primary/50 transition-all font-medium"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name="confirmPassword"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel className="text-foreground/80">Confirmar senha</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                type="password"
-                                                placeholder="••••••••"
-                                                className="h-12 px-4 rounded-xl bg-background/50 border-white/20 dark:border-white/10 focus-visible:ring-primary/50 transition-all font-medium"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
+                                <div>
+                                    <label className="block text-xs font-semibold text-[#e6e6eb] mb-1.5">
+                                        Nome completo
+                                    </label>
+                                    <input
+                                        type="text"
+                                        required
+                                        placeholder="Seu nome"
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)}
+                                        className="w-full px-4 py-3 rounded-xl bg-[#09090b] border border-white/15 focus:border-white/40 outline-none text-sm text-white placeholder:text-[#6e6e77] transition"
+                                    />
+                                </div>
 
-                            <Button
-                                type="submit"
-                                size="lg"
-                                className="w-full h-12 rounded-xl text-base shadow-lg shadow-primary/20 hover:shadow-primary/30 mt-4"
-                                disabled={loading}
-                            >
-                                {loading ? (
-                                    <><Loader2 className="mr-2 h-5 w-5 animate-spin" /> Criando conta...</>
-                                ) : (
-                                    <>Cadastrar <ArrowRight className="ml-2 h-5 w-5" /></>
-                                )}
-                            </Button>
-                        </form>
-                    </Form>
+                                <div>
+                                    <label className="block text-xs font-semibold text-[#e6e6eb] mb-1.5">
+                                        E-mail
+                                    </label>
+                                    <input
+                                        type="email"
+                                        required
+                                        placeholder="nome@exemplo.com"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        className="w-full px-4 py-3 rounded-xl bg-[#09090b] border border-white/15 focus:border-white/40 outline-none text-sm text-white placeholder:text-[#6e6e77] transition"
+                                    />
+                                </div>
 
-                    <div className="mt-6 text-xs text-center text-muted-foreground leading-relaxed">
-                        Ao se cadastrar, você concorda com nossos <Link href="/terms" className="underline hover:text-foreground">Termos de Serviço</Link> e nossa <Link href="/privacy" className="underline hover:text-foreground">Política de Privacidade</Link>.
+                                <div>
+                                    <label className="block text-xs font-semibold text-[#e6e6eb] mb-1.5">
+                                        Senha
+                                    </label>
+                                    <input
+                                        type="password"
+                                        required
+                                        placeholder="••••••••"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        className="w-full px-4 py-3 rounded-xl bg-[#09090b] border border-white/15 focus:border-white/40 outline-none text-sm text-white placeholder:text-[#6e6e77] transition"
+                                    />
+                                </div>
+
+                                <div>
+                                    <label className="block text-xs font-semibold text-[#e6e6eb] mb-1.5">
+                                        Confirmar senha
+                                    </label>
+                                    <input
+                                        type="password"
+                                        required
+                                        placeholder="••••••••"
+                                        value={confirmPassword}
+                                        onChange={(e) => setConfirmPassword(e.target.value)}
+                                        className="w-full px-4 py-3 rounded-xl bg-[#09090b] border border-white/15 focus:border-white/40 outline-none text-sm text-white placeholder:text-[#6e6e77] transition"
+                                    />
+                                </div>
+
+                                <button
+                                    type="submit"
+                                    disabled={loading}
+                                    className="w-full min-h-[48px] mt-2 rounded-full bg-[#e11d48] hover:bg-[#f43f5e] text-white font-bold text-sm shadow-[0_6px_20px_rgba(225,29,72,0.35)] transition disabled:opacity-50"
+                                >
+                                    {loading ? "Criando conta..." : "Cadastrar"}
+                                </button>
+                            </form>
+                        )}
+                    </div>
+
+                    <div className="mt-5 text-center text-xs text-[#9a9a9a]">
+                        Já possui conta?{" "}
+                        <Link href="/auth/login" className="text-white font-bold underline">
+                            Entrar agora
+                        </Link>
                     </div>
                 </div>
-
-                <div className="mt-8 text-center text-sm text-muted-foreground">
-                    Já tem uma conta?{" "}
-                    <Link href="/auth/login" className="font-semibold text-primary hover:text-primary/80 transition-colors">
-                        Entrar
-                    </Link>
-                </div>
-            </div>
+            </main>
         </div>
     );
 }

@@ -20,7 +20,7 @@ export function PwaInstallModal({
     onClose,
     isVip,
     viewerPhone,
-    onRequestVipModal,
+    onRequestVipModal
 }: PwaInstallModalProps) {
     const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
     const [isStandalone, setIsStandalone] = useState(false);
@@ -74,49 +74,58 @@ export function PwaInstallModal({
     }
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hd-theme">
-            <div className="relative w-full max-w-md rounded-[22px] hd-shell overflow-hidden">
-                <div className="px-6 pt-6 pb-4 border-b border-[rgb(239_233_222/0.12)] flex items-center justify-between">
+        <div
+            onClick={onClose}
+            className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/80 backdrop-blur-md"
+        >
+            <div
+                onClick={(e) => e.stopPropagation()}
+                className="relative w-full max-w-[440px] rounded-t-[24px] sm:rounded-[22px] bg-[#101014] border border-white/12 text-[#f5f5f5] shadow-[0_24px_60px_rgba(0,0,0,0.85)] overflow-hidden"
+            >
+                <div className="px-5 pt-5 pb-4 border-b border-white/[0.08] flex items-center justify-between bg-[#0b0b0e]">
                     <div>
-                        <span className="text-[11px] uppercase tracking-[0.06em] text-[#efe9de]/45 font-medium block">
-                            Versão Aplicativo · PWA
+                        <span className="text-[11px] font-extrabold uppercase tracking-[0.08em] text-[#e11d48] block">
+                            TVDRAMA REELS · APLICATIVO OFICIAL
                         </span>
-                        <h3 className="text-[19px] font-semibold tracking-[-0.012em] text-[#efe9de] mt-0.5">
-                            App TvDrama Reels
+                        <h3 className="text-[19px] font-black tracking-tight text-white mt-0.5">
+                            Baixar App (PWA)
                         </h3>
                     </div>
                     <button
                         type="button"
                         onClick={onClose}
-                        className="hd-btn-sm hd-button-quiet text-xs"
+                        aria-label="Fechar"
+                        className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/15 grid place-items-center text-white text-xs"
                     >
-                        Fechar
+                        ✕
                     </button>
                 </div>
 
-                <div className="p-6 space-y-5">
-                    <div className="rounded-[16px] p-4 hd-surface space-y-2.5">
+                <div className="p-5 sm:p-6 space-y-5">
+                    <div className="rounded-xl p-4 bg-[#09090b] border border-white/10 space-y-2.5">
                         <div className="flex items-center justify-between text-xs">
-                            <span className="text-[#efe9de]/64">Formato de exibição</span>
-                            <span className="text-[#efe9de] font-medium tabular-nums">Tela cheia 9:16 (Sem navegador)</span>
+                            <span className="text-[#9a9a9a]">Formato de exibição</span>
+                            <span className="text-white font-semibold tabular-nums">
+                                Tela cheia 9:16 (Sem navegador)
+                            </span>
                         </div>
-                        <div className="flex items-center justify-between text-xs border-t border-[rgb(239_233_222/0.08)] pt-2.5">
-                            <span className="text-[#efe9de]/64">Compatibilidade</span>
-                            <span className="text-[#efe9de] font-medium">iPhone (iOS) & Android</span>
+                        <div className="flex items-center justify-between text-xs border-t border-white/[0.08] pt-2.5">
+                            <span className="text-[#9a9a9a]">Compatibilidade</span>
+                            <span className="text-white font-semibold">iPhone (iOS) & Android</span>
                         </div>
-                        <div className="flex items-center justify-between text-xs border-t border-[rgb(239_233_222/0.08)] pt-2.5">
-                            <span className="text-[#efe9de]/64">Disponibilidade</span>
-                            <span className="text-[#e2b383] font-medium">Exclusivo para assinantes</span>
+                        <div className="flex items-center justify-between text-xs border-t border-white/[0.08] pt-2.5">
+                            <span className="text-[#9a9a9a]">Disponibilidade</span>
+                            <span className="text-[#4ade8a] font-bold">Exclusivo Assinantes</span>
                         </div>
                     </div>
 
                     {!isVip ? (
                         <div className="space-y-4">
-                            <div className="rounded-[16px] p-4 hd-plan">
-                                <p className="text-sm font-medium text-[#efe9de] mb-1">
+                            <div className="rounded-xl p-4 bg-[#e11d48]/12 border border-[#e11d48]/35">
+                                <p className="text-sm font-bold text-white mb-1">
                                     Download restrito a assinantes ativos
                                 </p>
-                                <p className="text-xs text-[#efe9de]/64 leading-relaxed">
+                                <p className="text-xs text-[#d4d4d8] leading-relaxed">
                                     O aplicativo PWA instala o player vertical direto na tela inicial do seu celular, sem ocupar memória e mantendo seu acesso sempre conectado.
                                 </p>
                             </div>
@@ -128,7 +137,7 @@ export function PwaInstallModal({
                                         onClose();
                                         onRequestVipModal("pix");
                                     }}
-                                    className="w-full hd-btn hd-button-cream"
+                                    className="w-full min-h-[48px] rounded-full bg-[#e11d48] hover:bg-[#f43f5e] text-white font-bold text-sm shadow-[0_6px_20px_rgba(225,29,72,0.35)] transition"
                                 >
                                     Liberar assinatura e baixar App
                                 </button>
@@ -138,51 +147,55 @@ export function PwaInstallModal({
                                         onClose();
                                         onRequestVipModal("login");
                                     }}
-                                    className="w-full hd-btn hd-button-quiet"
+                                    className="w-full min-h-[44px] rounded-full bg-white/10 hover:bg-white/15 border border-white/15 text-white font-semibold text-xs transition"
                                 >
-                                    Já sou assinante · Validar WhatsApp
+                                    Já paguei · Entrar na minha conta
                                 </button>
                             </div>
                         </div>
                     ) : isStandalone ? (
-                        <div className="rounded-[16px] p-4 hd-plan text-center space-y-1">
-                            <p className="text-sm font-medium text-[#efe9de]">
+                        <div className="rounded-xl p-4 bg-[#22b868]/15 border border-[#22b868]/35 text-center space-y-1">
+                            <p className="text-sm font-bold text-[#4ade8a]">
                                 Você já está utilizando a versão Aplicativo
                             </p>
-                            <p className="text-xs text-[#efe9de]/64">
+                            <p className="text-xs text-[#d4d4d8]">
                                 Acesso vinculado ao número {viewerPhone}.
                             </p>
                         </div>
                     ) : (
                         <div className="space-y-4">
-                            <div className="rounded-[14px] px-3.5 py-2.5 hd-surface flex items-center justify-between text-xs">
-                                <span className="text-[#efe9de]/64">Assinante verificado</span>
-                                <span className="text-[#e2b383] font-medium tabular-nums">{viewerPhone}</span>
+                            <div className="rounded-xl px-3.5 py-2.5 bg-[#09090b] border border-white/10 flex items-center justify-between text-xs">
+                                <span className="text-[#9a9a9a]">Assinante verificado</span>
+                                <span className="text-[#4ade8a] font-bold tabular-nums">
+                                    {viewerPhone}
+                                </span>
                             </div>
 
                             {deferredPrompt && (
                                 <button
                                     type="button"
                                     onClick={handleNativeInstall}
-                                    className="w-full hd-btn hd-button-cream"
+                                    className="w-full min-h-[48px] rounded-full bg-[#e11d48] hover:bg-[#f43f5e] text-white font-bold text-sm shadow-[0_6px_20px_rgba(225,29,72,0.35)] transition"
                                 >
                                     Instalar Aplicativo Agora
                                 </button>
                             )}
 
                             {installStatus && (
-                                <p className="text-xs text-center text-[#e2b383]">{installStatus}</p>
+                                <p className="text-xs text-center font-semibold text-[#4ade8a]">
+                                    {installStatus}
+                                </p>
                             )}
 
                             <div className="space-y-3">
-                                <div className="grid grid-cols-2 gap-2 p-1 rounded-full hd-surface">
+                                <div className="grid grid-cols-2 gap-1.5 p-1 rounded-full bg-[#09090b] border border-white/10">
                                     <button
                                         type="button"
                                         onClick={() => setPlatformTab("ios")}
-                                        className={`py-1.5 rounded-full text-xs font-medium transition ${
+                                        className={`py-2 rounded-full text-xs font-bold transition ${
                                             platformTab === "ios"
-                                                ? "bg-[#efe9de] text-[#151413]"
-                                                : "text-[#efe9de]/64 hover:text-[#efe9de]"
+                                                ? "bg-white text-black"
+                                                : "text-[#9a9a9a] hover:text-white"
                                         }`}
                                     >
                                         iPhone / iPad (iOS)
@@ -190,10 +203,10 @@ export function PwaInstallModal({
                                     <button
                                         type="button"
                                         onClick={() => setPlatformTab("android")}
-                                        className={`py-1.5 rounded-full text-xs font-medium transition ${
+                                        className={`py-2 rounded-full text-xs font-bold transition ${
                                             platformTab === "android"
-                                                ? "bg-[#efe9de] text-[#151413]"
-                                                : "text-[#efe9de]/64 hover:text-[#efe9de]"
+                                                ? "bg-white text-black"
+                                                : "text-[#9a9a9a] hover:text-white"
                                         }`}
                                     >
                                         Android (Chrome)
@@ -201,36 +214,56 @@ export function PwaInstallModal({
                                 </div>
 
                                 {platformTab === "ios" ? (
-                                    <div className="rounded-[16px] p-4 hd-card space-y-2.5 text-xs text-[#efe9de]/80 leading-relaxed">
-                                        <p className="font-medium text-[#efe9de]">
+                                    <div className="rounded-xl p-4 bg-[#09090b] border border-white/10 space-y-2.5 text-xs text-[#d4d4d8] leading-relaxed">
+                                        <p className="font-bold text-white">
                                             Como instalar no iPhone (Safari):
                                         </p>
-                                        <ol className="space-y-2 list-decimal list-inside text-[#efe9de]/64">
+                                        <ol className="space-y-2 list-decimal list-inside text-[#9a9a9a]">
                                             <li>
-                                                Toque no botão <strong className="text-[#efe9de]">Compartilhar</strong> na barra inferior do Safari.
+                                                Toque no botão{" "}
+                                                <strong className="text-white">Compartilhar</strong> na
+                                                barra inferior do Safari.
                                             </li>
                                             <li>
-                                                Role as opções para baixo e toque em <strong className="text-[#efe9de]">Adicionar à Tela de Início</strong>.
+                                                Role as opções para baixo e toque em{" "}
+                                                <strong className="text-white">
+                                                    Adicionar à Tela de Início
+                                                </strong>
+                                                .
                                             </li>
                                             <li>
-                                                Confirme tocando em <strong className="text-[#efe9de]">Adicionar</strong> no canto superior direito.
+                                                Confirme tocando em{" "}
+                                                <strong className="text-white">Adicionar</strong> no
+                                                canto superior direito.
                                             </li>
                                         </ol>
                                     </div>
                                 ) : (
-                                    <div className="rounded-[16px] p-4 hd-card space-y-2.5 text-xs text-[#efe9de]/80 leading-relaxed">
-                                        <p className="font-medium text-[#efe9de]">
+                                    <div className="rounded-xl p-4 bg-[#09090b] border border-white/10 space-y-2.5 text-xs text-[#d4d4d8] leading-relaxed">
+                                        <p className="font-bold text-white">
                                             Como instalar no Android (Chrome):
                                         </p>
-                                        <ol className="space-y-2 list-decimal list-inside text-[#efe9de]/64">
+                                        <ol className="space-y-2 list-decimal list-inside text-[#9a9a9a]">
                                             <li>
-                                                Toque no menu de <strong className="text-[#efe9de]">três pontos</strong> no canto superior direito do Chrome.
+                                                Toque no menu de{" "}
+                                                <strong className="text-white">três pontos</strong> no
+                                                canto superior direito do Chrome.
                                             </li>
                                             <li>
-                                                Selecione <strong className="text-[#efe9de]">Instalar aplicativo</strong> ou <strong className="text-[#efe9de]">Adicionar à tela inicial</strong>.
+                                                Selecione{" "}
+                                                <strong className="text-white">
+                                                    Instalar aplicativo
+                                                </strong>{" "}
+                                                ou{" "}
+                                                <strong className="text-white">
+                                                    Adicionar à tela inicial
+                                                </strong>
+                                                .
                                             </li>
                                             <li>
-                                                Confirme em <strong className="text-[#efe9de]">Instalar</strong> para abrir em tela cheia.
+                                                Confirme em{" "}
+                                                <strong className="text-white">Instalar</strong> para
+                                                abrir em tela cheia.
                                             </li>
                                         </ol>
                                     </div>
@@ -243,4 +276,3 @@ export function PwaInstallModal({
         </div>
     );
 }
-

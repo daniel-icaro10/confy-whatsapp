@@ -1,96 +1,58 @@
 import Link from "next/link";
-import { ArrowLeft, Lock, Shield } from "lucide-react";
 
 export const metadata = {
-    title: "Política de Privacidade | Confy WhatsApp",
-    description: "Política de Privacidade do Confy WhatsApp, gateway de WhatsApp auto-hospedado. Arquitetura sem rastreamento, propriedade dos dados e práticas de segurança.",
-    openGraph: {
-        title: "Política de Privacidade | Confy WhatsApp",
-        description: "Política de Privacidade do Confy WhatsApp, gateway de WhatsApp auto-hospedado.",
-        type: "website",
-    },
-    twitter: {
-        card: "summary_large_image",
-        title: "Política de Privacidade | Confy WhatsApp",
-        description: "Política de Privacidade do Confy WhatsApp, gateway de WhatsApp auto-hospedado.",
-    },
+    title: "Política de Privacidade | TvDrama Reels",
+    description: "Política de Privacidade e proteção de dados da plataforma TvDrama Reels."
 };
 
 export default function PrivacyPage() {
     return (
-        <div className="min-h-screen bg-background relative overflow-hidden py-24 selection:bg-primary/30 selection:text-primary-foreground">
-            {/* Ambient background glows */}
-            <div className="fixed top-0 right-1/4 translate-x-1/2 -translate-y-1/2 w-[40rem] h-[40rem] bg-blue-500/5 dark:bg-blue-500/10 rounded-full blur-[120px] pointer-events-none -z-10" />
-            <div className="fixed bottom-0 left-1/4 -translate-x-1/2 translate-y-1/2 w-[30rem] h-[30rem] bg-emerald-500/5 dark:bg-emerald-600/10 rounded-full blur-[100px] pointer-events-none -z-10" />
-
-            <div className="container max-w-4xl px-4 mx-auto relative z-10">
-
-                <Link href="/" className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-foreground mb-8 transition-colors group">
-                    <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
-                    Voltar para o início
+        <div className="min-h-dvh bg-black text-[#f5f5f5] pb-16">
+            <header className="sticky top-0 z-30 flex items-center justify-between px-4 sm:px-10 h-[66px] bg-[#060606]/90 backdrop-blur-xl border-b border-white/[0.06]">
+                <Link
+                    href="/"
+                    className="font-black text-[20px] sm:text-[22px] tracking-[0.06em] uppercase text-[#e11d48]"
+                >
+                    TVDRAMA REELS
                 </Link>
+                <Link
+                    href="/"
+                    className="px-3.5 py-1.5 rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/15 text-white text-xs font-semibold transition"
+                >
+                    ← Voltar ao catálogo
+                </Link>
+            </header>
 
-                <div className="glass-panel p-8 md:p-12 rounded-3xl shadow-xl shadow-black/5 dark:shadow-black/20 animate-in fade-in slide-in-from-bottom-8 duration-700">
-                    <div className="flex items-center gap-4 mb-8">
-                        <div className="p-3 bg-blue-500/10 rounded-2xl">
-                            <Shield className="h-8 w-8 text-blue-500" />
-                        </div>
-                        <div>
-                            <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground">Política de Privacidade</h1>
-                            <p className="text-muted-foreground mt-2">Data de vigência: {new Date().toLocaleDateString("pt-BR")}</p>
-                        </div>
+            <main className="max-w-3xl mx-auto px-4 sm:px-8 pt-10">
+                <div className="rounded-[22px] border border-white/12 bg-[#101014] p-6 sm:p-10 space-y-6">
+                    <div>
+                        <span className="text-[11px] font-extrabold uppercase tracking-[0.08em] text-[#e11d48]">
+                            TVDRAMA REELS · PRIVACIDADE
+                        </span>
+                        <h1 className="text-2xl sm:text-3xl font-black text-white mt-1">
+                            Política de Privacidade
+                        </h1>
                     </div>
 
-                    <div className="prose prose-slate dark:prose-invert max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-primary hover:prose-a:text-primary/80 prose-p:leading-relaxed">
-
-                        <p className="lead text-lg text-muted-foreground mb-8">
-                            No Confy WhatsApp, acreditamos que seus dados são propriedade sua. Esta Política de Privacidade detalha os limites rigorosos sobre como as informações são tratadas ao usar nosso gateway de WhatsApp open-source e auto-hospedado.
+                    <div className="space-y-4 text-sm text-[#c9c9d1] leading-relaxed">
+                        <p>
+                            O <strong className="text-white">TvDrama Reels</strong> respeita a sua privacidade e coleta apenas as informações estritamente necessárias para identificar e liberar o seu acesso ao catálogo.
                         </p>
-
-                        <h2 className="flex items-center gap-2 mt-8 text-2xl border-b pb-2">
-                            <Lock className="h-6 w-6 text-blue-500" />
-                            1. Arquitetura sem rastreamento
+                        <h2 className="text-base font-bold text-white pt-2">
+                            1. Dados Coletados
                         </h2>
                         <p>
-                            Como o Confy WhatsApp foi projetado para ser <strong>auto-hospedado</strong>, todo o processamento principal de dados ocorre exclusivamente no hardware onde você implanta o aplicativo.
+                            Utilizamos o seu número de WhatsApp (com DDD) e nome básico exclusivamente para vincular sua assinatura ativa, enviar o link automático de desbloqueio após o pagamento e permitir o login rápido em qualquer dispositivo.
                         </p>
-                        <ul>
-                            <li><strong>Sem telemetria centralizada:</strong> Os criadores do Confy WhatsApp não recebem telemetria, análises ou relatórios de uso sobre suas interações no WhatsApp.</li>
-                            <li><strong>Propriedade total dos dados:</strong> Seus contatos, mensagens, agendamentos e respostas automáticas permanecem no seu próprio banco de dados. Não podemos e não vamos acessá-lo.</li>
-                        </ul>
-
-                        <h2 className="mt-8 text-2xl border-b pb-2">2. Dados processados localmente</h2>
+                        <h2 className="text-base font-bold text-white pt-2">
+                            2. Processamento Seguro de Pagamentos
+                        </h2>
                         <p>
-                            Quando você implanta o gateway, o aplicativo em execução no seu servidor lida com:
+                            Os pagamentos via Pix e Cartão são processados por gateways certificados (Mangofy e Stripe). Não armazenamos dados completos de cartão de crédito em nossos servidores.
                         </p>
-                        <ul>
-                            <li><strong>Credenciais de autenticação:</strong> As senhas que você cria para o painel são protegidas com hash bcrypt antes de serem armazenadas no seu banco de dados local.</li>
-                            <li><strong>Sessões do WhatsApp:</strong> O Confy WhatsApp funciona como uma ponte para o WhatsApp Web. Os tokens de sessão (chaves) necessários para manter essa conexão ficam armazenados localmente no seu servidor.</li>
-                            <li><strong>Logs de comunicação:</strong> As mensagens enviadas e recebidas pelo gateway são registradas no seu banco de dados local para fornecer histórico e a funcionalidade de webhooks.</li>
-                        </ul>
-
-                        <h2 className="mt-8 text-2xl border-b pb-2">3. Proteção das suas informações</h2>
-                        <p>
-                            Embora o Confy WhatsApp seja construído com práticas modernas de segurança, a proteção final dos seus dados depende do seu ambiente de hospedagem. Recomendamos fortemente:
-                        </p>
-                        <ul>
-                            <li>Implantar o aplicativo atrás de um proxy reverso com <strong>criptografia SSL/TLS</strong> obrigatória (HTTPS).</li>
-                            <li>Proteger o servidor com firewalls e autenticação por chave SSH.</li>
-                            <li>Manter o sistema operacional e o ambiente Node.js sempre atualizados.</li>
-                        </ul>
-
-                        <h2 className="mt-8 text-2xl border-b pb-2">4. Integrações de terceiros</h2>
-                        <p>
-                            O Confy WhatsApp utiliza a biblioteca <code>@whiskeysockets/baileys</code> para se comunicar diretamente com os servidores do WhatsApp. Ao usar este gateway, seu servidor estabelecerá uma conexão WebSocket direta com o WhatsApp. Lembre-se de que o seu uso do WhatsApp continua sujeito à Política de Privacidade da Meta.
-                        </p>
-
-                        <div className="mt-12 p-6 bg-blue-500/5 rounded-2xl border border-blue-500/10">
-                            <p className="font-semibold mb-2">Precisa de mais detalhes?</p>
-                            <p className="text-sm text-muted-foreground mb-0">Se você tiver dúvidas específicas sobre o tratamento de dados ou segurança, entre em contato com nossa equipe de suporte.</p>
-                        </div>
                     </div>
                 </div>
-            </div>
+            </main>
         </div>
     );
 }

@@ -585,7 +585,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                         setLockedSerieModal(null);
                     }
                 })
-                .catch(() => {});
+                .catch(() => { });
         }
 
         const urlPhone = searchParams.get("phone");
@@ -632,14 +632,14 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
 
         const isFromAdTraffic = Boolean(
             searchParams.get("anuncio") === "1" ||
-                searchParams.get("origem") === "anuncio" ||
-                searchParams.get("ref") === "ads" ||
-                searchParams.get("fbclid") ||
-                searchParams.get("ttclid") ||
-                searchParams.get("gclid") ||
-                searchParams.get("utm_source") ||
-                searchParams.get("utm_campaign") ||
-                searchParams.get("utm_medium")
+            searchParams.get("origem") === "anuncio" ||
+            searchParams.get("ref") === "ads" ||
+            searchParams.get("fbclid") ||
+            searchParams.get("ttclid") ||
+            searchParams.get("gclid") ||
+            searchParams.get("utm_source") ||
+            searchParams.get("utm_campaign") ||
+            searchParams.get("utm_medium")
         );
 
         if (isFromAdTraffic && whatsappNumber) {
@@ -798,11 +798,10 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
         <div className="min-h-dvh bg-black text-[#f5f5f5] pb-28 select-none">
             {/* CABEÇALHO FIXO ESTILO TOPDORAMAX (.topo) */}
             <header
-                className={`fixed top-0 left-0 right-0 z-40 flex items-center justify-between gap-3 px-4 sm:px-10 h-[66px] transition-all ${
-                    scrolled
+                className={`fixed top-0 left-0 right-0 z-40 flex items-center justify-between gap-3 px-4 sm:px-10 h-[66px] transition-all ${scrolled
                         ? "bg-[#060606]/90 backdrop-blur-xl shadow-[0_1px_0_rgba(255,255,255,0.06)]"
                         : "bg-[#060606]/88 sm:bg-gradient-to-b sm:from-black/80 sm:to-transparent backdrop-blur-md sm:backdrop-blur-none"
-                }`}
+                    }`}
             >
                 <div className="flex items-center gap-3 min-w-0">
                     <button
@@ -908,11 +907,10 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                 key={cat.id}
                                 type="button"
                                 onClick={() => setActiveCategory(cat.id)}
-                                className={`flex-none px-[18px] py-[8px] rounded-full text-[14px] transition ${
-                                    active
+                                className={`flex-none px-[18px] py-[8px] rounded-full text-[14px] transition ${active
                                         ? "bg-white text-black font-bold border border-white"
                                         : "bg-[#0d0d0d] text-[#f5f5f5] font-semibold border border-white/22 hover:border-white/40"
-                                }`}
+                                    }`}
                             >
                                 {cat.label}
                             </button>
@@ -960,11 +958,10 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                         </h2>
                                         <p className="flex flex-wrap items-center justify-center md:justify-start gap-2.5 text-[15px] font-semibold text-[#f5f5f5]">
                                             <span
-                                                className={`px-2 py-0.5 rounded text-[12px] font-extrabold uppercase tracking-[0.03em] ${
-                                                    langTag === "Dublado"
+                                                className={`px-2 py-0.5 rounded text-[12px] font-extrabold uppercase tracking-[0.03em] ${langTag === "Dublado"
                                                         ? "bg-[#e11d48] text-white"
                                                         : "bg-white/90 text-black"
-                                                }`}
+                                                    }`}
                                             >
                                                 {langTag}
                                             </span>
@@ -1031,11 +1028,10 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                             type="button"
                                             onClick={() => setBannerIndex(idx)}
                                             aria-label={`Slide ${idx + 1}`}
-                                            className={`relative h-1 rounded-sm overflow-hidden transition-all ${
-                                                active
+                                            className={`relative h-1 rounded-sm overflow-hidden transition-all ${active
                                                     ? "w-11 bg-white/45"
                                                     : "w-6 bg-white/30 hover:bg-white/50"
-                                            }`}
+                                                }`}
                                         >
                                             {active && (
                                                 <span className="absolute inset-0 bg-white origin-left animate-[pulse_5s_linear_infinite]" />
@@ -1089,9 +1085,8 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                     <section className="px-4 sm:px-10 py-4">
                         <p className="text-sm text-[#9a9a9a] mb-3">
                             {searchResults.length > 0
-                                ? `Achamos ${searchResults.length} ${
-                                      searchResults.length === 1 ? "série" : "séries"
-                                  } para "${searchQuery}"`
+                                ? `Achamos ${searchResults.length} ${searchResults.length === 1 ? "série" : "séries"
+                                } para "${searchQuery}"`
                                 : `Nenhuma série encontrada para "${searchQuery}"`}
                         </p>
                         {searchResults.length > 0 && (
@@ -1306,19 +1301,17 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                         setActiveCategory("todos");
                         window.scrollTo({ top: 0, behavior: "smooth" });
                     }}
-                    className={`flex-1 min-h-[50px] py-1 px-1 rounded-full flex flex-col items-center justify-center gap-1 text-[10.5px] font-semibold transition ${
-                        activeOverlay === "none" && !lockedSerieModal
+                    className={`flex-1 min-h-[50px] py-1 px-1 rounded-full flex flex-col items-center justify-center gap-1 text-[10.5px] font-semibold transition ${activeOverlay === "none" && !lockedSerieModal
                             ? "text-white bg-white/12"
                             : "text-[#a3a3ad] hover:text-white"
-                    }`}
+                        }`}
                 >
                     <svg
                         viewBox="0 0 24 24"
-                        className={`w-[21px] h-[21px] fill-none stroke-[1.7] ${
-                            activeOverlay === "none" && !lockedSerieModal
+                        className={`w-[21px] h-[21px] fill-none stroke-[1.7] ${activeOverlay === "none" && !lockedSerieModal
                                 ? "stroke-[#e11d48]"
                                 : "stroke-current"
-                        }`}
+                            }`}
                     >
                         <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
                         <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
@@ -1333,17 +1326,15 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                         setExpandedRow(null);
                         setActiveOverlay((prev) => (prev === "buscar" ? "none" : "buscar"));
                     }}
-                    className={`flex-1 min-h-[50px] py-1 px-1 rounded-full flex flex-col items-center justify-center gap-1 text-[10.5px] font-semibold transition ${
-                        activeOverlay === "buscar"
+                    className={`flex-1 min-h-[50px] py-1 px-1 rounded-full flex flex-col items-center justify-center gap-1 text-[10.5px] font-semibold transition ${activeOverlay === "buscar"
                             ? "text-white bg-white/12"
                             : "text-[#a3a3ad] hover:text-white"
-                    }`}
+                        }`}
                 >
                     <svg
                         viewBox="0 0 24 24"
-                        className={`w-[21px] h-[21px] fill-none stroke-[1.7] ${
-                            activeOverlay === "buscar" ? "stroke-[#e11d48]" : "stroke-current"
-                        }`}
+                        className={`w-[21px] h-[21px] fill-none stroke-[1.7] ${activeOverlay === "buscar" ? "stroke-[#e11d48]" : "stroke-current"
+                            }`}
                     >
                         <circle cx="11" cy="11" r="7" />
                         <path d="m20 20-3.5-3.5" />
@@ -1358,17 +1349,15 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                         setExpandedRow(null);
                         setActiveOverlay((prev) => (prev === "anuncio" ? "none" : "anuncio"));
                     }}
-                    className={`flex-1 min-h-[50px] py-1 px-1 rounded-full flex flex-col items-center justify-center gap-1 text-[10.5px] font-semibold transition ${
-                        activeOverlay === "anuncio"
+                    className={`flex-1 min-h-[50px] py-1 px-1 rounded-full flex flex-col items-center justify-center gap-1 text-[10.5px] font-semibold transition ${activeOverlay === "anuncio"
                             ? "text-white bg-white/12"
                             : "text-[#a3a3ad] hover:text-white"
-                    }`}
+                        }`}
                 >
                     <svg
                         viewBox="0 0 24 24"
-                        className={`w-[21px] h-[21px] fill-none stroke-[1.7] ${
-                            activeOverlay === "anuncio" ? "stroke-[#e11d48]" : "stroke-current"
-                        }`}
+                        className={`w-[21px] h-[21px] fill-none stroke-[1.7] ${activeOverlay === "anuncio" ? "stroke-[#e11d48]" : "stroke-current"
+                            }`}
                     >
                         <path d="m3 11 18-5v12L3 14v-3z" />
                         <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6" />
@@ -1385,17 +1374,15 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                             handleOpenPlanCheckout("annual");
                         }
                     }}
-                    className={`relative flex-1 min-h-[50px] py-1 px-1 rounded-full flex flex-col items-center justify-center gap-1 text-[10.5px] font-semibold transition ${
-                        activeOverlay === "conta"
+                    className={`relative flex-1 min-h-[50px] py-1 px-1 rounded-full flex flex-col items-center justify-center gap-1 text-[10.5px] font-semibold transition ${activeOverlay === "conta"
                             ? "text-white bg-white/12"
                             : "text-[#a3a3ad] hover:text-white"
-                    }`}
+                        }`}
                 >
                     <svg
                         viewBox="0 0 24 24"
-                        className={`w-[21px] h-[21px] fill-none stroke-[1.7] ${
-                            activeOverlay === "conta" ? "stroke-[#e11d48]" : "stroke-current"
-                        }`}
+                        className={`w-[21px] h-[21px] fill-none stroke-[1.7] ${activeOverlay === "conta" ? "stroke-[#e11d48]" : "stroke-current"
+                            }`}
                     >
                         <circle cx="12" cy="8" r="4" />
                         <path d="M20 21a8 8 0 0 0-16 0" />
@@ -1731,7 +1718,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                 className="relative w-full text-left p-4 rounded-2xl border-2 border-[#e11d48] bg-[#e11d48]/14 hover:bg-[#e11d48]/22 shadow-[0_6px_20px_rgba(225,29,72,0.35)] transition block"
                             >
                                 <span className="absolute -top-2.5 right-3 px-2.5 py-0.5 rounded-full bg-white text-[#e11d48] text-[11px] font-extrabold uppercase">
-                                    Mais escolhido · {annualPlan.topTag}
+                                    Mais escolhido · {annualPlan.discountBadge}
                                 </span>
                                 <strong className="block text-[17px] font-extrabold text-white">
                                     Todas as séries (Plano Anual) · R${" "}
@@ -1739,7 +1726,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                 </strong>
                                 <span className="block text-xs text-[#e6e6eb] mt-0.5">
                                     365 dias · O catálogo completo + App PWA ·{" "}
-                                    {annualPlan.badge}
+                                    {annualPlan.savingsText}
                                 </span>
                             </button>
 
@@ -1757,11 +1744,11 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                         {monthlyPlan.price.toFixed(2).replace(".", ",")}/mês
                                     </strong>
                                     <span className="text-[11px] font-bold text-[#f43f5e]">
-                                        {monthlyPlan.topTag}
+                                        {monthlyPlan.discountBadge}
                                     </span>
                                 </div>
                                 <span className="block text-xs text-[#9a9a9a] mt-0.5">
-                                    30 dias · Catálogo completo liberado · {monthlyPlan.badge}
+                                    30 dias · Catálogo completo liberado · Pix ou Cartão
                                 </span>
                             </button>
 
@@ -1783,7 +1770,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                     </span>
                                 </div>
                                 <span className="block text-xs text-[#9a9a9a] mt-0.5">
-                                    90 dias · Catálogo completo · {quarterlyPlan.badge}
+                                    90 dias · Catálogo completo · {quarterlyPlan.savingsText}
                                 </span>
                             </button>
                         </div>

@@ -25,8 +25,8 @@ const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://segredosdocoracao.co
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#151413" },
-    { media: "(prefers-color-scheme: dark)", color: "#151413" },
+    { media: "(prefers-color-scheme: light)", color: "#000000" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -110,7 +110,7 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${interTight.variable} font-sans antialiased text-foreground bg-[#151413] min-h-screen flex flex-col`}
+        className={`${geistSans.variable} ${geistMono.variable} ${interTight.variable} font-sans antialiased text-[#f5f5f5] bg-black min-h-screen flex flex-col`}
         suppressHydrationWarning
       >
         <Providers>

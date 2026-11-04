@@ -21,11 +21,13 @@ export function VipAccessModal({
     dramaId,
     dramaTitle,
     defaultTab = "pix",
-    initialPlanKey = "monthly",
+    initialPlanKey = "annual",
     plans = DEFAULT_OFFER_PLANS
 }: VipAccessModalProps) {
     const [tab, setTab] = useState<"login" | "pix">(defaultTab);
-    const [selectedPlanKey, setSelectedPlanKey] = useState<"monthly" | "quarterly" | "annual">(initialPlanKey);
+    const [selectedPlanKey, setSelectedPlanKey] = useState<"monthly" | "quarterly" | "annual">(
+        initialPlanKey
+    );
     const [paymentMethod, setPaymentMethod] = useState<"pix" | "stripe">("pix");
     const [phone, setPhone] = useState("");
     const [name, setName] = useState("");
@@ -179,41 +181,52 @@ export function VipAccessModal({
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hd-theme overflow-y-auto">
-            <div className="relative w-full max-w-lg rounded-[22px] hd-shell overflow-hidden my-auto">
-                <div className="px-6 pt-6 pb-4 border-b border-[rgb(239_233_222/0.12)] flex items-start justify-between gap-4">
+        <div
+            onClick={onClose}
+            className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/80 backdrop-blur-md overflow-y-auto"
+        >
+            <div
+                onClick={(e) => e.stopPropagation()}
+                className="relative w-full max-w-[480px] rounded-t-[24px] sm:rounded-[22px] bg-[#101014] border border-white/12 text-[#f5f5f5] shadow-[0_24px_60px_rgba(0,0,0,0.85)] overflow-hidden my-auto"
+            >
+                {/* Cabeçalho */}
+                <div className="px-5 pt-5 pb-4 border-b border-white/[0.08] flex items-start justify-between gap-4 bg-[#0b0b0e]">
                     <div>
-                        <span className="text-[11px] uppercase tracking-[0.06em] text-[#efe9de]/45 font-medium block">
-                            TvDrama Reels · Planos Promocionais
+                        <span className="text-[11px] font-extrabold uppercase tracking-[0.08em] text-[#e11d48] block">
+                            TVDRAMA REELS · ACESSO COMPLETO
                         </span>
-                        <h3 className="text-[19px] font-semibold tracking-[-0.012em] text-[#efe9de] mt-0.5">
-                            {dramaTitle || "Escolha seu plano de acesso"}
+                        <h3 className="text-[19px] font-black tracking-tight text-white mt-0.5 line-clamp-1">
+                            {tab === "login"
+                                ? "Entrar na sua conta"
+                                : dramaTitle || "Liberar todas as séries"}
                         </h3>
                     </div>
                     <button
                         type="button"
                         onClick={onClose}
-                        className="hd-btn-sm hd-button-quiet text-xs shrink-0"
+                        aria-label="Fechar"
+                        className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/15 grid place-items-center text-white text-xs shrink-0 transition"
                     >
-                        Fechar
+                        ✕
                     </button>
                 </div>
 
-                <div className="p-6">
-                    <div className="grid grid-cols-2 gap-1.5 p-1 rounded-full hd-surface mb-5">
+                <div className="p-5 sm:p-6">
+                    {/* Seletor de Abas (Liberar Agora / Já paguei) */}
+                    <div className="grid grid-cols-2 gap-1.5 p-1 rounded-full bg-[#09090b] border border-white/10 mb-5">
                         <button
                             type="button"
                             onClick={() => {
                                 setTab("pix");
                                 setError("");
                             }}
-                            className={`py-2 px-3 rounded-full text-xs font-medium transition ${
+                            className={`py-2 px-3 rounded-full text-xs font-bold transition ${
                                 tab === "pix"
-                                    ? "bg-[#efe9de] text-[#151413]"
-                                    : "text-[#efe9de]/64 hover:text-[#efe9de]"
+                                    ? "bg-white text-black"
+                                    : "text-[#9a9a9a] hover:text-white"
                             }`}
                         >
-                            Assinar um plano
+                            Liberar acesso
                         </button>
                         <button
                             type="button"
@@ -221,27 +234,30 @@ export function VipAccessModal({
                                 setTab("login");
                                 setError("");
                             }}
-                            className={`py-2 px-3 rounded-full text-xs font-medium transition ${
+                            className={`py-2 px-3 rounded-full text-xs font-bold transition ${
                                 tab === "login"
-                                    ? "bg-[#efe9de] text-[#151413]"
-                                    : "text-[#efe9de]/64 hover:text-[#efe9de]"
+                                    ? "bg-white text-black"
+                                    : "text-[#9a9a9a] hover:text-white"
                             }`}
                         >
-                            Já sou assinante
+                            Já paguei · Entrar
                         </button>
                     </div>
 
                     {error && (
-                        <div className="mb-4 p-3.5 rounded-[14px] bg-[#ff8a7a]/10 border border-[#ff8a7a]/25 text-xs text-[#ff8a7a]">
+                        <div className="mb-4 p-3.5 rounded-xl bg-[#e11d48]/15 border border-[#e11d48]/35 text-xs font-medium text-[#fda4af]">
                             {error}
                         </div>
                     )}
 
                     {tab === "login" ? (
                         <form onSubmit={handleCheckAccess} className="space-y-4">
+                            <p className="text-xs text-[#9a9a9a] leading-relaxed">
+                                Digite o número de WhatsApp (com DDD) usado no pagamento para liberar todo o catálogo imediatamente neste aparelho.
+                            </p>
                             <div>
-                                <label className="block text-xs text-[#efe9de]/75 mb-1.5">
-                                    WhatsApp cadastrado (com DDD)
+                                <label className="block text-xs font-semibold text-[#e6e6eb] mb-1.5">
+                                    Seu WhatsApp cadastrado (com DDD)
                                 </label>
                                 <input
                                     type="tel"
@@ -249,21 +265,21 @@ export function VipAccessModal({
                                     placeholder="(11) 99999-9999"
                                     value={phone}
                                     onChange={(e) => setPhone(e.target.value)}
-                                    className="w-full px-4 py-3 rounded-[14px] hd-pill-field text-sm placeholder:text-[#efe9de]/35"
+                                    className="w-full px-4 py-3 rounded-xl bg-[#09090b] border border-white/15 focus:border-white/40 outline-none text-sm text-white placeholder:text-[#6e6e77] transition"
                                 />
                             </div>
 
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className="w-full hd-btn hd-button-cream disabled:opacity-50"
+                                className="w-full min-h-[48px] rounded-full bg-[#e11d48] hover:bg-[#f43f5e] text-white font-bold text-sm shadow-[0_6px_20px_rgba(225,29,72,0.35)] transition disabled:opacity-50"
                             >
-                                {loading ? "Verificando..." : "Validar acesso"}
+                                {loading ? "Verificando assinatura..." : "Entrar e liberar catálogo"}
                             </button>
                         </form>
                     ) : !pixOrder ? (
                         <form onSubmit={handleCheckoutSubmit} className="space-y-4">
-                            {/* Seletor dos 3 Planos */}
+                            {/* Seletor dos 3 Planos estilo TopDoramax */}
                             <div className="grid grid-cols-3 gap-2">
                                 {activePlans.map((plan) => {
                                     const isSelected = plan.key === selectedPlan.key;
@@ -272,26 +288,32 @@ export function VipAccessModal({
                                             key={plan.key}
                                             type="button"
                                             onClick={() => setSelectedPlanKey(plan.key)}
-                                            className={`p-3 rounded-[14px] text-left transition flex flex-col justify-between ${
+                                            className={`relative p-3 rounded-xl text-left transition flex flex-col justify-between border ${
                                                 isSelected
-                                                    ? "hd-plan ring-1 ring-[#e2b383]"
-                                                    : "hd-surface opacity-75 hover:opacity-100"
+                                                    ? "border-[#e11d48] bg-[#e11d48]/14 shadow-[0_4px_16px_rgba(225,29,72,0.25)]"
+                                                    : "border-white/12 bg-[#09090b] opacity-80 hover:opacity-100"
                                             }`}
                                         >
                                             <div>
-                                                <div className="text-[10px] text-[#e2b383] font-medium truncate">
+                                                <div
+                                                    className={`text-[10px] font-extrabold uppercase truncate ${
+                                                        plan.isPopular
+                                                            ? "text-[#f43f5e]"
+                                                            : "text-[#9a9a9a]"
+                                                    }`}
+                                                >
                                                     {plan.isPopular ? "Mais escolhido" : plan.subtitle}
                                                 </div>
-                                                <div className="text-xs font-semibold text-[#efe9de] mt-0.5">
+                                                <div className="text-xs font-bold text-white mt-0.5">
                                                     {plan.name.replace("Plano ", "")}
                                                 </div>
                                             </div>
 
-                                            <div className="mt-2 pt-2 border-t border-[rgb(239_233_222/0.08)]">
-                                                <div className="text-[10px] text-[#efe9de]/40 line-through tabular-nums">
+                                            <div className="mt-2 pt-2 border-t border-white/[0.08]">
+                                                <div className="text-[10px] text-[#7a7a85] line-through tabular-nums">
                                                     R$ {plan.originalPrice.toFixed(2).replace(".", ",")}
                                                 </div>
-                                                <div className="text-sm font-semibold text-[#efe9de] tabular-nums">
+                                                <div className="text-sm font-black text-white tabular-nums">
                                                     R$ {plan.price.toFixed(2).replace(".", ",")}
                                                 </div>
                                             </div>
@@ -300,18 +322,18 @@ export function VipAccessModal({
                                 })}
                             </div>
 
-                            <div className="p-3.5 rounded-[14px] hd-surface flex items-center justify-between gap-2 text-xs">
+                            <div className="p-3.5 rounded-xl bg-[#09090b] border border-white/10 flex items-center justify-between gap-2 text-xs">
                                 <div>
-                                    <span className="font-medium text-[#efe9de]">
+                                    <span className="font-bold text-white">
                                         {selectedPlan.name} · {selectedPlan.subtitle}
                                     </span>
-                                    <span className="block text-[11px] text-[#e2b383] mt-0.5">
+                                    <span className="block text-[11px] font-semibold text-[#4ade8a] mt-0.5">
                                         {selectedPlan.badge}
                                     </span>
                                 </div>
-                                <span className="text-base font-semibold text-[#efe9de] tabular-nums shrink-0">
+                                <span className="text-base font-black text-white tabular-nums shrink-0">
                                     R$ {selectedPlan.price.toFixed(2).replace(".", ",")}
-                                    <small className="text-[11px] font-normal text-[#efe9de]/55">
+                                    <small className="text-[11px] font-normal text-[#9a9a9a]">
                                         {selectedPlan.periodLabel}
                                     </small>
                                 </span>
@@ -319,38 +341,38 @@ export function VipAccessModal({
 
                             {/* Método de Pagamento: Pix vs Cartão Recorrente (Stripe) */}
                             <div>
-                                <label className="block text-xs text-[#efe9de]/75 mb-1.5">
+                                <label className="block text-xs font-semibold text-[#e6e6eb] mb-1.5">
                                     Forma de pagamento
                                 </label>
                                 <div className="grid grid-cols-2 gap-2">
                                     <button
                                         type="button"
                                         onClick={() => setPaymentMethod("pix")}
-                                        className={`py-2.5 px-3 rounded-[12px] text-xs font-medium transition text-center ${
+                                        className={`py-2.5 px-3 rounded-xl text-xs font-bold transition text-center border ${
                                             paymentMethod === "pix"
-                                                ? "bg-[#efe9de] text-[#151413]"
-                                                : "hd-surface text-[#efe9de]/70 hover:text-[#efe9de]"
+                                                ? "bg-white text-black border-white"
+                                                : "bg-[#09090b] border-white/12 text-[#9a9a9a] hover:text-white"
                                         }`}
                                     >
-                                        Pix (Liberação na hora)
+                                        ⚡ Pix (Liberação na hora)
                                     </button>
                                     <button
                                         type="button"
                                         onClick={() => setPaymentMethod("stripe")}
-                                        className={`py-2.5 px-3 rounded-[12px] text-xs font-medium transition text-center ${
+                                        className={`py-2.5 px-3 rounded-xl text-xs font-bold transition text-center border ${
                                             paymentMethod === "stripe"
-                                                ? "bg-[#efe9de] text-[#151413]"
-                                                : "hd-surface text-[#efe9de]/70 hover:text-[#efe9de]"
+                                                ? "bg-white text-black border-white"
+                                                : "bg-[#09090b] border-white/12 text-[#9a9a9a] hover:text-white"
                                         }`}
                                     >
-                                        Cartão / Assinatura (Stripe)
+                                        💳 Cartão (Stripe)
                                     </button>
                                 </div>
                             </div>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <div>
-                                    <label className="block text-xs text-[#efe9de]/75 mb-1.5">
+                                    <label className="block text-xs font-semibold text-[#e6e6eb] mb-1.5">
                                         WhatsApp com DDD
                                     </label>
                                     <input
@@ -359,20 +381,20 @@ export function VipAccessModal({
                                         placeholder="(11) 99999-9999"
                                         value={phone}
                                         onChange={(e) => setPhone(e.target.value)}
-                                        className="w-full px-3.5 py-2.5 rounded-[12px] hd-pill-field text-sm placeholder:text-[#efe9de]/35"
+                                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#09090b] border border-white/15 focus:border-white/40 outline-none text-sm text-white placeholder:text-[#6e6e77]"
                                     />
                                 </div>
 
                                 <div>
-                                    <label className="block text-xs text-[#efe9de]/75 mb-1.5">
-                                        Nome (opcional)
+                                    <label className="block text-xs font-semibold text-[#e6e6eb] mb-1.5">
+                                        Seu nome (opcional)
                                     </label>
                                     <input
                                         type="text"
-                                        placeholder="Seu nome"
+                                        placeholder="Como podemos te chamar"
                                         value={name}
                                         onChange={(e) => setName(e.target.value)}
-                                        className="w-full px-3.5 py-2.5 rounded-[12px] hd-pill-field text-sm placeholder:text-[#efe9de]/35"
+                                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#09090b] border border-white/15 focus:border-white/40 outline-none text-sm text-white placeholder:text-[#6e6e77]"
                                     />
                                 </div>
                             </div>
@@ -380,32 +402,32 @@ export function VipAccessModal({
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className="w-full hd-btn hd-button-cream disabled:opacity-50"
+                                className="w-full min-h-[48px] rounded-full bg-[#e11d48] hover:bg-[#f43f5e] text-white font-bold text-sm shadow-[0_6px_20px_rgba(225,29,72,0.35)] transition disabled:opacity-50"
                             >
                                 {loading
                                     ? "Processando..."
                                     : paymentMethod === "pix"
                                     ? `Gerar Pix — R$ ${selectedPlan.price.toFixed(2).replace(".", ",")}`
-                                    : `Assinar no Cartão — R$ ${selectedPlan.price.toFixed(2).replace(".", ",")}`}
+                                    : `Pagar no Cartão — R$ ${selectedPlan.price.toFixed(2).replace(".", ",")}`}
                             </button>
                         </form>
                     ) : (
                         <div className="space-y-4">
-                            <div className="p-4 rounded-[16px] hd-plan">
-                                <div className="text-xs font-medium text-[#e2b383] mb-1 tabular-nums">
+                            <div className="p-4 rounded-xl bg-[#e11d48]/12 border border-[#e11d48]/35">
+                                <div className="text-xs font-extrabold text-[#f43f5e] uppercase mb-1 tabular-nums">
                                     {pixOrder.planName || selectedPlan.name} · R${" "}
                                     {pixOrder.amount.toFixed(2).replace(".", ",")}
                                 </div>
-                                <p className="text-xs text-[#efe9de]/64 leading-relaxed">
-                                    Copie o código abaixo e pague via Pix Copia e Cola no seu banco. Seu número ({pixOrder.phone}) será liberado automaticamente em segundos.
+                                <p className="text-xs text-[#d4d4d8] leading-relaxed">
+                                    Copie o código abaixo e pague via Pix Copia e Cola no seu aplicativo bancário. Seu número ({pixOrder.phone}) será liberado automaticamente em segundos.
                                 </p>
                             </div>
 
                             <div>
-                                <label className="block text-xs text-[#efe9de]/64 mb-1.5">
+                                <label className="block text-xs font-semibold text-[#9a9a9a] mb-1.5">
                                     Código Pix Copia e Cola
                                 </label>
-                                <div className="p-3.5 rounded-[14px] hd-surface text-[11px] font-mono text-[#efe9de]/80 break-all max-h-24 overflow-y-auto">
+                                <div className="p-3.5 rounded-xl bg-[#09090b] border border-white/12 text-[11px] font-mono text-[#e4e4e7] break-all max-h-24 overflow-y-auto">
                                     {pixOrder.pixCopyPaste}
                                 </div>
                             </div>
@@ -413,18 +435,20 @@ export function VipAccessModal({
                             <button
                                 type="button"
                                 onClick={handleCopyPix}
-                                className="w-full hd-btn hd-button-cream"
+                                className="w-full min-h-[48px] rounded-full bg-[#e11d48] hover:bg-[#f43f5e] text-white font-bold text-sm shadow-[0_6px_20px_rgba(225,29,72,0.35)] transition"
                             >
-                                {copied ? "Código Pix copiado" : "Copiar código Pix"}
+                                {copied ? "✓ Código Pix copiado!" : "Copiar código Pix"}
                             </button>
 
                             <button
                                 type="button"
                                 onClick={handleManualVerify}
                                 disabled={checkingPayment}
-                                className="w-full hd-btn hd-button-quiet text-xs"
+                                className="w-full min-h-[44px] rounded-full bg-white/10 hover:bg-white/15 border border-white/15 text-white font-semibold text-xs transition"
                             >
-                                {checkingPayment ? "Verificando pagamento..." : "Já realizei o pagamento"}
+                                {checkingPayment
+                                    ? "Verificando pagamento..."
+                                    : "Já realizei o pagamento"}
                             </button>
                         </div>
                     )}
