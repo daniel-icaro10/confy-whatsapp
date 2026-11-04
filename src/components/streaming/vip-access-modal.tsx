@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { DEFAULT_OFFER_PLANS, OfferPlan } from "@/lib/segredos-defaults";
 
 interface VipAccessModalProps {
     isOpen: boolean;
@@ -9,7 +10,8 @@ interface VipAccessModalProps {
     dramaId?: string;
     dramaTitle?: string;
     defaultTab?: "login" | "pix";
-    planPrice?: number;
+    initialPlanKey?: "monthly" | "quarterly" | "annual";
+    plans?: OfferPlan[];
 }
 
 export function VipAccessModal({
@@ -19,9 +21,12 @@ export function VipAccessModal({
     dramaId,
     dramaTitle,
     defaultTab = "pix",
-    planPrice = 19.9
+    initialPlanKey = "monthly",
+    plans = DEFAULT_OFFER_PLANS
 }: VipAccessModalProps) {
     const [tab, setTab] = useState<"login" | "pix">(defaultTab);
+    const [selectedPlanKey, setSelectedPlanKey] = useState<"monthly" | "quarterly" | "annual">(initialPlanKey);
+    const [paymentMethod, setPaymentMethod] = useState<"pix" | "stripe">("pix");
     const [phone, setPhone] = useState("");
     const [name, setName] = useState("");
     const [loading, setLoading] = useState(false);
@@ -30,21 +35,27 @@ export function VipAccessModal({
     const [pixOrder, setPixOrder] = useState<{
         orderId: string;
         amount: number;
+        planName?: string;
         pixCopyPaste: string;
         phone: string;
-        isSimulated?: boolean;
     } | null>(null);
     const [copied, setCopied] = useState(false);
     const [checkingPayment, setCheckingPayment] = useState(false);
 
+    const activePlans = plans && plans.length > 0 ? plans : DEFAULT_OFFER_PLANS;
+    const selectedPlan =
+        activePlans.find((p) => p.key === selectedPlanKey) || activePlans[0];
+
     useEffect(() => {
         if (isOpen) {
             setTab(defaultTab);
+            setSelectedPlanKey(initialPlanKey);
             setError("");
+            setPixOrder(null);
             const savedPhone = localStorage.getItem("sdc_viewer_phone") || "";
             if (savedPhone) setPhone(savedPhone);
         }
-    }, [isOpen, defaultTab]);
+    }, [isOpen, defaultTab, initialPlanKey]);
 
     useEffect(() => {
         if (!pixOrder || !isOpen) return;
@@ -91,18 +102,42 @@ export function VipAccessModal({
         }
     };
 
-    const handleGeneratePix = async (e: React.FormEvent) => {
+    const handleCheckoutSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError("");
         setLoading(true);
+
         try {
+            if (paymentMethod === "stripe") {
+                const res = await fetch("/api/stripe/checkout", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        phone,
+                        name: name || "Assinante",
+                        planKey: selectedPlan.key,
+                        dramaId
+                    })
+                });
+                const data = await res.json();
+                if (!res.ok || !data?.checkoutUrl) {
+                    setError(data?.error || "Não foi possível iniciar o checkout com cartão.");
+                    return;
+                }
+                localStorage.setItem("sdc_viewer_phone", phone);
+                window.location.href = data.checkoutUrl;
+                return;
+            }
+
+            // Pagamento via Pix (Mangofy)
             const res = await fetch("/api/pix/create", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     phone,
                     name: name || "Cliente",
-                    dramaId
+                    dramaId,
+                    planKey: selectedPlan.key
                 })
             });
             const data = await res.json();
@@ -112,7 +147,7 @@ export function VipAccessModal({
             }
             setPixOrder(data);
         } catch {
-            setError("Erro ao gerar o Pix.");
+            setError("Erro ao processar pagamento.");
         } finally {
             setLoading(false);
         }
@@ -144,15 +179,15 @@ export function VipAccessModal({
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hd-theme">
-            <div className="relative w-full max-w-md rounded-[22px] hd-shell overflow-hidden">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hd-theme overflow-y-auto">
+            <div className="relative w-full max-w-lg rounded-[22px] hd-shell overflow-hidden my-auto">
                 <div className="px-6 pt-6 pb-4 border-b border-[rgb(239_233_222/0.12)] flex items-start justify-between gap-4">
                     <div>
                         <span className="text-[11px] uppercase tracking-[0.06em] text-[#efe9de]/45 font-medium block">
-                            Assinatura & Catálogo Completo
+                            TvDrama Reels · Planos Promocionais
                         </span>
                         <h3 className="text-[19px] font-semibold tracking-[-0.012em] text-[#efe9de] mt-0.5">
-                            {dramaTitle || "Liberar acesso completo"}
+                            {dramaTitle || "Escolha seu plano de acesso"}
                         </h3>
                     </div>
                     <button
@@ -178,7 +213,7 @@ export function VipAccessModal({
                                     : "text-[#efe9de]/64 hover:text-[#efe9de]"
                             }`}
                         >
-                            Liberar com Pix
+                            Assinar um plano
                         </button>
                         <button
                             type="button"
@@ -227,46 +262,119 @@ export function VipAccessModal({
                             </button>
                         </form>
                     ) : !pixOrder ? (
-                        <form onSubmit={handleGeneratePix} className="space-y-4">
-                            <div className="p-4 rounded-[16px] hd-plan flex items-center justify-between gap-3">
+                        <form onSubmit={handleCheckoutSubmit} className="space-y-4">
+                            {/* Seletor dos 3 Planos */}
+                            <div className="grid grid-cols-3 gap-2">
+                                {activePlans.map((plan) => {
+                                    const isSelected = plan.key === selectedPlan.key;
+                                    return (
+                                        <button
+                                            key={plan.key}
+                                            type="button"
+                                            onClick={() => setSelectedPlanKey(plan.key)}
+                                            className={`p-3 rounded-[14px] text-left transition flex flex-col justify-between ${
+                                                isSelected
+                                                    ? "hd-plan ring-1 ring-[#e2b383]"
+                                                    : "hd-surface opacity-75 hover:opacity-100"
+                                            }`}
+                                        >
+                                            <div>
+                                                <div className="text-[10px] text-[#e2b383] font-medium truncate">
+                                                    {plan.isPopular ? "Mais escolhido" : plan.subtitle}
+                                                </div>
+                                                <div className="text-xs font-semibold text-[#efe9de] mt-0.5">
+                                                    {plan.name.replace("Plano ", "")}
+                                                </div>
+                                            </div>
+
+                                            <div className="mt-2 pt-2 border-t border-[rgb(239_233_222/0.08)]">
+                                                <div className="text-[10px] text-[#efe9de]/40 line-through tabular-nums">
+                                                    R$ {plan.originalPrice.toFixed(2).replace(".", ",")}
+                                                </div>
+                                                <div className="text-sm font-semibold text-[#efe9de] tabular-nums">
+                                                    R$ {plan.price.toFixed(2).replace(".", ",")}
+                                                </div>
+                                            </div>
+                                        </button>
+                                    );
+                                })}
+                            </div>
+
+                            <div className="p-3.5 rounded-[14px] hd-surface flex items-center justify-between gap-2 text-xs">
                                 <div>
-                                    <div className="text-sm font-medium text-[#efe9de]">
-                                        Passaporte Ilimitado + App PWA
-                                    </div>
-                                    <div className="text-xs text-[#efe9de]/60 mt-0.5">
-                                        Todas as novelas liberadas + download do App
-                                    </div>
+                                    <span className="font-medium text-[#efe9de]">
+                                        {selectedPlan.name} · {selectedPlan.subtitle}
+                                    </span>
+                                    <span className="block text-[11px] text-[#e2b383] mt-0.5">
+                                        {selectedPlan.badge}
+                                    </span>
                                 </div>
-                                <div className="text-lg font-semibold text-[#e2b383] tabular-nums shrink-0">
-                                    R$ {planPrice.toFixed(2).replace(".", ",")}
+                                <span className="text-base font-semibold text-[#efe9de] tabular-nums shrink-0">
+                                    R$ {selectedPlan.price.toFixed(2).replace(".", ",")}
+                                    <small className="text-[11px] font-normal text-[#efe9de]/55">
+                                        {selectedPlan.periodLabel}
+                                    </small>
+                                </span>
+                            </div>
+
+                            {/* Método de Pagamento: Pix vs Cartão Recorrente (Stripe) */}
+                            <div>
+                                <label className="block text-xs text-[#efe9de]/75 mb-1.5">
+                                    Forma de pagamento
+                                </label>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <button
+                                        type="button"
+                                        onClick={() => setPaymentMethod("pix")}
+                                        className={`py-2.5 px-3 rounded-[12px] text-xs font-medium transition text-center ${
+                                            paymentMethod === "pix"
+                                                ? "bg-[#efe9de] text-[#151413]"
+                                                : "hd-surface text-[#efe9de]/70 hover:text-[#efe9de]"
+                                        }`}
+                                    >
+                                        Pix (Liberação na hora)
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => setPaymentMethod("stripe")}
+                                        className={`py-2.5 px-3 rounded-[12px] text-xs font-medium transition text-center ${
+                                            paymentMethod === "stripe"
+                                                ? "bg-[#efe9de] text-[#151413]"
+                                                : "hd-surface text-[#efe9de]/70 hover:text-[#efe9de]"
+                                        }`}
+                                    >
+                                        Cartão / Assinatura (Stripe)
+                                    </button>
                                 </div>
                             </div>
 
-                            <div>
-                                <label className="block text-xs text-[#efe9de]/75 mb-1.5">
-                                    Seu WhatsApp com DDD (para liberar o acesso)
-                                </label>
-                                <input
-                                    type="tel"
-                                    required
-                                    placeholder="(11) 99999-9999"
-                                    value={phone}
-                                    onChange={(e) => setPhone(e.target.value)}
-                                    className="w-full px-4 py-3 rounded-[14px] hd-pill-field text-sm placeholder:text-[#efe9de]/35"
-                                />
-                            </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label className="block text-xs text-[#efe9de]/75 mb-1.5">
+                                        WhatsApp com DDD
+                                    </label>
+                                    <input
+                                        type="tel"
+                                        required
+                                        placeholder="(11) 99999-9999"
+                                        value={phone}
+                                        onChange={(e) => setPhone(e.target.value)}
+                                        className="w-full px-3.5 py-2.5 rounded-[12px] hd-pill-field text-sm placeholder:text-[#efe9de]/35"
+                                    />
+                                </div>
 
-                            <div>
-                                <label className="block text-xs text-[#efe9de]/75 mb-1.5">
-                                    Seu nome (opcional)
-                                </label>
-                                <input
-                                    type="text"
-                                    placeholder="Como prefere ser chamado"
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                    className="w-full px-4 py-2.5 rounded-[14px] hd-pill-field text-sm placeholder:text-[#efe9de]/35"
-                                />
+                                <div>
+                                    <label className="block text-xs text-[#efe9de]/75 mb-1.5">
+                                        Nome (opcional)
+                                    </label>
+                                    <input
+                                        type="text"
+                                        placeholder="Seu nome"
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)}
+                                        className="w-full px-3.5 py-2.5 rounded-[12px] hd-pill-field text-sm placeholder:text-[#efe9de]/35"
+                                    />
+                                </div>
                             </div>
 
                             <button
@@ -275,15 +383,18 @@ export function VipAccessModal({
                                 className="w-full hd-btn hd-button-cream disabled:opacity-50"
                             >
                                 {loading
-                                    ? "Gerando Pix..."
-                                    : `Gerar Pix — R$ ${planPrice.toFixed(2).replace(".", ",")}`}
+                                    ? "Processando..."
+                                    : paymentMethod === "pix"
+                                    ? `Gerar Pix — R$ ${selectedPlan.price.toFixed(2).replace(".", ",")}`
+                                    : `Assinar no Cartão — R$ ${selectedPlan.price.toFixed(2).replace(".", ",")}`}
                             </button>
                         </form>
                     ) : (
                         <div className="space-y-4">
                             <div className="p-4 rounded-[16px] hd-plan">
                                 <div className="text-xs font-medium text-[#e2b383] mb-1 tabular-nums">
-                                    Aguardando pagamento · R$ {pixOrder.amount.toFixed(2).replace(".", ",")}
+                                    {pixOrder.planName || selectedPlan.name} · R${" "}
+                                    {pixOrder.amount.toFixed(2).replace(".", ",")}
                                 </div>
                                 <p className="text-xs text-[#efe9de]/64 leading-relaxed">
                                     Copie o código abaixo e pague via Pix Copia e Cola no seu banco. Seu número ({pixOrder.phone}) será liberado automaticamente em segundos.

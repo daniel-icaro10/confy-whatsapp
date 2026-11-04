@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { ensureFunnelConfig } from "@/lib/segredos-defaults";
+import { ensureFunnelConfig, getOfferPlans } from "@/lib/segredos-defaults";
 import { auth } from "@/lib/auth";
 
 export async function GET() {
@@ -20,12 +20,15 @@ export async function GET() {
                 .catch(() => [])
         ]);
 
+        const plans = getOfferPlans(config);
+
         return NextResponse.json({
             config: {
                 ...config,
                 publicPlanName: config.planName,
                 publicPlanPrice: config.planPrice
             },
+            plans,
             sessions
         });
     } catch (error: any) {
@@ -60,6 +63,10 @@ export async function PUT(request: Request) {
                 mangofyApiKey: body.mangofyApiKey,
                 mangofyStoreCode: body.mangofyStoreCode,
                 mangofyWebhookSecret: body.mangofyWebhookSecret,
+                stripeSecretKey: body.stripeSecretKey,
+                stripePublishableKey: body.stripePublishableKey,
+                stripeWebhookSecret: body.stripeWebhookSecret,
+                plansJson: body.plansJson !== undefined ? body.plansJson : undefined,
                 step1Greeting: body.step1Greeting,
                 step1MediaUrl: body.step1MediaUrl,
                 step1MediaType: body.step1MediaType,
@@ -75,7 +82,7 @@ export async function PUT(request: Request) {
             }
         });
 
-        return NextResponse.json({ config: updated });
+        return NextResponse.json({ config: updated, plans: getOfferPlans(updated) });
     } catch (error: any) {
         return NextResponse.json(
             { error: "Erro ao salvar configuração do funil", details: error?.message },

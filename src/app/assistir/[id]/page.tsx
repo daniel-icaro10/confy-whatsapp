@@ -3,7 +3,7 @@
 import { useState, useEffect, Suspense } from "react";
 import { useParams, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { extractYoutubeId } from "@/lib/segredos-defaults";
+import { DEFAULT_OFFER_PLANS, extractYoutubeId, OfferPlan } from "@/lib/segredos-defaults";
 import { VipAccessModal } from "@/components/streaming/vip-access-modal";
 import { PwaInstallModal } from "@/components/streaming/pwa-install-modal";
 
@@ -43,7 +43,7 @@ function WatchDramaContent() {
 
     const [viewerPhone, setViewerPhone] = useState("");
     const [isVip, setIsVip] = useState(false);
-    const [planPrice, setPlanPrice] = useState(19.9);
+    const [plans, setPlans] = useState<OfferPlan[]>(DEFAULT_OFFER_PLANS);
     const [vipModalOpen, setVipModalOpen] = useState(false);
     const [vipModalTab, setVipModalTab] = useState<"login" | "pix">("pix");
     const [pwaModalOpen, setPwaModalOpen] = useState(false);
@@ -66,8 +66,8 @@ function WatchDramaContent() {
                     }
                 }
                 const funnelData = await funnelRes.json();
-                if (funnelData?.config?.planPrice) {
-                    setPlanPrice(Number(funnelData.config.planPrice));
+                if (Array.isArray(funnelData?.plans) && funnelData.plans.length > 0) {
+                    setPlans(funnelData.plans);
                 }
             } catch {
                 // ignore
@@ -79,6 +79,21 @@ function WatchDramaContent() {
     }, [dramaIdOrSlug, searchParams]);
 
     useEffect(() => {
+        const stripeSessionId = searchParams.get("stripe_session_id");
+        if (stripeSessionId) {
+            fetch(`/api/stripe/checkout?session_id=${encodeURIComponent(stripeSessionId)}`)
+                .then((r) => r.json())
+                .then((data) => {
+                    if (data?.isPaid && data?.phone) {
+                        setViewerPhone(data.phone);
+                        setIsVip(true);
+                        localStorage.setItem("sdc_viewer_phone", data.phone);
+                        localStorage.setItem("sdc_viewer_vip", "true");
+                    }
+                })
+                .catch(() => {});
+        }
+
         const urlPhone = searchParams.get("phone");
         const storedPhone = localStorage.getItem("sdc_viewer_phone");
         const targetPhone = urlPhone || storedPhone || "";
@@ -149,6 +164,8 @@ function WatchDramaContent() {
             ? episodes[currentIndex + 1]
             : null;
 
+    const monthlyPlan = plans.find((p) => p.key === "monthly") || plans[0];
+
     return (
         <div className="min-h-dvh bg-[#0e0d0c] text-[#efe9de] hd-theme flex flex-col">
             <header className="sticky top-0 z-30 border-b border-[rgb(239_233_222/0.08)] bg-[#151413]/92 backdrop-blur-md">
@@ -204,7 +221,7 @@ function WatchDramaContent() {
                                     }}
                                     className="hd-btn-sm hd-button-cream text-xs"
                                 >
-                                    Liberar episódios
+                                    Assinar
                                 </button>
                             </>
                         )}
@@ -257,7 +274,7 @@ function WatchDramaContent() {
                                         Continue assistindo sem limites
                                     </h2>
                                     <p className="text-xs text-[#efe9de]/64 mb-6 leading-relaxed">
-                                        Desbloqueie todos os episódios de {drama.title}, todo o catálogo e o aplicativo PWA por R$ {planPrice.toFixed(2).replace(".", ",")}.
+                                        Desbloqueie todos os episódios de {drama.title}, todo o catálogo e o aplicativo PWA a partir de R$ {(monthlyPlan?.price || 9.9).toFixed(2).replace(".", ",")}/mês.
                                     </p>
 
                                     <div className="space-y-2.5">
@@ -269,7 +286,7 @@ function WatchDramaContent() {
                                             }}
                                             className="w-full hd-btn hd-button-cream text-xs"
                                         >
-                                            Liberar com Pix
+                                            Ver planos (Pix ou Cartão)
                                         </button>
 
                                         <button
@@ -423,7 +440,7 @@ function WatchDramaContent() {
                 dramaId={drama.slug}
                 dramaTitle={drama.title}
                 defaultTab={vipModalTab}
-                planPrice={planPrice}
+                plans={plans}
             />
 
             <PwaInstallModal

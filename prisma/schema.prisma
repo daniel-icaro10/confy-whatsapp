@@ -905,6 +905,11 @@ model FunnelConfig {
   mangofyStoreCode       String?  @db.Text
   mangofyWebhookSecret   String?  @db.Text
 
+  stripeSecretKey        String?  @db.Text
+  stripePublishableKey   String?  @db.Text
+  stripeWebhookSecret    String?  @db.Text
+  plansJson              Json?
+
   step1Greeting          String   @db.Text
   step1MediaUrl          String?  @db.Text
   step1MediaType         String   @default("none")

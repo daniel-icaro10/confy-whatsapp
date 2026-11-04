@@ -18,13 +18,15 @@ export async function POST(request: Request) {
             phone: cleanPhone,
             customerName: body.name || "Assinante Site",
             customerCpf: body.cpf || undefined,
-            dramaId: body.dramaId || undefined
+            dramaId: body.dramaId || undefined,
+            planKey: body.planKey || "monthly"
         });
 
         return NextResponse.json({
             orderId: charge.orderId,
             externalId: charge.externalId,
             amount: charge.amount,
+            planName: charge.planName,
             pixCopyPaste: charge.pixCopyPaste,
             pixQrCodeBase64: charge.pixQrCodeBase64,
             isSimulated: charge.isSimulated,
@@ -32,9 +34,8 @@ export async function POST(request: Request) {
         });
     } catch (error: any) {
         return NextResponse.json(
-            { error: "Erro ao gerar Pix", details: error?.message },
-            { status: 500 }
+            { error: error?.message || "Erro ao gerar Pix", details: error?.message },
+            { status: 400 }
         );
     }
 }
-

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { VipAccessModal } from "@/components/streaming/vip-access-modal";
 import { PwaInstallModal } from "@/components/streaming/pwa-install-modal";
+import { DEFAULT_OFFER_PLANS, OfferPlan } from "@/lib/segredos-defaults";
 
 interface EpisodeItem {
     id: string;
@@ -40,9 +41,10 @@ function SegredosCatalogContent() {
 
     const [viewerPhone, setViewerPhone] = useState<string>("");
     const [isVip, setIsVip] = useState<boolean>(false);
-    const [planPrice, setPlanPrice] = useState<number>(19.9);
+    const [plans, setPlans] = useState<OfferPlan[]>(DEFAULT_OFFER_PLANS);
     const [vipModalOpen, setVipModalOpen] = useState(false);
     const [vipModalTab, setVipModalTab] = useState<"login" | "pix">("pix");
+    const [vipModalPlanKey, setVipModalPlanKey] = useState<"monthly" | "quarterly" | "annual">("monthly");
     const [pwaModalOpen, setPwaModalOpen] = useState(false);
 
     useEffect(() => {
@@ -57,8 +59,8 @@ function SegredosCatalogContent() {
                     setDramas(dramasData.dramas);
                 }
                 const funnelData = await funnelRes.json();
-                if (funnelData?.config?.planPrice) {
-                    setPlanPrice(Number(funnelData.config.planPrice));
+                if (Array.isArray(funnelData?.plans) && funnelData.plans.length > 0) {
+                    setPlans(funnelData.plans);
                 }
             } catch {
                 // fallback
@@ -70,6 +72,21 @@ function SegredosCatalogContent() {
     }, []);
 
     useEffect(() => {
+        const stripeSessionId = searchParams.get("stripe_session_id");
+        if (stripeSessionId) {
+            fetch(`/api/stripe/checkout?session_id=${encodeURIComponent(stripeSessionId)}`)
+                .then((r) => r.json())
+                .then((data) => {
+                    if (data?.isPaid && data?.phone) {
+                        setViewerPhone(data.phone);
+                        setIsVip(true);
+                        localStorage.setItem("sdc_viewer_phone", data.phone);
+                        localStorage.setItem("sdc_viewer_vip", "true");
+                    }
+                })
+                .catch(() => {});
+        }
+
         const urlPhone = searchParams.get("phone");
         const storedPhone = localStorage.getItem("sdc_viewer_phone");
         const targetPhone = urlPhone || storedPhone || "";
@@ -120,10 +137,17 @@ function SegredosCatalogContent() {
     const featuredDrama = dramas.find((d) => d.isFeatured) || dramas[0];
     const topDramas = [...dramas].sort((a, b) => (b.viewsCount || 0) - (a.viewsCount || 0)).slice(0, 6);
     const totalEpisodesCount = dramas.reduce((acc, d) => acc + (d.totalEpisodes || 0), 0);
+    const monthlyPlan = plans.find((p) => p.key === "monthly") || plans[0];
 
     function formatViews(views: number) {
         if (!views || views < 1000) return `${views || 0} visualizações`;
         return `${(views / 1000).toFixed(1).replace(".", ",")} mil`;
+    }
+
+    function openPlanCheckout(planKey: "monthly" | "quarterly" | "annual") {
+        setVipModalPlanKey(planKey);
+        setVipModalTab("pix");
+        setVipModalOpen(true);
     }
 
     return (
@@ -141,7 +165,7 @@ function SegredosCatalogContent() {
                                 TvDrama Reels
                             </span>
                             <span className="text-xs text-[#efe9de]/55">
-                                Novelas verticais · HD 1080p
+                                Novelas verticais · HD e 4K
                             </span>
                         </div>
                     </Link>
@@ -174,7 +198,7 @@ function SegredosCatalogContent() {
                 <div className="my-8 lg:my-0 flex flex-col">
                     <div className="inline-flex items-center gap-2 self-start px-3 py-1 rounded-full hd-chip text-[11px] text-[#efe9de]/75 mb-4">
                         <span className="size-1.5 rounded-full bg-[#e2b383]" />
-                        <span>Inspirado no formato DramaWave · 9:16</span>
+                        <span>Streaming vertical 9:16 · Dublado e Legendado</span>
                     </div>
 
                     <h1 className="hd-rise text-[1.95rem] sm:text-[2.25rem] lg:text-[clamp(2.15rem,2.35vw,2.55rem)] leading-[1.08] font-medium tracking-[-0.016em] text-balance text-[#efe9de]">
@@ -204,15 +228,11 @@ function SegredosCatalogContent() {
                                 </svg>
                             </Link>
                         ) : (
-                            <button
-                                type="button"
-                                onClick={() => {
-                                    setVipModalTab("pix");
-                                    setVipModalOpen(true);
-                                }}
+                            <a
+                                href="#planos"
                                 className="hd-btn hd-button-cream gap-2.5"
                             >
-                                <span>Liberar catálogo completo</span>
+                                <span>Ver planos promocionais</span>
                                 <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="size-4">
                                     <path
                                         d="M4 10h11.5M11 5.5l4.5 4.5-4.5 4.5"
@@ -222,7 +242,7 @@ function SegredosCatalogContent() {
                                         strokeLinejoin="round"
                                     />
                                 </svg>
-                            </button>
+                            </a>
                         )}
 
                         <button
@@ -246,10 +266,10 @@ function SegredosCatalogContent() {
                         </div>
                         <div className="rounded-[14px] p-3 hd-surface">
                             <div className="text-base font-semibold text-[#efe9de] tabular-nums">
-                                1–3 min
+                                R$ {(monthlyPlan?.price || 9.9).toFixed(2).replace(".", ",")}
                             </div>
                             <div className="text-[11px] text-[#efe9de]/50 mt-0.5">
-                                Por episódio
+                                Plano Mensal
                             </div>
                         </div>
                         <div
@@ -274,16 +294,12 @@ function SegredosCatalogContent() {
                 {/* Bottom Sidebar Footer */}
                 <footer className="border-t border-[rgb(239_233_222/0.12)] pt-5 flex items-center justify-between gap-4 text-xs text-[#efe9de]/45">
                     <span className="tabular-nums">
-                        Passe completo · R$ {planPrice.toFixed(2).replace(".", ",")}
+                        A partir de R$ 2,49/mês no plano anual
                     </span>
                     <div className="flex items-center gap-4">
-                        <button
-                            type="button"
-                            onClick={() => setPwaModalOpen(true)}
-                            className="hover:text-[#efe9de] transition"
-                        >
-                            Instalar App
-                        </button>
+                        <a href="#planos" className="hover:text-[#efe9de] transition">
+                            Planos
+                        </a>
                         <Link href="/dashboard" className="hover:text-[#efe9de] transition">
                             Admin
                         </Link>
@@ -327,18 +343,17 @@ function SegredosCatalogContent() {
                                 />
                             </div>
 
-                            <button
-                                type="button"
-                                onClick={() => setPwaModalOpen(true)}
-                                className="hd-btn-sm hd-button-quiet text-xs shrink-0 hidden sm:inline-flex"
+                            <a
+                                href="#planos"
+                                className="hd-btn-sm hd-button-cream text-xs shrink-0 hidden sm:inline-flex"
                             >
-                                App PWA
-                            </button>
+                                Planos
+                            </a>
                         </div>
                     </div>
                 </div>
 
-                <div className="max-w-5xl mx-auto px-4 sm:px-8 py-6 sm:py-8 space-y-10">
+                <div className="max-w-5xl mx-auto px-4 sm:px-8 py-6 sm:py-8 space-y-12">
                     {/* 1. FEATURED SPOTLIGHT CARD (DRAMAWAVE HERO) */}
                     {featuredDrama && !search.trim() && selectedCategory === "Todas" && (
                         <section className="rounded-[24px] hd-shell p-5 sm:p-7">
@@ -386,7 +401,6 @@ function SegredosCatalogContent() {
                                             {featuredDrama.synopsis}
                                         </p>
 
-                                        {/* Quick Episode Preview Strip (DramaWave Style) */}
                                         <div className="mb-6">
                                             <div className="text-[11px] text-[#efe9de]/45 mb-2 font-medium">
                                                 Acesso rápido aos episódios:
@@ -445,10 +459,7 @@ function SegredosCatalogContent() {
                                         {!isVip && (
                                             <button
                                                 type="button"
-                                                onClick={() => {
-                                                    setVipModalTab("pix");
-                                                    setVipModalOpen(true);
-                                                }}
+                                                onClick={() => openPlanCheckout("monthly")}
                                                 className="hd-btn hd-button-quiet"
                                             >
                                                 Desbloquear todos os episódios
@@ -460,7 +471,7 @@ function SegredosCatalogContent() {
                         </section>
                     )}
 
-                    {/* 2. TOP RANKING ROW (DRAMAWAVE TRENDING REELS) */}
+                    {/* 2. TOP RANKING ROW */}
                     {topDramas.length > 0 && !search.trim() && selectedCategory === "Todas" && (
                         <section className="space-y-4">
                             <div className="flex items-end justify-between gap-4">
@@ -544,7 +555,7 @@ function SegredosCatalogContent() {
                         ) : filteredDramas.length === 0 ? (
                             <div className="rounded-[20px] p-12 hd-surface text-center">
                                 <p className="text-sm text-[#efe9de]/64">
-                                    Nenhuma novela encontrada para este filtro.
+                                    Nenhuma novela publicada no momento.
                                 </p>
                             </div>
                         ) : (
@@ -600,7 +611,110 @@ function SegredosCatalogContent() {
                         )}
                     </section>
 
-                    {/* 4. SUBSCRIBER PWA APP BANNER */}
+                    {/* 4. PROMOTIONAL PLANS SECTION (MENSAL, ANUAL & TRIMESTRAL — PIX & STRIPE) */}
+                    <section id="planos" className="space-y-6 pt-2 scroll-mt-20">
+                        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                            <div>
+                                <span className="text-xs font-medium text-[#e2b383] block mb-1">
+                                    Oferta por tempo limitado · Pix imediato ou Cartão
+                                </span>
+                                <h3 className="text-2xl sm:text-3xl font-semibold tracking-[-0.016em] text-[#efe9de]">
+                                    Escolha seu plano de acesso
+                                </h3>
+                                <p className="text-sm text-[#efe9de]/60 mt-1">
+                                    Acesso imediato a todas as novelas verticais, lançamentos diários e versão Aplicativo (PWA).
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
+                            {plans.map((plan) => {
+                                const isFeaturedPlan = plan.isPopular;
+                                return (
+                                    <div
+                                        key={plan.key}
+                                        className={`rounded-[22px] p-6 flex flex-col justify-between relative ${
+                                            isFeaturedPlan
+                                                ? "hd-plan ring-1 ring-[#e2b383]/60"
+                                                : "hd-card"
+                                        }`}
+                                    >
+                                        <div>
+                                            <div className="flex items-center justify-between gap-2 mb-4">
+                                                <span
+                                                    className={`px-3 py-1 rounded-full text-[11px] font-medium ${
+                                                        isFeaturedPlan
+                                                            ? "bg-[#e2b383] text-[#151413]"
+                                                            : "hd-surface text-[#efe9de]/75"
+                                                    }`}
+                                                >
+                                                    {plan.topTag}
+                                                </span>
+                                                <span className="text-[11px] text-[#efe9de]/50">
+                                                    Por tempo limitado
+                                                </span>
+                                            </div>
+
+                                            <h4 className="text-xl font-semibold tracking-[-0.015em] text-[#efe9de]">
+                                                {plan.name}
+                                            </h4>
+                                            <p className="text-xs text-[#efe9de]/55 mt-0.5">
+                                                {plan.subtitle}
+                                            </p>
+
+                                            <div className="mt-5 pt-4 border-t border-[rgb(239_233_222/0.1)]">
+                                                <div className="text-xs text-[#efe9de]/45 line-through tabular-nums">
+                                                    De R$ {plan.originalPrice.toFixed(2).replace(".", ",")}
+                                                </div>
+                                                <div className="flex items-baseline gap-1 mt-0.5">
+                                                    <span className="text-xs text-[#efe9de]/60">Por</span>
+                                                    <span className="text-3xl font-semibold tracking-[-0.02em] text-[#efe9de] tabular-nums">
+                                                        R$ {plan.price.toFixed(2).replace(".", ",")}
+                                                    </span>
+                                                    {plan.periodLabel && (
+                                                        <span className="text-xs text-[#efe9de]/60">
+                                                            {plan.periodLabel}
+                                                        </span>
+                                                    )}
+                                                </div>
+                                                <div className="inline-block mt-2 px-2.5 py-1 rounded-[8px] hd-surface text-[11px] font-medium text-[#e2b383] tabular-nums">
+                                                    {plan.badge}
+                                                </div>
+                                            </div>
+
+                                            <ul className="mt-6 space-y-2.5 text-xs text-[#efe9de]/80">
+                                                {plan.features.map((feat, i) => (
+                                                    <li key={i} className="flex items-start gap-2.5">
+                                                        <span className="size-1.5 rounded-full bg-[#e2b383] mt-1.5 shrink-0" />
+                                                        <span>{feat}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+
+                                        <div className="mt-7 pt-4 border-t border-[rgb(239_233_222/0.08)] space-y-2">
+                                            <button
+                                                type="button"
+                                                onClick={() => openPlanCheckout(plan.key)}
+                                                className={`w-full hd-btn ${
+                                                    isFeaturedPlan
+                                                        ? "hd-button-cream"
+                                                        : "hd-button-quiet hover:hd-button-cream"
+                                                }`}
+                                            >
+                                                Assinar agora
+                                            </button>
+                                            <p className="text-[11px] text-center text-[#efe9de]/45">
+                                                Pagamento 100% seguro · Acesso imediato (Pix ou Cartão)
+                                            </p>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </section>
+
+                    {/* 5. SUBSCRIBER PWA APP BANNER */}
                     <section className="rounded-[24px] p-6 sm:p-8 hd-plan">
                         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                             <div className="max-w-xl space-y-2">
@@ -626,10 +740,7 @@ function SegredosCatalogContent() {
                                 {!isVip && (
                                     <button
                                         type="button"
-                                        onClick={() => {
-                                            setVipModalTab("pix");
-                                            setVipModalOpen(true);
-                                        }}
+                                        onClick={() => openPlanCheckout("monthly")}
                                         className="hd-btn hd-button-quiet"
                                     >
                                         Tornar-se assinante
@@ -650,7 +761,8 @@ function SegredosCatalogContent() {
                     setVipModalOpen(false);
                 }}
                 defaultTab={vipModalTab}
-                planPrice={planPrice}
+                initialPlanKey={vipModalPlanKey}
+                plans={plans}
             />
 
             <PwaInstallModal

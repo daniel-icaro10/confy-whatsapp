@@ -1,9 +1,133 @@
 import { prisma } from "@/lib/prisma";
 
+export interface OfferPlan {
+    key: "monthly" | "quarterly" | "annual";
+    name: string;
+    subtitle: string;
+    topTag: string;
+    badge: string;
+    originalPrice: number;
+    price: number;
+    periodLabel: string;
+    equivalentMonthlyLabel: string;
+    durationDays: number;
+    interval: "month" | "year";
+    intervalCount: number;
+    isPopular: boolean;
+    stripePriceId?: string;
+    externalCheckoutUrl?: string;
+    features: string[];
+}
+
+export const DEFAULT_OFFER_PLANS: OfferPlan[] = [
+    {
+        key: "monthly",
+        name: "Plano Mensal",
+        subtitle: "Acesso Total",
+        topTag: "Por tempo limitado",
+        badge: "Economize R$ 7,00 · 41% OFF",
+        originalPrice: 16.90,
+        price: 9.90,
+        periodLabel: "/mês",
+        equivalentMonthlyLabel: "Renovação mensal ou Pix de 30 dias",
+        durationDays: 30,
+        interval: "month",
+        intervalCount: 1,
+        isPopular: false,
+        stripePriceId: "",
+        externalCheckoutUrl: "",
+        features: [
+            "Acesso imediato após pagamento",
+            "Acesso completo ao catálogo",
+            "Novos lançamentos todos os dias",
+            "Dublado e legendado",
+            "HD e 4K",
+            "Sem anúncios",
+            "2 telas",
+            "Assista em qualquer dispositivo"
+        ]
+    },
+    {
+        key: "annual",
+        name: "Plano Anual",
+        subtitle: "Acesso por um ano",
+        topTag: "Oferta Limitada · 35% OFF",
+        badge: "Economize R$ 16,00 · só R$ 2,49/mês",
+        originalPrice: 45.90,
+        price: 29.90,
+        periodLabel: "",
+        equivalentMonthlyLabel: "Pagamento único · 12 meses completos",
+        durationDays: 365,
+        interval: "year",
+        intervalCount: 1,
+        isPopular: true,
+        stripePriceId: "",
+        externalCheckoutUrl: "",
+        features: [
+            "Acesso imediato após pagamento",
+            "Tudo do plano mensal",
+            "Novos lançamentos todos os dias",
+            "Acesso por um ano completo",
+            "3 telas simultâneas",
+            "Suporte VIP via WhatsApp",
+            "Pagamento único",
+            "Assista em qualquer dispositivo",
+            "Bônus: lançamentos antecipados"
+        ]
+    },
+    {
+        key: "quarterly",
+        name: "Plano Trimestral",
+        subtitle: "Acesso por 3 meses",
+        topTag: "3 meses de acesso",
+        badge: "Economize R$ 10,00 · só R$ 6,63/mês",
+        originalPrice: 29.90,
+        price: 19.90,
+        periodLabel: "/trimestre",
+        equivalentMonthlyLabel: "Acesso completo por 90 dias",
+        durationDays: 90,
+        interval: "month",
+        intervalCount: 3,
+        isPopular: false,
+        stripePriceId: "",
+        externalCheckoutUrl: "",
+        features: [
+            "Acesso imediato após pagamento",
+            "Acesso completo ao catálogo",
+            "Novos lançamentos todos os dias",
+            "Dublado e legendado",
+            "HD e 4K",
+            "Sem anúncios",
+            "1 tela",
+            "Assista em qualquer dispositivo"
+        ]
+    }
+];
+
+export function getOfferPlans(config?: { plansJson?: unknown } | null): OfferPlan[] {
+    if (!config?.plansJson || !Array.isArray(config.plansJson)) {
+        return DEFAULT_OFFER_PLANS;
+    }
+
+    const customPlans = config.plansJson as Partial<OfferPlan>[];
+    return DEFAULT_OFFER_PLANS.map((defaultPlan) => {
+        const found = customPlans.find((p) => p.key === defaultPlan.key);
+        if (!found) return defaultPlan;
+        return {
+            ...defaultPlan,
+            ...found,
+            price: Number(found.price ?? defaultPlan.price),
+            originalPrice: Number(found.originalPrice ?? defaultPlan.originalPrice),
+            features:
+                Array.isArray(found.features) && found.features.length > 0
+                    ? found.features
+                    : defaultPlan.features
+        };
+    });
+}
+
 /**
  * Normaliza um número de telefone ou JID do WhatsApp para apenas dígitos com DDI 55 (padrão Brasil).
- * Ex: "(11) 98765-4321" -> "5511987654321"
- * Ex: "551187654321@s.whatsapp.net" -> "551187654321"
  */
 export function normalizeBrPhone(raw: string): string {
     if (!raw) return "";
@@ -71,13 +195,17 @@ export const DEFAULT_FUNNEL_CONFIG = {
     id: "default",
     enabled: false,
     sessionId: null as string | null,
-    planName: "Acesso Completo — TvDrama Reels",
-    planPrice: 19.90,
+    planName: "Plano Mensal — TvDrama Reels",
+    planPrice: 9.90,
     siteUrl: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
     mangofyApiUrl: "https://checkout.mangofy.com.br/api/v1",
     mangofyApiKey: "",
     mangofyStoreCode: "",
     mangofyWebhookSecret: "",
+    stripeSecretKey: "",
+    stripePublishableKey: "",
+    stripeWebhookSecret: "",
+    plansJson: DEFAULT_OFFER_PLANS as unknown as any,
     step1Greeting: "",
     step1MediaUrl: "",
     step1MediaType: "none",
@@ -111,7 +239,6 @@ export async function ensureFunnelConfig() {
             return config;
         }
 
-        // Se o registro ainda estiver com as mensagens prontas antigas de exemplo, limpa automaticamente
         if (
             config.step1Greeting?.includes("Oiê, meu amor!") ||
             config.aiSystemPrompt?.includes("Você é a Sofia, atendente")
@@ -120,7 +247,8 @@ export async function ensureFunnelConfig() {
                 where: { id: "default" },
                 data: {
                     enabled: false,
-                    planName: "Acesso Completo — TvDrama Reels",
+                    planName: "Plano Mensal — TvDrama Reels",
+                    planPrice: 9.90,
                     step1Greeting: "",
                     step2OfferMessage: "",
                     pixTriggerKeywords: "",
@@ -140,7 +268,6 @@ export async function ensureFunnelConfig() {
 
 export async function ensureInitialDramas() {
     try {
-        // Remove qualquer novela mockada que tenha sido criada anteriormente
         await prisma.drama.deleteMany({
             where: {
                 slug: { in: LEGACY_MOCK_DRAMA_SLUGS }

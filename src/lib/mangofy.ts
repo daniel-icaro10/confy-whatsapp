@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { ensureFunnelConfig, normalizeBrPhone } from "@/lib/segredos-defaults";
+import { ensureFunnelConfig, getOfferPlans, normalizeBrPhone } from "@/lib/segredos-defaults";
 import { waManager } from "@/modules/whatsapp/manager";
 import { logger } from "@/lib/logger";
 
@@ -11,6 +11,7 @@ export interface CreatePixChargeInput {
     customerCpf?: string;
     customerEmail?: string;
     dramaId?: string;
+    planKey?: "monthly" | "quarterly" | "annual";
     customAmount?: number;
 }
 
@@ -18,6 +19,7 @@ export interface CreatePixChargeResult {
     orderId: string;
     externalId: string;
     amount: number;
+    planName: string;
     pixCopyPaste: string;
     pixQrCodeBase64?: string | null;
     isSimulated: boolean;
@@ -28,8 +30,14 @@ export interface CreatePixChargeResult {
  */
 export async function createMangofyPixCharge(input: CreatePixChargeInput): Promise<CreatePixChargeResult> {
     const config = await ensureFunnelConfig();
+    const plans = getOfferPlans(config);
+    const selectedPlan = input.planKey
+        ? plans.find((p) => p.key === input.planKey)
+        : plans.find((p) => p.key === "monthly") || plans[0];
+
     const cleanPhone = normalizeBrPhone(input.phone);
-    const amount = input.customAmount ?? config.planPrice ?? 19.90;
+    const amount = input.customAmount ?? selectedPlan?.price ?? config.planPrice ?? 9.90;
+    const planTitle = selectedPlan ? `${selectedPlan.name} — TvDrama Reels` : config.planName || "Plano Mensal — TvDrama Reels";
     const amountCents = Math.round(amount * 100);
 
     const customerName = input.customerName?.trim() || "Cliente TvDrama Reels";
@@ -74,9 +82,9 @@ export async function createMangofyPixCharge(input: CreatePixChargeInput): Promi
         },
         items: [
             {
-                code: "vip-tvdrama",
-                title: config.planName || "Acesso Completo — TvDrama Reels",
-                name: config.planName || "Acesso Completo — TvDrama Reels",
+                code: `tvdrama-${selectedPlan?.key || "monthly"}`,
+                title: planTitle,
+                name: planTitle,
                 amount: 1,
                 quantity: 1,
                 unit_price: amountCents,
@@ -87,7 +95,9 @@ export async function createMangofyPixCharge(input: CreatePixChargeInput): Promi
             phone: cleanPhone,
             jid: input.jid || "",
             sessionId: input.sessionId || config.sessionId || "",
-            dramaId: input.dramaId || ""
+            dramaId: input.dramaId || "",
+            planKey: selectedPlan?.key || "monthly",
+            durationDays: String(selectedPlan?.durationDays || 30)
         }
     };
 
@@ -151,7 +161,7 @@ export async function createMangofyPixCharge(input: CreatePixChargeInput): Promi
             customerName,
             customerEmail,
             customerCpf,
-            planName: config.planName,
+            planName: planTitle,
             amount,
             status: "PENDING",
             pixCopyPaste,
@@ -164,6 +174,7 @@ export async function createMangofyPixCharge(input: CreatePixChargeInput): Promi
         orderId: order.id,
         externalId,
         amount,
+        planName: planTitle,
         pixCopyPaste,
         pixQrCodeBase64,
         isSimulated: false
@@ -171,12 +182,13 @@ export async function createMangofyPixCharge(input: CreatePixChargeInput): Promi
 }
 
 /**
- * Aprova um pedido Pix, libera o telefone do cliente na tabela ViewerAccess
+ * Aprova um pedido Pix ou Stripe, libera o telefone do cliente na tabela ViewerAccess
  * e envia a mensagem de confirmação no WhatsApp (caso configurada pelo administrador).
  */
 export async function approvePixOrderAndGrantAccess(orderIdentifier: {
     orderId?: string;
     externalId?: string;
+    durationDays?: number;
 }) {
     const config = await ensureFunnelConfig();
 
@@ -187,7 +199,7 @@ export async function approvePixOrderAndGrantAccess(orderIdentifier: {
     });
 
     if (!order) {
-        throw new Error("Pedido Pix não encontrado");
+        throw new Error("Pedido não encontrado");
     }
 
     const cleanPhone = normalizeBrPhone(order.phone);
@@ -200,6 +212,16 @@ export async function approvePixOrderAndGrantAccess(orderIdentifier: {
         }
     });
 
+    // Calcula validade de acordo com o plano (Mensal 30d, Trimestral 90d, Anual 365d)
+    let days = orderIdentifier.durationDays || 30;
+    const lowerPlan = (order.planName || "").toLowerCase();
+    if (!orderIdentifier.durationDays) {
+        if (lowerPlan.includes("anual")) days = 365;
+        else if (lowerPlan.includes("trimestral")) days = 90;
+        else days = 30;
+    }
+    const expiresAt = new Date(Date.now() + days * 24 * 60 * 60 * 1000);
+
     const viewer = await prisma.viewerAccess.upsert({
         where: { phone: cleanPhone },
         create: {
@@ -209,11 +231,13 @@ export async function approvePixOrderAndGrantAccess(orderIdentifier: {
             cpf: order.customerCpf,
             planName: order.planName || config.planName,
             isVip: true,
+            expiresAt,
             lastWatchedDramaId: order.dramaId || null
         },
         update: {
             isVip: true,
             planName: order.planName || config.planName,
+            expiresAt,
             updatedAt: new Date()
         }
     });
@@ -231,7 +255,6 @@ export async function approvePixOrderAndGrantAccess(orderIdentifier: {
             .replace(/\{\{NOME\}\}/g, order.customerName || "");
 
         try {
-            // Usa exclusivamente a sessão vinculada ao pedido ou configurada no funil do TvDrama Reels
             const targetSessionId = (order.sessionId || config.sessionId || "").trim();
 
             if (targetSessionId) {
