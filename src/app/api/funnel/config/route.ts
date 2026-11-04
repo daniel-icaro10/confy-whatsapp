@@ -5,14 +5,28 @@ import { auth } from "@/lib/auth";
 
 export async function GET() {
     try {
-        const config = await ensureFunnelConfig();
+        const [config, sessions] = await Promise.all([
+            ensureFunnelConfig(),
+            prisma.session
+                .findMany({
+                    select: {
+                        id: true,
+                        name: true,
+                        sessionId: true,
+                        status: true
+                    },
+                    orderBy: { createdAt: "desc" }
+                })
+                .catch(() => [])
+        ]);
+
         return NextResponse.json({
             config: {
                 ...config,
-                // Para o site público poder saber o valor do plano sem expor as chaves privadas
                 publicPlanName: config.planName,
                 publicPlanPrice: config.planPrice
-            }
+            },
+            sessions
         });
     } catch (error: any) {
         return NextResponse.json(
@@ -32,11 +46,13 @@ export async function PUT(request: Request) {
         const body = await request.json();
         await ensureFunnelConfig();
 
+        const cleanSessionId = body.sessionId?.trim() || null;
+
         const updated = await prisma.funnelConfig.update({
             where: { id: "default" },
             data: {
-                enabled: body.enabled !== undefined ? Boolean(body.enabled) : undefined,
-                sessionId: body.sessionId ?? null,
+                enabled: body.enabled !== undefined ? Boolean(body.enabled && cleanSessionId) : undefined,
+                sessionId: cleanSessionId,
                 planName: body.planName,
                 planPrice: body.planPrice !== undefined ? Number(body.planPrice) : undefined,
                 siteUrl: body.siteUrl,
@@ -67,4 +83,3 @@ export async function PUT(request: Request) {
         );
     }
 }
-

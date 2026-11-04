@@ -231,14 +231,8 @@ export async function approvePixOrderAndGrantAccess(orderIdentifier: {
             .replace(/\{\{NOME\}\}/g, order.customerName || "");
 
         try {
-            let targetSessionId = order.sessionId || config.sessionId;
-            if (!targetSessionId) {
-                const connectedSession = await prisma.session.findFirst({
-                    where: { status: "CONNECTED" },
-                    select: { sessionId: true }
-                });
-                targetSessionId = connectedSession?.sessionId || null;
-            }
+            // Usa exclusivamente a sessão vinculada ao pedido ou configurada no funil do TvDrama Reels
+            const targetSessionId = (order.sessionId || config.sessionId || "").trim();
 
             if (targetSessionId) {
                 const instance = waManager.getInstance(targetSessionId);
@@ -246,7 +240,7 @@ export async function approvePixOrderAndGrantAccess(orderIdentifier: {
 
                 if (instance?.socket) {
                     await instance.socket.sendMessage(targetJid, { text: finalMessage });
-                    logger.info("Funnel", `Acesso entregue via WhatsApp para ${targetJid}`);
+                    logger.info("Funnel", `Acesso entregue via WhatsApp (${targetSessionId}) para ${targetJid}`);
                 }
             }
         } catch (err) {

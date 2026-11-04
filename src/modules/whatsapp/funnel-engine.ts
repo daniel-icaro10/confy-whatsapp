@@ -23,7 +23,9 @@ export async function processFunnelIncomingMessage(
         const config = await ensureFunnelConfig();
         if (!config.enabled) return false;
 
-        if (config.sessionId && config.sessionId.trim() !== "" && config.sessionId !== sessionId) {
+        // Obrigatório ter uma sessão específica selecionada para o TvDrama Reels (nunca roda em outras sessões do Baileys)
+        const targetSessionId = config.sessionId?.trim();
+        if (!targetSessionId || targetSessionId !== sessionId) {
             return false;
         }
 

@@ -4,10 +4,18 @@ import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import Link from "next/link";
 
+interface WaSessionOption {
+    id: string;
+    name: string;
+    sessionId: string;
+    status: string;
+}
+
 export default function AdminFunilPage() {
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
     const [copiedWebhook, setCopiedWebhook] = useState(false);
+    const [sessions, setSessions] = useState<WaSessionOption[]>([]);
 
     const [config, setConfig] = useState({
         enabled: false,
@@ -38,6 +46,9 @@ export default function AdminFunilPage() {
             try {
                 const res = await fetch("/api/funnel/config");
                 const data = await res.json();
+                if (Array.isArray(data?.sessions)) {
+                    setSessions(data.sessions);
+                }
                 if (data?.config) {
                     setConfig({
                         ...data.config,
@@ -63,6 +74,10 @@ export default function AdminFunilPage() {
 
     const handleSave = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (config.enabled && !config.sessionId.trim()) {
+            toast.error("Selecione qual sessão do WhatsApp será usada exclusivamente pelo TvDrama Reels antes de ativar o funil.");
+            return;
+        }
         setSaving(true);
         try {
             const res = await fetch("/api/funnel/config", {
@@ -104,7 +119,7 @@ export default function AdminFunilPage() {
                         Funil e pagamentos
                     </h1>
                     <p className="text-xs text-neutral-400 mt-1">
-                        Configuração do fluxo de WhatsApp, gateway Mangofy e inteligência artificial.
+                        Configuração exclusiva do fluxo de WhatsApp do TvDrama Reels, gateway Mangofy e inteligência artificial.
                     </p>
                 </div>
 
@@ -125,13 +140,13 @@ export default function AdminFunilPage() {
                 </div>
             </div>
 
-            {/* Oferta */}
+            {/* Sessão exclusiva & Oferta */}
             <div className="p-5 rounded-lg border border-neutral-800 bg-[#111111] space-y-4">
                 <div className="flex items-center justify-between border-b border-neutral-800 pb-3">
                     <div>
-                        <h2 className="font-medium text-sm text-white">Oferta e funcionamento</h2>
+                        <h2 className="font-medium text-sm text-white">Sessão exclusiva e oferta</h2>
                         <p className="text-xs text-neutral-500">
-                            Define o valor cobrado no Pix e a URL enviada ao cliente após o pagamento.
+                            O atendimento do TvDrama Reels funcionará apenas na sessão selecionada abaixo, sem interferir nas sessões de outros projetos.
                         </p>
                     </div>
 
@@ -145,7 +160,28 @@ export default function AdminFunilPage() {
                     </label>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div>
+                    <label className="block text-xs font-medium text-neutral-300 mb-1.5">
+                        Sessão do WhatsApp exclusiva do TvDrama Reels
+                    </label>
+                    <select
+                        value={config.sessionId}
+                        onChange={(e) => setConfig({ ...config, sessionId: e.target.value })}
+                        className="w-full px-3 py-2 rounded bg-[#0a0a0a] border border-neutral-800 text-sm text-white"
+                    >
+                        <option value="">— Selecione uma sessão específica —</option>
+                        {sessions.map((s) => (
+                            <option key={s.id} value={s.sessionId}>
+                                {s.name} ({s.sessionId}) — {s.status === "CONNECTED" ? "Conectada" : s.status}
+                            </option>
+                        ))}
+                    </select>
+                    <p className="text-[11px] text-neutral-500 mt-1.5">
+                        Enquanto nenhuma sessão estiver selecionada, o bot do TvDrama Reels permanecerá desativado e não responderá em nenhuma instância.
+                    </p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2 border-t border-neutral-800">
                     <div>
                         <label className="block text-xs text-neutral-400 mb-1">Nome do plano</label>
                         <input
@@ -354,7 +390,7 @@ export default function AdminFunilPage() {
                             Resposta automática por IA
                         </h2>
                         <p className="text-xs text-neutral-500">
-                            Responde dúvidas abertas antes da geração do Pix.
+                            Responde dúvidas abertas antes da geração do Pix (somente na sessão exclusiva selecionada acima).
                         </p>
                     </div>
 
