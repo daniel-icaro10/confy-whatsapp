@@ -228,12 +228,12 @@ export function FramedYoutubePlayer({
             {(!isPlaying || hasEnded) && (
                 <div
                     onClick={togglePlay}
-                    className="absolute inset-0 z-10 bg-[#0e0d0c]/88 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center cursor-pointer transition-opacity"
+                    className="absolute inset-0 z-10 bg-black/90 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center cursor-pointer transition-opacity"
                 >
-                    <span className="px-3 py-1 rounded-full hd-surface text-[#e2b383] text-[11px] font-medium mb-2 tabular-nums">
+                    <span className="px-3.5 py-1 rounded-full bg-white/[0.08] border border-white/15 text-white text-[11px] font-bold mb-2 tabular-nums">
                         Episódio {String(episodeNumber).padStart(2, "0")}
                     </span>
-                    <p className="text-sm font-semibold text-[#efe9de] max-w-xs mb-4">
+                    <p className="text-sm font-bold text-white max-w-xs mb-4">
                         {title}
                     </p>
                     <button
@@ -242,7 +242,7 @@ export function FramedYoutubePlayer({
                             e.stopPropagation();
                             togglePlay();
                         }}
-                        className="hd-btn hd-button-cream text-xs px-6"
+                        className="px-6 py-2.5 rounded-full bg-[#e11d48] hover:bg-[#f43f5e] text-white font-bold text-xs shadow-[0_6px_20px_rgba(225,29,72,0.4)] transition"
                     >
                         {hasEnded ? "Assistir novamente" : "Continuar episódio"}
                     </button>
@@ -256,19 +256,19 @@ export function FramedYoutubePlayer({
             >
                 {/* Topo sutil da moldura TvDrama Reels */}
                 <div
-                    className={`p-3.5 bg-gradient-to-b from-black/75 via-black/25 to-transparent flex items-center justify-between transition-opacity duration-300 ${
+                    className={`p-3.5 bg-gradient-to-b from-black/85 via-black/40 to-transparent flex items-center justify-between transition-opacity duration-300 ${
                         controlsVisible || !isPlaying ? "opacity-100" : "opacity-0"
                     }`}
                 >
                     <div className="min-w-0">
-                        <span className="text-[11px] font-medium text-[#efe9de]/85 truncate block">
+                        <span className="text-[11px] font-bold text-white/90 truncate block">
                             Ep. {String(episodeNumber).padStart(2, "0")} · {title}
                         </span>
                     </div>
                     <button
                         type="button"
                         onClick={cycleCropMode}
-                        className="px-2.5 py-1 rounded-full bg-black/55 border border-[rgb(239_233_222/0.14)] text-[10px] text-[#efe9de]/85 hover:text-[#efe9de]"
+                        className="px-2.5 py-1 rounded-full bg-black/70 border border-white/15 text-[10px] text-white/80 hover:text-white transition"
                     >
                         Enquadramento:{" "}
                         {cropMode === "fit"
@@ -282,7 +282,7 @@ export function FramedYoutubePlayer({
                 {/* Barra de controles inferior própria do TvDrama Reels */}
                 <div
                     onClick={(e) => e.stopPropagation()}
-                    className={`p-3.5 bg-gradient-to-t from-black/85 via-black/45 to-transparent space-y-2 transition-opacity duration-300 ${
+                    className={`p-3.5 bg-gradient-to-t from-black/90 via-black/50 to-transparent space-y-2 transition-opacity duration-300 ${
                         controlsVisible || !isPlaying ? "opacity-100" : "opacity-0"
                     }`}
                 >
@@ -294,16 +294,16 @@ export function FramedYoutubePlayer({
                             step={0.5}
                             value={Math.min(currentTime, duration)}
                             onChange={handleSeek}
-                            className="w-full h-1 accent-[#efe9de] bg-[rgb(239_233_222/0.22)] rounded-full cursor-pointer"
+                            className="w-full h-1 accent-[#e11d48] bg-white/20 rounded-full cursor-pointer"
                         />
                     )}
 
-                    <div className="flex items-center justify-between gap-2 text-[11px] text-[#efe9de]/85 tabular-nums">
+                    <div className="flex items-center justify-between gap-2 text-[11px] text-white/90 tabular-nums">
                         <div className="flex items-center gap-2">
                             <button
                                 type="button"
                                 onClick={togglePlay}
-                                className="px-2.5 py-1 rounded-full bg-black/60 border border-[rgb(239_233_222/0.14)] hover:border-[rgb(239_233_222/0.35)] text-[#efe9de] font-medium"
+                                className="px-2.5 py-1 rounded-full bg-black/70 border border-white/15 hover:border-white/35 text-white font-semibold transition"
                             >
                                 {isPlaying ? "Pausar" : "Reproduzir"}
                             </button>
@@ -311,13 +311,13 @@ export function FramedYoutubePlayer({
                             <button
                                 type="button"
                                 onClick={toggleMute}
-                                className="px-2.5 py-1 rounded-full bg-black/60 border border-[rgb(239_233_222/0.14)] hover:border-[rgb(239_233_222/0.35)] text-[#efe9de]"
+                                className="px-2.5 py-1 rounded-full bg-black/70 border border-white/15 hover:border-white/35 text-white transition"
                             >
                                 {isMuted ? "Ativar som" : "Som ativo"}
                             </button>
 
                             {duration > 0 && (
-                                <span className="text-[10px] text-[#efe9de]/65 ml-1">
+                                <span className="text-[10px] text-[#9a9a9a] ml-1">
                                     {formatSeconds(currentTime)} / {formatSeconds(duration)}
                                 </span>
                             )}
@@ -326,7 +326,7 @@ export function FramedYoutubePlayer({
                         <button
                             type="button"
                             onClick={toggleFullscreen}
-                            className="px-2.5 py-1 rounded-full bg-black/60 border border-[rgb(239_233_222/0.14)] hover:border-[rgb(239_233_222/0.35)] text-[#efe9de]"
+                            className="px-2.5 py-1 rounded-full bg-black/70 border border-white/15 hover:border-white/35 text-white transition"
                         >
                             Tela cheia
                         </button>
@@ -335,8 +335,8 @@ export function FramedYoutubePlayer({
             </div>
 
             {!isReady && (
-                <div className="absolute inset-0 z-5 bg-[#0e0d0c] flex items-center justify-center pointer-events-none">
-                    <span className="text-xs text-[#efe9de]/55">Carregando player...</span>
+                <div className="absolute inset-0 z-5 bg-black flex items-center justify-center pointer-events-none">
+                    <span className="text-xs text-[#9a9a9a]">Carregando player...</span>
                 </div>
             )}
         </div>
