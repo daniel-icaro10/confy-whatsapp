@@ -6,6 +6,7 @@ import Link from "next/link";
 import { DEFAULT_OFFER_PLANS, extractYoutubeId, OfferPlan } from "@/lib/segredos-defaults";
 import { VipAccessModal } from "@/components/streaming/vip-access-modal";
 import { PwaInstallModal } from "@/components/streaming/pwa-install-modal";
+import { FramedYoutubePlayer } from "@/components/streaming/framed-youtube-player";
 
 interface Episode {
     id: string;
@@ -246,16 +247,17 @@ function WatchDramaContent() {
                                     controls
                                     autoPlay
                                     playsInline
+                                    onEnded={() => nextEp && handleSelectEpisode(nextEp)}
                                     className="w-full h-full object-contain bg-black"
                                 />
                             ) : youtubeId ? (
-                                <iframe
+                                <FramedYoutubePlayer
                                     key={currentEpisode.id}
-                                    src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
+                                    videoId={youtubeId}
                                     title={currentEpisode.title}
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowFullScreen
-                                    className="w-full h-full border-0"
+                                    episodeNumber={currentEpisode.number}
+                                    isVertical={drama.isVertical}
+                                    onEnded={() => nextEp && handleSelectEpisode(nextEp)}
                                 />
                             ) : (
                                 <div className="w-full h-full flex items-center justify-center p-6 text-center">
