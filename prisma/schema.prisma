@@ -910,6 +910,9 @@ model FunnelConfig {
   stripeWebhookSecret    String?  @db.Text
   plansJson              Json?
 
+  whatsappNumber         String?
+  adRedirectMessage      String?  @db.Text
+
   step1Greeting          String   @db.Text
   step1MediaUrl          String?  @db.Text
   step1MediaType         String   @default("none")

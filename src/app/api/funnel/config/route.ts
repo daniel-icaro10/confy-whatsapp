@@ -1,7 +1,43 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { ensureFunnelConfig, getOfferPlans } from "@/lib/segredos-defaults";
+import { ensureFunnelConfig, getOfferPlans, normalizeBrPhone } from "@/lib/segredos-defaults";
 import { auth } from "@/lib/auth";
+import { waManager } from "@/modules/whatsapp/manager";
+
+async function resolveSessionPhone(sessionId?: string | null): Promise<string> {
+    if (!sessionId) return "";
+    try {
+        const sock = waManager.getInstance(sessionId);
+        const rawUserId = sock?.user?.id || "";
+        if (rawUserId) {
+            const jidPart = rawUserId.split(":")[0].split("@")[0];
+            const clean = normalizeBrPhone(jidPart);
+            if (clean) return clean;
+        }
+    } catch {
+        // ignore
+    }
+
+    try {
+        const creds = await prisma.authState.findFirst({
+            where: {
+                sessionId,
+                key: "creds.json"
+            }
+        });
+        const val = creds?.value as any;
+        const meId = val?.me?.id || "";
+        if (meId && typeof meId === "string") {
+            const jidPart = meId.split(":")[0].split("@")[0];
+            const clean = normalizeBrPhone(jidPart);
+            if (clean) return clean;
+        }
+    } catch {
+        // ignore
+    }
+
+    return "";
+}
 
 export async function GET() {
     try {
@@ -21,12 +57,18 @@ export async function GET() {
         ]);
 
         const plans = getOfferPlans(config);
+        const manualPhone = normalizeBrPhone(config.whatsappNumber || "");
+        const detectedPhone = manualPhone || (await resolveSessionPhone(config.sessionId));
 
         return NextResponse.json({
             config: {
                 ...config,
                 publicPlanName: config.planName,
-                publicPlanPrice: config.planPrice
+                publicPlanPrice: config.planPrice,
+                publicWhatsappNumber: detectedPhone,
+                publicAdRedirectMessage:
+                    config.adRedirectMessage ||
+                    "Olá! Vi o anúncio e quero liberar meu acesso para assistir."
             },
             plans,
             sessions
@@ -59,6 +101,8 @@ export async function PUT(request: Request) {
                 planName: body.planName,
                 planPrice: body.planPrice !== undefined ? Number(body.planPrice) : undefined,
                 siteUrl: body.siteUrl,
+                whatsappNumber: body.whatsappNumber !== undefined ? String(body.whatsappNumber || "").trim() : undefined,
+                adRedirectMessage: body.adRedirectMessage !== undefined ? String(body.adRedirectMessage || "") : undefined,
                 mangofyApiUrl: body.mangofyApiUrl,
                 mangofyApiKey: body.mangofyApiKey,
                 mangofyStoreCode: body.mangofyStoreCode,

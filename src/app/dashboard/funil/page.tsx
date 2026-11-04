@@ -17,8 +17,10 @@ export default function AdminFunilPage() {
     const [saving, setSaving] = useState(false);
     const [copiedWebhook, setCopiedWebhook] = useState(false);
     const [copiedStripeWebhook, setCopiedStripeWebhook] = useState(false);
+    const [copiedAdUrl, setCopiedAdUrl] = useState(false);
     const [sessions, setSessions] = useState<WaSessionOption[]>([]);
     const [plans, setPlans] = useState<OfferPlan[]>(DEFAULT_OFFER_PLANS);
+    const [detectedWhatsapp, setDetectedWhatsapp] = useState("");
 
     const [config, setConfig] = useState({
         enabled: false,
@@ -26,6 +28,8 @@ export default function AdminFunilPage() {
         planName: "Plano Mensal — TvDrama Reels",
         planPrice: 9.9,
         siteUrl: "",
+        whatsappNumber: "",
+        adRedirectMessage: "Olá! Vi o anúncio e quero liberar meu acesso para assistir.",
         mangofyApiUrl: "https://checkout.mangofy.com.br/api/v1",
         mangofyApiKey: "",
         mangofyStoreCode: "",
@@ -59,9 +63,14 @@ export default function AdminFunilPage() {
                     setPlans(data.plans);
                 }
                 if (data?.config) {
+                    setDetectedWhatsapp(data.config.publicWhatsappNumber || "");
                     setConfig({
                         ...data.config,
                         sessionId: data.config.sessionId || "",
+                        whatsappNumber: data.config.whatsappNumber || "",
+                        adRedirectMessage:
+                            data.config.adRedirectMessage ||
+                            "Olá! Vi o anúncio e quero liberar meu acesso para assistir.",
                         mangofyApiKey: data.config.mangofyApiKey || "",
                         mangofyStoreCode: data.config.mangofyStoreCode || "",
                         mangofyWebhookSecret: data.config.mangofyWebhookSecret || "",
@@ -231,6 +240,77 @@ export default function AdminFunilPage() {
                             onChange={(e) => setConfig({ ...config, siteUrl: e.target.value })}
                             className="w-full px-3 py-2 rounded bg-[#0a0a0a] border border-neutral-800 text-sm text-white"
                         />
+                    </div>
+                </div>
+
+                {/* Redirecionamento de Anúncios (Tráfego -> WhatsApp) */}
+                <div className="pt-4 border-t border-neutral-800 space-y-3">
+                    <div>
+                        <h3 className="text-xs font-semibold text-white">
+                            Redirecionamento de Tráfego Pago (Anúncios → Funil Automático WhatsApp)
+                        </h3>
+                        <p className="text-[11px] text-neutral-400 mt-0.5">
+                            Quem acessa o site fora do tráfego vê o catálogo público (com liberação do display após o pagamento). Quem clica nos anúncios (com parâmetros de anúncio ou pelo link <code className="text-neutral-200">/anuncio</code>) vai direto para o seu funil automático no WhatsApp.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label className="block text-xs font-medium text-neutral-300 mb-1.5">
+                                Número do WhatsApp do Funil (com DDD)
+                            </label>
+                            <input
+                                type="text"
+                                placeholder={
+                                    detectedWhatsapp
+                                        ? `Detectado da sessão: ${detectedWhatsapp}`
+                                        : "Ex: 5511999999999 (ou automático pela sessão)"
+                                }
+                                value={config.whatsappNumber}
+                                onChange={(e) =>
+                                    setConfig({ ...config, whatsappNumber: e.target.value })
+                                }
+                                className="w-full px-3 py-2 rounded bg-[#0a0a0a] border border-neutral-800 text-sm text-white"
+                            />
+                            <p className="text-[11px] text-neutral-500 mt-1">
+                                Se deixar em branco, usa automaticamente o número conectado na sessão selecionada acima{detectedWhatsapp ? ` (${detectedWhatsapp})` : ""}.
+                            </p>
+                        </div>
+
+                        <div>
+                            <label className="block text-xs font-medium text-neutral-300 mb-1.5">
+                                Mensagem inicial enviada pelo lead do anúncio
+                            </label>
+                            <input
+                                type="text"
+                                placeholder="Olá! Vi o anúncio e quero liberar meu acesso para assistir."
+                                value={config.adRedirectMessage}
+                                onChange={(e) =>
+                                    setConfig({ ...config, adRedirectMessage: e.target.value })
+                                }
+                                className="w-full px-3 py-2 rounded bg-[#0a0a0a] border border-neutral-800 text-sm text-white"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="p-3 rounded bg-[#0a0a0a] border border-neutral-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <div className="text-xs text-neutral-400">
+                            <span className="text-neutral-300 font-medium">Link para colocar no Gerenciador de Anúncios: </span>
+                            <code className="text-white select-all">{baseOrigin}/anuncio</code>{" "}
+                            <span className="text-neutral-500">(ou qualquer link com <code className="text-neutral-300">?anuncio=1</code> / <code className="text-neutral-300">fbclid</code> / <code className="text-neutral-300">utm_source</code>)</span>
+                        </div>
+                        <button
+                            type="button"
+                            onClick={() => {
+                                navigator.clipboard.writeText(`${baseOrigin}/anuncio`);
+                                setCopiedAdUrl(true);
+                                toast.success("Link do anúncio copiado");
+                                setTimeout(() => setCopiedAdUrl(false), 3000);
+                            }}
+                            className="px-3 py-1.5 rounded border border-neutral-700 hover:border-neutral-500 text-xs text-neutral-200 shrink-0"
+                        >
+                            {copiedAdUrl ? "Copiado" : "Copiar link de anúncio"}
+                        </button>
                     </div>
                 </div>
             </div>

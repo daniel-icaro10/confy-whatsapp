@@ -206,6 +206,8 @@ export const DEFAULT_FUNNEL_CONFIG = {
     stripePublishableKey: "",
     stripeWebhookSecret: "",
     plansJson: DEFAULT_OFFER_PLANS as unknown as any,
+    whatsappNumber: "",
+    adRedirectMessage: "Olá! Vi o anúncio e quero liberar meu acesso para assistir.",
     step1Greeting: "",
     step1MediaUrl: "",
     step1MediaType: "none",
