@@ -82,7 +82,7 @@ export function PwaInstallModal({
                             Versão Aplicativo · PWA
                         </span>
                         <h3 className="text-[19px] font-semibold tracking-[-0.012em] text-[#efe9de] mt-0.5">
-                            App Segredos do Coração
+                            App TvDrama Reels
                         </h3>
                     </div>
                     <button
@@ -243,3 +243,4 @@ export function PwaInstallModal({
         </div>
     );
 }
+

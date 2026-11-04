@@ -134,11 +134,11 @@ function SegredosCatalogContent() {
                 <div className="hd-rise flex items-center justify-between gap-4">
                     <Link href="/" className="flex items-center gap-3">
                         <div className="size-10 rounded-full bg-[#151413] text-[#efe9de] font-semibold text-xs tracking-tight flex items-center justify-center shadow-[0_0_0_1px_rgb(0_0_0/0.65),inset_0_1px_0_rgb(255_255_255/0.12)]">
-                            SC
+                            TD
                         </div>
                         <div className="flex flex-col leading-[1.3]">
                             <span className="text-[15px] font-semibold text-[#efe9de]">
-                                Segredos do Coração
+                                TvDrama Reels
                             </span>
                             <span className="text-xs text-[#efe9de]/55">
                                 Novelas verticais · HD 1080p
@@ -611,7 +611,7 @@ function SegredosCatalogContent() {
                                     Baixe o aplicativo no seu celular sem ocupar memória
                                 </h3>
                                 <p className="text-sm text-[#efe9de]/64 leading-relaxed">
-                                    Assinantes podem instalar o aplicativo Segredos do Coração diretamente na tela inicial do iPhone (iOS) ou Android para assistir às novelas em tela cheia vertical, sem barras de navegador e com login salvo.
+                                    Assinantes podem instalar o aplicativo TvDrama Reels diretamente na tela inicial do iPhone (iOS) ou Android para assistir às novelas em tela cheia vertical, sem barras de navegador e com login salvo.
                                 </p>
                             </div>
 

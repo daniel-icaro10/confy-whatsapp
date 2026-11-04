@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import { segredosNavGroups } from "./sidebar-nav";
 
-export function MobileNav({ appName = "Segredos do Coração" }: { appName?: string }) {
+export function MobileNav({ appName = "TvDrama Reels" }: { appName?: string }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const { data: session } = useSession();

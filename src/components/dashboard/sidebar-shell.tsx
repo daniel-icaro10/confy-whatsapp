@@ -30,7 +30,7 @@ export function SidebarShell({
     >
       <div className="h-14 border-b border-neutral-800 flex items-center px-4 justify-between">
         <Link href="/dashboard" className="font-semibold text-sm text-white truncate">
-          {isCollapsed ? "SC" : appName || "Segredos do Coração"}
+          {isCollapsed ? "TD" : appName || "TvDrama Reels"}
         </Link>
       </div>
 

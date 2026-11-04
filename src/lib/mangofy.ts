@@ -33,8 +33,8 @@ export async function createMangofyPixCharge(input: CreatePixChargeInput): Promi
     const amount = input.customAmount ?? config.planPrice ?? 19.90;
     const amountCents = Math.round(amount * 100);
 
-    const customerName = input.customerName?.trim() || "Cliente Segredos do Coração";
-    const customerEmail = input.customerEmail?.trim() || `${cleanPhone}@segredosdocoracao.com`;
+    const customerName = input.customerName?.trim() || "Cliente TvDrama Reels";
+    const customerEmail = input.customerEmail?.trim() || `${cleanPhone}@tvdramareels.com`;
     const customerCpf = (input.customerCpf || "11144477735").replace(/\D/g, "");
 
     let externalId = `sim_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
@@ -78,9 +78,9 @@ export async function createMangofyPixCharge(input: CreatePixChargeInput): Promi
                 },
                 items: [
                     {
-                        code: "vip-segredos",
-                        title: config.planName || "Acesso VIP Segredos do Coração",
-                        name: config.planName || "Acesso VIP Segredos do Coração",
+                        code: "vip-tvdrama",
+                        title: config.planName || "Acesso VIP TvDrama Reels",
+                        name: config.planName || "Acesso VIP TvDrama Reels",
                         amount: 1,
                         quantity: 1,
                         unit_price: amountCents,
@@ -245,7 +245,7 @@ export async function approvePixOrderAndGrantAccess(orderIdentifier: {
 
     const messageTemplate = config.paymentApprovedMessage ||
         "🎉 *PAGAMENTO CONFIRMADO COM SUCESSO!* ❤️🍿\n\n" +
-        "Seu número *{{TELEFONE}}* já está 100% liberado no *Segredos do Coração*!\n\n" +
+        "Seu número *{{TELEFONE}}* já está 100% liberado no *TvDrama Reels*!\n\n" +
         "👉 *Clique no link abaixo para entrar e assistir agora mesmo:*\n{{LINK_ACESSO}}";
 
     const finalMessage = messageTemplate

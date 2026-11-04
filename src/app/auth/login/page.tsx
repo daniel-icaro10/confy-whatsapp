@@ -44,7 +44,7 @@ function LoginForm() {
       <div className="w-full max-w-sm">
         <div className="mb-6">
           <h1 className="text-xl font-semibold tracking-tight text-white">
-            Segredos do Coração
+            TvDrama Reels
           </h1>
           <p className="text-sm text-neutral-400 mt-1">
             Acesso restrito à administração

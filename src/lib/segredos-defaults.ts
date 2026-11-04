@@ -77,7 +77,7 @@ export const DEFAULT_FUNNEL_CONFIG = {
     id: "default",
     enabled: true,
     sessionId: null as string | null,
-    planName: "Acesso VIP Completo — Segredos do Coração",
+    planName: "Acesso VIP Completo — TvDrama Reels",
     planPrice: 19.90,
     siteUrl: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
     mangofyApiUrl: "https://checkout.mangofy.com.br/api/v1",
@@ -87,7 +87,7 @@ export const DEFAULT_FUNNEL_CONFIG = {
     step1Greeting:
         "Oiê, meu amor! ❤️ Que bom que você chamou!\n\n" +
         "Aquela cena do anúncio dá um aperto no coração, né?! 😱 Quando ela descobre a traição no altar e o verdadeiro dono da empresa aparece... todo mundo fica em choque!\n\n" +
-        "Olha só: todos os episódios completos e dublados/legendados já estão liberados na nossa plataforma exclusiva *Segredos do Coração* 🎬✨",
+        "Olha só: todos os episódios completos e dublados/legendados já estão liberados na nossa plataforma exclusiva *TvDrama Reels* 🎬✨",
     step1MediaUrl: "",
     step1MediaType: "none",
     step2OfferMessage:
@@ -104,7 +104,7 @@ export const DEFAULT_FUNNEL_CONFIG = {
         "⚡ *Assim que você pagar, eu mesma já te mando aqui no WhatsApp o link liberado com o seu número para você maratonar todos os episódios sem esperar nada!* ❤️🎬",
     paymentApprovedMessage:
         "🎉 *PAGAMENTO CONFIRMADO COM SUCESSO!* ❤️🍿\n\n" +
-        "Seu número *{{TELEFONE}}* já está 100% liberado como *Assinante VIP* no *Segredos do Coração*!\n\n" +
+        "Seu número *{{TELEFONE}}* já está 100% liberado como *Assinante VIP* no *TvDrama Reels*!\n\n" +
         "👉 *Clique no link abaixo para entrar e assistir agora mesmo:*\n" +
         "{{LINK_ACESSO}}\n\n" +
         "*(Dica: Se pedir seu acesso na tela, basta digitar o seu número de WhatsApp!). Bom divertimento e prepara o lencinho!* 😭❤️",
@@ -113,7 +113,7 @@ export const DEFAULT_FUNNEL_CONFIG = {
     aiApiKey: "",
     aiModel: "llama-3.3-70b-versatile",
     aiSystemPrompt:
-        "Você é a Sofia, atendente e consultora apaixonada por novelas e doramas verticais da plataforma 'Segredos do Coração'. " +
+        "Você é a Sofia, atendente e consultora apaixonada por novelas e doramas verticais da plataforma 'TvDrama Reels'. " +
         "A cliente acabou de vir de um anúncio de 3 minutos de uma novela dramática emocionante e quer assistir o restante da história. " +
         "Fale como uma amiga brasileira carismática, acolhedora, fofoqueira do bem (use emojis com moderação como ❤️, 😱, 🍿, ✨). " +
         "Seu único objetivo é aumentar a curiosidade dela sobre os próximos episódios e levá-la a pedir a geração do Pix de acesso VIP (que custa R$ {{VALOR}} com liberação imediata pelo número de WhatsApp). " +

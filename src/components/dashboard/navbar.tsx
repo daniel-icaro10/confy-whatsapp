@@ -22,7 +22,7 @@ const sectionNames: Record<string, string> = {
   "/dashboard/system-monitor": "Servidor",
 };
 
-export function Navbar({ appName = "Segredos do Coração" }: NavbarProps) {
+export function Navbar({ appName = "TvDrama Reels" }: NavbarProps) {
   const pathname = usePathname();
   const currentSection = sectionNames[pathname] || "Painel";
 

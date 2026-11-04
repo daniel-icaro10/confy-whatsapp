@@ -34,18 +34,23 @@ export const viewport: Viewport = {
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-  let appName = "Segredos do Coração";
+  let appName = "TvDrama Reels";
   try {
     // @ts-ignore
     const config = await prisma.systemConfig.findUnique({ where: { id: "default" } });
-    if (config?.appName && config.appName !== "WA-AKG" && config.appName !== "Confy WhatsApp") {
+    if (
+      config?.appName &&
+      config.appName !== "WA-AKG" &&
+      config.appName !== "Confy WhatsApp" &&
+      config.appName !== "Segredos do Coração"
+    ) {
       appName = config.appName;
     }
   } catch {
     // fallback
   }
 
-  const appDefaultTitle = `${appName} — Novelas Verticais & Dramas Exclusivos`;
+  const appDefaultTitle = `${appName} — Novelas Verticais & Séries Curtas`;
 
   return {
     metadataBase: new URL(APP_URL),
