@@ -191,12 +191,12 @@ function WatchDramaContent() {
     return (
         <div className="min-h-dvh bg-black text-[#f5f5f5] flex flex-col select-none">
             {/* CABEÇALHO FIXO PADRÃO TOPDORAMAX */}
-            <header className="sticky top-0 z-30 border-b border-white/[0.06] bg-[#060606]/90 backdrop-blur-xl">
-                <div className="max-w-[1280px] mx-auto px-4 sm:px-8 h-[64px] flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-3 min-w-0">
+            <header className="sticky top-0 z-30 border-b border-white/[0.06] bg-[#060606]/92 backdrop-blur-xl">
+                <div className="max-w-[1280px] mx-auto px-3 sm:px-8 h-[60px] sm:h-[64px] flex items-center justify-between gap-2 sm:gap-3">
+                    <div className="flex items-center gap-2 sm:gap-3 min-w-0">
                         <Link
                             href="/"
-                            className="px-3.5 py-1.5 rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/15 text-white text-xs font-semibold shrink-0 transition"
+                            className="px-2.5 sm:px-3.5 py-1.5 rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/15 text-white text-xs font-semibold shrink-0 transition"
                         >
                             ← Catálogo
                         </Link>
@@ -206,18 +206,18 @@ function WatchDramaContent() {
                                     TVDRAMA REELS
                                 </span>
                                 <span className="hidden sm:inline text-white/25">·</span>
-                                <h1 className="text-sm font-bold text-white truncate">
+                                <h1 className="text-xs sm:text-sm font-bold text-white truncate">
                                     {drama.title}
                                 </h1>
                             </div>
-                            <p className="text-[11px] text-[#9a9a9a] tabular-nums">
+                            <p className="text-[10px] sm:text-[11px] text-[#9a9a9a] tabular-nums">
                                 Episódio {String(currentEpisode?.number || 1).padStart(2, "0")} de{" "}
                                 {episodes.length}
                             </p>
                         </div>
                     </div>
 
-                    <div className="flex items-center gap-2 shrink-0">
+                    <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
                         <button
                             type="button"
                             onClick={() => setPwaModalOpen(true)}
@@ -227,8 +227,8 @@ function WatchDramaContent() {
                         </button>
 
                         {isVip ? (
-                            <span className="px-3 py-1.5 rounded-full bg-[#22b868]/15 border border-[#22b868]/30 text-[#4ade8a] text-xs font-bold tabular-nums">
-                                Display Liberado · {viewerPhone.slice(-4)}
+                            <span className="px-2.5 sm:px-3 py-1.5 rounded-full bg-[#22b868]/15 border border-[#22b868]/30 text-[#4ade8a] text-[11px] sm:text-xs font-bold tabular-nums">
+                                Display Liberado{viewerPhone ? ` · ${viewerPhone.slice(-4)}` : ""}
                             </span>
                         ) : (
                             <>
@@ -238,14 +238,14 @@ function WatchDramaContent() {
                                         setVipModalTab("login");
                                         setVipModalOpen(true);
                                     }}
-                                    className="px-3 py-1.5 rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/15 text-white text-xs font-semibold transition"
+                                    className="px-2.5 sm:px-3 py-1.5 rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/15 text-white text-[11px] sm:text-xs font-semibold transition"
                                 >
                                     Já paguei
                                 </button>
                                 <button
                                     type="button"
                                     onClick={() => openPlanModal("annual")}
-                                    className="px-3.5 py-1.5 rounded-full bg-[#e11d48] hover:bg-[#f43f5e] text-white text-xs font-bold shadow-[0_6px_20px_rgba(225,29,72,0.35)] transition"
+                                    className="px-3 sm:px-3.5 py-1.5 rounded-full bg-[#e11d48] hover:bg-[#f43f5e] text-white text-[11px] sm:text-xs font-bold shadow-[0_6px_20px_rgba(225,29,72,0.35)] transition"
                                 >
                                     Liberar Catálogo
                                 </button>
@@ -389,29 +389,29 @@ function WatchDramaContent() {
                     </div>
 
                     {/* Botões Anterior / Próximo */}
-                    <div className="w-full max-w-[410px] px-4 sm:px-0 mt-3.5 flex items-center justify-between gap-2">
+                    <div className="w-full max-w-[410px] px-3 sm:px-0 mt-3.5 flex items-center justify-center gap-2.5 mx-auto">
                         <button
                             type="button"
                             disabled={!prevEp}
                             onClick={() => prevEp && handleSelectEpisode(prevEp)}
-                            className="px-4 py-2 rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/15 text-white text-xs font-semibold transition disabled:opacity-35"
+                            className="flex-1 py-2 px-3 rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/15 text-white text-xs font-semibold text-center transition disabled:opacity-35"
                         >
-                            ← Episódio anterior
+                            ← Anterior
                         </button>
 
                         <button
                             type="button"
                             disabled={!nextEp}
                             onClick={() => nextEp && handleSelectEpisode(nextEp)}
-                            className="px-4 py-2 rounded-full bg-[#e11d48] hover:bg-[#f43f5e] text-white text-xs font-bold shadow-[0_6px_20px_rgba(225,29,72,0.3)] transition disabled:opacity-35"
+                            className="flex-1 py-2 px-3 rounded-full bg-[#e11d48] hover:bg-[#f43f5e] text-white text-xs font-bold shadow-[0_6px_20px_rgba(225,29,72,0.3)] text-center transition disabled:opacity-35"
                         >
-                            Próximo episódio →
+                            Próximo →
                         </button>
                     </div>
                 </div>
 
                 {/* COLUNA LATERAL DE INFORMAÇÕES E LISTA DE EPISÓDIOS */}
-                <div className="lg:col-span-5 px-4 sm:px-0 pb-12 space-y-4">
+                <div className="lg:col-span-5 w-full max-w-[410px] lg:max-w-none mx-auto px-3 sm:px-0 pb-12 space-y-4">
                     <div className="p-5 rounded-2xl bg-[#0e0e11] border border-white/10">
                         <div className="text-[11px] font-extrabold uppercase tracking-[0.06em] text-[#e11d48] mb-1">
                             {drama.category}

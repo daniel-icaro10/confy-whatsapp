@@ -184,9 +184,9 @@ export function FramedYoutubePlayer({
         const el = containerRef.current;
         if (!el) return;
         if (!document.fullscreenElement) {
-            el.requestFullscreen?.().catch(() => {});
+            el.requestFullscreen?.().catch(() => { });
         } else {
-            document.exitFullscreen?.().catch(() => {});
+            document.exitFullscreen?.().catch(() => { });
         }
     };
 
@@ -194,8 +194,8 @@ export function FramedYoutubePlayer({
         cropMode === "zoom"
             ? "scale-[1.28]"
             : cropMode === "crop"
-            ? "scale-[1.14]"
-            : "scale-[1.03]";
+                ? "scale-[1.14]"
+                : "scale-[1.03]";
 
     const originParam =
         typeof window !== "undefined"
@@ -256,9 +256,8 @@ export function FramedYoutubePlayer({
             >
                 {/* Topo sutil da moldura TvDrama Reels */}
                 <div
-                    className={`p-3.5 bg-gradient-to-b from-black/85 via-black/40 to-transparent flex items-center justify-between transition-opacity duration-300 ${
-                        controlsVisible || !isPlaying ? "opacity-100" : "opacity-0"
-                    }`}
+                    className={`p-3.5 bg-gradient-to-b from-black/85 via-black/40 to-transparent flex items-center justify-between transition-opacity duration-300 ${controlsVisible || !isPlaying ? "opacity-100" : "opacity-0"
+                        }`}
                 >
                     <div className="min-w-0">
                         <span className="text-[11px] font-bold text-white/90 truncate block">
@@ -274,17 +273,16 @@ export function FramedYoutubePlayer({
                         {cropMode === "fit"
                             ? "Padrão"
                             : cropMode === "crop"
-                            ? "Reels"
-                            : "Zoom"}
+                                ? "Reels"
+                                : "Zoom"}
                     </button>
                 </div>
 
                 {/* Barra de controles inferior própria do TvDrama Reels */}
                 <div
                     onClick={(e) => e.stopPropagation()}
-                    className={`p-3.5 bg-gradient-to-t from-black/90 via-black/50 to-transparent space-y-2 transition-opacity duration-300 ${
-                        controlsVisible || !isPlaying ? "opacity-100" : "opacity-0"
-                    }`}
+                    className={`p-3.5 bg-gradient-to-t from-black/90 via-black/50 to-transparent space-y-2 transition-opacity duration-300 ${controlsVisible || !isPlaying ? "opacity-100" : "opacity-0"
+                        }`}
                 >
                     {duration > 0 && (
                         <input

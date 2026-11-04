@@ -798,12 +798,12 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
         <div className="min-h-dvh bg-black text-[#f5f5f5] pb-28 select-none">
             {/* CABEÇALHO FIXO ESTILO TOPDORAMAX (.topo) */}
             <header
-                className={`fixed top-0 left-0 right-0 z-40 flex items-center justify-between gap-3 px-4 sm:px-10 h-[66px] transition-all ${scrolled
-                        ? "bg-[#060606]/90 backdrop-blur-xl shadow-[0_1px_0_rgba(255,255,255,0.06)]"
-                        : "bg-[#060606]/88 sm:bg-gradient-to-b sm:from-black/80 sm:to-transparent backdrop-blur-md sm:backdrop-blur-none"
+                className={`fixed top-0 left-0 right-0 z-40 flex items-center justify-between gap-2 px-3 sm:px-10 h-[62px] sm:h-[66px] transition-all ${scrolled
+                        ? "bg-[#060606]/92 backdrop-blur-xl shadow-[0_1px_0_rgba(255,255,255,0.06)]"
+                        : "bg-[#060606]/90 sm:bg-gradient-to-b sm:from-black/80 sm:to-transparent backdrop-blur-md sm:backdrop-blur-none"
                     }`}
             >
-                <div className="flex items-center gap-3 min-w-0">
+                <div className="flex items-center gap-2 sm:gap-3 min-w-0">
                     <button
                         type="button"
                         onClick={() => {
@@ -815,7 +815,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                         }}
                         className="text-left focus:outline-none"
                     >
-                        <span className="font-black text-[20px] sm:text-[22px] tracking-[0.06em] uppercase text-[#e11d48] whitespace-nowrap">
+                        <span className="font-black text-[18px] sm:text-[22px] tracking-[0.05em] uppercase text-[#e11d48] whitespace-nowrap">
                             TVDRAMA REELS
                         </span>
                     </button>
@@ -827,20 +827,20 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                     )}
                 </div>
 
-                <div className="flex items-center gap-2 shrink-0">
+                <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
                     {isVip ? (
                         <>
                             <button
                                 type="button"
                                 onClick={() => setPwaModalOpen(true)}
-                                className="px-3.5 py-1.5 rounded-full bg-[#e11d48] hover:bg-[#f43f5e] text-white text-xs font-bold shadow-[0_6px_20px_rgba(225,29,72,0.35)] transition"
+                                className="px-3 sm:px-3.5 py-1.5 rounded-full bg-[#e11d48] hover:bg-[#f43f5e] text-white text-[11px] sm:text-xs font-bold shadow-[0_6px_20px_rgba(225,29,72,0.35)] transition"
                             >
                                 Baixar App
                             </button>
                             <button
                                 type="button"
                                 onClick={() => setActiveOverlay("conta")}
-                                className="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 text-white text-xs font-semibold tabular-nums transition"
+                                className="px-2.5 sm:px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 text-white text-[11px] sm:text-xs font-semibold tabular-nums transition"
                             >
                                 Conta · {viewerPhone.slice(-4)}
                             </button>
@@ -853,14 +853,14 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                     setVipModalTab("login");
                                     setVipModalOpen(true);
                                 }}
-                                className="px-3 py-1.5 rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/15 text-white text-xs font-semibold transition"
+                                className="px-2.5 sm:px-3 py-1.5 rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/15 text-white text-[11px] sm:text-xs font-semibold transition"
                             >
                                 Já paguei
                             </button>
                             <button
                                 type="button"
                                 onClick={() => handleOpenPlanCheckout("annual")}
-                                className="px-3.5 py-1.5 rounded-full bg-[#e11d48] hover:bg-[#f43f5e] text-white text-xs font-bold shadow-[0_6px_20px_rgba(225,29,72,0.35)] transition"
+                                className="px-3 sm:px-3.5 py-1.5 rounded-full bg-[#e11d48] hover:bg-[#f43f5e] text-white text-[11px] sm:text-xs font-bold shadow-[0_6px_20px_rgba(225,29,72,0.35)] transition"
                             >
                                 Liberar Catálogo
                             </button>
@@ -871,14 +871,14 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                         type="button"
                         onClick={() => setActiveOverlay("buscar")}
                         aria-label="Buscar séries"
-                        className="w-9 h-9 rounded-full bg-white/[0.06] hover:bg-white/[0.14] grid place-items-center text-white transition"
+                        className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/[0.06] hover:bg-white/[0.14] grid place-items-center text-white transition shrink-0"
                     >
                         <svg
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
                             strokeWidth="2"
-                            className="w-5 h-5"
+                            className="w-4 h-4 sm:w-5 sm:h-5"
                         >
                             <circle cx="11" cy="11" r="7" />
                             <path d="m20 20-3.5-3.5" strokeLinecap="round" />
@@ -920,14 +920,14 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
 
                 {/* 2. CARROSSEL DE DESTAQUES (.banners / .banner-destaque) */}
                 {activeCategory === "todos" && featuredDramas.length > 0 && (
-                    <div className="relative mx-4 sm:mx-10 mt-3 mb-2 rounded-[18px] sm:rounded-[24px] overflow-hidden bg-black border border-white/[0.06] shadow-[0_24px_60px_rgba(0,0,0,0.7)]">
+                    <div className="relative mx-3 sm:mx-10 mt-2 sm:mt-3 mb-2 rounded-[18px] sm:rounded-[24px] overflow-hidden bg-black border border-white/[0.06] shadow-[0_24px_60px_rgba(0,0,0,0.7)]">
                         {(() => {
                             const currentBanner =
                                 featuredDramas[bannerIndex % featuredDramas.length] ||
                                 featuredDramas[0];
                             const langTag = detectLanguageTag(currentBanner);
                             return (
-                                <div className="relative grid grid-cols-1 md:grid-cols-[1fr_auto] items-center gap-6 min-h-[410px] sm:min-h-[460px] p-5 sm:p-10 pb-11 overflow-hidden bg-black">
+                                <div className="relative grid grid-cols-1 md:grid-cols-[1fr_auto] items-center gap-5 sm:gap-6 min-h-[380px] sm:min-h-[460px] p-4 sm:p-10 pb-11 overflow-hidden bg-black">
                                     {/* Fundo desfocado (.destaque-fundo) */}
                                     <div
                                         aria-hidden="true"
@@ -949,16 +949,16 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                     />
 
                                     {/* Informações do destaque (.destaque-info) */}
-                                    <div className="relative z-10 max-w-[620px] grid gap-3.5 text-center md:text-left justify-items-center md:justify-items-start order-2 md:order-1">
-                                        <p className="text-[13px] font-extrabold tracking-[0.08em] uppercase text-[#f43f5e]">
+                                    <div className="relative z-10 max-w-[620px] w-full grid gap-3 text-center md:text-left justify-items-center md:justify-items-start order-2 md:order-1 mx-auto md:mx-0">
+                                        <p className="text-[12px] sm:text-[13px] font-extrabold tracking-[0.08em] uppercase text-[#f43f5e]">
                                             Bombando · Nº {(bannerIndex % featuredDramas.length) + 1} hoje
                                         </p>
-                                        <h2 className="font-black text-[32px] sm:text-[52px] leading-[0.96] tracking-[-0.02em] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.5)] line-clamp-3">
+                                        <h2 className="font-black text-[24px] sm:text-[40px] md:text-[52px] leading-[1.05] sm:leading-[0.96] tracking-[-0.02em] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.5)] line-clamp-3">
                                             {currentBanner.title}
                                         </h2>
-                                        <p className="flex flex-wrap items-center justify-center md:justify-start gap-2.5 text-[15px] font-semibold text-[#f5f5f5]">
+                                        <p className="flex flex-wrap items-center justify-center md:justify-start gap-2.5 text-[13px] sm:text-[15px] font-semibold text-[#f5f5f5]">
                                             <span
-                                                className={`px-2 py-0.5 rounded text-[12px] font-extrabold uppercase tracking-[0.03em] ${langTag === "Dublado"
+                                                className={`px-2 py-0.5 rounded text-[11px] sm:text-[12px] font-extrabold uppercase tracking-[0.03em] ${langTag === "Dublado"
                                                         ? "bg-[#e11d48] text-white"
                                                         : "bg-white/90 text-black"
                                                     }`}
@@ -969,15 +969,15 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                             <span>Minissérie</span>
                                         </p>
 
-                                        <div className="flex flex-wrap justify-center md:justify-start gap-3 mt-1">
+                                        <div className="flex flex-wrap items-center justify-center md:justify-start gap-2.5 w-full mt-1">
                                             <button
                                                 type="button"
                                                 onClick={() => handleSelectDrama(currentBanner)}
-                                                className="inline-flex items-center justify-center gap-2 px-[26px] py-[11px] rounded-full bg-white hover:bg-[#e8e8e8] text-black font-semibold text-[17px] transition transform hover:scale-[1.03]"
+                                                className="min-w-[130px] sm:min-w-[140px] inline-flex items-center justify-center gap-2 px-6 py-2.5 sm:py-3 rounded-full bg-white hover:bg-[#e8e8e8] text-black font-bold text-sm sm:text-base transition transform active:scale-95"
                                             >
                                                 <svg
                                                     viewBox="0 0 24 24"
-                                                    className="w-5 h-5 fill-current"
+                                                    className="w-4 h-4 sm:w-5 sm:h-5 fill-current"
                                                     aria-hidden="true"
                                                 >
                                                     <path d="M7 4.5v15l12.5-7.5z" />
@@ -988,7 +988,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                             <button
                                                 type="button"
                                                 onClick={() => setLockedSerieModal(currentBanner)}
-                                                className="inline-flex items-center justify-center px-[26px] py-[11px] rounded-full bg-[#8c91a0]/35 hover:bg-[#8c91a0]/50 backdrop-blur-md text-white font-semibold text-[17px] transition transform hover:scale-[1.03]"
+                                                className="min-w-[130px] sm:min-w-[140px] inline-flex items-center justify-center px-5 py-2.5 sm:py-3 rounded-full bg-[#8c91a0]/35 hover:bg-[#8c91a0]/50 border border-white/10 backdrop-blur-md text-white font-semibold text-xs sm:text-sm transition transform active:scale-95"
                                             >
                                                 Mais informações
                                             </button>
@@ -999,7 +999,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                     <button
                                         type="button"
                                         onClick={() => handleSelectDrama(currentBanner)}
-                                        className="relative z-10 order-1 md:order-2 justify-self-center w-[46vw] max-w-[220px] md:w-[220px] md:max-w-none aspect-[2/3] rounded-[14px] overflow-hidden bg-[#121212] shadow-[0_30px_60px_rgba(0,0,0,0.8),0_0_0_1px_rgba(255,255,255,0.08)] rotate-[2deg] hover:rotate-0 hover:scale-[1.03] transition duration-300"
+                                        className="relative z-10 order-1 md:order-2 justify-self-center mx-auto w-[42vw] max-w-[180px] md:w-[220px] md:max-w-none aspect-[2/3] rounded-[14px] overflow-hidden bg-[#121212] shadow-[0_20px_40px_rgba(0,0,0,0.8),0_0_0_1px_rgba(255,255,255,0.08)] sm:rotate-[2deg] sm:hover:rotate-0 hover:scale-[1.03] transition duration-300"
                                     >
                                         <img
                                             src={currentBanner.bannerUrl || currentBanner.coverUrl}
@@ -1009,7 +1009,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                         <span className="absolute top-2 left-2 z-20 px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-sm text-white text-[8.5px] font-extrabold uppercase tracking-wider">
                                             {langTag}
                                         </span>
-                                        <span className="absolute left-2 right-2 bottom-2 z-20 py-1.5 px-2.5 rounded-lg bg-black/75 backdrop-blur-md text-white text-[12px] font-bold text-center">
+                                        <span className="absolute left-2 right-2 bottom-2 z-20 py-1.5 px-2.5 rounded-lg bg-black/75 backdrop-blur-md text-white text-[11px] font-bold text-center">
                                             Em alta agora
                                         </span>
                                     </button>
@@ -1589,11 +1589,11 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
             {activeOverlay === "conta" && (
                 <div
                     onClick={() => setActiveOverlay("none")}
-                    className="fixed inset-0 z-50 bg-black/75 backdrop-blur-md flex items-end sm:items-center justify-center p-0 sm:p-4"
+                    className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-4"
                 >
                     <div
                         onClick={(e) => e.stopPropagation()}
-                        className="w-full max-w-[460px] rounded-t-[24px] sm:rounded-[22px] bg-[#141418] border border-white/12 p-5 pb-8 space-y-4"
+                        className="w-full max-w-[460px] rounded-[22px] bg-[#141418] border border-white/12 p-5 sm:p-6 space-y-4 my-auto"
                     >
                         <div className="flex items-center justify-between">
                             <div>
@@ -1653,14 +1653,22 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
 
             {/* TELA DE SÉRIE BLOQUEADA / LIBERAÇÃO DO DISPLAY (Idêntica a https://topdoramax.pro/catalogo/serie/...) */}
             {lockedSerieModal && (
-                <div className="fixed inset-0 z-50 overflow-y-auto bg-black text-[#f5f5f5] pb-16">
-                    <header className="sticky top-0 z-20 flex items-center justify-center h-14 bg-black/85 backdrop-blur-md border-b border-white/[0.06]">
-                        <span className="font-black text-[19px] tracking-[0.06em] uppercase text-[#e11d48]">
+                <div className="fixed inset-0 z-50 overflow-y-auto bg-black text-[#f5f5f5] pb-24">
+                    <header className="sticky top-0 z-20 flex items-center justify-between px-3 sm:px-6 h-14 bg-black/90 backdrop-blur-md border-b border-white/[0.06]">
+                        <button
+                            type="button"
+                            onClick={() => setLockedSerieModal(null)}
+                            className="px-3 py-1 rounded-full bg-white/10 hover:bg-white/15 text-xs font-semibold text-white transition"
+                        >
+                            ← Voltar
+                        </button>
+                        <span className="font-black text-[17px] sm:text-[19px] tracking-[0.06em] uppercase text-[#e11d48]">
                             TVDRAMA REELS
                         </span>
+                        <div className="w-14" />
                     </header>
 
-                    <div className="max-w-[520px] mx-auto px-4 pt-3">
+                    <div className="max-w-[480px] mx-auto px-4 pt-3 flex flex-col items-center text-center">
                         {/* Player / Capa Bloqueada (.bloqueada-player) */}
                         <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-2xl overflow-hidden bg-[#111114] border border-white/10 mb-4">
                             <button
@@ -1696,19 +1704,19 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                             </div>
                         </div>
 
-                        <h1 className="font-black text-[22px] sm:text-[26px] leading-tight uppercase text-white text-center">
+                        <h1 className="font-black text-[20px] sm:text-[24px] leading-tight uppercase text-white text-center">
                             {lockedSerieModal.title}
                         </h1>
                         <p className="text-xs font-semibold text-[#9a9a9a] text-center mt-1 mb-5">
-                            {detectLanguageTag(lockedSerieModal)} · Todos os episódios
+                            {detectLanguageTag(lockedSerieModal)} · Todos os episódios completos
                         </p>
 
-                        <p className="text-sm font-bold text-white mb-3">
+                        <p className="text-sm font-bold text-white mb-3 text-center">
                             Desbloqueie para assistir agora:
                         </p>
 
                         {/* 3 BOTÕES DE PLANOS ESTILO TICKET.CSS DO TOPDORAMAX */}
-                        <div className="space-y-2.5">
+                        <div className="space-y-2.5 w-full">
                             {/* Botão Principal em Destaque (Plano Anual) */}
                             <button
                                 type="button"

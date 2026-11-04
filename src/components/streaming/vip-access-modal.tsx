@@ -183,11 +183,11 @@ export function VipAccessModal({
     return (
         <div
             onClick={onClose}
-            className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/80 backdrop-blur-md overflow-y-auto"
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md overflow-y-auto"
         >
             <div
                 onClick={(e) => e.stopPropagation()}
-                className="relative w-full max-w-[480px] rounded-t-[24px] sm:rounded-[22px] bg-[#101014] border border-white/12 text-[#f5f5f5] shadow-[0_24px_60px_rgba(0,0,0,0.85)] overflow-hidden my-auto"
+                className="relative w-full max-w-[480px] rounded-[22px] bg-[#101014] border border-white/12 text-[#f5f5f5] shadow-[0_24px_60px_rgba(0,0,0,0.85)] overflow-hidden my-auto"
             >
                 {/* Cabeçalho */}
                 <div className="px-5 pt-5 pb-4 border-b border-white/[0.08] flex items-start justify-between gap-4 bg-[#0b0b0e]">
