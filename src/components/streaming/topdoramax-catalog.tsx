@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { DEFAULT_OFFER_PLANS, OfferPlan } from "@/lib/segredos-defaults";
 import { VipAccessModal } from "@/components/streaming/vip-access-modal";
 import { PwaInstallModal } from "@/components/streaming/pwa-install-modal";
@@ -681,6 +682,44 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
         return () => clearInterval(timer);
     }, [featuredDramas.length]);
 
+    const handleNextBanner = () => {
+        if (featuredDramas.length <= 1) return;
+        setBannerIndex((prev) => (prev + 1) % featuredDramas.length);
+    };
+
+    const handlePrevBanner = () => {
+        if (featuredDramas.length <= 1) return;
+        setBannerIndex((prev) => (prev - 1 + featuredDramas.length) % featuredDramas.length);
+    };
+
+    // Touch swipe gestures para navegar as capas no mobile com o dedo
+    const touchStartX = useRef<number | null>(null);
+    const touchStartY = useRef<number | null>(null);
+
+    const handleTouchStart = (e: React.TouchEvent) => {
+        touchStartX.current = e.touches[0].clientX;
+        touchStartY.current = e.touches[0].clientY;
+    };
+
+    const handleTouchEnd = (e: React.TouchEvent) => {
+        if (touchStartX.current === null) return;
+        const touchEndX = e.changedTouches[0].clientX;
+        const touchEndY = e.changedTouches[0].clientY;
+        const deltaX = touchStartX.current - touchEndX;
+        const deltaY = touchStartY.current ? Math.abs(touchStartY.current - touchEndY) : 0;
+
+        // Se o gesto for horizontal e tiver pelo menos 35px
+        if (Math.abs(deltaX) > 35 && Math.abs(deltaX) > deltaY) {
+            if (deltaX > 0) {
+                handleNextBanner();
+            } else {
+                handlePrevBanner();
+            }
+        }
+        touchStartX.current = null;
+        touchStartY.current = null;
+    };
+
     const filteredCatalog = useMemo(() => {
         return dramas.filter((d) => matchesFilterCategory(d, activeCategory));
     }, [dramas, activeCategory]);
@@ -920,14 +959,18 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
 
                 {/* 2. CARROSSEL DE DESTAQUES (.banners / .banner-destaque) */}
                 {activeCategory === "todos" && featuredDramas.length > 0 && (
-                    <div className="relative mx-3 sm:mx-10 mt-2 sm:mt-3 mb-2 rounded-[18px] sm:rounded-[24px] overflow-hidden bg-black border border-white/[0.06] shadow-[0_24px_60px_rgba(0,0,0,0.7)]">
+                    <div
+                        onTouchStart={handleTouchStart}
+                        onTouchEnd={handleTouchEnd}
+                        className="relative mx-3 sm:mx-10 mt-2 sm:mt-3 mb-2 rounded-[18px] sm:rounded-[24px] overflow-hidden bg-black border border-white/[0.06] shadow-[0_24px_60px_rgba(0,0,0,0.7)] select-none"
+                    >
                         {(() => {
                             const currentBanner =
                                 featuredDramas[bannerIndex % featuredDramas.length] ||
                                 featuredDramas[0];
                             const langTag = detectLanguageTag(currentBanner);
                             return (
-                                <div className="relative grid grid-cols-1 md:grid-cols-[1fr_auto] items-center gap-5 sm:gap-6 min-h-[380px] sm:min-h-[460px] p-4 sm:p-10 pb-11 overflow-hidden bg-black">
+                                <div className="relative grid grid-cols-1 md:grid-cols-[1fr_auto] items-center gap-5 sm:gap-6 min-h-[380px] sm:min-h-[460px] p-4 sm:p-10 pb-14 overflow-hidden bg-black">
                                     {/* Fundo desfocado (.destaque-fundo) */}
                                     <div
                                         aria-hidden="true"
@@ -973,7 +1016,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                             <button
                                                 type="button"
                                                 onClick={() => handleSelectDrama(currentBanner)}
-                                                className="min-w-[130px] sm:min-w-[140px] inline-flex items-center justify-center gap-2 px-6 py-2.5 sm:py-3 rounded-full bg-white hover:bg-[#e8e8e8] text-black font-bold text-sm sm:text-base transition transform active:scale-95"
+                                                className="min-w-[130px] sm:min-w-[140px] inline-flex items-center justify-center gap-2 px-6 py-2.5 sm:py-3 rounded-full bg-white hover:bg-[#e8e8e8] text-black font-bold text-sm sm:text-base transition transform active:scale-95 cursor-pointer shadow-md"
                                             >
                                                 <svg
                                                     viewBox="0 0 24 24"
@@ -988,57 +1031,117 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                             <button
                                                 type="button"
                                                 onClick={() => setLockedSerieModal(currentBanner)}
-                                                className="min-w-[130px] sm:min-w-[140px] inline-flex items-center justify-center px-5 py-2.5 sm:py-3 rounded-full bg-[#8c91a0]/35 hover:bg-[#8c91a0]/50 border border-white/10 backdrop-blur-md text-white font-semibold text-xs sm:text-sm transition transform active:scale-95"
+                                                className="min-w-[130px] sm:min-w-[140px] inline-flex items-center justify-center px-5 py-2.5 sm:py-3 rounded-full bg-[#8c91a0]/35 hover:bg-[#8c91a0]/50 border border-white/10 backdrop-blur-md text-white font-semibold text-xs sm:text-sm transition transform active:scale-95 cursor-pointer shadow-md"
                                             >
                                                 Mais informações
                                             </button>
                                         </div>
                                     </div>
 
-                                    {/* Capa inclinada à direita/topo (.destaque-capa) */}
-                                    <button
-                                        type="button"
-                                        onClick={() => handleSelectDrama(currentBanner)}
-                                        className="relative z-10 order-1 md:order-2 justify-self-center mx-auto w-[42vw] max-w-[180px] md:w-[220px] md:max-w-none aspect-[2/3] rounded-[14px] overflow-hidden bg-[#121212] shadow-[0_20px_40px_rgba(0,0,0,0.8),0_0_0_1px_rgba(255,255,255,0.08)] sm:rotate-[2deg] sm:hover:rotate-0 hover:scale-[1.03] transition duration-300"
-                                    >
-                                        <img
-                                            src={currentBanner.bannerUrl || currentBanner.coverUrl}
-                                            alt={currentBanner.title}
-                                            className="absolute inset-0 w-full h-full object-cover"
-                                        />
-                                        <span className="absolute top-2 left-2 z-20 px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-sm text-white text-[8.5px] font-extrabold uppercase tracking-wider">
-                                            {langTag}
-                                        </span>
-                                        <span className="absolute left-2 right-2 bottom-2 z-20 py-1.5 px-2.5 rounded-lg bg-black/75 backdrop-blur-md text-white text-[11px] font-bold text-center">
-                                            Em alta agora
-                                        </span>
-                                    </button>
+                                    {/* Capa com botões laterais para passar capa no mobile (.destaque-capa) */}
+                                    <div className="relative z-10 order-1 md:order-2 justify-self-center mx-auto flex items-center justify-center">
+                                        {/* Botão lateral esquerdo para passar capa */}
+                                        {featuredDramas.length > 1 && (
+                                            <button
+                                                type="button"
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    handlePrevBanner();
+                                                }}
+                                                aria-label="Capa anterior"
+                                                className="absolute -left-3 sm:-left-5 z-30 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/75 hover:bg-black/95 active:scale-90 border border-white/20 backdrop-blur-md text-white grid place-items-center shadow-[0_4px_16px_rgba(0,0,0,0.8)] transition cursor-pointer"
+                                            >
+                                                <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                                            </button>
+                                        )}
+
+                                        <button
+                                            type="button"
+                                            onClick={() => handleSelectDrama(currentBanner)}
+                                            className="relative w-[44vw] max-w-[185px] md:w-[220px] md:max-w-none aspect-[2/3] rounded-[16px] overflow-hidden bg-[#121212] shadow-[0_20px_40px_rgba(0,0,0,0.8),0_0_0_1px_rgba(255,255,255,0.08)] sm:rotate-[2deg] sm:hover:rotate-0 hover:scale-[1.03] transition duration-300 cursor-pointer"
+                                        >
+                                            <img
+                                                src={currentBanner.bannerUrl || currentBanner.coverUrl}
+                                                alt={currentBanner.title}
+                                                className="absolute inset-0 w-full h-full object-cover"
+                                            />
+                                            <span className="absolute top-2 left-2 z-20 px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-sm text-white text-[8.5px] font-extrabold uppercase tracking-wider">
+                                                {langTag}
+                                            </span>
+                                            <span className="absolute left-2 right-2 bottom-2 z-20 py-1.5 px-2.5 rounded-lg bg-black/75 backdrop-blur-md text-white text-[11px] font-bold text-center">
+                                                Em alta agora
+                                            </span>
+                                        </button>
+
+                                        {/* Botão lateral direito para passar capa */}
+                                        {featuredDramas.length > 1 && (
+                                            <button
+                                                type="button"
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    handleNextBanner();
+                                                }}
+                                                aria-label="Próxima capa"
+                                                className="absolute -right-3 sm:-right-5 z-30 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/75 hover:bg-black/95 active:scale-90 border border-white/20 backdrop-blur-md text-white grid place-items-center shadow-[0_4px_16px_rgba(0,0,0,0.8)] transition cursor-pointer"
+                                            >
+                                                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                                            </button>
+                                        )}
+                                    </div>
                                 </div>
                             );
                         })()}
 
-                        {/* Barrinhas animadas do carrossel (.banners-pontos) */}
+                        {/* Barra de controle inferior do carrossel (.banners-pontos) */}
                         {featuredDramas.length > 1 && (
-                            <div className="absolute left-0 right-0 bottom-4 z-20 flex justify-center md:justify-start md:left-10 gap-1.5">
-                                {featuredDramas.map((d, idx) => {
-                                    const active = idx === bannerIndex % featuredDramas.length;
-                                    return (
-                                        <button
-                                            key={d.id}
-                                            type="button"
-                                            onClick={() => setBannerIndex(idx)}
-                                            aria-label={`Slide ${idx + 1}`}
-                                            className={`relative h-1 rounded-sm overflow-hidden transition-all ${active
-                                                    ? "w-11 bg-white/45"
-                                                    : "w-6 bg-white/30 hover:bg-white/50"
+                            <div className="absolute left-0 right-0 bottom-3 z-20 flex items-center justify-center md:justify-start md:left-10 gap-2 sm:gap-3">
+                                {/* Botão Seta Anterior */}
+                                <button
+                                    type="button"
+                                    onClick={handlePrevBanner}
+                                    aria-label="Capa anterior"
+                                    className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/10 hover:bg-white/25 active:scale-90 border border-white/15 backdrop-blur-md text-white grid place-items-center transition cursor-pointer shadow-md"
+                                >
+                                    <ChevronLeft className="w-4 h-4" />
+                                </button>
+
+                                {/* Cápsula com os marcadores de capa */}
+                                <div className="flex items-center gap-1.5 py-1 px-2.5 rounded-full bg-black/55 backdrop-blur-md border border-white/15 shadow-lg">
+                                    {featuredDramas.map((d, idx) => {
+                                        const active = idx === bannerIndex % featuredDramas.length;
+                                        return (
+                                            <button
+                                                key={d.id}
+                                                type="button"
+                                                onClick={() => setBannerIndex(idx)}
+                                                aria-label={`Ir para capa ${idx + 1}`}
+                                                className={`relative h-2 rounded-full overflow-hidden transition-all duration-300 cursor-pointer ${
+                                                    active
+                                                        ? "w-8 sm:w-10 bg-[#e11d48] shadow-[0_0_12px_rgba(225,29,72,0.9)]"
+                                                        : "w-2.5 sm:w-3 bg-white/35 hover:bg-white/60"
                                                 }`}
-                                        >
-                                            {active && (
-                                                <span className="absolute inset-0 bg-white origin-left animate-[pulse_5s_linear_infinite]" />
-                                            )}
-                                        </button>
-                                    );
-                                })}
+                                            >
+                                                {active && (
+                                                    <span className="absolute inset-0 bg-white/30 animate-[pulse_2s_ease-in-out_infinite]" />
+                                                )}
+                                            </button>
+                                        );
+                                    })}
+                                </div>
+
+                                {/* Botão Seta Próximo */}
+                                <button
+                                    type="button"
+                                    onClick={handleNextBanner}
+                                    aria-label="Próxima capa"
+                                    className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/10 hover:bg-white/25 active:scale-90 border border-white/15 backdrop-blur-md text-white grid place-items-center transition cursor-pointer shadow-md"
+                                >
+                                    <ChevronRight className="w-4 h-4" />
+                                </button>
+
+                                <span className="hidden md:inline-block text-[11px] font-mono text-neutral-400 ml-1">
+                                    {(bannerIndex % featuredDramas.length) + 1} / {featuredDramas.length}
+                                </span>
                             </div>
                         )}
                     </div>
