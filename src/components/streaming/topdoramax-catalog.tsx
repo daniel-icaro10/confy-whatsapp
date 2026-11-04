@@ -62,422 +62,6 @@ const DEFAULT_CATALOG_DRAMAS: Drama[] = INITIAL_YOUTUBE_DRAMAS.map((d) => ({
     isShowcaseOnly: false
 }));
 
-const TOPDORAMAX_SHOWCASE_DRAMAS: Drama[] = [
-    {
-        id: "tdx-1",
-        title: "Minha Chefe Viciada em Sexo",
-        slug: "minha-chefe-viciada-em-sexo-bxu4",
-        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
-        coverUrl: "https://topdoramax.pro/midia/capas-p/minha-chefe-viciada-em-sexo-bxu4.jpg",
-        bannerUrl: "https://topdoramax.pro/midia/capas/minha-chefe-viciada-em-sexo-bxu4.png",
-        category: "Dublado",
-        tags: "anuncio,bombando,dublado",
-        totalEpisodes: 65,
-        freeEpisodesCount: 0,
-        isFeatured: true,
-        isVertical: true,
-        viewsCount: 9850,
-        likesCount: 4120,
-        episodes: [],
-        isShowcaseOnly: true
-    },
-    {
-        id: "tdx-2",
-        title: "A Cuidadora do Bilionário Deficiente",
-        slug: "a-cuidadora-do-bilionario-deficiente-dublado-rxp8",
-        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
-        coverUrl: "https://topdoramax.pro/midia/capas-p/a-cuidadora-do-bilionario-deficiente-dublado-rxp8.jpg",
-        bannerUrl: "https://topdoramax.pro/midia/capas/a-cuidadora-do-bilionario-deficiente-dublado-rxp8.jpg",
-        category: "Dublado",
-        tags: "anuncio,bombando,dublado",
-        totalEpisodes: 72,
-        freeEpisodesCount: 0,
-        isFeatured: true,
-        isVertical: true,
-        viewsCount: 9420,
-        likesCount: 3890,
-        episodes: [],
-        isShowcaseOnly: true
-    },
-    {
-        id: "tdx-3",
-        title: "O Pai do meu Filho é o Arquimago",
-        slug: "o-pai-do-meu-filho-e-o-arquimago-dublado-eta9",
-        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
-        coverUrl: "https://topdoramax.pro/midia/capas-p/o-pai-do-meu-filho-e-o-arquimago-dublado-eta9.jpg",
-        bannerUrl: "https://topdoramax.pro/midia/capas/o-pai-do-meu-filho-e-o-arquimago-dublado-eta9.jpg",
-        category: "Dublado",
-        tags: "anuncio,bombando,dublado",
-        totalEpisodes: 80,
-        freeEpisodesCount: 0,
-        isFeatured: true,
-        isVertical: true,
-        viewsCount: 9100,
-        likesCount: 3650,
-        episodes: [],
-        isShowcaseOnly: true
-    },
-    {
-        id: "tdx-4",
-        title: "Você Mexeu com o Mago Errado",
-        slug: "voce-mexeu-com-o-mago-errado-dublado-neb9",
-        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
-        coverUrl: "https://topdoramax.pro/midia/capas-p/voce-mexeu-com-o-mago-errado-dublado-neb9.jpg",
-        bannerUrl: "https://topdoramax.pro/midia/capas/voce-mexeu-com-o-mago-errado-dublado-neb9.jpg",
-        category: "Dublado",
-        tags: "anuncio,bombando,dublado",
-        totalEpisodes: 68,
-        freeEpisodesCount: 0,
-        isFeatured: true,
-        isVertical: true,
-        viewsCount: 8890,
-        likesCount: 3410,
-        episodes: [],
-        isShowcaseOnly: true
-    },
-    {
-        id: "tdx-5",
-        title: "Meu Deus meu Marido Lenhador é um Bilionário",
-        slug: "meu-deus-meu-marido-lenhador-e-um-bilionario-dublado-pqx6",
-        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
-        coverUrl: "https://topdoramax.pro/midia/capas-p/meu-deus-meu-marido-lenhador-e-um-bilionario-dublado-pqx6.jpg",
-        bannerUrl: "https://topdoramax.pro/midia/capas/meu-deus-meu-marido-lenhador-e-um-bilionario-dublado-pqx6.jpg",
-        category: "Dublado",
-        tags: "anuncio,bombando,dublado",
-        totalEpisodes: 75,
-        freeEpisodesCount: 0,
-        isFeatured: true,
-        isVertical: true,
-        viewsCount: 8650,
-        likesCount: 3200,
-        episodes: [],
-        isShowcaseOnly: true
-    },
-    {
-        id: "tdx-6",
-        title: "Uma Noite de Paixão com minha Chefe",
-        slug: "uma-noite-de-paixao-com-minha-chefe-pyb9",
-        synopsis: "Legendado · Todos os episódios completos liberados após o desbloqueio.",
-        coverUrl: "https://topdoramax.pro/midia/capas-p/uma-noite-de-paixao-com-minha-chefe-pyb9.jpg",
-        category: "Legendado",
-        tags: "anuncio,tendencias,legendado",
-        totalEpisodes: 60,
-        freeEpisodesCount: 0,
-        isFeatured: false,
-        isVertical: true,
-        viewsCount: 9900,
-        likesCount: 4100,
-        episodes: [],
-        isShowcaseOnly: true
-    },
-    {
-        id: "tdx-7",
-        title: "O Chefão da Máfia Não Vai Mais se Esconder",
-        slug: "o-chefao-da-mafia-nao-vai-mais-se-esconder---dublado-cbd5",
-        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
-        coverUrl: "https://topdoramax.pro/midia/capas-p/o-chefao-da-mafia-nao-vai-mais-se-esconder---dublado-cbd5.jpg",
-        category: "Dublado",
-        tags: "anuncio,bombando,em_alta,dublado",
-        totalEpisodes: 70,
-        freeEpisodesCount: 0,
-        isFeatured: false,
-        isVertical: true,
-        viewsCount: 8400,
-        likesCount: 2950,
-        episodes: [],
-        isShowcaseOnly: true
-    },
-    {
-        id: "tdx-8",
-        title: "O Segredo do Rei dos Elfos",
-        slug: "o-segredo-do-rei-dos-elfos-dublado-jvc4",
-        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
-        coverUrl: "https://topdoramax.pro/midia/capas-p/o-segredo-do-rei-dos-elfos-dublado-jvc4.jpg",
-        category: "Dublado",
-        tags: "anuncio,bombando,dublado",
-        totalEpisodes: 64,
-        freeEpisodesCount: 0,
-        isFeatured: false,
-        isVertical: true,
-        viewsCount: 8200,
-        likesCount: 2800,
-        episodes: [],
-        isShowcaseOnly: true
-    },
-    {
-        id: "tdx-9",
-        title: "O Ceo Alfa Dominador é meu Cachorrinho Fofo",
-        slug: "o-ceo-alfa-dominador-e-meu-cachorrinho-fofo-wzu6",
-        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
-        coverUrl: "https://topdoramax.pro/midia/capas-p/o-ceo-alfa-dominador-e-meu-cachorrinho-fofo-wzu6.jpg",
-        category: "Dublado",
-        tags: "anuncio,tendencias,em_alta,dublado",
-        totalEpisodes: 58,
-        freeEpisodesCount: 0,
-        isFeatured: false,
-        isVertical: true,
-        viewsCount: 9500,
-        likesCount: 3700,
-        episodes: [],
-        isShowcaseOnly: true
-    },
-    {
-        id: "tdx-10",
-        title: "Meu Pai é um Herói, Não um Mendigo",
-        slug: "meu-pai-e-um-heroi-nao-um-mendigo-jjy9",
-        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
-        coverUrl: "https://topdoramax.pro/midia/capas-p/meu-pai-e-um-heroi-nao-um-mendigo-jjy9.jpg",
-        category: "Dublado",
-        tags: "anuncio,tendencias,dublado",
-        totalEpisodes: 62,
-        freeEpisodesCount: 0,
-        isFeatured: false,
-        isVertical: true,
-        viewsCount: 9300,
-        likesCount: 3500,
-        episodes: [],
-        isShowcaseOnly: true
-    },
-    {
-        id: "tdx-11",
-        title: "Sincronia Sensorial",
-        slug: "sincronia-sensorial-dublado-snm5",
-        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
-        coverUrl: "https://topdoramax.pro/midia/capas-p/sincronia-sensorial-dublado-snm5.jpg",
-        category: "Dublado",
-        tags: "anuncio,tendencias,em_alta,dublado",
-        totalEpisodes: 55,
-        freeEpisodesCount: 0,
-        isFeatured: false,
-        isVertical: true,
-        viewsCount: 9150,
-        likesCount: 3300,
-        episodes: [],
-        isShowcaseOnly: true
-    },
-    {
-        id: "tdx-12",
-        title: "Despertar da Herdeira de Poseidon",
-        slug: "despertar-da-herdeira-de-poseidon-zyp3",
-        synopsis: "Legendado · Todos os episódios completos liberados após o desbloqueio.",
-        coverUrl: "https://topdoramax.pro/midia/capas-p/despertar-da-herdeira-de-poseidon-zyp3.jpg",
-        category: "Legendado",
-        tags: "anuncio,tendencias,em_alta,legendado",
-        totalEpisodes: 66,
-        freeEpisodesCount: 0,
-        isFeatured: false,
-        isVertical: true,
-        viewsCount: 9020,
-        likesCount: 3150,
-        episodes: [],
-        isShowcaseOnly: true
-    },
-    {
-        id: "tdx-13",
-        title: "Me Chamaram de Feia Agora Vão se Arrepender!",
-        slug: "me-chamaram-de-feia-agora-vao-se-arrepender---dublado-ayd6",
-        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
-        coverUrl: "https://topdoramax.pro/midia/capas-p/me-chamaram-de-feia-agora-vao-se-arrepender---dublado-ayd6.jpg",
-        category: "Dublado",
-        tags: "anuncio,tendencias,em_alta,dublado",
-        totalEpisodes: 70,
-        freeEpisodesCount: 0,
-        isFeatured: false,
-        isVertical: true,
-        viewsCount: 8950,
-        likesCount: 3100,
-        episodes: [],
-        isShowcaseOnly: true
-    },
-    {
-        id: "tdx-14",
-        title: "Grande Erro: Torturando o Bilionário Oculto",
-        slug: "grande-erro-torturando-o-bilionario-oculto-dublado-czk5",
-        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
-        coverUrl: "https://topdoramax.pro/midia/capas-p/grande-erro-torturando-o-bilionario-oculto-dublado-czk5.jpg",
-        category: "Dublado",
-        tags: "anuncio,tendencias,dublado",
-        totalEpisodes: 68,
-        freeEpisodesCount: 0,
-        isFeatured: false,
-        isVertical: true,
-        viewsCount: 8800,
-        likesCount: 3020,
-        episodes: [],
-        isShowcaseOnly: true
-    },
-    {
-        id: "tdx-15",
-        title: "Para Viver Tenho que Conquistar a Noiva Sangrenta",
-        slug: "para-viver-tenho-que-conquistar-a-noiva-sangrenta---dublado-spu2",
-        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
-        coverUrl: "https://topdoramax.pro/midia/capas-p/para-viver-tenho-que-conquistar-a-noiva-sangrenta---dublado-spu2.jpg",
-        category: "Dublado",
-        tags: "anuncio,tendencias,dublado",
-        totalEpisodes: 74,
-        freeEpisodesCount: 0,
-        isFeatured: false,
-        isVertical: true,
-        viewsCount: 8740,
-        likesCount: 2980,
-        episodes: [],
-        isShowcaseOnly: true
-    },
-    {
-        id: "tdx-16",
-        title: "O Ceo que Sentiu minha Gravidez",
-        slug: "o-ceo-que-sentiu-minha-gravidez-dublado-jwk3",
-        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
-        coverUrl: "https://topdoramax.pro/midia/capas-p/o-ceo-que-sentiu-minha-gravidez-dublado-jwk3.jpg",
-        category: "Dublado",
-        tags: "anuncio,tendencias,nova,dublado",
-        totalEpisodes: 64,
-        freeEpisodesCount: 0,
-        isFeatured: false,
-        isVertical: true,
-        viewsCount: 8700,
-        likesCount: 2910,
-        episodes: [],
-        isShowcaseOnly: true
-    },
-    {
-        id: "tdx-17",
-        title: "A Ex-capitã de Torcida me Chamou de Gordo, Agora Sou Meio Armador",
-        slug: "a-ex-capita-de-torcida-me-chamou-de-gordo-agora-sou-meio-armador-dublado-cqe4",
-        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
-        coverUrl: "https://topdoramax.pro/midia/capas-p/a-ex-capita-de-torcida-me-chamou-de-gordo-agora-sou-meio-armador-dublado-cqe4.jpg",
-        category: "Dublado",
-        tags: "anuncio,tendencias,em_alta,dublado",
-        totalEpisodes: 60,
-        freeEpisodesCount: 0,
-        isFeatured: false,
-        isVertical: true,
-        viewsCount: 8620,
-        likesCount: 2890,
-        episodes: [],
-        isShowcaseOnly: true
-    },
-    {
-        id: "tdx-18",
-        title: "Destinada a Te Encontrar",
-        slug: "destinada-a-te-encontrar-dublado-cng1",
-        synopsis: "Brasileira · Dublado · Todos os episódios completos liberados após o desbloqueio.",
-        coverUrl: "https://topdoramax.pro/midia/capas-p/destinada-a-te-encontrar-dublado-cng1.jpg",
-        category: "Brasileira",
-        tags: "nova,brasileiro,dublado",
-        totalEpisodes: 52,
-        freeEpisodesCount: 0,
-        isFeatured: false,
-        isVertical: true,
-        viewsCount: 8100,
-        likesCount: 2740,
-        episodes: [],
-        isShowcaseOnly: true
-    },
-    {
-        id: "tdx-19",
-        title: "De Repente Casados",
-        slug: "de-repente-casados-brasileira-mvk3",
-        synopsis: "Brasileira · Todos os episódios completos liberados após o desbloqueio.",
-        coverUrl: "https://topdoramax.pro/midia/capas-p/de-repente-casados-brasileira.jpg",
-        category: "Brasileira",
-        tags: "brasileiro",
-        totalEpisodes: 48,
-        freeEpisodesCount: 0,
-        isFeatured: false,
-        isVertical: true,
-        viewsCount: 7900,
-        likesCount: 2600,
-        episodes: [],
-        isShowcaseOnly: true
-    },
-    {
-        id: "tdx-20",
-        title: "O Doutor que Despertou do Proibido",
-        slug: "o-doutor-que-despertou-do-proibido-legendado-bcg6",
-        synopsis: "LGBT · Legendado · Todos os episódios completos liberados após o desbloqueio.",
-        coverUrl: "https://topdoramax.pro/midia/capas-p/o-doutor-que-despertou-do-proibido-legendado.jpg",
-        category: "LGBT",
-        tags: "lgbt,legendado",
-        totalEpisodes: 56,
-        freeEpisodesCount: 0,
-        isFeatured: false,
-        isVertical: true,
-        viewsCount: 7750,
-        likesCount: 2510,
-        episodes: [],
-        isShowcaseOnly: true
-    },
-    {
-        id: "tdx-21",
-        title: "Meu Rival no Gelo",
-        slug: "meu-rival-no-gelo-dublado-xcu1",
-        synopsis: "LGBT · Dublado · Todos os episódios completos liberados após o desbloqueio.",
-        coverUrl: "https://topdoramax.pro/midia/capas-p/meu-rival-no-gelo-dublado.jpg",
-        category: "LGBT",
-        tags: "lgbt,dublado",
-        totalEpisodes: 54,
-        freeEpisodesCount: 0,
-        isFeatured: false,
-        isVertical: true,
-        viewsCount: 7600,
-        likesCount: 2480,
-        episodes: [],
-        isShowcaseOnly: true
-    },
-    {
-        id: "tdx-22",
-        title: "Depois do Divórcio Casei com o Chefão e Tive Quatro Filhos",
-        slug: "casei-com-o-chefao-e-tive-quatro-filhos-jpn1",
-        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
-        coverUrl: "https://topdoramax.pro/midia/capas-p/casei-com-o-chefao-e-tive-quatro-filhos-jpn1.jpg",
-        category: "Dublado",
-        tags: "anuncio,bombando,dublado",
-        totalEpisodes: 78,
-        freeEpisodesCount: 0,
-        isFeatured: false,
-        isVertical: true,
-        viewsCount: 8510,
-        likesCount: 2890,
-        episodes: [],
-        isShowcaseOnly: true
-    },
-    {
-        id: "tdx-23",
-        title: "A Babá Máxima dos Chefões da Máfia",
-        slug: "a-baba-maxima-dos-chefoes-da-mafia-dublado-imh6",
-        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
-        coverUrl: "https://topdoramax.pro/midia/capas-p/a-baba-maxima-dos-chefoes-da-mafia-dublado-imh6.jpg",
-        category: "Dublado",
-        tags: "anuncio,bombando,dublado",
-        totalEpisodes: 69,
-        freeEpisodesCount: 0,
-        isFeatured: false,
-        isVertical: true,
-        viewsCount: 8480,
-        likesCount: 2830,
-        episodes: [],
-        isShowcaseOnly: true
-    },
-    {
-        id: "tdx-24",
-        title: "Refém do Padrasto do meu Ex",
-        slug: "refem-do-padrasto-do-meu-ex---dublado-tbk6",
-        synopsis: "Dublado · Todos os episódios completos liberados após o desbloqueio.",
-        coverUrl: "https://topdoramax.pro/midia/capas-p/refem-do-padrasto-do-meu-ex---dublado-tbk6.jpg",
-        category: "Dublado",
-        tags: "anuncio,bombando,em_alta,dublado",
-        totalEpisodes: 66,
-        freeEpisodesCount: 0,
-        isFeatured: false,
-        isVertical: true,
-        viewsCount: 8390,
-        likesCount: 2770,
-        episodes: [],
-        isShowcaseOnly: true
-    }
-];
-
 function semAcento(t: string): string {
     return (t || "")
         .normalize("NFD")
@@ -582,20 +166,12 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
         loadData();
     }, []);
 
-    // Combina as novelas cadastradas no painel (/dashboard/novelas) com o catálogo padrão e vitrine
+    // Exibe apenas as novelas reais disponíveis no sistema (banco de dados ou catálogo inicial)
     const dramas = useMemo(() => {
         if (dbDramas.length > 0) {
-            const dbSlugs = new Set(dbDramas.map((d) => d.slug));
-            return [
-                ...dbDramas,
-                ...DEFAULT_CATALOG_DRAMAS.filter((d) => !dbSlugs.has(d.slug)),
-                ...TOPDORAMAX_SHOWCASE_DRAMAS.filter((s) => !dbSlugs.has(s.slug))
-            ];
+            return dbDramas;
         }
-        return [
-            ...DEFAULT_CATALOG_DRAMAS,
-            ...TOPDORAMAX_SHOWCASE_DRAMAS
-        ];
+        return DEFAULT_CATALOG_DRAMAS;
     }, [dbDramas]);
 
     // Verifica acesso VIP (sessão Admin, retorno Stripe, parâmetro ?phone= do robô do WhatsApp ou localStorage)
@@ -779,18 +355,24 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
     }, [dramas, searchQuery]);
 
     const top10Dramas = useMemo(() => {
-        const tend = dramas.filter((d) => (d.tags || "").includes("tendencias") || !d.isShowcaseOnly);
-        const base = tend.length >= 6 ? tend : dramas;
+        const tend = dramas.filter((d) => (d.tags || "").includes("tendencias") || d.isFeatured);
+        const base = tend.length >= 4 ? tend : dramas;
         return base.slice(0, 10);
     }, [dramas]);
 
     const bombandoDramas = useMemo(
-        () => dramas.filter((d) => (d.tags || "").includes("bombando") || !d.isShowcaseOnly),
+        () => {
+            const list = dramas.filter((d) => (d.tags || "").includes("bombando"));
+            return list.length > 0 ? list : dramas.slice(0, 8);
+        },
         [dramas]
     );
 
     const emAltaDramas = useMemo(
-        () => dramas.filter((d) => (d.tags || "").includes("em_alta") || !d.isShowcaseOnly),
+        () => {
+            const list = dramas.filter((d) => (d.tags || "").includes("em_alta"));
+            return list.length > 0 ? list : dramas.slice(4, 12);
+        },
         [dramas]
     );
 
@@ -826,24 +408,13 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
     }, [viewerExpiresAt]);
 
     const handleSelectDrama = (drama: Drama, forceWatch = false) => {
-        if ((isVip || isAdmin) && !drama.isShowcaseOnly) {
+        if (isVip || isAdmin) {
             router.push(`/assistir/${drama.slug}`);
             return;
         }
-        if (forceWatch && !drama.isShowcaseOnly) {
+        if (forceWatch) {
             router.push(`/assistir/${drama.slug}?ep=1`);
             return;
-        }
-        if ((isVip || isAdmin) && drama.isShowcaseOnly) {
-            // Se for uma série da vitrine e já houver novela real cadastrada no banco, leva para a primeira novela
-            if (dbDramas.length > 0) {
-                router.push(`/assistir/${dbDramas[0].slug}`);
-                return;
-            }
-            if (DEFAULT_CATALOG_DRAMAS.length > 0) {
-                router.push(`/assistir/${DEFAULT_CATALOG_DRAMAS[0].slug}`);
-                return;
-            }
         }
         // Abre a tela de Série Bloqueada com opção de assistir ep 1 grátis e planos VIP
         setLockedSerieModal(drama);
@@ -1864,8 +1435,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                 <div className="px-4 py-2 rounded-full bg-black/80 border border-white/15 backdrop-blur-md text-white text-sm font-bold mb-2">
                                     Série bloqueada
                                 </div>
-                                {!lockedSerieModal.isShowcaseOnly &&
-                                    lockedSerieModal.freeEpisodesCount > 0 && (
+                                {lockedSerieModal.freeEpisodesCount > 0 && (
                                         <Link
                                             href={`/assistir/${lockedSerieModal.slug}?ep=1`}
                                             className="mt-1 px-4 py-1.5 rounded-full bg-white/15 hover:bg-white/25 border border-white/25 text-white text-xs font-semibold transition"
@@ -2004,7 +1574,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                     setViewerPhone(phone);
                     setIsVip(true);
                     setVipModalOpen(false);
-                    if (lockedSerieModal && !lockedSerieModal.isShowcaseOnly) {
+                    if (lockedSerieModal) {
                         const targetSlug = lockedSerieModal.slug;
                         setLockedSerieModal(null);
                         router.push(`/assistir/${targetSlug}`);
