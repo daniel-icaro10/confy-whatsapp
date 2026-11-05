@@ -30,6 +30,7 @@ export function FramedYoutubePlayer({
 
     const [isPlaying, setIsPlaying] = useState(true);
     const [isMuted, setIsMuted] = useState(false);
+    const [volume, setVolume] = useState<number>(100);
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
     const [isReady, setIsReady] = useState(false);
@@ -97,6 +98,9 @@ export function FramedYoutubePlayer({
                     if (typeof data.info.muted === "boolean") {
                         setIsMuted(data.info.muted);
                     }
+                    if (typeof data.info.volume === "number") {
+                        setVolume(data.info.volume);
+                    }
                     if (typeof data.info.playerState === "number") {
                         const state = data.info.playerState;
                         if (state === 1) {
@@ -150,11 +154,31 @@ export function FramedYoutubePlayer({
         }
     };
 
+    const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.stopPropagation();
+        scheduleHideControls();
+        const nextVol = Number(e.target.value);
+        setVolume(nextVol);
+        if (nextVol === 0) {
+            setIsMuted(true);
+            sendCommand("mute");
+        } else {
+            if (isMuted) {
+                setIsMuted(false);
+                sendCommand("unMute");
+            }
+            sendCommand("setVolume", [nextVol]);
+        }
+    };
+
     const toggleMute = (e: React.MouseEvent) => {
         e.stopPropagation();
         scheduleHideControls();
-        if (isMuted) {
+        if (isMuted || volume === 0) {
             sendCommand("unMute");
+            const restoreVol = volume === 0 ? 80 : volume;
+            setVolume(restoreVol);
+            sendCommand("setVolume", [restoreVol]);
             setIsMuted(false);
         } else {
             sendCommand("mute");
@@ -306,16 +330,51 @@ export function FramedYoutubePlayer({
                                 {isPlaying ? "Pausar" : "Reproduzir"}
                             </button>
 
-                            <button
-                                type="button"
-                                onClick={toggleMute}
-                                className="px-2.5 py-1 rounded-full bg-black/70 border border-white/15 hover:border-white/35 text-white transition"
-                            >
-                                {isMuted ? "Ativar som" : "Som ativo"}
-                            </button>
+                            {/* Controle de Volume com Slider Deslizante e Mute */}
+                            <div className="flex items-center gap-1.5 bg-black/70 border border-white/15 rounded-full px-2.5 py-1">
+                                <button
+                                    type="button"
+                                    onClick={toggleMute}
+                                    title={isMuted || volume === 0 ? "Ativar som" : "Mutar som"}
+                                    aria-label={isMuted || volume === 0 ? "Ativar som" : "Mutar som"}
+                                    className="text-white hover:text-[#f43f5e] transition shrink-0"
+                                >
+                                    {isMuted || volume === 0 ? (
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3.5 h-3.5">
+                                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                                            <line x1="23" y1="9" x2="17" y2="15" />
+                                            <line x1="17" y1="9" x2="23" y2="15" />
+                                        </svg>
+                                    ) : volume < 50 ? (
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3.5 h-3.5">
+                                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                                            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                                        </svg>
+                                    ) : (
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3.5 h-3.5">
+                                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                                            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+                                        </svg>
+                                    )}
+                                </button>
+                                <input
+                                    type="range"
+                                    min={0}
+                                    max={100}
+                                    step={1}
+                                    value={isMuted ? 0 : volume}
+                                    onChange={handleVolumeChange}
+                                    aria-label="Controle de volume"
+                                    className="w-14 sm:w-20 h-1 accent-[#e11d48] bg-white/20 rounded-full cursor-pointer"
+                                />
+                                <span className="text-[9.5px] font-mono text-white/80 min-w-[24px] text-right">
+                                    {isMuted ? "0%" : `${volume}%`}
+                                </span>
+                            </div>
 
                             {duration > 0 && (
-                                <span className="text-[10px] text-[#9a9a9a] ml-1">
+                                <span className="hidden sm:inline-block text-[10px] text-[#9a9a9a] ml-1">
                                     {formatSeconds(currentTime)} / {formatSeconds(duration)}
                                 </span>
                             )}

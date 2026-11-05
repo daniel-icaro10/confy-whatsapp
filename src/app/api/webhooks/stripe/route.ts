@@ -25,7 +25,9 @@ export async function POST(request: Request) {
         if (
             type === "checkout.session.completed" ||
             type === "checkout.session.async_payment_succeeded" ||
-            type === "payment_intent.succeeded"
+            type === "payment_intent.succeeded" ||
+            type === "invoice.paid" ||
+            type === "invoice.payment_succeeded"
         ) {
             const externalId = obj?.id;
             const durationDays = Number(obj?.metadata?.durationDays || 30);
