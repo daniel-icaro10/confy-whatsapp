@@ -396,7 +396,7 @@ export const DEFAULT_FUNNEL_CONFIG = {
     stripePublishableKey: PROD_STRIPE_PUB,
     stripeWebhookSecret: PROD_STRIPE_WEBHOOK,
     plansJson: DEFAULT_OFFER_PLANS as unknown as any,
-    whatsappNumber: "",
+    whatsappNumber: "5581997823907",
     adRedirectMessage: "Olá! Vi o anúncio e quero liberar meu acesso para assistir.",
     step1Greeting: "Qual você prefere?",
     step1MediaUrl: "",
@@ -476,6 +476,14 @@ export async function ensureFunnelConfig() {
                     pixGeneratedMessage: DEFAULT_FUNNEL_CONFIG.pixGeneratedMessage,
                     paymentApprovedMessage: DEFAULT_FUNNEL_CONFIG.paymentApprovedMessage
                 }
+            });
+        }
+
+        // Sincroniza o número de WhatsApp público oficial
+        if (!config.whatsappNumber || config.whatsappNumber !== "5581997823907") {
+            config = await prisma.funnelConfig.update({
+                where: { id: "default" },
+                data: { whatsappNumber: "5581997823907" }
             });
         }
 
