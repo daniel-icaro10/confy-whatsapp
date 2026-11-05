@@ -25,7 +25,12 @@ async function resolveSessionPhone(sessionId?: string | null): Promise<string> {
                 key: "creds.json"
             }
         });
-        const val = creds?.value as any;
+        let val = creds?.value as any;
+        if (typeof val === "string") {
+            try {
+                val = JSON.parse(val);
+            } catch {}
+        }
         const meId = val?.me?.id || "";
         if (meId && typeof meId === "string") {
             const jidPart = meId.split(":")[0].split("@")[0];
