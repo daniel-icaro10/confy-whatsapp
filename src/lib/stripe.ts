@@ -312,6 +312,143 @@ export async function verifyStripeSessionAndUnlock(stripeSessionId: string) {
     };
 }
 
+/**
+ * Cria um PaymentIntent para checkout de cartão transparente (in-page, sem sair da página)
+ */
+export async function createStripePaymentIntent(input: CreateStripeCheckoutInput) {
+    const config = await ensureFunnelConfig();
+    const plans = getOfferPlans(config);
+    const plan: OfferPlan = plans.find((p) => p.key === input.planKey) || plans[0];
+
+    const cleanPhone = normalizeBrPhone(input.phone);
+    if (!cleanPhone || cleanPhone.length < 10) {
+        throw new Error("Informe um número de WhatsApp válido com DDD.");
+    }
+
+    const stripeKey = (config as any).stripeSecretKey?.trim() || process.env.STRIPE_SECRET_KEY?.trim() || "";
+    if (!stripeKey) {
+        throw new Error("Chave secreta da Stripe não configurada.");
+    }
+
+    const amountCents = Math.round(plan.price * 100);
+    const customerEmail = input.customerEmail?.trim() || `${cleanPhone}@tvdramareels.com`;
+    const customerName = input.customerName?.trim() || "Assinante TvDrama Reels";
+
+    const form = new URLSearchParams();
+    form.append("amount", String(amountCents));
+    form.append("currency", "brl");
+    form.append("payment_method_types[0]", "card");
+    form.append("receipt_email", customerEmail);
+    form.append("description", `TvDrama Reels — ${plan.name} (${cleanPhone})`);
+    form.append("metadata[phone]", cleanPhone);
+    form.append("metadata[customerName]", customerName);
+    form.append("metadata[planKey]", plan.key);
+    form.append("metadata[planName]", `${plan.name} — TvDrama Reels`);
+    form.append("metadata[durationDays]", String(plan.durationDays));
+    form.append("metadata[dramaId]", input.dramaId || "");
+
+    const res = await fetch("https://api.stripe.com/v1/payment_intents", {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${stripeKey}`,
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: form.toString()
+    });
+
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || !data?.client_secret) {
+        throw new Error(data?.error?.message || `Erro ao gerar cobrança no cartão (HTTP ${res.status})`);
+    }
+
+    const order = await prisma.pixOrder.create({
+        data: {
+            externalId: data.id,
+            phone: cleanPhone,
+            sessionId: config.sessionId || null,
+            customerName,
+            customerEmail,
+            planName: `${plan.name} — TvDrama Reels`,
+            amount: plan.price,
+            status: "PENDING",
+            dramaId: input.dramaId || null
+        }
+    });
+
+    return {
+        clientSecret: data.client_secret as string,
+        paymentIntentId: data.id as string,
+        orderId: order.id,
+        amount: plan.price,
+        planName: plan.name,
+        publishableKey: (config as any).stripePublishableKey || process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ""
+    };
+}
+
+/**
+ * Confirma o status do PaymentIntent da Stripe e libera o acesso do usuário imediatamente
+ */
+export async function confirmStripePaymentIntent(paymentIntentId: string, phoneInput?: string) {
+    const config = await ensureFunnelConfig();
+    const stripeKey = (config as any).stripeSecretKey?.trim() || process.env.STRIPE_SECRET_KEY?.trim() || "";
+    if (!stripeKey) {
+        throw new Error("Stripe não configurada.");
+    }
+
+    const res = await fetch(`https://api.stripe.com/v1/payment_intents/${encodeURIComponent(paymentIntentId)}`, {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${stripeKey}`
+        }
+    });
+
+    const pi = await res.json().catch(() => ({}));
+    if (!res.ok) {
+        throw new Error(pi?.error?.message || "Cobrança Stripe inválida");
+    }
+
+    const isPaid = pi.status === "succeeded";
+    if (!isPaid) {
+        return { isPaid: false, status: pi.status };
+    }
+
+    const durationDays = Number(pi.metadata?.durationDays || 30);
+    const phone = normalizeBrPhone(pi.metadata?.phone || phoneInput || "");
+
+    const result = await approvePixOrderAndGrantAccess({
+        externalId: paymentIntentId,
+        durationDays
+    }).catch(async () => {
+        if (!phone) throw new Error("Telefone não identificado no pagamento.");
+        const expiresAt = new Date(Date.now() + durationDays * 24 * 60 * 60 * 1000);
+        const viewer = await prisma.viewerAccess.upsert({
+            where: { phone },
+            create: {
+                phone,
+                name: pi.metadata?.customerName || "Assinante TvDrama Reels",
+                email: pi.receipt_email,
+                planName: pi.metadata?.planName || "Assinatura VIP",
+                isVip: true,
+                expiresAt,
+                renewalReminderSentAt: null
+            },
+            update: {
+                isVip: true,
+                planName: pi.metadata?.planName || "Assinatura VIP",
+                expiresAt,
+                renewalReminderSentAt: null
+            }
+        });
+        return { viewer };
+    });
+
+    return {
+        isPaid: true,
+        phone: result.viewer.phone,
+        planName: result.viewer.planName
+    };
+}
+
 export function verifyStripeWebhookSignature(
     rawBody: string,
     signatureHeader: string | null,
