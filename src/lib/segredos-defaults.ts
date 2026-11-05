@@ -383,7 +383,7 @@ export const DEFAULT_FUNNEL_CONFIG = {
     sessionId: "kb3786" as string | null,
     planName: "Catálogo Completo — TvDrama Reels",
     planPrice: 19.90,
-    siteUrl: process.env.NEXT_PUBLIC_APP_URL || "http://2.24.89.184:3000",
+    siteUrl: process.env.NEXT_PUBLIC_APP_URL || "https://tvdramareels.online",
     mangofyApiUrl: "https://checkout.mangofy.com.br/api/v1",
     mangofyApiKey: "",
     mangofyStoreCode: "",
@@ -427,6 +427,16 @@ export async function ensureFunnelConfig() {
             return config;
         }
 
+        // Se a URL ainda for IP antigo, migra para o domínio oficial
+        if (config.siteUrl?.includes("142.93") || config.siteUrl?.includes("2.24.89") || !config.siteUrl?.includes("tvdramareels.online")) {
+            config = await prisma.funnelConfig.update({
+                where: { id: "default" },
+                data: {
+                    siteUrl: "https://tvdramareels.online"
+                }
+            });
+        }
+
         // Se os textos principais estiverem vazios, atualiza com a mensagem oficial da oferta
         if (!config.step1Greeting?.trim()) {
             config = await prisma.funnelConfig.update({
@@ -434,7 +444,7 @@ export async function ensureFunnelConfig() {
                 data: {
                     enabled: true,
                     sessionId: config.sessionId || "kb3786",
-                    siteUrl: config.siteUrl?.includes("142.93") ? "http://2.24.89.184:3000" : config.siteUrl || "http://2.24.89.184:3000",
+                    siteUrl: "https://tvdramareels.online",
                     step1Greeting: DEFAULT_FUNNEL_CONFIG.step1Greeting,
                     pixTriggerKeywords: DEFAULT_FUNNEL_CONFIG.pixTriggerKeywords,
                     pixGeneratedMessage: DEFAULT_FUNNEL_CONFIG.pixGeneratedMessage,
