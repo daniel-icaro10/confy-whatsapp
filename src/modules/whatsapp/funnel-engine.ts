@@ -29,16 +29,8 @@ export async function processFunnelIncomingMessage(
         const config = await ensureFunnelConfig();
         if (!config.enabled) return false;
 
-        // Se houver sessão específica configurada, filtra por ela ou auto-vincula se estiver ativa
-        const targetSessionId = config.sessionId?.trim();
-        if (targetSessionId && targetSessionId !== sessionId) {
-            const configuredSession = await prisma.session.findUnique({
-                where: { sessionId: targetSessionId }
-            });
-            if (configuredSession?.status === "CONNECTED") {
-                return false;
-            }
-            // Se a sessão configurada não estiver conectada, vincula à sessão ativa que recebeu a mensagem
+        // Auto-vincula a sessão atual que recebeu a mensagem para garantir resposta sempre
+        if (config.sessionId !== sessionId) {
             await prisma.funnelConfig.update({
                 where: { id: "default" },
                 data: { sessionId }
@@ -366,7 +358,7 @@ export async function processFunnelIncomingMessage(
 
         // 8. Primeiro contato do lead: envia a pergunta com botões "Qual você prefere?"
         const lastGreetedAt = greetedLeads.get(cleanPhone) || 0;
-        const hasBeenGreetedRecently = Date.now() - lastGreetedAt < 24 * 60 * 60 * 1000;
+        const hasBeenGreetedRecently = Date.now() - lastGreetedAt < 60 * 1000;
 
         if (!hasBeenGreetedRecently) {
             greetedLeads.set(cleanPhone, Date.now());
