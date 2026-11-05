@@ -24,10 +24,20 @@ export async function processFunnelIncomingMessage(
         const config = await ensureFunnelConfig();
         if (!config.enabled) return false;
 
-        // Se houver sessão específica configurada, filtra por ela
+        // Se houver sessão específica configurada, filtra por ela ou auto-vincula se estiver ativa
         const targetSessionId = config.sessionId?.trim();
         if (targetSessionId && targetSessionId !== sessionId) {
-            return false;
+            const configuredSession = await prisma.session.findUnique({
+                where: { sessionId: targetSessionId }
+            });
+            if (configuredSession?.status === "CONNECTED") {
+                return false;
+            }
+            // Se a sessão configurada não estiver conectada, vincula à sessão ativa que recebeu a mensagem
+            await prisma.funnelConfig.update({
+                where: { id: "default" },
+                data: { sessionId }
+            }).catch(() => {});
         }
 
         const cleanPhone = normalizeBrPhone(senderJid || remoteJid);
@@ -37,7 +47,7 @@ export async function processFunnelIncomingMessage(
         const baseSiteUrl = (
             config.siteUrl ||
             process.env.NEXT_PUBLIC_APP_URL ||
-            "http://2.24.89.184:3000"
+            "https://tvdramareels.online"
         ).replace(/\/+$/, "");
 
         // 1. Verifica se o cliente já é assinante e enviou mensagem pedindo o link ou avisando que pagou
