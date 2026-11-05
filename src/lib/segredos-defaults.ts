@@ -550,13 +550,19 @@ export async function ensureInitialDramas() {
                     }
                 });
             } else {
-                // Sincroniza visualizações e status de destaque para atualizar o ranking
-                if (existing.viewsCount !== item.viewsCount || existing.isFeatured !== item.isFeatured) {
+                // Sincroniza visualizações, status de destaque e categoria (Dublado/Legendado)
+                if (
+                    existing.viewsCount !== item.viewsCount ||
+                    existing.isFeatured !== item.isFeatured ||
+                    existing.category !== item.category
+                ) {
                     await prisma.drama.update({
                         where: { id: existing.id },
                         data: {
                             viewsCount: item.viewsCount,
-                            isFeatured: item.isFeatured
+                            isFeatured: item.isFeatured,
+                            category: item.category,
+                            tags: item.tags
                         }
                     }).catch(() => {});
                 }

@@ -698,7 +698,8 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                         { id: "vinganca", label: "⚔️ Vingança" },
                         { id: "romance", label: "❤️ Romance" },
                         { id: "lgbt", label: "🌈 LGBT (BL)" },
-                        { id: "dublado", label: "Dublados" }
+                        { id: "dublado", label: "Dublados" },
+                        { id: "legendado", label: "Legendados" }
                     ].map((cat) => {
                         const active = activeCategory === cat.id;
                         return (
