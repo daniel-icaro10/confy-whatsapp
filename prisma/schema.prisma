@@ -851,6 +851,7 @@ model ViewerAccess {
   planName           String    @default("Acesso VIP Vitalício")
   isVip              Boolean   @default(true)
   expiresAt          DateTime?
+  renewalReminderSentAt DateTime?
   lastWatchedDramaId String?
   lastWatchedEpisode Int?      @default(1)
   notes              String?   @db.Text
@@ -859,6 +860,7 @@ model ViewerAccess {
 
   @@index([phone])
   @@index([isVip])
+  @@index([expiresAt])
 }
 
 enum PixOrderStatus {
@@ -884,12 +886,15 @@ model PixOrder {
   pixQrCodeBase64 String?        @db.LongText
   dramaId         String?
   paidAt          DateTime?
+  remarketingSentAt DateTime?
+  remarketingStatus String?
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
 
   @@index([phone])
   @@index([status])
   @@index([externalId])
+  @@index([createdAt])
 }
 
 model FunnelConfig {
@@ -921,6 +926,13 @@ model FunnelConfig {
   pixTriggerKeywords     String   @default("pix, quero, sim, continuar, assistir, liberar, pagar, acesso, parte 2, completo, novela, valor, preco")
   pixGeneratedMessage    String   @db.Text
   paymentApprovedMessage String   @db.Text
+
+  pixAbandonRemarketingEnabled Boolean  @default(true)
+  pixAbandonMinutes           Int      @default(15)
+  pixAbandonMessage           String?  @db.Text
+  renewalReminderEnabled      Boolean  @default(true)
+  renewalReminderDaysBefore   Int      @default(1)
+  renewalReminderMessage      String?  @db.Text
 
   useAiSaleswoman        Boolean  @default(true)
   aiProvider             AiProvider @default(GROQ)

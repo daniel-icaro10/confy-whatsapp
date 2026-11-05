@@ -125,11 +125,30 @@ export async function processFunnelIncomingMessage(
             "2️⃣"
         ].some((k) => incomingLower === k || (incomingLower.length <= 25 && incomingLower.includes(k)));
 
-        if (isOption1 || isOption2) {
+        // 3.1 Detecta se o cliente quer renovar o acesso VIP
+        const isRenewal = [
+            "renovar",
+            "renovação",
+            "renovacao",
+            "reativar",
+            "reativação",
+            "reativacao",
+            "venceu",
+            "vencendo",
+            "quero renovar",
+            "renovei",
+            "meu acesso venceu"
+        ].some((k) => incomingLower.includes(k));
+
+        if (isOption1 || isOption2 || isRenewal) {
             const selectedPrice = isOption1 ? 9.90 : 19.90;
-            const selectedHeader = isOption1
+            let selectedHeader = isOption1
                 ? "🎬 Excelente escolha! Você escolheu *3 Séries por R$ 9,90*!\nVocê escolhe as séries e o acesso é enviado aqui na hora."
                 : "🚀 Escolha perfeita! Você escolheu o *Catálogo Completo por R$ 19,90* com mais de 501 séries por 30 dias! ⭐";
+
+            if (isRenewal) {
+                selectedHeader = "🚀 Perfeito! Vamos renovar seu acesso VIP ao *Catálogo Completo* por mais 30 dias por apenas R$ 19,90! ⭐";
+            }
 
             try {
                 await sock.sendPresenceUpdate("composing", remoteJid);

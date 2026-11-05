@@ -262,12 +262,14 @@ export async function approvePixOrderAndGrantAccess(orderIdentifier: {
             planName: order.planName || config.planName,
             isVip: true,
             expiresAt,
+            renewalReminderSentAt: null,
             lastWatchedDramaId: order.dramaId || null
         },
         update: {
             isVip: true,
             planName: order.planName || config.planName,
             expiresAt,
+            renewalReminderSentAt: null,
             updatedAt: new Date()
         }
     });
@@ -286,15 +288,12 @@ export async function approvePixOrderAndGrantAccess(orderIdentifier: {
 
         try {
             const targetSessionId = (order.sessionId || config.sessionId || "").trim();
+            const activeSession = waManager.getSessionOrAnyActive(targetSessionId);
+            const targetJid = order.jid || `${cleanPhone}@s.whatsapp.net`;
 
-            if (targetSessionId) {
-                const instance = waManager.getInstance(targetSessionId);
-                const targetJid = order.jid || `${cleanPhone}@s.whatsapp.net`;
-
-                if (instance?.socket) {
-                    await instance.socket.sendMessage(targetJid, { text: finalMessage });
-                    logger.info("Funnel", `Acesso entregue via WhatsApp (${targetSessionId}) para ${targetJid}`);
-                }
+            if (activeSession?.instance?.socket) {
+                await activeSession.instance.socket.sendMessage(targetJid, { text: finalMessage });
+                logger.info("Funnel", `Acesso entregue via WhatsApp (${activeSession.sessionId}) para ${targetJid}`);
             }
         } catch (err) {
             logger.error("Funnel", "Erro ao enviar mensagem de confirmação no WhatsApp:", err);

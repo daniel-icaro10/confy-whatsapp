@@ -69,13 +69,26 @@ const checkScheduledMessages = async () => {
 };
 
 export function startScheduler() {
-    logger.info("Scheduler", "Starting Message Scheduler...");
+    logger.info("Scheduler", "Starting Message Scheduler & Remarketing Engine...");
 
-    // Run immediately on start
+    // Run scheduled messages immediately on start
     checkScheduledMessages();
 
-    // Then run every 30 seconds
+    // Then run scheduled messages every 30 seconds
     setInterval(checkScheduledMessages, 30 * 1000);
+
+    // Motor de Remarketing de Pix Abandonado (15min) e Lembrete de Renovação (29º dia)
+    import("./remarketing-engine").then(({ runRemarketingAndRenewalJobs }) => {
+        // Primeira rodada após 10 segundos do boot (para dar tempo do socket conectar)
+        setTimeout(() => {
+            runRemarketingAndRenewalJobs().catch(err => logger.error("Scheduler", "Initial remarketing job error:", err));
+        }, 10 * 1000);
+
+        // Rodadas periódicas a cada 60 segundos
+        setInterval(() => {
+            runRemarketingAndRenewalJobs().catch(err => logger.error("Scheduler", "Scheduled remarketing job error:", err));
+        }, 60 * 1000);
+    });
 
     // Run media retention cleanup once on start, then every 6 hours
     import("@/lib/storage").then(({ cleanupOldMedia }) => {

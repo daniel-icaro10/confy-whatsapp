@@ -95,6 +95,31 @@ export class WhatsAppManager {
         return this.sessions.get(sessionId);
     }
 
+    /**
+     * Retorna a primeira sessao que esteja no status CONNECTED com socket ativo
+     */
+    public getActiveSession(): { sessionId: string; instance: WhatsAppInstance } | null {
+        for (const [id, inst] of this.sessions.entries()) {
+            if (inst.status === "CONNECTED" && inst.socket) {
+                return { sessionId: id, instance: inst };
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Tenta obter a sessao solicitada; caso nao esteja conectada, recorre a qualquer sessao ativa
+     */
+    public getSessionOrAnyActive(sessionId?: string | null): { sessionId: string; instance: WhatsAppInstance } | null {
+        if (sessionId) {
+            const inst = this.sessions.get(sessionId);
+            if (inst?.status === "CONNECTED" && inst.socket) {
+                return { sessionId, instance: inst };
+            }
+        }
+        return this.getActiveSession();
+    }
+
     /** Remove instance from memory manager (cleanup after stop/logout) */
     public removeInstance(sessionId: string) {
         const inst = this.sessions.get(sessionId);

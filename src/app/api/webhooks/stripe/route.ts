@@ -51,12 +51,14 @@ export async function POST(request: Request) {
                                 email: obj?.customer_details?.email || obj?.receipt_email || null,
                                 planName,
                                 isVip: true,
-                                expiresAt
+                                expiresAt,
+                                renewalReminderSentAt: null
                             },
                             update: {
                                 isVip: true,
                                 planName,
-                                expiresAt
+                                expiresAt,
+                                renewalReminderSentAt: null
                             }
                         });
                     }
