@@ -4,6 +4,51 @@ import { normalizeMessageContent } from "@whiskeysockets/baileys";
 import { logger } from "@/lib/logger";
 import { processFunnelIncomingMessage } from "../funnel-engine";
 
+export function extractMessageText(msg: any): string {
+    if (!msg?.message) return "";
+    const m = normalizeMessageContent(msg.message);
+    if (!m) return "";
+
+    // 1. Plain text / extended text
+    if (m.conversation) return m.conversation.trim();
+    if (m.extendedTextMessage?.text) return m.extendedTextMessage.text.trim();
+
+    // 2. Button responses (Quick Reply / Buttons)
+    if (m.buttonsResponseMessage?.selectedDisplayText) return m.buttonsResponseMessage.selectedDisplayText.trim();
+    if (m.buttonsResponseMessage?.selectedButtonId) return m.buttonsResponseMessage.selectedButtonId.trim();
+
+    // 3. Template button reply
+    if (m.templateButtonReplyMessage?.selectedDisplayText) return m.templateButtonReplyMessage.selectedDisplayText.trim();
+    if (m.templateButtonReplyMessage?.selectedId) return m.templateButtonReplyMessage.selectedId.trim();
+
+    // 4. Interactive Response (Native Flow buttons like quick_reply)
+    if (m.interactiveResponseMessage) {
+        const nativeFlow = m.interactiveResponseMessage.nativeFlowResponseMessage;
+        if (nativeFlow?.paramsJson) {
+            try {
+                const params = JSON.parse(nativeFlow.paramsJson);
+                if (params.id) return String(params.id).trim();
+                if (params.display_text) return String(params.display_text).trim();
+            } catch {}
+        }
+        if (m.interactiveResponseMessage.body?.text) {
+            return m.interactiveResponseMessage.body.text.trim();
+        }
+    }
+
+    // 5. List response
+    if (m.listResponseMessage?.title) return m.listResponseMessage.title.trim();
+    if (m.listResponseMessage?.singleSelectReply?.selectedRowId) {
+        return m.listResponseMessage.singleSelectReply.selectedRowId.trim();
+    }
+
+    // 6. Image / Video caption
+    if (m.imageMessage?.caption) return m.imageMessage.caption.trim();
+    if (m.videoMessage?.caption) return m.videoMessage.caption.trim();
+
+    return "";
+}
+
 function canAutoReply(config: any, fromMe: boolean, senderJid: string): boolean {
     if (!config || !config.enabled) return false;
 
@@ -78,8 +123,7 @@ export async function bindAutoReply(sock: WASocket, sessionId: string) {
 
             if (!remoteJid || !senderJid) continue;
 
-            const content = normalizeMessageContent(msg.message);
-            const text = content?.conversation || content?.extendedTextMessage?.text || "";
+            const text = extractMessageText(msg);
 
             if (!text) continue;
 

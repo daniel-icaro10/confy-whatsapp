@@ -398,24 +398,24 @@ export const DEFAULT_FUNNEL_CONFIG = {
     plansJson: DEFAULT_OFFER_PLANS as unknown as any,
     whatsappNumber: "",
     adRedirectMessage: "Olá! Vi o anúncio e quero liberar meu acesso para assistir.",
-    step1Greeting: `Qual das duas vc prefere? 😊\n\n🎬 *3 Séries por R$ 9,90*\n✅ Você que escolhe as séries\n✅ Acesso enviado no WhatsApp após o pagamento\n\n🚀 *Catálogo Completo por R$ 19,90* ⭐\n✅ Todas as +501 séries liberadas\n✅ Assista quantas quiser por 30 dias\n✅ TODO DIA entra série nova\n✅ Melhor custo-benefício\n\n📌 Catálogo:\n{{LINK_CATALOGO}}\n\n✅ Depois do pagamento a série chega aqui na hora`,
+    step1Greeting: "Qual você prefere?",
     step1MediaUrl: "",
     step1MediaType: "none",
     step2OfferMessage: "",
-    pixTriggerKeywords: "1, 2, 3 series, 3 séries, catalogo, catálogo, completo, pix, quero, sim, pagar, assistir, liberar, 9.90, 9,90, 19.90, 19,90",
+    pixTriggerKeywords: "1, 2, 3 series, 3 séries, catalogo, catálogo, completo, pix, quero, sim, pagar, assistir, liberar, 10, 10.00, 10,00, 20, 20.00, 20,00, 9.90, 9,90, 19.90, 19,90",
     pixGeneratedMessage: "Aqui está a sua chave Pix Copia e Cola no valor de R$ {{VALOR}}:\n\n{{PIX_COPIA_E_COLA}}\n\n📱 Copie o código acima e pague no app do seu banco.\n⚡ Assim que o pagamento for confirmado, seu acesso é liberado aqui mesmo na hora!",
     paymentApprovedMessage: "🎉 Pagamento confirmado com sucesso, {{NOME}}!\n\nSeu acesso exclusivo já está liberado! 🎬🍿\nClique no link abaixo para assistir agora:\n👉 {{LINK_ACESSO}}\n\n✅ Assista no celular, tablet, computador ou TV\n✅ Sem anúncios e episódios completos em HD\nBom entretenimento! ❤️",
     pixAbandonRemarketingEnabled: true,
     pixAbandonMinutes: 15,
-    pixAbandonMessage: "Oi, {{NOME}}! Tudo bem? 😊\n\nVi que você gerou o Pix para liberar o seu acesso ao *TvDrama Reels*, mas o pagamento ainda não foi concluído.\n\n🎬 As vagas promocionais com acesso a todas as +501 séries dubladas por R$ 19,90 (ou 3 séries por R$ 9,90) são limitadas!\n\nSe precisar do código Pix novamente, aqui está:\n\n{{PIX_COPIA_E_COLA}}\n\n💡 Se preferir pagar no *Cartão de Crédito* ou tiver qualquer dúvida, basta me responder aqui que eu te ajudo na hora! ❤️",
+    pixAbandonMessage: "o pix ainda não apareceu aqui 😊\nconseguiu fazer?\n\nse travou no banco, me avisa que eu te mando um novinho",
     renewalReminderEnabled: true,
     renewalReminderDaysBefore: 1,
-    renewalReminderMessage: "Oi, {{NOME}}! Passando com um aviso importante: ⏳\n\nSeu acesso VIP ao *TvDrama Reels* vence amanhã! 🎬🍿\n\nPara você continuar assistindo todas as suas séries favoritas sem interrupção e aproveitar todos os novos lançamentos diários, você pode renovar seu acesso por mais 30 dias por apenas *R$ 19,90*.\n\n👉 Para renovar agora no Pix ou Cartão com liberação imediata, clique aqui:\n{{LINK_RENOVACAO}}\n\nOu se preferir, basta responder *RENOVAR* aqui que eu já gero o seu Pix na hora! ❤️",
+    renewalReminderMessage: "Oi, {{NOME}}! Passando com um aviso importante: ⏳\n\nSeu acesso VIP ao *TvDrama Reels* vence amanhã! 🎬🍿\n\nPara você continuar assistindo todas as suas séries favoritas sem interrupção e aproveitar todos os novos lançamentos diários, você pode renovar seu acesso por mais 30 dias por apenas *R$ 20,00*.\n\n👉 Para renovar agora no Pix ou Cartão com liberação imediata, clique aqui:\n{{LINK_RENOVACAO}}\n\nOu se preferir, basta responder *RENOVAR* aqui que eu já gero o seu Pix na hora! ❤️",
     useAiSaleswoman: false,
     aiProvider: "GROQ" as const,
     aiApiKey: "",
     aiModel: "llama-3.3-70b-versatile",
-    aiSystemPrompt: "Você é a assistente de vendas do TvDrama Reels. Seu objetivo é tirar dúvidas e orientar o cliente a escolher entre a Opção 1 (3 Séries por R$ 9,90) e a Opção 2 (Catálogo Completo por R$ 19,90). Responda com simpatia e clareza."
+    aiSystemPrompt: "Você é a assistente de vendas do TvDrama Reels. Seu objetivo é tirar dúvidas e orientar o cliente a escolher entre a Opção 1 (3 Séries por R$ 10,00) e a Opção 2 (Catálogo Completo por R$ 20,00). Responda com simpatia e clareza."
 };
 
 const LEGACY_MOCK_DRAMA_SLUGS = [
@@ -463,15 +463,15 @@ export async function ensureFunnelConfig() {
             });
         }
 
-        // Se os textos principais estiverem vazios, atualiza com a mensagem oficial da oferta
-        if (!config.step1Greeting?.trim()) {
+        // Sincroniza textos oficiais da oferta caso estejam no formato antigo
+        if (!config.step1Greeting?.trim() || config.step1Greeting.includes("Qual das duas vc prefere")) {
             config = await prisma.funnelConfig.update({
                 where: { id: "default" },
                 data: {
                     enabled: true,
-                    sessionId: config.sessionId || "kb3786",
                     siteUrl: "https://tvdramareels.online",
                     step1Greeting: DEFAULT_FUNNEL_CONFIG.step1Greeting,
+                    pixAbandonMessage: DEFAULT_FUNNEL_CONFIG.pixAbandonMessage,
                     pixTriggerKeywords: DEFAULT_FUNNEL_CONFIG.pixTriggerKeywords,
                     pixGeneratedMessage: DEFAULT_FUNNEL_CONFIG.pixGeneratedMessage,
                     paymentApprovedMessage: DEFAULT_FUNNEL_CONFIG.paymentApprovedMessage

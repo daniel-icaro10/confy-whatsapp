@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { ensureFunnelConfig, normalizeBrPhone, getPhoneVariants } from "@/lib/segredos-defaults";
 import { waManager } from "./manager";
 import { logger } from "@/lib/logger";
+import { sendAbandonedPixRemarketing } from "./interactive-buttons";
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -9,6 +10,7 @@ const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
  * Remarketing de Pix Abandonado:
  * Dispara uma mensagem amigável no WhatsApp 15 minutos após a geração do Pix
  * caso o cliente ainda não tenha concluído o pagamento.
+ * Exibe exatamente o layout com os 2 botões rápidos ("Mandar pix de novo" e "Já paguei").
  */
 export async function runPixAbandonRemarketing(): Promise<{ processed: number; sent: number; skipped: number }> {
     let processed = 0;
@@ -45,16 +47,6 @@ export async function runPixAbandonRemarketing(): Promise<{ processed: number; s
         }
 
         logger.info("Remarketing", `Encontrados ${pendingOrders.length} pedidos Pix pendentes para remarketing.`);
-
-        const baseSiteUrl = (
-            config.siteUrl ||
-            process.env.NEXT_PUBLIC_APP_URL ||
-            "https://tvdramareels.online"
-        ).replace(/\/+$/, "");
-
-        const defaultTemplate =
-            (config as any).pixAbandonMessage?.trim() ||
-            `Oi, {{NOME}}! Tudo bem? 😊\n\nVi que você gerou o Pix para liberar o seu acesso ao *TvDrama Reels*, mas o pagamento ainda não foi concluído.\n\n🎬 As vagas promocionais com acesso a todas as +501 séries dubladas por R$ 19,90 (ou 3 séries por R$ 9,90) são limitadas!\n\nSe precisar do código Pix novamente, aqui está:\n\n{{PIX_COPIA_E_COLA}}\n\n💡 Se preferir pagar no *Cartão de Crédito* ou tiver qualquer dúvida, basta me responder aqui que eu te ajudo na hora! ❤️`;
 
         for (const order of pendingOrders) {
             processed++;
@@ -101,25 +93,11 @@ export async function runPixAbandonRemarketing(): Promise<{ processed: number; s
             }
 
             const targetJid = order.jid || `${cleanPhone}@s.whatsapp.net`;
-            const valorTxt = (order.amount || 19.90).toFixed(2).replace(".", ",");
-            const customerName = (order.customerName || "amigo(a)").split(" ")[0];
-
-            const messageText = defaultTemplate
-                .replace(/\{\{NOME\}\}/g, customerName)
-                .replace(/\{\{VALOR\}\}/g, valorTxt)
-                .replace(/\{\{PIX_COPIA_E_COLA\}\}/g, order.pixCopyPaste || "")
-                .replace(/\{\{LINK_SITE\}\}/g, baseSiteUrl)
-                .replace(/\{\{LINK_CATALOGO\}\}/g, baseSiteUrl);
 
             try {
-                // Envia mensagem amigável de remarketing
-                await sessionResult.instance.socket.sendMessage(targetJid, { text: messageText });
-
-                // Se houver código Pix Copia e Cola, envia limpo na sequência para cópia fácil
-                if (order.pixCopyPaste && order.pixCopyPaste.length > 10) {
-                    await sleep(1000);
-                    await sessionResult.instance.socket.sendMessage(targetJid, { text: order.pixCopyPaste });
-                }
+                // Envia a mensagem interativa de remarketing idêntica ao print com os 2 botões rápidos
+                // SEM mensagem duplicada de Pix
+                await sendAbandonedPixRemarketing(sessionResult.instance.socket, targetJid);
 
                 await prisma.pixOrder.update({
                     where: { id: order.id },
@@ -201,7 +179,7 @@ export async function runRenewalReminder(): Promise<{ processed: number; sent: n
 
         const defaultTemplate =
             (config as any).renewalReminderMessage?.trim() ||
-            `Oi, {{NOME}}! Passando com um aviso importante: ⏳\n\nSeu acesso VIP ao *TvDrama Reels* vence amanhã! 🎬🍿\n\nPara você continuar assistindo todas as suas séries favoritas sem interrupção e aproveitar todos os novos lançamentos diários, você pode renovar seu acesso por mais 30 dias por apenas *R$ 19,90*.\n\n👉 Para renovar agora no Pix ou Cartão com liberação imediata, clique aqui:\n{{LINK_RENOVACAO}}\n\nOu se preferir, basta responder *RENOVAR* aqui que eu já gero o seu Pix na hora! ❤️`;
+            `Oi, {{NOME}}! Passando com um aviso importante: ⏳\n\nSeu acesso VIP ao *TvDrama Reels* vence amanhã! 🎬🍿\n\nPara você continuar assistindo todas as suas séries favoritas sem interrupção e aproveitar todos os novos lançamentos diários, você pode renovar seu acesso por mais 30 dias por apenas *R$ 20,00*.\n\n👉 Para renovar agora no Pix ou Cartão com liberação imediata, clique aqui:\n{{LINK_RENOVACAO}}\n\nOu se preferir, basta responder *RENOVAR* aqui que eu já gero o seu Pix na hora! ❤️`;
 
         for (const viewer of expiringViewers) {
             processed++;
@@ -230,7 +208,7 @@ export async function runRenewalReminder(): Promise<{ processed: number; sent: n
                 .replace(/\{\{TELEFONE\}\}/g, cleanPhone)
                 .replace(/\{\{LINK_RENOVACAO\}\}/g, renewalLink)
                 .replace(/\{\{LINK_SITE\}\}/g, baseSiteUrl)
-                .replace(/\{\{VALOR\}\}/g, "19,90");
+                .replace(/\{\{VALOR\}\}/g, "20,00");
 
             try {
                 await sessionResult.instance.socket.sendMessage(targetJid, { text: messageText });
@@ -267,4 +245,3 @@ export async function runRemarketingAndRenewalJobs() {
     await runPixAbandonRemarketing();
     await runRenewalReminder();
 }
-

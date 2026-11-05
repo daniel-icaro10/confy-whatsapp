@@ -638,6 +638,24 @@ async function processAndSaveMessage(
     } else if (messageContent?.contactMessage) {
         messageType = "CONTACT";
         text = messageContent.contactMessage.displayName || "";
+    } else if (messageContent?.interactiveMessage) {
+        messageType = "INTERACTIVE";
+        text = messageContent.interactiveMessage.body?.text || "";
+    } else if (messageContent?.buttonsResponseMessage) {
+        text = messageContent.buttonsResponseMessage.selectedDisplayText || messageContent.buttonsResponseMessage.selectedButtonId || "";
+    } else if (messageContent?.templateButtonReplyMessage) {
+        text = messageContent.templateButtonReplyMessage.selectedDisplayText || messageContent.templateButtonReplyMessage.selectedId || "";
+    } else if (messageContent?.interactiveResponseMessage) {
+        const nativeFlow = messageContent.interactiveResponseMessage.nativeFlowResponseMessage;
+        if (nativeFlow?.paramsJson) {
+            try {
+                const parsed = JSON.parse(nativeFlow.paramsJson);
+                text = parsed.display_text || parsed.id || "";
+            } catch {}
+        }
+        if (!text) text = messageContent.interactiveResponseMessage.body?.text || "";
+    } else if (messageContent?.listResponseMessage) {
+        text = messageContent.listResponseMessage.title || messageContent.listResponseMessage.singleSelectReply?.selectedRowId || "";
     }
 
     // Determine effective participant for groups

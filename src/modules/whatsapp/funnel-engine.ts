@@ -1,9 +1,14 @@
 import type { WASocket, WAMessage } from "@whiskeysockets/baileys";
 import { prisma } from "@/lib/prisma";
 import { ensureFunnelConfig, normalizeBrPhone, getPhoneVariants } from "@/lib/segredos-defaults";
-import { createMangofyPixCharge } from "@/lib/mangofy";
+import { createMangofyPixCharge, approvePixOrderAndGrantAccess } from "@/lib/mangofy";
 import { createStripePixCharge, createStripeCheckoutSession } from "@/lib/stripe";
 import { logger } from "@/lib/logger";
+import {
+    sendOfferSelectionMessage,
+    sendPixPaymentMessage,
+    sendAbandonedPixRemarketing
+} from "./interactive-buttons";
 
 const greetedLeads = new Map<string, number>();
 
@@ -50,7 +55,7 @@ export async function processFunnelIncomingMessage(
             "https://tvdramareels.online"
         ).replace(/\/+$/, "");
 
-        // 1. Verifica se o cliente já é assinante e enviou mensagem pedindo o link ou avisando que pagou
+        // 1. Verifica se o cliente já é assinante VIP ativo
         const variants = getPhoneVariants(cleanPhone);
         const existingVip = await prisma.viewerAccess.findFirst({
             where: {
@@ -59,6 +64,7 @@ export async function processFunnelIncomingMessage(
             }
         });
 
+        // 1.1 Se o cliente já é VIP e pediu link, acesso ou avisou que pagou
         if (
             existingVip &&
             (incomingLower.includes("link") ||
@@ -66,6 +72,7 @@ export async function processFunnelIncomingMessage(
                 incomingLower.includes("entrar") ||
                 incomingLower.includes("ja paguei") ||
                 incomingLower.includes("já paguei") ||
+                incomingLower.includes("pix_already_paid") ||
                 incomingLower.includes("assistir"))
         ) {
             const magicLink = `${baseSiteUrl}/?phone=${existingVip.phone}`;
@@ -77,21 +84,136 @@ export async function processFunnelIncomingMessage(
                 .replace(/\{\{TELEFONE\}\}/g, existingVip.phone)
                 .replace(/\{\{LINK_ACESSO\}\}/g, magicLink)
                 .replace(/\{\{NOME\}\}/g, pushName || "Cliente")
-                .replace(/\{\{VALOR\}\}/g, "19,90");
+                .replace(/\{\{VALOR\}\}/g, "20,00");
 
-            await sock.sendMessage(remoteJid, { text: formattedApproved });
+            await sock.sendMessage(remoteJid, { text: formattedApproved }, rawMsg ? { quoted: rawMsg } : undefined);
             return true;
         }
 
-        // 2. Detecta se o cliente escolheu a Opção 1 (3 Séries - R$ 9,90)
+        // 2. Detecta clique no botão "Já paguei"
+        const isAlreadyPaid = [
+            "já paguei",
+            "ja paguei",
+            "paguei",
+            "pago",
+            "já fiz",
+            "ja fiz",
+            "fiz o pix",
+            "pix_already_paid",
+            "consegui",
+            "pronto",
+            "tá pago",
+            "ta pago",
+            "acabei de pagar",
+            "acabei de fazer"
+        ].some((k) => incomingLower === k || (incomingLower.length <= 25 && incomingLower.includes(k)));
+
+        if (isAlreadyPaid) {
+            // Busca o pedido Pix mais recente do cliente
+            const latestOrder = await prisma.pixOrder.findFirst({
+                where: { phone: { in: variants } },
+                orderBy: { createdAt: "desc" }
+            });
+
+            if (latestOrder && latestOrder.status === "PAID") {
+                const magicLink = `${baseSiteUrl}/?phone=${latestOrder.phone}`;
+                const approvedMsg =
+                    `🎉 Pagamento confirmado com sucesso, ${pushName || "Cliente"}!\n\n` +
+                    `Seu acesso exclusivo já está liberado! 🎬🍿\n` +
+                    `Clique no link abaixo para assistir agora:\n` +
+                    `👉 ${magicLink}\n\n` +
+                    `✅ Assista no celular, tablet, computador ou TV\n` +
+                    `✅ Sem anúncios e episódios completos em HD\n` +
+                    `Bom entretenimento! ❤️`;
+                await sock.sendMessage(remoteJid, { text: approvedMsg }, rawMsg ? { quoted: rawMsg } : undefined);
+                return true;
+            }
+
+            const pendingWaitMsg =
+                `Ainda estou aguardando a confirmação do seu banco 😊\n\n` +
+                `Normalmente o Pix é compensado em até 30 segundos. Assim que o banco aprovar, seu link de acesso exclusivo chega aqui na hora!\n\n` +
+                `Se o valor já saiu da sua conta e demorar mais de 1 minuto, pode me avisar aqui que eu já te ajudo! ❤️`;
+            await sock.sendMessage(remoteJid, { text: pendingWaitMsg }, rawMsg ? { quoted: rawMsg } : undefined);
+            return true;
+        }
+
+        // 3. Detecta clique no botão "Mandar pix de novo"
+        const isPixResend = [
+            "mandar pix de novo",
+            "pix de novo",
+            "de novo",
+            "novo pix",
+            "manda outro",
+            "outro pix",
+            "pix_resend",
+            "gerar de novo",
+            "não consegui",
+            "nao consegui",
+            "travou",
+            "manda o pix de novo",
+            "manda de novo",
+            "reenviar pix",
+            "reenviar"
+        ].some((k) => incomingLower === k || (incomingLower.length <= 30 && incomingLower.includes(k)));
+
+        if (isPixResend) {
+            // Verifica se o último pedido era de 3 Séries (R$ 10,00) ou Completo (R$ 20,00)
+            const previousOrder = await prisma.pixOrder.findFirst({
+                where: { phone: { in: variants } },
+                orderBy: { createdAt: "desc" }
+            });
+
+            const isPrevOption1 = previousOrder ? (previousOrder.amount <= 12) : false;
+            const resendPrice = isPrevOption1 ? 10.00 : 20.00;
+            const resendPlanType: "option1" | "option2" = isPrevOption1 ? "option1" : "option2";
+
+            const isStripePreferred = Boolean((config as any).stripeSecretKey?.trim()) || !Boolean(config.mangofyApiKey?.trim());
+            const charge = isStripePreferred
+                ? await createStripePixCharge({
+                    phone: cleanPhone,
+                    jid: remoteJid,
+                    sessionId,
+                    customerName: pushName || "Cliente",
+                    customAmount: resendPrice,
+                    planKey: isPrevOption1 ? "monthly" : "quarterly"
+                })
+                : await createMangofyPixCharge({
+                    phone: cleanPhone,
+                    jid: remoteJid,
+                    sessionId,
+                    customerName: pushName || "Cliente",
+                    customAmount: resendPrice,
+                    planKey: isPrevOption1 ? "monthly" : "quarterly"
+                });
+
+            await sendPixPaymentMessage(sock, remoteJid, {
+                planType: resendPlanType,
+                priceTxt: resendPrice.toFixed(2).replace(".", ","),
+                pixCode: charge.pixCopyPaste,
+                quoted: rawMsg
+            });
+
+            return true;
+        }
+
+        // 4. Detecta escolha da Opção 1 (3 Séries - R$ 10,00)
         const isOption1 = [
             "1",
-            "opcao 1",
-            "opção 1",
+            "opt_1",
+            "plan_3_series",
             "3 series",
             "3 séries",
             "3 serie",
             "3 série",
+            "3 séries r$ 10,00",
+            "3 series r$ 10,00",
+            "3 series r$ 10",
+            "3 séries r$ 10",
+            "3 series 10",
+            "3 séries 10",
+            "10,00",
+            "10.00",
+            "10",
             "9,90",
             "9.90",
             "primeira",
@@ -100,18 +222,26 @@ export async function processFunnelIncomingMessage(
             "quero a 1",
             "escolho 1",
             "1️⃣"
-        ].some((k) => incomingLower === k || (incomingLower.length <= 25 && incomingLower.includes(k)));
+        ].some((k) => incomingLower === k || (incomingLower.length <= 30 && incomingLower.includes(k)));
 
-        // 3. Detecta se o cliente escolheu a Opção 2 (Catálogo Completo - R$ 19,90)
+        // 5. Detecta escolha da Opção 2 (Catálogo Completo - R$ 20,00)
         const isOption2 = [
             "2",
-            "opcao 2",
-            "opção 2",
+            "opt_2",
+            "plan_completo",
+            "completo r$ 20,00",
+            "completo r$ 20",
+            "completo 20",
+            "completo",
             "catalogo",
             "catálogo",
-            "completo",
             "catalogo completo",
             "catálogo completo",
+            "catálogo completo (r$ 20,00)",
+            "catalogo completo (r$ 20,00)",
+            "20,00",
+            "20.00",
+            "20",
             "19,90",
             "19.90",
             "segunda",
@@ -123,9 +253,9 @@ export async function processFunnelIncomingMessage(
             "tudo",
             "501",
             "2️⃣"
-        ].some((k) => incomingLower === k || (incomingLower.length <= 25 && incomingLower.includes(k)));
+        ].some((k) => incomingLower === k || (incomingLower.length <= 30 && incomingLower.includes(k)));
 
-        // 3.1 Detecta se o cliente quer renovar o acesso VIP
+        // 5.1 Detecta renovação
         const isRenewal = [
             "renovar",
             "renovação",
@@ -141,14 +271,8 @@ export async function processFunnelIncomingMessage(
         ].some((k) => incomingLower.includes(k));
 
         if (isOption1 || isOption2 || isRenewal) {
-            const selectedPrice = isOption1 ? 9.90 : 19.90;
-            let selectedHeader = isOption1
-                ? "🎬 Excelente escolha! Você escolheu *3 Séries por R$ 9,90*!\nVocê escolhe as séries e o acesso é enviado aqui na hora."
-                : "🚀 Escolha perfeita! Você escolheu o *Catálogo Completo por R$ 19,90* com mais de 501 séries por 30 dias! ⭐";
-
-            if (isRenewal) {
-                selectedHeader = "🚀 Perfeito! Vamos renovar seu acesso VIP ao *Catálogo Completo* por mais 30 dias por apenas R$ 19,90! ⭐";
-            }
+            const selectedPrice = isOption1 ? 10.00 : 20.00;
+            const planType: "option1" | "option2" = isOption1 ? "option1" : "option2";
 
             try {
                 await sock.sendPresenceUpdate("composing", remoteJid);
@@ -174,20 +298,19 @@ export async function processFunnelIncomingMessage(
                     planKey: isOption1 ? "monthly" : "quarterly"
                 });
 
-            const valorTxt = selectedPrice.toFixed(2).replace(".", ",");
-            const pixText = `${selectedHeader}\n\nAqui está a sua chave Pix Copia e Cola no valor de *R$ ${valorTxt}*:\n\n${charge.pixCopyPaste}\n\n📱 *Como pagar:*\n1. Copie o código acima\n2. Abra o app do seu banco e escolha *Pix Copia e Cola*\n3. Cole e confirme o pagamento\n\n⚡ *Acesso liberado*: Assim que pagar, o acesso chega aqui no seu WhatsApp na hora!\n\n💳 _Se preferir pagar no Cartão de Crédito, basta responder *cartão*._`;
-
-            await sock.sendMessage(remoteJid, { text: pixText }, rawMsg ? { quoted: rawMsg } : undefined);
-
-            // Envia também o código limpo na sequência para facilitar a cópia com 1 clique no celular
-            if (charge.pixCopyPaste) {
-                await sock.sendMessage(remoteJid, { text: charge.pixCopyPaste });
-            }
+            // Envia o modelo idêntico ao print com o botão de cópia nativo
+            // SEM duplicar o código Pix e SEM mandar mensagem repetida
+            await sendPixPaymentMessage(sock, remoteJid, {
+                planType,
+                priceTxt: selectedPrice.toFixed(2).replace(".", ","),
+                pixCode: charge.pixCopyPaste,
+                quoted: rawMsg
+            });
 
             return true;
         }
 
-        // 3.1 Detecta se o cliente pediu para pagar no cartão de crédito
+        // 6. Detecta pedido para pagar no cartão de crédito
         const isCardRequest = [
             "cartao",
             "cartão",
@@ -221,7 +344,7 @@ export async function processFunnelIncomingMessage(
             }
         }
 
-        // 4. Se enviou "pix" ou "quero" sem dizer 1 ou 2, orienta sobre as duas opções
+        // 7. Se enviou "pix" ou "quero" sem especificar a opção
         const isGenericPixRequest = [
             "pix",
             "quero",
@@ -237,16 +360,11 @@ export async function processFunnelIncomingMessage(
         ].some((k) => incomingLower === k || (incomingLower.length <= 20 && incomingLower.includes(k)));
 
         if (isGenericPixRequest) {
-            try {
-                await sock.sendPresenceUpdate("composing", remoteJid);
-            } catch {}
-
-            const clarifyMsg = `Qual das duas opções você prefere? 😊\n\nDigite *1* para 🎬 *3 Séries por R$ 9,90*\nDigite *2* para 🚀 *Catálogo Completo por R$ 19,90* ⭐\n\n📌 Catálogo:\n${baseSiteUrl}\n\n✅ Depois do pagamento a série chega aqui na hora!`;
-            await sock.sendMessage(remoteJid, { text: clarifyMsg }, rawMsg ? { quoted: rawMsg } : undefined);
+            await sendOfferSelectionMessage(sock, remoteJid, rawMsg);
             return true;
         }
 
-        // 5. Primeiro contato do lead: envia a mensagem de oferta principal
+        // 8. Primeiro contato do lead: envia a pergunta com botões "Qual você prefere?"
         const lastGreetedAt = greetedLeads.get(cleanPhone) || 0;
         const hasBeenGreetedRecently = Date.now() - lastGreetedAt < 24 * 60 * 60 * 1000;
 
@@ -257,23 +375,7 @@ export async function processFunnelIncomingMessage(
                 await sock.sendPresenceUpdate("composing", remoteJid);
             } catch {}
 
-            const defaultInitialGreeting = `Qual das duas vc prefere? 😊\n\n🎬 *3 Séries por R$ 9,90*\n✅ Você que escolhe as séries\n✅ Acesso enviado no WhatsApp após o pagamento\n\n🚀 *Catálogo Completo por R$ 19,90* ⭐\n✅ Todas as +501 séries liberadas\n✅ Assista quantas quiser por 30 dias\n✅ TODO DIA entra série nova\n✅ Melhor custo-benefício\n\n📌 Catálogo:\n{{LINK_CATALOGO}}\n\n✅ Depois do pagamento a série chega aqui na hora`;
-
-            let initialText = config.step1Greeting?.trim() || defaultInitialGreeting;
-            initialText = initialText
-                .replace(/\{\{NOME\}\}/g, pushName || "")
-                .replace(/\{\{TELEFONE\}\}/g, cleanPhone)
-                .replace(/\{\{LINK_CATALOGO\}\}/g, baseSiteUrl)
-                .replace(/\{\{LINK_SITE\}\}/g, baseSiteUrl);
-
-            // Garante que o link do catálogo está presente caso o template tenha ficado em branco após "📌 Catálogo:"
-            if (initialText.includes("📌 Catálogo:") && !initialText.includes(baseSiteUrl)) {
-                initialText = initialText.replace(/📌 Catálogo:(\s*)/, `📌 Catálogo:\n${baseSiteUrl}\n\n`);
-            }
-
-            await sock.sendMessage(remoteJid, { text: initialText });
-
-            // Envio opcional de mídia configurada
+            // Envio opcional de mídia configurada (áudio de prévia, vídeo teaser) antes da pergunta
             if (
                 config.step1MediaUrl?.trim() &&
                 config.step1MediaType &&
@@ -297,10 +399,12 @@ export async function processFunnelIncomingMessage(
                 }
             }
 
+            // Envia a mensagem com os botões idêntica ao print: "Qual você prefere?"
+            await sendOfferSelectionMessage(sock, remoteJid, rawMsg);
             return true;
         }
 
-        // 6. Resposta por IA Vendedora (se ativada no painel)
+        // 9. Resposta por IA Vendedora (se ativada no painel)
         if (config.useAiSaleswoman && config.aiApiKey?.trim() && config.aiSystemPrompt?.trim()) {
             try {
                 await sock.sendPresenceUpdate("composing", remoteJid);
@@ -308,7 +412,7 @@ export async function processFunnelIncomingMessage(
                     provider: config.aiProvider || "GROQ",
                     apiKey: config.aiApiKey.trim(),
                     model: config.aiModel || "llama-3.3-70b-versatile",
-                    systemPrompt: config.aiSystemPrompt.replace(/\{\{VALOR\}\}/g, "19,90"),
+                    systemPrompt: config.aiSystemPrompt.replace(/\{\{VALOR\}\}/g, "20,00"),
                     userMessage: text,
                     customerName: pushName || "Cliente"
                 });
@@ -321,9 +425,8 @@ export async function processFunnelIncomingMessage(
                 logger.error("Funnel", "Erro na IA do Funil:", aiErr?.message);
             }
         } else {
-            // Se o lead já foi saudado e enviou outra mensagem sem escolher opção
-            const helpMsg = `Para liberar o seu acesso agora mesmo, basta responder:\n\n*1* para 🎬 *3 Séries por R$ 9,90*\n*2* para 🚀 *Catálogo Completo por R$ 19,90* ⭐\n\n📌 Catálogo:\n${baseSiteUrl}\n\n✅ Depois do pagamento a série chega aqui na hora!`;
-            await sock.sendMessage(remoteJid, { text: helpMsg });
+            // Se o lead já foi saudado e mandou outra dúvida, reenvia as opções interativas
+            await sendOfferSelectionMessage(sock, remoteJid, rawMsg);
             return true;
         }
 
