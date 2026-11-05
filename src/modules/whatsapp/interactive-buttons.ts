@@ -26,8 +26,9 @@ export async function sendOfferSelectionMessage(
 }
 
 /**
- * Envia o Pix Copia e Cola formatado em mensagem única.
- * SEM duplicação e com instruções diretas para copiar e pagar.
+ * Envia as instruções e o código Pix Copia e Cola isolado em seguida.
+ * Desta forma, o cliente copia APENAS o código Pix limpo (sem texto misturado),
+ * facilitando o pagamento imediato em qualquer aplicativo bancário.
  */
 export async function sendPixPaymentMessage(
     sock: WASocket,
@@ -46,14 +47,23 @@ export async function sendPixPaymentMessage(
             ? `3 séries (R$ ${priceTxt})`
             : `catálogo completo (R$ ${priceTxt})`;
 
-    const text =
+    const instructionText =
         `prontinho! segue o pix da ${planLabel} 👇\n\n` +
-        `pra copiar é só tocar e segurar no código aqui embaixo ⬇️\n` +
-        `aí abre o app do seu banco ➔ Pix copia e cola ➔ cola e paga:\n\n` +
-        `${pixCode}`;
+        `pra copiar é só tocar no código que enviei logo abaixo ⬇️\n` +
+        `aí abre o app do seu banco ➔ Pix copia e cola ➔ cola e paga`;
+
+    const cleanPixCode = (pixCode || "").trim();
 
     try {
-        await sock.sendMessage(jid, { text }, quoted ? { quoted } : undefined);
+        // 1. Envia a mensagem explicativa (sem o código, sem gerar QR code)
+        await sock.sendMessage(jid, { text: instructionText }, quoted ? { quoted } : undefined);
+
+        // 2. Envia apenas a chave Pix 100% isolada para cópia com 1 toque
+        if (cleanPixCode) {
+            await new Promise((resolve) => setTimeout(resolve, 400));
+            await sock.sendMessage(jid, { text: cleanPixCode });
+        }
+
         return true;
     } catch (err: any) {
         logger.error("InteractiveButtons", `Erro ao enviar Pix: ${err?.message}`);
