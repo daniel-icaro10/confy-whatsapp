@@ -63,7 +63,7 @@ export async function sendInteractiveMessage(
                 }
             },
             {
-                userJid: sock.user?.id,
+                userJid: sock.user?.id || jid,
                 quoted
             }
         );
@@ -235,3 +235,4 @@ export async function sendAbandonedPixRemarketing(
         quoted
     });
 }
+
