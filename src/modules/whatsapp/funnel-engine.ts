@@ -369,7 +369,7 @@ export async function processFunnelIncomingMessage(
         ].some((k) => incomingLower === k || (incomingLower.length <= 20 && incomingLower.includes(k)));
 
         if (isGenericPixRequest) {
-            await sendOfferSelectionMessage(sock, remoteJid, rawMsg);
+            await sendOfferSelectionMessage(sock, remoteJid, rawMsg, baseSiteUrl);
             return true;
         }
 
@@ -408,8 +408,8 @@ export async function processFunnelIncomingMessage(
                 }
             }
 
-            // Envia a mensagem com os botões idêntica ao print: "Qual você prefere?"
-            await sendOfferSelectionMessage(sock, remoteJid, rawMsg);
+            // Envia a mensagem com os botões idêntica ao modelo configurado
+            await sendOfferSelectionMessage(sock, remoteJid, rawMsg, baseSiteUrl);
             return true;
         }
 
@@ -435,7 +435,7 @@ export async function processFunnelIncomingMessage(
             }
         } else {
             // Se o lead já foi saudado e mandou outra dúvida, reenvia as opções interativas
-            await sendOfferSelectionMessage(sock, remoteJid, rawMsg);
+            await sendOfferSelectionMessage(sock, remoteJid, rawMsg, baseSiteUrl);
             return true;
         }
 

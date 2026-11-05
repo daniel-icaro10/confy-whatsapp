@@ -105,8 +105,12 @@ export async function sendInteractiveMessage(
 }
 
 /**
- * 1. Envia a mensagem de escolha de planos idêntica à imagem de referência:
- * "Qual você prefere?"
+ * 1. Envia a mensagem de escolha de planos idêntica ao modelo solicitado pelo cliente:
+ * "Qual das duas vc prefere? 😊
+ *  🎬 3 Séries por R$ 10,00 ...
+ *  🚀 Catálogo Completo por R$ 20,00 ⭐ ...
+ *  📌 Catálogo: https://tvdramareels.online"
+ *
  * Botões nativos:
  * [ ↩ 3 Séries R$ 10,00 ]
  * [ ↩ Completo R$ 20,00 ]
@@ -114,9 +118,24 @@ export async function sendInteractiveMessage(
 export async function sendOfferSelectionMessage(
     sock: WASocket,
     jid: string,
-    quoted?: WAMessage
+    quoted?: WAMessage,
+    siteUrl: string = "https://tvdramareels.online"
 ): Promise<boolean> {
-    const body = "Qual você prefere?";
+    const cleanSiteUrl = (siteUrl || "https://tvdramareels.online").replace(/\/+$/, "");
+
+    const body =
+        `Qual das duas vc prefere? 😊\n\n` +
+        `🎬 *3 Séries por R$ 10,00*\n` +
+        `✅ Você que escolhe as séries\n` +
+        `✅ Acesso enviado no WhatsApp após o pagamento\n\n` +
+        `🚀 *Catálogo Completo por R$ 20,00* ⭐\n` +
+        `✅ Todas as +501 séries liberadas\n` +
+        `✅ Assista quantas quiser por 30 dias\n` +
+        `✅ TODO DIA entra série nova\n` +
+        `✅ Melhor custo-benefício\n\n` +
+        `📌 Catálogo:\n` +
+        `${cleanSiteUrl}\n\n` +
+        `✅ Depois do pagamento a série chega aqui na hora`;
 
     const buttons: InteractiveNativeButton[] = [
         {
@@ -136,10 +155,8 @@ export async function sendOfferSelectionMessage(
     ];
 
     const fallbackText =
-        "Qual você prefere? 😊\n\n" +
-        "1️⃣ *3 Séries R$ 10,00*\n" +
-        "2️⃣ *Completo R$ 20,00*\n\n" +
-        "_Responda *1* ou *2*_";
+        `${body}\n\n` +
+        `_Responda *1* ou *2*_`;
 
     return sendInteractiveMessage(sock, jid, {
         body,

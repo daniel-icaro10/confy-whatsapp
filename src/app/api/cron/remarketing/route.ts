@@ -26,7 +26,7 @@ export async function GET(req: NextRequest) {
             if (sessionResult && sessionResult.instance.socket) {
                 const sock = sessionResult.instance.socket;
                 if (testType === "offer") {
-                    await sendOfferSelectionMessage(sock, targetJid);
+                    await sendOfferSelectionMessage(sock, targetJid, undefined, funnelConfig?.siteUrl || "https://tvdramareels.online");
                     testSendResult = { sent: true, type: "offer", to: targetJid };
                 } else if (testType === "pix") {
                     await sendPixPaymentMessage(sock, targetJid, {
