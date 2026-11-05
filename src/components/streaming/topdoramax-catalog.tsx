@@ -70,6 +70,101 @@ function semAcento(t: string): string {
         .trim();
 }
 
+export type GenreKey = "alfa" | "bilionario" | "mafia" | "vinganca" | "romance" | "lgbt";
+
+export function detectDramaGenre(drama: Drama): GenreKey {
+    const text = semAcento(`${drama.title} ${drama.category || ""} ${drama.tags || ""} ${drama.synopsis || ""}`);
+
+    // LGBT / BL / GL
+    if (
+        /\b(bl|gl|lgbt|gay|lesbica|lésbica|boys love|girls love)\b/.test(text) ||
+        text.includes("do peso a gloria") ||
+        text.includes("amor entre rapazes")
+    ) {
+        return "lgbt";
+    }
+
+    // Alfas / Lobos / Dragões / Fantasia Sobrenatural
+    if (
+        text.includes("lobo") ||
+        text.includes("alfa") ||
+        text.includes("dragao") ||
+        text.includes("dragão") ||
+        text.includes("matilha") ||
+        text.includes("luna") ||
+        text.includes("vampiro") ||
+        text.includes("bruxa") ||
+        text.includes("imortal") ||
+        text.includes("hades") ||
+        text.includes("bestiais")
+    ) {
+        return "alfa";
+    }
+
+    // Bilionários / CEOs / Herdeiras / Contratos
+    if (
+        text.includes("bilionari") ||
+        text.includes("ceo") ||
+        text.includes("herdeir") ||
+        text.includes("magnata") ||
+        text.includes("contrato") ||
+        text.includes("patrao") ||
+        text.includes("patrão") ||
+        text.includes("riqueza") ||
+        text.includes("fortuna") ||
+        text.includes("prefeito") ||
+        text.includes("dinheiro")
+    ) {
+        return "bilionario";
+    }
+
+    // Máfia / Chefes / Guarda-Costas / Poder
+    if (
+        text.includes("mafia") ||
+        text.includes("máfia") ||
+        text.includes("guarda-costas") ||
+        text.includes("chefe") ||
+        text.includes("refugio") ||
+        text.includes("refúgio") ||
+        text.includes("assassino") ||
+        text.includes("sabio") ||
+        text.includes("sábio") ||
+        text.includes("rei das pistas") ||
+        text.includes("esparta")
+    ) {
+        return "mafia";
+    }
+
+    // Vingança / Retorno / Traição
+    if (
+        text.includes("vinganca") ||
+        text.includes("vingança") ||
+        text.includes("retorno") ||
+        text.includes("renasc") ||
+        text.includes("traid") ||
+        text.includes("traicao") ||
+        text.includes("traição") ||
+        text.includes("arrependid") ||
+        text.includes("humilhad") ||
+        text.includes("implacavel") ||
+        text.includes("odio") ||
+        text.includes("ódio") ||
+        text.includes("inimig")
+    ) {
+        return "vinganca";
+    }
+
+    return "romance";
+}
+
+function getDramaScore(drama: Drama): number {
+    const epCount = drama.episodes?.length || drama.totalEpisodes || 0;
+    const views = drama.viewsCount || 0;
+    const isFeaturedBonus = drama.isFeatured ? 4000 : 0;
+    // Multi-episódios ganham peso para dominar o topo e maximizar retenção
+    return (epCount * 1200) + views + isFeaturedBonus;
+}
+
 function detectLanguageTag(drama: Drama): "Dublado" | "Legendado" | "Brasileira" {
     const combined = semAcento(`${drama.title} ${drama.category} ${drama.tags || ""}`);
     if (combined.includes("brasileir") || combined.includes("nacional")) return "Brasileira";
@@ -79,11 +174,15 @@ function detectLanguageTag(drama: Drama): "Dublado" | "Legendado" | "Brasileira"
 
 function matchesFilterCategory(drama: Drama, filter: string): boolean {
     if (filter === "todos") return true;
-    const combined = semAcento(`${drama.title} ${drama.category} ${drama.tags || ""}`);
     if (filter === "dublado") return detectLanguageTag(drama) === "Dublado";
     if (filter === "legendado") return detectLanguageTag(drama) === "Legendado";
-    if (filter === "brasileiro") return detectLanguageTag(drama) === "Brasileira" || combined.includes("brasileir");
-    if (filter === "lgbt") return combined.includes("lgbt") || combined.includes("bl") || combined.includes("gl");
+    if (filter === "brasileiro") return detectLanguageTag(drama) === "Brasileira" || semAcento(drama.title + drama.category).includes("brasileir");
+    if (filter === "alfa") return detectDramaGenre(drama) === "alfa";
+    if (filter === "bilionario") return detectDramaGenre(drama) === "bilionario";
+    if (filter === "mafia") return detectDramaGenre(drama) === "mafia";
+    if (filter === "vinganca") return detectDramaGenre(drama) === "vinganca";
+    if (filter === "romance") return detectDramaGenre(drama) === "romance";
+    if (filter === "lgbt") return detectDramaGenre(drama) === "lgbt";
     return semAcento(drama.category) === semAcento(filter);
 }
 
@@ -285,11 +384,14 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
         dramas
     ]);
 
-    const featuredDramas = useMemo(() => {
-        const list = dramas.filter((d) => d.isFeatured);
-        const base = list.length > 0 ? list : dramas;
-        return base.slice(0, 5);
+    // Ordena o catálogo priorizando séries de alta retenção (mais episódios, mais visualizações e pôsteres marcantes)
+    const sortedDramas = useMemo(() => {
+        return [...dramas].sort((a, b) => getDramaScore(b) - getDramaScore(a));
     }, [dramas]);
+
+    const featuredDramas = useMemo(() => {
+        return sortedDramas.slice(0, 7);
+    }, [sortedDramas]);
 
     // Carrossel automático de 5 segundos igual ao topdoramax.pro/catalogo
     useEffect(() => {
@@ -339,61 +441,58 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
     };
 
     const filteredCatalog = useMemo(() => {
-        return dramas.filter((d) => matchesFilterCategory(d, activeCategory));
-    }, [dramas, activeCategory]);
+        return sortedDramas.filter((d) => matchesFilterCategory(d, activeCategory));
+    }, [sortedDramas, activeCategory]);
 
     const searchResults = useMemo(() => {
         const q = semAcento(searchQuery);
         if (!q) return [];
-        return dramas.filter(
+        return sortedDramas.filter(
             (d) =>
                 semAcento(d.title).includes(q) ||
                 semAcento(d.category).includes(q) ||
                 semAcento(d.synopsis).includes(q) ||
                 semAcento(d.tags || "").includes(q)
         );
-    }, [dramas, searchQuery]);
+    }, [sortedDramas, searchQuery]);
 
     const top10Dramas = useMemo(() => {
-        const tend = dramas.filter((d) => (d.tags || "").includes("tendencias") || d.isFeatured);
-        const base = tend.length >= 4 ? tend : dramas;
-        return base.slice(0, 10);
-    }, [dramas]);
+        return sortedDramas.slice(0, 10);
+    }, [sortedDramas]);
 
     const bombandoDramas = useMemo(
-        () => {
-            const list = dramas.filter((d) => (d.tags || "").includes("bombando"));
-            return list.length > 0 ? list : dramas.slice(0, 8);
-        },
-        [dramas]
+        () => sortedDramas.slice(10, 26),
+        [sortedDramas]
     );
 
-    const emAltaDramas = useMemo(
-        () => {
-            const list = dramas.filter((d) => (d.tags || "").includes("em_alta"));
-            return list.length > 0 ? list : dramas.slice(4, 12);
-        },
-        [dramas]
+    const alfasDramas = useMemo(
+        () => sortedDramas.filter((d) => detectDramaGenre(d) === "alfa"),
+        [sortedDramas]
     );
 
-    const dubladosDramas = useMemo(
-        () => dramas.filter((d) => detectLanguageTag(d) === "Dublado"),
-        [dramas]
+    const bilionariosDramas = useMemo(
+        () => sortedDramas.filter((d) => detectDramaGenre(d) === "bilionario"),
+        [sortedDramas]
     );
 
-    const legendadosDramas = useMemo(
-        () => dramas.filter((d) => detectLanguageTag(d) === "Legendado"),
-        [dramas]
+    const mafiaDramas = useMemo(
+        () => sortedDramas.filter((d) => detectDramaGenre(d) === "mafia"),
+        [sortedDramas]
+    );
+
+    const vingancaDramas = useMemo(
+        () => sortedDramas.filter((d) => detectDramaGenre(d) === "vinganca"),
+        [sortedDramas]
+    );
+
+    const romanceDramas = useMemo(
+        () => sortedDramas.filter((d) => detectDramaGenre(d) === "romance"),
+        [sortedDramas]
     );
 
     const lgbtDramas = useMemo(
-        () => dramas.filter((d) => matchesFilterCategory(d, "lgbt")),
-        [dramas]
-    );
-
-    const brasileirasDramas = useMemo(
-        () => dramas.filter((d) => matchesFilterCategory(d, "brasileiro")),
-        [dramas]
+        () => sortedDramas.filter((d) => detectDramaGenre(d) === "lgbt"),
+        [sortedDramas]
     );
 
     const annualPlan = plans.find((p) => p.key === "annual") || DEFAULT_OFFER_PLANS[1];
@@ -575,11 +674,14 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                     className="flex gap-2 overflow-x-auto no-scrollbar px-4 sm:px-10 pb-1"
                 >
                     {[
-                        { id: "todos", label: "Todos" },
-                        { id: "dublado", label: "Dublados" },
-                        { id: "legendado", label: "Legendados" },
-                        { id: "brasileiro", label: "Brasileiros" },
-                        { id: "lgbt", label: "LGBT" }
+                        { id: "todos", label: "🔥 Todos" },
+                        { id: "bilionario", label: "💎 Bilionários" },
+                        { id: "alfa", label: "🐺 Alfas & Lobos" },
+                        { id: "mafia", label: "🕶️ Máfia" },
+                        { id: "vinganca", label: "⚔️ Vingança" },
+                        { id: "romance", label: "❤️ Romance" },
+                        { id: "lgbt", label: "🌈 LGBT (BL)" },
+                        { id: "dublado", label: "Dublados" }
                     ].map((cat) => {
                         const active = activeCategory === cat.id;
                         return (
@@ -851,36 +953,25 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                 {/* 4. FILEIRAS HORIZONTAIS (.faixa) IDÊNTICAS AO TOPDORAMAX */}
                 {activeCategory === "todos" && searchQuery.trim() === "" && dramas.length > 0 && (
                     <div id="principal" className="mt-4 space-y-5">
-                        {/* Fileira 1: Do anúncio */}
+                        {/* Fileira 1: Mais Assistidas (Prioridade de episódios e views) */}
                         <HorizontalRowSection
-                            title="Do anúncio"
-                            items={dramas}
+                            title="🔥 Mais Assistidas"
+                            items={sortedDramas}
                             isVip={isVip}
                             onSelect={handleSelectDrama}
                             onExpand={() =>
-                                setExpandedRow({ title: "Do anúncio", items: dramas })
+                                setExpandedRow({ title: "🔥 Mais Assistidas", items: sortedDramas })
                             }
                         />
 
-                        {/* Fileira 2: Bombando */}
+                        {/* Fileira 2: Bombando Agora */}
                         <HorizontalRowSection
-                            title="Bombando"
+                            title="⚡ Bombando Agora"
                             items={bombandoDramas}
                             isVip={isVip}
                             onSelect={handleSelectDrama}
                             onExpand={() =>
-                                setExpandedRow({ title: "Bombando", items: bombandoDramas })
-                            }
-                        />
-
-                        {/* Fileira 3: Em Alta Agora */}
-                        <HorizontalRowSection
-                            title="Em Alta Agora"
-                            items={emAltaDramas}
-                            isVip={isVip}
-                            onSelect={handleSelectDrama}
-                            onExpand={() =>
-                                setExpandedRow({ title: "Em Alta Agora", items: emAltaDramas })
+                                setExpandedRow({ title: "⚡ Bombando Agora", items: bombandoDramas })
                             }
                         />
 
@@ -945,63 +1036,95 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                             </section>
                         )}
 
-                        {/* Fileira 5: Dublados em português */}
-                        {dubladosDramas.length > 0 && (
+                        {/* Fileira 4: Alfas, Lobos & Fantasia */}
+                        {alfasDramas.length > 0 && (
                             <HorizontalRowSection
-                                title="Dublados em português"
-                                items={dubladosDramas}
+                                title="🐺 Alfas, Lobos & Fantasia"
+                                items={alfasDramas}
                                 isVip={isVip}
                                 onSelect={handleSelectDrama}
                                 onExpand={() =>
                                     setExpandedRow({
-                                        title: "Dublados em português",
-                                        items: dubladosDramas
+                                        title: "🐺 Alfas, Lobos & Fantasia",
+                                        items: alfasDramas
                                     })
                                 }
                             />
                         )}
 
-                        {/* Fileira 6: Legendados */}
-                        {legendadosDramas.length > 0 && (
+                        {/* Fileira 5: Bilionários & CEOs */}
+                        {bilionariosDramas.length > 0 && (
                             <HorizontalRowSection
-                                title="Legendados"
-                                items={legendadosDramas}
+                                title="💎 Bilionários & Casamentos de Contrato"
+                                items={bilionariosDramas}
                                 isVip={isVip}
                                 onSelect={handleSelectDrama}
                                 onExpand={() =>
                                     setExpandedRow({
-                                        title: "Legendados",
-                                        items: legendadosDramas
+                                        title: "💎 Bilionários & Casamentos de Contrato",
+                                        items: bilionariosDramas
                                     })
                                 }
                             />
                         )}
 
-                        {/* Fileira 7: LGBT */}
+                        {/* Fileira 6: Máfia & Protetores */}
+                        {mafiaDramas.length > 0 && (
+                            <HorizontalRowSection
+                                title="🕶️ Máfia & Protetores"
+                                items={mafiaDramas}
+                                isVip={isVip}
+                                onSelect={handleSelectDrama}
+                                onExpand={() =>
+                                    setExpandedRow({
+                                        title: "🕶️ Máfia & Protetores",
+                                        items: mafiaDramas
+                                    })
+                                }
+                            />
+                        )}
+
+                        {/* Fileira 7: Vingança & Reviravolta */}
+                        {vingancaDramas.length > 0 && (
+                            <HorizontalRowSection
+                                title="⚔️ Vingança & Reviravolta"
+                                items={vingancaDramas}
+                                isVip={isVip}
+                                onSelect={handleSelectDrama}
+                                onExpand={() =>
+                                    setExpandedRow({
+                                        title: "⚔️ Vingança & Reviravolta",
+                                        items: vingancaDramas
+                                    })
+                                }
+                            />
+                        )}
+
+                        {/* Fileira 8: Romances & Paixões */}
+                        {romanceDramas.length > 0 && (
+                            <HorizontalRowSection
+                                title="❤️ Romances & Paixões"
+                                items={romanceDramas}
+                                isVip={isVip}
+                                onSelect={handleSelectDrama}
+                                onExpand={() =>
+                                    setExpandedRow({
+                                        title: "❤️ Romances & Paixões",
+                                        items: romanceDramas
+                                    })
+                                }
+                            />
+                        )}
+
+                        {/* Fileira 9: LGBT (BL & GL) */}
                         {lgbtDramas.length > 0 && (
                             <HorizontalRowSection
-                                title="LGBT"
+                                title="🌈 LGBT (BL & GL)"
                                 items={lgbtDramas}
                                 isVip={isVip}
                                 onSelect={handleSelectDrama}
                                 onExpand={() =>
-                                    setExpandedRow({ title: "LGBT", items: lgbtDramas })
-                                }
-                            />
-                        )}
-
-                        {/* Fileira 8: Brasileiras */}
-                        {brasileirasDramas.length > 0 && (
-                            <HorizontalRowSection
-                                title="Brasileiras"
-                                items={brasileirasDramas}
-                                isVip={isVip}
-                                onSelect={handleSelectDrama}
-                                onExpand={() =>
-                                    setExpandedRow({
-                                        title: "Brasileiras",
-                                        items: brasileirasDramas
-                                    })
+                                    setExpandedRow({ title: "🌈 LGBT (BL & GL)", items: lgbtDramas })
                                 }
                             />
                         )}
@@ -1659,6 +1782,7 @@ function CatalogPosterCard({
     onSelect: (drama: Drama) => void;
 }) {
     const langTag = detectLanguageTag(drama);
+    const epCount = drama.episodes?.length || drama.totalEpisodes || 1;
     return (
         <button
             type="button"
@@ -1672,10 +1796,10 @@ function CatalogPosterCard({
                 decoding="async"
                 className="absolute inset-0 w-full h-full object-cover"
             />
-            <div className="absolute inset-x-0 top-[68%] bottom-0 bg-gradient-to-t from-black/75 to-transparent pointer-events-none" />
+            <div className="absolute inset-x-0 top-[60%] bottom-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent pointer-events-none" />
 
             {isVip && (
-                <span className="absolute top-1.5 right-1.5 z-20 px-1.5 py-0.5 rounded bg-[#22b868] text-black text-[8px] font-extrabold uppercase">
+                <span className="absolute top-1.5 right-1.5 z-20 px-1.5 py-0.5 rounded bg-[#22b868] text-black text-[8px] font-extrabold uppercase shadow-sm">
                     Liberado
                 </span>
             )}
@@ -1689,9 +1813,21 @@ function CatalogPosterCard({
                 </span>
             </div>
 
-            <span className="absolute left-1.5 bottom-1.5 z-20 px-1.5 py-0.5 rounded-full bg-black/75 backdrop-blur-sm text-white text-[8.5px] font-extrabold uppercase tracking-[0.04em]">
-                {langTag}
-            </span>
+            {/* Título legível no mobile */}
+            <div className="sm:hidden absolute inset-x-0 bottom-6 z-15 px-1.5">
+                <p className="text-[10px] font-bold text-white line-clamp-1 leading-tight drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
+                    {drama.title}
+                </p>
+            </div>
+
+            <div className="absolute left-1.5 right-1.5 bottom-1.5 z-20 flex items-center justify-between pointer-events-none">
+                <span className="px-1.5 py-0.5 rounded-full bg-black/75 backdrop-blur-sm text-white text-[8px] font-extrabold uppercase tracking-[0.04em]">
+                    {langTag}
+                </span>
+                <span className="px-1.5 py-0.5 rounded-full bg-black/80 border border-white/10 backdrop-blur-sm text-white/90 text-[8px] font-bold">
+                    {epCount} eps
+                </span>
+            </div>
         </button>
     );
 }
