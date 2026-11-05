@@ -531,6 +531,17 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
         setVipModalOpen(true);
     };
 
+    const handleRedirectWhatsapp = () => {
+        if (whatsappNumber) {
+            const cleanNumber = whatsappNumber.replace(/\D/g, "");
+            const url = `https://wa.me/${cleanNumber}?text=${encodeURIComponent("Olá! Vim pelo TvDrama Reels e quero liberar meu acesso VIP.")}`;
+            window.open(url, "_blank");
+        } else {
+            setVipModalTab("pix");
+            setVipModalOpen(true);
+        }
+    };
+
     if (isRedirectingToWhatsapp) {
         return (
             <div className="min-h-dvh bg-black text-[#f5f5f5] flex flex-col items-center justify-center p-6 text-center">

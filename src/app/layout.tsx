@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Inter_Tight, Sora } from "next/font/google";
+import { Geist, Geist_Mono, Inter_Tight } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/providers";
 import { TopLoader } from "@/components/ui/top-loader";
@@ -18,12 +18,6 @@ const geistMono = Geist_Mono({
 const interTight = Inter_Tight({
   variable: "--font-inter-tight",
   subsets: ["latin"],
-});
-
-const sora = Sora({
-  variable: "--font-sora",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
 });
 
 const APP_DESCRIPTION = "Novelas verticais, romances proibidos e séries curtas em alta definição feitas para assistir no celular.";
@@ -116,7 +110,7 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${interTight.variable} ${sora.variable} font-sans antialiased text-[#f5f5f5] bg-[#0c0d0e] min-h-screen flex flex-col`}
+        className={`${geistSans.variable} ${geistMono.variable} ${interTight.variable} font-sans antialiased text-[#f5f5f5] bg-[#0c0d0e] min-h-screen flex flex-col`}
         suppressHydrationWarning
       >
         <Providers>
