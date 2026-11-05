@@ -29,7 +29,24 @@ export async function processFunnelIncomingMessage(
         const config = await ensureFunnelConfig();
         if (!config.enabled) return false;
 
-        // Auto-vincula a sessão atual que recebeu a mensagem para garantir resposta sempre
+        const currentSession = await prisma.session.findUnique({
+            where: { sessionId },
+            select: { name: true }
+        });
+
+        const sessionNameLower = (currentSession?.name || "").toLowerCase();
+        const isTvDramaSession =
+            sessionNameLower.includes("tvdrama") ||
+            sessionNameLower.includes("dorama") ||
+            sessionNameLower.includes("segredos") ||
+            sessionId === config.sessionId;
+
+        // Se houver mais de uma sessão ativa na VPS, o funil responde apenas na sessão do TvDrama Reels
+        if (!isTvDramaSession) {
+            return false;
+        }
+
+        // Auto-vincula a sessão do TvDrama Reels para garantir resposta sempre
         if (config.sessionId !== sessionId) {
             await prisma.funnelConfig.update({
                 where: { id: "default" },

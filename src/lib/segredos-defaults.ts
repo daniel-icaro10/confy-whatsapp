@@ -479,6 +479,22 @@ export async function ensureFunnelConfig() {
             });
         }
 
+        // Sincroniza a sessão ativa do TvDrama Reels caso o sessionId atual esteja desconectado
+        const connectedSessions = await prisma.session.findMany({
+            where: { status: "CONNECTED" }
+        });
+        const tvDramaSession = connectedSessions.find(s =>
+            (s.name || "").toLowerCase().includes("tvdrama") ||
+            (s.name || "").toLowerCase().includes("dorama")
+        );
+
+        if (tvDramaSession && config.sessionId !== tvDramaSession.sessionId) {
+            config = await prisma.funnelConfig.update({
+                where: { id: "default" },
+                data: { sessionId: tvDramaSession.sessionId }
+            });
+        }
+
         return config;
     } catch {
         return DEFAULT_FUNNEL_CONFIG;
