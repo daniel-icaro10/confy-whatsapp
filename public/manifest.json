@@ -11,9 +11,9 @@
   "lang": "pt-BR",
   "icons": [
     {
-      "src": "/icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "/icon.png",
+      "sizes": "192x192 512x512 any",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ]
