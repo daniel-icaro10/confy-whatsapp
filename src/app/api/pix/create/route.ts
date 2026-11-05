@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createMangofyPixCharge } from "@/lib/mangofy";
-import { normalizeBrPhone } from "@/lib/segredos-defaults";
+import { createStripePixCharge } from "@/lib/stripe";
+import { ensureFunnelConfig, normalizeBrPhone } from "@/lib/segredos-defaults";
 
 export async function POST(request: Request) {
     try {
@@ -14,13 +15,24 @@ export async function POST(request: Request) {
             );
         }
 
-        const charge = await createMangofyPixCharge({
-            phone: cleanPhone,
-            customerName: body.name || "Assinante Site",
-            customerCpf: body.cpf || undefined,
-            dramaId: body.dramaId || undefined,
-            planKey: body.planKey || "monthly"
-        });
+        const config = await ensureFunnelConfig();
+        const useStripe = Boolean((config as any).stripeSecretKey?.trim()) || !Boolean(config.mangofyApiKey?.trim());
+
+        const charge = useStripe
+            ? await createStripePixCharge({
+                phone: cleanPhone,
+                customerName: body.name || "Assinante Site",
+                customerCpf: body.cpf || undefined,
+                dramaId: body.dramaId || undefined,
+                planKey: body.planKey || "monthly"
+            })
+            : await createMangofyPixCharge({
+                phone: cleanPhone,
+                customerName: body.name || "Assinante Site",
+                customerCpf: body.cpf || undefined,
+                dramaId: body.dramaId || undefined,
+                planKey: body.planKey || "monthly"
+            });
 
         return NextResponse.json({
             orderId: charge.orderId,

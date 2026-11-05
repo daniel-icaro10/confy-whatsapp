@@ -763,7 +763,7 @@ export default function AdminFunilPage() {
                         <div className="p-4 rounded-xl bg-[#0a0a0d] border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                             <div className="text-xs">
                                 <span className="text-neutral-400 block mb-0.5">
-                                    URL de Webhook da Stripe (evento <code className="text-sky-300">checkout.session.completed</code>):
+                                    URL de Webhook da Stripe (eventos <code className="text-sky-300">checkout.session.completed</code>, <code className="text-sky-300">payment_intent.succeeded</code> e <code className="text-sky-300">checkout.session.async_payment_succeeded</code>):
                                 </span>
                                 <div className="font-mono text-sky-400 font-semibold select-all">
                                     {stripeWebhookUrl}

@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { ensureFunnelConfig, getOfferPlans, normalizeBrPhone, OfferPlan } from "@/lib/segredos-defaults";
 import { approvePixOrderAndGrantAccess } from "@/lib/mangofy";
+import { logger } from "@/lib/logger";
 import crypto from "crypto";
 
 export interface CreateStripeCheckoutInput {
@@ -9,6 +10,142 @@ export interface CreateStripeCheckoutInput {
     customerEmail?: string;
     planKey: "monthly" | "quarterly" | "annual";
     dramaId?: string;
+    mode?: "subscription" | "payment";
+}
+
+export interface CreateStripePixInput {
+    phone: string;
+    jid?: string;
+    sessionId?: string;
+    customerName?: string;
+    customerEmail?: string;
+    customAmount?: number;
+    planKey?: "monthly" | "quarterly" | "annual";
+    dramaId?: string;
+}
+
+/**
+ * Cria cobrança Pix nativa diretamente pela Stripe via PaymentIntent
+ * Devolve o código Copia e Cola (EMV payload) para envio no WhatsApp
+ */
+export async function createStripePixCharge(input: CreateStripePixInput) {
+    const config = await ensureFunnelConfig();
+    const cleanPhone = normalizeBrPhone(input.phone);
+    if (!cleanPhone || cleanPhone.length < 10) {
+        throw new Error("Telefone inválido para geração de Pix");
+    }
+
+    const plans = getOfferPlans(config);
+    const selectedPlan = plans.find((p) => p.key === input.planKey);
+    const amount = typeof input.customAmount === "number" && input.customAmount > 0
+        ? input.customAmount
+        : (selectedPlan ? selectedPlan.price : config.planPrice || 19.90);
+
+    const planTitle = selectedPlan ? `${selectedPlan.name} — TvDrama Reels` : config.planName || "Acesso 30 Dias — TvDrama Reels";
+    const amountCents = Math.round(amount * 100);
+
+    const customerName = input.customerName?.trim() || "Cliente TvDrama Reels";
+    const customerEmail = input.customerEmail?.trim() || `${cleanPhone}@tvdramareels.com`;
+
+    const stripeKey = (config as any).stripeSecretKey?.trim() || process.env.STRIPE_SECRET_KEY?.trim() || "";
+
+    if (!stripeKey) {
+        logger.warn("Stripe", "Aviso: Stripe sem chave secreta. Gerando cobrança Pix de teste para simulação.");
+        const simulatedExternalId = `stripe_sim_${Date.now()}`;
+        const simulatedCopyPaste = `00020126580014br.gov.bcb.pix0136${cleanPhone}520400005303986540${amount.toFixed(2)}5802BR5913TvDrama Reels6009Sao Paulo62070503***6304ABCD`;
+
+        const order = await prisma.pixOrder.create({
+            data: {
+                externalId: simulatedExternalId,
+                phone: cleanPhone,
+                jid: input.jid || `${cleanPhone}@s.whatsapp.net`,
+                sessionId: input.sessionId || config.sessionId || null,
+                customerName,
+                customerEmail,
+                planName: planTitle,
+                amount,
+                status: "PENDING",
+                pixCopyPaste: simulatedCopyPaste,
+                pixQrCodeBase64: null,
+                dramaId: input.dramaId || null
+            }
+        });
+
+        return {
+            orderId: order.id,
+            externalId: simulatedExternalId,
+            amount,
+            planName: planTitle,
+            pixCopyPaste: simulatedCopyPaste,
+            pixQrCodeBase64: null,
+            hostedInstructionsUrl: null,
+            isSimulated: true
+        };
+    }
+
+    // Criar PaymentIntent oficial da Stripe para Pix
+    const form = new URLSearchParams();
+    form.append("amount", String(amountCents));
+    form.append("currency", "brl");
+    form.append("payment_method_types[0]", "pix");
+    form.append("payment_method_data[type]", "pix");
+    form.append("confirm", "true");
+    form.append("payment_method_options[pix][expires_after_seconds]", "86400"); // 24 horas de validade
+    form.append("receipt_email", customerEmail);
+    form.append("description", `Assinatura TvDrama Reels - ${planTitle}`);
+    form.append("metadata[phone]", cleanPhone);
+    form.append("metadata[customerName]", customerName);
+    form.append("metadata[planName]", planTitle);
+    form.append("metadata[durationDays]", "30");
+    form.append("metadata[dramaId]", input.dramaId || "");
+
+    const res = await fetch("https://api.stripe.com/v1/payment_intents", {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${stripeKey}`,
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: form.toString()
+    });
+
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || !data?.id) {
+        logger.error("Stripe", "Erro ao criar PaymentIntent Pix:", data?.error?.message || res.statusText);
+        throw new Error(data?.error?.message || `Erro ao gerar Pix na Stripe (HTTP ${res.status})`);
+    }
+
+    const pixAction = data?.next_action?.pix_display_qr_code;
+    const pixCopyPaste = pixAction?.data || "";
+    const hostedInstructionsUrl = pixAction?.hosted_instructions_url || null;
+    const qrCodeUrl = pixAction?.image_url_png || pixAction?.image_url_svg || null;
+
+    const order = await prisma.pixOrder.create({
+        data: {
+            externalId: data.id,
+            phone: cleanPhone,
+            jid: input.jid || `${cleanPhone}@s.whatsapp.net`,
+            sessionId: input.sessionId || config.sessionId || null,
+            customerName,
+            customerEmail,
+            planName: planTitle,
+            amount,
+            status: "PENDING",
+            pixCopyPaste: pixCopyPaste || `pix_${data.id}`,
+            pixQrCodeBase64: qrCodeUrl || hostedInstructionsUrl,
+            dramaId: input.dramaId || null
+        }
+    });
+
+    return {
+        orderId: order.id,
+        externalId: data.id,
+        amount,
+        planName: planTitle,
+        pixCopyPaste,
+        pixQrCodeBase64: qrCodeUrl,
+        hostedInstructionsUrl,
+        isSimulated: false
+    };
 }
 
 export async function createStripeCheckoutSession(input: CreateStripeCheckoutInput) {
@@ -62,13 +199,21 @@ export async function createStripeCheckoutSession(input: CreateStripeCheckoutInp
         ? `${baseSiteUrl}/assistir/${encodeURIComponent(input.dramaId)}`
         : `${baseSiteUrl}/`;
 
+    const isPayment = input.mode === "payment";
+    const checkoutMode = isPayment ? "payment" : "subscription";
+
     const form = new URLSearchParams();
-    form.append("mode", "subscription");
+    form.append("mode", checkoutMode);
     form.append("success_url", successUrl);
     form.append("cancel_url", cancelUrl);
     form.append("client_reference_id", cleanPhone);
     form.append("customer_email", customerEmail);
     form.append("allow_promotion_codes", "true");
+
+    if (isPayment) {
+        form.append("payment_method_types[0]", "card");
+        form.append("payment_method_types[1]", "pix");
+    }
 
     if (plan.stripePriceId?.trim()) {
         form.append("line_items[0][price]", plan.stripePriceId.trim());
@@ -81,8 +226,10 @@ export async function createStripeCheckoutSession(input: CreateStripeCheckoutInp
             "line_items[0][price_data][product_data][description]",
             `${plan.subtitle} (${plan.badge})`
         );
-        form.append("line_items[0][price_data][recurring][interval]", plan.interval);
-        form.append("line_items[0][price_data][recurring][interval_count]", String(plan.intervalCount));
+        if (!isPayment) {
+            form.append("line_items[0][price_data][recurring][interval]", plan.interval);
+            form.append("line_items[0][price_data][recurring][interval_count]", String(plan.intervalCount));
+        }
         form.append("line_items[0][quantity]", "1");
     }
 

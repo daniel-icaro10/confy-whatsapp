@@ -22,16 +22,20 @@ export async function POST(request: Request) {
         const type = event?.type;
         const obj = event?.data?.object;
 
-        if (type === "checkout.session.completed" || type === "checkout.session.async_payment_succeeded") {
-            const sessionId = obj?.id;
+        if (
+            type === "checkout.session.completed" ||
+            type === "checkout.session.async_payment_succeeded" ||
+            type === "payment_intent.succeeded"
+        ) {
+            const externalId = obj?.id;
             const durationDays = Number(obj?.metadata?.durationDays || 30);
             const phone = normalizeBrPhone(obj?.metadata?.phone || obj?.client_reference_id || "");
             const planName = obj?.metadata?.planName || "Assinatura TvDrama Reels";
 
-            if (sessionId) {
+            if (externalId) {
                 try {
                     await approvePixOrderAndGrantAccess({
-                        externalId: sessionId,
+                        externalId,
                         durationDays
                     });
                 } catch {
@@ -41,8 +45,8 @@ export async function POST(request: Request) {
                             where: { phone },
                             create: {
                                 phone,
-                                name: obj?.customer_details?.name || "Assinante Stripe",
-                                email: obj?.customer_details?.email || null,
+                                name: obj?.customer_details?.name || obj?.metadata?.customerName || "Assinante Stripe",
+                                email: obj?.customer_details?.email || obj?.receipt_email || null,
                                 planName,
                                 isVip: true,
                                 expiresAt

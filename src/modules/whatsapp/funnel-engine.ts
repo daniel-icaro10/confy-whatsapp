@@ -2,6 +2,7 @@ import type { WASocket, WAMessage } from "@whiskeysockets/baileys";
 import { prisma } from "@/lib/prisma";
 import { ensureFunnelConfig, normalizeBrPhone, getPhoneVariants } from "@/lib/segredos-defaults";
 import { createMangofyPixCharge } from "@/lib/mangofy";
+import { createStripePixCharge, createStripeCheckoutSession } from "@/lib/stripe";
 import { logger } from "@/lib/logger";
 
 const greetedLeads = new Map<string, number>();
@@ -124,17 +125,28 @@ export async function processFunnelIncomingMessage(
                 await sock.sendPresenceUpdate("composing", remoteJid);
             } catch {}
 
-            const charge = await createMangofyPixCharge({
-                phone: cleanPhone,
-                jid: remoteJid,
-                sessionId,
-                customerName: pushName || "Cliente",
-                customAmount: selectedPrice,
-                planKey: "monthly"
-            });
+            const isStripePreferred = Boolean((config as any).stripeSecretKey?.trim()) || !Boolean(config.mangofyApiKey?.trim());
+
+            const charge = isStripePreferred
+                ? await createStripePixCharge({
+                    phone: cleanPhone,
+                    jid: remoteJid,
+                    sessionId,
+                    customerName: pushName || "Cliente",
+                    customAmount: selectedPrice,
+                    planKey: isOption1 ? "monthly" : "quarterly"
+                })
+                : await createMangofyPixCharge({
+                    phone: cleanPhone,
+                    jid: remoteJid,
+                    sessionId,
+                    customerName: pushName || "Cliente",
+                    customAmount: selectedPrice,
+                    planKey: isOption1 ? "monthly" : "quarterly"
+                });
 
             const valorTxt = selectedPrice.toFixed(2).replace(".", ",");
-            const pixText = `${selectedHeader}\n\nAqui está a sua chave Pix Copia e Cola no valor de *R$ ${valorTxt}*:\n\n${charge.pixCopyPaste}\n\n📱 *Como pagar:*\n1. Copie o código acima\n2. Abra o app do seu banco e escolha *Pix Copia e Cola*\n3. Cole e confirme o pagamento\n\n⚡ *Acesso liberado*: Assim que pagar, o acesso chega aqui no seu WhatsApp na hora!`;
+            const pixText = `${selectedHeader}\n\nAqui está a sua chave Pix Copia e Cola no valor de *R$ ${valorTxt}*:\n\n${charge.pixCopyPaste}\n\n📱 *Como pagar:*\n1. Copie o código acima\n2. Abra o app do seu banco e escolha *Pix Copia e Cola*\n3. Cole e confirme o pagamento\n\n⚡ *Acesso liberado*: Assim que pagar, o acesso chega aqui no seu WhatsApp na hora!\n\n💳 _Se preferir pagar no Cartão de Crédito, basta responder *cartão*._`;
 
             await sock.sendMessage(remoteJid, { text: pixText }, rawMsg ? { quoted: rawMsg } : undefined);
 
@@ -144,6 +156,40 @@ export async function processFunnelIncomingMessage(
             }
 
             return true;
+        }
+
+        // 3.1 Detecta se o cliente pediu para pagar no cartão de crédito
+        const isCardRequest = [
+            "cartao",
+            "cartão",
+            "credito",
+            "crédito",
+            "link do cartao",
+            "link do cartão",
+            "link de cartao",
+            "link de cartão",
+            "parcelar",
+            "aceita cartao",
+            "aceita cartão",
+            "paga no cartao",
+            "paga no cartão"
+        ].some((k) => incomingLower.includes(k));
+
+        if (isCardRequest) {
+            try {
+                await sock.sendPresenceUpdate("composing", remoteJid);
+                const checkout = await createStripeCheckoutSession({
+                    phone: cleanPhone,
+                    customerName: pushName || "Cliente",
+                    planKey: "monthly",
+                    mode: "subscription"
+                });
+                const cardMsg = `💳 Sim! Aceitamos Cartão de Crédito com liberação imediata.\n\nClique no link seguro da Stripe abaixo para assinar no cartão:\n👉 ${checkout.checkoutUrl}\n\n✅ Assim que a operadora aprovar, seu acesso chega aqui no WhatsApp na hora!`;
+                await sock.sendMessage(remoteJid, { text: cardMsg });
+                return true;
+            } catch (err: any) {
+                logger.error("Funnel", "Erro ao gerar link de cartão Stripe:", err?.message);
+            }
         }
 
         // 4. Se enviou "pix" ou "quero" sem dizer 1 ou 2, orienta sobre as duas opções
