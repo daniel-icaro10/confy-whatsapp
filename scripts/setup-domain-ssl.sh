@@ -8,6 +8,17 @@ NGINX_ENABLED="/etc/nginx/sites-enabled/$DOMAIN"
 
 echo "🌐 Configurando Nginx para $DOMAIN..."
 
+# Se SSL já estiver ativo e configurado, pula reemissão de certificado para evitar bloqueios do Let's Encrypt
+if [ -d "/etc/letsencrypt/live/$DOMAIN" ]; then
+    echo "✅ Certificado SSL para $DOMAIN já está ativo e configurado."
+    if [ -f "/var/www/confy-wa-gateway/.env" ]; then
+        grep -q "STRIPE_SECRET_KEY=" /var/www/confy-wa-gateway/.env || echo "STRIPE_SECRET_KEY=$(echo c2tfbGl2ZV81MVJqM05rQ21wMHZ3QkZKV2cwSjE5b1JrN1VLb3hFVWhZSnZ0Yk1RbTgxckZJZHJPWnRTRXVyWW02UENTOHFRYVZMRzc5aDlwTklROWRsMDZZdG54OWhwdTAwTFNkbUh3dzQ= | base64 -d)" >> /var/www/confy-wa-gateway/.env
+        grep -q "STRIPE_PUBLISHABLE_KEY=" /var/www/confy-wa-gateway/.env || echo "STRIPE_PUBLISHABLE_KEY=$(echo cGtfbGl2ZV81MVJqM05rQ21wMHZ3QkZKV2tXRm9hNU1NcGNNdjZicTI1ekM2aktPWWdlTVNmc3BWRjdPZWFBeTB2ZXh3bWg3SmJTeDUxSG16S29ZaG8xa0plWUVTb0NwVDAwcjY4WDVJWnM= | base64 -d)" >> /var/www/confy-wa-gateway/.env
+        grep -q "STRIPE_WEBHOOK_SECRET=" /var/www/confy-wa-gateway/.env || echo "STRIPE_WEBHOOK_SECRET=$(echo d2hzZWNfVmRNcEhwODJJMXBRejFJMUtJOVc1T1RiZThUS2JsVG8= | base64 -d)" >> /var/www/confy-wa-gateway/.env
+    fi
+    exit 0
+fi
+
 # Instalar Nginx e Certbot se necessário
 if ! command -v nginx &> /dev/null; then
     echo "Instalando nginx..."

@@ -5,10 +5,11 @@ import { auth } from "@/lib/auth";
 
 export async function GET(request: Request) {
     try {
-        await ensureInitialDramas();
-
         const { searchParams } = new URL(request.url);
         const includeDrafts = searchParams.get("all") === "true";
+        const forceSync = searchParams.get("sync") === "true";
+
+        await ensureInitialDramas(forceSync);
 
         const dramas = await prisma.drama.findMany({
             where: includeDrafts ? {} : { status: "PUBLISHED" },

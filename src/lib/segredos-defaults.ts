@@ -503,8 +503,8 @@ export async function ensureFunnelConfig() {
 
 let dramasEnsured = false;
 
-export async function ensureInitialDramas() {
-    if (dramasEnsured) return;
+export async function ensureInitialDramas(force: boolean = false) {
+    if (dramasEnsured && !force) return;
     try {
         await prisma.drama.deleteMany({
             where: {
