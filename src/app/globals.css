@@ -5,6 +5,28 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ============================================================
+   YESTV.AI / STREAMING MOBILE DESIGN TOKENS
+   ============================================================ */
+:root {
+  --font-sora: 'Sora', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --mobile-nav-height: 64px;
+}
+
+.grad-gold {
+  background: linear-gradient(135deg, #ffd363 0%, #ffb830 50%, #ff9800 100%);
+  color: #0b0c0e;
+}
+
+.grad-yestv-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(18, 19, 23, 0.96) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.safe-area-pb {
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+}
+
+/* ============================================================
    QUIRE / GR8R STUDIO — DESIGN TOKENS & SYSTEM DESIGN
    ============================================================ */
 

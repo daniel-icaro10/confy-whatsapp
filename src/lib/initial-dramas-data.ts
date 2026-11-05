@@ -27,6 +27,312 @@ export interface InitialDramaData {
 
 export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
     {
+    "id": "tdx-xiu-somos-um-secreto",
+    "title": "Xiu... Somos Um Secreto",
+    "slug": "xiu-somos-um-secreto",
+    "synopsis": "Em um mundo onde a lealdade entra em conflito com a tentação, um herdeiro rebelde e sua meia-irmã recém-chegada enfrentam disputas pelo poder, traições familiares e um romance proibido — arriscando tudo para proteger seus segredos um ao outro.",
+    "coverUrl": "https://i.ytimg.com/vi/FNBTJfCnpnw/maxresdefault.jpg",
+    "bannerUrl": "https://i.ytimg.com/vi/FNBTJfCnpnw/maxresdefault.jpg",
+    "category": "Dublado",
+    "tags": "dublado,bombando,tendencias,romance,bilionario,mafia,vinganca,destaques,top1",
+    "totalEpisodes": 36,
+    "freeEpisodesCount": 1,
+    "isFeatured": true,
+    "isVertical": true,
+    "viewsCount": 103288,
+    "likesCount": 38450,
+    "episodes": [
+        {
+            "number": 1,
+            "title": "Parte 1",
+            "description": "Episódio 1 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": true
+        },
+        {
+            "number": 2,
+            "title": "Parte 2",
+            "description": "Episódio 2 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 3,
+            "title": "Parte 3",
+            "description": "Episódio 3 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 4,
+            "title": "Parte 4",
+            "description": "Episódio 4 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 5,
+            "title": "Parte 5",
+            "description": "Episódio 5 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 6,
+            "title": "Parte 6",
+            "description": "Episódio 6 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 7,
+            "title": "Parte 7",
+            "description": "Episódio 7 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 8,
+            "title": "Parte 8",
+            "description": "Episódio 8 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 9,
+            "title": "Parte 9",
+            "description": "Episódio 9 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 10,
+            "title": "Parte 10",
+            "description": "Episódio 10 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 11,
+            "title": "Parte 11",
+            "description": "Episódio 11 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 12,
+            "title": "Parte 12",
+            "description": "Episódio 12 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 13,
+            "title": "Parte 13",
+            "description": "Episódio 13 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 14,
+            "title": "Parte 14",
+            "description": "Episódio 14 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 15,
+            "title": "Parte 15",
+            "description": "Episódio 15 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 16,
+            "title": "Parte 16",
+            "description": "Episódio 16 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 17,
+            "title": "Parte 17",
+            "description": "Episódio 17 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 18,
+            "title": "Parte 18",
+            "description": "Episódio 18 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 19,
+            "title": "Parte 19",
+            "description": "Episódio 19 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 20,
+            "title": "Parte 20",
+            "description": "Episódio 20 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 21,
+            "title": "Parte 21",
+            "description": "Episódio 21 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 22,
+            "title": "Parte 22",
+            "description": "Episódio 22 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 23,
+            "title": "Parte 23",
+            "description": "Episódio 23 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 24,
+            "title": "Parte 24",
+            "description": "Episódio 24 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 25,
+            "title": "Parte 25",
+            "description": "Episódio 25 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 26,
+            "title": "Parte 26",
+            "description": "Episódio 26 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 27,
+            "title": "Parte 27",
+            "description": "Episódio 27 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 28,
+            "title": "Parte 28",
+            "description": "Episódio 28 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 29,
+            "title": "Parte 29",
+            "description": "Episódio 29 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 30,
+            "title": "Parte 30",
+            "description": "Episódio 30 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 31,
+            "title": "Parte 31",
+            "description": "Episódio 31 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 32,
+            "title": "Parte 32",
+            "description": "Episódio 32 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 33,
+            "title": "Parte 33",
+            "description": "Episódio 33 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 34,
+            "title": "Parte 34",
+            "description": "Episódio 34 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 35,
+            "title": "Parte 35",
+            "description": "Episódio 35 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        },
+        {
+            "number": 36,
+            "title": "Parte 36",
+            "description": "Episódio 36 de Xiu... Somos Um Secreto completo e dublado em alta definição.",
+            "youtubeUrl": "https://youtu.be/FNBTJfCnpnw",
+            "durationSeconds": 119,
+            "isFree": false
+        }
+    ]
+},
+    {
         "id": "tdx-refugio-perigoso",
         "title": "Refúgio Perigoso",
         "slug": "refugio-perigoso",

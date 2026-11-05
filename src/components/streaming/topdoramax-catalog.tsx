@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Home, Compass, Flame, Crown, MessageCircle } from "lucide-react";
 import { DEFAULT_OFFER_PLANS, OfferPlan } from "@/lib/segredos-defaults";
 import { INITIAL_YOUTUBE_DRAMAS } from "@/lib/initial-dramas-data";
 import { VipAccessModal } from "@/components/streaming/vip-access-modal";
@@ -554,12 +554,12 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
     }
 
     return (
-        <div className="min-h-dvh bg-black text-[#f5f5f5] pb-28 select-none">
-            {/* CABEÇALHO FIXO ESTILO TOPDORAMAX (.topo) */}
+        <div className="min-h-dvh bg-[#0c0d0e] font-sans text-[#f5f5f5] pb-32 sm:pb-24 select-none">
+            {/* CABEÇALHO FIXO ESTILO YESTV.AI (.topo) */}
             <header
-                className={`fixed top-0 left-0 right-0 z-40 flex items-center justify-between gap-2 px-3 sm:px-10 h-[62px] sm:h-[66px] transition-all ${scrolled
-                        ? "bg-[#060606]/92 backdrop-blur-xl shadow-[0_1px_0_rgba(255,255,255,0.06)]"
-                        : "bg-[#060606]/90 sm:bg-gradient-to-b sm:from-black/80 sm:to-transparent backdrop-blur-md sm:backdrop-blur-none"
+                className={`fixed top-0 left-0 right-0 z-40 flex items-center justify-between gap-2 px-3 sm:px-10 h-[58px] sm:h-[66px] transition-all ${scrolled
+                        ? "bg-[#0c0d0e]/95 backdrop-blur-xl border-b border-white/[0.07] shadow-[0_4px_20px_rgba(0,0,0,0.8)]"
+                        : "bg-[#0c0d0e]/90 sm:bg-gradient-to-b sm:from-black/80 sm:to-transparent backdrop-blur-md sm:backdrop-blur-none"
                     }`}
             >
                 <div className="flex items-center gap-2 sm:gap-3 min-w-0">
@@ -572,10 +572,11 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                             setLockedSerieModal(null);
                             window.scrollTo({ top: 0, behavior: "smooth" });
                         }}
-                        className="text-left focus:outline-none"
+                        className="text-left focus:outline-none flex items-center gap-1.5"
                     >
-                        <span className="font-black text-[18px] sm:text-[22px] tracking-[0.05em] uppercase text-[#e11d48] whitespace-nowrap">
-                            TVDRAMA REELS
+                        <span className="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse shadow-[0_0_8px_rgba(244,63,94,0.8)]" />
+                        <span className="font-black text-[17px] sm:text-[22px] tracking-[0.04em] uppercase text-white whitespace-nowrap">
+                            TVDRAMA<span className="text-rose-500">.REELS</span>
                         </span>
                     </button>
 
@@ -584,7 +585,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                             👑 Admin Master · Liberado
                         </span>
                     ) : isVip ? (
-                        <span className="hidden sm:inline-flex items-center px-2.5 py-1 rounded-full bg-[#22b868]/15 border border-[#22b868]/30 text-[#4ade8a] text-[11px] font-bold">
+                        <span className="hidden sm:inline-flex items-center px-2.5 py-1 rounded-full bg-[#1dcc99]/15 border border-[#1dcc99]/30 text-[#1dcc99] text-[11px] font-bold">
                             Acesso Liberado{daysRemaining !== null ? ` · ${daysRemaining}d` : ""}
                         </span>
                     ) : null}
@@ -612,16 +613,16 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                             <button
                                 type="button"
                                 onClick={() => setPwaModalOpen(true)}
-                                className="px-3 sm:px-3.5 py-1.5 rounded-full bg-[#e11d48] hover:bg-[#f43f5e] text-white text-[11px] sm:text-xs font-bold shadow-[0_6px_20px_rgba(225,29,72,0.35)] transition"
+                                className="px-3 sm:px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-white text-[11px] sm:text-xs font-bold transition"
                             >
                                 Baixar App
                             </button>
                             <button
                                 type="button"
                                 onClick={() => setActiveOverlay("conta")}
-                                className="px-2.5 sm:px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 text-white text-[11px] sm:text-xs font-semibold tabular-nums transition"
+                                className="px-2.5 sm:px-3 py-1.5 rounded-full bg-[#1dcc99]/15 border border-[#1dcc99]/30 text-[#1dcc99] text-[11px] sm:text-xs font-semibold tabular-nums transition"
                             >
-                                Conta · {viewerPhone.slice(-4)}
+                                VIP Ativo
                             </button>
                         </>
                     ) : (
@@ -632,16 +633,20 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                     setVipModalTab("login");
                                     setVipModalOpen(true);
                                 }}
-                                className="px-2.5 sm:px-3 py-1.5 rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/15 text-white text-[11px] sm:text-xs font-semibold transition"
+                                className="hidden sm:inline-flex px-2.5 sm:px-3 py-1.5 rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/15 text-white text-[11px] sm:text-xs font-semibold transition"
                             >
                                 Já paguei
                             </button>
                             <button
                                 type="button"
-                                onClick={() => handleOpenPlanCheckout("annual")}
-                                className="px-3 sm:px-3.5 py-1.5 rounded-full bg-[#e11d48] hover:bg-[#f43f5e] text-white text-[11px] sm:text-xs font-bold shadow-[0_6px_20px_rgba(225,29,72,0.35)] transition"
+                                onClick={() => {
+                                    setVipModalTab("pix");
+                                    setVipModalOpen(true);
+                                }}
+                                className="px-3 sm:px-3.5 py-1.5 rounded-full grad-gold text-black text-[11px] sm:text-xs font-black shadow-[0_2px_14px_rgba(251,191,36,0.4)] transition transform active:scale-95 flex items-center gap-1.5 cursor-pointer"
                             >
-                                Liberar Catálogo
+                                <Crown className="w-3.5 h-3.5 text-black" />
+                                <span>Seja VIP</span>
                             </button>
                         </>
                     )}
@@ -667,11 +672,12 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
             </header>
 
             {/* CONTEÚDO PRINCIPAL (.conteudo) */}
-            <main className="pt-[70px] sm:pt-[78px] max-w-[1440px] mx-auto">
-                {/* 1. PÍLULAS DE FILTRO (.filtros) */}
+            <main className="pt-[64px] sm:pt-[76px] max-w-[1440px] mx-auto">
+                {/* 1. PÍLULAS DE FILTRO (.filtros) ESTILO YESTV */}
                 <nav
+                    id="filtros-categorias"
                     aria-label="Categorias do catálogo"
-                    className="flex gap-2 overflow-x-auto no-scrollbar px-4 sm:px-10 pb-1"
+                    className="flex gap-2 overflow-x-auto no-scrollbar px-3 sm:px-10 py-2 scroll-smooth"
                 >
                     {[
                         { id: "todos", label: "🔥 Todos" },
@@ -689,9 +695,9 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                 key={cat.id}
                                 type="button"
                                 onClick={() => setActiveCategory(cat.id)}
-                                className={`flex-none px-[18px] py-[8px] rounded-full text-[14px] transition ${active
-                                        ? "bg-white text-black font-bold border border-white"
-                                        : "bg-[#0d0d0d] text-[#f5f5f5] font-semibold border border-white/22 hover:border-white/40"
+                                className={`flex-none px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${active
+                                        ? "bg-white text-black font-bold shadow-[0_2px_12px_rgba(255,255,255,0.25)] scale-[1.02]"
+                                        : "bg-[#141518]/90 text-white/70 hover:text-white border border-white/[0.08] hover:border-white/20"
                                     }`}
                             >
                                 {cat.label}
@@ -936,7 +942,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                 : `Nenhuma série encontrada para "${searchQuery}"`}
                         </p>
                         {searchResults.length > 0 && (
-                            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2.5 sm:gap-3.5">
+                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
                                 {searchResults.map((drama) => (
                                     <CatalogPosterCard
                                         key={drama.id}
@@ -998,36 +1004,49 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                     </button>
                                 </div>
 
-                                <div className="grid grid-flow-col auto-cols-[calc((100%-32px-20px)/2.3)] sm:auto-cols-[calc((100%-80px-30px)/4)] lg:auto-cols-[calc((100%-80px-40px)/5)] gap-2.5 overflow-x-auto no-scrollbar px-4 sm:px-10 pb-4 snap-x snap-mandatory">
+                                <div className="grid grid-flow-col auto-cols-[calc((100%-32px-16px)/2.1)] sm:auto-cols-[calc((100%-80px-30px)/3.8)] lg:auto-cols-[calc((100%-80px-40px)/5.2)] gap-3 overflow-x-auto no-scrollbar px-4 sm:px-10 pb-4 snap-x snap-mandatory">
                                     {top10Dramas.map((drama, idx) => {
                                         const langTag = detectLanguageTag(drama);
+                                        const epCount = drama.episodes?.length || drama.totalEpisodes || 1;
                                         return (
                                             <button
                                                 key={drama.id}
                                                 type="button"
                                                 onClick={() => handleSelectDrama(drama)}
-                                                className="relative pl-[32%] text-left snap-start group focus:outline-none"
+                                                className="group flex flex-col text-left pl-[26%] relative snap-start focus:outline-none transition duration-200 cursor-pointer"
                                             >
                                                 <span
                                                     aria-hidden="true"
                                                     style={{
                                                         WebkitTextStroke:
-                                                            "2px rgba(255,255,255,0.82)"
+                                                            "2px rgba(255,255,255,0.45)"
                                                     }}
-                                                    className="absolute left-0 bottom-0 z-10 font-black text-[96px] sm:text-[128px] leading-[0.74] tracking-[-0.06em] text-black select-none pointer-events-none"
+                                                    className="absolute left-0 bottom-8 z-10 font-black text-[92px] sm:text-[124px] leading-[0.74] tracking-[-0.06em] text-transparent select-none pointer-events-none drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)]"
                                                 >
                                                     {idx + 1}
                                                 </span>
-                                                <div className="relative z-20 aspect-[2/3] rounded-[8px] overflow-hidden bg-[#121212] shadow-[-8px_0_16px_rgba(0,0,0,0.75)] group-hover:scale-[1.04] transition">
+                                                <div className="relative z-20 w-full aspect-[9/13] rounded-2xl overflow-hidden bg-[#151619] border border-white/[0.08] shadow-[-8px_4px_20px_rgba(0,0,0,0.85)] group-hover:scale-[1.03] transition-all duration-300">
                                                     <img
                                                         src={drama.coverUrl}
                                                         alt={drama.title}
                                                         loading="lazy"
                                                         className="w-full h-full object-cover"
                                                     />
-                                                    <span className="absolute left-1.5 bottom-1.5 z-20 px-1.5 py-0.5 rounded-full bg-black/75 backdrop-blur-sm text-white text-[8.5px] font-extrabold uppercase tracking-wider">
+                                                    <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
+                                                    <span className="absolute top-2 left-2 z-20 px-2 py-0.5 rounded-full bg-black/65 backdrop-blur-md border border-white/10 text-white text-[9px] font-bold uppercase tracking-wider">
                                                         {langTag}
                                                     </span>
+                                                    <span className="absolute right-2 bottom-2 z-20 px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-md border border-white/10 text-white text-[10px] font-bold tabular-nums">
+                                                        {epCount} EP
+                                                    </span>
+                                                </div>
+                                                <div className="relative z-20 mt-2 px-0.5 min-w-0">
+                                                    <h3 className="font-semibold text-[13px] leading-[17px] text-white line-clamp-2 group-hover:text-amber-400 transition-colors">
+                                                        {drama.title}
+                                                    </h3>
+                                                    <p className="mt-0.5 text-[11px] text-white/50 line-clamp-1">
+                                                        {epCount} episódios · {langTag}
+                                                    </p>
                                                 </div>
                                             </button>
                                         );
@@ -1280,7 +1299,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                         </span>
                     </div>
                     <div className="max-w-[1200px] mx-auto px-4 sm:px-10 py-5">
-                        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2.5 sm:gap-3.5">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
                             {expandedRow.items.map((drama) => (
                                 <CatalogPosterCard
                                     key={drama.id}
@@ -1723,6 +1742,86 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                     setVipModalOpen(true);
                 }}
             />
+
+            {/* BARRA DE NAVEGAÇÃO INFERIOR MOBILE ESTILO HOTPLOT.AI / YESTV.AI */}
+            <nav className="sm:hidden fixed bottom-0 inset-x-0 z-50 bg-[#0e0f12]/95 backdrop-blur-xl border-t border-white/[0.08] px-2 py-1.5 pb-[max(8px,env(safe-area-inset-bottom))] flex items-center justify-around shadow-[0_-8px_30px_rgba(0,0,0,0.85)]">
+                {/* 1. Início */}
+                <button
+                    type="button"
+                    onClick={() => {
+                        setActiveCategory("todos");
+                        setSearchQuery("");
+                        setActiveOverlay("none");
+                        setLockedSerieModal(null);
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
+                    className={`flex flex-col items-center justify-center py-1 px-3 rounded-xl transition cursor-pointer ${
+                        activeCategory === "todos" && activeOverlay === "none" && !searchQuery
+                            ? "text-white"
+                            : "text-white/45 hover:text-white/80"
+                    }`}
+                >
+                    <Home className="w-5 h-5 mb-0.5" />
+                    <span className="text-[10px] font-semibold">Início</span>
+                </button>
+
+                {/* 2. Gêneros */}
+                <button
+                    type="button"
+                    onClick={() => {
+                        const el = document.getElementById("filtros-categorias");
+                        if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+                    }}
+                    className="flex flex-col items-center justify-center py-1 px-3 rounded-xl text-white/45 hover:text-white/80 transition cursor-pointer"
+                >
+                    <Compass className="w-5 h-5 mb-0.5" />
+                    <span className="text-[10px] font-semibold">Gêneros</span>
+                </button>
+
+                {/* 3. Em Alta */}
+                <button
+                    type="button"
+                    onClick={() => {
+                        const el = document.getElementById("principal");
+                        if (el) el.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    className="flex flex-col items-center justify-center py-1 px-3 rounded-xl text-white/45 hover:text-white/80 transition cursor-pointer"
+                >
+                    <Flame className="w-5 h-5 mb-0.5 text-rose-500" />
+                    <span className="text-[10px] font-semibold">Em Alta</span>
+                </button>
+
+                {/* 4. VIP (Botão Ouro Destaque YesTV) */}
+                <button
+                    type="button"
+                    onClick={() => {
+                        if (isVip) {
+                            setActiveOverlay("conta");
+                        } else {
+                            setVipModalTab("pix");
+                            setVipModalOpen(true);
+                        }
+                    }}
+                    className="flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition cursor-pointer"
+                >
+                    <div className="w-7 h-7 rounded-full grad-gold grid place-items-center shadow-[0_2px_12px_rgba(251,191,36,0.45)] mb-0.5">
+                        <Crown className="w-4 h-4 text-black" />
+                    </div>
+                    <span className="text-[10px] font-black text-[#ffd363]">
+                        {isVip ? "Meu VIP" : "Seja VIP"}
+                    </span>
+                </button>
+
+                {/* 5. WhatsApp */}
+                <button
+                    type="button"
+                    onClick={() => handleRedirectWhatsapp()}
+                    className="flex flex-col items-center justify-center py-1 px-3 rounded-xl text-emerald-400 hover:text-emerald-300 transition cursor-pointer"
+                >
+                    <MessageCircle className="w-5 h-5 mb-0.5" />
+                    <span className="text-[10px] font-semibold">WhatsApp</span>
+                </button>
+            </nav>
         </div>
     );
 }
@@ -1747,18 +1846,18 @@ function HorizontalRowSection({
                 <button
                     type="button"
                     onClick={onExpand}
-                    className="inline-flex items-baseline gap-3.5 text-left group"
+                    className="inline-flex items-baseline gap-2.5 text-left group cursor-pointer"
                 >
-                    <span className="font-bold text-[17px] sm:text-[21px] text-[#f5f5f5]">
+                    <span className="font-bold text-[17px] sm:text-[21px] text-white group-hover:text-amber-300 transition-colors">
                         {title}
                     </span>
-                    <span className="text-[14px] font-semibold text-[#9a9a9a] group-hover:text-white">
+                    <span className="text-[13px] font-semibold text-white/50 group-hover:text-white transition-colors">
                         Ver tudo ›
                     </span>
                 </button>
             </div>
 
-            <div className="grid grid-flow-col auto-cols-[calc((100%-32px-20px)/3.3)] sm:auto-cols-[calc((100%-80px-40px)/5)] lg:auto-cols-[calc((100%-80px-60px)/7)] gap-2.5 overflow-x-auto no-scrollbar px-4 sm:px-10 pb-2 snap-x snap-mandatory">
+            <div className="grid grid-flow-col auto-cols-[calc((100%-32px-16px)/2.4)] sm:auto-cols-[calc((100%-80px-40px)/4.8)] lg:auto-cols-[calc((100%-80px-60px)/6.5)] gap-3 overflow-x-auto no-scrollbar px-4 sm:px-10 pb-4 snap-x snap-mandatory">
                 {items.map((drama) => (
                     <CatalogPosterCard
                         key={drama.id}
@@ -1787,46 +1886,49 @@ function CatalogPosterCard({
         <button
             type="button"
             onClick={() => onSelect(drama)}
-            className="relative block w-full aspect-[2/3] rounded-[8px] overflow-hidden bg-[#121212] text-left snap-start group focus:outline-none transition duration-200 sm:hover:scale-[1.05] sm:hover:z-10 sm:hover:shadow-[0_16px_34px_rgba(0,0,0,0.85),0_0_0_2px_rgba(255,255,255,0.85)]"
+            className="group flex flex-col text-left w-full focus:outline-none transition duration-200 snap-start cursor-pointer"
         >
-            <img
-                src={drama.coverUrl}
-                alt={drama.title}
-                loading="lazy"
-                decoding="async"
-                className="absolute inset-0 w-full h-full object-cover"
-            />
-            <div className="absolute inset-x-0 top-[60%] bottom-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent pointer-events-none" />
+            {/* Capa com proporção 9:13 e cantos arredondados padrão Hotplot / YesTV (16px) */}
+            <div className="relative w-full aspect-[9/13] rounded-2xl overflow-hidden bg-[#151619] border border-white/[0.08] shadow-[0_6px_18px_rgba(0,0,0,0.6)] group-hover:border-amber-400/50 group-hover:shadow-[0_12px_28px_rgba(0,0,0,0.85)] group-hover:scale-[1.03] transition-all duration-300">
+                <img
+                    src={drama.coverUrl}
+                    alt={drama.title}
+                    loading="lazy"
+                    decoding="async"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
 
-            {isVip && (
-                <span className="absolute top-1.5 right-1.5 z-20 px-1.5 py-0.5 rounded bg-[#22b868] text-black text-[8px] font-extrabold uppercase shadow-sm">
-                    Liberado
-                </span>
-            )}
+                {isVip && (
+                    <span className="absolute top-2 right-2 z-20 px-2 py-0.5 rounded-full bg-[#1dcc99] text-black text-[9px] font-black uppercase tracking-wider shadow-md">
+                        Liberado
+                    </span>
+                )}
 
-            <div className="hidden sm:flex absolute inset-0 z-10 p-2.5 pb-7 flex-col justify-end items-start gap-1.5 bg-gradient-to-t from-black/95 via-black/70 to-black/20 opacity-0 group-hover:opacity-100 transition-opacity">
-                <span className="w-8 h-8 rounded-full bg-white text-black grid place-items-center text-xs font-bold pl-0.5">
-                    ▶
-                </span>
-                <span className="font-bold text-xs text-white leading-tight line-clamp-2">
-                    {drama.title}
-                </span>
-            </div>
-
-            {/* Título legível no mobile */}
-            <div className="sm:hidden absolute inset-x-0 bottom-6 z-15 px-1.5">
-                <p className="text-[10px] font-bold text-white line-clamp-1 leading-tight drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
-                    {drama.title}
-                </p>
-            </div>
-
-            <div className="absolute left-1.5 right-1.5 bottom-1.5 z-20 flex items-center justify-between pointer-events-none">
-                <span className="px-1.5 py-0.5 rounded-full bg-black/75 backdrop-blur-sm text-white text-[8px] font-extrabold uppercase tracking-[0.04em]">
+                <span className="absolute top-2 left-2 z-20 px-2 py-0.5 rounded-full bg-black/65 backdrop-blur-md border border-white/10 text-white text-[9px] font-bold uppercase tracking-wider">
                     {langTag}
                 </span>
-                <span className="px-1.5 py-0.5 rounded-full bg-black/80 border border-white/10 backdrop-blur-sm text-white/90 text-[8px] font-bold">
-                    {epCount} eps
+
+                <span className="absolute right-2 bottom-2 z-20 px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-md border border-white/10 text-white text-[10px] font-bold tabular-nums">
+                    {epCount} EP
                 </span>
+
+                {/* Ícone Play ao passar o mouse no Desktop */}
+                <div className="hidden sm:flex absolute inset-0 z-10 items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="w-10 h-10 rounded-full bg-white text-black grid place-items-center text-sm font-bold shadow-lg pl-0.5">
+                        ▶
+                    </span>
+                </div>
+            </div>
+
+            {/* Metadados abaixo do card - Padrão Hotplot.ai / YesTV.ai */}
+            <div className="mt-2 px-0.5 min-w-0">
+                <h3 className="font-semibold text-[13px] leading-[17px] text-white line-clamp-2 group-hover:text-amber-400 transition-colors">
+                    {drama.title}
+                </h3>
+                <p className="mt-0.5 text-[11px] text-white/50 line-clamp-1">
+                    {epCount} episódios · {langTag}
+                </p>
             </div>
         </button>
     );
