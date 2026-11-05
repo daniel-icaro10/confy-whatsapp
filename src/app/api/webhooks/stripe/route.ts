@@ -35,7 +35,7 @@ export async function POST(request: Request) {
             if (externalId) {
                 try {
                     await approvePixOrderAndGrantAccess({
-                        externalId,
+                        externalId: String(externalId),
                         durationDays
                     });
                 } catch {

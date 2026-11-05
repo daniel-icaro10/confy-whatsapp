@@ -19,6 +19,7 @@ export interface CreateStripePixInput {
     sessionId?: string;
     customerName?: string;
     customerEmail?: string;
+    customerCpf?: string;
     customAmount?: number;
     planKey?: "monthly" | "quarterly" | "annual";
     dramaId?: string;

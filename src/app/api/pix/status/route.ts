@@ -32,7 +32,7 @@ export async function GET(request: Request) {
                     const pi = await stripeRes.json().catch(() => null);
                     if (pi?.status === "succeeded") {
                         await approvePixOrderAndGrantAccess({
-                            externalId: order.externalId,
+                            externalId: order.externalId || undefined,
                             durationDays: 30
                         });
                         return NextResponse.json({
