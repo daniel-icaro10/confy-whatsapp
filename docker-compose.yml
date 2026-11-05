@@ -31,8 +31,8 @@ services:
     environment:
       - DATABASE_URL=mysql://root:${MYSQL_ROOT_PASSWORD}@db:3306/${MYSQL_DATABASE:-wa_akg}
       - AUTH_SECRET=${AUTH_SECRET}
-      - BASE_URL=${BASE_URL:-http://localhost:3000}
-      - NEXTAUTH_URL=${NEXTAUTH_URL:-http://localhost:3000}
+      - BASE_URL=
+      - NEXTAUTH_URL=
       - NODE_ENV=production
       - PORT=${PORT:-3000}
       - HOSTNAME=0.0.0.0

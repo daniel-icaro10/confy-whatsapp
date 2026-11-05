@@ -125,7 +125,7 @@ async function main() {
         data: {
             enabled: true,
             sessionId: "kb3786",
-            siteUrl: process.env.NEXT_PUBLIC_APP_URL || "http://2.24.89.184:3000",
+            siteUrl: process.env.NEXT_PUBLIC_APP_URL || "https://tvdramareels.online",
             step1Greeting: funnelGreeting,
             pixTriggerKeywords: "1, 2, 3 series, 3 séries, catalogo, catálogo, completo, pix, quero, sim, pagar, assistir, liberar, 9.90, 9,90, 19.90, 19,90",
             pixGeneratedMessage: funnelPixMsg,

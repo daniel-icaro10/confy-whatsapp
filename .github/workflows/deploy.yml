@@ -72,6 +72,8 @@ jobs:
 
             # 2. Atualizar repositorio e subir nova versao
             git pull -q
+            chmod +x scripts/setup-domain-ssl.sh 2>/dev/null || true
+            bash scripts/setup-domain-ssl.sh || true
             docker compose pull app
             docker compose up -d --no-build
             docker image prune -f
