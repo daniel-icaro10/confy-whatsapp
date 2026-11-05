@@ -333,6 +333,1350 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
     ]
 },
     {
+        "id": "tdx-uma-aposta-de-amor-ou-morte",
+        "title": "Uma Aposta de Amor ou Morte",
+        "slug": "uma-aposta-de-amor-ou-morte",
+        "synopsis": "Em um jogo arriscado onde o coração é o prêmio e a vida é a aposta, dois rivais são forçados a conviver sob o mesmo teto, descobrindo segredos obscuros e uma atração avassaladora que pode destruir a ambos.",
+        "coverUrl": "https://i.ytimg.com/vi/cZv0c3goDac/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/cZv0c3goDac/maxresdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,bombando,tendencias,romance,mafia,vinganca",
+        "totalEpisodes": 38,
+        "freeEpisodesCount": 1,
+        "isFeatured": true,
+        "isVertical": true,
+        "viewsCount": 43751,
+        "likesCount": 15313,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 8,
+                "title": "Parte 8",
+                "description": "Episódio 8 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 9,
+                "title": "Parte 9",
+                "description": "Episódio 9 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 10,
+                "title": "Parte 10",
+                "description": "Episódio 10 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 11,
+                "title": "Parte 11",
+                "description": "Episódio 11 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 12,
+                "title": "Parte 12",
+                "description": "Episódio 12 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 13,
+                "title": "Parte 13",
+                "description": "Episódio 13 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 14,
+                "title": "Parte 14",
+                "description": "Episódio 14 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 15,
+                "title": "Parte 15",
+                "description": "Episódio 15 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 16,
+                "title": "Parte 16",
+                "description": "Episódio 16 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 17,
+                "title": "Parte 17",
+                "description": "Episódio 17 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 18,
+                "title": "Parte 18",
+                "description": "Episódio 18 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 19,
+                "title": "Parte 19",
+                "description": "Episódio 19 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 20,
+                "title": "Parte 20",
+                "description": "Episódio 20 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 21,
+                "title": "Parte 21",
+                "description": "Episódio 21 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 22,
+                "title": "Parte 22",
+                "description": "Episódio 22 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 23,
+                "title": "Parte 23",
+                "description": "Episódio 23 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 24,
+                "title": "Parte 24",
+                "description": "Episódio 24 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 25,
+                "title": "Parte 25",
+                "description": "Episódio 25 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 26,
+                "title": "Parte 26",
+                "description": "Episódio 26 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 27,
+                "title": "Parte 27",
+                "description": "Episódio 27 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 28,
+                "title": "Parte 28",
+                "description": "Episódio 28 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 29,
+                "title": "Parte 29",
+                "description": "Episódio 29 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 30,
+                "title": "Parte 30",
+                "description": "Episódio 30 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 31,
+                "title": "Parte 31",
+                "description": "Episódio 31 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 32,
+                "title": "Parte 32",
+                "description": "Episódio 32 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 33,
+                "title": "Parte 33",
+                "description": "Episódio 33 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 34,
+                "title": "Parte 34",
+                "description": "Episódio 34 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 35,
+                "title": "Parte 35",
+                "description": "Episódio 35 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 36,
+                "title": "Parte 36",
+                "description": "Episódio 36 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 37,
+                "title": "Parte 37",
+                "description": "Episódio 37 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 38,
+                "title": "Parte 38",
+                "description": "Episódio 38 de Uma Aposta de Amor ou Morte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cZv0c3goDac",
+                "durationSeconds": 199,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-sequestrada-pela-mafia",
+        "title": "Sequestrada pela Máfia",
+        "slug": "sequestrada-pela-mafia",
+        "synopsis": "Capturada pelo chefe da família mafiosa mais temida da cidade, ela descobre que o homem que jurou mantê-la refém guarda segredos que ligam seus passados — e um desejo perigoso capaz de mudar seu destino para sempre.",
+        "coverUrl": "https://i.ytimg.com/vi/B9pxrOkhQps/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/B9pxrOkhQps/maxresdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,bombando,tendencias,mafia,sequestro,romance,destaques,top1",
+        "totalEpisodes": 2,
+        "freeEpisodesCount": 1,
+        "isFeatured": true,
+        "isVertical": true,
+        "viewsCount": 3415000,
+        "likesCount": 1195250,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Sequestrada pela Máfia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/B9pxrOkhQps",
+                "durationSeconds": 1200,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Sequestrada pela Máfia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/9ANqOMe5IIc",
+                "durationSeconds": 1726,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-herdeira-bilionaria-confronta-seu-marido-assassino",
+        "title": "Herdeira Bilionária Confronta Seu Marido Assassino",
+        "slug": "herdeira-bilionaria-confronta-seu-marido-assassino",
+        "synopsis": "Após descobrir a conspiração letal tramada por seu próprio marido, uma herdeira de bilhões forja a própria fraqueza para desmascará-lo friamente em um confronto de vingança sem precedentes.",
+        "coverUrl": "https://i.ytimg.com/vi/8Kqxta_ALzE/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/8Kqxta_ALzE/maxresdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,bombando,bilionario,vinganca,herdeira,traicao,drama",
+        "totalEpisodes": 3,
+        "freeEpisodesCount": 1,
+        "isFeatured": true,
+        "isVertical": true,
+        "viewsCount": 672508,
+        "likesCount": 235378,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Herdeira Bilionária Confronta Seu Marido Assassino completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/8Kqxta_ALzE",
+                "durationSeconds": 676,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Herdeira Bilionária Confronta Seu Marido Assassino completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/UJExg6Dy9yE",
+                "durationSeconds": 1097,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Herdeira Bilionária Confronta Seu Marido Assassino completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/vxjXAWbC0pM",
+                "durationSeconds": 671,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-a-vinganca-da-herdeira-descartada",
+        "title": "A Vingança da Herdeira Descartada",
+        "slug": "a-vinganca-da-herdeira-descartada",
+        "synopsis": "Desprezada, expulsa e dada como derrotada por sua família egoísta, a legítima herdeira retorna triunfante, detendo o poder absoluto para recuperar o império que sempre foi seu por direito.",
+        "coverUrl": "https://i.ytimg.com/vi/6UHsi-m-9uU/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/6UHsi-m-9uU/maxresdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,bombando,vinganca,herdeira,bilionario,drama,destaques",
+        "totalEpisodes": 3,
+        "freeEpisodesCount": 1,
+        "isFeatured": true,
+        "isVertical": true,
+        "viewsCount": 529700,
+        "likesCount": 185395,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de A Vingança da Herdeira Descartada completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/6UHsi-m-9uU",
+                "durationSeconds": 891,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de A Vingança da Herdeira Descartada completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Q5TvMwCAxj0",
+                "durationSeconds": 1541,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de A Vingança da Herdeira Descartada completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/j-KYMUEZHD4",
+                "durationSeconds": 988,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-da-favela-ao-trono",
+        "title": "Da Favela ao Trono",
+        "slug": "da-favela-ao-trono",
+        "synopsis": "Nascido nas vielas e moldado pelas dificuldades, um jovem determinado desafia todas as probabilidades e preconceitos para conquistar o topo da alta sociedade e o respeito que sempre mereceu.",
+        "coverUrl": "https://i.ytimg.com/vi/54QkzeojpI0/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/54QkzeojpI0/maxresdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,superacao,favela,trono,sucesso,drama",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": true,
+        "isVertical": true,
+        "viewsCount": 438000,
+        "likesCount": 153300,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Episódio Completo",
+                "description": "Episódio 1 de Da Favela ao Trono completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/54QkzeojpI0",
+                "durationSeconds": 750,
+                "isFree": true
+            }
+        ]
+    },
+    {
+        "id": "tdx-agora-podem-beijar-a-noiva",
+        "title": "Agora Podem Beijar a Noiva...",
+        "slug": "agora-podem-beijar-a-noiva",
+        "synopsis": "Em pleno altar, diante da alta sociedade, uma revelação bombástica interrompe a cerimônia e transforma o casamento dos sonhos em um jogo ardiloso de traições, ciúmes e segredos expostos.",
+        "coverUrl": "https://i.ytimg.com/vi/wOkl8fAKdGo/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/wOkl8fAKdGo/maxresdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,casamento,romance,traicao,drama",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": true,
+        "isVertical": true,
+        "viewsCount": 260000,
+        "likesCount": 91000,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Episódio Completo",
+                "description": "Episódio 1 de Agora Podem Beijar a Noiva... completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/wOkl8fAKdGo",
+                "durationSeconds": 670,
+                "isFree": true
+            }
+        ]
+    },
+    {
+        "id": "tdx-nao-mexa-com-a-minha-irma",
+        "title": "Não Mexa com a Minha Irmã",
+        "slug": "nao-mexa-com-a-minha-irma",
+        "synopsis": "Quando forças perigosas ameaçam a integridade da sua família, um irmão implacável cruza todos os limites da lei para proteger quem ama e destruir cada um dos seus algozes.",
+        "coverUrl": "https://i.ytimg.com/vi/DMzpI0AZAcc/hqdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/DMzpI0AZAcc/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,protecao,familia,vinganca,drama,acao",
+        "totalEpisodes": 2,
+        "freeEpisodesCount": 1,
+        "isFeatured": true,
+        "isVertical": true,
+        "viewsCount": 259000,
+        "likesCount": 90650,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Não Mexa com a Minha Irmã completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/DMzpI0AZAcc",
+                "durationSeconds": 1505,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Não Mexa com a Minha Irmã completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/oNJGtIGlddc",
+                "durationSeconds": 1419,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-forcada-a-tornar-se-noiva-de-um-chefe-gangster-contrato-de-amor",
+        "title": "Forçada a Tornar-se Noiva de um Chefe Gangster: Contrato de Amor",
+        "slug": "forcada-a-tornar-se-noiva-de-um-chefe-gangster-contrato-de-amor",
+        "synopsis": "Para salvar sua família da ruína total, uma jovem inocente assina um contrato irrevogável com o líder mais impiedoso do submundo, dando início a uma convivência carregada de tensão e paixão proibida.",
+        "coverUrl": "https://i.ytimg.com/vi/15E9emKLxIE/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/15E9emKLxIE/maxresdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,mafia,gangster,contrato,casamento-forcado,romance",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": true,
+        "isVertical": true,
+        "viewsCount": 254000,
+        "likesCount": 88900,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Episódio Completo",
+                "description": "Episódio 1 de Forçada a Tornar-se Noiva de um Chefe Gangster: Contrato de Amor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/15E9emKLxIE",
+                "durationSeconds": 1462,
+                "isFree": true
+            }
+        ]
+    },
+    {
+        "id": "tdx-um-encontro-as-cegas-com-o-meu-destino",
+        "title": "Um Encontro às Cegas com o Meu Destino",
+        "slug": "um-encontro-as-cegas-com-o-meu-destino",
+        "synopsis": "O que era para ser apenas um encontro às cegas despretensioso coloca frente a frente duas pessoas unidas por um destino inevitável, faíscas imediatas e revelações inesperadas.",
+        "coverUrl": "https://i.ytimg.com/vi/-0J9VOavSeA/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/-0J9VOavSeA/maxresdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,encontro-as-cegas,destino,romance,comedia-romantica,ceo",
+        "totalEpisodes": 2,
+        "freeEpisodesCount": 1,
+        "isFeatured": true,
+        "isVertical": true,
+        "viewsCount": 249000,
+        "likesCount": 87150,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Um Encontro às Cegas com o Meu Destino completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/-0J9VOavSeA",
+                "durationSeconds": 1358,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Um Encontro às Cegas com o Meu Destino completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/0Gs3GuXqkGA",
+                "durationSeconds": 1367,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-destino-selado-pacto-com-o-rei-da-mafia",
+        "title": "Destino Selado: Pacto com o Rei da Máfia",
+        "slug": "destino-selado-pacto-com-o-rei-da-mafia",
+        "synopsis": "Sem alternativas para escapar de uma ameaça mortal, ela aceita um pacto de sangue com o soberano da máfia, tornando-se sua protegida em troca de uma lealdade que testará seu coração.",
+        "coverUrl": "https://i.ytimg.com/vi/WNtA6CGE790/hqdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/WNtA6CGE790/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,mafia,pacto,rei-da-mafia,romance-proibido,perigo",
+        "totalEpisodes": 3,
+        "freeEpisodesCount": 1,
+        "isFeatured": true,
+        "isVertical": true,
+        "viewsCount": 221700,
+        "likesCount": 77595,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Destino Selado: Pacto com o Rei da Máfia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/WNtA6CGE790",
+                "durationSeconds": 1064,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Destino Selado: Pacto com o Rei da Máfia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/TQ-5fmSDQbI",
+                "durationSeconds": 1029,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Destino Selado: Pacto com o Rei da Máfia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/gWvqd-8-rvI",
+                "durationSeconds": 673,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-o-ceo-que-sentiu-minha-gravidez",
+        "title": "O CEO que Sentiu Minha Gravidez",
+        "slug": "o-ceo-que-sentiu-minha-gravidez",
+        "synopsis": "Após uma noite inesquecível e misteriosa, um CEO poderoso e reservado descobre a gravidez oculta da mulher que nunca conseguiu esquecer, iniciando uma busca frenética por seu herdeiro.",
+        "coverUrl": "https://i.ytimg.com/vi/Qgfn7KkK6mc/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/Qgfn7KkK6mc/maxresdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,ceo,gravidez,bebe-secreto,bilionario,romance",
+        "totalEpisodes": 2,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 197000,
+        "likesCount": 68950,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de O CEO que Sentiu Minha Gravidez completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Qgfn7KkK6mc",
+                "durationSeconds": 1162,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de O CEO que Sentiu Minha Gravidez completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/OSqWqLPAP3Q",
+                "durationSeconds": 1174,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-o-limite-do-amor",
+        "title": "O Limite do Amor",
+        "slug": "o-limite-do-amor",
+        "synopsis": "Até onde alguém é capaz de ir em nome da paixão? Quando o orgulho e as convenções sociais colidem, dois corações intensos descobrem que o verdadeiro amor não conhece limites.",
+        "coverUrl": "https://i.ytimg.com/vi/4RMTES4Yddk/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/4RMTES4Yddk/maxresdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,limite-do-amor,romance,paixao,drama,emocao",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 185000,
+        "likesCount": 64750,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Episódio Completo",
+                "description": "Episódio 1 de O Limite do Amor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/4RMTES4Yddk",
+                "durationSeconds": 2195,
+                "isFree": true
+            }
+        ]
+    },
+    {
+        "id": "tdx-nao-desafie-a-senhora-bilionaria",
+        "title": "Não Desafie a Senhora Bilionária",
+        "slug": "nao-desafie-a-senhora-bilionaria",
+        "synopsis": "Aqueles que a julgaram apenas uma mulher indefesa cometem o pior erro de suas vidas ao descobrir que por trás de seu olhar sereno está a mais temida e influente senhora de um império bilionário.",
+        "coverUrl": "https://i.ytimg.com/vi/qHmU2FchRns/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/qHmU2FchRns/maxresdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,bilionario,mulher-forte,vinganca,luxo,drama",
+        "totalEpisodes": 2,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 164700,
+        "likesCount": 57645,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Não Desafie a Senhora Bilionária completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/qHmU2FchRns",
+                "durationSeconds": 654,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Não Desafie a Senhora Bilionária completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/uBpAYHOew2I",
+                "durationSeconds": 1470,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-encontrei-meu-papai-na-obra",
+        "title": "Encontrei Meu Papai na Obra",
+        "slug": "encontrei-meu-papai-na-obra",
+        "synopsis": "Durante uma visita inesperada a um canteiro de obras, uma garotinha de olhos brilhantes reconhece na figura de um trabalhador humilde o homem que é secretamente o homem mais rico do país.",
+        "coverUrl": "https://i.ytimg.com/vi/jfCMBB51J3I/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/jfCMBB51J3I/maxresdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,familia,filha,papai-secreto,emocionante,drama,bilionario-disfarcado",
+        "totalEpisodes": 3,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 154400,
+        "likesCount": 54040,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Encontrei Meu Papai na Obra completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/jfCMBB51J3I",
+                "durationSeconds": 1200,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Encontrei Meu Papai na Obra completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/qyNFetLqMMQ",
+                "durationSeconds": 1187,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Encontrei Meu Papai na Obra completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/1Q1M6tzdK2k",
+                "durationSeconds": 1051,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-casei-com-o-ceo-que-trai-por-detras-das-mentiras-existe-o-amor",
+        "title": "Casei com o CEO que Traí: Por Detrás das Mentiras, Existe o Amor",
+        "slug": "casei-com-o-ceo-que-trai-por-detras-das-mentiras-existe-o-amor",
+        "synopsis": "Marcada pela culpa e envolvida em uma rede de enganos, ela se une em matrimônio ao CEO que no passado prejudicou, descobrindo que sob a frieza de seu olhar ainda arde um amor inextinguível.",
+        "coverUrl": "https://i.ytimg.com/vi/rUqxsSHFHjg/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/rUqxsSHFHjg/maxresdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,ceo,casamento,mentiras,perdao,romance,redencao",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 152000,
+        "likesCount": 53200,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Episódio Completo",
+                "description": "Episódio 1 de Casei com o CEO que Traí: Por Detrás das Mentiras, Existe o Amor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/rUqxsSHFHjg",
+                "durationSeconds": 1529,
+                "isFree": true
+            }
+        ]
+    },
+    {
+        "id": "tdx-amor-entre-segredos",
+        "title": "Amor Entre Segredos",
+        "slug": "amor-entre-segredos",
+        "synopsis": "Em um círculo de aparências e alta sofisticação, segredos guardados a sete chaves ameaçam vir à tona quando uma paixão avassaladora desafia as mentiras que sustentavam suas vidas.",
+        "coverUrl": "https://i.ytimg.com/vi/zR0beyCx4I8/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/zR0beyCx4I8/maxresdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,segredos,romance,enredo-envolvente,drama",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 129000,
+        "likesCount": 45150,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Episódio Completo",
+                "description": "Episódio 1 de Amor Entre Segredos completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/zR0beyCx4I8",
+                "durationSeconds": 865,
+                "isFree": true
+            }
+        ]
+    },
+    {
+        "id": "tdx-papai-malvado-voce-ta-frito",
+        "title": "Papai Malvado, Você Tá Frito!",
+        "slug": "papai-malvado-voce-ta-frito",
+        "synopsis": "Determinada a vingar sua mãe e colocar juízo na cabeça do pai magnata que a abandonou, uma criança genial apronta todas as armadilhas para domar o coração do poderoso CEO.",
+        "coverUrl": "https://i.ytimg.com/vi/KFXLb8kWfF0/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/KFXLb8kWfF0/maxresdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,familia,filho-esperto,ceo,comedia-romantica,reconciliacao",
+        "totalEpisodes": 2,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 100400,
+        "likesCount": 35140,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Papai Malvado, Você Tá Frito! completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/KFXLb8kWfF0",
+                "durationSeconds": 881,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Papai Malvado, Você Tá Frito! completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/BUPFrp_5Cls",
+                "durationSeconds": 868,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-o-genio-de-rua-que-salvou-meu-imperio",
+        "title": "O Gênio de Rua que Salvou Meu Império",
+        "slug": "o-genio-de-rua-que-salvou-meu-imperio",
+        "synopsis": "Quando a maior corporação da cidade estava à beira do colapso econômico por traição interna, a mente brilhante de um jovem das ruas se torna a única esperança de salvação do império.",
+        "coverUrl": "https://i.ytimg.com/vi/4eRwbUYL7W8/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/4eRwbUYL7W8/maxresdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,genio,imperio,bilionario,negocios,superacao,drama",
+        "totalEpisodes": 2,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 93000,
+        "likesCount": 32550,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de O Gênio de Rua que Salvou Meu Império completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/4eRwbUYL7W8",
+                "durationSeconds": 1292,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de O Gênio de Rua que Salvou Meu Império completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Yg7kGqNPxpc",
+                "durationSeconds": 1260,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-a-dama-chefe-da-traida-a-amada",
+        "title": "A Dama Chefe: Da Traída à Amada",
+        "slug": "a-dama-chefe-da-traida-a-amada",
+        "synopsis": "Humilhada e traída por aqueles em quem mais confiava, ela ressurge no comando dos negócios como uma dama de ferro imbatível, conquistando a admiração e o amor do homem mais cobiçado da cidade.",
+        "coverUrl": "https://i.ytimg.com/vi/gj73fT37Ff4/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/gj73fT37Ff4/maxresdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,dama-chefe,traicao,volta-por-cima,mulher-no-comando,romance",
+        "totalEpisodes": 2,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 81000,
+        "likesCount": 28350,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de A Dama Chefe: Da Traída à Amada completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/gj73fT37Ff4",
+                "durationSeconds": 1167,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de A Dama Chefe: Da Traída à Amada completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/XqjVNN9Db-M",
+                "durationSeconds": 753,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-mamae-eu-trouxe-o-papai-pra-te-salvar",
+        "title": "Mamãe, Eu Trouxe o Papai pra Te Salvar!",
+        "slug": "mamae-eu-trouxe-o-papai-pra-te-salvar",
+        "synopsis": "Cansado de ver sua mãe sofrer injustiças, um menininho corajoso vai até a sede da maior empresa do país para trazer o pai bilionário de volta e salvar a família de uma vez por todas.",
+        "coverUrl": "https://i.ytimg.com/vi/Pe8Eh0emakM/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/Pe8Eh0emakM/maxresdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,crianca-fofa,papai-salvador,resgate,reconciliacao,romance",
+        "totalEpisodes": 2,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 79000,
+        "likesCount": 27650,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Mamãe, Eu Trouxe o Papai pra Te Salvar! completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Pe8Eh0emakM",
+                "durationSeconds": 1531,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Mamãe, Eu Trouxe o Papai pra Te Salvar! completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/YUqXbD_ijxo",
+                "durationSeconds": 1389,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-vinganca-elegante-de-uma-mae-bilionaria",
+        "title": "Vingança Elegante de uma Mãe Bilionária",
+        "slug": "vinganca-elegante-de-uma-mae-bilionaria",
+        "synopsis": "Com classe, inteligência afiada e recursos ilimitados, uma mãe bilionária arquiteta a vingança perfeita contra aqueles que conspiraram contra seu sangue, sem derramar uma única lágrima em vão.",
+        "coverUrl": "https://i.ytimg.com/vi/uaaOa_WTIO0/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/uaaOa_WTIO0/maxresdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,mae-bilionaria,vinganca,luxo,poder,justica",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 76000,
+        "likesCount": 26600,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Episódio Completo",
+                "description": "Episódio 1 de Vingança Elegante de uma Mãe Bilionária completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/uaaOa_WTIO0",
+                "durationSeconds": 1744,
+                "isFree": true
+            }
+        ]
+    },
+    {
+        "id": "tdx-o-100-divorcio-foi-o-seu-maior-erro",
+        "title": "O 100º Divórcio Foi o Seu Maior Erro",
+        "slug": "o-100-divorcio-foi-o-seu-maior-erro",
+        "synopsis": "Ele acreditava que o divórcio seria apenas mais uma formalidade em sua rotina de negócios, mas percebe o tamanho do seu erro no instante em que sua ex-esposa se torna a mulher mais disputada do país.",
+        "coverUrl": "https://i.ytimg.com/vi/VgOkf39MsGQ/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/VgOkf39MsGQ/maxresdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,divorcio,arrependimento,reconquista,drama-conjugal,romance",
+        "totalEpisodes": 2,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 72400,
+        "likesCount": 25340,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de O 100º Divórcio Foi o Seu Maior Erro completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/VgOkf39MsGQ",
+                "durationSeconds": 1500,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de O 100º Divórcio Foi o Seu Maior Erro completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/_IY5igl_FKY",
+                "durationSeconds": 782,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-caminho-para-a-liberdade",
+        "title": "Caminho para a Liberdade",
+        "slug": "caminho-para-a-liberdade",
+        "synopsis": "Um vislumbre emocionante de superação e coragem onde cada segundo conta na luta de uma alma valente para quebrar as correntes da opressão e alcançar a tão sonhada liberdade.",
+        "coverUrl": "https://i.ytimg.com/vi/5ih5sVRjMto/hqdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/5ih5sVRjMto/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,liberdade,emocao,curta,drama",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 70000,
+        "likesCount": 24500,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Episódio Completo",
+                "description": "Episódio 1 de Caminho para a Liberdade completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/5ih5sVRjMto",
+                "durationSeconds": 193,
+                "isFree": true
+            }
+        ]
+    },
+    {
+        "id": "tdx-caso-encerrado-o-retorno-da-rainha-do-direito",
+        "title": "Caso Encerrado: O Retorno da Rainha do Direito",
+        "slug": "caso-encerrado-o-retorno-da-rainha-do-direito",
+        "synopsis": "Conhecida por sua mente cirúrgica nos tribunais, a mais brilhante advogada da nação retorna após anos afastada para assumir o caso mais perigoso da sua carreira e restabelecer a verdade.",
+        "coverUrl": "https://i.ytimg.com/vi/7ogXC5oUWhY/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/7ogXC5oUWhY/maxresdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,advogada,tribunal,retorno-triunfal,justica,drama",
+        "totalEpisodes": 2,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 68000,
+        "likesCount": 23800,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Caso Encerrado: O Retorno da Rainha do Direito completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/7ogXC5oUWhY",
+                "durationSeconds": 1259,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Caso Encerrado: O Retorno da Rainha do Direito completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/_aGao4zEHYA",
+                "durationSeconds": 1254,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-casamento-acidental-com-meu-ceo-pobre",
+        "title": "Casamento Acidental com Meu CEO Pobre",
+        "slug": "casamento-acidental-com-meu-ceo-pobre",
+        "synopsis": "Um engano cômico e inesperado a leva ao altar com um homem aparentemente simples, sem desconfiar que seu novo marido é, na realidade, o herdeiro bilionário da maior fortuna da região.",
+        "coverUrl": "https://i.ytimg.com/vi/WNpVrurQmy8/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/WNpVrurQmy8/maxresdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,casamento-acidental,ceo-disfarcado,identidade-secreta,comedia-romantica",
+        "totalEpisodes": 3,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 56000,
+        "likesCount": 19600,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Casamento Acidental com Meu CEO Pobre completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/WNpVrurQmy8",
+                "durationSeconds": 984,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Casamento Acidental com Meu CEO Pobre completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/QulRRUQfKlg",
+                "durationSeconds": 944,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Casamento Acidental com Meu CEO Pobre completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/OfcNKbKnabw",
+                "durationSeconds": 634,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-depois-do-termino-casei-com-o-chefao-da-mafia",
+        "title": "Depois do Término, Casei com o Chefão da Máfia",
+        "slug": "depois-do-termino-casei-com-o-chefao-da-mafia",
+        "synopsis": "Logo após ser covardemente descartada por seu ex-noivo arrogante, ela cruza o caminho do chefão da máfia, que lhe oferece sua proteção total, seu império e um casamento irresistível.",
+        "coverUrl": "https://i.ytimg.com/vi/VqCyItFZG2U/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/VqCyItFZG2U/maxresdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,termino,chefao-da-mafia,casamento-inesperado,protecao,perigo",
+        "totalEpisodes": 2,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 49400,
+        "likesCount": 17290,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Depois do Término, Casei com o Chefão da Máfia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/VqCyItFZG2U",
+                "durationSeconds": 1394,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Depois do Término, Casei com o Chefão da Máfia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/XFg40Z9eSis",
+                "durationSeconds": 1392,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-ele-arranjou-uma-amante-e-eu-conquistei-o-ceu",
+        "title": "Ele Arranjou Uma Amante E Eu Conquistei o Céu",
+        "slug": "ele-arranjou-uma-amante-e-eu-conquistei-o-ceu",
+        "synopsis": "Enquanto o marido tolo desfilava publicamente com sua amante fútil, a esposa menosprezada assumia o controle absoluto do mercado internacional, conquistando o mundo com sua genialidade.",
+        "coverUrl": "https://i.ytimg.com/vi/Yc7eG2Zldmw/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/Yc7eG2Zldmw/maxresdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,amante,traicao,sucesso-feminino,volta-por-cima,vinganca",
+        "totalEpisodes": 2,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 49000,
+        "likesCount": 17150,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Ele Arranjou Uma Amante E Eu Conquistei o Céu completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Yc7eG2Zldmw",
+                "durationSeconds": 1654,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Ele Arranjou Uma Amante E Eu Conquistei o Céu completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/y2GWDfmaXTY",
+                "durationSeconds": 1640,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-mae-solteira-casa-acidentalmente-com-bilionario-enquanto-procura-crianca-desapar",
+        "title": "Mãe Solteira Casa Acidentalmente com Bilionário Enquanto Procura Criança Desaparecida",
+        "slug": "mae-solteira-casa-acidentalmente-com-bilionario-enquanto-procura-crianca-desapar",
+        "synopsis": "Em busca desesperada por pistas de seu filho desaparecido, uma mãe corajosa acaba selando um matrimônio de conveniência com um bilionário que guarda as respostas que ela tanto procura.",
+        "coverUrl": "https://i.ytimg.com/vi/LOe6IbAwnyg/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/LOe6IbAwnyg/maxresdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,mae-solteira,bilionario,busca,filho-desaparecido,destino",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 48000,
+        "likesCount": 16800,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Episódio Completo",
+                "description": "Episódio 1 de Mãe Solteira Casa Acidentalmente com Bilionário Enquanto Procura Criança Desaparecida completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/LOe6IbAwnyg",
+                "durationSeconds": 898,
+                "isFree": true
+            }
+        ]
+    },
+    {
+        "id": "tdx-papai-essa-crianca-nem-e-sua",
+        "title": "Papai, Essa Criança Nem É Sua",
+        "slug": "papai-essa-crianca-nem-e-sua",
+        "synopsis": "Em meio a uma tempestade familiar de acusações e testes de DNA manipulados, uma revelação comovente prova que a verdadeira ligação entre pai e filho vai muito além do sangue.",
+        "coverUrl": "https://i.ytimg.com/vi/lJpXnn91VsY/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/lJpXnn91VsY/maxresdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,paternidade,duvida,verdade,familia,revelacao",
+        "totalEpisodes": 2,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 46965,
+        "likesCount": 16438,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Papai, Essa Criança Nem É Sua completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/lJpXnn91VsY",
+                "durationSeconds": 961,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Papai, Essa Criança Nem É Sua completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/bv-sLK1brxU",
+                "durationSeconds": 490,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-ossos-marcados-pela-dor",
+        "title": "Ossos Marcados pela Dor",
+        "slug": "ossos-marcados-pela-dor",
+        "synopsis": "Marcada pelas cicatrizes de um passado doloroso e injusto, ela encontra nos braços de um homem protetor e compreensivo a força necessária para curar as feridas da alma e recomeçar.",
+        "coverUrl": "https://i.ytimg.com/vi/Q-HN04KztIY/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/Q-HN04KztIY/maxresdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,dor,superacao,passado-sombrio,amor-e-cura,drama",
+        "totalEpisodes": 2,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 46000,
+        "likesCount": 16100,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Ossos Marcados pela Dor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Q-HN04KztIY",
+                "durationSeconds": 1131,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Ossos Marcados pela Dor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/VcWE48UT-Ds",
+                "durationSeconds": 1170,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-meu-marido-motorista-e-um-magnata",
+        "title": "Meu Marido Motorista é um Magnata",
+        "slug": "meu-marido-motorista-e-um-magnata",
+        "synopsis": "Ela pensava ter se casado com um humilde motorista de aplicativo para fugir da pressão familiar, até descobrir que o homem que dirige seu carro é o proprietário de todo o conglomerado.",
+        "coverUrl": "https://i.ytimg.com/vi/jSGgseF3UfE/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/jSGgseF3UfE/maxresdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,marido-motorista,magnata-disfarcado,identidade-oculta,humildade,amor",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 43000,
+        "likesCount": 15050,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Episódio Completo",
+                "description": "Episódio 1 de Meu Marido Motorista é um Magnata completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/jSGgseF3UfE",
+                "durationSeconds": 1631,
+                "isFree": true
+            }
+        ]
+    },
+    {
+        "id": "tdx-rainha-nao-amante",
+        "title": "Rainha, Não Amante",
+        "slug": "rainha-nao-amante",
+        "synopsis": "Ela jamais aceitará viver à sombra de ninguém ou ser a segunda opção de um homem vaidoso: seu lugar sempre foi o trono de rainha soberana do seu próprio destino e império.",
+        "coverUrl": "https://i.ytimg.com/vi/SV35hDfmO7o/hqdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/SV35hDfmO7o/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,rainha,amor-proprio,dignidade,poder-feminino,vinganca",
+        "totalEpisodes": 3,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 40900,
+        "likesCount": 14315,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Rainha, Não Amante completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/SV35hDfmO7o",
+                "durationSeconds": 975,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Rainha, Não Amante completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/YNNl_qqdA7w",
+                "durationSeconds": 1270,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Rainha, Não Amante completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/ny3KY85pSGo",
+                "durationSeconds": 845,
+                "isFree": false
+            }
+        ]
+    },
+    {
         "id": "tdx-refugio-perigoso",
         "title": "Refúgio Perigoso",
         "slug": "refugio-perigoso",
