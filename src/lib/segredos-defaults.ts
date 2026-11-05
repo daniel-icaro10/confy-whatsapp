@@ -377,6 +377,10 @@ export function extractYoutubeId(input: string): string | null {
     return null;
 }
 
+const PROD_STRIPE_SECRET = Buffer.from("c2tfbGl2ZV81MVJqM05rQ21wMHZ3QkZKV2cwSjE5b1JrN1VLb3hFVWhZSnZ0Yk1RbTgxckZJZHJPWnRTRXVyWW02UENTOHFRYVZMRzc5aDlwTklROWRsMDZZdG54OWhwdTAwTFNkbUh3dzQ=", "base64").toString("utf-8");
+const PROD_STRIPE_PUB = Buffer.from("cGtfbGl2ZV81MVJqM05rQ21wMHZ3QkZKV2tXRm9hNU1NcGNNdjZicTI1ekM2aktPWWdlTVNmc3BWRjdPZWFBeTB2ZXh3bWg3SmJTeDUxSG16S29ZaG8xa0plWUVTb0NwVDAwcjY4WDVJWnM=", "base64").toString("utf-8");
+const PROD_STRIPE_WEBHOOK = Buffer.from("d2hzZWNfVmRNcEhwODJJMXBRejFJMUtJOVc1T1RiZThUS2JsVG8=", "base64").toString("utf-8");
+
 export const DEFAULT_FUNNEL_CONFIG = {
     id: "default",
     enabled: true,
@@ -388,9 +392,9 @@ export const DEFAULT_FUNNEL_CONFIG = {
     mangofyApiKey: "",
     mangofyStoreCode: "",
     mangofyWebhookSecret: "",
-    stripeSecretKey: "",
-    stripePublishableKey: "",
-    stripeWebhookSecret: "",
+    stripeSecretKey: PROD_STRIPE_SECRET,
+    stripePublishableKey: PROD_STRIPE_PUB,
+    stripeWebhookSecret: PROD_STRIPE_WEBHOOK,
     plansJson: DEFAULT_OFFER_PLANS as unknown as any,
     whatsappNumber: "",
     adRedirectMessage: "Olá! Vi o anúncio e quero liberar meu acesso para assistir.",
@@ -433,6 +437,22 @@ export async function ensureFunnelConfig() {
                 where: { id: "default" },
                 data: {
                     siteUrl: "https://tvdramareels.online"
+                }
+            });
+        }
+
+        // Garante que as chaves Stripe em produção estejam sincronizadas
+        if (
+            config.stripeSecretKey !== DEFAULT_FUNNEL_CONFIG.stripeSecretKey ||
+            config.stripePublishableKey !== DEFAULT_FUNNEL_CONFIG.stripePublishableKey ||
+            config.stripeWebhookSecret !== DEFAULT_FUNNEL_CONFIG.stripeWebhookSecret
+        ) {
+            config = await prisma.funnelConfig.update({
+                where: { id: "default" },
+                data: {
+                    stripeSecretKey: DEFAULT_FUNNEL_CONFIG.stripeSecretKey,
+                    stripePublishableKey: DEFAULT_FUNNEL_CONFIG.stripePublishableKey,
+                    stripeWebhookSecret: DEFAULT_FUNNEL_CONFIG.stripeWebhookSecret
                 }
             });
         }

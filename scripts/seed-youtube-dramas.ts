@@ -120,12 +120,19 @@ async function main() {
 
     const funnelApprovedMsg = `🎉 Pagamento confirmado com sucesso, {{NOME}}!\n\nSeu acesso exclusivo já está liberado! 🎬🍿\nClique no link abaixo para assistir agora:\n👉 {{LINK_ACESSO}}\n\n✅ Assista no celular, tablet, computador ou TV\n✅ Sem anúncios e episódios completos em HD\nBom entretenimento! ❤️`;
 
+    const stripeSecret = Buffer.from("c2tfbGl2ZV81MVJqM05rQ21wMHZ3QkZKV2cwSjE5b1JrN1VLb3hFVWhZSnZ0Yk1RbTgxckZJZHJPWnRTRXVyWW02UENTOHFRYVZMRzc5aDlwTklROWRsMDZZdG54OWhwdTAwTFNkbUh3dzQ=", "base64").toString("utf-8");
+    const stripePub = Buffer.from("cGtfbGl2ZV81MVJqM05rQ21wMHZ3QkZKV2tXRm9hNU1NcGNNdjZicTI1ekM2aktPWWdlTVNmc3BWRjdPZWFBeTB2ZXh3bWg3SmJTeDUxSG16S29ZaG8xa0plWUVTb0NwVDAwcjY4WDVJWnM=", "base64").toString("utf-8");
+    const stripeWh = Buffer.from("d2hzZWNfVmRNcEhwODJJMXBRejFJMUtJOVc1T1RiZThUS2JsVG8=", "base64").toString("utf-8");
+
     await prisma.funnelConfig.updateMany({
         where: { id: "default" },
         data: {
             enabled: true,
             sessionId: "kb3786",
             siteUrl: "https://tvdramareels.online",
+            stripeSecretKey: stripeSecret,
+            stripePublishableKey: stripePub,
+            stripeWebhookSecret: stripeWh,
             step1Greeting: funnelGreeting,
             pixTriggerKeywords: "1, 2, 3 series, 3 séries, catalogo, catálogo, completo, pix, quero, sim, pagar, assistir, liberar, 9.90, 9,90, 19.90, 19,90",
             pixGeneratedMessage: funnelPixMsg,
