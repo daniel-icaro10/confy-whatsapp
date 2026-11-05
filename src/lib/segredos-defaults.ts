@@ -549,30 +549,43 @@ export async function ensureInitialDramas() {
                         }
                     }
                 });
-            } else if (existing.episodes.length !== item.episodes.length) {
-                await prisma.drama.update({
-                    where: { id: existing.id },
-                    data: {
-                        totalEpisodes: item.totalEpisodes,
-                        freeEpisodesCount: item.freeEpisodesCount
-                    }
-                });
-                await prisma.episode.deleteMany({
-                    where: { dramaId: existing.id }
-                });
-                await prisma.episode.createMany({
-                    data: item.episodes.map((ep) => ({
-                        dramaId: existing.id,
-                        number: ep.number,
-                        title: ep.title,
-                        description: ep.description,
-                        youtubeUrl: ep.youtubeUrl,
-                        thumbnailUrl: item.coverUrl,
-                        durationSeconds: ep.durationSeconds || 900,
-                        isFree: ep.isFree,
-                        viewsCount: 0
-                    }))
-                });
+            } else {
+                // Sincroniza visualizações e status de destaque para atualizar o ranking
+                if (existing.viewsCount !== item.viewsCount || existing.isFeatured !== item.isFeatured) {
+                    await prisma.drama.update({
+                        where: { id: existing.id },
+                        data: {
+                            viewsCount: item.viewsCount,
+                            isFeatured: item.isFeatured
+                        }
+                    }).catch(() => {});
+                }
+
+                if (existing.episodes.length !== item.episodes.length) {
+                    await prisma.drama.update({
+                        where: { id: existing.id },
+                        data: {
+                            totalEpisodes: item.totalEpisodes,
+                            freeEpisodesCount: item.freeEpisodesCount
+                        }
+                    });
+                    await prisma.episode.deleteMany({
+                        where: { dramaId: existing.id }
+                    });
+                    await prisma.episode.createMany({
+                        data: item.episodes.map((ep) => ({
+                            dramaId: existing.id,
+                            number: ep.number,
+                            title: ep.title,
+                            description: ep.description,
+                            youtubeUrl: ep.youtubeUrl,
+                            thumbnailUrl: item.coverUrl,
+                            durationSeconds: ep.durationSeconds || 900,
+                            isFree: ep.isFree,
+                            viewsCount: 0
+                        }))
+                    });
+                }
             }
         }
 

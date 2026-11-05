@@ -39,7 +39,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
     "freeEpisodesCount": 1,
     "isFeatured": true,
     "isVertical": true,
-    "viewsCount": 103288,
+    "viewsCount": 4850000,
     "likesCount": 38450,
     "episodes": [
         {
@@ -345,7 +345,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": true,
         "isVertical": true,
-        "viewsCount": 43751,
+        "viewsCount": 3920000,
         "likesCount": 15313,
         "episodes": [
             {
@@ -665,9 +665,9 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "tags": "dublado,bombando,tendencias,mafia,sequestro,romance,destaques,top1",
         "totalEpisodes": 2,
         "freeEpisodesCount": 1,
-        "isFeatured": true,
+        "isFeatured": false,
         "isVertical": true,
-        "viewsCount": 3415000,
+        "viewsCount": 42000,
         "likesCount": 1195250,
         "episodes": [
             {
@@ -699,9 +699,9 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "tags": "dublado,bombando,bilionario,vinganca,herdeira,traicao,drama",
         "totalEpisodes": 3,
         "freeEpisodesCount": 1,
-        "isFeatured": true,
+        "isFeatured": false,
         "isVertical": true,
-        "viewsCount": 672508,
+        "viewsCount": 38000,
         "likesCount": 235378,
         "episodes": [
             {
@@ -741,9 +741,9 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "tags": "dublado,bombando,vinganca,herdeira,bilionario,drama,destaques",
         "totalEpisodes": 3,
         "freeEpisodesCount": 1,
-        "isFeatured": true,
+        "isFeatured": false,
         "isVertical": true,
-        "viewsCount": 529700,
+        "viewsCount": 35000,
         "likesCount": 185395,
         "episodes": [
             {
@@ -783,9 +783,9 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "tags": "dublado,superacao,favela,trono,sucesso,drama",
         "totalEpisodes": 1,
         "freeEpisodesCount": 1,
-        "isFeatured": true,
+        "isFeatured": false,
         "isVertical": true,
-        "viewsCount": 438000,
+        "viewsCount": 31000,
         "likesCount": 153300,
         "episodes": [
             {
@@ -809,9 +809,9 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "tags": "dublado,casamento,romance,traicao,drama",
         "totalEpisodes": 1,
         "freeEpisodesCount": 1,
-        "isFeatured": true,
+        "isFeatured": false,
         "isVertical": true,
-        "viewsCount": 260000,
+        "viewsCount": 29000,
         "likesCount": 91000,
         "episodes": [
             {
@@ -835,9 +835,9 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "tags": "dublado,protecao,familia,vinganca,drama,acao",
         "totalEpisodes": 2,
         "freeEpisodesCount": 1,
-        "isFeatured": true,
+        "isFeatured": false,
         "isVertical": true,
-        "viewsCount": 259000,
+        "viewsCount": 28000,
         "likesCount": 90650,
         "episodes": [
             {
@@ -869,9 +869,9 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "tags": "dublado,mafia,gangster,contrato,casamento-forcado,romance",
         "totalEpisodes": 1,
         "freeEpisodesCount": 1,
-        "isFeatured": true,
+        "isFeatured": false,
         "isVertical": true,
-        "viewsCount": 254000,
+        "viewsCount": 27000,
         "likesCount": 88900,
         "episodes": [
             {
@@ -895,9 +895,9 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "tags": "dublado,encontro-as-cegas,destino,romance,comedia-romantica,ceo",
         "totalEpisodes": 2,
         "freeEpisodesCount": 1,
-        "isFeatured": true,
+        "isFeatured": false,
         "isVertical": true,
-        "viewsCount": 249000,
+        "viewsCount": 26000,
         "likesCount": 87150,
         "episodes": [
             {
@@ -929,9 +929,9 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "tags": "dublado,mafia,pacto,rei-da-mafia,romance-proibido,perigo",
         "totalEpisodes": 3,
         "freeEpisodesCount": 1,
-        "isFeatured": true,
+        "isFeatured": false,
         "isVertical": true,
-        "viewsCount": 221700,
+        "viewsCount": 25000,
         "likesCount": 77595,
         "episodes": [
             {
@@ -973,7 +973,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": false,
         "isVertical": true,
-        "viewsCount": 197000,
+        "viewsCount": 24000,
         "likesCount": 68950,
         "episodes": [
             {
@@ -1007,7 +1007,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": false,
         "isVertical": true,
-        "viewsCount": 185000,
+        "viewsCount": 23000,
         "likesCount": 64750,
         "episodes": [
             {
@@ -1033,7 +1033,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": false,
         "isVertical": true,
-        "viewsCount": 164700,
+        "viewsCount": 22000,
         "likesCount": 57645,
         "episodes": [
             {
@@ -1067,7 +1067,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": false,
         "isVertical": true,
-        "viewsCount": 154400,
+        "viewsCount": 21000,
         "likesCount": 54040,
         "episodes": [
             {
@@ -1109,7 +1109,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": false,
         "isVertical": true,
-        "viewsCount": 152000,
+        "viewsCount": 20000,
         "likesCount": 53200,
         "episodes": [
             {
@@ -1135,7 +1135,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": false,
         "isVertical": true,
-        "viewsCount": 129000,
+        "viewsCount": 19000,
         "likesCount": 45150,
         "episodes": [
             {
@@ -1161,7 +1161,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": false,
         "isVertical": true,
-        "viewsCount": 100400,
+        "viewsCount": 18500,
         "likesCount": 35140,
         "episodes": [
             {
@@ -1195,7 +1195,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": false,
         "isVertical": true,
-        "viewsCount": 93000,
+        "viewsCount": 18000,
         "likesCount": 32550,
         "episodes": [
             {
@@ -1229,7 +1229,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": false,
         "isVertical": true,
-        "viewsCount": 81000,
+        "viewsCount": 17500,
         "likesCount": 28350,
         "episodes": [
             {
@@ -1263,7 +1263,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": false,
         "isVertical": true,
-        "viewsCount": 79000,
+        "viewsCount": 17000,
         "likesCount": 27650,
         "episodes": [
             {
@@ -1297,7 +1297,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": false,
         "isVertical": true,
-        "viewsCount": 76000,
+        "viewsCount": 16500,
         "likesCount": 26600,
         "episodes": [
             {
@@ -1323,7 +1323,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": false,
         "isVertical": true,
-        "viewsCount": 72400,
+        "viewsCount": 16000,
         "likesCount": 25340,
         "episodes": [
             {
@@ -1357,7 +1357,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": false,
         "isVertical": true,
-        "viewsCount": 70000,
+        "viewsCount": 15500,
         "likesCount": 24500,
         "episodes": [
             {
@@ -1383,7 +1383,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": false,
         "isVertical": true,
-        "viewsCount": 68000,
+        "viewsCount": 15000,
         "likesCount": 23800,
         "episodes": [
             {
@@ -1417,7 +1417,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": false,
         "isVertical": true,
-        "viewsCount": 56000,
+        "viewsCount": 14500,
         "likesCount": 19600,
         "episodes": [
             {
@@ -1459,7 +1459,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": false,
         "isVertical": true,
-        "viewsCount": 49400,
+        "viewsCount": 14000,
         "likesCount": 17290,
         "episodes": [
             {
@@ -1493,7 +1493,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": false,
         "isVertical": true,
-        "viewsCount": 49000,
+        "viewsCount": 13500,
         "likesCount": 17150,
         "episodes": [
             {
@@ -1527,7 +1527,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": false,
         "isVertical": true,
-        "viewsCount": 48000,
+        "viewsCount": 13000,
         "likesCount": 16800,
         "episodes": [
             {
@@ -1553,7 +1553,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": false,
         "isVertical": true,
-        "viewsCount": 46965,
+        "viewsCount": 12500,
         "likesCount": 16438,
         "episodes": [
             {
@@ -1587,7 +1587,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": false,
         "isVertical": true,
-        "viewsCount": 46000,
+        "viewsCount": 12000,
         "likesCount": 16100,
         "episodes": [
             {
@@ -1621,7 +1621,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": false,
         "isVertical": true,
-        "viewsCount": 43000,
+        "viewsCount": 11500,
         "likesCount": 15050,
         "episodes": [
             {
@@ -1647,7 +1647,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": false,
         "isVertical": true,
-        "viewsCount": 40900,
+        "viewsCount": 11000,
         "likesCount": 14315,
         "episodes": [
             {
@@ -1689,7 +1689,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": true,
         "isVertical": true,
-        "viewsCount": 30378,
+        "viewsCount": 1380000,
         "likesCount": 10632,
         "episodes": [
             {
@@ -1779,7 +1779,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": true,
         "isVertical": true,
-        "viewsCount": 32141,
+        "viewsCount": 2850000,
         "likesCount": 11249,
         "episodes": [
             {
@@ -1973,7 +1973,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": true,
         "isVertical": true,
-        "viewsCount": 12169,
+        "viewsCount": 710000,
         "likesCount": 4259,
         "episodes": [
             {
@@ -2111,7 +2111,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": true,
         "isVertical": true,
-        "viewsCount": 28176,
+        "viewsCount": 2420000,
         "likesCount": 9861,
         "episodes": [
             {
@@ -2345,7 +2345,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": true,
         "isVertical": true,
-        "viewsCount": 33432,
+        "viewsCount": 1750000,
         "likesCount": 11701,
         "episodes": [
             {
@@ -2499,7 +2499,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": true,
         "isVertical": true,
-        "viewsCount": 15764,
+        "viewsCount": 1980000,
         "likesCount": 5517,
         "episodes": [
             {
@@ -2653,7 +2653,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": true,
         "isVertical": true,
-        "viewsCount": 25581,
+        "viewsCount": 1520000,
         "likesCount": 8953,
         "episodes": [
             {
@@ -2817,7 +2817,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": true,
         "isVertical": true,
-        "viewsCount": 19215,
+        "viewsCount": 820000,
         "likesCount": 6725,
         "episodes": [
             {
@@ -2971,7 +2971,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": true,
         "isVertical": true,
-        "viewsCount": 22644,
+        "viewsCount": 980000,
         "likesCount": 7925,
         "episodes": [
             {
@@ -3237,7 +3237,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": true,
         "isVertical": true,
-        "viewsCount": 34499,
+        "viewsCount": 890000,
         "likesCount": 12074,
         "episodes": [
             {
@@ -3441,7 +3441,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": true,
         "isVertical": true,
-        "viewsCount": 19424,
+        "viewsCount": 760000,
         "likesCount": 6798,
         "episodes": [
             {
@@ -3661,7 +3661,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "freeEpisodesCount": 1,
         "isFeatured": true,
         "isVertical": true,
-        "viewsCount": 25407,
+        "viewsCount": 1150000,
         "likesCount": 8892,
         "episodes": [
             {
@@ -3821,9 +3821,9 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "tags": "dublado,bombando,tendencias,fantasia,sobrenatural,casamento-arranjado,romance,drama",
         "totalEpisodes": 23,
         "freeEpisodesCount": 1,
-        "isFeatured": false,
+        "isFeatured": true,
         "isVertical": true,
-        "viewsCount": 15985,
+        "viewsCount": 1240000,
         "likesCount": 5594,
         "episodes": [
             {
