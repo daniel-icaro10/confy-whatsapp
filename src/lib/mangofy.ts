@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { ensureFunnelConfig, getOfferPlans, normalizeBrPhone } from "@/lib/segredos-defaults";
 import { waManager } from "@/modules/whatsapp/manager";
 import { logger } from "@/lib/logger";
+import { sendMetaCapiEvent } from "@/lib/meta-capi";
 
 export interface CreatePixChargeInput {
     phone: string;
@@ -272,6 +273,19 @@ export async function approvePixOrderAndGrantAccess(orderIdentifier: {
             renewalReminderSentAt: null,
             updatedAt: new Date()
         }
+    });
+
+    // Envia evento oficial Purchase para a API de Conversões da Meta (CAPI)
+    sendMetaCapiEvent({
+        eventName: "Purchase",
+        phone: cleanPhone,
+        name: order.customerName || undefined,
+        email: order.customerEmail || undefined,
+        value: order.amount,
+        currency: "BRL",
+        orderId: order.externalId || order.id
+    }).catch((err) => {
+        logger.warn("MetaCAPI", "Falha ao enviar evento de Purchase:", err);
     });
 
     const baseSiteUrl = (config.siteUrl || process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000").replace(/\/+$/, "");

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { DEFAULT_OFFER_PLANS, OfferPlan } from "@/lib/segredos-defaults";
 import { loadStripeClient } from "@/lib/stripe-client";
+import { trackMetaEvent } from "@/lib/tracking";
 
 interface VipAccessModalProps {
     isOpen: boolean;
@@ -83,6 +84,11 @@ export function VipAccessModal({
             setCardSuccess(false);
             const savedPhone = localStorage.getItem("sdc_viewer_phone") || "";
             if (savedPhone) setPhone(savedPhone);
+            trackMetaEvent("InitiateCheckout", {
+                content_name: selectedPlan.name,
+                value: selectedPlan.price,
+                currency: "BRL"
+            });
         }
     }, [isOpen, defaultTab, initialPlanKey]);
 
@@ -177,6 +183,11 @@ export function VipAccessModal({
                 const data = await res.json();
                 if (data?.isPaid) {
                     clearInterval(interval);
+                    trackMetaEvent("Purchase", {
+                        content_name: selectedPlan.name,
+                        value: pixOrder.amount || selectedPlan.price,
+                        currency: "BRL"
+                    });
                     localStorage.setItem("sdc_viewer_phone", pixOrder.phone);
                     localStorage.setItem("sdc_viewer_vip", "true");
                     onUnlocked(pixOrder.phone);
@@ -298,6 +309,12 @@ export function VipAccessModal({
                         })
                     }).catch(() => {});
 
+                    trackMetaEvent("Purchase", {
+                        content_name: selectedPlan.name,
+                        value: selectedPlan.price,
+                        currency: "BRL"
+                    });
+
                     localStorage.setItem("sdc_viewer_phone", phone);
                     localStorage.setItem("sdc_viewer_vip", "true");
                     setCardSuccess(true);
@@ -324,6 +341,11 @@ export function VipAccessModal({
                 setError(data?.error || "Não foi possível gerar o Pix.");
                 return;
             }
+            trackMetaEvent("AddPaymentInfo", {
+                content_name: selectedPlan.name,
+                value: selectedPlan.price,
+                currency: "BRL"
+            });
             setPixOrder(data);
         } catch {
             setError("Erro ao processar pagamento. Tente novamente.");
@@ -346,6 +368,11 @@ export function VipAccessModal({
             const res = await fetch(`/api/pix/status?orderId=${pixOrder.orderId}`);
             const data = await res.json();
             if (data?.isPaid) {
+                trackMetaEvent("Purchase", {
+                    content_name: selectedPlan.name,
+                    value: pixOrder.amount || selectedPlan.price,
+                    currency: "BRL"
+                });
                 localStorage.setItem("sdc_viewer_phone", pixOrder.phone);
                 localStorage.setItem("sdc_viewer_vip", "true");
                 onUnlocked(pixOrder.phone);

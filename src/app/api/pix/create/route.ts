@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createMangofyPixCharge } from "@/lib/mangofy";
 import { createStripePixCharge } from "@/lib/stripe";
 import { ensureFunnelConfig, normalizeBrPhone } from "@/lib/segredos-defaults";
+import { sendMetaCapiEvent } from "@/lib/meta-capi";
 
 export async function POST(request: Request) {
     try {
@@ -33,6 +34,16 @@ export async function POST(request: Request) {
                 dramaId: body.dramaId || undefined,
                 planKey: body.planKey || "monthly"
             });
+
+        // Envia evento oficial InitiateCheckout para a Meta Conversions API (CAPI)
+        sendMetaCapiEvent({
+            eventName: "InitiateCheckout",
+            phone: cleanPhone,
+            name: body.name || undefined,
+            value: charge.amount,
+            currency: "BRL",
+            orderId: charge.externalId || charge.orderId
+        }).catch(() => {});
 
         return NextResponse.json({
             orderId: charge.orderId,
