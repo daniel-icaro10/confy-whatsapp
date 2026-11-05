@@ -13,7 +13,7 @@ export async function GET() {
                 select: { keyId: true, remoteJid: true, fromMe: true, content: true, status: true, timestamp: true }
             }).catch(() => []),
             prisma.session.findMany({
-                select: { sessionId: true, status: true, jid: true, updatedAt: true }
+                select: { sessionId: true, status: true, name: true, updatedAt: true }
             }).catch(() => []),
             prisma.funnelConfig.findUnique({
                 where: { id: "default" },
