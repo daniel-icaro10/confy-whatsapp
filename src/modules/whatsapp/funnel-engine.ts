@@ -173,7 +173,8 @@ export async function processFunnelIncomingMessage(
             });
 
             const isPrevOption1 = previousOrder ? (previousOrder.amount <= 12) : false;
-            const resendPrice = isPrevOption1 ? 10.00 : 20.00;
+            const hasDiscount = Boolean(previousOrder?.remarketingSentAt) || incomingLower.includes("desconto") || incomingLower.includes("cupom");
+            const resendPrice = isPrevOption1 ? (hasDiscount ? 7.90 : 10.00) : (hasDiscount ? 15.00 : 20.00);
             const resendPlanType: "option1" | "option2" = isPrevOption1 ? "option1" : "option2";
 
             const isStripePreferred = Boolean((config as any).stripeSecretKey?.trim()) || !Boolean(config.mangofyApiKey?.trim());
@@ -225,6 +226,15 @@ export async function processFunnelIncomingMessage(
             "10",
             "9,90",
             "9.90",
+            "7,90",
+            "7.90",
+            "7,9",
+            "7.9",
+            "7",
+            "3 series por 7,90",
+            "3 séries por 7,90",
+            "3 series 7,90",
+            "3 séries 7,90",
             "primeira",
             "a primeira",
             "quero 3",
@@ -233,7 +243,7 @@ export async function processFunnelIncomingMessage(
             "1️⃣"
         ].some((k) => incomingLower === k || (incomingLower.length <= 30 && incomingLower.includes(k)));
 
-        // 5. Detecta escolha da Opção 2 (Catálogo Completo - R$ 20,00)
+        // 5. Detecta escolha da Opção 2 (Catálogo Completo - R$ 20,00 ou R$ 15,00 no remarketing)
         const isOption2 = [
             "2",
             "opt_2",
@@ -253,6 +263,22 @@ export async function processFunnelIncomingMessage(
             "20",
             "19,90",
             "19.90",
+            "15,00",
+            "15.00",
+            "15",
+            "completo por 15",
+            "completo 15",
+            "completo 15,00",
+            "quero",
+            "sim quero",
+            "quero o completo",
+            "quero o catalogo",
+            "quero o catálogo",
+            "quero o desconto",
+            "desconto",
+            "cupom",
+            "promoção",
+            "promocao",
             "segunda",
             "a segunda",
             "todas",
@@ -280,7 +306,22 @@ export async function processFunnelIncomingMessage(
         ].some((k) => incomingLower.includes(k));
 
         if (isOption1 || isOption2 || isRenewal) {
-            const selectedPrice = isOption1 ? 10.00 : 20.00;
+            const previousPending = await prisma.pixOrder.findFirst({
+                where: { phone: { in: variants } },
+                orderBy: { createdAt: "desc" }
+            });
+            const hasRemarketingDiscount =
+                Boolean(previousPending?.remarketingSentAt) ||
+                incomingLower.includes("desconto") ||
+                incomingLower.includes("cupom") ||
+                incomingLower.includes("7,90") ||
+                incomingLower.includes("7.90") ||
+                incomingLower.includes("15") ||
+                incomingLower === "quero";
+
+            const selectedPrice = isOption1
+                ? (hasRemarketingDiscount ? 7.90 : 10.00)
+                : (hasRemarketingDiscount ? 15.00 : 20.00);
             const planType: "option1" | "option2" = isOption1 ? "option1" : "option2";
 
             try {

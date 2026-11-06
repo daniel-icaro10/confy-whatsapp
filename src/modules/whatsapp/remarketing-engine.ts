@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { ensureFunnelConfig, normalizeBrPhone, getPhoneVariants } from "@/lib/segredos-defaults";
 import { waManager } from "./manager";
 import { logger } from "@/lib/logger";
-import { sendAbandonedPixRemarketing } from "./interactive-buttons";
+import { sendAbandonedPixRemarketing, send24hPromoRemarketing } from "./interactive-buttons";
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -103,12 +103,12 @@ export async function runPixAbandonRemarketing(): Promise<{ processed: number; s
                     where: { id: order.id },
                     data: {
                         remarketingSentAt: new Date(),
-                        remarketingStatus: "SENT"
+                        remarketingStatus: "STAGE_1_SENT"
                     }
                 });
 
                 sent++;
-                logger.success("Remarketing", `Mensagem de remarketing Pix enviada para ${targetJid} (Pedido ${order.id})`);
+                logger.success("Remarketing", `Mensagem de remarketing Pix 15m enviada para ${targetJid} (Pedido ${order.id})`);
 
                 // Pausa anti-spam de 2 segundos entre envios
                 await sleep(2000);
@@ -121,6 +121,69 @@ export async function runPixAbandonRemarketing(): Promise<{ processed: number; s
                         remarketingStatus: "FAILED_SEND_ERROR"
                     }
                 }).catch(() => {});
+                skipped++;
+            }
+        }
+
+        // ETAPA 2: Remarketing de 24 Horas com Cupom de Última Chance (R$ 7,90 e R$ 15,00)
+        const minCreatedAt24h = new Date(now - 72 * 60 * 60 * 1000);
+        const maxCreatedAt24h = new Date(now - 24 * 60 * 60 * 1000);
+
+        const pendingOrders24h = await prisma.pixOrder.findMany({
+            where: {
+                status: "PENDING",
+                remarketingStatus: { in: ["SENT", "STAGE_1_SENT"] },
+                createdAt: {
+                    gte: minCreatedAt24h,
+                    lte: maxCreatedAt24h
+                }
+            },
+            take: 15,
+            orderBy: { createdAt: "asc" }
+        });
+
+        for (const order of pendingOrders24h) {
+            processed++;
+            const cleanPhone = normalizeBrPhone(order.phone);
+            if (!cleanPhone) continue;
+
+            const variants = getPhoneVariants(cleanPhone);
+            const activeVip = await prisma.viewerAccess.findFirst({
+                where: {
+                    phone: { in: variants },
+                    isVip: true,
+                    OR: [
+                        { expiresAt: null },
+                        { expiresAt: { gt: new Date() } }
+                    ]
+                }
+            });
+
+            if (activeVip) {
+                await prisma.pixOrder.update({
+                    where: { id: order.id },
+                    data: { remarketingStatus: "SKIPPED_ALREADY_VIP" }
+                }).catch(() => {});
+                skipped++;
+                continue;
+            }
+
+            const sessionResult = waManager.getSessionOrAnyActive(order.sessionId || config.sessionId);
+            if (!sessionResult || !sessionResult.instance.socket) break;
+
+            const targetJid = order.jid || `${cleanPhone}@s.whatsapp.net`;
+
+            try {
+                await send24hPromoRemarketing(sessionResult.instance.socket, targetJid);
+                await prisma.pixOrder.update({
+                    where: { id: order.id },
+                    data: { remarketingStatus: "STAGE_2_SENT" }
+                });
+                sent++;
+                logger.success("Remarketing", `Mensagem 24h promocional enviada para ${targetJid} (Pedido ${order.id})`);
+                await sleep(2000);
+            } catch (err: any) {
+                logger.error("Remarketing", `Erro ao enviar remarketing 24h para ${targetJid}:`, err?.message);
                 skipped++;
             }
         }

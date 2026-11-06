@@ -86,8 +86,8 @@ export async function sendPixPaymentMessage(
 }
 
 /**
- * 3. Envia o remarketing de Pix abandonado:
- * "o pix ainda não apareceu aqui 😊..."
+ * 3. Envia o remarketing de Pix abandonado (15 minutos):
+ * "o pix ainda não apareceu aqui 😊..." com cupom de desconto (R$ 7,90 e R$ 15,00)
  */
 export async function sendAbandonedPixRemarketing(
     sock: WASocket,
@@ -97,17 +97,50 @@ export async function sendAbandonedPixRemarketing(
     const text =
         `o pix ainda não apareceu aqui 😊\n` +
         `conseguiu fazer?\n\n` +
-        `se travou no banco, me avisa que eu te mando um novinho\n\n` +
+        `se travou no banco, liberei um cupom especial de desconto pra você:\n` +
+        `🎬 *3 Séries por R$ 7,90* (de ~R$ 10,00~)\n` +
+        `🔥 *Catálogo Completo por R$ 15,00* (de ~R$ 20,00~)\n\n` +
         `_Responda:_\n` +
-        `*1* - Mandar pix de novo\n` +
+        `*1* - Mandar pix de novo (com desconto)\n` +
         `*2* - Já paguei`;
 
     try {
         await sock.sendMessage(jid, { text }, quoted ? { quoted } : undefined);
-        logger.info("InteractiveButtons", `Remarketing entregue via sendMessage para ${jid}`);
+        logger.info("InteractiveButtons", `Remarketing 15m entregue via sendMessage para ${jid}`);
         return true;
     } catch (err: any) {
-        logger.error("InteractiveButtons", `Erro ao enviar remarketing: ${err?.message}`);
+        logger.error("InteractiveButtons", `Erro ao enviar remarketing 15m: ${err?.message}`);
+        return false;
+    }
+}
+
+/**
+ * 4. Envia o remarketing de 24 horas (D+1) com o cupom de última chance:
+ * 3 Séries por R$ 7,90 ou Catálogo Completo por R$ 15,00
+ */
+export async function send24hPromoRemarketing(
+    sock: WASocket,
+    jid: string,
+    quoted?: WAMessage
+): Promise<boolean> {
+    const text =
+        `💜 Oie! Passando porque vi que você ainda não conseguiu garantir seu acesso ao TvDrama Reels 😢\n\n` +
+        `🎬 Tem mais de 5000 novelinhas curtas, séries dubladas e lançamentos diários te esperando pra maratonar sem anúncios!\n\n` +
+        `✨ Pra você não ficar de fora hoje, liberei um *CUPOM EXCLUSIVO DE ÚLTIMA CHANCE*:\n\n` +
+        `🎬 *3 Séries por R$ 7,90* (de ~R$ 10,00~)\n` +
+        `🔥 *Catálogo Completo VIP por apenas R$ 15,00* (de ~R$ 20,00~)\n\n` +
+        `Quer que eu te envie o Pix com o desconto agora? 😊\n\n` +
+        `_Responda:_\n` +
+        `*1* - 3 Séries (R$ 7,90)\n` +
+        `*2* - Catálogo Completo (R$ 15,00)\n` +
+        `_(ou responda *QUERO* para liberar o Catálogo Completo)_`;
+
+    try {
+        await sock.sendMessage(jid, { text }, quoted ? { quoted } : undefined);
+        logger.info("InteractiveButtons", `Remarketing 24h entregue via sendMessage para ${jid}`);
+        return true;
+    } catch (err: any) {
+        logger.error("InteractiveButtons", `Erro ao enviar remarketing 24h: ${err?.message}`);
         return false;
     }
 }
