@@ -2,7 +2,11 @@ import { prisma } from "@/lib/prisma";
 import { ensureFunnelConfig, normalizeBrPhone, getPhoneVariants } from "@/lib/segredos-defaults";
 import { waManager } from "./manager";
 import { logger } from "@/lib/logger";
-import { sendAbandonedPixRemarketing, send24hPromoRemarketing } from "./interactive-buttons";
+import {
+    sendAbandonedPixRemarketing,
+    send24hPromoRemarketing,
+    sendNoReplyLeadRemarketing
+} from "./interactive-buttons";
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -302,9 +306,158 @@ export async function runRenewalReminder(): Promise<{ processed: number; sent: n
 }
 
 /**
- * Executa ambos os motores (Pix abandonado + lembrete de renovação)
+ * Remarketing para Leads Sem Resposta (Opção B):
+ * Dispara uma mensagem amigável no WhatsApp após 30 a 45 minutos do 1º contato
+ * caso o cliente NÃO tenha respondido à 1ª mensagem (não gerou Pix, não comprou e não interagiu mais).
+ * Oferece a condição promocional de R$ 7,90 para destravar a conversa.
+ */
+export async function runNoReplyLeadRemarketing(): Promise<{ processed: number; sent: number; skipped: number }> {
+    let processed = 0;
+    let sent = 0;
+    let skipped = 0;
+
+    try {
+        const config = await ensureFunnelConfig();
+        if (!config.enabled) {
+            return { processed, sent, skipped };
+        }
+
+        const now = Date.now();
+        // Dispara para leads que entraram em contato entre 30 minutos e 24 horas atrás
+        const maxCreatedAt = new Date(now - 30 * 60 * 1000); // Mais de 30 minutos
+        const minCreatedAt = new Date(now - 24 * 60 * 60 * 1000); // Menos de 24 horas
+
+        // Busca tickets abertos sem atendente atribuído criados no período
+        const candidates = await prisma.ticket.findMany({
+            where: {
+                status: "OPEN",
+                assignedUserId: null,
+                createdAt: {
+                    gte: minCreatedAt,
+                    lte: maxCreatedAt
+                }
+            },
+            take: 20,
+            orderBy: { createdAt: "asc" }
+        });
+
+        if (candidates.length === 0) {
+            return { processed, sent, skipped };
+        }
+
+        for (const ticket of candidates) {
+            processed++;
+            const cleanPhone = normalizeBrPhone(ticket.jid);
+            if (!cleanPhone) {
+                skipped++;
+                continue;
+            }
+
+            // 1. Verifica se já enviou follow-up para este ticket
+            const alreadySent = await prisma.ticketActivity.findFirst({
+                where: {
+                    ticketId: ticket.id,
+                    type: "FUNNEL_NO_REPLY_FOLLOWUP_SENT"
+                }
+            });
+            if (alreadySent) {
+                skipped++;
+                continue;
+            }
+
+            // 2. Verifica se o lead é assinante VIP ativo
+            const variants = getPhoneVariants(cleanPhone);
+            const activeVip = await prisma.viewerAccess.findFirst({
+                where: {
+                    phone: { in: variants },
+                    isVip: true,
+                    OR: [
+                        { expiresAt: null },
+                        { expiresAt: { gt: new Date() } }
+                    ]
+                }
+            });
+            if (activeVip) {
+                skipped++;
+                continue;
+            }
+
+            // 3. Verifica se o lead já gerou um Pix (se gerou, o remarketing de Pix abandonado cuida dele)
+            const existingPixOrder = await prisma.pixOrder.findFirst({
+                where: { phone: { in: variants } }
+            });
+            if (existingPixOrder) {
+                skipped++;
+                continue;
+            }
+
+            // 4. Verifica as mensagens do cliente
+            const clientMessages = await prisma.message.findMany({
+                where: {
+                    remoteJid: ticket.jid,
+                    fromMe: false
+                },
+                orderBy: { timestamp: "asc" }
+            });
+
+            // Se o lead mandou mais de uma mensagem, ele interagiu (não está totalmente mudo)
+            if (clientMessages.length > 1) {
+                skipped++;
+                continue;
+            }
+
+            // 5. Extrai o nome da novela (se tiver no texto do 1º contato do lead)
+            let dramaTitle: string | undefined;
+            if (clientMessages.length === 1 && clientMessages[0].content) {
+                const match = clientMessages[0].content.match(/\(([^)]+)\)/);
+                if (match) dramaTitle = match[1].trim();
+            }
+
+            // 6. Busca a sessão conectada ativa no WhatsApp
+            const sessionResult = waManager.getSessionOrAnyActive(config.sessionId);
+            if (!sessionResult || !sessionResult.instance.socket) {
+                logger.warn("Remarketing", `Nenhuma sessão WhatsApp ativa para follow-up sem resposta. Aguardando reconexão.`);
+                break;
+            }
+
+            const targetJid = ticket.jid.includes("@") ? ticket.jid : `${cleanPhone}@s.whatsapp.net`;
+
+            try {
+                // Envia a mensagem calorosa com o cupom de R$ 7,90 (Opção B)
+                await sendNoReplyLeadRemarketing(sessionResult.instance.socket, targetJid, dramaTitle);
+
+                // Registra o envio para nunca duplicar
+                await prisma.ticketActivity.create({
+                    data: {
+                        ticketId: ticket.id,
+                        type: "FUNNEL_NO_REPLY_FOLLOWUP_SENT",
+                        description: `Follow-up 30m enviado com sucesso (R$ 7,90)${dramaTitle ? ` - ${dramaTitle}` : ""}`
+                    }
+                }).catch(() => {});
+
+                sent++;
+                logger.success("Remarketing", `Follow-up de lead sem resposta (30m) enviado para ${targetJid}`);
+                await sleep(2000);
+            } catch (err: any) {
+                logger.error("Remarketing", `Erro ao enviar follow-up para ${targetJid}:`, err?.message);
+                skipped++;
+            }
+        }
+    } catch (e: any) {
+        logger.error("Remarketing", "Erro no motor de follow-up de leads sem resposta:", e?.message);
+    }
+
+    return { processed, sent, skipped };
+}
+
+/**
+ * Executa todos os motores de automação do funil:
+ * 1. Pix abandonado (15 min e 24 horas)
+ * 2. Follow-up de lead sem resposta (30 a 45 min)
+ * 3. Lembrete de renovação (29º dia)
  */
 export async function runRemarketingAndRenewalJobs() {
     await runPixAbandonRemarketing();
+    await runNoReplyLeadRemarketing();
     await runRenewalReminder();
 }

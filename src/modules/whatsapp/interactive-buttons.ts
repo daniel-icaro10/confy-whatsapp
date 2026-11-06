@@ -2,36 +2,35 @@ import type { WASocket, WAMessage } from "@whiskeysockets/baileys";
 import { logger } from "@/lib/logger";
 
 /**
- * 1. Envia a mensagem de escolha de planos com entrega 100% garantida via sendMessage do Baileys.
- * Utiliza o texto rico e persuasivo solicitado, com o link do catálogo e instruções diretas (1 ou 2).
- * Evita o descarte silencioso do WhatsApp que ocorre ao tentar enviar botões interativos via relayMessage em contas Web.
+ * 1. Envia a mensagem acolhedora de escolha de planos (Opção A) com entrega 100% garantida via Baileys.
+ * Valida o interesse do lead, cita a novela solicitada (se veio pelo anúncio) e apresenta as 2 opções com clareza.
  */
 export async function sendOfferSelectionMessage(
     sock: WASocket,
     jid: string,
     quoted?: WAMessage,
-    siteUrl: string = "https://tvdramareels.online"
+    siteUrl: string = "https://tvdramareels.online",
+    dramaTitle?: string
 ): Promise<boolean> {
-    const cleanSiteUrl = (siteUrl || "https://tvdramareels.online").replace(/\/+$/, "");
+    const dramaMention = dramaTitle ? ` "${dramaTitle}"` : "";
 
     const text =
-        `Qual das duas vc prefere? 😊\n\n` +
-        `🎬 *3 Séries por R$ 10,00*\n` +
-        `✅ Você que escolhe as séries\n` +
-        `✅ Acesso enviado no WhatsApp após o pagamento\n\n` +
-        `🚀 *Catálogo Completo por R$ 20,00* ⭐\n` +
-        `✅ Todas as +501 séries liberadas\n` +
+        `Oie, que bom te ver por aqui! 🥰🎬\n\n` +
+        `A novelinha${dramaMention} tá completa, dublada e em alta definição te esperando pra maratonar sem anúncios!\n\n` +
+        `Liberamos 2 opções super acessíveis pra você assistir agora mesmo no celular:\n\n` +
+        `1️⃣ *3 Séries completas por apenas R$ 10,00*\n` +
+        `✅ Você que escolhe as 3 séries\n` +
+        `✅ Acesso enviado no WhatsApp na hora\n\n` +
+        `2️⃣ *Catálogo VIP Completo por apenas R$ 20,00* ⭐\n` +
+        `✅ Todas as +500 séries liberadas\n` +
         `✅ Assista quantas quiser por 30 dias\n` +
-        `✅ TODO DIA entra série nova\n` +
+        `✅ Todo dia entra novela nova\n` +
         `✅ Melhor custo-benefício\n\n` +
-        `📌 Catálogo:\n` +
-        `${cleanSiteUrl}\n\n` +
-        `✅ Depois do pagamento a série chega aqui na hora\n\n` +
-        `_Responda *1* para 3 Séries ou *2* para Catálogo Completo_`;
+        `👉 *Responda 1 ou 2* para liberar seu acesso na hora!`;
 
     try {
         await sock.sendMessage(jid, { text }, quoted ? { quoted } : undefined);
-        logger.info("InteractiveButtons", `Mensagem de oferta entregue via sendMessage para ${jid}`);
+        logger.info("InteractiveButtons", `Mensagem de boas-vindas e oferta entregue para ${jid}`);
         return true;
     } catch (err: any) {
         logger.error("InteractiveButtons", `Erro ao enviar escolha de oferta: ${err?.message}`);
@@ -141,6 +140,32 @@ export async function send24hPromoRemarketing(
         return true;
     } catch (err: any) {
         logger.error("InteractiveButtons", `Erro ao enviar remarketing 24h: ${err?.message}`);
+        return false;
+    }
+}
+
+/**
+ * 5. Envia o remarketing para lead sem resposta (Opção B - após 30 a 45 minutos da 1ª mensagem):
+ * Abordagem leve e descontraída com oferta irresistível de R$ 7,90 para destravar a conversa.
+ */
+export async function sendNoReplyLeadRemarketing(
+    sock: WASocket,
+    jid: string,
+    dramaTitle?: string
+): Promise<boolean> {
+    const dramaMention = dramaTitle ? ` "${dramaTitle}"` : "";
+
+    const text =
+        `Oie! Passando rapidinho pra saber se você ainda quer assistir à novelinha${dramaMention} hoje? 😊\n\n` +
+        `Liberamos uma condição especial de *R$ 7,90* pra você começar agora sem anúncios!\n\n` +
+        `Quer que eu te envie o Pix com o desconto? Só me responder *QUERO* 🍿`;
+
+    try {
+        await sock.sendMessage(jid, { text });
+        logger.info("InteractiveButtons", `Follow-up 30m enviado para lead sem resposta em ${jid}`);
+        return true;
+    } catch (err: any) {
+        logger.error("InteractiveButtons", `Erro ao enviar follow-up para ${jid}: ${err?.message}`);
         return false;
     }
 }

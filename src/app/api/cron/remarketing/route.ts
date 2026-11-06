@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
-import { runPixAbandonRemarketing, runRenewalReminder } from "@/modules/whatsapp/remarketing-engine";
+import { runPixAbandonRemarketing, runRenewalReminder, runNoReplyLeadRemarketing } from "@/modules/whatsapp/remarketing-engine";
 import { prisma } from "@/lib/prisma";
 import { WhatsAppManager } from "@/modules/whatsapp/manager";
 import { normalizeBrPhone } from "@/lib/segredos-defaults";
 import {
     sendOfferSelectionMessage,
     sendPixPaymentMessage,
-    sendAbandonedPixRemarketing
+    sendAbandonedPixRemarketing,
+    sendNoReplyLeadRemarketing
 } from "@/modules/whatsapp/interactive-buttons";
 
 export async function GET(req: NextRequest) {
@@ -38,14 +39,18 @@ export async function GET(req: NextRequest) {
                 } else if (testType === "remarketing") {
                     await sendAbandonedPixRemarketing(sock, targetJid);
                     testSendResult = { sent: true, type: "remarketing", to: targetJid };
+                } else if (testType === "noreply") {
+                    await sendNoReplyLeadRemarketing(sock, targetJid);
+                    testSendResult = { sent: true, type: "noreply", to: targetJid };
                 }
             } else {
                 testSendResult = { sent: false, error: "Nenhuma sessão ativa conectada no WhatsAppManager" };
             }
         }
 
-        const [abandonResult, renewalResult, recentMessages, sessions, funnelConfig] = await Promise.all([
+        const [abandonResult, noReplyResult, renewalResult, recentMessages, sessions, funnelConfig] = await Promise.all([
             runPixAbandonRemarketing(),
+            runNoReplyLeadRemarketing(),
             runRenewalReminder(),
             prisma.message.findMany({
                 take: 10,
@@ -69,6 +74,7 @@ export async function GET(req: NextRequest) {
             funnelConfig,
             recentMessages,
             pixAbandonRemarketing: abandonResult,
+            noReplyLeadRemarketing: noReplyResult,
             renewalReminder: renewalResult
         });
     } catch (err: any) {
