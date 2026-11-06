@@ -330,7 +330,7 @@ export async function runNoReplyLeadRemarketing(): Promise<{ processed: number; 
         // Busca tickets abertos sem atendente atribuído criados no período
         const candidates = await prisma.ticket.findMany({
             where: {
-                status: "OPEN",
+                status: "OPEN" as any,
                 assignedUserId: null,
                 createdAt: {
                     gte: minCreatedAt,
@@ -431,7 +431,7 @@ export async function runNoReplyLeadRemarketing(): Promise<{ processed: number; 
                     data: {
                         ticketId: ticket.id,
                         type: "FUNNEL_NO_REPLY_FOLLOWUP_SENT",
-                        description: `Follow-up 30m enviado com sucesso (R$ 7,90)${dramaTitle ? ` - ${dramaTitle}` : ""}`
+                        content: `Follow-up 30m enviado com sucesso (R$ 7,90)${dramaTitle ? ` - ${dramaTitle}` : ""}`
                     }
                 }).catch(() => {});
 
