@@ -21,7 +21,7 @@ const interTight = Inter_Tight({
 });
 
 const APP_DESCRIPTION = "Novelas verticais, romances proibidos e séries curtas em alta definição feitas para assistir no celular.";
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://segredosdocoracao.com";
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://tvdramareels.online";
 
 export const viewport: Viewport = {
   themeColor: [
@@ -89,11 +89,20 @@ export async function generateMetadata(): Promise<Metadata> {
       title: appDefaultTitle,
       description: APP_DESCRIPTION,
       url: APP_URL,
+      images: [
+        {
+          url: "/logo-banner.png",
+          width: 1024,
+          height: 512,
+          alt: "TvDrama Reels",
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: appDefaultTitle,
       description: APP_DESCRIPTION,
+      images: ["/logo-banner.png"],
     },
     other: {
       "mobile-web-app-capable": "yes",

@@ -201,9 +201,12 @@ function WatchDramaContent() {
     if (!drama) {
         return (
             <div className="min-h-dvh bg-black text-[#f5f5f5] flex flex-col items-center justify-center p-6 text-center">
-                <span className="text-[11px] font-extrabold uppercase tracking-[0.08em] text-[#e11d48] mb-2">
-                    TVDRAMA REELS
-                </span>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                    src="/logo.png"
+                    alt="TvDrama Reels"
+                    className="h-10 w-auto mb-3 object-contain"
+                />
                 <h1 className="text-xl font-black text-white mb-4">
                     Série não encontrada
                 </h1>
@@ -275,9 +278,12 @@ function WatchDramaContent() {
                         </Link>
                         <div className="min-w-0">
                             <div className="flex items-center gap-2">
-                                <span className="hidden sm:inline font-black text-xs tracking-[0.06em] uppercase text-[#e11d48]">
-                                    TVDRAMA REELS
-                                </span>
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
+                                    src="/logo.png"
+                                    alt="TvDrama Reels"
+                                    className="hidden sm:inline h-5 w-auto object-contain"
+                                />
                                 <span className="hidden sm:inline text-white/25">·</span>
                                 <h1 className="text-xs sm:text-sm font-bold text-white truncate">
                                     {drama.title}

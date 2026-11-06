@@ -583,12 +583,15 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                             setLockedSerieModal(null);
                             window.scrollTo({ top: 0, behavior: "smooth" });
                         }}
-                        className="text-left focus:outline-none flex items-center gap-1.5"
+                        className="text-left focus:outline-none flex items-center gap-2 group cursor-pointer"
+                        aria-label="Ir para a página inicial do TvDrama Reels"
                     >
-                        <span className="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse shadow-[0_0_8px_rgba(244,63,94,0.8)]" />
-                        <span className="font-black text-[17px] sm:text-[22px] tracking-[0.04em] uppercase text-white whitespace-nowrap">
-                            TVDRAMA<span className="text-rose-500">.REELS</span>
-                        </span>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                            src="/logo.png"
+                            alt="TvDrama Reels"
+                            className="h-[36px] sm:h-[44px] w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+                        />
                     </button>
 
                     {isAdmin ? (
@@ -1560,9 +1563,12 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                         >
                             ← Voltar
                         </button>
-                        <span className="font-black text-[17px] sm:text-[19px] tracking-[0.06em] uppercase text-[#e11d48]">
-                            TVDRAMA REELS
-                        </span>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                            src="/logo.png"
+                            alt="TvDrama Reels"
+                            className="h-[28px] sm:h-[34px] w-auto object-contain"
+                        />
                         <div className="w-14" />
                     </header>
 
