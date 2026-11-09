@@ -40,19 +40,23 @@ export async function generateMetadata({ params }: OfertaPageProps): Promise<Met
         // fallback
     }
 
+    const absoluteCoverUrl = coverUrl.startsWith("http")
+        ? coverUrl
+        : `https://tvdramareels.online${coverUrl.startsWith("/") ? "" : "/"}${coverUrl}`;
+
     return {
         title,
         description,
         openGraph: {
             title,
             description,
-            images: [{ url: coverUrl, width: 1200, height: 630, alt: title }]
+            images: [{ url: absoluteCoverUrl, width: 1200, height: 630, alt: title }]
         },
         twitter: {
             card: "summary_large_image",
             title,
             description,
-            images: [coverUrl]
+            images: [absoluteCoverUrl]
         }
     };
 }
