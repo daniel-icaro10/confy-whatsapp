@@ -1688,3 +1688,42 @@ kbd, .kbd {
 .hd-rise {
   animation: hdRise 0.65s var(--hd-ease) both;
 }
+
+/* ============================================================
+   OFERTA SALES PAGE ANIMATIONS (MARQUEE & PULSE)
+   ============================================================ */
+@keyframes marqueeLeft {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marqueeRight {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+
+@keyframes shineSweep {
+  0% { transform: translateX(-150%); }
+  100% { transform: translateX(250%); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 16px rgba(225, 29, 72, 0.4), 0 0 32px rgba(168, 85, 247, 0.2); }
+  50% { box-shadow: 0 0 28px rgba(225, 29, 72, 0.75), 0 0 48px rgba(168, 85, 247, 0.45); }
+}
+
+.animate-marquee-left {
+  animation: marqueeLeft 26s linear infinite;
+}
+
+.animate-marquee-right {
+  animation: marqueeRight 26s linear infinite;
+}
+
+.animate-shine-sweep {
+  animation: shineSweep 2.8s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}

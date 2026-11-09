@@ -27,6 +27,504 @@ export interface InitialDramaData {
 
 export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
     {
+        "id": "tdx-ganhei-tres-namoradas",
+        "title": "Ganhei Três Namoradas",
+        "slug": "ganhei-tres-namoradas",
+        "synopsis": "Preso em uma realidade brutal inspirada na antiga Esparta, Jason é um pária da sociedade que toma uma decisão leal ao ficar ao lado de três garotas rejeitadas. Sua atitude desperta um sistema misterioso que o recompensa com armas modernas e tecnológicas conforme o vínculo de afeto entre eles aumenta. Em um mundo de espadas e exércitos impiedosos, eles se tornam uma força imparável.",
+        "coverUrl": "https://i.ytimg.com/vi/K5aKv-9gR28/hqdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/K5aKv-9gR28/hqdefault.jpg",
+        "category": "Legendado",
+        "tags": "legendado,fantasia,acao,romance,esparta,armas,destaques,em alta",
+        "totalEpisodes": 60,
+        "freeEpisodesCount": 2,
+        "isFeatured": true,
+        "isVertical": true,
+        "viewsCount": 5200000,
+        "likesCount": 49200,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Episódio 1",
+                "description": "Episódio 1 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Episódio 2",
+                "description": "Episódio 2 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=hMg4j8JBZ0U",
+                "durationSeconds": 150,
+                "isFree": true
+            },
+            {
+                "number": 3,
+                "title": "Episódio 3",
+                "description": "Episódio 3 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Episódio 4",
+                "description": "Episódio 4 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Episódio 5",
+                "description": "Episódio 5 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Episódio 6",
+                "description": "Episódio 6 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Episódio 7",
+                "description": "Episódio 7 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 8,
+                "title": "Episódio 8",
+                "description": "Episódio 8 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 9,
+                "title": "Episódio 9",
+                "description": "Episódio 9 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 10,
+                "title": "Episódio 10",
+                "description": "Episódio 10 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 11,
+                "title": "Episódio 11",
+                "description": "Episódio 11 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 12,
+                "title": "Episódio 12",
+                "description": "Episódio 12 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 13,
+                "title": "Episódio 13",
+                "description": "Episódio 13 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 14,
+                "title": "Episódio 14",
+                "description": "Episódio 14 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 15,
+                "title": "Episódio 15",
+                "description": "Episódio 15 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 16,
+                "title": "Episódio 16",
+                "description": "Episódio 16 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 17,
+                "title": "Episódio 17",
+                "description": "Episódio 17 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 18,
+                "title": "Episódio 18",
+                "description": "Episódio 18 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 19,
+                "title": "Episódio 19",
+                "description": "Episódio 19 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 20,
+                "title": "Episódio 20",
+                "description": "Episódio 20 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 21,
+                "title": "Episódio 21",
+                "description": "Episódio 21 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 22,
+                "title": "Episódio 22",
+                "description": "Episódio 22 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 23,
+                "title": "Episódio 23",
+                "description": "Episódio 23 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 24,
+                "title": "Episódio 24",
+                "description": "Episódio 24 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 25,
+                "title": "Episódio 25",
+                "description": "Episódio 25 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 26,
+                "title": "Episódio 26",
+                "description": "Episódio 26 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 27,
+                "title": "Episódio 27",
+                "description": "Episódio 27 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 28,
+                "title": "Episódio 28",
+                "description": "Episódio 28 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 29,
+                "title": "Episódio 29",
+                "description": "Episódio 29 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 30,
+                "title": "Episódio 30",
+                "description": "Episódio 30 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 31,
+                "title": "Episódio 31",
+                "description": "Episódio 31 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 32,
+                "title": "Episódio 32",
+                "description": "Episódio 32 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 33,
+                "title": "Episódio 33",
+                "description": "Episódio 33 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 34,
+                "title": "Episódio 34",
+                "description": "Episódio 34 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 35,
+                "title": "Episódio 35",
+                "description": "Episódio 35 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 36,
+                "title": "Episódio 36",
+                "description": "Episódio 36 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 37,
+                "title": "Episódio 37",
+                "description": "Episódio 37 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 38,
+                "title": "Episódio 38",
+                "description": "Episódio 38 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 39,
+                "title": "Episódio 39",
+                "description": "Episódio 39 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 40,
+                "title": "Episódio 40",
+                "description": "Episódio 40 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 41,
+                "title": "Episódio 41",
+                "description": "Episódio 41 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 42,
+                "title": "Episódio 42",
+                "description": "Episódio 42 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 43,
+                "title": "Episódio 43",
+                "description": "Episódio 43 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 44,
+                "title": "Episódio 44",
+                "description": "Episódio 44 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 45,
+                "title": "Episódio 45",
+                "description": "Episódio 45 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 46,
+                "title": "Episódio 46",
+                "description": "Episódio 46 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 47,
+                "title": "Episódio 47",
+                "description": "Episódio 47 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 48,
+                "title": "Episódio 48",
+                "description": "Episódio 48 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 49,
+                "title": "Episódio 49",
+                "description": "Episódio 49 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 50,
+                "title": "Episódio 50",
+                "description": "Episódio 50 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 51,
+                "title": "Episódio 51",
+                "description": "Episódio 51 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 52,
+                "title": "Episódio 52",
+                "description": "Episódio 52 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 53,
+                "title": "Episódio 53",
+                "description": "Episódio 53 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 54,
+                "title": "Episódio 54",
+                "description": "Episódio 54 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 55,
+                "title": "Episódio 55",
+                "description": "Episódio 55 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 56,
+                "title": "Episódio 56",
+                "description": "Episódio 56 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 57,
+                "title": "Episódio 57",
+                "description": "Episódio 57 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 58,
+                "title": "Episódio 58",
+                "description": "Episódio 58 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 59,
+                "title": "Episódio 59",
+                "description": "Episódio 59 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            },
+            {
+                "number": 60,
+                "title": "Episódio 60",
+                "description": "Episódio 60 de Ganhei Três Namoradas completo e legendado em alta definição.",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "durationSeconds": 150,
+                "isFree": false
+            }
+        ]
+    },
+        {
         "id": "tdx-xiu-somos-um-secreto",
         "title": "Xiu... Somos Um Secreto",
         "slug": "xiu-somos-um-secreto",

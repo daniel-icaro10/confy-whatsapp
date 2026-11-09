@@ -24,15 +24,19 @@ export async function POST(request: Request) {
                 phone: cleanPhone,
                 customerName: body.name || "Assinante Site",
                 customerCpf: body.cpf || undefined,
+                customerEmail: body.email || undefined,
                 dramaId: body.dramaId || undefined,
-                planKey: body.planKey || "monthly"
+                planKey: body.planKey || "monthly",
+                customAmount: body.amount ? Number(body.amount) : undefined
             })
             : await createMangofyPixCharge({
                 phone: cleanPhone,
                 customerName: body.name || "Assinante Site",
                 customerCpf: body.cpf || undefined,
+                customerEmail: body.email || undefined,
                 dramaId: body.dramaId || undefined,
-                planKey: body.planKey || "monthly"
+                planKey: body.planKey || "monthly",
+                customAmount: body.amount ? Number(body.amount) : undefined
             });
 
         // Envia evento oficial InitiateCheckout para a Meta Conversions API (CAPI)
