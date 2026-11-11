@@ -187,6 +187,23 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
     // ID do Vimeo de exemplo (Ganhei Três Namoradas)
     const vimeoVideoId = "1242685747";
 
+    // 0. Captura parâmetros de anúncios (UTMs e fbclid) para atribuição
+    useEffect(() => {
+        if (typeof window === "undefined") return;
+        const params = new URLSearchParams(window.location.search);
+        const utmKeys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid", "utm_id"];
+        const foundUtms: Record<string, string> = {};
+
+        utmKeys.forEach((key) => {
+            const val = params.get(key);
+            if (val) foundUtms[key] = val;
+        });
+
+        if (Object.keys(foundUtms).length > 0) {
+            sessionStorage.setItem("sdc_utm_params", JSON.stringify(foundUtms));
+        }
+    }, []);
+
     // 1. Carrega dados do drama
     useEffect(() => {
         let isMounted = true;
@@ -228,6 +245,22 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
         fetchDrama();
         return () => { isMounted = false; };
     }, [slug]);
+
+    // Dispara ViewContent no Meta Pixel assim que a oferta é visualizada
+    useEffect(() => {
+        if (!drama) return;
+        if (typeof window !== "undefined" && (window as any).fbq) {
+            try {
+                (window as any).fbq("track", "ViewContent", {
+                    content_name: drama.title || "Ganhei Três Namoradas",
+                    content_ids: [slug],
+                    content_type: "product",
+                    value: PRICE_BASICA,
+                    currency: "BRL"
+                });
+            } catch {}
+        }
+    }, [drama, slug]);
 
     // 2. Inicializa o player da Vimeo API para controle de áudio
     useEffect(() => {
@@ -378,7 +411,26 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
 
         setGeneratingPix(true);
 
+        // Dispara evento AddPaymentInfo no Meta Pixel
+        if (typeof window !== "undefined" && (window as any).fbq) {
+            try {
+                (window as any).fbq("track", "AddPaymentInfo", {
+                    content_name: drama?.title || "Ganhei Três Namoradas",
+                    content_ids: [slug],
+                    currency: "BRL",
+                    value: currentTotalAmount
+                });
+            } catch {}
+        }
+
         try {
+            // Recupera UTMs salvas
+            let utms: Record<string, string> = {};
+            try {
+                const raw = sessionStorage.getItem("sdc_utm_params");
+                if (raw) utms = JSON.parse(raw);
+            } catch {}
+
             const planKey = selectedPackage === "upsell" ? "monthly" : "single_drama";
             const res = await fetch("/api/pix/create", {
                 method: "POST",
@@ -389,7 +441,9 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                     phone: phoneDigits,
                     amount: currentTotalAmount,
                     dramaId: slug,
-                    planKey
+                    planKey,
+                    url: typeof window !== "undefined" ? window.location.href : undefined,
+                    ...utms
                 })
             });
 
@@ -1327,6 +1381,56 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                     )}
                 </div>
             )}
+
+            {/* RODAPÉ LEGAL DE CONFORMIDADE COM META / FACEBOOK ADS */}
+            <footer className="w-full mt-auto border-t border-white/10 bg-[#06050a] py-8 px-4 text-center text-xs text-stone-500">
+                <div className="max-w-2xl mx-auto space-y-4">
+                    <div className="flex items-center justify-center gap-2">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src="/logo.png" alt="TvDrama Reels" className="h-6 w-auto object-contain opacity-75" />
+                    </div>
+
+                    <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-stone-400 font-medium">
+                        <Link href="/termos" target="_blank" className="hover:text-white transition-colors">
+                            Termos de Uso
+                        </Link>
+                        <span>•</span>
+                        <Link href="/privacidade" target="_blank" className="hover:text-white transition-colors">
+                            Políticas de Privacidade
+                        </Link>
+                        <span>•</span>
+                        <a
+                            href={`https://wa.me/5581997823907?text=${encodeURIComponent("Olá! Estou na página da novela e gostaria de tirar uma dúvida sobre meu acesso.")}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:text-white transition-colors"
+                        >
+                            Suporte ao Cliente
+                        </a>
+                    </div>
+
+                    <p className="text-[11px] text-stone-500 leading-relaxed max-w-lg mx-auto">
+                        Este site não é afiliado ao Facebook ou a qualquer entidade do Facebook. Depois que você sair do Facebook, a responsabilidade não é deles e sim do nosso site. Fazemos todos os esforços para indicar claramente e apresentar a plataforma com transparência.
+                    </p>
+
+                    <p className="text-[10px] text-stone-600">
+                        TvDrama Reels © 2026 – Todos os direitos reservados.
+                    </p>
+                </div>
+            </footer>
+
+            {/* WIDGET FLUTUANTE DE SUPORTE WHATSAPP */}
+            <a
+                href={`https://wa.me/5581997823907?text=${encodeURIComponent("Olá! Vi a oferta da novela Ganhei Três Namoradas no site e gostaria de tirar uma dúvida.")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="fixed bottom-20 sm:bottom-6 right-4 z-40 flex items-center gap-2 rounded-full bg-emerald-600 hover:bg-emerald-500 px-4 py-2.5 text-white text-xs font-bold shadow-[0_4px_20px_rgba(16,185,129,0.45)] transition-all active:scale-95 group"
+                aria-label="Falar com suporte no WhatsApp"
+            >
+                <MessageCircle className="size-4 fill-white text-emerald-600" />
+                <span className="hidden sm:inline">Dúvidas? Fale Conosco</span>
+                <span className="sm:hidden">Ajuda</span>
+            </a>
         </div>
     );
 }

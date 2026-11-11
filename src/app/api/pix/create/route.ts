@@ -39,14 +39,21 @@ export async function POST(request: Request) {
                 customAmount: body.amount ? Number(body.amount) : undefined
             });
 
+        const clientIp = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || request.headers.get("x-real-ip") || undefined;
+        const userAgent = request.headers.get("user-agent") || undefined;
+
         // Envia evento oficial InitiateCheckout para a Meta Conversions API (CAPI)
         sendMetaCapiEvent({
             eventName: "InitiateCheckout",
             phone: cleanPhone,
+            email: body.email || undefined,
             name: body.name || undefined,
             value: charge.amount,
             currency: "BRL",
-            orderId: charge.externalId || charge.orderId
+            orderId: charge.externalId || charge.orderId,
+            clientIp,
+            userAgent,
+            url: body.url || "https://tvdramareels.online/oferta/ganhei-tres-namoradas"
         }).catch(() => {});
 
         return NextResponse.json({
