@@ -252,7 +252,7 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
         if (typeof window !== "undefined" && (window as any).fbq) {
             try {
                 (window as any).fbq("track", "ViewContent", {
-                    content_name: drama.title || "Ganhei Três Namoradas",
+                    content_name: drama.title || "Ganhei Três Namoradas (Dublada)",
                     content_ids: [slug],
                     content_type: "product",
                     value: PRICE_BASICA,
@@ -346,7 +346,7 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
         if (typeof window !== "undefined" && (window as any).fbq) {
             try {
                 (window as any).fbq("track", "InitiateCheckout", {
-                    content_name: drama?.title || "Ganhei Três Namoradas",
+                    content_name: drama?.title || "Ganhei Três Namoradas (Dublada)",
                     currency: "BRL",
                     value: PRICE_BASICA
                 });
@@ -406,7 +406,7 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
         if (typeof window !== "undefined" && (window as any).fbq) {
             try {
                 (window as any).fbq("track", "AddPaymentInfo", {
-                    content_name: drama?.title || "Ganhei Três Namoradas",
+                    content_name: drama?.title || "Ganhei Três Namoradas (Dublada)",
                     content_ids: [slug],
                     currency: "BRL",
                     value: currentTotalAmount
@@ -557,7 +557,7 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
         );
     }
 
-    const currentTitle = drama?.title || "Ganhei Três Namoradas";
+    const currentTitle = drama?.title || "Ganhei Três Namoradas (Dublada)";
     const currentCover = "/cover-ganhei-tres-namoradas.jpg";
 
     return (
@@ -1547,7 +1547,7 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
 
             {/* WIDGET FLUTUANTE DE SUPORTE WHATSAPP */}
             <a
-                href={`https://wa.me/5581997823907?text=${encodeURIComponent("Olá! Vi a oferta da novela Ganhei Três Namoradas no site e gostaria de tirar uma dúvida.")}`}
+                href={`https://wa.me/5581997823907?text=${encodeURIComponent("Olá! Vi a oferta da novela Ganhei Três Namoradas (Dublada) no site e gostaria de tirar uma dúvida.")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="fixed bottom-20 sm:bottom-6 right-4 z-40 flex items-center gap-2 rounded-full bg-emerald-600 hover:bg-emerald-500 px-4 py-2.5 text-white text-xs font-bold shadow-[0_4px_20px_rgba(16,185,129,0.45)] transition-all active:scale-95 group"

@@ -582,8 +582,9 @@ export async function ensureInitialDramas(force: boolean = false) {
                     }
                 });
             } else {
-                // Sincroniza visualizações, status de destaque e categoria (Dublado/Legendado)
+                // Sincroniza título, visualizações, status de destaque e categoria (Dublado/Legendado)
                 if (
+                    existing.title !== item.title ||
                     existing.viewsCount !== item.viewsCount ||
                     existing.isFeatured !== item.isFeatured ||
                     existing.category !== item.category
@@ -591,6 +592,7 @@ export async function ensureInitialDramas(force: boolean = false) {
                     await prisma.drama.update({
                         where: { id: existing.id },
                         data: {
+                            title: item.title,
                             viewsCount: item.viewsCount,
                             isFeatured: item.isFeatured,
                             category: item.category,
