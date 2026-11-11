@@ -421,7 +421,7 @@ export const DEFAULT_FUNNEL_CONFIG = {
     plansJson: DEFAULT_OFFER_PLANS as unknown as any,
     whatsappNumber: "5581997823907",
     adRedirectMessage: "Olá! Vi o anúncio e quero liberar meu acesso para assistir.",
-    step1Greeting: "Oie, que bom te ver por aqui! 🥰🎬\n\nA novelinha tá completa, dublada e em alta definição te esperando pra maratonar sem anúncios!\n\nLiberamos 2 opções super acessíveis pra você assistir agora mesmo no celular:\n\n1️⃣ *3 Séries completas por apenas R$ 10,00*\n✅ Você que escolhe as 3 séries\n✅ Acesso enviado no WhatsApp na hora\n\n2️⃣ *Catálogo VIP Completo por apenas R$ 20,00* ⭐\n✅ Todas as +500 séries liberadas\n✅ Assista quantas quiser por 30 dias\n✅ Todo dia entra novela nova\n✅ Melhor custo-benefício\n\n👉 *Responda 1 ou 2* para liberar seu acesso na hora!",
+    step1Greeting: "Oie, que bom te ver por aqui! 🥰🎬\n\nA novelinha tá completa, dublada e em alta definição te esperando pra maratonar sem anúncios!\n\nLiberamos 2 opções super acessíveis pra você assistir agora mesmo no celular:\n\n1️⃣ *3 Séries completas por apenas R$ 10,00*\n✅ Você que escolhe as 3 séries\n✅ Acesso enviado no WhatsApp na hora\n\n2️⃣ *Catálogo VIP Completo por apenas R$ 20,00* ⭐\n✅ Todas as mais de 500 séries e lançamentos diários liberados\n✅ Assista quantas quiser por 30 dias\n✅ Todo dia entra novela nova\n✅ Melhor custo-benefício\n\n👉 *Responda 1 ou 2* para liberar seu acesso na hora!",
     step1MediaUrl: "",
     step1MediaType: "none",
     step2OfferMessage: "",

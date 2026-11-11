@@ -933,7 +933,7 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                                 </h3>
 
                                 <p className="mt-3 max-w-sm text-xs leading-relaxed text-stone-300 mb-4">
-                                    Por que levar só uma novela se você pode levar TODAS as mais de 500 séries por apenas R$ 10,00?
+                                    Por que levar só uma novela se você pode levar TODAS as séries do catálogo completo com lançamentos diários por apenas R$ 10,00?
                                 </p>
 
                                 {/* Benefícios do Upsell */}
@@ -944,7 +944,7 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                                         </span>
                                         <div className="flex flex-col">
                                             <span className="text-xs font-black text-stone-100">
-                                                Mais de 5.000 Novelinhas
+                                                Mais de 15.000 Episódios Liberados
                                             </span>
                                             <span className="text-[10px] text-stone-300">
                                                 Acesso imediato e lançamentos diários.
@@ -1057,7 +1057,7 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                                     {selectedPackage === "upsell" ? "⭐ Pacote VIP Selecionado" : "🎬 Novela Selecionada"}
                                 </span>
                                 <h3 className="text-sm font-bold text-white truncate">
-                                    {selectedPackage === "upsell" ? "Catálogo VIP Completo (+500 séries)" : currentTitle}
+                                    {selectedPackage === "upsell" ? "Catálogo VIP Completo (Acesso Ilimitado)" : currentTitle}
                                 </h3>
                                 <p className="text-xs text-stone-400">
                                     {selectedPackage === "upsell"

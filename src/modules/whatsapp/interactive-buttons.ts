@@ -22,7 +22,7 @@ export async function sendOfferSelectionMessage(
         `✅ Você que escolhe as 3 séries\n` +
         `✅ Acesso enviado no WhatsApp na hora\n\n` +
         `2️⃣ *Catálogo VIP Completo por apenas R$ 20,00* ⭐\n` +
-        `✅ Todas as +500 séries liberadas\n` +
+        `✅ Todas as centenas de séries e lançamentos diários liberados\n` +
         `✅ Assista quantas quiser por 30 dias\n` +
         `✅ Todo dia entra novela nova\n` +
         `✅ Melhor custo-benefício\n\n` +

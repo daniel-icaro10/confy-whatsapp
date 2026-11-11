@@ -727,7 +727,7 @@ function WatchDramaContent() {
                                         {drama.title}
                                     </h2>
                                     <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
-                                        Assista a todos os 60 episódios desta série liberados no Pix agora:
+                                        Assista a todos os {drama.totalEpisodes || episodes.length || "completos"} episódios desta série liberados no Pix agora:
                                     </p>
                                 </div>
 
@@ -752,7 +752,7 @@ function WatchDramaContent() {
                                             </strong>
                                         </div>
                                         <span className="text-[11px] text-zinc-300 block mt-0.5">
-                                            Todos os 60 episódios + Catálogo VIP
+                                            Episódios completos + Catálogo VIP Ilimitado
                                         </span>
                                     </button>
 
