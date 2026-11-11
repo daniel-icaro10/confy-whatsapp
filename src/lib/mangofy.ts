@@ -38,7 +38,9 @@ export async function createMangofyPixCharge(input: CreatePixChargeInput): Promi
 
     const cleanPhone = normalizeBrPhone(input.phone);
     const amount = input.customAmount ?? selectedPlan?.price ?? config.planPrice ?? 9.90;
-    const planTitle = selectedPlan ? `${selectedPlan.name} — TvDrama Reels` : config.planName || "Plano Mensal — TvDrama Reels";
+    const planTitle = input.planKey === "single_drama"
+        ? `${input.dramaId || "Série"} — Série Individual`
+        : (selectedPlan ? `${selectedPlan.name} — TvDrama Reels` : config.planName || "Plano Mensal — TvDrama Reels");
     const amountCents = Math.round(amount * 100);
 
     const customerName = input.customerName?.trim() || "Cliente TvDrama Reels";
@@ -253,6 +255,31 @@ export async function approvePixOrderAndGrantAccess(orderIdentifier: {
     }
     const expiresAt = new Date(Date.now() + days * 24 * 60 * 60 * 1000);
 
+    // Determina se é compra de série avulsa (ex: R$ 5,00) ou Upsell VIP / Catálogo Completo (R$ 10,00+)
+    const isSingleDrama = (order.planName || "").toLowerCase().includes("single_drama") ||
+        (order.planName || "").toLowerCase().includes("individual") ||
+        (order.amount <= 9.00 && Boolean(order.dramaId));
+
+    // Busca acesso existente do cliente para mesclar séries liberadas
+    const existingViewer = await prisma.viewerAccess.findUnique({
+        where: { phone: cleanPhone }
+    }).catch(() => null);
+
+    let newUnlockedDramas = "*";
+    if (isSingleDrama && order.dramaId) {
+        if (existingViewer?.unlockedDramas === "*") {
+            newUnlockedDramas = "*";
+        } else {
+            const currentList = (existingViewer?.unlockedDramas || "").split(",").map((s: string) => s.trim()).filter(Boolean);
+            if (!currentList.includes(order.dramaId)) {
+                currentList.push(order.dramaId);
+            }
+            newUnlockedDramas = currentList.join(",");
+        }
+    } else {
+        newUnlockedDramas = "*";
+    }
+
     const viewer = await prisma.viewerAccess.upsert({
         where: { phone: cleanPhone },
         create: {
@@ -260,15 +287,17 @@ export async function approvePixOrderAndGrantAccess(orderIdentifier: {
             name: order.customerName || "Assinante",
             email: order.customerEmail,
             cpf: order.customerCpf,
-            planName: order.planName || config.planName,
+            planName: order.planName || (isSingleDrama ? `${order.dramaId} — Série Individual` : config.planName),
             isVip: true,
+            unlockedDramas: newUnlockedDramas,
             expiresAt,
             renewalReminderSentAt: null,
             lastWatchedDramaId: order.dramaId || null
         },
         update: {
             isVip: true,
-            planName: order.planName || config.planName,
+            planName: newUnlockedDramas === "*" ? (order.planName || "Acesso VIP Completo") : (order.planName || existingViewer?.planName || `${order.dramaId} — Série Individual`),
+            unlockedDramas: newUnlockedDramas,
             expiresAt,
             renewalReminderSentAt: null,
             updatedAt: new Date()

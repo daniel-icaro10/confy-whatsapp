@@ -850,6 +850,7 @@ model ViewerAccess {
   cpf                String?
   planName           String    @default("Acesso VIP Vitalício")
   isVip              Boolean   @default(true)
+  unlockedDramas     String?   @db.Text  // slugs/IDs liberados ("*" = todo o catalogo, ou "slug1,slug2")
   expiresAt          DateTime?
   renewalReminderSentAt DateTime?
   lastWatchedDramaId String?

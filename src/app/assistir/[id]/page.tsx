@@ -80,6 +80,8 @@ function WatchDramaContent() {
 
     const [viewerPhone, setViewerPhone] = useState("");
     const [isVip, setIsVip] = useState(false);
+    const [isFullVip, setIsFullVip] = useState(false);
+    const [unlockedDramas, setUnlockedDramas] = useState<string[]>([]);
     const [plans, setPlans] = useState<OfferPlan[]>(DEFAULT_OFFER_PLANS);
     const [vipModalOpen, setVipModalOpen] = useState(false);
     const [vipModalTab, setVipModalTab] = useState<"login" | "pix">("pix");
@@ -229,10 +231,24 @@ function WatchDramaContent() {
 
     // VIP and Session check
     useEffect(() => {
+        // Leitura local imediata de cache
+        try {
+            const storedFullVip = localStorage.getItem("sdc_is_full_vip") === "true";
+            if (storedFullVip) setIsFullVip(true);
+            const storedDramas = localStorage.getItem("sdc_unlocked_dramas");
+            if (storedDramas) {
+                const list = JSON.parse(storedDramas);
+                if (Array.isArray(list)) setUnlockedDramas(list);
+            }
+        } catch {}
+
         if (session?.user) {
             setIsVip(true);
+            setIsFullVip(true);
+            setUnlockedDramas(["*"]);
             setViewerPhone(session.user.name || session.user.email || "Admin");
             localStorage.setItem("sdc_viewer_vip", "true");
+            localStorage.setItem("sdc_is_full_vip", "true");
             return;
         }
 
@@ -258,27 +274,46 @@ function WatchDramaContent() {
 
         async function checkAccess(phone: string) {
             try {
-                const res = await fetch(`/api/viewer/access?phone=${encodeURIComponent(phone)}`);
+                const currentSlug = (drama?.slug || dramaIdOrSlug || "").toLowerCase();
+                const res = await fetch(`/api/viewer/access?phone=${encodeURIComponent(phone)}&slug=${encodeURIComponent(currentSlug)}`);
                 const data = await res.json();
                 if (data?.isVip) {
                     setViewerPhone(data.phone);
                     setIsVip(true);
+                    setIsFullVip(Boolean(data.isFullVip));
+                    if (Array.isArray(data.unlockedDramas)) {
+                        setUnlockedDramas(data.unlockedDramas);
+                        localStorage.setItem("sdc_unlocked_dramas", JSON.stringify(data.unlockedDramas));
+                    }
                     localStorage.setItem("sdc_viewer_phone", data.phone);
                     localStorage.setItem("sdc_viewer_vip", "true");
+                    if (data.isFullVip) {
+                        localStorage.setItem("sdc_is_full_vip", "true");
+                    }
                 }
             } catch {
                 // ignore
             }
         }
         checkAccess(targetPhone);
-    }, [searchParams, session]);
+    }, [searchParams, session, drama?.slug, dramaIdOrSlug]);
 
     const episodes = drama?.episodes || [];
     const currentEpisode =
         episodes.find((ep) => ep.number === currentEpNumber) || episodes[0];
 
     const isEpisodeUnlocked = (ep: Episode) => {
-        if (isAdmin || isVip) return true;
+        if (isAdmin || isFullVip) return true;
+
+        const currentSlug = (drama?.slug || dramaIdOrSlug || "").toLowerCase();
+        const hasSpecificAccess =
+            unlockedDramas.includes("*") ||
+            unlockedDramas.includes(currentSlug) ||
+            (typeof window !== "undefined" && localStorage.getItem(`sdc_unlocked_${currentSlug}`) === "true");
+
+        if (hasSpecificAccess) return true;
+
+        // Se não possui acesso liberado para esta série, apenas os episódios grátis de amostra são liberados
         if (ep.isFree) return true;
         const freeCount =
             typeof drama?.freeEpisodesCount === "number" && drama.freeEpisodesCount >= 0

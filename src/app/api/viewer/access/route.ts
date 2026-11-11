@@ -63,8 +63,34 @@ export async function GET(request: Request) {
             });
         }
 
+        const dramaParam = (searchParams.get("dramaId") || searchParams.get("slug") || "").trim().toLowerCase();
+        const rawUnlocked = (viewer as any).unlockedDramas || "";
+        const isFullVip = rawUnlocked === "*" ||
+            rawUnlocked.includes("*") ||
+            (viewer.planName?.toLowerCase().includes("vip") && !viewer.planName?.toLowerCase().includes("individual")) ||
+            viewer.planName?.toLowerCase().includes("todas") ||
+            viewer.planName?.toLowerCase().includes("catálogo") ||
+            viewer.planName?.toLowerCase().includes("anual");
+
+        const unlockedList = isFullVip
+            ? ["*"]
+            : rawUnlocked
+                .split(",")
+                .map((s: string) => s.trim().toLowerCase())
+                .filter(Boolean);
+
+        // Se o viewer comprou série avulsa antes mas não tinha unlockedDramas preenchido, usa lastWatchedDramaId
+        if (!isFullVip && unlockedList.length === 0 && viewer.lastWatchedDramaId) {
+            unlockedList.push(viewer.lastWatchedDramaId.trim().toLowerCase());
+        }
+
+        const hasDramaAccess = isFullVip || (dramaParam ? unlockedList.includes(dramaParam) : true);
+
         return NextResponse.json({
             isVip: true,
+            isFullVip,
+            unlockedDramas: unlockedList,
+            hasDramaAccess,
             phone: viewer.phone,
             viewer
         });

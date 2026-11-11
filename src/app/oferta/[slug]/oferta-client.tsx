@@ -515,10 +515,23 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                         } catch {}
                     }
 
-                    // Salva status VIP no localStorage
+                    // Salva status de acesso no localStorage (Série única vs VIP Completo)
                     if (data.phone) {
                         localStorage.setItem("sdc_viewer_phone", data.phone);
                         localStorage.setItem("sdc_viewer_vip", "true");
+                        if (selectedPackage === "upsell") {
+                            localStorage.setItem("sdc_is_full_vip", "true");
+                            localStorage.setItem("sdc_unlocked_dramas", JSON.stringify(["*"]));
+                        } else {
+                            localStorage.setItem("sdc_is_full_vip", "false");
+                            localStorage.setItem(`sdc_unlocked_${slug}`, "true");
+                            try {
+                                const raw = localStorage.getItem("sdc_unlocked_dramas");
+                                const list = raw ? JSON.parse(raw) : [];
+                                if (!list.includes(slug)) list.push(slug);
+                                localStorage.setItem("sdc_unlocked_dramas", JSON.stringify(list));
+                            } catch {}
+                        }
                     }
 
                     // Redireciona para a página de assistir após 1.8s

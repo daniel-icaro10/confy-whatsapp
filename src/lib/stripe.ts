@@ -42,7 +42,9 @@ export async function createStripePixCharge(input: CreateStripePixInput) {
         ? input.customAmount
         : (selectedPlan ? selectedPlan.price : config.planPrice || 19.90);
 
-    const planTitle = selectedPlan ? `${selectedPlan.name} — TvDrama Reels` : config.planName || "Acesso 30 Dias — TvDrama Reels";
+    const planTitle = input.planKey === ("single_drama" as any)
+        ? `${input.dramaId || "Série"} — Série Individual`
+        : (selectedPlan ? `${selectedPlan.name} — TvDrama Reels` : config.planName || "Acesso 30 Dias — TvDrama Reels");
     const amountCents = Math.round(amount * 100);
 
     const customerName = input.customerName?.trim() || "Cliente TvDrama Reels";
