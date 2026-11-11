@@ -255,7 +255,7 @@ export async function approvePixOrderAndGrantAccess(orderIdentifier: {
     }
     const expiresAt = new Date(Date.now() + days * 24 * 60 * 60 * 1000);
 
-    // Determina se é compra de série avulsa (ex: R$ 5,00) ou Upsell VIP / Catálogo Completo (R$ 10,00+)
+    // Determina se é compra de série avulsa (ex: R$ 7,90) ou Upsell VIP / Catálogo Completo (R$ 10,00+)
     const isSingleDrama = (order.planName || "").toLowerCase().includes("single_drama") ||
         (order.planName || "").toLowerCase().includes("individual") ||
         (order.amount <= 9.00 && Boolean(order.dramaId));

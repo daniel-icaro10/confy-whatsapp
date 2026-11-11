@@ -154,7 +154,7 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
     // Controle do Modal de Upsell
     const [isUpsellModalOpen, setIsUpsellModalOpen] = useState(false);
 
-    // Pacote Escolhido: 'basica' (R$ 5,00) ou 'upsell' (Catálogo VIP - R$ 10,00)
+    // Pacote Escolhido: 'basica' (R$ 7,90) ou 'upsell' (Catálogo VIP - R$ 10,00)
     const [selectedPackage, setSelectedPackage] = useState<"basica" | "upsell">("basica");
 
     // Order bumps selecionados
@@ -337,7 +337,7 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
     };
 
     // Preços
-    const PRICE_BASICA = 5.0; // R$ 5,00
+    const PRICE_BASICA = 7.9; // R$ 7,90
     const PRICE_UPSELL = 10.0; // R$ 10,00
 
     const currentTotalAmount = useMemo(() => {
@@ -372,7 +372,7 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
-    // Recusa o Upsell e mantém Opção Básica (R$ 5,00)
+    // Recusa o Upsell e mantém Opção Básica (R$ 7,90)
     const handleDeclineUpsell = () => {
         setSelectedPackage("basica");
         setIsUpsellModalOpen(false);
