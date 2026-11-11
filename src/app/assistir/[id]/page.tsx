@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import { useParams, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
@@ -34,6 +34,75 @@ interface Drama {
     isVertical: boolean;
     likesCount: number;
     episodes: Episode[];
+}
+
+function UniversalVideoPlayer({
+    src,
+    onEnded,
+    className
+}: {
+    src: string;
+    onEnded?: () => void;
+    className?: string;
+}) {
+    const videoRef = useRef<HTMLVideoElement>(null);
+
+    useEffect(() => {
+        const video = videoRef.current;
+        if (!video || !src) return;
+
+        const isHls = src.includes(".m3u8");
+
+        if (isHls && !video.canPlayType("application/vnd.apple.mpegurl")) {
+            let hlsInstance: any = null;
+            const initHls = () => {
+                const Hls = (window as any).Hls;
+                if (Hls && Hls.isSupported()) {
+                    hlsInstance = new Hls({ enableWorker: true });
+                    hlsInstance.loadSource(src);
+                    hlsInstance.attachMedia(video);
+                    hlsInstance.on(Hls.Events.MANIFEST_PARSED, () => {
+                        video.play().catch(() => {});
+                    });
+                }
+            };
+
+            if ((window as any).Hls) {
+                initHls();
+            } else {
+                const existingScript = document.querySelector('script[src*="hls.js"]');
+                if (existingScript) {
+                    existingScript.addEventListener("load", initHls);
+                } else {
+                    const script = document.createElement("script");
+                    script.src = "https://cdn.jsdelivr.net/npm/hls.js@1.5.8/dist/hls.min.js";
+                    script.async = true;
+                    script.onload = initHls;
+                    document.head.appendChild(script);
+                }
+            }
+
+            return () => {
+                if (hlsInstance) {
+                    hlsInstance.destroy();
+                }
+            };
+        } else {
+            video.src = src;
+            video.play().catch(() => {});
+        }
+    }, [src]);
+
+    return (
+        <video
+            ref={videoRef}
+            controls
+            autoPlay
+            playsInline
+            onEnded={onEnded}
+            className={className}
+        />
+    );
 }
 
 function WatchDramaContent() {
@@ -360,12 +429,9 @@ function WatchDramaContent() {
                     >
                         {currentUnlocked && currentEpisode ? (
                             currentEpisode.videoUrl ? (
-                                <video
+                                <UniversalVideoPlayer
                                     key={currentEpisode.id}
                                     src={currentEpisode.videoUrl}
-                                    controls
-                                    autoPlay
-                                    playsInline
                                     onEnded={() => nextEp && handleSelectEpisode(nextEp)}
                                     className="w-full h-full object-contain bg-black"
                                 />
