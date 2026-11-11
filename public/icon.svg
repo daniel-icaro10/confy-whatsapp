@@ -1,5 +1,43 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
-  <rect width="512" height="512" rx="112" fill="#151413"/>
-  <rect x="24" y="24" width="464" height="464" rx="92" fill="none" stroke="#efe9de" stroke-opacity="0.14" stroke-width="4"/>
-  <text x="256" y="302" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="168" font-weight="600" letter-spacing="-6" fill="#efe9de">TD</text>
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#12060b" />
+      <stop offset="50%" stop-color="#090608" />
+      <stop offset="100%" stop-color="#050406" />
+    </linearGradient>
+
+    <!-- Neon Rose Gradient for Badge -->
+    <linearGradient id="roseBadge" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff3366" />
+      <stop offset="50%" stop-color="#e11d48" />
+      <stop offset="100%" stop-color="#be123c" />
+    </linearGradient>
+
+    <!-- Ambient Glow Filter -->
+    <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#ff3366" flood-opacity="0.5" />
+    </filter>
+
+    <!-- Inner Border Gradient -->
+    <linearGradient id="innerStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03" />
+    </linearGradient>
+  </defs>
+
+  <!-- Dark Squircle Background -->
+  <rect width="512" height="512" rx="120" fill="url(#bgGrad)" />
+  <rect x="8" y="8" width="496" height="496" rx="114" fill="none" stroke="url(#innerStroke)" stroke-width="4" />
+
+  <!-- Central Pink Badge with Shadow -->
+  <g filter="url(#neonGlow)">
+    <rect x="96" y="96" width="320" height="320" rx="76" fill="url(#roseBadge)" />
+    
+    <!-- Bold Iconic "T" Monogram + Play Accent -->
+    <path d="M164 168 H348 V224 H288 V344 H224 V224 H164 Z" fill="#ffffff" />
+    
+    <!-- Play Triangle (Reels accent) -->
+    <path d="M268 252 L324 284 L268 316 Z" fill="#ffffff" />
+  </g>
 </svg>

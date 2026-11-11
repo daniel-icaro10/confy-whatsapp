@@ -73,6 +73,8 @@ export async function generateMetadata(): Promise<Metadata> {
     formatDetection: { telephone: false },
     icons: {
       icon: [
+        { url: "/icon.svg", type: "image/svg+xml" },
+        { url: "/favicon.svg", type: "image/svg+xml" },
         { url: "/icon.png" },
         { url: "/icon.png", sizes: "192x192", type: "image/png" },
         { url: "/icon.png", sizes: "512x512", type: "image/png" }
@@ -80,7 +82,7 @@ export async function generateMetadata(): Promise<Metadata> {
       apple: [
         { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }
       ],
-      shortcut: "/icon.png"
+      shortcut: "/icon.svg"
     },
     openGraph: {
       type: "website",

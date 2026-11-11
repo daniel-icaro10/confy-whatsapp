@@ -6,10 +6,16 @@
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#151413",
-  "theme_color": "#151413",
+  "background_color": "#070709",
+  "theme_color": "#070709",
   "lang": "pt-BR",
   "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
     {
       "src": "/icon.png",
       "sizes": "192x192 512x512 any",
