@@ -607,7 +607,11 @@ export async function ensureInitialDramas(force: boolean = false) {
                         if (ep.videoUrl) {
                             await prisma.episode.updateMany({
                                 where: { dramaId: existing.id, number: ep.number },
-                                data: { videoUrl: ep.videoUrl }
+                                data: {
+                                    videoUrl: ep.videoUrl,
+                                    durationSeconds: ep.durationSeconds || 43,
+                                    description: ep.description
+                                }
                             }).catch(() => {});
                         }
                     }
