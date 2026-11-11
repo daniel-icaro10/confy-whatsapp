@@ -12,7 +12,7 @@ export interface CreatePixChargeInput {
     customerCpf?: string;
     customerEmail?: string;
     dramaId?: string;
-    planKey?: "monthly" | "quarterly" | "annual";
+    planKey?: "monthly" | "quarterly" | "annual" | "single_drama" | (string & {});
     customAmount?: number;
 }
 

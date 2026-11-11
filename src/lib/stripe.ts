@@ -8,7 +8,7 @@ export interface CreateStripeCheckoutInput {
     phone: string;
     customerName?: string;
     customerEmail?: string;
-    planKey: "monthly" | "quarterly" | "annual";
+    planKey: "monthly" | "quarterly" | "annual" | "single_drama" | (string & {});
     dramaId?: string;
     mode?: "subscription" | "payment";
 }
@@ -21,7 +21,7 @@ export interface CreateStripePixInput {
     customerEmail?: string;
     customerCpf?: string;
     customAmount?: number;
-    planKey?: "monthly" | "quarterly" | "annual";
+    planKey?: "monthly" | "quarterly" | "annual" | "single_drama" | (string & {});
     dramaId?: string;
 }
 
