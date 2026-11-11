@@ -160,11 +160,13 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
     // Order bumps selecionados
     const [selectedBumps, setSelectedBumps] = useState<string[]>([]);
 
-    // Player de Vídeo Vimeo
+    // Player de Vídeo Nativo de Prévia (Ganhei Três Namoradas)
     const [isMuted, setIsMuted] = useState(true);
-    const [, setVideoEnded] = useState(false);
-    const vimeoIframeRef = useRef<HTMLIFrameElement>(null);
-    const vimeoPlayerRef = useRef<any>(null);
+    const [currentPreviewEp, setCurrentPreviewEp] = useState<number>(1);
+    const [showEndedOverlay, setShowEndedOverlay] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(true);
+    const [currentProgress, setCurrentProgress] = useState(0);
+    const videoRef = useRef<HTMLVideoElement>(null);
 
     // Formulário de Checkout
     const [name, setName] = useState("");
@@ -184,8 +186,6 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
     const [isPaymentConfirmed, setIsPaymentConfirmed] = useState(false);
     const [pixTimeRemaining, setPixTimeRemaining] = useState(24 * 60);
 
-    // ID do Vimeo de exemplo (Ganhei Três Namoradas)
-    const vimeoVideoId = "1242685747";
 
     // 0. Captura parâmetros de anúncios (UTMs e fbclid) para atribuição
     useEffect(() => {
@@ -262,77 +262,68 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
         }
     }, [drama, slug]);
 
-    // 2. Inicializa o player da Vimeo API para controle de áudio
+    // 2. Sincroniza reprodução ao trocar de episódio de prévia
     useEffect(() => {
-        let isCancelled = false;
-
-        const setupVimeoPlayer = () => {
-            if (isCancelled || !vimeoIframeRef.current || !(window as any).Vimeo) return;
-            try {
-                const player = new (window as any).Vimeo.Player(vimeoIframeRef.current);
-                vimeoPlayerRef.current = player;
-                player.on("ended", () => setVideoEnded(true));
-            } catch (err) {
-                console.error("Vimeo setup error:", err);
+        if (videoRef.current) {
+            videoRef.current.load();
+            videoRef.current.currentTime = 0;
+            const playPromise = videoRef.current.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => setIsPlaying(true)).catch(() => {});
             }
-        };
-
-        if (!(window as any).Vimeo) {
-            let script = document.querySelector('script[src="https://player.vimeo.com/api/player.js"]') as HTMLScriptElement | null;
-            if (!script) {
-                script = document.createElement("script");
-                script.src = "https://player.vimeo.com/api/player.js";
-                script.async = true;
-                document.head.appendChild(script);
-            }
-            script.addEventListener("load", setupVimeoPlayer);
-        } else {
-            setupVimeoPlayer();
         }
+    }, [currentPreviewEp]);
 
-        return () => {
-            isCancelled = true;
-            if (vimeoPlayerRef.current) {
-                try {
-                    vimeoPlayerRef.current.destroy().catch(() => {});
-                } catch {}
-                vimeoPlayerRef.current = null;
-            }
-        };
-    }, []);
-
-    // Desmuta áudio do Vimeo
-    const unmuteVimeo = () => {
-        const player = vimeoPlayerRef.current;
-        if (player) {
-            player.setMuted(false)
-                .then(() => player.setVolume(1))
-                .then(() => {
+    // Desmuta áudio do vídeo nativo
+    const unmuteVideo = () => {
+        if (videoRef.current) {
+            videoRef.current.muted = false;
+            videoRef.current.volume = 1;
+            videoRef.current.currentTime = 0;
+            const playPromise = videoRef.current.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    setIsPlaying(true);
                     setIsMuted(false);
-                    player.setCurrentTime(0).catch(() => {});
-                    player.play().catch(() => {});
-                })
-                .catch(() => setIsMuted(false));
+                }).catch(() => {
+                    setIsMuted(false);
+                });
+            } else {
+                setIsMuted(false);
+            }
         } else {
             setIsMuted(false);
         }
     };
 
-    // Alterna som do Vimeo
-    const toggleVimeoSound = (e?: React.MouseEvent) => {
+    // Alterna som do vídeo nativo
+    const toggleVideoSound = (e?: React.MouseEvent) => {
         if (e) e.stopPropagation();
-        const player = vimeoPlayerRef.current;
-        if (player) {
+        if (videoRef.current) {
             if (isMuted) {
-                unmuteVimeo();
+                unmuteVideo();
             } else {
-                player.setMuted(true)
-                    .then(() => player.setVolume(0))
-                    .then(() => setIsMuted(true))
-                    .catch(() => setIsMuted(true));
+                videoRef.current.muted = true;
+                setIsMuted(true);
             }
         } else {
             setIsMuted(!isMuted);
+        }
+    };
+
+    // Alterna play/pause ao clicar no vídeo quando já com som
+    const handleVideoClick = () => {
+        if (showEndedOverlay) return;
+        if (isMuted) {
+            unmuteVideo();
+        } else if (videoRef.current) {
+            if (videoRef.current.paused) {
+                videoRef.current.play().catch(() => {});
+                setIsPlaying(true);
+            } else {
+                videoRef.current.pause();
+                setIsPlaying(false);
+            }
         }
     };
 
@@ -572,7 +563,7 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
     return (
         <div className="min-h-dvh bg-[#07060a] text-stone-100 flex flex-col selection:bg-rose-500/40 selection:text-white pb-24 sm:pb-16 font-sans">
             {/* =========================================================================
-                TELA 1: PÁGINA DE VENDAS COM O VÍDEO DO VIMEO (IDÊNTICO À DRAMALOVE)
+                TELA 1: PÁGINA DE VENDAS COM O PLAYER NATIVO VERTICAL HD
                 ========================================================================= */}
             {currentView === "offer" && (
                 <>
@@ -619,32 +610,100 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                             </div>
                         </div>
 
-                        {/* 4. Título da Seção do Vídeo */}
-                        <h2 className="mb-5 text-center text-lg sm:text-2xl font-black uppercase tracking-wider text-white">
+                        {/* 4. Título da Seção do Vídeo e Seletor de Episódio */}
+                        <h2 className="mb-3 text-center text-lg sm:text-2xl font-black uppercase tracking-wider text-white">
                             Assista a uma prévia
                         </h2>
 
-                        {/* 5. Player de Vídeo Vertical Vimeo (9:16) */}
+                        {/* Seletor de Episódios de Prévia (Ep. 1 e Ep. 2 liberados para teste) */}
+                        <div className="mb-4 flex flex-wrap items-center justify-center gap-2">
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    setCurrentPreviewEp(1);
+                                    setShowEndedOverlay(false);
+                                }}
+                                className={`flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-bold transition-all ${
+                                    currentPreviewEp === 1 && !showEndedOverlay
+                                        ? "bg-gradient-to-r from-rose-600 to-rose-500 text-white shadow-[0_0_15px_rgba(225,29,72,0.5)] border border-rose-400/40"
+                                        : "bg-white/5 border border-white/10 text-stone-300 hover:bg-white/10"
+                                }`}
+                            >
+                                <Play className="size-3 fill-current" />
+                                <span>Episódio 1</span>
+                                <span className="text-[10px] opacity-75">(43s)</span>
+                            </button>
+
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    setCurrentPreviewEp(2);
+                                    setShowEndedOverlay(false);
+                                }}
+                                className={`flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-bold transition-all ${
+                                    currentPreviewEp === 2 && !showEndedOverlay
+                                        ? "bg-gradient-to-r from-rose-600 to-rose-500 text-white shadow-[0_0_15px_rgba(225,29,72,0.5)] border border-rose-400/40"
+                                        : "bg-white/5 border border-white/10 text-stone-300 hover:bg-white/10"
+                                }`}
+                            >
+                                <Play className="size-3 fill-current" />
+                                <span>Episódio 2</span>
+                                <span className="text-[10px] opacity-75">(43s)</span>
+                            </button>
+
+                            <a
+                                href="#oferta-cards"
+                                className="flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-bold bg-amber-500/10 border border-amber-500/30 text-amber-300 hover:bg-amber-500/20 transition-all"
+                            >
+                                <Lock className="size-3 text-amber-400" />
+                                <span>Ep. 3 ao 60</span>
+                            </a>
+                        </div>
+
+                        {/* 5. Player de Vídeo Vertical Nativo HD (9:16) */}
                         <div className="relative mx-auto mb-10 flex aspect-[9/16] w-full max-w-[260px] sm:max-w-[270px] select-none items-center justify-center overflow-hidden rounded-3xl border-2 border-rose-500/30 bg-black shadow-[0_25px_60px_rgba(0,0,0,0.85)]">
-                            <iframe
-                                ref={vimeoIframeRef}
-                                src={`https://player.vimeo.com/video/${vimeoVideoId}?muted=1&autoplay=1&controls=0&app_id=122963`}
-                                title="Prévia da Minissérie"
-                                allow="autoplay; fullscreen; picture-in-picture"
-                                className="pointer-events-none absolute inset-0 z-0 h-full w-full border-0 scale-105"
+                            <video
+                                ref={videoRef}
+                                src={`/dramas/ganhei-tres-namoradas/ep-${currentPreviewEp}.mp4`}
+                                poster={currentCover}
+                                playsInline
+                                autoPlay
+                                muted={isMuted}
+                                preload="auto"
+                                onTimeUpdate={(e) => {
+                                    const v = e.currentTarget;
+                                    if (v.duration) {
+                                        setCurrentProgress((v.currentTime / v.duration) * 100);
+                                    }
+                                }}
+                                onEnded={() => {
+                                    if (currentPreviewEp === 1) {
+                                        setCurrentPreviewEp(2);
+                                        setShowEndedOverlay(false);
+                                    } else {
+                                        setShowEndedOverlay(true);
+                                    }
+                                }}
+                                className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover"
                             />
 
-                            {/* Overlay transparente clicável para ativar som */}
+                            {/* Overlay transparente clicável para ativar som ou pausar */}
                             <div
-                                className="absolute inset-0 z-20 cursor-pointer"
-                                onClick={unmuteVimeo}
+                                className="absolute inset-0 z-10 cursor-pointer"
+                                onClick={handleVideoClick}
                             />
+
+                            {/* Badge do Episódio Atual */}
+                            <div className="absolute left-3.5 top-3.5 z-20 flex items-center gap-1.5 rounded-full border border-white/15 bg-black/60 backdrop-blur-md px-2.5 py-1 text-[10px] font-bold text-stone-200 pointer-events-none">
+                                <span className="size-1.5 rounded-full bg-rose-500 animate-pulse" />
+                                <span>Ep. {currentPreviewEp} de 60 • HD</span>
+                            </div>
 
                             {/* Botão de status de áudio no canto superior direito */}
                             <button
                                 type="button"
-                                onClick={toggleVimeoSound}
-                                className="absolute right-3.5 top-3.5 z-30 flex items-center gap-1.5 rounded-full border border-rose-500/30 bg-black/80 backdrop-blur-md px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-rose-300 hover:bg-black transition-all"
+                                onClick={toggleVideoSound}
+                                className="absolute right-3.5 top-3.5 z-20 flex items-center gap-1.5 rounded-full border border-rose-500/30 bg-black/80 backdrop-blur-md px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-rose-300 hover:bg-black transition-all"
                             >
                                 {isMuted ? (
                                     <>
@@ -659,18 +718,72 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                                 )}
                             </button>
 
+                            {/* Indicador de Pausa no Centro */}
+                            {!isPlaying && !isMuted && !showEndedOverlay && (
+                                <div
+                                    onClick={handleVideoClick}
+                                    className="absolute inset-0 z-20 flex items-center justify-center bg-black/40 cursor-pointer"
+                                >
+                                    <div className="flex size-14 items-center justify-center rounded-full bg-rose-600/90 text-white shadow-lg">
+                                        <Play className="size-7 fill-white translate-x-0.5" />
+                                    </div>
+                                </div>
+                            )}
+
                             {/* Botão central/inferior piscando quando mutado */}
-                            {isMuted && (
+                            {isMuted && !showEndedOverlay && (
                                 <div
                                     onClick={(e) => {
                                         e.stopPropagation();
-                                        unmuteVimeo();
+                                        unmuteVideo();
                                     }}
-                                    className="absolute inset-x-3.5 bottom-12 z-30 flex animate-bounce cursor-pointer items-center justify-center gap-2 rounded-2xl border-2 border-white/20 bg-rose-600 px-4 py-3 text-center text-xs font-black text-white shadow-[0_8px_30px_rgba(225,29,72,0.6)] select-none"
+                                    className="absolute inset-x-3.5 bottom-8 z-20 flex animate-bounce cursor-pointer items-center justify-center gap-2 rounded-2xl border-2 border-white/20 bg-rose-600 px-4 py-3 text-center text-xs font-black text-white shadow-[0_8px_30px_rgba(225,29,72,0.6)] select-none"
                                 >
                                     🔊 Toque para ativar o som 🔊
                                 </div>
                             )}
+
+                            {/* Overlay de Bloqueio ao fim da prévia gratuita */}
+                            {showEndedOverlay && (
+                                <div className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-black/92 p-5 text-center backdrop-blur-md">
+                                    <div className="mb-2.5 flex size-12 items-center justify-center rounded-full bg-rose-600/20 border-2 border-rose-500 text-rose-400">
+                                        <Lock className="size-6" />
+                                    </div>
+                                    <p className="text-[10px] font-black uppercase tracking-widest text-rose-400 mb-1">
+                                        Fim da prévia gratuita
+                                    </p>
+                                    <h3 className="text-base font-black text-white leading-tight mb-1.5">
+                                        Assista aos 60 Episódios
+                                    </h3>
+                                    <p className="text-[11px] text-stone-300 mb-3 max-w-[210px] leading-snug">
+                                        Libere o desfecho completo agora mesmo sem cortes em alta definição.
+                                    </p>
+                                    <a
+                                        href="#oferta-cards"
+                                        className="w-full rounded-xl bg-gradient-to-r from-rose-600 to-rose-500 py-2.5 text-xs font-black uppercase tracking-wider text-white shadow-[0_4px_20px_rgba(225,29,72,0.6)] hover:brightness-110 active:scale-95 transition-all text-center"
+                                    >
+                                        Liberar Acesso (R$ 7,90)
+                                    </a>
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            setCurrentPreviewEp(1);
+                                            setShowEndedOverlay(false);
+                                        }}
+                                        className="mt-2.5 text-[10px] font-bold text-stone-400 hover:text-white underline underline-offset-4"
+                                    >
+                                        Assistir prévia novamente ↺
+                                    </button>
+                                </div>
+                            )}
+
+                            {/* Barra de progresso sutil na base */}
+                            <div className="absolute inset-x-0 bottom-0 z-20 h-1 bg-white/20 pointer-events-none">
+                                <div
+                                    className="h-full bg-rose-500 transition-all duration-100 ease-linear"
+                                    style={{ width: `${currentProgress}%` }}
+                                />
+                            </div>
                         </div>
 
                         {/* 6. Card da Oferta: Opção Básica */}
@@ -897,7 +1010,7 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                     </div>
 
                     {/* =========================================================================
-                        MODAL DE UPSELL (IDÊNTICO AO MODAL DE CATÁLOGO DA DRAMALOVE)
+                        MODAL DE UPSELL (CATÁLOGO VIP COMPLETO)
                         ========================================================================= */}
                     {isUpsellModalOpen && (
                         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -1022,7 +1135,7 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
             )}
 
             {/* =========================================================================
-                TELA 2: CHECKOUT COM IDENTIFICAÇÃO E ORDER BUMPS (IDÊNTICO À DRAMALOVE)
+                TELA 2: CHECKOUT COM IDENTIFICAÇÃO E ORDER BUMPS
                 ========================================================================= */}
             {currentView === "checkout" && (
                 <div className="max-w-xl mx-auto px-4 py-6 sm:py-10 w-full">
@@ -1281,7 +1394,7 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
             )}
 
             {/* =========================================================================
-                TELA 3: TELA DO PIX GERADO COM AVISO VERMELHO (IDÊNTICO À DRAMALOVE)
+                TELA 3: TELA DO PIX GERADO COM AVISO VERMELHO
                 ========================================================================= */}
             {currentView === "pix" && pixOrder && (
                 <div className="max-w-md mx-auto px-4 py-8 sm:py-12 w-full text-center">
