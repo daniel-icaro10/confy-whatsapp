@@ -28,7 +28,7 @@ import {
     Sparkles,
     ArrowLeft
 } from "lucide-react";
-import { DEFAULT_OFFER_PLANS, extractYoutubeId, OfferPlan } from "@/lib/segredos-defaults";
+import { DEFAULT_OFFER_PLANS, extractYoutubeId, extractDailymotionId, OfferPlan } from "@/lib/segredos-defaults";
 import { INITIAL_YOUTUBE_DRAMAS } from "@/lib/initial-dramas-data";
 import { VipAccessModal } from "@/components/streaming/vip-access-modal";
 import { PwaInstallModal } from "@/components/streaming/pwa-install-modal";
@@ -325,6 +325,7 @@ function WatchDramaContent() {
 
     const currentUnlocked = currentEpisode ? isEpisodeUnlocked(currentEpisode) : false;
     const youtubeId = currentEpisode ? extractYoutubeId(currentEpisode.youtubeUrl) : null;
+    const dailymotionId = currentEpisode ? extractDailymotionId(currentEpisode.youtubeUrl || currentEpisode.videoUrl) : null;
 
     const currentIndex = episodes.findIndex((e) => e.number === currentEpNumber);
     const prevEp = currentIndex > 0 ? episodes[currentIndex - 1] : null;
@@ -669,13 +670,23 @@ function WatchDramaContent() {
                     className="absolute inset-0 w-full h-full flex items-center justify-center cursor-pointer bg-black overflow-hidden"
                 >
                     {currentUnlocked && currentEpisode ? (
-                        currentEpisode.videoUrl ? (
+                        currentEpisode.videoUrl && !dailymotionId ? (
                             <video
                                 ref={videoRef}
                                 playsInline
                                 autoPlay
                                 className="w-full h-full object-cover bg-black"
                             />
+                        ) : dailymotionId ? (
+                            <div className="w-full h-full pointer-events-auto bg-black flex items-center justify-center">
+                                <iframe
+                                    key={currentEpisode.id || dailymotionId}
+                                    src={`https://geo.dailymotion.com/player.html?video=${dailymotionId}`}
+                                    className="w-full h-full border-0 object-cover"
+                                    allow="autoplay; fullscreen; picture-in-picture"
+                                    allowFullScreen
+                                />
+                            </div>
                         ) : youtubeId ? (
                             <div className="w-full h-full pointer-events-auto">
                                 <FramedYoutubePlayer
@@ -909,70 +920,74 @@ function WatchDramaContent() {
                         </span>
                     </div>
 
-                    {/* Pink Progress Scrubber */}
-                    <div
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            handleSeek(e);
-                        }}
-                        className="w-full h-1.5 bg-white/20 hover:h-2.5 rounded-full overflow-hidden cursor-pointer relative transition-all"
-                    >
-                        <div
-                            className="h-full bg-gradient-to-r from-[#e11d48] to-[#f43f5e] rounded-full relative"
-                            style={{ width: `${progressPercent}%` }}
-                        />
-                    </div>
-
-                    {/* Controls Row */}
-                    <div className="flex items-center justify-between mt-2 pt-0.5 text-white/90">
-                        {/* Play / Pause mini */}
-                        <div className="flex items-center gap-2.5">
-                            <button
-                                type="button"
+                    {/* Pink Progress Scrubber & Controls (quando usando player de vídeo nativo) */}
+                    {Boolean(currentEpisode?.videoUrl && !dailymotionId) && (
+                        <>
+                            <div
                                 onClick={(e) => {
                                     e.stopPropagation();
-                                    togglePlay();
+                                    handleSeek(e);
                                 }}
-                                className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition"
+                                className="w-full h-1.5 bg-white/20 hover:h-2.5 rounded-full overflow-hidden cursor-pointer relative transition-all"
                             >
-                                {isPlaying ? (
-                                    <Pause size={14} fill="white" />
-                                ) : (
-                                    <Play size={14} fill="white" className="ml-0.5" />
-                                )}
-                            </button>
+                                <div
+                                    className="h-full bg-gradient-to-r from-[#e11d48] to-[#f43f5e] rounded-full relative"
+                                    style={{ width: `${progressPercent}%` }}
+                                />
+                            </div>
 
-                            {/* Time: 0:48 / 1:28 */}
-                            <span className="text-[11px] font-mono font-medium text-white/80 tabular-nums">
-                                {formatTime(currentTime)} / {formatTime(duration)}
-                            </span>
-                        </div>
+                            {/* Controls Row */}
+                            <div className="flex items-center justify-between mt-2 pt-0.5 text-white/90">
+                                {/* Play / Pause mini */}
+                                <div className="flex items-center gap-2.5">
+                                    <button
+                                        type="button"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            togglePlay();
+                                        }}
+                                        className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition"
+                                    >
+                                        {isPlaying ? (
+                                            <Pause size={14} fill="white" />
+                                        ) : (
+                                            <Play size={14} fill="white" className="ml-0.5" />
+                                        )}
+                                    </button>
 
-                        {/* Speed & Volume */}
-                        <div className="flex items-center gap-2.5">
-                            <button
-                                type="button"
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    cycleSpeed();
-                                }}
-                                className="px-2 py-0.5 rounded-md bg-white/10 hover:bg-white/20 text-[11px] font-bold text-white font-mono transition"
-                            >
-                                {speed}x
-                            </button>
+                                    {/* Time: 0:48 / 1:28 */}
+                                    <span className="text-[11px] font-mono font-medium text-white/80 tabular-nums">
+                                        {formatTime(currentTime)} / {formatTime(duration)}
+                                    </span>
+                                </div>
 
-                            <button
-                                type="button"
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    toggleMute();
-                                }}
-                                className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition"
-                            >
-                                {isMuted ? <VolumeX size={15} /> : <Volume2 size={15} />}
-                            </button>
-                        </div>
-                    </div>
+                                {/* Speed & Volume */}
+                                <div className="flex items-center gap-2.5">
+                                    <button
+                                        type="button"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            cycleSpeed();
+                                        }}
+                                        className="px-2 py-0.5 rounded-md bg-white/10 hover:bg-white/20 text-[11px] font-bold text-white font-mono transition"
+                                    >
+                                        {speed}x
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            toggleMute();
+                                        }}
+                                        className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition"
+                                    >
+                                        {isMuted ? <VolumeX size={15} /> : <Volume2 size={15} />}
+                                    </button>
+                                </div>
+                            </div>
+                        </>
+                    )}
                 </div>
 
                 {/* 5. BOTTOM NAVIGATION BAR (EXACT HOTPLOT STYLE) */}

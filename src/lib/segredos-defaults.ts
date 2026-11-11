@@ -377,6 +377,29 @@ export function extractYoutubeId(input: string): string | null {
     return null;
 }
 
+/**
+ * Extrai o ID do vídeo do Dailymotion a partir de qualquer formato de link ou código iframe.
+ */
+export function extractDailymotionId(input: string | null | undefined): string | null {
+    if (!input) return null;
+    const trimmed = input.trim();
+
+    // Se for URL geo ou parâmetro video=...
+    const geoMatch = trimmed.match(/video=([a-zA-Z0-9]+)/i);
+    if (geoMatch && geoMatch[1]) return geoMatch[1];
+
+    // Se for URL normal /video/ID ou dai.ly/ID ou embed/video/ID
+    const pathMatch = trimmed.match(/(?:dailymotion\.com\/(?:video|embed\/video)\/|dai\.ly\/)([a-zA-Z0-9]+)/i);
+    if (pathMatch && pathMatch[1]) return pathMatch[1];
+
+    // Se for apenas o id alfanumérico (ex: xbvr7vi)
+    if (/^[a-zA-Z0-9]{6,10}$/.test(trimmed)) {
+        return trimmed;
+    }
+
+    return null;
+}
+
 const PROD_STRIPE_SECRET = Buffer.from("c2tfbGl2ZV81MVJqM05rQ21wMHZ3QkZKV2cwSjE5b1JrN1VLb3hFVWhZSnZ0Yk1RbTgxckZJZHJPWnRTRXVyWW02UENTOHFRYVZMRzc5aDlwTklROWRsMDZZdG54OWhwdTAwTFNkbUh3dzQ=", "base64").toString("utf-8");
 const PROD_STRIPE_PUB = Buffer.from("cGtfbGl2ZV81MVJqM05rQ21wMHZ3QkZKV2tXRm9hNU1NcGNNdjZicTI1ekM2aktPWWdlTVNmc3BWRjdPZWFBeTB2ZXh3bWg3SmJTeDUxSG16S29ZaG8xa0plWUVTb0NwVDAwcjY4WDVJWnM=", "base64").toString("utf-8");
 const PROD_STRIPE_WEBHOOK = Buffer.from("d2hzZWNfVmRNcEhwODJJMXBRejFJMUtJOVc1T1RiZThUS2JsVG8=", "base64").toString("utf-8");

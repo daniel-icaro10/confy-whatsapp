@@ -28,6 +28,32 @@ export interface InitialDramaData {
 
 export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
     {
+        "id": "tdx-wall-street-nao-negocia-o-amor",
+        "title": "Wall Street Não Negocia o Amor",
+        "slug": "wall-street-nao-negocia-o-amor",
+        "synopsis": "No implacável mundo corporativo de Wall Street, poder, ambição e segredos colidem quando um magnata financeiro se vê dividido entre um império bilionário e uma paixão arrebatadora que ele não pode negociar.",
+        "coverUrl": "/cover-wall-street-nao-negocia-o-amor.jpg",
+        "bannerUrl": "/cover-wall-street-nao-negocia-o-amor.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama,bilionario,wall street,negocios,em alta,destaques",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": true,
+        "isVertical": true,
+        "viewsCount": 3840000,
+        "likesCount": 42100,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Filme Completo (Dublado)",
+                "description": "Wall Street Não Negocia o Amor completo e dublado em alta definição (84 minutos).",
+                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvr7vi",
+                "durationSeconds": 5055,
+                "isFree": true
+            }
+        ]
+    },
+    {
         "id": "tdx-ganhei-tres-namoradas",
         "title": "Ganhei Três Namoradas",
         "slug": "ganhei-tres-namoradas",
