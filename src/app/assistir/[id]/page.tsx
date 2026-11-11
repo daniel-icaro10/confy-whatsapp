@@ -240,7 +240,7 @@ function WatchDramaContent() {
                 const list = JSON.parse(storedDramas);
                 if (Array.isArray(list)) setUnlockedDramas(list);
             }
-        } catch {}
+        } catch { }
 
         if (session?.user) {
             setIsVip(true);
@@ -264,7 +264,7 @@ function WatchDramaContent() {
                         localStorage.setItem("sdc_viewer_vip", "true");
                     }
                 })
-                .catch(() => {});
+                .catch(() => { });
         }
 
         const urlPhone = searchParams.get("phone");
@@ -414,7 +414,7 @@ function WatchDramaContent() {
                     hlsInstance.loadSource(src);
                     hlsInstance.attachMedia(video);
                     hlsInstance.on(Hls.Events.MANIFEST_PARSED, () => {
-                        video.play().catch(() => {});
+                        video.play().catch(() => { });
                         setIsPlaying(true);
                     });
                 }
@@ -431,7 +431,7 @@ function WatchDramaContent() {
             }
         } else {
             video.src = src;
-            video.play().catch(() => {});
+            video.play().catch(() => { });
             setIsPlaying(true);
         }
 
@@ -479,7 +479,7 @@ function WatchDramaContent() {
         const video = videoRef.current;
         if (!video) return;
         if (video.paused) {
-            video.play().catch(() => {});
+            video.play().catch(() => { });
             setIsPlaying(true);
         } else {
             video.pause();
@@ -522,7 +522,7 @@ function WatchDramaContent() {
         setLikesCount((prev) => (next ? prev + 1 : prev - 1));
         try {
             localStorage.setItem(`sdc_liked_${drama.id}_${currentEpNumber}`, String(next));
-        } catch {}
+        } catch { }
         if (next) showToast("Você curtiu este episódio! ❤️");
     };
 
@@ -532,7 +532,7 @@ function WatchDramaContent() {
         setIsFollowing(next);
         try {
             localStorage.setItem(`sdc_follow_${drama.id}`, String(next));
-        } catch {}
+        } catch { }
         showToast(next ? "Você começou a seguir esta série! ✨" : "Você deixou de seguir.");
     };
 
@@ -542,7 +542,7 @@ function WatchDramaContent() {
         setIsSaved(next);
         try {
             localStorage.setItem(`sdc_saved_${drama.id}`, String(next));
-        } catch {}
+        } catch { }
         showToast(next ? "Série salva na sua lista! 🔖" : "Removida da sua lista.");
     };
 
@@ -557,7 +557,7 @@ function WatchDramaContent() {
             try {
                 await navigator.share(shareData);
                 return;
-            } catch {}
+            } catch { }
         }
         try {
             await navigator.clipboard.writeText(window.location.href);
@@ -799,9 +799,8 @@ function WatchDramaContent() {
                         className="flex flex-col items-center gap-1 group active:scale-90 transition"
                     >
                         <div
-                            className={`w-11 h-11 rounded-full bg-black/45 backdrop-blur-md border border-white/15 flex items-center justify-center transition shadow-md ${
-                                isLiked ? "text-[#f43f5e] border-[#f43f5e]/40" : "text-white"
-                            }`}
+                            className={`w-11 h-11 rounded-full bg-black/45 backdrop-blur-md border border-white/15 flex items-center justify-center transition shadow-md ${isLiked ? "text-[#f43f5e] border-[#f43f5e]/40" : "text-white"
+                                }`}
                         >
                             <Heart
                                 size={22}
@@ -824,9 +823,8 @@ function WatchDramaContent() {
                         className="flex flex-col items-center gap-1 group active:scale-90 transition"
                     >
                         <div
-                            className={`w-11 h-11 rounded-full bg-black/45 backdrop-blur-md border border-white/15 flex items-center justify-center transition shadow-md ${
-                                isFollowing ? "text-[#4ade8a] border-[#4ade8a]/40" : "text-white"
-                            }`}
+                            className={`w-11 h-11 rounded-full bg-black/45 backdrop-blur-md border border-white/15 flex items-center justify-center transition shadow-md ${isFollowing ? "text-[#4ade8a] border-[#4ade8a]/40" : "text-white"
+                                }`}
                         >
                             {isFollowing ? <Check size={20} /> : <Plus size={22} />}
                         </div>
@@ -845,9 +843,8 @@ function WatchDramaContent() {
                         className="flex flex-col items-center gap-1 group active:scale-90 transition"
                     >
                         <div
-                            className={`w-11 h-11 rounded-full bg-black/45 backdrop-blur-md border border-white/15 flex items-center justify-center transition shadow-md ${
-                                isSaved ? "text-amber-400 border-amber-400/40" : "text-white"
-                            }`}
+                            className={`w-11 h-11 rounded-full bg-black/45 backdrop-blur-md border border-white/15 flex items-center justify-center transition shadow-md ${isSaved ? "text-amber-400 border-amber-400/40" : "text-white"
+                                }`}
                         >
                             <Bookmark size={22} fill={isSaved ? "#fbbf24" : "transparent"} />
                         </div>
@@ -1092,13 +1089,12 @@ function WatchDramaContent() {
                                                 handleSelectEpisode(ep);
                                                 setDrawerOpen(false);
                                             }}
-                                            className={`py-2 rounded-xl text-xs font-bold tabular-nums transition ${
-                                                active
+                                            className={`py-2 rounded-xl text-xs font-bold tabular-nums transition ${active
                                                     ? "bg-[#e11d48] text-white shadow-md"
                                                     : unlocked
-                                                    ? "bg-white/10 text-white hover:bg-white/15"
-                                                    : "bg-white/[0.04] text-zinc-500"
-                                            }`}
+                                                        ? "bg-white/10 text-white hover:bg-white/15"
+                                                        : "bg-white/[0.04] text-zinc-500"
+                                                }`}
                                         >
                                             {String(ep.number).padStart(2, "0")}
                                         </button>
@@ -1119,9 +1115,8 @@ function WatchDramaContent() {
                                                 handleSelectEpisode(ep);
                                                 setDrawerOpen(false);
                                             }}
-                                            className={`w-full py-2.5 px-2 flex items-center justify-between gap-3 text-left transition rounded-xl ${
-                                                active ? "bg-white/[0.08]" : ""
-                                            }`}
+                                            className={`w-full py-2.5 px-2 flex items-center justify-between gap-3 text-left transition rounded-xl ${active ? "bg-white/[0.08]" : ""
+                                                }`}
                                         >
                                             <div className="min-w-0">
                                                 <div className="text-xs font-bold text-white truncate">
@@ -1133,9 +1128,8 @@ function WatchDramaContent() {
                                             </div>
 
                                             <span
-                                                className={`text-[11px] font-bold shrink-0 ${
-                                                    unlocked ? "text-[#4ade8a]" : "text-zinc-500"
-                                                }`}
+                                                className={`text-[11px] font-bold shrink-0 ${unlocked ? "text-[#4ade8a]" : "text-zinc-500"
+                                                    }`}
                                             >
                                                 {unlocked ? "Liberado" : "Bloqueado"}
                                             </span>
