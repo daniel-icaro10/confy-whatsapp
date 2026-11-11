@@ -4,7 +4,22 @@ import { useState, useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { ChevronLeft, ChevronRight, Home, Compass, Flame, Crown, MessageCircle } from "lucide-react";
+import {
+    ChevronLeft,
+    ChevronRight,
+    Home,
+    Compass,
+    Flame,
+    Crown,
+    MessageCircle,
+    Search,
+    Bookmark,
+    User,
+    X,
+    Check,
+    Play,
+    Sparkles
+} from "lucide-react";
 import { DEFAULT_OFFER_PLANS, OfferPlan } from "@/lib/segredos-defaults";
 import { INITIAL_YOUTUBE_DRAMAS } from "@/lib/initial-dramas-data";
 import { VipAccessModal } from "@/components/streaming/vip-access-modal";
@@ -172,16 +187,32 @@ function detectLanguageTag(drama: Drama): "Dublado" | "Legendado" | "Brasileira"
     return "Dublado";
 }
 
+export const DISCOVER_CATEGORIES = [
+    { id: "populares", label: "🔥 Populares", badge: "Mais assistidos" },
+    { id: "dublado", label: "🇧🇷 Dublados", badge: "Áudio em português" },
+    { id: "legendado", label: "💬 Legendados", badge: "Com legendas" },
+    { id: "novos", label: "✨ Novidades", badge: "Recém adicionados" },
+    { id: "drama", label: "🎭 Dramas & Romance", badge: "Amor & Emoção" },
+    { id: "bilionario", label: "💎 Bilionários", badge: "CEOs & Contratos" },
+    { id: "alfa", label: "🐺 Alfas & Lobos", badge: "Fantasia & Sobrenatural" },
+    { id: "mafia", label: "🕶️ Máfia", badge: "Crime & Poder" },
+    { id: "vinganca", label: "⚔️ Vingança", badge: "Reviravoltas" },
+    { id: "lgbt", label: "🌈 LGBT (BL)", badge: "Diversidade" },
+    { id: "todos", label: "🌐 Todos", badge: "Catálogo completo" }
+];
+
 function matchesFilterCategory(drama: Drama, filter: string): boolean {
     if (filter === "todos") return true;
-    if (filter === "dublado") return detectLanguageTag(drama) === "Dublado";
-    if (filter === "legendado") return detectLanguageTag(drama) === "Legendado";
+    if (filter === "dublado" || filter === "dublados") return detectLanguageTag(drama) === "Dublado";
+    if (filter === "legendado" || filter === "legendados") return detectLanguageTag(drama) === "Legendado";
     if (filter === "brasileiro") return detectLanguageTag(drama) === "Brasileira" || semAcento(drama.title + drama.category).includes("brasileir");
     if (filter === "alfa") return detectDramaGenre(drama) === "alfa";
     if (filter === "bilionario") return detectDramaGenre(drama) === "bilionario";
     if (filter === "mafia") return detectDramaGenre(drama) === "mafia";
     if (filter === "vinganca") return detectDramaGenre(drama) === "vinganca";
-    if (filter === "romance") return detectDramaGenre(drama) === "romance";
+    if (filter === "romance" || filter === "drama") {
+        return detectDramaGenre(drama) === "romance" || semAcento(drama.title + drama.synopsis + (drama.tags || "")).includes("amor") || semAcento(drama.title + drama.synopsis).includes("romance");
+    }
     if (filter === "lgbt") return detectDramaGenre(drama) === "lgbt";
     return semAcento(drama.category) === semAcento(filter);
 }
@@ -198,11 +229,14 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
 
     const [dbDramas, setDbDramas] = useState<Drama[]>([]);
     const [loading, setLoading] = useState(true);
+    const [activeTab, setActiveTab] = useState<"inicio" | "descobrir" | "emalta" | "minhalista">("inicio");
     const [activeCategory, setActiveCategory] = useState<string>("todos");
+    const [discoverCategory, setDiscoverCategory] = useState<string>("populares");
+    const [myListIds, setMyListIds] = useState<string[]>([]);
     const [searchQuery, setSearchQuery] = useState<string>("");
 
     const [bannerIndex, setBannerIndex] = useState(0);
-    const [activeOverlay, setActiveOverlay] = useState<"none" | "buscar" | "anuncio" | "conta">("none");
+    const [activeOverlay, setActiveOverlay] = useState<"none" | "buscar" | "anuncio" | "conta" | "perfil">("none");
     const [expandedRow, setExpandedRow] = useState<{ title: string; items: Drama[] } | null>(null);
     const [lockedSerieModal, setLockedSerieModal] = useState<Drama | null>(null);
 
@@ -232,6 +266,30 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
         window.addEventListener("scroll", onScroll, { passive: true });
         return () => window.removeEventListener("scroll", onScroll);
     }, []);
+
+    // Sincroniza Minha Lista com o localStorage
+    useEffect(() => {
+        try {
+            const saved = localStorage.getItem("tvdrama_my_list");
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                if (Array.isArray(parsed)) setMyListIds(parsed);
+            }
+        } catch {}
+    }, []);
+
+    const toggleMyList = (dramaId: string, e?: React.MouseEvent) => {
+        if (e) e.stopPropagation();
+        setMyListIds((prev) => {
+            const next = prev.includes(dramaId)
+                ? prev.filter((id) => id !== dramaId)
+                : [...prev, dramaId];
+            try {
+                localStorage.setItem("tvdrama_my_list", JSON.stringify(next));
+            } catch {}
+            return next;
+        });
+    };
 
     // Busca inicial de novelas do banco e configurações do funil
     useEffect(() => {
@@ -460,6 +518,32 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
         return sortedDramas.slice(0, 10);
     }, [sortedDramas]);
 
+    const discoverDramas = useMemo(() => {
+        let list = sortedDramas;
+        if (discoverCategory === "populares") {
+            list = sortedDramas.slice(0, 80);
+        } else if (discoverCategory === "novos") {
+            list = [...dramas].reverse().slice(0, 80);
+        } else {
+            list = sortedDramas.filter((d) => matchesFilterCategory(d, discoverCategory));
+        }
+
+        if (searchQuery.trim()) {
+            const q = semAcento(searchQuery);
+            return list.filter((d) =>
+                semAcento(d.title).includes(q) ||
+                semAcento(d.synopsis).includes(q) ||
+                semAcento(d.category).includes(q) ||
+                semAcento(d.tags || "").includes(q)
+            );
+        }
+        return list;
+    }, [sortedDramas, dramas, discoverCategory, searchQuery]);
+
+    const myListDramas = useMemo(() => {
+        return sortedDramas.filter((d) => myListIds.includes(d.id) || myListIds.includes(d.slug));
+    }, [sortedDramas, myListIds]);
+
     const bombandoDramas = useMemo(
         () => sortedDramas.slice(10, 26),
         [sortedDramas]
@@ -542,6 +626,19 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
         }
     };
 
+    const handleRedirectWhatsappSupport = () => {
+        const cleanNumber = (whatsappNumber || "").replace(/\D/g, "");
+        const msg = isVip
+            ? `Olá! Estou logado no TvDrama Reels e preciso de suporte com meu acesso VIP. (Telefone: ${viewerPhone || "cadastrado"})`
+            : "Olá! Vim pelo TvDrama Reels e preciso de suporte com o catálogo de séries.";
+        if (cleanNumber) {
+            const url = `https://wa.me/${cleanNumber}?text=${encodeURIComponent(msg)}`;
+            window.open(url, "_blank");
+        } else {
+            handleRedirectWhatsapp();
+        }
+    };
+
     if (isRedirectingToWhatsapp) {
         return (
             <div className="min-h-dvh bg-black text-[#f5f5f5] flex flex-col items-center justify-center p-6 text-center">
@@ -573,11 +670,12 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                         : "bg-[#0c0d0e]/90 sm:bg-gradient-to-b sm:from-black/80 sm:to-transparent backdrop-blur-md sm:backdrop-blur-none"
                     }`}
             >
-                <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                <div className="flex items-center gap-3 sm:gap-6 min-w-0">
                     <button
                         type="button"
                         onClick={() => {
                             setActiveCategory("todos");
+                            setActiveTab("inicio");
                             setSearchQuery("");
                             setActiveOverlay("none");
                             setLockedSerieModal(null);
@@ -590,16 +688,81 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                         <img
                             src="/logo.png"
                             alt="TvDrama Reels"
-                            className="h-[36px] sm:h-[44px] w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+                            className="h-[34px] sm:h-[40px] w-auto object-contain transition-transform duration-200 group-hover:scale-105"
                         />
                     </button>
 
+                    {/* Navegação Desktop: Início, Descobrir, Em Alta, Minha Lista */}
+                    <nav className="hidden md:flex items-center gap-1.5">
+                        <button
+                            type="button"
+                            onClick={() => {
+                                setActiveTab("inicio");
+                                setActiveOverlay("none");
+                                setSearchQuery("");
+                            }}
+                            className={`px-3 py-1.5 rounded-full text-xs font-semibold transition cursor-pointer flex items-center gap-1.5 ${
+                                activeTab === "inicio" && activeOverlay === "none"
+                                    ? "bg-white/15 text-white font-bold"
+                                    : "text-white/60 hover:text-white hover:bg-white/5"
+                            }`}
+                        >
+                            <Home className="w-3.5 h-3.5" />
+                            <span>Início</span>
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => {
+                                setActiveTab("descobrir");
+                                setActiveOverlay("none");
+                            }}
+                            className={`px-3 py-1.5 rounded-full text-xs font-semibold transition cursor-pointer flex items-center gap-1.5 ${
+                                activeTab === "descobrir" && activeOverlay === "none"
+                                    ? "bg-rose-600/30 text-rose-300 font-bold border border-rose-500/40"
+                                    : "text-white/60 hover:text-white hover:bg-white/5"
+                            }`}
+                        >
+                            <Compass className="w-3.5 h-3.5" />
+                            <span>Descobrir</span>
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => {
+                                setActiveTab("emalta");
+                                setActiveOverlay("none");
+                            }}
+                            className={`px-3 py-1.5 rounded-full text-xs font-semibold transition cursor-pointer flex items-center gap-1.5 ${
+                                activeTab === "emalta" && activeOverlay === "none"
+                                    ? "bg-rose-600/30 text-rose-300 font-bold border border-rose-500/40"
+                                    : "text-white/60 hover:text-white hover:bg-white/5"
+                            }`}
+                        >
+                            <Flame className="w-3.5 h-3.5 text-rose-500" />
+                            <span>Em Alta</span>
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => {
+                                setActiveTab("minhalista");
+                                setActiveOverlay("none");
+                            }}
+                            className={`px-3 py-1.5 rounded-full text-xs font-semibold transition cursor-pointer flex items-center gap-1.5 ${
+                                activeTab === "minhalista" && activeOverlay === "none"
+                                    ? "bg-rose-600/30 text-rose-300 font-bold border border-rose-500/40"
+                                    : "text-white/60 hover:text-white hover:bg-white/5"
+                            }`}
+                        >
+                            <Bookmark className="w-3.5 h-3.5" />
+                            <span>Minha Lista</span>
+                        </button>
+                    </nav>
+
                     {isAdmin ? (
-                        <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-rose-600/20 border border-rose-500/40 text-rose-400 text-[11px] font-bold">
+                        <span className="hidden lg:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-rose-600/20 border border-rose-500/40 text-rose-400 text-[11px] font-bold">
                             👑 Admin Master · Liberado
                         </span>
                     ) : isVip ? (
-                        <span className="hidden sm:inline-flex items-center px-2.5 py-1 rounded-full bg-[#1dcc99]/15 border border-[#1dcc99]/30 text-[#1dcc99] text-[11px] font-bold">
+                        <span className="hidden lg:inline-flex items-center px-2.5 py-1 rounded-full bg-[#1dcc99]/15 border border-[#1dcc99]/30 text-[#1dcc99] text-[11px] font-bold">
                             Acesso Liberado{daysRemaining !== null ? ` · ${daysRemaining}d` : ""}
                         </span>
                     ) : null}
@@ -616,10 +779,11 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                             </Link>
                             <button
                                 type="button"
-                                onClick={() => setActiveOverlay("conta")}
-                                className="px-2.5 sm:px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 text-white text-[11px] sm:text-xs font-semibold tabular-nums transition"
+                                onClick={() => setActiveOverlay("perfil")}
+                                className="px-2.5 sm:px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 text-white text-[11px] sm:text-xs font-semibold tabular-nums transition flex items-center gap-1.5 cursor-pointer"
                             >
-                                Conta
+                                <User className="w-3.5 h-3.5" />
+                                <span>Perfil</span>
                             </button>
                         </>
                     ) : isVip ? (
@@ -627,16 +791,17 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                             <button
                                 type="button"
                                 onClick={() => setPwaModalOpen(true)}
-                                className="px-3 sm:px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-white text-[11px] sm:text-xs font-bold transition"
+                                className="px-3 sm:px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-white text-[11px] sm:text-xs font-bold transition cursor-pointer"
                             >
                                 Baixar App
                             </button>
                             <button
                                 type="button"
-                                onClick={() => setActiveOverlay("conta")}
-                                className="px-2.5 sm:px-3 py-1.5 rounded-full bg-[#1dcc99]/15 border border-[#1dcc99]/30 text-[#1dcc99] text-[11px] sm:text-xs font-semibold tabular-nums transition"
+                                onClick={() => setActiveOverlay("perfil")}
+                                className="px-2.5 sm:px-3 py-1.5 rounded-full bg-[#1dcc99]/15 hover:bg-[#1dcc99]/25 border border-[#1dcc99]/30 text-[#1dcc99] text-[11px] sm:text-xs font-semibold tabular-nums transition flex items-center gap-1.5 cursor-pointer"
                             >
-                                VIP Ativo
+                                <Crown className="w-3.5 h-3.5" />
+                                <span>VIP ({daysRemaining !== null ? `${daysRemaining}d` : "Ativo"})</span>
                             </button>
                         </>
                     ) : (
@@ -647,7 +812,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                     setVipModalTab("login");
                                     setVipModalOpen(true);
                                 }}
-                                className="hidden sm:inline-flex px-2.5 sm:px-3 py-1.5 rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/15 text-white text-[11px] sm:text-xs font-semibold transition"
+                                className="hidden sm:inline-flex px-2.5 sm:px-3 py-1.5 rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/15 text-white text-[11px] sm:text-xs font-semibold transition cursor-pointer"
                             >
                                 Já paguei
                             </button>
@@ -661,6 +826,15 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                             >
                                 <Crown className="w-3.5 h-3.5 text-black" />
                                 <span>Seja VIP</span>
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => setActiveOverlay("perfil")}
+                                className="px-2.5 sm:px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 text-white text-[11px] sm:text-xs font-semibold transition flex items-center gap-1 cursor-pointer"
+                                aria-label="Abrir Perfil"
+                            >
+                                <User className="w-3.5 h-3.5" />
+                                <span className="hidden sm:inline">Perfil</span>
                             </button>
                         </>
                     )}
@@ -687,42 +861,51 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
 
             {/* CONTEÚDO PRINCIPAL (.conteudo) */}
             <main className="pt-[64px] sm:pt-[76px] max-w-[1440px] mx-auto">
-                {/* 1. PÍLULAS DE FILTRO (.filtros) ESTILO YESTV */}
-                <nav
-                    id="filtros-categorias"
-                    aria-label="Categorias do catálogo"
-                    className="flex gap-2 overflow-x-auto no-scrollbar px-3 sm:px-10 py-2 scroll-smooth"
-                >
-                    {[
-                        { id: "todos", label: "🔥 Todos" },
-                        { id: "bilionario", label: "💎 Bilionários" },
-                        { id: "alfa", label: "🐺 Alfas & Lobos" },
-                        { id: "mafia", label: "🕶️ Máfia" },
-                        { id: "vinganca", label: "⚔️ Vingança" },
-                        { id: "romance", label: "❤️ Romance" },
-                        { id: "lgbt", label: "🌈 LGBT (BL)" },
-                        { id: "dublado", label: "Dublados" },
-                        { id: "legendado", label: "Legendados" }
-                    ].map((cat) => {
-                        const active = activeCategory === cat.id;
-                        return (
+                {/* BARRA DE PESQUISA ESTILO HOTPLOT.AI */}
+                <div className="px-3 sm:px-10 pt-2 sm:pt-3 pb-2">
+                    <form
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            if (searchQuery.trim()) {
+                                const el = document.getElementById("search-results-section");
+                                if (el) el.scrollIntoView({ behavior: "smooth" });
+                            }
+                        }}
+                        className="relative flex items-center w-full bg-[#151419] hover:bg-[#1a1920] focus-within:bg-[#1a1920] border border-white/[0.1] focus-within:border-rose-500/60 rounded-full px-3.5 sm:px-4 py-1.5 sm:py-2 transition shadow-inner"
+                    >
+                        <Search className="w-4 h-4 text-white/50 shrink-0 mr-2.5" />
+                        <input
+                            type="text"
+                            value={searchQuery}
+                            onChange={(e) => {
+                                setSearchQuery(e.target.value);
+                                if (activeTab !== "inicio" && activeTab !== "descobrir") {
+                                    setActiveTab("inicio");
+                                }
+                            }}
+                            placeholder="Buscar séries..."
+                            className="w-full bg-transparent text-white text-xs sm:text-sm placeholder:text-white/40 focus:outline-none"
+                        />
+                        {searchQuery && (
                             <button
-                                key={cat.id}
                                 type="button"
-                                onClick={() => setActiveCategory(cat.id)}
-                                className={`flex-none px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${active
-                                        ? "bg-white text-black font-bold shadow-[0_2px_12px_rgba(255,255,255,0.25)] scale-[1.02]"
-                                        : "bg-[#141518]/90 text-white/70 hover:text-white border border-white/[0.08] hover:border-white/20"
-                                    }`}
+                                onClick={() => setSearchQuery("")}
+                                className="text-white/40 hover:text-white mr-2.5 p-1"
                             >
-                                {cat.label}
+                                <X className="w-3.5 h-3.5" />
                             </button>
-                        );
-                    })}
-                </nav>
+                        )}
+                        <button
+                            type="submit"
+                            className="px-4 py-1.5 rounded-full bg-[#f43f5e] hover:bg-[#e11d48] text-white text-xs font-bold shrink-0 shadow-[0_2px_12px_rgba(244,63,94,0.35)] transition transform active:scale-95 cursor-pointer"
+                        >
+                            Buscar
+                        </button>
+                    </form>
+                </div>
 
                 {/* 2. CARROSSEL DE DESTAQUES (.banners / .banner-destaque) */}
-                {activeCategory === "todos" && featuredDramas.length > 0 && (
+                {activeTab === "inicio" && searchQuery.trim() === "" && featuredDramas.length > 0 && (
                     <div
                         onTouchStart={handleTouchStart}
                         onTouchEnd={handleTouchEnd}
@@ -911,59 +1094,33 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                     </div>
                 )}
 
-                {/* 3. CAMPO DE BUSCA RÁPIDA (.busca) */}
-                <div className="mx-4 sm:mx-10 mt-4 mb-1 flex items-center gap-2.5 px-[18px] py-[14px] rounded-[12px] bg-[#0f0f10] border border-white/12 focus-within:border-white/30 text-[#9a9a9a] focus-within:text-white transition">
-                    <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        className="w-5 h-5 shrink-0"
-                        aria-hidden="true"
-                    >
-                        <circle cx="11" cy="11" r="8" stroke="currentColor" strokeWidth="2" />
-                        <path
-                            d="m21 21-4.35-4.35"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                        />
-                    </svg>
-                    <input
-                        id="busca"
-                        type="search"
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        placeholder="Buscar séries..."
-                        autoComplete="off"
-                        className="flex-1 min-w-0 bg-transparent border-0 outline-none text-[15px] text-white placeholder-[#9a9a9a]"
-                    />
-                    {searchQuery && (
-                        <button
-                            type="button"
-                            onClick={() => setSearchQuery("")}
-                            className="text-xs text-[#9a9a9a] hover:text-white px-2"
-                        >
-                            Limpar
-                        </button>
-                    )}
-                </div>
-
                 {/* RESULTADOS DA BUSCA INLINE */}
                 {searchQuery.trim() !== "" && (
-                    <section className="px-4 sm:px-10 py-4">
-                        <p className="text-sm text-[#9a9a9a] mb-3">
-                            {searchResults.length > 0
-                                ? `Achamos ${searchResults.length} ${searchResults.length === 1 ? "série" : "séries"
-                                } para "${searchQuery}"`
-                                : `Nenhuma série encontrada para "${searchQuery}"`}
-                        </p>
+                    <section id="search-results-section" className="px-4 sm:px-10 py-4">
+                        <div className="flex items-center justify-between mb-3">
+                            <p className="text-sm text-[#9a9a9a]">
+                                {searchResults.length > 0
+                                    ? `Achamos ${searchResults.length} ${searchResults.length === 1 ? "série" : "séries"} para "${searchQuery}"`
+                                    : `Nenhuma série encontrada para "${searchQuery}"`}
+                            </p>
+                            <button
+                                type="button"
+                                onClick={() => setSearchQuery("")}
+                                className="text-xs text-rose-400 hover:text-rose-300 font-bold"
+                            >
+                                Limpar busca ✕
+                            </button>
+                        </div>
                         {searchResults.length > 0 && (
-                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
+                            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 sm:gap-3.5">
                                 {searchResults.map((drama) => (
                                     <CatalogPosterCard
                                         key={drama.id}
                                         drama={drama}
                                         isVip={isVip}
                                         onSelect={handleSelectDrama}
+                                        isBookmarked={myListIds.includes(drama.id)}
+                                        onToggleBookmark={(e) => toggleMyList(drama.id, e)}
                                     />
                                 ))}
                             </div>
@@ -971,8 +1128,8 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                     </section>
                 )}
 
-                {/* 4. FILEIRAS HORIZONTAIS (.faixa) IDÊNTICAS AO TOPDORAMAX */}
-                {activeCategory === "todos" && searchQuery.trim() === "" && dramas.length > 0 && (
+                {/* 4. FILEIRAS HORIZONTAIS (.faixa) */}
+                {activeTab === "inicio" && searchQuery.trim() === "" && dramas.length > 0 && (
                     <div id="principal" className="mt-4 space-y-5">
                         {/* Fileira 1: Mais Assistidas (Prioridade de episódios e views) */}
                         <HorizontalRowSection
@@ -983,6 +1140,8 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                             onExpand={() =>
                                 setExpandedRow({ title: "🔥 Mais Assistidas", items: sortedDramas })
                             }
+                            myListIds={myListIds}
+                            onToggleBookmark={toggleMyList}
                         />
 
                         {/* Fileira 2: Bombando Agora */}
@@ -994,6 +1153,8 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                             onExpand={() =>
                                 setExpandedRow({ title: "⚡ Bombando Agora", items: bombandoDramas })
                             }
+                            myListIds={myListIds}
+                            onToggleBookmark={toggleMyList}
                         />
 
                         {/* Fileira 4: Tendências — Top 10 (.faixa-ranking com número gigante vazado atrás da capa) */}
@@ -1023,12 +1184,11 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                     {top10Dramas.map((drama, idx) => {
                                         const langTag = detectLanguageTag(drama);
                                         const epCount = drama.episodes?.length || drama.totalEpisodes || 1;
+                                        const isBookmarked = myListIds.includes(drama.id) || myListIds.includes(drama.slug);
                                         return (
-                                            <button
+                                            <div
                                                 key={drama.id}
-                                                type="button"
-                                                onClick={() => handleSelectDrama(drama)}
-                                                className="group flex flex-col text-left pl-[26%] relative snap-start focus:outline-none transition duration-200 cursor-pointer"
+                                                className="group flex flex-col text-left pl-[26%] relative snap-start focus:outline-none transition duration-200"
                                             >
                                                 <span
                                                     aria-hidden="true"
@@ -1040,7 +1200,10 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                                 >
                                                     {idx + 1}
                                                 </span>
-                                                <div className="relative z-20 w-full aspect-[9/13] rounded-2xl overflow-hidden bg-[#151619] border border-white/[0.08] shadow-[-8px_4px_20px_rgba(0,0,0,0.85)] group-hover:scale-[1.03] transition-all duration-300">
+                                                <div 
+                                                    onClick={() => handleSelectDrama(drama)}
+                                                    className="relative z-20 w-full aspect-[9/13] rounded-2xl overflow-hidden bg-[#151619] border border-white/[0.08] shadow-[-8px_4px_20px_rgba(0,0,0,0.85)] group-hover:scale-[1.03] transition-all duration-300 cursor-pointer"
+                                                >
                                                     <img
                                                         src={drama.coverUrl}
                                                         alt={drama.title}
@@ -1051,19 +1214,34 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                                     <span className="absolute top-2 left-2 z-20 px-2 py-0.5 rounded-full bg-black/65 backdrop-blur-md border border-white/10 text-white text-[9px] font-bold uppercase tracking-wider">
                                                         {langTag}
                                                     </span>
+                                                    <button
+                                                        type="button"
+                                                        onClick={(e) => toggleMyList(drama.id, e)}
+                                                        aria-label="Salvar na Minha Lista"
+                                                        className={`absolute top-2 right-2 z-30 w-7 h-7 rounded-full flex items-center justify-center backdrop-blur-md transition-all active:scale-90 cursor-pointer ${
+                                                            isBookmarked
+                                                                ? "bg-rose-600 text-white shadow-md shadow-rose-600/50"
+                                                                : "bg-black/65 hover:bg-black/90 text-white/80 hover:text-white border border-white/15"
+                                                        }`}
+                                                    >
+                                                        <Bookmark className={`w-3.5 h-3.5 ${isBookmarked ? "fill-white" : ""}`} />
+                                                    </button>
                                                     <span className="absolute right-2 bottom-2 z-20 px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-md border border-white/10 text-white text-[10px] font-bold tabular-nums">
                                                         {epCount} EP
                                                     </span>
                                                 </div>
-                                                <div className="relative z-20 mt-2 px-0.5 min-w-0">
-                                                    <h3 className="font-semibold text-[13px] leading-[17px] text-white line-clamp-2 group-hover:text-amber-400 transition-colors">
+                                                <div 
+                                                    onClick={() => handleSelectDrama(drama)}
+                                                    className="relative z-20 mt-2 px-0.5 min-w-0 cursor-pointer"
+                                                >
+                                                    <h3 className="font-semibold text-[13px] leading-[17px] text-white line-clamp-2 group-hover:text-rose-400 transition-colors">
                                                         {drama.title}
                                                     </h3>
                                                     <p className="mt-0.5 text-[11px] text-white/50 line-clamp-1">
                                                         {epCount} episódios · {langTag}
                                                     </p>
                                                 </div>
-                                            </button>
+                                            </div>
                                         );
                                     })}
                                 </div>
@@ -1083,6 +1261,8 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                         items: alfasDramas
                                     })
                                 }
+                                myListIds={myListIds}
+                                onToggleBookmark={toggleMyList}
                             />
                         )}
 
@@ -1099,6 +1279,8 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                         items: bilionariosDramas
                                     })
                                 }
+                                myListIds={myListIds}
+                                onToggleBookmark={toggleMyList}
                             />
                         )}
 
@@ -1115,6 +1297,8 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                         items: mafiaDramas
                                     })
                                 }
+                                myListIds={myListIds}
+                                onToggleBookmark={toggleMyList}
                             />
                         )}
 
@@ -1131,6 +1315,8 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                         items: vingancaDramas
                                     })
                                 }
+                                myListIds={myListIds}
+                                onToggleBookmark={toggleMyList}
                             />
                         )}
 
@@ -1147,6 +1333,8 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                         items: romanceDramas
                                     })
                                 }
+                                myListIds={myListIds}
+                                onToggleBookmark={toggleMyList}
                             />
                         )}
 
@@ -1160,140 +1348,185 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                 onExpand={() =>
                                     setExpandedRow({ title: "🌈 LGBT (BL & GL)", items: lgbtDramas })
                                 }
+                                myListIds={myListIds}
+                                onToggleBookmark={toggleMyList}
                             />
                         )}
                     </div>
                 )}
 
-                {/* 5. GRADE COMPLETA DO CATÁLOGO (#catalogo) */}
-                <section id="catalogo" className="px-4 sm:px-10 pt-6 pb-8">
-                    <div className="flex items-baseline justify-between mb-1">
-                        <h2 className="font-bold text-[22px] text-[#f5f5f5]">Catálogo</h2>
-                    </div>
-                    <p className="text-[14px] text-[#9a9a9a] mb-3.5">
-                        {filteredCatalog.length}{" "}
-                        {filteredCatalog.length === 1 ? "série" : "séries"}
-                    </p>
+                {/* 5. GRADE COMPLETA DO CATÁLOGO (#catalogo) NA ABA INÍCIO */}
+                {activeTab === "inicio" && searchQuery.trim() === "" && (
+                    <section id="catalogo" className="px-4 sm:px-10 pt-6 pb-8">
+                        <div className="flex items-baseline justify-between mb-1">
+                            <h2 className="font-bold text-[22px] text-[#f5f5f5]">Catálogo Completo</h2>
+                        </div>
+                        <p className="text-[14px] text-[#9a9a9a] mb-3.5">
+                            {filteredCatalog.length}{" "}
+                            {filteredCatalog.length === 1 ? "série" : "séries"}
+                        </p>
 
-                    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 sm:gap-3.5">
-                        {filteredCatalog.map((drama) => (
-                            <CatalogPosterCard
-                                key={drama.id}
-                                drama={drama}
-                                isVip={isVip}
-                                onSelect={handleSelectDrama}
-                            />
-                        ))}
-                    </div>
-                </section>
+                        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 sm:gap-3.5">
+                            {filteredCatalog.map((drama) => (
+                                <CatalogPosterCard
+                                    key={drama.id}
+                                    drama={drama}
+                                    isVip={isVip}
+                                    onSelect={handleSelectDrama}
+                                    isBookmarked={myListIds.includes(drama.id)}
+                                    onToggleBookmark={(e) => toggleMyList(drama.id, e)}
+                                />
+                            ))}
+                        </div>
+                    </section>
+                )}
+
+                {/* ABA 2: DESCOBRIR (GÊNEROS E CATEGORIAS REFINADAS) */}
+                {activeTab === "descobrir" && (
+                    <section className="px-3 sm:px-10 py-3 sm:py-5">
+                        <div className="mb-4">
+                            <div className="flex items-center gap-2 mb-1">
+                                <Compass className="size-6 text-rose-500" />
+                                <h2 className="text-2xl font-black text-white tracking-tight">Descobrir</h2>
+                            </div>
+                            <p className="text-xs sm:text-sm text-stone-400">
+                                Explore mais de 500 séries organizadas por gênero, dublagem e estilo
+                            </p>
+                        </div>
+
+                        {/* Pílulas de Categorias Aprimoradas e Fáceis para o Cliente */}
+                        <div className="flex gap-2 overflow-x-auto no-scrollbar py-2 mb-5 scroll-smooth">
+                            {DISCOVER_CATEGORIES.map((cat) => {
+                                const active = discoverCategory === cat.id;
+                                return (
+                                    <button
+                                        key={cat.id}
+                                        type="button"
+                                        onClick={() => {
+                                            setDiscoverCategory(cat.id);
+                                            setSearchQuery("");
+                                        }}
+                                        className={`flex-none px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
+                                            active
+                                                ? "bg-gradient-to-r from-rose-600 to-pink-600 text-white font-black shadow-[0_0_15px_rgba(244,63,94,0.4)] scale-[1.03]"
+                                                : "bg-[#141518]/90 text-stone-300 hover:text-white border border-white/10 hover:border-white/20"
+                                        }`}
+                                    >
+                                        <span>{cat.label}</span>
+                                    </button>
+                                );
+                            })}
+                        </div>
+
+                        {/* Informações da categoria selecionada */}
+                        <div className="flex items-center justify-between mb-4 text-xs text-stone-400 px-1">
+                            <span>
+                                Mostrando <b className="text-white">{discoverDramas.length}</b> séries
+                            </span>
+                            <span className="text-[11px] text-rose-400 font-semibold">
+                                {DISCOVER_CATEGORIES.find((c) => c.id === discoverCategory)?.badge}
+                            </span>
+                        </div>
+
+                        {/* Grade de Séries da Categoria */}
+                        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 sm:gap-3.5">
+                            {discoverDramas.map((drama) => (
+                                <CatalogPosterCard
+                                    key={drama.id}
+                                    drama={drama}
+                                    isVip={isVip}
+                                    onSelect={handleSelectDrama}
+                                    isBookmarked={myListIds.includes(drama.id)}
+                                    onToggleBookmark={(e) => toggleMyList(drama.id, e)}
+                                />
+                            ))}
+                        </div>
+                    </section>
+                )}
+
+                {/* ABA 3: EM ALTA */}
+                {activeTab === "emalta" && (
+                    <section className="px-3 sm:px-10 py-3 sm:py-5">
+                        <div className="mb-5">
+                            <div className="flex items-center gap-2 mb-1">
+                                <Flame className="size-6 text-rose-500 fill-rose-500" />
+                                <h2 className="text-2xl font-black text-white tracking-tight">Em Alta no Brasil</h2>
+                            </div>
+                            <p className="text-xs sm:text-sm text-stone-400">
+                                As séries e episódios mais assistidos e comentados da semana
+                            </p>
+                        </div>
+
+                        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 sm:gap-3.5">
+                            {sortedDramas.slice(0, 48).map((drama, idx) => (
+                                <div key={drama.id} className="relative">
+                                    {idx < 10 && (
+                                        <div className="absolute -top-1.5 -left-1.5 z-20 size-6 rounded-full bg-rose-600 text-white font-black text-[11px] flex items-center justify-center shadow-lg border border-white/20 pointer-events-none">
+                                            {idx + 1}
+                                        </div>
+                                    )}
+                                    <CatalogPosterCard
+                                        drama={drama}
+                                        isVip={isVip}
+                                        onSelect={handleSelectDrama}
+                                        isBookmarked={myListIds.includes(drama.id)}
+                                        onToggleBookmark={(e) => toggleMyList(drama.id, e)}
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                )}
+
+                {/* ABA 4: MINHA LISTA */}
+                {activeTab === "minhalista" && (
+                    <section className="px-3 sm:px-10 py-3 sm:py-5">
+                        <div className="mb-5">
+                            <div className="flex items-center gap-2 mb-1">
+                                <Bookmark className="size-6 text-rose-400 fill-rose-400" />
+                                <h2 className="text-2xl font-black text-white tracking-tight">Minha Lista</h2>
+                            </div>
+                            <p className="text-xs sm:text-sm text-stone-400">
+                                {myListDramas.length > 0
+                                    ? `${myListDramas.length} ${myListDramas.length === 1 ? "série salva" : "séries salvas"} para você assistir`
+                                    : "Suas séries salvas para assistir quando quiser"}
+                            </p>
+                        </div>
+
+                        {myListDramas.length === 0 ? (
+                            <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
+                                <div className="size-16 rounded-full bg-rose-950/40 border border-rose-500/30 flex items-center justify-center mb-4 text-rose-400">
+                                    <Bookmark className="size-8 stroke-[1.5]" />
+                                </div>
+                                <h3 className="text-lg font-bold text-white mb-2">Sua lista está vazia</h3>
+                                <p className="text-xs text-stone-400 max-w-sm mb-6 leading-relaxed">
+                                    Toque no ícone de salvar em qualquer série para adicioná-la aos seus favoritos e continuar assistindo quando quiser.
+                                </p>
+                                <button
+                                    type="button"
+                                    onClick={() => setActiveTab("inicio")}
+                                    className="px-6 py-2.5 rounded-full bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold shadow-lg transition cursor-pointer"
+                                >
+                                    Explorar Catálogo
+                                </button>
+                            </div>
+                        ) : (
+                            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 sm:gap-3.5">
+                                {myListDramas.map((drama) => (
+                                    <CatalogPosterCard
+                                        key={drama.id}
+                                        drama={drama}
+                                        isVip={isVip}
+                                        onSelect={handleSelectDrama}
+                                        isBookmarked={true}
+                                        onToggleBookmark={(e) => toggleMyList(drama.id, e)}
+                                    />
+                                ))}
+                            </div>
+                        )}
+                    </section>
+                )}
             </main>
-
-            {/* BARRA INFERIOR FLUTUANTE DE VIDRO (.barra do TopDoramax) */}
-            <nav
-                aria-label="Menu"
-                className="fixed left-1/2 bottom-[max(10px,env(safe-area-inset-bottom))] -translate-x-1/2 z-40 flex gap-0.5 w-[min(calc(100%-20px),440px)] p-1.5 rounded-full border border-white/[0.08] bg-[#141418]/75 backdrop-blur-xl shadow-[0_16px_48px_rgba(0,0,0,0.65)]"
-            >
-                <button
-                    type="button"
-                    onClick={() => {
-                        setActiveOverlay("none");
-                        setLockedSerieModal(null);
-                        setExpandedRow(null);
-                        setActiveCategory("todos");
-                        window.scrollTo({ top: 0, behavior: "smooth" });
-                    }}
-                    className={`flex-1 min-h-[50px] py-1 px-1 rounded-full flex flex-col items-center justify-center gap-1 text-[10.5px] font-semibold transition ${activeOverlay === "none" && !lockedSerieModal
-                            ? "text-white bg-white/12"
-                            : "text-[#a3a3ad] hover:text-white"
-                        }`}
-                >
-                    <svg
-                        viewBox="0 0 24 24"
-                        className={`w-[21px] h-[21px] fill-none stroke-[1.7] ${activeOverlay === "none" && !lockedSerieModal
-                                ? "stroke-[#e11d48]"
-                                : "stroke-current"
-                            }`}
-                    >
-                        <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
-                        <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                    </svg>
-                    <span>Início</span>
-                </button>
-
-                <button
-                    type="button"
-                    onClick={() => {
-                        setLockedSerieModal(null);
-                        setExpandedRow(null);
-                        setActiveOverlay((prev) => (prev === "buscar" ? "none" : "buscar"));
-                    }}
-                    className={`flex-1 min-h-[50px] py-1 px-1 rounded-full flex flex-col items-center justify-center gap-1 text-[10.5px] font-semibold transition ${activeOverlay === "buscar"
-                            ? "text-white bg-white/12"
-                            : "text-[#a3a3ad] hover:text-white"
-                        }`}
-                >
-                    <svg
-                        viewBox="0 0 24 24"
-                        className={`w-[21px] h-[21px] fill-none stroke-[1.7] ${activeOverlay === "buscar" ? "stroke-[#e11d48]" : "stroke-current"
-                            }`}
-                    >
-                        <circle cx="11" cy="11" r="7" />
-                        <path d="m20 20-3.5-3.5" />
-                    </svg>
-                    <span>Buscar</span>
-                </button>
-
-                <button
-                    type="button"
-                    onClick={() => {
-                        setLockedSerieModal(null);
-                        setExpandedRow(null);
-                        setActiveOverlay((prev) => (prev === "anuncio" ? "none" : "anuncio"));
-                    }}
-                    className={`flex-1 min-h-[50px] py-1 px-1 rounded-full flex flex-col items-center justify-center gap-1 text-[10.5px] font-semibold transition ${activeOverlay === "anuncio"
-                            ? "text-white bg-white/12"
-                            : "text-[#a3a3ad] hover:text-white"
-                        }`}
-                >
-                    <svg
-                        viewBox="0 0 24 24"
-                        className={`w-[21px] h-[21px] fill-none stroke-[1.7] ${activeOverlay === "anuncio" ? "stroke-[#e11d48]" : "stroke-current"
-                            }`}
-                    >
-                        <path d="m3 11 18-5v12L3 14v-3z" />
-                        <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6" />
-                    </svg>
-                    <span>Do anúncio</span>
-                </button>
-
-                <button
-                    type="button"
-                    onClick={() => {
-                        if (isVip) {
-                            setActiveOverlay((prev) => (prev === "conta" ? "none" : "conta"));
-                        } else {
-                            handleOpenPlanCheckout("annual");
-                        }
-                    }}
-                    className={`relative flex-1 min-h-[50px] py-1 px-1 rounded-full flex flex-col items-center justify-center gap-1 text-[10.5px] font-semibold transition ${activeOverlay === "conta"
-                            ? "text-white bg-white/12"
-                            : "text-[#a3a3ad] hover:text-white"
-                        }`}
-                >
-                    <svg
-                        viewBox="0 0 24 24"
-                        className={`w-[21px] h-[21px] fill-none stroke-[1.7] ${activeOverlay === "conta" ? "stroke-[#e11d48]" : "stroke-current"
-                            }`}
-                    >
-                        <circle cx="12" cy="8" r="4" />
-                        <path d="M20 21a8 8 0 0 0-16 0" />
-                    </svg>
-                    <span>{isVip ? "Minha Conta" : "Liberar"}</span>
-                    {!isVip && (
-                        <span className="absolute top-1.5 right-[calc(50%-16px)] w-2 h-2 rounded-full bg-[#e11d48]" />
-                    )}
-                </button>
-            </nav>
 
             {/* TELA "VER TUDO" DE UMA FILEIRA (.fileira-toda) */}
             {expandedRow && (
@@ -1324,6 +1557,8 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                         setExpandedRow(null);
                                         handleSelectDrama(d);
                                     }}
+                                    isBookmarked={myListIds.includes(drama.id) || myListIds.includes(drama.slug)}
+                                    onToggleBookmark={(e) => toggleMyList(drama.id, e)}
                                 />
                             ))}
                         </div>
@@ -1486,68 +1721,145 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                 </section>
             )}
 
-            {/* JANELA "MINHA CONTA" (Quando o cliente está com o display liberado) */}
-            {activeOverlay === "conta" && (
+            {/* JANELA "MEU PERFIL / MINHA CONTA" */}
+            {(activeOverlay === "conta" || activeOverlay === "perfil") && (
                 <div
                     onClick={() => setActiveOverlay("none")}
-                    className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-4"
+                    className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4"
                 >
                     <div
                         onClick={(e) => e.stopPropagation()}
-                        className="w-full max-w-[460px] rounded-[22px] bg-[#141418] border border-white/12 p-5 sm:p-6 space-y-4 my-auto"
+                        className="w-full max-w-[440px] rounded-[24px] bg-[#121316] border border-white/10 p-5 sm:p-6 space-y-4 my-auto shadow-2xl"
                     >
-                        <div className="flex items-center justify-between">
-                            <div>
-                                <h3 className="font-bold text-lg text-white">Minha Conta</h3>
-                                <p className="text-xs text-[#9a9a9a] font-mono">
-                                    WhatsApp: {viewerPhone || "Conectado"}
-                                </p>
+                        {/* Topo do Perfil com Avatar */}
+                        <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
+                            <div className="flex items-center gap-3">
+                                <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-rose-600 to-pink-500 flex items-center justify-center text-white shadow-lg shadow-rose-600/30">
+                                    <User className="w-6 h-6" />
+                                </div>
+                                <div>
+                                    <h3 className="font-bold text-base text-white">Meu Perfil</h3>
+                                    <p className="text-xs text-stone-400 font-mono">
+                                        {viewerPhone ? `WhatsApp: ${viewerPhone}` : "Usuário Convidado"}
+                                    </p>
+                                </div>
                             </div>
                             <button
                                 type="button"
                                 onClick={() => setActiveOverlay("none")}
-                                className="w-8 h-8 rounded-full bg-white/10 text-white text-xs"
+                                className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs flex items-center justify-center transition cursor-pointer"
                             >
                                 ✕
                             </button>
                         </div>
 
-                        <div className="p-4 rounded-2xl bg-gradient-to-br from-[#e11d48]/22 to-[#e11d48]/5 border border-[#e11d48]/35 space-y-1.5">
-                            <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#e11d48] text-white text-[11px] font-bold">
-                                ACESSO LIBERADO · VIP
-                            </span>
-                            <div className="text-sm font-bold text-white">{viewerPlanName}</div>
-                            <div className="text-xs text-[#c9c9d1]">
-                                {daysRemaining !== null
-                                    ? `Acesso válido por mais ${daysRemaining} dias`
-                                    : "Acesso ativo a todas as séries do catálogo"}
+                        {/* Detalhes do VIP e Dias Restantes */}
+                        {isVip ? (
+                            <div className="p-4 rounded-2xl bg-gradient-to-br from-rose-950/50 via-rose-900/20 to-black border border-rose-500/30 space-y-2">
+                                <div className="flex items-center justify-between">
+                                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-rose-600 to-pink-600 text-white text-[11px] font-black tracking-wide uppercase shadow">
+                                        <Crown className="w-3 h-3" /> VIP Ativo
+                                    </span>
+                                    {daysRemaining !== null && (
+                                        <span className="text-xs font-bold text-rose-300">
+                                            {daysRemaining} {daysRemaining === 1 ? "dia restante" : "dias restantes"}
+                                        </span>
+                                    )}
+                                </div>
+                                <div className="text-sm font-bold text-white">{viewerPlanName}</div>
+                                <p className="text-xs text-stone-300 leading-relaxed">
+                                    {daysRemaining !== null
+                                        ? `Seu acesso VIP está garantido por mais ${daysRemaining} dias com todas as séries e episódios liberados sem cortes.`
+                                        : "Acesso total liberado a todas as séries e lançamentos do catálogo."}
+                                </p>
                             </div>
+                        ) : (
+                            <div className="p-4 rounded-2xl bg-[#18191e] border border-white/10 space-y-3">
+                                <div className="flex items-center justify-between">
+                                    <span className="inline-block px-2.5 py-0.5 rounded-full bg-stone-800 text-stone-300 text-[11px] font-bold">
+                                        CONTA GRATUITA
+                                    </span>
+                                    <span className="text-[11px] text-stone-400 font-semibold">
+                                        Prévias Liberadas
+                                    </span>
+                                </div>
+                                <div>
+                                    <h4 className="text-sm font-bold text-white">Desbloqueie o Catálogo Completo</h4>
+                                    <p className="text-xs text-stone-400 mt-0.5 leading-relaxed">
+                                        Assine o VIP para assistir todos os episódios de mais de 500 séries dubladas em alta qualidade.
+                                    </p>
+                                </div>
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        setActiveOverlay("none");
+                                        setVipModalTab("pix");
+                                        setVipModalOpen(true);
+                                    }}
+                                    className="w-full py-2.5 rounded-full bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white font-bold text-xs shadow-lg transition transform active:scale-95 cursor-pointer"
+                                >
+                                    Liberar Acesso VIP Agora
+                                </button>
+                            </div>
+                        )}
+
+                        {/* Botão de Suporte pelo WhatsApp */}
+                        <div className="space-y-1.5 pt-1">
+                            <button
+                                type="button"
+                                onClick={() => handleRedirectWhatsappSupport()}
+                                className="w-full min-h-[46px] rounded-full bg-[#25D366] hover:bg-[#22bf5b] text-black font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-[0_4px_16px_rgba(37,211,102,0.25)] transition transform active:scale-95 cursor-pointer"
+                            >
+                                <MessageCircle className="w-4 h-4 fill-black" />
+                                <span>Suporte no WhatsApp</span>
+                            </button>
+                            <p className="text-[11px] text-center text-stone-400">
+                                Precisa de ajuda com seu acesso ou quer tirar dúvidas? Fale conosco!
+                            </p>
                         </div>
 
+                        {/* Botão Aplicativo PWA */}
                         <button
                             type="button"
                             onClick={() => {
                                 setActiveOverlay("none");
                                 setPwaModalOpen(true);
                             }}
-                            className="w-full min-h-[46px] rounded-full bg-[#e11d48] hover:bg-[#f43f5e] text-white font-bold text-sm"
+                            className="w-full min-h-[42px] rounded-full bg-white/10 hover:bg-white/15 border border-white/10 text-white font-semibold text-xs flex items-center justify-center gap-1.5 transition cursor-pointer"
                         >
-                            Baixar Aplicativo (PWA)
+                            <span>Baixar Aplicativo no Celular</span>
                         </button>
 
-                        <button
-                            type="button"
-                            onClick={() => {
-                                localStorage.removeItem("sdc_viewer_phone");
-                                localStorage.removeItem("sdc_viewer_vip");
-                                setViewerPhone("");
-                                setIsVip(false);
-                                setActiveOverlay("none");
-                            }}
-                            className="w-full py-2.5 text-xs text-[#9a9a9a] hover:text-white underline"
-                        >
-                            Sair desta conta / Trocar número
-                        </button>
+                        {/* Login / Trocar conta */}
+                        <div className="text-center pt-1">
+                            {isVip || viewerPhone ? (
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        localStorage.removeItem("sdc_viewer_phone");
+                                        localStorage.removeItem("sdc_viewer_vip");
+                                        setViewerPhone("");
+                                        setIsVip(false);
+                                        setActiveOverlay("none");
+                                    }}
+                                    className="text-xs text-stone-400 hover:text-white underline cursor-pointer"
+                                >
+                                    Sair desta conta / Trocar número
+                                </button>
+                            ) : (
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        setActiveOverlay("none");
+                                        setVipModalTab("login");
+                                        setVipModalOpen(true);
+                                    }}
+                                    className="text-xs text-stone-400 hover:text-white underline cursor-pointer"
+                                >
+                                    Já assinou em outro aparelho? Entrar com WhatsApp
+                                </button>
+                            )}
+                        </div>
                     </div>
                 </div>
             )}
@@ -1761,83 +2073,105 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                 }}
             />
 
-            {/* BARRA DE NAVEGAÇÃO INFERIOR MOBILE ESTILO HOTPLOT.AI / YESTV.AI */}
+            {/* BARRA DE NAVEGAÇÃO INFERIOR MOBILE ESTILO HOTPLOT.AI */}
             <nav className="sm:hidden fixed bottom-0 inset-x-0 z-50 bg-[#0e0f12]/95 backdrop-blur-xl border-t border-white/[0.08] px-2 py-1.5 pb-[max(8px,env(safe-area-inset-bottom))] flex items-center justify-around shadow-[0_-8px_30px_rgba(0,0,0,0.85)]">
                 {/* 1. Início */}
                 <button
                     type="button"
                     onClick={() => {
                         setActiveCategory("todos");
+                        setActiveTab("inicio");
                         setSearchQuery("");
                         setActiveOverlay("none");
                         setLockedSerieModal(null);
                         window.scrollTo({ top: 0, behavior: "smooth" });
                     }}
-                    className={`flex flex-col items-center justify-center py-1 px-3 rounded-xl transition cursor-pointer ${
-                        activeCategory === "todos" && activeOverlay === "none" && !searchQuery
+                    className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition cursor-pointer ${
+                        activeTab === "inicio" && activeOverlay === "none"
                             ? "text-white"
                             : "text-white/45 hover:text-white/80"
                     }`}
                 >
-                    <Home className="w-5 h-5 mb-0.5" />
+                    <Home className={`w-5 h-5 mb-0.5 ${activeTab === "inicio" && activeOverlay === "none" ? "stroke-[2.5]" : ""}`} />
                     <span className="text-[10px] font-semibold">Início</span>
                 </button>
 
-                {/* 2. Gêneros */}
+                {/* 2. Descobrir */}
                 <button
                     type="button"
                     onClick={() => {
-                        const el = document.getElementById("filtros-categorias");
-                        if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+                        setActiveTab("descobrir");
+                        setActiveOverlay("none");
+                        window.scrollTo({ top: 0, behavior: "smooth" });
                     }}
-                    className="flex flex-col items-center justify-center py-1 px-3 rounded-xl text-white/45 hover:text-white/80 transition cursor-pointer"
+                    className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition cursor-pointer ${
+                        activeTab === "descobrir" && activeOverlay === "none"
+                            ? "text-rose-400 font-bold"
+                            : "text-white/45 hover:text-white/80"
+                    }`}
                 >
-                    <Compass className="w-5 h-5 mb-0.5" />
-                    <span className="text-[10px] font-semibold">Gêneros</span>
+                    <Compass className={`w-5 h-5 mb-0.5 ${activeTab === "descobrir" && activeOverlay === "none" ? "stroke-[2.5]" : ""}`} />
+                    <span className="text-[10px] font-semibold">Descobrir</span>
                 </button>
 
-                {/* 3. Em Alta */}
+                {/* 3. Em Alta (Pílula Rosa Central Estilo HotPlot.ai) */}
                 <button
                     type="button"
                     onClick={() => {
-                        const el = document.getElementById("principal");
-                        if (el) el.scrollIntoView({ behavior: "smooth" });
+                        setActiveTab("emalta");
+                        setActiveOverlay("none");
+                        window.scrollTo({ top: 0, behavior: "smooth" });
                     }}
-                    className="flex flex-col items-center justify-center py-1 px-3 rounded-xl text-white/45 hover:text-white/80 transition cursor-pointer"
+                    className="flex flex-col items-center justify-center py-0.5 px-2 rounded-xl transition cursor-pointer group"
                 >
-                    <Flame className="w-5 h-5 mb-0.5 text-rose-500" />
-                    <span className="text-[10px] font-semibold">Em Alta</span>
-                </button>
-
-                {/* 4. VIP (Botão Ouro Destaque YesTV) */}
-                <button
-                    type="button"
-                    onClick={() => {
-                        if (isVip) {
-                            setActiveOverlay("conta");
-                        } else {
-                            setVipModalTab("pix");
-                            setVipModalOpen(true);
-                        }
-                    }}
-                    className="flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition cursor-pointer"
-                >
-                    <div className="w-7 h-7 rounded-full grad-gold grid place-items-center shadow-[0_2px_12px_rgba(251,191,36,0.45)] mb-0.5">
-                        <Crown className="w-4 h-4 text-black" />
+                    <div className={`w-12 h-7 rounded-full flex items-center justify-center shadow-lg transition-transform group-active:scale-90 ${
+                        activeTab === "emalta" && activeOverlay === "none"
+                            ? "bg-[#f43f5e] shadow-[0_0_16px_rgba(244,63,94,0.6)]"
+                            : "bg-[#f43f5e]/85 hover:bg-[#f43f5e]"
+                    }`}>
+                        <Play className="w-3.5 h-3.5 text-white fill-white ml-0.5" />
                     </div>
-                    <span className="text-[10px] font-black text-[#ffd363]">
-                        {isVip ? "Meu VIP" : "Seja VIP"}
+                    <span className={`text-[10px] font-semibold mt-0.5 ${
+                        activeTab === "emalta" && activeOverlay === "none"
+                            ? "text-rose-400 font-bold"
+                            : "text-white/60"
+                    }`}>
+                        Em Alta
                     </span>
                 </button>
 
-                {/* 5. WhatsApp */}
+                {/* 4. Minha lista */}
                 <button
                     type="button"
-                    onClick={() => handleRedirectWhatsapp()}
-                    className="flex flex-col items-center justify-center py-1 px-3 rounded-xl text-emerald-400 hover:text-emerald-300 transition cursor-pointer"
+                    onClick={() => {
+                        setActiveTab("minhalista");
+                        setActiveOverlay("none");
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
+                    className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition cursor-pointer ${
+                        activeTab === "minhalista" && activeOverlay === "none"
+                            ? "text-rose-400 font-bold"
+                            : "text-white/45 hover:text-white/80"
+                    }`}
                 >
-                    <MessageCircle className="w-5 h-5 mb-0.5" />
-                    <span className="text-[10px] font-semibold">WhatsApp</span>
+                    <Bookmark className={`w-5 h-5 mb-0.5 ${activeTab === "minhalista" && activeOverlay === "none" ? "stroke-[2.5] fill-rose-400" : ""}`} />
+                    <span className="text-[10px] font-semibold">Minha lista</span>
+                </button>
+
+                {/* 5. Eu / Perfil */}
+                <button
+                    type="button"
+                    onClick={() => {
+                        setActiveOverlay("perfil");
+                    }}
+                    className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition cursor-pointer ${
+                        activeOverlay === "perfil" || activeOverlay === "conta"
+                            ? "text-rose-400 font-bold"
+                            : "text-white/45 hover:text-white/80"
+                    }`}
+                >
+                    <User className={`w-5 h-5 mb-0.5 ${activeOverlay === "perfil" || activeOverlay === "conta" ? "stroke-[2.5]" : ""}`} />
+                    <span className="text-[10px] font-semibold">Eu</span>
                 </button>
             </nav>
         </div>
@@ -1849,13 +2183,17 @@ function HorizontalRowSection({
     items,
     isVip,
     onSelect,
-    onExpand
+    onExpand,
+    myListIds,
+    onToggleBookmark
 }: {
     title: string;
     items: Drama[];
     isVip: boolean;
     onSelect: (drama: Drama) => void;
     onExpand: () => void;
+    myListIds?: string[];
+    onToggleBookmark?: (dramaId: string, e: React.MouseEvent) => void;
 }) {
     if (items.length === 0) return null;
     return (
@@ -1866,7 +2204,7 @@ function HorizontalRowSection({
                     onClick={onExpand}
                     className="inline-flex items-baseline gap-2.5 text-left group cursor-pointer"
                 >
-                    <span className="font-bold text-[17px] sm:text-[21px] text-white group-hover:text-amber-300 transition-colors">
+                    <span className="font-bold text-[17px] sm:text-[21px] text-white group-hover:text-rose-400 transition-colors">
                         {title}
                     </span>
                     <span className="text-[13px] font-semibold text-white/50 group-hover:text-white transition-colors">
@@ -1882,6 +2220,8 @@ function HorizontalRowSection({
                         drama={drama}
                         isVip={isVip}
                         onSelect={onSelect}
+                        isBookmarked={myListIds ? (myListIds.includes(drama.id) || myListIds.includes(drama.slug)) : false}
+                        onToggleBookmark={onToggleBookmark ? (e) => onToggleBookmark(drama.id, e) : undefined}
                     />
                 ))}
             </div>
@@ -1892,22 +2232,25 @@ function HorizontalRowSection({
 function CatalogPosterCard({
     drama,
     isVip,
-    onSelect
+    onSelect,
+    isBookmarked,
+    onToggleBookmark
 }: {
     drama: Drama;
     isVip: boolean;
     onSelect: (drama: Drama) => void;
+    isBookmarked?: boolean;
+    onToggleBookmark?: (e: React.MouseEvent) => void;
 }) {
     const langTag = detectLanguageTag(drama);
     const epCount = drama.episodes?.length || drama.totalEpisodes || 1;
     return (
-        <button
-            type="button"
-            onClick={() => onSelect(drama)}
-            className="group flex flex-col text-left w-full focus:outline-none transition duration-200 snap-start cursor-pointer"
-        >
+        <div className="group relative flex flex-col text-left w-full snap-start">
             {/* Capa com proporção 9:13 e cantos arredondados padrão Hotplot / YesTV (16px) */}
-            <div className="relative w-full aspect-[9/13] rounded-2xl overflow-hidden bg-[#151619] border border-white/[0.08] shadow-[0_6px_18px_rgba(0,0,0,0.6)] group-hover:border-amber-400/50 group-hover:shadow-[0_12px_28px_rgba(0,0,0,0.85)] group-hover:scale-[1.03] transition-all duration-300">
+            <div 
+                onClick={() => onSelect(drama)}
+                className="relative w-full aspect-[9/13] rounded-2xl overflow-hidden bg-[#151619] border border-white/[0.08] shadow-[0_6px_18px_rgba(0,0,0,0.6)] group-hover:border-rose-500/50 group-hover:shadow-[0_12px_28px_rgba(244,63,94,0.3)] group-hover:scale-[1.02] transition-all duration-300 cursor-pointer"
+            >
                 <img
                     src={drama.coverUrl}
                     alt={drama.title}
@@ -1917,37 +2260,62 @@ function CatalogPosterCard({
                 />
                 <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
 
-                {isVip && (
-                    <span className="absolute top-2 right-2 z-20 px-2 py-0.5 rounded-full bg-[#1dcc99] text-black text-[9px] font-black uppercase tracking-wider shadow-md">
-                        Liberado
-                    </span>
-                )}
-
-                <span className="absolute top-2 left-2 z-20 px-2 py-0.5 rounded-full bg-black/65 backdrop-blur-md border border-white/10 text-white text-[9px] font-bold uppercase tracking-wider">
+                {/* Badge Dublado / Legendado */}
+                <span className="absolute top-2 left-2 z-20 px-2 py-0.5 rounded-full bg-black/65 backdrop-blur-md border border-white/10 text-white text-[9px] font-bold uppercase tracking-wider pointer-events-none">
                     {langTag}
                 </span>
 
-                <span className="absolute right-2 bottom-2 z-20 px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-md border border-white/10 text-white text-[10px] font-bold tabular-nums">
+                {/* Botão Salvar / Bookmark */}
+                {onToggleBookmark && (
+                    <button
+                        type="button"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onToggleBookmark(e);
+                        }}
+                        aria-label={isBookmarked ? "Remover da Minha Lista" : "Salvar na Minha Lista"}
+                        className={`absolute top-2 right-2 z-30 w-7 h-7 rounded-full flex items-center justify-center backdrop-blur-md transition-all active:scale-90 cursor-pointer ${
+                            isBookmarked
+                                ? "bg-rose-600 text-white shadow-md shadow-rose-600/50"
+                                : "bg-black/65 hover:bg-black/90 text-white/80 hover:text-white border border-white/15"
+                        }`}
+                    >
+                        <Bookmark className={`w-3.5 h-3.5 ${isBookmarked ? "fill-white" : ""}`} />
+                    </button>
+                )}
+
+                {/* Badge VIP Liberado */}
+                {isVip && (
+                    <span className="absolute bottom-2 left-2 z-20 px-2 py-0.5 rounded-md bg-[#1dcc99] text-black text-[9px] font-black uppercase tracking-wider shadow-md pointer-events-none">
+                        VIP
+                    </span>
+                )}
+
+                {/* Quantidade de episódios */}
+                <span className="absolute right-2 bottom-2 z-20 px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-md border border-white/10 text-white text-[10px] font-bold tabular-nums pointer-events-none">
                     {epCount} EP
                 </span>
 
                 {/* Ícone Play ao passar o mouse no Desktop */}
-                <div className="hidden sm:flex absolute inset-0 z-10 items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="hidden sm:flex absolute inset-0 z-10 items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
                     <span className="w-10 h-10 rounded-full bg-white text-black grid place-items-center text-sm font-bold shadow-lg pl-0.5">
                         ▶
                     </span>
                 </div>
             </div>
 
-            {/* Metadados abaixo do card - Padrão Hotplot.ai / YesTV.ai */}
-            <div className="mt-2 px-0.5 min-w-0">
-                <h3 className="font-semibold text-[13px] leading-[17px] text-white line-clamp-2 group-hover:text-amber-400 transition-colors">
+            {/* Metadados abaixo do card - Padrão Hotplot.ai */}
+            <div 
+                onClick={() => onSelect(drama)}
+                className="mt-2 px-0.5 min-w-0 cursor-pointer"
+            >
+                <h3 className="font-semibold text-[13px] leading-[17px] text-white line-clamp-2 group-hover:text-rose-400 transition-colors">
                     {drama.title}
                 </h3>
                 <p className="mt-0.5 text-[11px] text-white/50 line-clamp-1">
                     {epCount} episódios · {langTag}
                 </p>
             </div>
-        </button>
+        </div>
     );
 }
