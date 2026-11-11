@@ -549,6 +549,7 @@ export async function ensureInitialDramas(force: boolean = false) {
                                 title: ep.title,
                                 description: ep.description,
                                 youtubeUrl: ep.youtubeUrl,
+                                videoUrl: ep.videoUrl || undefined,
                                 thumbnailUrl: item.coverUrl,
                                 durationSeconds: ep.durationSeconds || 900,
                                 isFree: ep.isFree,
@@ -593,12 +594,23 @@ export async function ensureInitialDramas(force: boolean = false) {
                             title: ep.title,
                             description: ep.description,
                             youtubeUrl: ep.youtubeUrl,
+                            videoUrl: ep.videoUrl || undefined,
                             thumbnailUrl: item.coverUrl,
                             durationSeconds: ep.durationSeconds || 900,
                             isFree: ep.isFree,
                             viewsCount: 0
                         }))
                     });
+                } else {
+                    // Atualiza videoUrl dos episódios se fornecido
+                    for (const ep of item.episodes) {
+                        if (ep.videoUrl) {
+                            await prisma.episode.updateMany({
+                                where: { dramaId: existing.id, number: ep.number },
+                                data: { videoUrl: ep.videoUrl }
+                            }).catch(() => {});
+                        }
+                    }
                 }
             }
         }

@@ -94,6 +94,7 @@ function WatchDramaContent() {
                                 title: ep.title,
                                 description: ep.description,
                                 youtubeUrl: ep.youtubeUrl,
+                                videoUrl: (ep as any).videoUrl || undefined,
                                 durationSeconds: ep.durationSeconds || 900,
                                 isFree: ep.isFree
                             }))
@@ -131,6 +132,7 @@ function WatchDramaContent() {
                             title: ep.title,
                             description: ep.description,
                             youtubeUrl: ep.youtubeUrl,
+                            videoUrl: (ep as any).videoUrl || undefined,
                             durationSeconds: ep.durationSeconds || 900,
                             isFree: ep.isFree
                         }))

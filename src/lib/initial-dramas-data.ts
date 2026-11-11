@@ -3,6 +3,7 @@ export interface InitialEpisodeData {
     title: string;
     description: string;
     youtubeUrl: string;
+    videoUrl?: string;
     durationSeconds?: number;
     isFree: boolean;
 }
@@ -47,6 +48,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 1",
                 "description": "Episódio 1 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": true
             },
@@ -54,7 +56,8 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "number": 2,
                 "title": "Episódio 2",
                 "description": "Episódio 2 de Ganhei Três Namoradas completo e legendado em alta definição.",
-                "youtubeUrl": "https://www.youtube.com/watch?v=hMg4j8JBZ0U",
+                "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": true
             },
@@ -63,6 +66,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 3",
                 "description": "Episódio 3 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -71,6 +75,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 4",
                 "description": "Episódio 4 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -79,6 +84,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 5",
                 "description": "Episódio 5 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -87,6 +93,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 6",
                 "description": "Episódio 6 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -95,6 +102,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 7",
                 "description": "Episódio 7 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -103,6 +111,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 8",
                 "description": "Episódio 8 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -111,6 +120,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 9",
                 "description": "Episódio 9 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -119,6 +129,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 10",
                 "description": "Episódio 10 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -127,6 +138,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 11",
                 "description": "Episódio 11 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -135,6 +147,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 12",
                 "description": "Episódio 12 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -143,6 +156,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 13",
                 "description": "Episódio 13 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -151,6 +165,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 14",
                 "description": "Episódio 14 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -159,6 +174,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 15",
                 "description": "Episódio 15 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -167,6 +183,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 16",
                 "description": "Episódio 16 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -175,6 +192,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 17",
                 "description": "Episódio 17 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -183,6 +201,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 18",
                 "description": "Episódio 18 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -191,6 +210,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 19",
                 "description": "Episódio 19 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -199,6 +219,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 20",
                 "description": "Episódio 20 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -207,6 +228,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 21",
                 "description": "Episódio 21 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -215,6 +237,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 22",
                 "description": "Episódio 22 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -223,6 +246,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 23",
                 "description": "Episódio 23 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -231,6 +255,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 24",
                 "description": "Episódio 24 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -239,6 +264,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 25",
                 "description": "Episódio 25 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -247,6 +273,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 26",
                 "description": "Episódio 26 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -255,6 +282,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 27",
                 "description": "Episódio 27 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -263,6 +291,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 28",
                 "description": "Episódio 28 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -271,6 +300,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 29",
                 "description": "Episódio 29 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -279,6 +309,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 30",
                 "description": "Episódio 30 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -287,6 +318,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 31",
                 "description": "Episódio 31 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -295,6 +327,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 32",
                 "description": "Episódio 32 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -303,6 +336,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 33",
                 "description": "Episódio 33 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -311,6 +345,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 34",
                 "description": "Episódio 34 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -319,6 +354,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 35",
                 "description": "Episódio 35 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -327,6 +363,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 36",
                 "description": "Episódio 36 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -335,6 +372,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 37",
                 "description": "Episódio 37 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -343,6 +381,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 38",
                 "description": "Episódio 38 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -351,6 +390,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 39",
                 "description": "Episódio 39 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -359,6 +399,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 40",
                 "description": "Episódio 40 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -367,6 +408,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 41",
                 "description": "Episódio 41 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -375,6 +417,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 42",
                 "description": "Episódio 42 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -383,6 +426,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 43",
                 "description": "Episódio 43 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -391,6 +435,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 44",
                 "description": "Episódio 44 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -399,6 +444,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 45",
                 "description": "Episódio 45 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -407,6 +453,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 46",
                 "description": "Episódio 46 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -415,6 +462,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 47",
                 "description": "Episódio 47 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -423,6 +471,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 48",
                 "description": "Episódio 48 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -431,6 +480,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 49",
                 "description": "Episódio 49 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -439,6 +489,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 50",
                 "description": "Episódio 50 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -447,6 +498,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 51",
                 "description": "Episódio 51 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -455,6 +507,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 52",
                 "description": "Episódio 52 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -463,6 +516,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 53",
                 "description": "Episódio 53 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -471,6 +525,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 54",
                 "description": "Episódio 54 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -479,6 +534,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 55",
                 "description": "Episódio 55 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -487,6 +543,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 56",
                 "description": "Episódio 56 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -495,6 +552,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 57",
                 "description": "Episódio 57 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -503,6 +561,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 58",
                 "description": "Episódio 58 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -511,6 +570,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 59",
                 "description": "Episódio 59 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             },
@@ -519,6 +579,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "title": "Episódio 60",
                 "description": "Episódio 60 de Ganhei Três Namoradas completo e legendado em alta definição.",
                 "youtubeUrl": "https://www.youtube.com/watch?v=K5aKv-9gR28",
+                "videoUrl": "https://big-stream-player.lovable.app/api/public/video/7a83e8c6-6715-40bf-b1db-9dd46e40a8f8",
                 "durationSeconds": 150,
                 "isFree": false
             }
