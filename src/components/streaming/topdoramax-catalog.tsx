@@ -18,7 +18,8 @@ import {
     X,
     Check,
     Play,
-    Sparkles
+    Sparkles,
+    Globe
 } from "lucide-react";
 import { DEFAULT_OFFER_PLANS, OfferPlan } from "@/lib/segredos-defaults";
 import { INITIAL_YOUTUBE_DRAMAS } from "@/lib/initial-dramas-data";
@@ -551,6 +552,21 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
         return sortedDramas.filter((d) => myListIds.includes(d.id) || myListIds.includes(d.slug));
     }, [sortedDramas, myListIds]);
 
+    const reelShortDramas = useMemo(
+        () => sortedDramas.slice(0, 18),
+        [sortedDramas]
+    );
+
+    const dramaBoxDramas = useMemo(
+        () => sortedDramas.slice(18, 36),
+        [sortedDramas]
+    );
+
+    const dubladoDramas = useMemo(
+        () => sortedDramas.filter((d) => detectLanguageTag(d) === "Dublado"),
+        [sortedDramas]
+    );
+
     const bombandoDramas = useMemo(
         () => sortedDramas.slice(10, 26),
         [sortedDramas]
@@ -670,14 +686,31 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
 
     return (
         <div className="min-h-dvh bg-[#0c0d0e] font-sans text-[#f5f5f5] pb-32 sm:pb-24 select-none">
-            {/* CABEÇALHO FIXO ESTILO YESTV.AI (.topo) */}
+            {/* CABEÇALHO FIXO ESTILO HOTPLOT.AI */}
             <header
-                className={`fixed top-0 left-0 right-0 z-40 flex items-center justify-between gap-2 px-3 sm:px-10 h-[58px] sm:h-[66px] transition-all ${scrolled
+                className={`fixed top-0 left-0 right-0 z-40 flex items-center justify-between gap-2 px-3 sm:px-10 h-[58px] sm:h-[66px] transition-all ${
+                    scrolled
                         ? "bg-[#0c0d0e]/95 backdrop-blur-xl border-b border-white/[0.07] shadow-[0_4px_20px_rgba(0,0,0,0.8)]"
                         : "bg-[#0c0d0e]/90 sm:bg-gradient-to-b sm:from-black/80 sm:to-transparent backdrop-blur-md sm:backdrop-blur-none"
-                    }`}
+                }`}
             >
-                <div className="flex items-center gap-3 sm:gap-6 min-w-0">
+                {/* Mobile: Botão Globo à esquerda (estilo HotPlot.ai) */}
+                <div className="flex items-center gap-2 sm:hidden shrink-0">
+                    <button
+                        type="button"
+                        onClick={() => {
+                            setActiveTab("descobrir");
+                            setActiveOverlay("none");
+                        }}
+                        aria-label="Descobrir e categorias"
+                        className="size-9 rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/10 flex items-center justify-center text-white/90 active:scale-95 transition cursor-pointer"
+                    >
+                        <Globe className="size-4" />
+                    </button>
+                </div>
+
+                {/* Centro no Mobile / Esquerda no Desktop: Logo */}
+                <div className="flex items-center justify-center sm:justify-start gap-3 sm:gap-6 min-w-0 flex-1 sm:flex-initial">
                     <button
                         type="button"
                         onClick={() => {
@@ -689,13 +722,24 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                             window.scrollTo({ top: 0, behavior: "smooth" });
                         }}
                         className="text-left focus:outline-none flex items-center gap-2 group cursor-pointer"
-                        aria-label="Ir para a página inicial do TvDrama Reels"
+                        aria-label="Ir para a página inicial"
                     >
+                        {/* Mobile: Pill centralizada idêntica à referência HotPlot.ai */}
+                        <div className="flex sm:hidden items-center gap-2 px-2 py-1 rounded-2xl">
+                            <div className="size-7 rounded-xl bg-gradient-to-tr from-[#f43f5e] via-rose-500 to-pink-500 flex items-center justify-center text-white font-black text-xs shadow-md shadow-rose-600/40">
+                                H
+                            </div>
+                            <span className="font-extrabold text-[16px] text-white tracking-tight">
+                                HotPlot<span className="text-[#f43f5e]">.ai</span>
+                            </span>
+                        </div>
+
+                        {/* Desktop: Logo oficial TvDrama Reels */}
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                             src="/logo.png"
                             alt="TvDrama Reels"
-                            className="h-[34px] sm:h-[40px] w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+                            className="hidden sm:block h-[34px] sm:h-[40px] w-auto object-contain transition-transform duration-200 group-hover:scale-105"
                         />
                     </button>
 
@@ -776,18 +820,28 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                 </div>
 
                 <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                    {/* Mobile: Perfil / VIP rápido */}
+                    <button
+                        type="button"
+                        onClick={() => setActiveOverlay("perfil")}
+                        className="sm:hidden size-9 rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/10 flex items-center justify-center text-white/90 active:scale-95 transition cursor-pointer"
+                        aria-label="Meu Perfil"
+                    >
+                        <User className="size-4" />
+                    </button>
+
                     {isAdmin ? (
                         <>
                             <Link
                                 href="/dashboard"
-                                className="px-3 sm:px-3.5 py-1.5 rounded-full bg-[#e11d48] hover:bg-[#f43f5e] text-white text-[11px] sm:text-xs font-bold shadow-[0_6px_20px_rgba(225,29,72,0.35)] transition"
+                                className="hidden sm:inline-flex px-3 sm:px-3.5 py-1.5 rounded-full bg-[#e11d48] hover:bg-[#f43f5e] text-white text-[11px] sm:text-xs font-bold shadow-[0_6px_20px_rgba(225,29,72,0.35)] transition"
                             >
                                 ⚙️ Painel Admin
                             </Link>
                             <button
                                 type="button"
                                 onClick={() => setActiveOverlay("perfil")}
-                                className="px-2.5 sm:px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 text-white text-[11px] sm:text-xs font-semibold tabular-nums transition flex items-center gap-1.5 cursor-pointer"
+                                className="hidden sm:inline-flex px-2.5 sm:px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 text-white text-[11px] sm:text-xs font-semibold tabular-nums transition items-center gap-1.5 cursor-pointer"
                             >
                                 <User className="w-3.5 h-3.5" />
                                 <span>Perfil</span>
@@ -798,14 +852,14 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                             <button
                                 type="button"
                                 onClick={() => setPwaModalOpen(true)}
-                                className="px-3 sm:px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-white text-[11px] sm:text-xs font-bold transition cursor-pointer"
+                                className="hidden sm:inline-flex px-3 sm:px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-white text-[11px] sm:text-xs font-bold transition cursor-pointer"
                             >
                                 Baixar App
                             </button>
                             <button
                                 type="button"
                                 onClick={() => setActiveOverlay("perfil")}
-                                className="px-2.5 sm:px-3 py-1.5 rounded-full bg-[#1dcc99]/15 hover:bg-[#1dcc99]/25 border border-[#1dcc99]/30 text-[#1dcc99] text-[11px] sm:text-xs font-semibold tabular-nums transition flex items-center gap-1.5 cursor-pointer"
+                                className="hidden sm:inline-flex px-2.5 sm:px-3 py-1.5 rounded-full bg-[#1dcc99]/15 hover:bg-[#1dcc99]/25 border border-[#1dcc99]/30 text-[#1dcc99] text-[11px] sm:text-xs font-semibold tabular-nums transition items-center gap-1.5 cursor-pointer"
                             >
                                 <Crown className="w-3.5 h-3.5" />
                                 <span>VIP ({daysRemaining !== null ? `${daysRemaining}d` : "Ativo"})</span>
@@ -829,7 +883,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                     setVipModalTab("pix");
                                     setVipModalOpen(true);
                                 }}
-                                className="px-3 sm:px-3.5 py-1.5 rounded-full grad-gold text-black text-[11px] sm:text-xs font-black shadow-[0_2px_14px_rgba(251,191,36,0.4)] transition transform active:scale-95 flex items-center gap-1.5 cursor-pointer"
+                                className="hidden sm:inline-flex px-3 sm:px-3.5 py-1.5 rounded-full grad-gold text-black text-[11px] sm:text-xs font-black shadow-[0_2px_14px_rgba(251,191,36,0.4)] transition transform active:scale-95 items-center gap-1.5 cursor-pointer"
                             >
                                 <Crown className="w-3.5 h-3.5 text-black" />
                                 <span>Seja VIP</span>
@@ -837,32 +891,14 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                             <button
                                 type="button"
                                 onClick={() => setActiveOverlay("perfil")}
-                                className="px-2.5 sm:px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 text-white text-[11px] sm:text-xs font-semibold transition flex items-center gap-1 cursor-pointer"
+                                className="hidden sm:inline-flex px-2.5 sm:px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 text-white text-[11px] sm:text-xs font-semibold transition items-center gap-1 cursor-pointer"
                                 aria-label="Abrir Perfil"
                             >
                                 <User className="w-3.5 h-3.5" />
-                                <span className="hidden sm:inline">Perfil</span>
+                                <span>Perfil</span>
                             </button>
                         </>
                     )}
-
-                    <button
-                        type="button"
-                        onClick={() => setActiveOverlay("buscar")}
-                        aria-label="Buscar séries"
-                        className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/[0.06] hover:bg-white/[0.14] grid place-items-center text-white transition shrink-0"
-                    >
-                        <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            className="w-4 h-4 sm:w-5 sm:h-5"
-                        >
-                            <circle cx="11" cy="11" r="7" />
-                            <path d="m20 20-3.5-3.5" strokeLinecap="round" />
-                        </svg>
-                    </button>
                 </div>
             </header>
 
@@ -1135,34 +1171,49 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                     </section>
                 )}
 
-                {/* 4. FILEIRAS HORIZONTAIS (.faixa) */}
+                {/* 4. FILEIRAS HORIZONTAIS (.faixa) ESTILO HOTPLOT.AI */}
                 {activeTab === "inicio" && searchQuery.trim() === "" && dramas.length > 0 && (
-                    <div id="principal" className="mt-4 space-y-5">
-                        {/* Fileira 1: Mais Assistidas (Prioridade de episódios e views) */}
+                    <div id="principal" className="mt-4 space-y-6 sm:space-y-8">
+                        {/* Fileira 1: ReelShort (3 colunas com 6 séries estilo HotPlot.ai) */}
                         <HorizontalRowSection
-                            title="🔥 Mais Assistidas"
-                            items={sortedDramas}
+                            title="ReelShort"
+                            items={reelShortDramas}
                             isVip={isVip}
                             onSelect={handleSelectDrama}
                             onExpand={() =>
-                                setExpandedRow({ title: "🔥 Mais Assistidas", items: sortedDramas })
+                                setExpandedRow({ title: "ReelShort", items: reelShortDramas })
                             }
                             myListIds={myListIds}
                             onToggleBookmark={toggleMyList}
                         />
 
-                        {/* Fileira 2: Bombando Agora */}
+                        {/* Fileira 2: DramaBox (3 colunas com 6 séries estilo HotPlot.ai) */}
                         <HorizontalRowSection
-                            title="⚡ Bombando Agora"
-                            items={bombandoDramas}
+                            title="DramaBox"
+                            items={dramaBoxDramas}
                             isVip={isVip}
                             onSelect={handleSelectDrama}
                             onExpand={() =>
-                                setExpandedRow({ title: "⚡ Bombando Agora", items: bombandoDramas })
+                                setExpandedRow({ title: "DramaBox", items: dramaBoxDramas })
                             }
                             myListIds={myListIds}
                             onToggleBookmark={toggleMyList}
                         />
+
+                        {/* Fileira 3: Novelas Dubladas */}
+                        {dubladoDramas.length > 0 && (
+                            <HorizontalRowSection
+                                title="🇧🇷 Novelas Dubladas"
+                                items={dubladoDramas}
+                                isVip={isVip}
+                                onSelect={handleSelectDrama}
+                                onExpand={() =>
+                                    setExpandedRow({ title: "🇧🇷 Novelas Dubladas", items: dubladoDramas })
+                                }
+                                myListIds={myListIds}
+                                onToggleBookmark={toggleMyList}
+                            />
+                        )}
 
                         {/* Fileira 4: Tendências — Top 10 (.faixa-ranking com número gigante vazado atrás da capa) */}
                         {top10Dramas.length > 0 && (
@@ -2203,25 +2254,26 @@ function HorizontalRowSection({
     onToggleBookmark?: (dramaId: string, e: React.MouseEvent) => void;
 }) {
     if (items.length === 0) return null;
+    const displayItems = items.slice(0, 6);
+
     return (
-        <section className="relative">
-            <div className="flex items-baseline justify-between px-4 sm:px-10 mb-2">
+        <section className="relative px-3 sm:px-10">
+            <div className="flex items-center justify-between mb-2.5 sm:mb-3">
+                <h2 className="font-extrabold text-[17px] sm:text-[21px] text-white tracking-tight">
+                    {title}
+                </h2>
                 <button
                     type="button"
                     onClick={onExpand}
-                    className="inline-flex items-baseline gap-2.5 text-left group cursor-pointer"
+                    className="inline-flex items-center gap-0.5 text-xs sm:text-[13px] font-bold text-white/50 hover:text-white transition-colors cursor-pointer group"
                 >
-                    <span className="font-bold text-[17px] sm:text-[21px] text-white group-hover:text-rose-400 transition-colors">
-                        {title}
-                    </span>
-                    <span className="text-[13px] font-semibold text-white/50 group-hover:text-white transition-colors">
-                        Ver tudo ›
-                    </span>
+                    <span>Tudo</span>
+                    <ChevronRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
                 </button>
             </div>
 
-            <div className="grid grid-flow-col auto-cols-[calc((100%-32px-16px)/2.4)] sm:auto-cols-[calc((100%-80px-40px)/4.8)] lg:auto-cols-[calc((100%-80px-60px)/6.5)] gap-3 overflow-x-auto no-scrollbar px-4 sm:px-10 pb-4 snap-x snap-mandatory">
-                {items.map((drama) => (
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2 sm:gap-3.5">
+                {displayItems.map((drama) => (
                     <CatalogPosterCard
                         key={drama.id}
                         drama={drama}
@@ -2252,11 +2304,11 @@ function CatalogPosterCard({
     const langTag = detectLanguageTag(drama);
     const epCount = drama.episodes?.length || drama.totalEpisodes || 1;
     return (
-        <div className="group relative flex flex-col text-left w-full snap-start">
-            {/* Capa com proporção 9:13 e cantos arredondados padrão Hotplot / YesTV (16px) */}
+        <div className="group relative flex flex-col text-left w-full">
+            {/* Capa com proporção 9:13 e cantos arredondados padrão Hotplot / ReelShort */}
             <div 
                 onClick={() => onSelect(drama)}
-                className="relative w-full aspect-[9/13] rounded-2xl overflow-hidden bg-[#151619] border border-white/[0.08] shadow-[0_6px_18px_rgba(0,0,0,0.6)] group-hover:border-rose-500/50 group-hover:shadow-[0_12px_28px_rgba(244,63,94,0.3)] group-hover:scale-[1.02] transition-all duration-300 cursor-pointer"
+                className="relative w-full aspect-[9/13] rounded-xl sm:rounded-2xl overflow-hidden bg-[#151619] border border-white/[0.08] shadow-[0_4px_16px_rgba(0,0,0,0.6)] group-hover:border-rose-500/50 group-hover:shadow-[0_8px_24px_rgba(244,63,94,0.3)] transition-all duration-300 cursor-pointer"
             >
                 <img
                     src={drama.coverUrl}
@@ -2265,10 +2317,10 @@ function CatalogPosterCard({
                     decoding="async"
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
+                <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
 
                 {/* Badge Dublado / Legendado */}
-                <span className="absolute top-2 left-2 z-20 px-2 py-0.5 rounded-full bg-black/65 backdrop-blur-md border border-white/10 text-white text-[9px] font-bold uppercase tracking-wider pointer-events-none">
+                <span className="absolute top-1.5 left-1.5 sm:top-2 sm:left-2 z-20 px-1.5 sm:px-2 py-0.5 rounded-md sm:rounded-full bg-black/70 backdrop-blur-md border border-white/10 text-white text-[8px] sm:text-[9px] font-bold uppercase tracking-wider pointer-events-none">
                     {langTag}
                 </span>
 
@@ -2281,46 +2333,34 @@ function CatalogPosterCard({
                             onToggleBookmark(e);
                         }}
                         aria-label={isBookmarked ? "Remover da Minha Lista" : "Salvar na Minha Lista"}
-                        className={`absolute top-2 right-2 z-30 w-7 h-7 rounded-full flex items-center justify-center backdrop-blur-md transition-all active:scale-90 cursor-pointer ${
+                        className={`absolute top-1.5 right-1.5 sm:top-2 sm:right-2 z-30 size-6 sm:size-7 rounded-full flex items-center justify-center backdrop-blur-md transition-all active:scale-90 cursor-pointer ${
                             isBookmarked
                                 ? "bg-rose-600 text-white shadow-md shadow-rose-600/50"
-                                : "bg-black/65 hover:bg-black/90 text-white/80 hover:text-white border border-white/15"
+                                : "bg-black/60 hover:bg-black/90 text-white/80 hover:text-white border border-white/15"
                         }`}
                     >
-                        <Bookmark className={`w-3.5 h-3.5 ${isBookmarked ? "fill-white" : ""}`} />
+                        <Bookmark className={`size-3 sm:size-3.5 ${isBookmarked ? "fill-white" : ""}`} />
                     </button>
                 )}
 
                 {/* Badge VIP Liberado */}
                 {isVip && (
-                    <span className="absolute bottom-2 left-2 z-20 px-2 py-0.5 rounded-md bg-[#1dcc99] text-black text-[9px] font-black uppercase tracking-wider shadow-md pointer-events-none">
+                    <span className="absolute bottom-1.5 left-1.5 sm:bottom-2 sm:left-2 z-20 px-1.5 py-0.5 rounded bg-[#1dcc99] text-black text-[8px] sm:text-[9px] font-black uppercase tracking-wider shadow-md pointer-events-none">
                         VIP
                     </span>
                 )}
-
-                {/* Quantidade de episódios */}
-                <span className="absolute right-2 bottom-2 z-20 px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-md border border-white/10 text-white text-[10px] font-bold tabular-nums pointer-events-none">
-                    {epCount} EP
-                </span>
-
-                {/* Ícone Play ao passar o mouse no Desktop */}
-                <div className="hidden sm:flex absolute inset-0 z-10 items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-                    <span className="w-10 h-10 rounded-full bg-white text-black grid place-items-center text-sm font-bold shadow-lg pl-0.5">
-                        ▶
-                    </span>
-                </div>
             </div>
 
             {/* Metadados abaixo do card - Padrão Hotplot.ai */}
             <div 
                 onClick={() => onSelect(drama)}
-                className="mt-2 px-0.5 min-w-0 cursor-pointer"
+                className="mt-1.5 sm:mt-2 px-0.5 min-w-0 cursor-pointer"
             >
-                <h3 className="font-semibold text-[13px] leading-[17px] text-white line-clamp-2 group-hover:text-rose-400 transition-colors">
+                <h3 className="font-semibold text-xs sm:text-[13px] leading-[15px] sm:leading-[17px] text-white line-clamp-2 group-hover:text-rose-400 transition-colors">
                     {drama.title}
                 </h3>
-                <p className="mt-0.5 text-[11px] text-white/50 line-clamp-1">
-                    {epCount} episódios · {langTag}
+                <p className="mt-0.5 text-[10px] sm:text-[11px] font-medium text-stone-400 line-clamp-1">
+                    {epCount} EP
                 </p>
             </div>
         </div>

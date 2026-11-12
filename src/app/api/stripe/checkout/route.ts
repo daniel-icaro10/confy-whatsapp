@@ -4,7 +4,7 @@ import { createStripeCheckoutSession, verifyStripeSessionAndUnlock } from "@/lib
 export async function POST(request: Request) {
     try {
         const body = await request.json();
-        const { phone, name, email, planKey, dramaId } = body;
+        const { phone, name, email, planKey, dramaId, amount, mode } = body;
 
         if (!phone) {
             return NextResponse.json(
@@ -17,8 +17,10 @@ export async function POST(request: Request) {
             phone,
             customerName: name,
             customerEmail: email,
-            planKey: planKey || "monthly",
-            dramaId
+            planKey: planKey || "single_drama",
+            dramaId,
+            mode: mode || "payment",
+            customAmount: amount ? Number(amount) : undefined
         });
 
         return NextResponse.json(result);

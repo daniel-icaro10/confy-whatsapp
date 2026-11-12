@@ -23,7 +23,13 @@ import {
     Tv,
     Smartphone,
     Film,
-    X
+    X,
+    CreditCard,
+    User,
+    Mail,
+    Shield,
+    CheckCircle2,
+    BadgePercent
 } from "lucide-react";
 import { INITIAL_YOUTUBE_DRAMAS } from "@/lib/initial-dramas-data";
 
@@ -50,26 +56,38 @@ interface DramaOffer {
 
 interface OrderBump {
     id: string;
+    badge: string;
     title: string;
     description: string;
+    originalPrice: number;
     price: number;
+    discountPercent: number;
     iconUrl: string;
+    tagHighlight?: string;
 }
 
 const ORDER_BUMPS: OrderBump[] = [
     {
         id: "bump-whatsapp",
-        title: "Entrega Imediata via WhatsApp!",
-        description: "Receba o link de acesso na hora, direto no seu WhatsApp.",
-        price: 5.0,
-        iconUrl: "/bump-whatsapp.jpg"
+        badge: "⚡ MAIS ESCOLHIDO (94% DOS CLIENTES)",
+        title: "Entrega Imediata & Acesso no WhatsApp",
+        description: "Receba o link privativo de acesso e o aplicativo PWA direto no seu WhatsApp em menos de 10 segundos, sem filas e com suporte VIP prioritário.",
+        originalPrice: 19.90,
+        price: 4.90,
+        discountPercent: 75,
+        iconUrl: "/bump-whatsapp.jpg",
+        tagHighlight: "LIBERAÇÃO INSTANTÂNEA"
     },
     {
         id: "bump-18",
-        title: "Novelinhas Com Cenas +18",
-        description: "Libere todas as novelinhas com as cenas mais picantes e sem censura.",
-        price: 5.0,
-        iconUrl: "/bump-18.webp"
+        badge: "🔥 CONTEÚDO EXCLUSIVO (SEM CENSURA)",
+        title: "Novelinhas Secretas com Cenas +18",
+        description: "Desbloqueie a pasta secreta com todos os episódios completos das novelinhas mais intensas e picantes, 100% sem cortes e com áudio dublado original em alta definição.",
+        originalPrice: 29.90,
+        price: 5.00,
+        discountPercent: 83,
+        iconUrl: "/bump-18.webp",
+        tagHighlight: "ÁUDIO E VÍDEO 100% SEM CENSURA"
     }
 ];
 
@@ -172,8 +190,10 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
+    const [paymentMethod, setPaymentMethod] = useState<"pix" | "card">("pix");
     const [formError, setFormError] = useState("");
     const [generatingPix, setGeneratingPix] = useState(false);
+    const [generatingCard, setGeneratingCard] = useState(false);
 
     // Pedido Pix Gerado
     const [pixOrder, setPixOrder] = useState<{
@@ -456,6 +476,71 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
             setFormError(err.message || "Ocorreu um erro ao gerar o Pix. Tente novamente.");
         } finally {
             setGeneratingPix(false);
+        }
+    };
+
+    // Submete checkout via Cartão de Crédito (Stripe)
+    const handleGenerateCard = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setFormError("");
+
+        if (name.trim().length < 3) {
+            setFormError("Informe seu nome completo para emissão do acesso.");
+            return;
+        }
+
+        const emailClean = email.trim();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(emailClean)) {
+            setFormError("Informe um endereço de e-mail válido.");
+            return;
+        }
+
+        const phoneDigits = phone.replace(/\D/g, "");
+        if (phoneDigits.length < 10) {
+            setFormError("Informe um número de WhatsApp válido com DDD.");
+            return;
+        }
+
+        setGeneratingCard(true);
+
+        // Dispara evento AddPaymentInfo no Meta Pixel
+        if (typeof window !== "undefined" && (window as any).fbq) {
+            try {
+                (window as any).fbq("track", "AddPaymentInfo", {
+                    content_name: drama?.title || "Ganhei Três Namoradas (Dublada)",
+                    content_ids: [slug],
+                    currency: "BRL",
+                    value: currentTotalAmount
+                });
+            } catch {}
+        }
+
+        try {
+            const planKey = selectedPackage === "upsell" ? "monthly" : "single_drama";
+            const res = await fetch("/api/stripe/checkout", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: name.trim(),
+                    email: emailClean,
+                    phone: phoneDigits,
+                    amount: currentTotalAmount,
+                    dramaId: slug,
+                    planKey,
+                    mode: "payment"
+                })
+            });
+
+            const data = await res.json();
+            if (!res.ok || !data.checkoutUrl) {
+                throw new Error(data.error || "Não foi possível iniciar o pagamento com cartão. Tente via Pix para aprovação imediata.");
+            }
+
+            window.location.href = data.checkoutUrl;
+        } catch (err: any) {
+            setFormError(err.message || "Erro ao processar cartão. Recomendamos usar o Pix para aprovação imediata.");
+        } finally {
+            setGeneratingCard(false);
         }
     };
 
@@ -1194,56 +1279,74 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                         </div>
                     </div>
 
-                    <form onSubmit={handleGeneratePix} className="space-y-6">
-                        {/* 1. SEÇÃO DE IDENTIFICAÇÃO */}
-                        <section className="rounded-2xl border border-white/10 bg-[#120e1a] p-5 text-left">
-                            <h2 className="text-xs font-extrabold uppercase tracking-widest text-stone-400">
-                                Identificação
-                            </h2>
+                    <form onSubmit={(e) => {
+                        if (paymentMethod === "card") {
+                            handleGenerateCard(e);
+                        } else {
+                            handleGeneratePix(e);
+                        }
+                    }} className="space-y-6">
+                        {/* 1. SEÇÃO DE IDENTIFICAÇÃO CLEAN */}
+                        <section className="rounded-2xl border border-white/10 bg-[#120e1a]/95 backdrop-blur p-5 text-left shadow-xl shadow-black/40">
+                            <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                                <h2 className="text-xs font-black uppercase tracking-widest text-stone-300 flex items-center gap-2">
+                                    <User className="size-4 text-rose-500" />
+                                    <span>Seus Dados de Acesso</span>
+                                </h2>
+                                <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                                    <ShieldCheck className="size-3" /> Ambiente 100% Seguro
+                                </span>
+                            </div>
 
                             <div className="mt-4 space-y-4">
                                 <div>
                                     <label className="block text-xs font-semibold text-stone-300 mb-1.5" htmlFor="of-name">
                                         Nome completo
                                     </label>
-                                    <input
-                                        id="of-name"
-                                        type="text"
-                                        value={name}
-                                        onChange={(e) => setName(e.target.value.slice(0, 100))}
-                                        placeholder="Digite seu nome completo"
-                                        required
-                                        className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-sm text-white placeholder-stone-500 outline-none focus:border-rose-500 transition-colors"
-                                    />
+                                    <div className="relative">
+                                        <input
+                                            id="of-name"
+                                            type="text"
+                                            value={name}
+                                            onChange={(e) => setName(e.target.value.slice(0, 100))}
+                                            placeholder="Digite seu nome completo"
+                                            required
+                                            className="w-full rounded-xl border border-white/10 bg-black/60 pl-11 pr-4 py-3.5 text-sm text-white placeholder-stone-500 outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all"
+                                        />
+                                        <User className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-stone-500" />
+                                    </div>
                                 </div>
 
                                 <div>
                                     <label className="block text-xs font-semibold text-stone-300 mb-1.5" htmlFor="of-email">
-                                        E-mail{" "}
+                                        E-mail para receber o acesso{" "}
                                         <span className="font-bold text-amber-400">
-                                            (VERIFIQUE SE SEU EMAIL ESTÁ CORRETO)
+                                            (seu login será enviado aqui)
                                         </span>
                                     </label>
-                                    <input
-                                        id="of-email"
-                                        type="email"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value.slice(0, 160))}
-                                        placeholder="seuemail@exemplo.com"
-                                        required
-                                        className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-sm text-white placeholder-stone-500 outline-none focus:border-rose-500 transition-colors"
-                                    />
+                                    <div className="relative">
+                                        <input
+                                            id="of-email"
+                                            type="email"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value.slice(0, 160))}
+                                            placeholder="seuemail@exemplo.com"
+                                            required
+                                            className="w-full rounded-xl border border-white/10 bg-black/60 pl-11 pr-4 py-3.5 text-sm text-white placeholder-stone-500 outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all"
+                                        />
+                                        <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-stone-500" />
+                                    </div>
                                 </div>
 
                                 <div>
                                     <label className="block text-xs font-semibold text-stone-300 mb-1.5" htmlFor="of-phone">
-                                        Celular / WhatsApp{" "}
-                                        <span className="font-bold text-amber-400">
-                                            (VERIFIQUE SE SEU NÚMERO ESTÁ CORRETO)
+                                        WhatsApp{" "}
+                                        <span className="font-bold text-emerald-400">
+                                            (para suporte e liberação rápida)
                                         </span>
                                     </label>
-                                    <div className="flex items-center gap-2">
-                                        <span className="rounded-xl border border-white/10 bg-black/50 px-3.5 py-3 text-sm font-semibold text-stone-400">
+                                    <div className="relative flex items-center">
+                                        <span className="absolute left-3.5 text-xs font-bold text-stone-400 z-10 pointer-events-none">
                                             +55
                                         </span>
                                         <input
@@ -1254,108 +1357,207 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                                             onChange={(e) => setPhone(formatPhone(e.target.value))}
                                             placeholder="(11) 99999-9999"
                                             required
-                                            className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-sm text-white placeholder-stone-500 outline-none focus:border-rose-500 transition-colors"
+                                            className="w-full rounded-xl border border-white/10 bg-black/60 pl-12 pr-4 py-3.5 text-sm text-white placeholder-stone-500 outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all"
                                         />
                                     </div>
                                 </div>
                             </div>
                         </section>
 
-                        {/* 2. SEÇÃO DE ORDER BUMPS */}
-                        <section className="space-y-3">
+                        {/* 2. SEÇÃO DE ORDER BUMPS DE ALTA CONVERSÃO */}
+                        <section className="space-y-3.5 text-left">
+                            <div className="flex items-center gap-2 px-1">
+                                <BadgePercent className="size-4 text-amber-400" />
+                                <h3 className="text-xs font-black uppercase tracking-wider text-amber-300">
+                                    Ofertas Especiais de Checkout (Apenas Hoje)
+                                </h3>
+                            </div>
+
                             {ORDER_BUMPS.map((bump) => {
                                 const isChecked = selectedBumps.includes(bump.id);
                                 return (
-                                    <button
+                                    <div
                                         key={bump.id}
-                                        type="button"
                                         onClick={() => toggleBump(bump.id)}
-                                        className={`flex w-full items-start gap-3.5 rounded-2xl border-2 border-dashed p-4 text-left transition-all ${
+                                        className={`relative cursor-pointer rounded-2xl border-2 transition-all overflow-hidden ${
                                             isChecked
-                                                ? "border-rose-500 bg-rose-500/10 shadow-lg shadow-rose-500/10"
-                                                : "border-white/15 bg-[#120e1a] hover:border-rose-500/40"
+                                                ? "border-rose-500 bg-gradient-to-br from-rose-950/40 via-[#181124] to-[#120e1a] shadow-lg shadow-rose-600/20"
+                                                : "border-white/10 bg-[#120e1a] hover:border-white/25"
                                         }`}
                                     >
-                                        <span
-                                            className={`mt-0.5 grid size-5 shrink-0 place-items-center rounded-md border-2 transition-colors ${
-                                                isChecked
-                                                    ? "border-rose-500 bg-rose-500 text-white"
-                                                    : "border-stone-500 bg-black/40"
-                                            }`}
-                                        >
-                                            {isChecked && <Check className="size-3.5 stroke-[3]" />}
-                                        </span>
+                                        {/* Top Tag Ribbon */}
+                                        <div className={`px-4 py-1 text-[10px] font-black uppercase tracking-wider flex items-center justify-between ${
+                                            isChecked
+                                                ? "bg-rose-600 text-white"
+                                                : "bg-white/5 text-stone-400 border-b border-white/5"
+                                        }`}>
+                                            <span>{bump.badge}</span>
+                                            <span className="font-extrabold text-amber-300">{bump.discountPercent}% OFF</span>
+                                        </div>
 
-                                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                                        <img
-                                            src={bump.iconUrl}
-                                            alt=""
-                                            className="mt-0.5 size-10 shrink-0 rounded-lg object-cover border border-white/10"
-                                        />
+                                        <div className="p-4 flex items-start gap-3.5">
+                                            {/* Custom Checkbox */}
+                                            <div
+                                                className={`mt-1 grid size-6 shrink-0 place-items-center rounded-lg border-2 transition-all ${
+                                                    isChecked
+                                                        ? "border-rose-500 bg-rose-500 text-white shadow-md shadow-rose-500/40"
+                                                        : "border-stone-500 bg-black/40 hover:border-stone-400"
+                                                }`}
+                                            >
+                                                {isChecked && <Check className="size-4 stroke-[3]" />}
+                                            </div>
 
-                                        <span className="min-w-0 flex-1">
-                                            <span className="block text-sm font-extrabold text-white">
-                                                {bump.title}
-                                            </span>
-                                            <span className="mt-0.5 block text-xs text-stone-400">
-                                                {bump.description}
-                                            </span>
-                                            <span className="mt-1 block text-sm font-black text-rose-400">
-                                                + R$ {formatMoney(bump.price)}
-                                            </span>
-                                        </span>
+                                            {/* Thumbnail */}
+                                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                                            <img
+                                                src={bump.iconUrl}
+                                                alt=""
+                                                className="mt-0.5 size-12 shrink-0 rounded-xl object-cover border border-white/10 shadow-md"
+                                            />
 
-                                        <span
-                                            className={`mt-0.5 shrink-0 rounded-full px-3 py-1.5 text-xs font-bold transition-all ${
-                                                isChecked
-                                                    ? "bg-rose-600 text-white shadow-md shadow-rose-600/30"
-                                                    : "border border-rose-500 text-rose-400"
-                                            }`}
-                                        >
-                                            {isChecked ? "Adicionado" : "+ Eu quero"}
-                                        </span>
-                                    </button>
+                                            {/* Content */}
+                                            <div className="min-w-0 flex-1">
+                                                <div className="flex items-start justify-between gap-2">
+                                                    <span className="block text-sm font-black text-white leading-snug">
+                                                        {bump.title}
+                                                    </span>
+                                                </div>
+                                                <p className="mt-1 text-xs text-stone-400 leading-relaxed">
+                                                    {bump.description}
+                                                </p>
+                                                <div className="mt-2 flex items-center gap-2">
+                                                    <span className="text-[11px] text-stone-500 line-through">
+                                                        De R$ {formatMoney(bump.originalPrice)}
+                                                    </span>
+                                                    <span className="text-sm font-black text-emerald-400">
+                                                        por apenas + R$ {formatMoney(bump.price)}
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            {/* Action Pill */}
+                                            <div className="shrink-0 self-center">
+                                                <span
+                                                    className={`inline-flex items-center rounded-full px-3 py-1.5 text-xs font-black transition-all ${
+                                                        isChecked
+                                                            ? "bg-emerald-500 text-white shadow-md shadow-emerald-500/30"
+                                                            : "border border-rose-500/60 bg-rose-500/10 text-rose-400 hover:bg-rose-500 hover:text-white"
+                                                    }`}
+                                                >
+                                                    {isChecked ? "✓ Adicionado" : "+ Adicionar"}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 );
                             })}
                         </section>
 
-                        {/* 3. SEÇÃO FORMA DE PAGAMENTO */}
-                        <section className="rounded-2xl border border-white/10 bg-[#120e1a] p-5 text-left">
-                            <h2 className="text-xs font-extrabold uppercase tracking-widest text-stone-400">
-                                Forma de pagamento
+                        {/* 3. SEÇÃO FORMA DE PAGAMENTO (PIX PRINCIPAL + CARTÃO) */}
+                        <section className="rounded-2xl border border-white/10 bg-[#120e1a]/95 backdrop-blur p-5 text-left shadow-xl shadow-black/40">
+                            <h2 className="text-xs font-black uppercase tracking-widest text-stone-300 mb-3 flex items-center justify-between">
+                                <span>Forma de Pagamento</span>
+                                <span className="text-[11px] font-normal text-stone-400">Escolha como pagar</span>
                             </h2>
 
-                            <div className="mt-4">
-                                <div className="flex items-center gap-3 rounded-xl border border-rose-500 bg-rose-500/10 p-4">
-                                    <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-rose-500/20 text-rose-400">
-                                        <Zap className="size-4" />
+                            {/* Payment Options Grid */}
+                            <div className="grid grid-cols-2 gap-3">
+                                {/* PIX (RECOMENDADO) */}
+                                <button
+                                    type="button"
+                                    onClick={() => setPaymentMethod("pix")}
+                                    className={`relative flex flex-col items-start p-3.5 rounded-xl border-2 text-left transition-all ${
+                                        paymentMethod === "pix"
+                                            ? "border-emerald-500 bg-emerald-500/10 shadow-lg shadow-emerald-500/10"
+                                            : "border-white/10 bg-black/40 hover:border-white/20"
+                                    }`}
+                                >
+                                    <span className="absolute -top-2.5 right-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-[9px] font-black uppercase tracking-wider text-black px-2 py-0.5 rounded-full shadow-sm">
+                                        Mais Rápido
                                     </span>
-                                    <div className="min-w-0 flex-1">
-                                        <p className="text-sm font-bold text-white">Pix</p>
-                                        <p className="text-[11px] text-emerald-400 font-semibold">
-                                            Aprovação em segundos
-                                        </p>
+                                    <div className="flex items-center gap-2 mb-1">
+                                        <span className={`grid size-7 place-items-center rounded-lg ${
+                                            paymentMethod === "pix" ? "bg-emerald-500 text-black font-black" : "bg-white/10 text-stone-300"
+                                        }`}>
+                                            <Zap className="size-4" />
+                                        </span>
+                                        <span className="text-sm font-black text-white">Pix</span>
                                     </div>
-                                    <span className="grid size-6 shrink-0 place-items-center rounded-full border border-rose-500 bg-rose-500 text-white">
-                                        <Check className="size-4 stroke-[3]" />
+                                    <span className="text-[11px] text-emerald-400 font-bold">
+                                        Aprovação imediata
+                                    </span>
+                                    <span className="text-[10px] text-stone-400 mt-0.5">
+                                        Sem taxas · Libera na hora
+                                    </span>
+                                </button>
+
+                                {/* CARTÃO DE CRÉDITO */}
+                                <button
+                                    type="button"
+                                    onClick={() => setPaymentMethod("card")}
+                                    className={`relative flex flex-col items-start p-3.5 rounded-xl border-2 text-left transition-all ${
+                                        paymentMethod === "card"
+                                            ? "border-rose-500 bg-rose-500/10 shadow-lg shadow-rose-500/10"
+                                            : "border-white/10 bg-black/40 hover:border-white/20"
+                                    }`}
+                                >
+                                    <div className="flex items-center gap-2 mb-1">
+                                        <span className={`grid size-7 place-items-center rounded-lg ${
+                                            paymentMethod === "card" ? "bg-rose-500 text-white" : "bg-white/10 text-stone-300"
+                                        }`}>
+                                            <CreditCard className="size-4" />
+                                        </span>
+                                        <span className="text-sm font-black text-white">Cartão</span>
+                                    </div>
+                                    <span className="text-[11px] text-stone-300 font-bold">
+                                        Crédito à vista ou parcelado
+                                    </span>
+                                    <span className="text-[10px] text-stone-400 mt-0.5">
+                                        Visa, Master, Elo
+                                    </span>
+                                </button>
+                            </div>
+
+                            {/* Informações da Forma Selecionada */}
+                            {paymentMethod === "pix" ? (
+                                <div className="mt-4 rounded-xl border border-emerald-500/20 bg-emerald-950/20 p-3.5 text-xs text-stone-300 flex items-start gap-2.5">
+                                    <CheckCircle2 className="size-4 text-emerald-400 shrink-0 mt-0.5" />
+                                    <p className="leading-relaxed">
+                                        <strong className="text-white">Pagamento 100% instantâneo:</strong> gere o QR Code Pix e copie a chave. O sistema detecta o pagamento sozinho e envia seu acesso no e-mail e WhatsApp em segundos.
+                                    </p>
+                                </div>
+                            ) : (
+                                <div className="mt-4 rounded-xl border border-rose-500/20 bg-rose-950/20 p-3.5 text-xs text-stone-300 flex items-start gap-2.5">
+                                    <Shield className="size-4 text-rose-400 shrink-0 mt-0.5" />
+                                    <p className="leading-relaxed">
+                                        <strong className="text-white">Ambiente Seguro Stripe:</strong> processamento com criptografia bancária de ponta a ponta. Você será direcionado para o checkout oficial protegido.
+                                    </p>
+                                </div>
+                            )}
+
+                            {/* Resumo do Valor Total */}
+                            <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-4">
+                                <div>
+                                    <span className="block text-xs text-stone-400">Total a pagar:</span>
+                                    <span className="text-[11px] text-stone-500">
+                                        {selectedBumps.length > 0
+                                            ? `Pacote + ${selectedBumps.length} adicional${selectedBumps.length > 1 ? "is" : ""}`
+                                            : "Acesso Completo"}
                                     </span>
                                 </div>
-
-                                <div className="mt-4 rounded-xl border border-white/5 bg-black/40 p-4 text-xs leading-relaxed text-stone-400">
-                                    O pagamento via Pix é instantâneo. Assim que a confirmação chegar, seu acesso é liberado automaticamente — sem precisar enviar comprovante.
-                                </div>
-
-                                <div className="mt-4 flex items-end justify-between border-t border-white/10 pt-4">
-                                    <span className="text-xs text-stone-400">Valor à vista</span>
+                                <div className="text-right">
                                     <span className="text-2xl font-black text-rose-400">
                                         R$ {formatMoney(currentTotalAmount)}
+                                    </span>
+                                    <span className="block text-[10px] text-emerald-400 font-semibold">
+                                        {paymentMethod === "pix" ? "à vista no Pix" : "ou até 12x no cartão"}
                                     </span>
                                 </div>
                             </div>
                         </section>
 
                         {formError && (
-                            <div className="rounded-xl bg-red-500/10 border border-red-500/30 p-3 text-center text-xs font-semibold text-red-400">
+                            <div className="rounded-xl bg-red-500/10 border border-red-500/30 p-3.5 text-center text-xs font-semibold text-red-400">
                                 {formError}
                             </div>
                         )}
@@ -1363,18 +1565,22 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                         {/* Botão de Finalizar Compra com Animação Shine Sweep */}
                         <button
                             type="submit"
-                            disabled={generatingPix}
+                            disabled={generatingPix || generatingCard}
                             className="relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-rose-600 via-rose-500 to-rose-600 hover:from-rose-500 hover:to-rose-500 px-6 py-4 text-base font-black uppercase tracking-wider text-white shadow-xl shadow-rose-600/40 disabled:opacity-60 transition-all active:scale-[0.98]"
                         >
-                            {generatingPix ? (
+                            {generatingPix || generatingCard ? (
                                 <>
                                     <Loader2 className="size-5 animate-spin" />
-                                    <span>Gerando Pix seguro...</span>
+                                    <span>{paymentMethod === "pix" ? "Gerando Pix seguro..." : "Iniciando pagamento seguro..."}</span>
                                 </>
                             ) : (
                                 <>
                                     <Lock className="size-5" />
-                                    <span>Finalizar compra</span>
+                                    <span>
+                                        {paymentMethod === "pix"
+                                            ? `Pagar com Pix e Liberar Acesso — R$ ${formatMoney(currentTotalAmount)}`
+                                            : `Pagar no Cartão — R$ ${formatMoney(currentTotalAmount)}`}
+                                    </span>
                                 </>
                             )}
                             <span
@@ -1385,10 +1591,16 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                             </span>
                         </button>
 
-                        <p className="flex items-center justify-center gap-2 text-center text-[11px] text-stone-400">
-                            <ShieldCheck className="size-4 text-emerald-400" />
-                            <span>Pagamento 100% seguro · Acesso imediato</span>
-                        </p>
+                        {/* Garantia & Selos de Confiança */}
+                        <div className="space-y-2 pt-1">
+                            <p className="flex items-center justify-center gap-2 text-center text-[11px] text-stone-300">
+                                <ShieldCheck className="size-4 text-emerald-400" />
+                                <span>Garantia Incondicional de 7 Dias · Risco Zero</span>
+                            </p>
+                            <p className="text-center text-[10px] text-stone-500">
+                                Seus dados estão 100% protegidos por criptografia de 256 bits.
+                            </p>
+                        </div>
                     </form>
                 </div>
             )}

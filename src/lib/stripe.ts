@@ -11,6 +11,7 @@ export interface CreateStripeCheckoutInput {
     planKey: "monthly" | "quarterly" | "annual" | "single_drama" | (string & {});
     dramaId?: string;
     mode?: "subscription" | "payment";
+    customAmount?: number;
 }
 
 export interface CreateStripePixInput {
@@ -192,7 +193,10 @@ export async function createStripeCheckoutSession(input: CreateStripeCheckoutInp
         throw new Error("A chave secreta da Stripe ainda não foi configurada no painel administrativo.");
     }
 
-    const amountCents = Math.round(plan.price * 100);
+    const finalAmount = typeof input.customAmount === "number" && input.customAmount > 0
+        ? input.customAmount
+        : plan.price;
+    const amountCents = Math.round(finalAmount * 100);
     const customerEmail = input.customerEmail?.trim() || `${cleanPhone}@tvdramareels.com`;
 
     const successUrl = input.dramaId
@@ -218,7 +222,7 @@ export async function createStripeCheckoutSession(input: CreateStripeCheckoutInp
         form.append("payment_method_types[1]", "pix");
     }
 
-    if (plan.stripePriceId?.trim()) {
+    if (plan.stripePriceId?.trim() && !input.customAmount) {
         form.append("line_items[0][price]", plan.stripePriceId.trim());
         form.append("line_items[0][quantity]", "1");
     } else {
