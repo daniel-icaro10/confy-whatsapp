@@ -30,7 +30,8 @@ import {
     Shield,
     CheckCircle2,
     BadgePercent,
-    Download
+    Download,
+    Users
 } from "lucide-react";
 import { INITIAL_YOUTUBE_DRAMAS } from "@/lib/initial-dramas-data";
 import { loadStripeClient } from "@/lib/stripe-client";
@@ -70,10 +71,21 @@ interface OrderBump {
 
 const ORDER_BUMPS: OrderBump[] = [
     {
+        id: "bump-familia",
+        badge: "👨‍👩‍👧‍👦 MAIS ADICIONADO • 3 TELAS",
+        title: "Passe VIP Família • 3 Telas Simultâneas",
+        description: "Assista no celular, tablet ou Smart TV ao mesmo tempo. Compartilhe o acesso completo com até 3 pessoas da família sem desconectar ninguém.",
+        originalPrice: 29.90,
+        price: 4.90,
+        discountPercent: 84,
+        iconUrl: "/bump-whatsapp.jpg",
+        tagHighlight: "3 TELAS SIMULTÂNEAS"
+    },
+    {
         id: "bump-offline",
-        badge: "⚡ INOVAÇÃO (96% DOS CLIENTES LEVAM)",
-        title: "Modo Offline & Download no Celular",
-        description: "Baixe qualquer episódio em 1 toque para assistir offline sem internet, sem travamentos e sem gastar seu 4G no ônibus, trabalho ou viagens.",
+        badge: "⚡ ESSENCIAL PARA O DIA A DIA",
+        title: "Modo Offline & Download Ilimitado no Celular",
+        description: "Baixe qualquer episódio em 1 toque para assistir offline no ônibus, metrô ou viagens sem gastar seu 4G e sem travamentos.",
         originalPrice: 24.90,
         price: 4.90,
         discountPercent: 80,
@@ -84,10 +96,10 @@ const ORDER_BUMPS: OrderBump[] = [
         id: "bump-18",
         badge: "🔥 COFRE SECRETO (+18 SEM CENSURA)",
         title: "Cenas Quentes Proibidas & Finais Alternativos",
-        description: "Desbloqueie o cofre privativo com episódios proibidos, cenas picantes sem cortes de censura e os finais alternativos exclusivos de mais de 80 novelinhas.",
-        originalPrice: 29.90,
+        description: "Desbloqueie o cofre privativo com episódios proibidos, cenas picantes sem cortes de censura e os 3 finais alternativos exclusivos da história.",
+        originalPrice: 34.90,
         price: 5.00,
-        discountPercent: 83,
+        discountPercent: 85,
         iconUrl: "/bump-18.webp",
         tagHighlight: "ÁUDIO & VÍDEO 100% SEM CORTES"
     }
@@ -215,6 +227,23 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
     const [copiedPix, setCopiedPix] = useState(false);
     const [isPaymentConfirmed, setIsPaymentConfirmed] = useState(false);
     const [pixTimeRemaining, setPixTimeRemaining] = useState(24 * 60);
+
+    // Cronômetro de reserva promocional no Checkout (15 minutos padrão Kiwify)
+    const [checkoutTimer, setCheckoutTimer] = useState(14 * 60 + 59);
+
+    useEffect(() => {
+        if (currentView !== "checkout") return;
+        const interval = setInterval(() => {
+            setCheckoutTimer((prev) => (prev > 0 ? prev - 1 : 0));
+        }, 1000);
+        return () => clearInterval(interval);
+    }, [currentView]);
+
+    const formatCheckoutTimer = (seconds: number) => {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+    };
 
 
     // 0. Captura parâmetros de anúncios (UTMs e fbclid) para atribuição
@@ -1447,430 +1476,523 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                         </div>
                     ) : (
                         <>
-                            {/* Topo do Checkout */}
-                            <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
+                            {/* TOPO DO CHECKOUT: FUSÃO KIWIFY + NETFLIX */}
+                            <div className="flex items-center justify-between pb-3.5 border-b border-white/10 mb-4">
                                 <button
                                     type="button"
                                     onClick={() => setCurrentView("offer")}
-                                    className="flex items-center gap-1.5 text-xs font-semibold text-stone-400 hover:text-white transition-colors"
+                                    className="inline-flex items-center gap-1.5 text-xs font-bold text-stone-400 hover:text-white transition-colors cursor-pointer"
                                 >
                                     <ArrowLeft className="size-4" />
-                                    <span>Voltar à oferta</span>
+                                    <span>Voltar à prévia</span>
                                 </button>
 
-                                <div className="flex items-center gap-1.5 text-[11px] font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full">
-                                    <Lock className="size-3" />
-                                    <span>Ambiente 100% Seguro</span>
+                                <div className="inline-flex items-center gap-1.5 text-[11px] font-extrabold text-emerald-400 bg-emerald-500/10 border border-emerald-500/25 px-3 py-1 rounded-full shadow-sm">
+                                    <ShieldCheck className="size-3.5 text-emerald-400" />
+                                    <span>Checkout 100% Blindado</span>
                                 </div>
                             </div>
 
-                    {/* Resumo do Pacote Selecionado */}
-                    <div className="mb-6 rounded-2xl border border-rose-500/30 bg-[#161022] p-4 flex items-center justify-between gap-3">
-                        <div className="flex items-center gap-3 min-w-0">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                                src={currentCover}
-                                alt={currentTitle}
-                                className="size-12 rounded-xl object-cover border border-white/10 shrink-0"
-                            />
-                            <div className="min-w-0">
-                                <span className="block text-[10px] font-bold uppercase tracking-wider text-rose-400">
-                                    {selectedPackage === "upsell" ? "⭐ Pacote VIP Selecionado" : "🎬 Novela Selecionada"}
-                                </span>
-                                <h3 className="text-sm font-bold text-white truncate">
-                                    {selectedPackage === "upsell" ? "Catálogo VIP Completo (Acesso Ilimitado)" : currentTitle}
-                                </h3>
-                                <p className="text-xs text-stone-400">
-                                    {selectedPackage === "upsell"
-                                        ? "Acesso total a todas as novelinhas"
-                                        : "Temporada completa em Full HD"}
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className="text-right shrink-0">
-                            <span className="block text-base font-extrabold text-rose-400">
-                                R$ {formatMoney(selectedPackage === "upsell" ? PRICE_UPSELL : PRICE_BASICA)}
-                            </span>
-                            <button
-                                type="button"
-                                onClick={() => setIsUpsellModalOpen(true)}
-                                className="text-[10px] text-stone-400 underline hover:text-white"
-                            >
-                                Alterar pacote
-                            </button>
-                        </div>
-                    </div>
-
-                    <form onSubmit={(e) => {
-                        if (paymentMethod === "card") {
-                            handleGenerateCard(e);
-                        } else {
-                            handleGeneratePix(e);
-                        }
-                    }} className="space-y-6">
-                        {/* 1. SEÇÃO DE IDENTIFICAÇÃO CLEAN */}
-                        <section className="rounded-2xl border border-white/10 bg-[#120e1a]/95 backdrop-blur p-5 text-left shadow-xl shadow-black/40">
-                            <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                                <h2 className="text-xs font-black uppercase tracking-widest text-stone-300 flex items-center gap-2">
-                                    <User className="size-4 text-rose-500" />
-                                    <span>Seus Dados de Acesso</span>
-                                </h2>
-                                <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
-                                    <ShieldCheck className="size-3" /> Ambiente 100% Seguro
-                                </span>
+                            {/* BARRA DE RESERVA COM CRONÔMETRO REGRESSIVO KIWIFY */}
+                            <div className="mb-5 rounded-2xl border border-rose-500/30 bg-gradient-to-r from-rose-950/40 via-[#161022] to-rose-950/40 p-3.5 flex items-center justify-between text-xs shadow-lg shadow-rose-950/20">
+                                <div className="flex items-center gap-2 text-rose-200 font-semibold">
+                                    <Clock className="size-4 text-rose-400 animate-pulse shrink-0" />
+                                    <span className="text-[11px] sm:text-xs">
+                                        Condição promocional exclusiva reservada por:
+                                    </span>
+                                </div>
+                                <div className="font-mono font-black text-rose-300 bg-black/70 px-2.5 py-1 rounded-lg border border-rose-500/30 text-xs tabular-nums shrink-0">
+                                    {formatCheckoutTimer(checkoutTimer)}
+                                </div>
                             </div>
 
-                            <div className="mt-4 space-y-4">
-                                <div>
-                                    <label className="block text-xs font-semibold text-stone-300 mb-1.5" htmlFor="of-name">
-                                        Nome completo
-                                    </label>
-                                    <div className="relative">
-                                        <input
-                                            id="of-name"
-                                            type="text"
-                                            value={name}
-                                            onChange={(e) => setName(e.target.value.slice(0, 100))}
-                                            placeholder="Digite seu nome completo"
-                                            required
-                                            className="w-full rounded-xl border border-white/10 bg-black/60 pl-11 pr-4 py-3.5 text-sm text-white placeholder-stone-500 outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all"
+                            {/* CARD RESUMO DO PLANO SELECIONADO (NETFLIX STREAMING LUXE) */}
+                            <div className="mb-5 rounded-2xl border border-white/10 bg-[#120f1c] p-4 sm:p-5 relative overflow-hidden shadow-xl">
+                                <div className="absolute top-0 right-0 w-40 h-40 bg-rose-600/10 rounded-full blur-3xl pointer-events-none" />
+                                <div className="flex items-start justify-between gap-3 relative z-10">
+                                    <div className="flex items-center gap-3.5 min-w-0">
+                                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                                        <img
+                                            src={currentCover}
+                                            alt={currentTitle}
+                                            className="size-14 sm:size-16 rounded-xl object-cover border border-rose-500/30 shrink-0 shadow-lg"
                                         />
-                                        <User className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-stone-500" />
+                                        <div className="min-w-0 text-left">
+                                            <span className="inline-flex items-center gap-1 text-[9px] font-black uppercase tracking-wider text-rose-400 bg-rose-500/15 px-2 py-0.5 rounded-md mb-1">
+                                                {selectedPackage === "upsell" ? "⭐ PACOTE VIP ILIMITADO" : "🎬 NOVELA COMPLETA"}
+                                            </span>
+                                            <h3 className="text-sm sm:text-base font-black text-white truncate">
+                                                {selectedPackage === "upsell" ? "Catálogo VIP Completo (Todas as Novelas)" : currentTitle}
+                                            </h3>
+                                            <p className="text-[11px] text-stone-400 flex flex-wrap items-center gap-x-2 gap-y-0.5 mt-0.5">
+                                                <span className="text-emerald-400 font-bold">✓ Full HD 1080p</span>
+                                                <span className="text-stone-600">•</span>
+                                                <span>Sem anúncios</span>
+                                                <span className="text-stone-600">•</span>
+                                                <span className="text-stone-300 font-medium">Liberação Imediata</span>
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div>
-                                    <label className="block text-xs font-semibold text-stone-300 mb-1.5" htmlFor="of-email">
-                                        E-mail para receber o acesso{" "}
-                                        <span className="font-bold text-amber-400">
-                                            (seu login será enviado aqui)
+                                    <div className="text-right shrink-0">
+                                        <span className="block text-lg sm:text-xl font-black text-white">
+                                            R$ {formatMoney(selectedPackage === "upsell" ? PRICE_UPSELL : PRICE_BASICA)}
                                         </span>
-                                    </label>
-                                    <div className="relative">
-                                        <input
-                                            id="of-email"
-                                            type="email"
-                                            value={email}
-                                            onChange={(e) => setEmail(e.target.value.slice(0, 160))}
-                                            placeholder="seuemail@exemplo.com"
-                                            required
-                                            className="w-full rounded-xl border border-white/10 bg-black/60 pl-11 pr-4 py-3.5 text-sm text-white placeholder-stone-500 outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all"
-                                        />
-                                        <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-stone-500" />
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <label className="block text-xs font-semibold text-stone-300 mb-1.5" htmlFor="of-phone">
-                                        WhatsApp{" "}
-                                        <span className="font-bold text-emerald-400">
-                                            (para suporte e liberação rápida)
-                                        </span>
-                                    </label>
-                                    <div className="relative flex items-center">
-                                        <span className="absolute left-3.5 text-xs font-bold text-stone-400 z-10 pointer-events-none">
-                                            +55
-                                        </span>
-                                        <input
-                                            id="of-phone"
-                                            type="tel"
-                                            inputMode="numeric"
-                                            value={phone}
-                                            onChange={(e) => setPhone(formatPhone(e.target.value))}
-                                            placeholder="(11) 99999-9999"
-                                            required
-                                            className="w-full rounded-xl border border-white/10 bg-black/60 pl-12 pr-4 py-3.5 text-sm text-white placeholder-stone-500 outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all"
-                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() => setIsUpsellModalOpen(true)}
+                                            className="text-[10px] text-rose-400 hover:text-rose-300 font-bold underline cursor-pointer"
+                                        >
+                                            Trocar plano
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </section>
 
-                        {/* 2. SEÇÃO DE ORDER BUMPS DE ALTA CONVERSÃO */}
-                        <section className="space-y-3.5 text-left">
-                            <div className="flex items-center gap-2 px-1">
-                                <BadgePercent className="size-4 text-amber-400" />
-                                <h3 className="text-xs font-black uppercase tracking-wider text-amber-300">
-                                    Ofertas Especiais de Checkout (Apenas Hoje)
-                                </h3>
-                            </div>
+                            <form onSubmit={(e) => {
+                                if (paymentMethod === "card") {
+                                    handleGenerateCard(e);
+                                } else {
+                                    handleGeneratePix(e);
+                                }
+                            }} className="space-y-5">
+                                {/* PASSO 1: SEUS DADOS DE ACESSO (KIWIFY CLEAN) */}
+                                <section className="rounded-2xl border border-white/10 bg-[#120e1a]/95 backdrop-blur-md p-4 sm:p-5 text-left shadow-xl shadow-black/40">
+                                    <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
+                                        <div className="flex items-center gap-2.5">
+                                            <div className="size-6 rounded-full bg-rose-600 text-white font-black text-xs flex items-center justify-center shadow">
+                                                1
+                                            </div>
+                                            <div>
+                                                <h3 className="text-xs sm:text-sm font-black text-white uppercase tracking-wider">
+                                                    Seus Dados de Acesso
+                                                </h3>
+                                                <p className="text-[10px] sm:text-[11px] text-stone-400">
+                                                    Para onde enviaremos o seu acesso e confirmação
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                                            <Lock className="size-2.5" /> 100% Confidencial
+                                        </span>
+                                    </div>
 
-                            {ORDER_BUMPS.map((bump) => {
-                                const isChecked = selectedBumps.includes(bump.id);
-                                return (
-                                    <div
-                                        key={bump.id}
-                                        onClick={() => toggleBump(bump.id)}
-                                        className={`relative cursor-pointer rounded-2xl border-2 transition-all overflow-hidden ${
-                                            isChecked
-                                                ? "border-rose-500 bg-gradient-to-br from-rose-950/40 via-[#181124] to-[#120e1a] shadow-lg shadow-rose-600/20"
-                                                : "border-white/10 bg-[#120e1a] hover:border-white/25"
-                                        }`}
-                                    >
-                                        {/* Top Tag Ribbon */}
-                                        <div className={`px-4 py-1 text-[10px] font-black uppercase tracking-wider flex items-center justify-between ${
-                                            isChecked
-                                                ? "bg-rose-600 text-white"
-                                                : "bg-white/5 text-stone-400 border-b border-white/5"
-                                        }`}>
-                                            <span>{bump.badge}</span>
-                                            <span className="font-extrabold text-amber-300">{bump.discountPercent}% OFF</span>
+                                    <div className="space-y-3.5">
+                                        {/* Nome */}
+                                        <div>
+                                            <label className="block text-xs font-bold text-stone-300 mb-1" htmlFor="of-name">
+                                                Nome completo
+                                            </label>
+                                            <div className="relative">
+                                                <input
+                                                    id="of-name"
+                                                    type="text"
+                                                    value={name}
+                                                    onChange={(e) => setName(e.target.value.slice(0, 100))}
+                                                    placeholder="Digite seu nome completo"
+                                                    required
+                                                    className="w-full rounded-xl border border-white/15 bg-black/60 pl-10 pr-4 py-3 text-sm text-white placeholder-stone-500 outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all"
+                                                />
+                                                <User className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-stone-500" />
+                                            </div>
                                         </div>
 
-                                        <div className="p-3.5 sm:p-4">
-                                            {/* Linha Superior: Checkbox + Thumbnail + Título & Descrição */}
-                                            <div className="flex items-start gap-3">
-                                                {/* Custom Checkbox */}
-                                                <div
-                                                    className={`mt-0.5 grid size-6 shrink-0 place-items-center rounded-lg border-2 transition-all ${
-                                                        isChecked
-                                                            ? "border-rose-500 bg-rose-500 text-white shadow-md shadow-rose-500/40"
-                                                            : "border-stone-500 bg-black/40 hover:border-stone-400"
-                                                    }`}
-                                                >
-                                                    {isChecked && <Check className="size-4 stroke-[3]" />}
+                                        {/* WhatsApp */}
+                                        <div>
+                                            <div className="flex items-center justify-between mb-1">
+                                                <label className="block text-xs font-bold text-stone-300" htmlFor="of-phone">
+                                                    WhatsApp
+                                                </label>
+                                                <span className="text-[10px] font-bold text-emerald-400">
+                                                    Liberamos o link direto aqui
+                                                </span>
+                                            </div>
+                                            <div className="relative flex items-center">
+                                                <span className="absolute left-3.5 text-xs font-bold text-stone-400 z-10 pointer-events-none">
+                                                    +55
+                                                </span>
+                                                <input
+                                                    id="of-phone"
+                                                    type="tel"
+                                                    inputMode="numeric"
+                                                    value={phone}
+                                                    onChange={(e) => setPhone(formatPhone(e.target.value))}
+                                                    placeholder="(11) 99999-9999"
+                                                    required
+                                                    className="w-full rounded-xl border border-white/15 bg-black/60 pl-12 pr-4 py-3 text-sm text-white placeholder-stone-500 outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all font-mono"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        {/* E-mail */}
+                                        <div>
+                                            <div className="flex items-center justify-between mb-1">
+                                                <label className="block text-xs font-bold text-stone-300" htmlFor="of-email">
+                                                    E-mail de Acesso
+                                                </label>
+                                                <span className="text-[10px] font-semibold text-stone-400">
+                                                    Cópia do comprovante
+                                                </span>
+                                            </div>
+                                            <div className="relative">
+                                                <input
+                                                    id="of-email"
+                                                    type="email"
+                                                    value={email}
+                                                    onChange={(e) => setEmail(e.target.value.slice(0, 160))}
+                                                    placeholder="seuemail@exemplo.com"
+                                                    required
+                                                    className="w-full rounded-xl border border-white/15 bg-black/60 pl-10 pr-4 py-3 text-sm text-white placeholder-stone-500 outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all"
+                                                />
+                                                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-stone-500" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                {/* PASSO 2: ORDER BUMPS INOVADORES (KIWIFY STYLE) */}
+                                <section className="space-y-3 text-left">
+                                    <div className="flex items-center justify-between px-1">
+                                        <div className="flex items-center gap-2">
+                                            <div className="size-6 rounded-full bg-amber-500 text-black font-black text-xs flex items-center justify-center shadow">
+                                                2
+                                            </div>
+                                            <div>
+                                                <h3 className="text-xs sm:text-sm font-black text-white uppercase tracking-wider">
+                                                    Turbine sua Experiência (Opcional)
+                                                </h3>
+                                                <p className="text-[10px] sm:text-[11px] text-amber-300 font-semibold">
+                                                    ⚡ Adicione com desconto único apenas nesta tela
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {ORDER_BUMPS.map((bump) => {
+                                        const isChecked = selectedBumps.includes(bump.id);
+                                        return (
+                                            <div
+                                                key={bump.id}
+                                                onClick={() => toggleBump(bump.id)}
+                                                className={`relative cursor-pointer rounded-2xl border-2 transition-all overflow-hidden ${
+                                                    isChecked
+                                                        ? "border-emerald-500 bg-gradient-to-br from-emerald-950/30 via-[#181124] to-[#120e1a] shadow-lg shadow-emerald-500/20"
+                                                        : "border-white/10 bg-[#120e1a] hover:border-white/25"
+                                                }`}
+                                            >
+                                                {/* Top Tag Ribbon */}
+                                                <div className={`px-4 py-1 text-[10px] font-black uppercase tracking-wider flex items-center justify-between ${
+                                                    isChecked
+                                                        ? "bg-emerald-600 text-white"
+                                                        : "bg-white/5 text-stone-400 border-b border-white/5"
+                                                }`}>
+                                                    <span>{bump.badge}</span>
+                                                    <span className="font-extrabold text-amber-300">{bump.discountPercent}% OFF</span>
                                                 </div>
 
-                                                {/* Thumbnail */}
-                                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                                <img
-                                                    src={bump.iconUrl}
-                                                    alt=""
-                                                    className="size-11 sm:size-12 shrink-0 rounded-xl object-cover border border-white/10 shadow-md"
-                                                />
+                                                <div className="p-3.5 sm:p-4">
+                                                    {/* Linha Superior: Checkbox + Thumbnail + Título & Descrição */}
+                                                    <div className="flex items-start gap-3">
+                                                        {/* Custom Checkbox */}
+                                                        <div
+                                                            className={`mt-0.5 grid size-6 shrink-0 place-items-center rounded-lg border-2 transition-all ${
+                                                                isChecked
+                                                                    ? "border-emerald-500 bg-emerald-500 text-black shadow-md shadow-emerald-500/40"
+                                                                    : "border-stone-500 bg-black/40 hover:border-stone-400"
+                                                                }`}
+                                                        >
+                                                            {isChecked && <Check className="size-4 stroke-[3]" />}
+                                                        </div>
 
-                                                {/* Content */}
-                                                <div className="min-w-0 flex-1">
-                                                    <span className="block text-xs sm:text-sm font-black text-white leading-snug">
-                                                        {bump.title}
-                                                    </span>
-                                                    <p className="mt-1 text-[11px] sm:text-xs text-stone-400 leading-relaxed">
-                                                        {bump.description}
-                                                    </p>
+                                                        {/* Thumbnail */}
+                                                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                                                        <img
+                                                            src={bump.iconUrl}
+                                                            alt=""
+                                                            className="size-11 sm:size-12 shrink-0 rounded-xl object-cover border border-white/10 shadow-md"
+                                                        />
+
+                                                        {/* Content */}
+                                                        <div className="min-w-0 flex-1">
+                                                            <span className="block text-xs sm:text-sm font-black text-white leading-snug">
+                                                                {bump.title}
+                                                            </span>
+                                                            <p className="mt-1 text-[11px] sm:text-xs text-stone-400 leading-relaxed">
+                                                                {bump.description}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Linha Inferior: Preço + Botão Adicionar */}
+                                                    <div className="mt-3 pt-2.5 border-t border-white/5 flex items-center justify-between gap-2">
+                                                        <div className="flex flex-col sm:flex-row sm:items-center gap-0.5 sm:gap-2 min-w-0">
+                                                            <span className="text-[10px] sm:text-[11px] text-stone-500 line-through">
+                                                                De R$ {formatMoney(bump.originalPrice)}
+                                                            </span>
+                                                            <span className="text-xs sm:text-sm font-black text-emerald-400">
+                                                                por apenas + R$ {formatMoney(bump.price)}
+                                                            </span>
+                                                        </div>
+
+                                                        {/* Action Pill */}
+                                                        <span
+                                                            className={`inline-flex items-center shrink-0 rounded-full px-3 py-1.5 text-xs font-black transition-all ${
+                                                                isChecked
+                                                                    ? "bg-emerald-500 text-black font-extrabold shadow-md shadow-emerald-500/30"
+                                                                    : "border border-rose-500/60 bg-rose-500/10 text-rose-400 hover:bg-rose-500 hover:text-white"
+                                                            }`}
+                                                        >
+                                                            {isChecked ? "✓ Adicionado" : "+ Adicionar"}
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
+                                        );
+                                    })}
+                                </section>
 
-                                            {/* Linha Inferior: Preço + Botão Adicionar */}
-                                            <div className="mt-3 pt-2.5 border-t border-white/5 flex items-center justify-between gap-2">
-                                                <div className="flex flex-col sm:flex-row sm:items-center gap-0.5 sm:gap-2 min-w-0">
-                                                    <span className="text-[10px] sm:text-[11px] text-stone-500 line-through">
-                                                        De R$ {formatMoney(bump.originalPrice)}
-                                                    </span>
-                                                    <span className="text-xs sm:text-sm font-black text-emerald-400">
-                                                        por apenas + R$ {formatMoney(bump.price)}
-                                                    </span>
-                                                </div>
+                                {/* PASSO 3: FORMA DE PAGAMENTO (PIX DESTAQUE + CARTÃO TRANSPARENTE) */}
+                                <section className="rounded-2xl border border-white/10 bg-[#120e1a]/95 backdrop-blur-md p-4 sm:p-5 text-left shadow-xl shadow-black/40">
+                                    <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
+                                        <div className="flex items-center gap-2.5">
+                                            <div className="size-6 rounded-full bg-emerald-500 text-black font-black text-xs flex items-center justify-center shadow">
+                                                3
+                                            </div>
+                                            <div>
+                                                <h3 className="text-xs sm:text-sm font-black text-white uppercase tracking-wider">
+                                                    Forma de Pagamento
+                                                </h3>
+                                                <p className="text-[10px] sm:text-[11px] text-stone-400">
+                                                    Escolha como prefere pagar com segurança
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <span className="text-[10px] font-bold text-emerald-400 flex items-center gap-1">
+                                            <Lock className="size-3" /> Criptografia 256 bits
+                                        </span>
+                                    </div>
 
-                                                {/* Action Pill */}
-                                                <span
-                                                    className={`inline-flex items-center shrink-0 rounded-full px-3 py-1.5 text-xs font-black transition-all ${
-                                                        isChecked
-                                                            ? "bg-emerald-500 text-white shadow-md shadow-emerald-500/30"
-                                                            : "border border-rose-500/60 bg-rose-500/10 text-rose-400 hover:bg-rose-500 hover:text-white"
-                                                    }`}
-                                                >
-                                                    {isChecked ? "✓ Adicionado" : "+ Adicionar"}
+                                    {/* Payment Options Grid */}
+                                    <div className="grid grid-cols-2 gap-3">
+                                        {/* PIX (RECOMENDADO) */}
+                                        <button
+                                            type="button"
+                                            onClick={() => setPaymentMethod("pix")}
+                                            className={`relative flex flex-col items-start p-3.5 rounded-xl border-2 text-left transition-all cursor-pointer ${
+                                                paymentMethod === "pix"
+                                                    ? "border-emerald-500 bg-emerald-500/10 shadow-lg shadow-emerald-500/15"
+                                                    : "border-white/10 bg-black/40 hover:border-white/20"
+                                            }`}
+                                        >
+                                            <span className="absolute -top-2.5 right-2 bg-gradient-to-r from-emerald-500 to-teal-400 text-[9px] font-black uppercase tracking-wider text-black px-2 py-0.5 rounded-full shadow-sm">
+                                                Mais Rápido
+                                            </span>
+                                            <div className="flex items-center gap-2 mb-1">
+                                                <span className={`grid size-7 place-items-center rounded-lg ${
+                                                    paymentMethod === "pix" ? "bg-emerald-500 text-black font-black" : "bg-white/10 text-stone-300"
+                                                }`}>
+                                                    <Zap className="size-4" />
+                                                </span>
+                                                <span className="text-sm font-black text-white">Pix</span>
+                                            </div>
+                                            <span className="text-[11px] text-emerald-400 font-bold">
+                                                Liberação em 3s
+                                            </span>
+                                            <span className="text-[10px] text-stone-400 mt-0.5">
+                                                Sem taxas · Automático
+                                            </span>
+                                        </button>
+
+                                        {/* CARTÃO DE CRÉDITO */}
+                                        <button
+                                            type="button"
+                                            onClick={() => setPaymentMethod("card")}
+                                            className={`relative flex flex-col items-start p-3.5 rounded-xl border-2 text-left transition-all cursor-pointer ${
+                                                paymentMethod === "card"
+                                                    ? "border-rose-500 bg-rose-500/10 shadow-lg shadow-rose-500/15"
+                                                    : "border-white/10 bg-black/40 hover:border-white/20"
+                                            }`}
+                                        >
+                                            <div className="flex items-center gap-2 mb-1">
+                                                <span className={`grid size-7 place-items-center rounded-lg ${
+                                                    paymentMethod === "card" ? "bg-rose-500 text-white" : "bg-white/10 text-stone-300"
+                                                }`}>
+                                                    <CreditCard className="size-4" />
+                                                </span>
+                                                <span className="text-sm font-black text-white">Cartão</span>
+                                            </div>
+                                            <span className="text-[11px] text-stone-300 font-bold">
+                                                Crédito à vista ou 12x
+                                            </span>
+                                            <span className="text-[10px] text-stone-400 mt-0.5">
+                                                Visa, Master, Elo
+                                            </span>
+                                        </button>
+                                    </div>
+
+                                    {/* Informações e Formulário da Forma Selecionada */}
+                                    {paymentMethod === "pix" ? (
+                                        <div className="mt-4 rounded-xl border border-emerald-500/20 bg-emerald-950/20 p-3.5 text-xs text-stone-300 flex items-start gap-2.5">
+                                            <CheckCircle2 className="size-4 text-emerald-400 shrink-0 mt-0.5" />
+                                            <p className="leading-relaxed">
+                                                <strong className="text-white">Pagamento 100% instantâneo:</strong> gere o QR Code Pix e copie a chave. O sistema detecta o pagamento sozinho e envia seu acesso no e-mail e WhatsApp em segundos.
+                                            </p>
+                                        </div>
+                                    ) : (
+                                        <div className="mt-4 space-y-3.5 rounded-xl border border-rose-500/25 bg-black/50 p-4">
+                                            <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
+                                                <span className="text-xs font-bold text-white flex items-center gap-1.5">
+                                                    <CreditCard className="size-3.5 text-rose-400" />
+                                                    <span>Cartão de Crédito (Checkout Transparente)</span>
+                                                </span>
+                                                <span className="text-[10px] text-emerald-400 font-semibold flex items-center gap-1">
+                                                    <Lock className="size-2.5" /> 100% Seguro
+                                                </span>
+                                            </div>
+
+                                            {/* Nome impresso no cartão */}
+                                            <div>
+                                                <label className="block text-xs font-semibold text-stone-300 mb-1.5" htmlFor="cardholder-name">
+                                                    Nome impresso no cartão
+                                                </label>
+                                                <input
+                                                    id="cardholder-name"
+                                                    type="text"
+                                                    value={cardholderName}
+                                                    onChange={(e) => setCardholderName(e.target.value.toUpperCase())}
+                                                    placeholder="NOME COMO ESTÁ NO CARTÃO"
+                                                    required={paymentMethod === "card"}
+                                                    className="w-full rounded-xl border border-white/10 bg-black/60 px-4 py-3 text-xs sm:text-sm text-white placeholder-stone-500 outline-none focus:border-rose-500 uppercase tracking-wider font-mono transition-colors"
+                                                />
+                                            </div>
+
+                                            {/* Stripe Card Element Container (Transparente in-page) */}
+                                            <div>
+                                                <label className="block text-xs font-semibold text-stone-300 mb-1.5">
+                                                    Dados do Cartão (Número, Validade e CVC)
+                                                </label>
+                                                <div
+                                                    ref={cardContainerRef}
+                                                    className="rounded-xl border border-white/10 bg-black/60 px-4 py-3.5 text-sm text-white focus-within:border-rose-500 transition-all min-h-[46px]"
+                                                />
+                                            </div>
+
+                                            <div className="flex items-center justify-between text-[10px] text-stone-400 pt-1">
+                                                <span className="flex items-center gap-1">
+                                                    <ShieldCheck className="size-3 text-emerald-400" />
+                                                    Pagamento processado na mesma página
+                                                </span>
+                                                <span className="font-semibold text-stone-300">
+                                                    Até 12x no cartão
                                                 </span>
                                             </div>
                                         </div>
-                                    </div>
-                                );
-                            })}
-                        </section>
+                                    )}
+                                </section>
 
-                        {/* 3. SEÇÃO FORMA DE PAGAMENTO (PIX PRINCIPAL + CARTÃO) */}
-                        <section className="rounded-2xl border border-white/10 bg-[#120e1a]/95 backdrop-blur p-5 text-left shadow-xl shadow-black/40">
-                            <h2 className="text-xs font-black uppercase tracking-widest text-stone-300 mb-3 flex items-center justify-between">
-                                <span>Forma de Pagamento</span>
-                                <span className="text-[11px] font-normal text-stone-400">Escolha como pagar</span>
-                            </h2>
-
-                            {/* Payment Options Grid */}
-                            <div className="grid grid-cols-2 gap-3">
-                                {/* PIX (RECOMENDADO) */}
-                                <button
-                                    type="button"
-                                    onClick={() => setPaymentMethod("pix")}
-                                    className={`relative flex flex-col items-start p-3.5 rounded-xl border-2 text-left transition-all ${
-                                        paymentMethod === "pix"
-                                            ? "border-emerald-500 bg-emerald-500/10 shadow-lg shadow-emerald-500/10"
-                                            : "border-white/10 bg-black/40 hover:border-white/20"
-                                    }`}
-                                >
-                                    <span className="absolute -top-2.5 right-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-[9px] font-black uppercase tracking-wider text-black px-2 py-0.5 rounded-full shadow-sm">
-                                        Mais Rápido
-                                    </span>
-                                    <div className="flex items-center gap-2 mb-1">
-                                        <span className={`grid size-7 place-items-center rounded-lg ${
-                                            paymentMethod === "pix" ? "bg-emerald-500 text-black font-black" : "bg-white/10 text-stone-300"
-                                        }`}>
-                                            <Zap className="size-4" />
+                                {/* RESUMO DISCRIMINADO DO PEDIDO (ESTILO KIWIFY) */}
+                                <div className="rounded-2xl border border-white/10 bg-black/40 p-4 space-y-2 text-xs text-left">
+                                    <div className="flex justify-between text-stone-300 pb-2 border-b border-white/10">
+                                        <span className="font-semibold text-white">
+                                            {selectedPackage === "upsell" ? "Catálogo VIP Completo (Todas as Séries)" : currentTitle}
                                         </span>
-                                        <span className="text-sm font-black text-white">Pix</span>
+                                        <span className="font-bold text-white">
+                                            R$ {formatMoney(selectedPackage === "upsell" ? PRICE_UPSELL : PRICE_BASICA)}
+                                        </span>
                                     </div>
-                                    <span className="text-[11px] text-emerald-400 font-bold">
-                                        Aprovação imediata
-                                    </span>
-                                    <span className="text-[10px] text-stone-400 mt-0.5">
-                                        Sem taxas · Libera na hora
+                                    {selectedBumps.map((bumpId) => {
+                                        const b = ORDER_BUMPS.find((item) => item.id === bumpId);
+                                        if (!b) return null;
+                                        return (
+                                            <div key={b.id} className="flex justify-between text-stone-400 py-1 border-b border-white/5">
+                                                <span className="flex items-center gap-1.5">
+                                                    <span className="text-emerald-400 font-bold">✓</span> {b.title}
+                                                </span>
+                                                <span className="font-bold text-emerald-400">+ R$ {formatMoney(b.price)}</span>
+                                            </div>
+                                        );
+                                    })}
+                                    <div className="flex justify-between items-baseline pt-2 text-sm">
+                                        <div>
+                                            <span className="font-black text-white block">Total a pagar:</span>
+                                            <span className="text-[10px] text-stone-400">
+                                                {paymentMethod === "pix" ? "à vista no Pix sem tarifas" : "em até 12x no cartão"}
+                                            </span>
+                                        </div>
+                                        <div className="text-right">
+                                            <span className="text-2xl sm:text-3xl font-black text-emerald-400 drop-shadow">
+                                                R$ {formatMoney(currentTotalAmount)}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {formError && (
+                                    <div className="rounded-xl bg-red-500/10 border border-red-500/30 p-3.5 text-center text-xs font-semibold text-red-400">
+                                        {formError}
+                                    </div>
+                                )}
+
+                                {/* BOTÃO DE FINALIZAR COMPRA COM ANIMAÇÃO SHINE SWEEP */}
+                                <button
+                                    type="submit"
+                                    disabled={generatingPix || generatingCard}
+                                    className="relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-600 hover:from-emerald-500 hover:to-emerald-400 px-4 sm:px-6 py-4 text-sm sm:text-base font-black uppercase tracking-wide text-black shadow-xl shadow-emerald-500/30 disabled:opacity-60 transition-all active:scale-[0.98] leading-tight text-center cursor-pointer"
+                                >
+                                    {generatingPix || generatingCard ? (
+                                        <>
+                                            <Loader2 className="size-5 animate-spin shrink-0 text-black" />
+                                            <span className="font-black">{paymentMethod === "pix" ? "Gerando Pix seguro..." : "Iniciando pagamento..."}</span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Lock className="size-5 shrink-0 stroke-[2.5]" />
+                                            <span className="font-black">
+                                                {paymentMethod === "pix"
+                                                    ? `LIBERAR ACESSO NO PIX · R$ ${formatMoney(currentTotalAmount)}`
+                                                    : `PAGAR NO CARTÃO · R$ ${formatMoney(currentTotalAmount)}`}
+                                            </span>
+                                        </>
+                                    )}
+                                    <span
+                                        className="pointer-events-none absolute inset-0 overflow-hidden rounded-full"
+                                        aria-hidden="true"
+                                    >
+                                        <span className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-transparent via-white/50 to-transparent animate-shine-sweep" />
                                     </span>
                                 </button>
 
-                                {/* CARTÃO DE CRÉDITO */}
-                                <button
-                                    type="button"
-                                    onClick={() => setPaymentMethod("card")}
-                                    className={`relative flex flex-col items-start p-3.5 rounded-xl border-2 text-left transition-all ${
-                                        paymentMethod === "card"
-                                            ? "border-rose-500 bg-rose-500/10 shadow-lg shadow-rose-500/10"
-                                            : "border-white/10 bg-black/40 hover:border-white/20"
-                                    }`}
-                                >
-                                    <div className="flex items-center gap-2 mb-1">
-                                        <span className={`grid size-7 place-items-center rounded-lg ${
-                                            paymentMethod === "card" ? "bg-rose-500 text-white" : "bg-white/10 text-stone-300"
-                                        }`}>
-                                            <CreditCard className="size-4" />
-                                        </span>
-                                        <span className="text-sm font-black text-white">Cartão</span>
+                                {/* SELO DE GARANTIA 7 DIAS KIWIFY + SUPORTE WHATSAPP */}
+                                <div className="p-4 rounded-2xl border border-white/10 bg-[#100d18] flex items-center gap-3.5 text-left shadow-lg">
+                                    <div className="size-11 sm:size-12 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center shrink-0 text-emerald-400">
+                                        <ShieldCheck className="size-6 stroke-[2]" />
                                     </div>
-                                    <span className="text-[11px] text-stone-300 font-bold">
-                                        Crédito à vista ou parcelado
-                                    </span>
-                                    <span className="text-[10px] text-stone-400 mt-0.5">
-                                        Visa, Master, Elo
-                                    </span>
-                                </button>
-                            </div>
-
-                            {/* Informações e Formulário da Forma Selecionada */}
-                            {paymentMethod === "pix" ? (
-                                <div className="mt-4 rounded-xl border border-emerald-500/20 bg-emerald-950/20 p-3.5 text-xs text-stone-300 flex items-start gap-2.5">
-                                    <CheckCircle2 className="size-4 text-emerald-400 shrink-0 mt-0.5" />
-                                    <p className="leading-relaxed">
-                                        <strong className="text-white">Pagamento 100% instantâneo:</strong> gere o QR Code Pix e copie a chave. O sistema detecta o pagamento sozinho e envia seu acesso no e-mail e WhatsApp em segundos.
-                                    </p>
-                                </div>
-                            ) : (
-                                <div className="mt-4 space-y-3.5 rounded-xl border border-rose-500/25 bg-black/50 p-4">
-                                    <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
-                                        <span className="text-xs font-bold text-white flex items-center gap-1.5">
-                                            <CreditCard className="size-3.5 text-rose-400" />
-                                            <span>Cartão de Crédito (Checkout Transparente)</span>
-                                        </span>
-                                        <span className="text-[10px] text-emerald-400 font-semibold flex items-center gap-1">
-                                            <Lock className="size-2.5" /> 100% Seguro
-                                        </span>
-                                    </div>
-
-                                    {/* Nome impresso no cartão */}
-                                    <div>
-                                        <label className="block text-xs font-semibold text-stone-300 mb-1.5" htmlFor="cardholder-name">
-                                            Nome impresso no cartão
-                                        </label>
-                                        <input
-                                            id="cardholder-name"
-                                            type="text"
-                                            value={cardholderName}
-                                            onChange={(e) => setCardholderName(e.target.value.toUpperCase())}
-                                            placeholder="NOME COMO ESTÁ NO CARTÃO"
-                                            required={paymentMethod === "card"}
-                                            className="w-full rounded-xl border border-white/10 bg-black/60 px-4 py-3 text-xs sm:text-sm text-white placeholder-stone-500 outline-none focus:border-rose-500 uppercase tracking-wider font-mono transition-colors"
-                                        />
-                                    </div>
-
-                                    {/* Stripe Card Element Container (Transparente in-page) */}
-                                    <div>
-                                        <label className="block text-xs font-semibold text-stone-300 mb-1.5">
-                                            Dados do Cartão (Número, Validade e CVC)
-                                        </label>
-                                        <div
-                                            ref={cardContainerRef}
-                                            className="rounded-xl border border-white/10 bg-black/60 px-4 py-3.5 text-sm text-white focus-within:border-rose-500 transition-all min-h-[46px]"
-                                        />
-                                    </div>
-
-                                    <div className="flex items-center justify-between text-[10px] text-stone-400 pt-1">
-                                        <span className="flex items-center gap-1">
-                                            <ShieldCheck className="size-3 text-emerald-400" />
-                                            Pagamento processado na mesma página
-                                        </span>
-                                        <span className="font-semibold text-stone-300">
-                                            Até 12x no cartão
-                                        </span>
+                                    <div className="min-w-0">
+                                        <h4 className="text-xs font-black text-white uppercase tracking-wide">
+                                            Garantia Incondicional de 7 Dias · Risco Zero
+                                        </h4>
+                                        <p className="text-[11px] text-stone-400 leading-snug mt-0.5">
+                                            Assista a todos os episódios completos. Se não gostar da história ou do player, basta nos enviar uma mensagem no WhatsApp que devolvemos 100% do seu dinheiro na hora.
+                                        </p>
                                     </div>
                                 </div>
-                            )}
 
-                            {/* Resumo do Valor Total */}
-                            <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-4">
-                                <div>
-                                    <span className="block text-xs text-stone-400">Total a pagar:</span>
-                                    <span className="text-[11px] text-stone-500">
-                                        {selectedBumps.length > 0
-                                            ? `Pacote + ${selectedBumps.length} adicional${selectedBumps.length > 1 ? "is" : ""}`
-                                            : "Acesso Completo"}
+                                {/* SELOS OFICIAIS NO RODAPÉ */}
+                                <div className="pt-1 text-center text-[10px] text-stone-500 flex flex-wrap items-center justify-center gap-3">
+                                    <span className="flex items-center gap-1 font-semibold text-stone-400">
+                                        <Lock className="size-3 text-emerald-400" /> Criptografia SSL 256 bits
+                                    </span>
+                                    <span>•</span>
+                                    <span className="flex items-center gap-1 font-semibold text-stone-400">
+                                        <Zap className="size-3 text-amber-400" /> Liberação Automática
+                                    </span>
+                                    <span>•</span>
+                                    <span className="flex items-center gap-1 font-semibold text-stone-400">
+                                        <MessageCircle className="size-3 text-[#25D366]" /> Suporte no WhatsApp
                                     </span>
                                 </div>
-                                <div className="text-right">
-                                    <span className="text-2xl font-black text-rose-400">
-                                        R$ {formatMoney(currentTotalAmount)}
-                                    </span>
-                                    <span className="block text-[10px] text-emerald-400 font-semibold">
-                                        {paymentMethod === "pix" ? "à vista no Pix" : "ou até 12x no cartão"}
-                                    </span>
-                                </div>
-                            </div>
-                        </section>
-
-                        {formError && (
-                            <div className="rounded-xl bg-red-500/10 border border-red-500/30 p-3.5 text-center text-xs font-semibold text-red-400">
-                                {formError}
-                            </div>
-                        )}
-
-                        {/* Botão de Finalizar Compra com Animação Shine Sweep */}
-                        <button
-                            type="submit"
-                            disabled={generatingPix || generatingCard}
-                            className="relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-rose-600 via-rose-500 to-rose-600 hover:from-rose-500 hover:to-rose-500 px-4 sm:px-6 py-3.5 sm:py-4 text-xs sm:text-sm md:text-base font-black uppercase tracking-wide text-white shadow-xl shadow-rose-600/40 disabled:opacity-60 transition-all active:scale-[0.98] leading-tight text-center"
-                        >
-                            {generatingPix || generatingCard ? (
-                                <>
-                                    <Loader2 className="size-4 sm:size-5 animate-spin shrink-0" />
-                                    <span>{paymentMethod === "pix" ? "Gerando Pix seguro..." : "Iniciando pagamento seguro..."}</span>
-                                </>
-                            ) : (
-                                <>
-                                    <Lock className="size-4 sm:size-5 shrink-0" />
-                                    <span>
-                                        {paymentMethod === "pix"
-                                            ? `Liberar no Pix · R$ ${formatMoney(currentTotalAmount)}`
-                                            : `Pagar no Cartão · R$ ${formatMoney(currentTotalAmount)}`}
-                                    </span>
-                                </>
-                            )}
-                            <span
-                                className="pointer-events-none absolute inset-0 overflow-hidden rounded-full"
-                                aria-hidden="true"
-                            >
-                                <span className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-transparent via-white/35 to-transparent animate-shine-sweep" />
-                            </span>
-                        </button>
-
-                        {/* Garantia & Selos de Confiança */}
-                        <div className="space-y-2 pt-1">
-                            <p className="flex items-center justify-center gap-2 text-center text-[11px] text-stone-300">
-                                <ShieldCheck className="size-4 text-emerald-400" />
-                                <span>Garantia Incondicional de 7 Dias · Risco Zero</span>
-                            </p>
-                            <p className="text-center text-[10px] text-stone-500">
-                                Seus dados estão 100% protegidos por criptografia de 256 bits.
-                            </p>
-                        </div>
-                    </form>
-                    </>
+                            </form>
+                        </>
                     )}
                 </div>
             )}

@@ -728,7 +728,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                         <img
                             src="/logo.png"
                             alt="TvDrama Reels"
-                            className="h-[30px] sm:h-[40px] w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+                            className="h-[30px] sm:h-[40px] w-auto max-w-[160px] sm:max-w-none object-contain shrink transition-transform duration-200 group-hover:scale-105"
                         />
                     </button>
 
@@ -909,7 +909,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                 }
                             }}
                             placeholder="Buscar séries..."
-                            className="w-full bg-transparent text-white text-xs sm:text-sm placeholder:text-white/40 focus:outline-none"
+                            className="w-full flex-1 min-w-0 bg-transparent text-white text-xs sm:text-sm placeholder:text-white/40 focus:outline-none"
                         />
                         {searchQuery && (
                             <button
