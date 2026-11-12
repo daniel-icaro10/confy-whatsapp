@@ -1467,7 +1467,7 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                                 <button
                                     type="button"
                                     onClick={() => {
-                                        const phoneNum = "5511999999999";
+                                        const phoneNum = "5581997823907";
                                         const msg = encodeURIComponent(`Olá, acabei de pagar a novela ${currentTitle} no cartão e quero confirmar meu acesso!`);
                                         window.open(`https://wa.me/${phoneNum}?text=${msg}`, "_blank");
                                     }}
