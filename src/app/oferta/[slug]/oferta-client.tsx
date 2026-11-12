@@ -13,7 +13,7 @@ import {
     Zap,
     ShieldCheck,
     Clock,
-    Sparkles,
+    Flame,
     ArrowRight,
     ArrowLeft,
     Star,
@@ -65,7 +65,7 @@ interface OrderBump {
     originalPrice: number;
     price: number;
     discountPercent: number;
-    iconUrl: string;
+    iconType: "users" | "download" | "flame";
     tagHighlight?: string;
 }
 
@@ -78,7 +78,7 @@ const ORDER_BUMPS: OrderBump[] = [
         originalPrice: 29.90,
         price: 4.90,
         discountPercent: 84,
-        iconUrl: "/bump-whatsapp.jpg",
+        iconType: "users",
         tagHighlight: "3 TELAS SIMULTÂNEAS"
     },
     {
@@ -89,7 +89,7 @@ const ORDER_BUMPS: OrderBump[] = [
         originalPrice: 24.90,
         price: 4.90,
         discountPercent: 80,
-        iconUrl: "/bump-offline.jpg",
+        iconType: "download",
         tagHighlight: "ASSISTA MESMO SEM SINAL"
     },
     {
@@ -100,7 +100,7 @@ const ORDER_BUMPS: OrderBump[] = [
         originalPrice: 34.90,
         price: 5.00,
         discountPercent: 85,
-        iconUrl: "/bump-18.webp",
+        iconType: "flame",
         tagHighlight: "ÁUDIO & VÍDEO 100% SEM CORTES"
     }
 ];
@@ -367,17 +367,17 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                     hidePostalCode: true,
                     style: {
                         base: {
-                            color: "#ffffff",
+                            color: "#0f172a",
                             fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
                             fontSize: "14px",
                             fontSmoothing: "antialiased",
                             "::placeholder": {
-                                color: "#71717a"
+                                color: "#94a3b8"
                             }
                         },
                         invalid: {
-                            color: "#f43f5e",
-                            iconColor: "#f43f5e"
+                            color: "#e11d48",
+                            iconColor: "#e11d48"
                         }
                     }
                 });
@@ -835,7 +835,11 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
     const currentCover = "/cover-ganhei-tres-namoradas.jpg";
 
     return (
-        <div className="min-h-dvh bg-[#07060a] text-stone-100 flex flex-col selection:bg-rose-500/40 selection:text-white pb-24 sm:pb-16 font-sans w-full max-w-full overflow-x-hidden">
+        <div className={`min-h-dvh flex flex-col pb-24 sm:pb-16 font-sans w-full max-w-full overflow-x-hidden transition-colors duration-200 ${
+            currentView === "checkout" || currentView === "pix"
+                ? "bg-[#f4f6f8] text-slate-900 selection:bg-emerald-500/20 selection:text-emerald-900"
+                : "bg-[#07060a] text-stone-100 selection:bg-rose-500/40 selection:text-white"
+        }`}>
             {/* =========================================================================
                 TELA 1: PÁGINA DE VENDAS COM O PLAYER NATIVO VERTICAL HD
                 ========================================================================= */}
@@ -1412,40 +1416,40 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                 TELA 2: CHECKOUT COM IDENTIFICAÇÃO E ORDER BUMPS
                 ========================================================================= */}
             {currentView === "checkout" && (
-                <div className="max-w-xl mx-auto px-4 py-6 sm:py-10 w-full">
+                <div className="max-w-xl mx-auto px-4 py-6 sm:py-10 w-full text-slate-900">
                     {cardSuccess ? (
-                        <div className="rounded-3xl border border-emerald-500/30 bg-[#101918]/95 backdrop-blur-xl p-6 sm:p-8 text-center space-y-6 shadow-2xl shadow-emerald-500/10">
-                            <div className="mx-auto size-16 rounded-full bg-emerald-500/20 border-2 border-emerald-500 flex items-center justify-center text-emerald-400 shadow-xl shadow-emerald-500/30">
+                        <div className="rounded-3xl border border-emerald-200 bg-white p-6 sm:p-8 text-center space-y-6 shadow-xl shadow-emerald-500/10">
+                            <div className="mx-auto size-16 rounded-full bg-emerald-100 border-2 border-emerald-500 flex items-center justify-center text-emerald-600 shadow-lg shadow-emerald-500/20">
                                 <Check className="size-8 stroke-[3]" />
                             </div>
 
                             <div className="space-y-2">
-                                <span className="inline-block px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs font-black uppercase tracking-wider">
+                                <span className="inline-block px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-black uppercase tracking-wider">
                                     Pagamento Aprovado no Cartão
                                 </span>
-                                <h2 className="text-2xl sm:text-3xl font-black text-white">
+                                <h2 className="text-2xl sm:text-3xl font-black text-slate-900">
                                     Acesso Liberado com Sucesso!
                                 </h2>
-                                <p className="text-xs sm:text-sm text-stone-300 max-w-sm mx-auto leading-relaxed">
+                                <p className="text-xs sm:text-sm text-slate-600 max-w-sm mx-auto leading-relaxed">
                                     Seu pagamento foi confirmado com segurança. Seus episódios já estão 100% desbloqueados em Full HD no seu dispositivo!
                                 </p>
                             </div>
 
-                            <div className="rounded-2xl border border-white/10 bg-black/50 p-4 text-left flex items-center gap-3.5">
+                            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-left flex items-center gap-3.5">
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
                                     src={currentCover}
                                     alt=""
-                                    className="size-14 rounded-xl object-cover border border-white/10"
+                                    className="size-14 rounded-xl object-cover border border-slate-200"
                                 />
                                 <div className="min-w-0 flex-1">
-                                    <span className="text-[10px] font-bold text-rose-400 uppercase tracking-wider block">
+                                    <span className="text-[10px] font-bold text-rose-600 uppercase tracking-wider block">
                                         {selectedPackage === "upsell" ? "⭐ Pacote VIP Ilimitado" : "🎬 Temporada Completa"}
                                     </span>
-                                    <h4 className="text-sm font-bold text-white truncate">
+                                    <h4 className="text-sm font-bold text-slate-900 truncate">
                                         {selectedPackage === "upsell" ? "Catálogo VIP Completo" : currentTitle}
                                     </h4>
-                                    <p className="text-[11px] text-emerald-400 font-semibold mt-0.5 flex items-center gap-1">
+                                    <p className="text-[11px] text-emerald-600 font-semibold mt-0.5 flex items-center gap-1">
                                         <CheckCircle2 className="size-3" /> Status: 100% Desbloqueado
                                     </p>
                                 </div>
@@ -1467,7 +1471,7 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                                         const msg = encodeURIComponent(`Olá, acabei de pagar a novela ${currentTitle} no cartão e quero confirmar meu acesso!`);
                                         window.open(`https://wa.me/${phoneNum}?text=${msg}`, "_blank");
                                     }}
-                                    className="inline-flex items-center justify-center gap-2 text-xs text-stone-400 hover:text-white transition-colors"
+                                    className="inline-flex items-center justify-center gap-2 text-xs text-slate-500 hover:text-slate-800 transition-colors"
                                 >
                                     <MessageCircle className="size-3.5" />
                                     <span>Dúvidas? Fale com nosso suporte no WhatsApp</span>
@@ -1476,72 +1480,71 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                         </div>
                     ) : (
                         <>
-                            {/* TOPO DO CHECKOUT: FUSÃO KIWIFY + NETFLIX */}
-                            <div className="flex items-center justify-between pb-3.5 border-b border-white/10 mb-4">
+                            {/* TOPO DO CHECKOUT: KIWIFY CLEAN & SEGURO */}
+                            <div className="flex items-center justify-between pb-3.5 border-b border-slate-200 mb-4">
                                 <button
                                     type="button"
                                     onClick={() => setCurrentView("offer")}
-                                    className="inline-flex items-center gap-1.5 text-xs font-bold text-stone-400 hover:text-white transition-colors cursor-pointer"
+                                    className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-slate-800 transition-colors cursor-pointer"
                                 >
                                     <ArrowLeft className="size-4" />
                                     <span>Voltar à prévia</span>
                                 </button>
 
-                                <div className="inline-flex items-center gap-1.5 text-[11px] font-extrabold text-emerald-400 bg-emerald-500/10 border border-emerald-500/25 px-3 py-1 rounded-full shadow-sm">
-                                    <ShieldCheck className="size-3.5 text-emerald-400" />
+                                <div className="inline-flex items-center gap-1.5 text-[11px] font-extrabold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full shadow-xs">
+                                    <ShieldCheck className="size-3.5 text-emerald-600" />
                                     <span>Checkout 100% Blindado</span>
                                 </div>
                             </div>
 
                             {/* BARRA DE RESERVA COM CRONÔMETRO REGRESSIVO KIWIFY */}
-                            <div className="mb-5 rounded-2xl border border-rose-500/30 bg-gradient-to-r from-rose-950/40 via-[#161022] to-rose-950/40 p-3.5 flex items-center justify-between text-xs shadow-lg shadow-rose-950/20">
-                                <div className="flex items-center gap-2 text-rose-200 font-semibold">
-                                    <Clock className="size-4 text-rose-400 animate-pulse shrink-0" />
+                            <div className="mb-5 rounded-2xl border border-rose-200 bg-rose-50/90 p-3.5 flex items-center justify-between text-xs shadow-xs">
+                                <div className="flex items-center gap-2 text-rose-900 font-semibold">
+                                    <Clock className="size-4 text-rose-600 animate-pulse shrink-0" />
                                     <span className="text-[11px] sm:text-xs">
                                         Condição promocional exclusiva reservada por:
                                     </span>
                                 </div>
-                                <div className="font-mono font-black text-rose-300 bg-black/70 px-2.5 py-1 rounded-lg border border-rose-500/30 text-xs tabular-nums shrink-0">
+                                <div className="font-mono font-black text-rose-700 bg-white px-2.5 py-1 rounded-lg border border-rose-200 text-xs tabular-nums shadow-xs shrink-0">
                                     {formatCheckoutTimer(checkoutTimer)}
                                 </div>
                             </div>
 
-                            {/* CARD RESUMO DO PLANO SELECIONADO (NETFLIX STREAMING LUXE) */}
-                            <div className="mb-5 rounded-2xl border border-white/10 bg-[#120f1c] p-4 sm:p-5 relative overflow-hidden shadow-xl">
-                                <div className="absolute top-0 right-0 w-40 h-40 bg-rose-600/10 rounded-full blur-3xl pointer-events-none" />
+                            {/* CARD RESUMO DO PLANO SELECIONADO */}
+                            <div className="mb-5 rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 relative overflow-hidden shadow-sm">
                                 <div className="flex items-start justify-between gap-3 relative z-10">
                                     <div className="flex items-center gap-3.5 min-w-0">
                                         {/* eslint-disable-next-line @next/next/no-img-element */}
                                         <img
                                             src={currentCover}
                                             alt={currentTitle}
-                                            className="size-14 sm:size-16 rounded-xl object-cover border border-rose-500/30 shrink-0 shadow-lg"
+                                            className="size-14 sm:size-16 rounded-xl object-cover border border-slate-200 shrink-0 shadow-xs"
                                         />
                                         <div className="min-w-0 text-left">
-                                            <span className="inline-flex items-center gap-1 text-[9px] font-black uppercase tracking-wider text-rose-400 bg-rose-500/15 px-2 py-0.5 rounded-md mb-1">
+                                            <span className="inline-flex items-center gap-1 text-[9px] font-black uppercase tracking-wider text-rose-700 bg-rose-50 border border-rose-200 px-2 py-0.5 rounded-md mb-1">
                                                 {selectedPackage === "upsell" ? "⭐ PACOTE VIP ILIMITADO" : "🎬 NOVELA COMPLETA"}
                                             </span>
-                                            <h3 className="text-sm sm:text-base font-black text-white truncate">
+                                            <h3 className="text-sm sm:text-base font-black text-slate-900 truncate">
                                                 {selectedPackage === "upsell" ? "Catálogo VIP Completo (Todas as Novelas)" : currentTitle}
                                             </h3>
-                                            <p className="text-[11px] text-stone-400 flex flex-wrap items-center gap-x-2 gap-y-0.5 mt-0.5">
-                                                <span className="text-emerald-400 font-bold">✓ Full HD 1080p</span>
-                                                <span className="text-stone-600">•</span>
+                                            <p className="text-[11px] text-slate-600 flex flex-wrap items-center gap-x-2 gap-y-0.5 mt-0.5">
+                                                <span className="text-emerald-600 font-bold">✓ Full HD 1080p</span>
+                                                <span className="text-slate-300">•</span>
                                                 <span>Sem anúncios</span>
-                                                <span className="text-stone-600">•</span>
-                                                <span className="text-stone-300 font-medium">Liberação Imediata</span>
+                                                <span className="text-slate-300">•</span>
+                                                <span className="text-slate-700 font-medium">Liberação Imediata</span>
                                             </p>
                                         </div>
                                     </div>
 
                                     <div className="text-right shrink-0">
-                                        <span className="block text-lg sm:text-xl font-black text-white">
+                                        <span className="block text-lg sm:text-xl font-black text-slate-900">
                                             R$ {formatMoney(selectedPackage === "upsell" ? PRICE_UPSELL : PRICE_BASICA)}
                                         </span>
                                         <button
                                             type="button"
                                             onClick={() => setIsUpsellModalOpen(true)}
-                                            className="text-[10px] text-rose-400 hover:text-rose-300 font-bold underline cursor-pointer"
+                                            className="text-[10px] text-rose-600 hover:text-rose-700 font-bold underline cursor-pointer"
                                         >
                                             Trocar plano
                                         </button>
@@ -1557,22 +1560,22 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                                 }
                             }} className="space-y-5">
                                 {/* PASSO 1: SEUS DADOS DE ACESSO (KIWIFY CLEAN) */}
-                                <section className="rounded-2xl border border-white/10 bg-[#120e1a]/95 backdrop-blur-md p-4 sm:p-5 text-left shadow-xl shadow-black/40">
-                                    <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
+                                <section className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 text-left shadow-sm">
+                                    <div className="flex items-center justify-between border-b border-slate-200 pb-3 mb-4">
                                         <div className="flex items-center gap-2.5">
-                                            <div className="size-6 rounded-full bg-rose-600 text-white font-black text-xs flex items-center justify-center shadow">
+                                            <div className="size-6 rounded-full bg-rose-600 text-white font-black text-xs flex items-center justify-center shadow-xs">
                                                 1
                                             </div>
                                             <div>
-                                                <h3 className="text-xs sm:text-sm font-black text-white uppercase tracking-wider">
+                                                <h3 className="text-xs sm:text-sm font-black text-slate-900 uppercase tracking-wider">
                                                     Seus Dados de Acesso
                                                 </h3>
-                                                <p className="text-[10px] sm:text-[11px] text-stone-400">
+                                                <p className="text-[10px] sm:text-[11px] text-slate-500">
                                                     Para onde enviaremos o seu acesso e confirmação
                                                 </p>
                                             </div>
                                         </div>
-                                        <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                                        <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
                                             <Lock className="size-2.5" /> 100% Confidencial
                                         </span>
                                     </div>
@@ -1580,7 +1583,7 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                                     <div className="space-y-3.5">
                                         {/* Nome */}
                                         <div>
-                                            <label className="block text-xs font-bold text-stone-300 mb-1" htmlFor="of-name">
+                                            <label className="block text-xs font-bold text-slate-700 mb-1" htmlFor="of-name">
                                                 Nome completo
                                             </label>
                                             <div className="relative">
@@ -1591,24 +1594,24 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                                                     onChange={(e) => setName(e.target.value.slice(0, 100))}
                                                     placeholder="Digite seu nome completo"
                                                     required
-                                                    className="w-full rounded-xl border border-white/15 bg-black/60 pl-10 pr-4 py-3 text-sm text-white placeholder-stone-500 outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all"
+                                                    className="w-full rounded-xl border border-slate-300 bg-slate-50/70 pl-10 pr-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none focus:bg-white focus:border-rose-500 focus:ring-2 focus:ring-rose-500/15 transition-all font-medium"
                                                 />
-                                                <User className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-stone-500" />
+                                                <User className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-slate-400" />
                                             </div>
                                         </div>
 
                                         {/* WhatsApp */}
                                         <div>
                                             <div className="flex items-center justify-between mb-1">
-                                                <label className="block text-xs font-bold text-stone-300" htmlFor="of-phone">
+                                                <label className="block text-xs font-bold text-slate-700" htmlFor="of-phone">
                                                     WhatsApp
                                                 </label>
-                                                <span className="text-[10px] font-bold text-emerald-400">
+                                                <span className="text-[10px] font-bold text-emerald-600">
                                                     Liberamos o link direto aqui
                                                 </span>
                                             </div>
                                             <div className="relative flex items-center">
-                                                <span className="absolute left-3.5 text-xs font-bold text-stone-400 z-10 pointer-events-none">
+                                                <span className="absolute left-3.5 text-xs font-bold text-slate-400 z-10 pointer-events-none">
                                                     +55
                                                 </span>
                                                 <input
@@ -1619,7 +1622,7 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                                                     onChange={(e) => setPhone(formatPhone(e.target.value))}
                                                     placeholder="(11) 99999-9999"
                                                     required
-                                                    className="w-full rounded-xl border border-white/15 bg-black/60 pl-12 pr-4 py-3 text-sm text-white placeholder-stone-500 outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all font-mono"
+                                                    className="w-full rounded-xl border border-slate-300 bg-slate-50/70 pl-12 pr-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none focus:bg-white focus:border-rose-500 focus:ring-2 focus:ring-rose-500/15 transition-all font-mono font-medium"
                                                 />
                                             </div>
                                         </div>
@@ -1627,10 +1630,10 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                                         {/* E-mail */}
                                         <div>
                                             <div className="flex items-center justify-between mb-1">
-                                                <label className="block text-xs font-bold text-stone-300" htmlFor="of-email">
+                                                <label className="block text-xs font-bold text-slate-700" htmlFor="of-email">
                                                     E-mail de Acesso
                                                 </label>
-                                                <span className="text-[10px] font-semibold text-stone-400">
+                                                <span className="text-[10px] font-semibold text-slate-500">
                                                     Cópia do comprovante
                                                 </span>
                                             </div>
@@ -1642,26 +1645,26 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                                                     onChange={(e) => setEmail(e.target.value.slice(0, 160))}
                                                     placeholder="seuemail@exemplo.com"
                                                     required
-                                                    className="w-full rounded-xl border border-white/15 bg-black/60 pl-10 pr-4 py-3 text-sm text-white placeholder-stone-500 outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all"
+                                                    className="w-full rounded-xl border border-slate-300 bg-slate-50/70 pl-10 pr-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none focus:bg-white focus:border-rose-500 focus:ring-2 focus:ring-rose-500/15 transition-all font-medium"
                                                 />
-                                                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-stone-500" />
+                                                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-slate-400" />
                                             </div>
                                         </div>
                                     </div>
                                 </section>
 
-                                {/* PASSO 2: ORDER BUMPS INOVADORES (KIWIFY STYLE) */}
+                                {/* PASSO 2: ORDER BUMPS INOVADORES (SEM IMAGENS DE IA, 100% VETORIAL LIMPO) */}
                                 <section className="space-y-3 text-left">
                                     <div className="flex items-center justify-between px-1">
                                         <div className="flex items-center gap-2">
-                                            <div className="size-6 rounded-full bg-amber-500 text-black font-black text-xs flex items-center justify-center shadow">
+                                            <div className="size-6 rounded-full bg-amber-500 text-white font-black text-xs flex items-center justify-center shadow-xs">
                                                 2
                                             </div>
                                             <div>
-                                                <h3 className="text-xs sm:text-sm font-black text-white uppercase tracking-wider">
+                                                <h3 className="text-xs sm:text-sm font-black text-slate-900 uppercase tracking-wider">
                                                     Turbine sua Experiência (Opcional)
                                                 </h3>
-                                                <p className="text-[10px] sm:text-[11px] text-amber-300 font-semibold">
+                                                <p className="text-[10px] sm:text-[11px] text-amber-800 font-semibold">
                                                     ⚡ Adicione com desconto único apenas nesta tela
                                                 </p>
                                             </div>
@@ -1676,60 +1679,69 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                                                 onClick={() => toggleBump(bump.id)}
                                                 className={`relative cursor-pointer rounded-2xl border-2 transition-all overflow-hidden ${
                                                     isChecked
-                                                        ? "border-emerald-500 bg-gradient-to-br from-emerald-950/30 via-[#181124] to-[#120e1a] shadow-lg shadow-emerald-500/20"
-                                                        : "border-white/10 bg-[#120e1a] hover:border-white/25"
+                                                        ? "border-emerald-500 bg-emerald-50/50 shadow-md shadow-emerald-500/10"
+                                                        : "border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50/50 shadow-xs"
                                                 }`}
                                             >
                                                 {/* Top Tag Ribbon */}
                                                 <div className={`px-4 py-1 text-[10px] font-black uppercase tracking-wider flex items-center justify-between ${
                                                     isChecked
                                                         ? "bg-emerald-600 text-white"
-                                                        : "bg-white/5 text-stone-400 border-b border-white/5"
+                                                        : "bg-slate-100 text-slate-600 border-b border-slate-200"
                                                 }`}>
                                                     <span>{bump.badge}</span>
-                                                    <span className="font-extrabold text-amber-300">{bump.discountPercent}% OFF</span>
+                                                    <span className={`font-extrabold ${isChecked ? "text-amber-200" : "text-amber-700"}`}>
+                                                        {bump.discountPercent}% OFF
+                                                    </span>
                                                 </div>
 
                                                 <div className="p-3.5 sm:p-4">
-                                                    {/* Linha Superior: Checkbox + Thumbnail + Título & Descrição */}
+                                                    {/* Linha Superior: Checkbox + Ícone Vetorial + Título & Descrição */}
                                                     <div className="flex items-start gap-3">
                                                         {/* Custom Checkbox */}
                                                         <div
                                                             className={`mt-0.5 grid size-6 shrink-0 place-items-center rounded-lg border-2 transition-all ${
                                                                 isChecked
-                                                                    ? "border-emerald-500 bg-emerald-500 text-black shadow-md shadow-emerald-500/40"
-                                                                    : "border-stone-500 bg-black/40 hover:border-stone-400"
+                                                                    ? "border-emerald-600 bg-emerald-600 text-white shadow-xs"
+                                                                    : "border-slate-300 bg-white hover:border-slate-400"
                                                                 }`}
                                                         >
                                                             {isChecked && <Check className="size-4 stroke-[3]" />}
                                                         </div>
 
-                                                        {/* Thumbnail */}
-                                                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                                                        <img
-                                                            src={bump.iconUrl}
-                                                            alt=""
-                                                            className="size-11 sm:size-12 shrink-0 rounded-xl object-cover border border-white/10 shadow-md"
-                                                        />
+                                                        {/* Vector Icon Badge (Sem imagens de IA) */}
+                                                        {bump.iconType === "users" ? (
+                                                            <div className="size-11 sm:size-12 shrink-0 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 text-white flex items-center justify-center shadow-xs">
+                                                                <Users className="size-5 sm:size-6" />
+                                                            </div>
+                                                        ) : bump.iconType === "download" ? (
+                                                            <div className="size-11 sm:size-12 shrink-0 rounded-xl bg-gradient-to-br from-sky-500 to-blue-600 text-white flex items-center justify-center shadow-xs">
+                                                                <Download className="size-5 sm:size-6" />
+                                                            </div>
+                                                        ) : (
+                                                            <div className="size-11 sm:size-12 shrink-0 rounded-xl bg-gradient-to-br from-rose-500 to-red-600 text-white flex items-center justify-center shadow-xs">
+                                                                <Flame className="size-5 sm:size-6" />
+                                                            </div>
+                                                        )}
 
                                                         {/* Content */}
                                                         <div className="min-w-0 flex-1">
-                                                            <span className="block text-xs sm:text-sm font-black text-white leading-snug">
+                                                            <span className="block text-xs sm:text-sm font-black text-slate-900 leading-snug">
                                                                 {bump.title}
                                                             </span>
-                                                            <p className="mt-1 text-[11px] sm:text-xs text-stone-400 leading-relaxed">
+                                                            <p className="mt-1 text-[11px] sm:text-xs text-slate-600 leading-relaxed">
                                                                 {bump.description}
                                                             </p>
                                                         </div>
                                                     </div>
 
                                                     {/* Linha Inferior: Preço + Botão Adicionar */}
-                                                    <div className="mt-3 pt-2.5 border-t border-white/5 flex items-center justify-between gap-2">
+                                                    <div className="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between gap-2">
                                                         <div className="flex flex-col sm:flex-row sm:items-center gap-0.5 sm:gap-2 min-w-0">
-                                                            <span className="text-[10px] sm:text-[11px] text-stone-500 line-through">
+                                                            <span className="text-[10px] sm:text-[11px] text-slate-400 line-through">
                                                                 De R$ {formatMoney(bump.originalPrice)}
                                                             </span>
-                                                            <span className="text-xs sm:text-sm font-black text-emerald-400">
+                                                            <span className="text-xs sm:text-sm font-black text-emerald-700">
                                                                 por apenas + R$ {formatMoney(bump.price)}
                                                             </span>
                                                         </div>
@@ -1738,8 +1750,8 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                                                         <span
                                                             className={`inline-flex items-center shrink-0 rounded-full px-3 py-1.5 text-xs font-black transition-all ${
                                                                 isChecked
-                                                                    ? "bg-emerald-500 text-black font-extrabold shadow-md shadow-emerald-500/30"
-                                                                    : "border border-rose-500/60 bg-rose-500/10 text-rose-400 hover:bg-rose-500 hover:text-white"
+                                                                    ? "bg-emerald-600 text-white shadow-xs"
+                                                                    : "border border-rose-300 bg-rose-50 text-rose-700 hover:bg-rose-600 hover:text-white"
                                                             }`}
                                                         >
                                                             {isChecked ? "✓ Adicionado" : "+ Adicionar"}
@@ -1752,22 +1764,22 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                                 </section>
 
                                 {/* PASSO 3: FORMA DE PAGAMENTO (PIX DESTAQUE + CARTÃO TRANSPARENTE) */}
-                                <section className="rounded-2xl border border-white/10 bg-[#120e1a]/95 backdrop-blur-md p-4 sm:p-5 text-left shadow-xl shadow-black/40">
-                                    <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
+                                <section className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 text-left shadow-sm">
+                                    <div className="flex items-center justify-between border-b border-slate-200 pb-3 mb-4">
                                         <div className="flex items-center gap-2.5">
-                                            <div className="size-6 rounded-full bg-emerald-500 text-black font-black text-xs flex items-center justify-center shadow">
+                                            <div className="size-6 rounded-full bg-emerald-600 text-white font-black text-xs flex items-center justify-center shadow-xs">
                                                 3
                                             </div>
                                             <div>
-                                                <h3 className="text-xs sm:text-sm font-black text-white uppercase tracking-wider">
+                                                <h3 className="text-xs sm:text-sm font-black text-slate-900 uppercase tracking-wider">
                                                     Forma de Pagamento
                                                 </h3>
-                                                <p className="text-[10px] sm:text-[11px] text-stone-400">
+                                                <p className="text-[10px] sm:text-[11px] text-slate-500">
                                                     Escolha como prefere pagar com segurança
                                                 </p>
                                             </div>
                                         </div>
-                                        <span className="text-[10px] font-bold text-emerald-400 flex items-center gap-1">
+                                        <span className="text-[10px] font-bold text-emerald-700 flex items-center gap-1">
                                             <Lock className="size-3" /> Criptografia 256 bits
                                         </span>
                                     </div>
@@ -1780,25 +1792,25 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                                             onClick={() => setPaymentMethod("pix")}
                                             className={`relative flex flex-col items-start p-3.5 rounded-xl border-2 text-left transition-all cursor-pointer ${
                                                 paymentMethod === "pix"
-                                                    ? "border-emerald-500 bg-emerald-500/10 shadow-lg shadow-emerald-500/15"
-                                                    : "border-white/10 bg-black/40 hover:border-white/20"
+                                                    ? "border-emerald-500 bg-emerald-50/80 shadow-xs"
+                                                    : "border-slate-200 bg-white hover:bg-slate-50"
                                             }`}
                                         >
-                                            <span className="absolute -top-2.5 right-2 bg-gradient-to-r from-emerald-500 to-teal-400 text-[9px] font-black uppercase tracking-wider text-black px-2 py-0.5 rounded-full shadow-sm">
+                                            <span className="absolute -top-2.5 right-2 bg-emerald-600 text-[9px] font-black uppercase tracking-wider text-white px-2 py-0.5 rounded-full shadow-xs">
                                                 Mais Rápido
                                             </span>
                                             <div className="flex items-center gap-2 mb-1">
                                                 <span className={`grid size-7 place-items-center rounded-lg ${
-                                                    paymentMethod === "pix" ? "bg-emerald-500 text-black font-black" : "bg-white/10 text-stone-300"
+                                                    paymentMethod === "pix" ? "bg-emerald-600 text-white font-black" : "bg-slate-100 text-slate-600"
                                                 }`}>
                                                     <Zap className="size-4" />
                                                 </span>
-                                                <span className="text-sm font-black text-white">Pix</span>
+                                                <span className="text-sm font-black text-slate-900">Pix</span>
                                             </div>
-                                            <span className="text-[11px] text-emerald-400 font-bold">
+                                            <span className="text-[11px] text-emerald-700 font-bold">
                                                 Liberação em 3s
                                             </span>
-                                            <span className="text-[10px] text-stone-400 mt-0.5">
+                                            <span className="text-[10px] text-slate-500 mt-0.5">
                                                 Sem taxas · Automático
                                             </span>
                                         </button>
@@ -1809,22 +1821,22 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                                             onClick={() => setPaymentMethod("card")}
                                             className={`relative flex flex-col items-start p-3.5 rounded-xl border-2 text-left transition-all cursor-pointer ${
                                                 paymentMethod === "card"
-                                                    ? "border-rose-500 bg-rose-500/10 shadow-lg shadow-rose-500/15"
-                                                    : "border-white/10 bg-black/40 hover:border-white/20"
+                                                    ? "border-rose-500 bg-rose-50/80 shadow-xs"
+                                                    : "border-slate-200 bg-white hover:bg-slate-50"
                                             }`}
                                         >
                                             <div className="flex items-center gap-2 mb-1">
                                                 <span className={`grid size-7 place-items-center rounded-lg ${
-                                                    paymentMethod === "card" ? "bg-rose-500 text-white" : "bg-white/10 text-stone-300"
+                                                    paymentMethod === "card" ? "bg-rose-600 text-white" : "bg-slate-100 text-slate-600"
                                                 }`}>
                                                     <CreditCard className="size-4" />
                                                 </span>
-                                                <span className="text-sm font-black text-white">Cartão</span>
+                                                <span className="text-sm font-black text-slate-900">Cartão</span>
                                             </div>
-                                            <span className="text-[11px] text-stone-300 font-bold">
+                                            <span className="text-[11px] text-slate-700 font-bold">
                                                 Crédito à vista ou 12x
                                             </span>
-                                            <span className="text-[10px] text-stone-400 mt-0.5">
+                                            <span className="text-[10px] text-slate-500 mt-0.5">
                                                 Visa, Master, Elo
                                             </span>
                                         </button>
@@ -1832,27 +1844,27 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
 
                                     {/* Informações e Formulário da Forma Selecionada */}
                                     {paymentMethod === "pix" ? (
-                                        <div className="mt-4 rounded-xl border border-emerald-500/20 bg-emerald-950/20 p-3.5 text-xs text-stone-300 flex items-start gap-2.5">
-                                            <CheckCircle2 className="size-4 text-emerald-400 shrink-0 mt-0.5" />
+                                        <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 p-3.5 text-xs text-slate-700 flex items-start gap-2.5">
+                                            <CheckCircle2 className="size-4 text-emerald-600 shrink-0 mt-0.5" />
                                             <p className="leading-relaxed">
-                                                <strong className="text-white">Pagamento 100% instantâneo:</strong> gere o QR Code Pix e copie a chave. O sistema detecta o pagamento sozinho e envia seu acesso no e-mail e WhatsApp em segundos.
+                                                <strong className="text-slate-900">Pagamento 100% instantâneo:</strong> gere o QR Code Pix e copie a chave. O sistema detecta o pagamento sozinho e envia seu acesso no e-mail e WhatsApp em segundos.
                                             </p>
                                         </div>
                                     ) : (
-                                        <div className="mt-4 space-y-3.5 rounded-xl border border-rose-500/25 bg-black/50 p-4">
-                                            <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
-                                                <span className="text-xs font-bold text-white flex items-center gap-1.5">
-                                                    <CreditCard className="size-3.5 text-rose-400" />
+                                        <div className="mt-4 space-y-3.5 rounded-xl border border-slate-200 bg-slate-50/80 p-4">
+                                            <div className="flex items-center justify-between border-b border-slate-200 pb-2.5">
+                                                <span className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
+                                                    <CreditCard className="size-3.5 text-rose-600" />
                                                     <span>Cartão de Crédito (Checkout Transparente)</span>
                                                 </span>
-                                                <span className="text-[10px] text-emerald-400 font-semibold flex items-center gap-1">
+                                                <span className="text-[10px] text-emerald-700 font-semibold flex items-center gap-1">
                                                     <Lock className="size-2.5" /> 100% Seguro
                                                 </span>
                                             </div>
 
                                             {/* Nome impresso no cartão */}
                                             <div>
-                                                <label className="block text-xs font-semibold text-stone-300 mb-1.5" htmlFor="cardholder-name">
+                                                <label className="block text-xs font-semibold text-slate-700 mb-1.5" htmlFor="cardholder-name">
                                                     Nome impresso no cartão
                                                 </label>
                                                 <input
@@ -1862,27 +1874,27 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                                                     onChange={(e) => setCardholderName(e.target.value.toUpperCase())}
                                                     placeholder="NOME COMO ESTÁ NO CARTÃO"
                                                     required={paymentMethod === "card"}
-                                                    className="w-full rounded-xl border border-white/10 bg-black/60 px-4 py-3 text-xs sm:text-sm text-white placeholder-stone-500 outline-none focus:border-rose-500 uppercase tracking-wider font-mono transition-colors"
+                                                    className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-xs sm:text-sm text-slate-900 placeholder-slate-400 outline-none focus:border-rose-500 uppercase tracking-wider font-mono transition-colors font-medium"
                                                 />
                                             </div>
 
                                             {/* Stripe Card Element Container (Transparente in-page) */}
                                             <div>
-                                                <label className="block text-xs font-semibold text-stone-300 mb-1.5">
+                                                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                                                     Dados do Cartão (Número, Validade e CVC)
                                                 </label>
                                                 <div
                                                     ref={cardContainerRef}
-                                                    className="rounded-xl border border-white/10 bg-black/60 px-4 py-3.5 text-sm text-white focus-within:border-rose-500 transition-all min-h-[46px]"
+                                                    className="rounded-xl border border-slate-300 bg-white px-4 py-3.5 text-sm text-slate-900 focus-within:border-rose-500 transition-all min-h-[46px]"
                                                 />
                                             </div>
 
-                                            <div className="flex items-center justify-between text-[10px] text-stone-400 pt-1">
+                                            <div className="flex items-center justify-between text-[10px] text-slate-500 pt-1">
                                                 <span className="flex items-center gap-1">
-                                                    <ShieldCheck className="size-3 text-emerald-400" />
+                                                    <ShieldCheck className="size-3 text-emerald-600" />
                                                     Pagamento processado na mesma página
                                                 </span>
-                                                <span className="font-semibold text-stone-300">
+                                                <span className="font-semibold text-slate-700">
                                                     Até 12x no cartão
                                                 </span>
                                             </div>
@@ -1890,13 +1902,13 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                                     )}
                                 </section>
 
-                                {/* RESUMO DISCRIMINADO DO PEDIDO (ESTILO KIWIFY) */}
-                                <div className="rounded-2xl border border-white/10 bg-black/40 p-4 space-y-2 text-xs text-left">
-                                    <div className="flex justify-between text-stone-300 pb-2 border-b border-white/10">
-                                        <span className="font-semibold text-white">
+                                {/* RESUMO DISCRIMINADO DO PEDIDO (ESTILO KIWIFY CLEAN) */}
+                                <div className="rounded-2xl border border-slate-200 bg-white p-4 space-y-2 text-xs text-left shadow-sm">
+                                    <div className="flex justify-between text-slate-700 pb-2 border-b border-slate-100">
+                                        <span className="font-semibold text-slate-900">
                                             {selectedPackage === "upsell" ? "Catálogo VIP Completo (Todas as Séries)" : currentTitle}
                                         </span>
-                                        <span className="font-bold text-white">
+                                        <span className="font-bold text-slate-900">
                                             R$ {formatMoney(selectedPackage === "upsell" ? PRICE_UPSELL : PRICE_BASICA)}
                                         </span>
                                     </div>
@@ -1904,23 +1916,23 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                                         const b = ORDER_BUMPS.find((item) => item.id === bumpId);
                                         if (!b) return null;
                                         return (
-                                            <div key={b.id} className="flex justify-between text-stone-400 py-1 border-b border-white/5">
+                                            <div key={b.id} className="flex justify-between text-slate-600 py-1 border-b border-slate-50">
                                                 <span className="flex items-center gap-1.5">
-                                                    <span className="text-emerald-400 font-bold">✓</span> {b.title}
+                                                    <span className="text-emerald-600 font-bold">✓</span> {b.title}
                                                 </span>
-                                                <span className="font-bold text-emerald-400">+ R$ {formatMoney(b.price)}</span>
+                                                <span className="font-bold text-emerald-700">+ R$ {formatMoney(b.price)}</span>
                                             </div>
                                         );
                                     })}
                                     <div className="flex justify-between items-baseline pt-2 text-sm">
                                         <div>
-                                            <span className="font-black text-white block">Total a pagar:</span>
-                                            <span className="text-[10px] text-stone-400">
+                                            <span className="font-black text-slate-900 block">Total a pagar:</span>
+                                            <span className="text-[10px] text-slate-500">
                                                 {paymentMethod === "pix" ? "à vista no Pix sem tarifas" : "em até 12x no cartão"}
                                             </span>
                                         </div>
                                         <div className="text-right">
-                                            <span className="text-2xl sm:text-3xl font-black text-emerald-400 drop-shadow">
+                                            <span className="text-2xl sm:text-3xl font-black text-emerald-600">
                                                 R$ {formatMoney(currentTotalAmount)}
                                             </span>
                                         </div>
@@ -1928,7 +1940,7 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                                 </div>
 
                                 {formError && (
-                                    <div className="rounded-xl bg-red-500/10 border border-red-500/30 p-3.5 text-center text-xs font-semibold text-red-400">
+                                    <div className="rounded-xl bg-red-50 border border-red-200 p-3.5 text-center text-xs font-semibold text-red-600">
                                         {formError}
                                     </div>
                                 )}
@@ -1937,11 +1949,11 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                                 <button
                                     type="submit"
                                     disabled={generatingPix || generatingCard}
-                                    className="relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-600 hover:from-emerald-500 hover:to-emerald-400 px-4 sm:px-6 py-4 text-sm sm:text-base font-black uppercase tracking-wide text-black shadow-xl shadow-emerald-500/30 disabled:opacity-60 transition-all active:scale-[0.98] leading-tight text-center cursor-pointer"
+                                    className="relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-600 hover:from-emerald-500 hover:to-emerald-400 px-4 sm:px-6 py-4 text-sm sm:text-base font-black uppercase tracking-wide text-white shadow-xl shadow-emerald-600/30 disabled:opacity-60 transition-all active:scale-[0.98] leading-tight text-center cursor-pointer"
                                 >
                                     {generatingPix || generatingCard ? (
                                         <>
-                                            <Loader2 className="size-5 animate-spin shrink-0 text-black" />
+                                            <Loader2 className="size-5 animate-spin shrink-0 text-white" />
                                             <span className="font-black">{paymentMethod === "pix" ? "Gerando Pix seguro..." : "Iniciando pagamento..."}</span>
                                         </>
                                     ) : (
@@ -1958,36 +1970,36 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                                         className="pointer-events-none absolute inset-0 overflow-hidden rounded-full"
                                         aria-hidden="true"
                                     >
-                                        <span className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-transparent via-white/50 to-transparent animate-shine-sweep" />
+                                        <span className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-shine-sweep" />
                                     </span>
                                 </button>
 
-                                {/* SELO DE GARANTIA 7 DIAS KIWIFY + SUPORTE WHATSAPP */}
-                                <div className="p-4 rounded-2xl border border-white/10 bg-[#100d18] flex items-center gap-3.5 text-left shadow-lg">
-                                    <div className="size-11 sm:size-12 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center shrink-0 text-emerald-400">
+                                {/* SELO DE GARANTIA 7 DIAS KIWIFY */}
+                                <div className="p-4 rounded-2xl border border-amber-200 bg-amber-50/70 flex items-center gap-3.5 text-left shadow-xs">
+                                    <div className="size-11 sm:size-12 rounded-full bg-amber-100 border border-amber-300 flex items-center justify-center shrink-0 text-amber-700">
                                         <ShieldCheck className="size-6 stroke-[2]" />
                                     </div>
                                     <div className="min-w-0">
-                                        <h4 className="text-xs font-black text-white uppercase tracking-wide">
+                                        <h4 className="text-xs font-black text-amber-900 uppercase tracking-wide">
                                             Garantia Incondicional de 7 Dias · Risco Zero
                                         </h4>
-                                        <p className="text-[11px] text-stone-400 leading-snug mt-0.5">
+                                        <p className="text-[11px] text-amber-800 leading-snug mt-0.5">
                                             Assista a todos os episódios completos. Se não gostar da história ou do player, basta nos enviar uma mensagem no WhatsApp que devolvemos 100% do seu dinheiro na hora.
                                         </p>
                                     </div>
                                 </div>
 
                                 {/* SELOS OFICIAIS NO RODAPÉ */}
-                                <div className="pt-1 text-center text-[10px] text-stone-500 flex flex-wrap items-center justify-center gap-3">
-                                    <span className="flex items-center gap-1 font-semibold text-stone-400">
-                                        <Lock className="size-3 text-emerald-400" /> Criptografia SSL 256 bits
+                                <div className="pt-1 text-center text-[10px] text-slate-500 flex flex-wrap items-center justify-center gap-3">
+                                    <span className="flex items-center gap-1 font-semibold text-slate-600">
+                                        <Lock className="size-3 text-emerald-600" /> Criptografia SSL 256 bits
                                     </span>
                                     <span>•</span>
-                                    <span className="flex items-center gap-1 font-semibold text-stone-400">
-                                        <Zap className="size-3 text-amber-400" /> Liberação Automática
+                                    <span className="flex items-center gap-1 font-semibold text-slate-600">
+                                        <Zap className="size-3 text-amber-600" /> Liberação Automática
                                     </span>
                                     <span>•</span>
-                                    <span className="flex items-center gap-1 font-semibold text-stone-400">
+                                    <span className="flex items-center gap-1 font-semibold text-slate-600">
                                         <MessageCircle className="size-3 text-[#25D366]" /> Suporte no WhatsApp
                                     </span>
                                 </div>
@@ -1998,35 +2010,39 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
             )}
 
             {/* =========================================================================
-                TELA 3: TELA DO PIX GERADO COM AVISO VERMELHO
+                TELA 3: TELA DO PIX GERADO
                 ========================================================================= */}
             {currentView === "pix" && pixOrder && (
-                <div className="max-w-md mx-auto px-4 py-8 sm:py-12 w-full text-center">
+                <div className="max-w-md mx-auto px-4 py-8 sm:py-12 w-full text-center text-slate-900">
                     {/* Botão de Voltar */}
                     <div className="flex justify-start mb-4">
                         <button
                             type="button"
                             onClick={() => setCurrentView("checkout")}
-                            className="flex items-center gap-1.5 text-xs text-stone-400 hover:text-white"
+                            className="flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-slate-800 transition-colors cursor-pointer"
                         >
                             <ArrowLeft className="size-4" />
                             <span>Alterar dados / Voltar</span>
                         </button>
                     </div>
 
-                    <section className="rounded-3xl border border-white/10 bg-[#120e1a] p-6 shadow-2xl text-center">
-                        <h2 className="text-base sm:text-lg font-extrabold text-white mb-1">
+                    <section className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-7 shadow-xl text-center">
+                        <div className="inline-flex items-center gap-1.5 text-[11px] font-extrabold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full mb-3 shadow-xs">
+                            <Zap className="size-3.5 text-emerald-600" />
+                            <span>Código Pix Gerado com Sucesso</span>
+                        </div>
+                        <h2 className="text-base sm:text-lg font-black text-slate-900 mb-1">
                             Pague com Pix para liberar o acesso
                         </h2>
-                        <p className="text-xs text-stone-400 mb-4">
+                        <p className="text-xs text-slate-500 mb-4">
                             Valor total:{" "}
-                            <strong className="text-rose-400 font-extrabold text-sm">
+                            <strong className="text-emerald-600 font-black text-sm">
                                 R$ {formatMoney(pixOrder.amount)}
                             </strong>
                         </p>
 
                         {/* QR Code SVG */}
-                        <div className="mx-auto size-60 rounded-2xl border border-white/10 bg-white p-3 shadow-inner flex items-center justify-center">
+                        <div className="mx-auto size-60 rounded-2xl border-2 border-slate-200 bg-white p-3 shadow-inner flex items-center justify-center">
                             <QRCodeSVG
                                 value={pixOrder.pixCopyPaste}
                                 size={216}
@@ -2035,26 +2051,26 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                             />
                         </div>
 
-                        <p className="mt-4 text-center text-xs text-stone-400">
+                        <p className="mt-4 text-center text-xs text-slate-500">
                             Escaneie o QR Code ou use o código copia-e-cola. Expira em{" "}
-                            <span className="font-bold text-white font-mono">
+                            <span className="font-bold text-slate-900 font-mono">
                                 {formattedMinutes}:{formattedSeconds}
                             </span>
                         </p>
 
-                        {/* CAIXA VERMELHA DE ATENÇÃO MÁXIMA COM TEXTO BRILHANTE (GLOW RED) */}
-                        <div className="mt-5 rounded-xl border-2 border-red-600 bg-black/90 p-4 text-center shadow-lg shadow-red-950/40">
-                            <p className="text-sm font-black uppercase leading-snug text-red-500 animate-glow-red">
+                        {/* CAIXA DE ATENÇÃO MÁXIMA */}
+                        <div className="mt-5 rounded-xl border-2 border-amber-400 bg-amber-50 p-4 text-center shadow-xs">
+                            <p className="text-xs sm:text-sm font-black uppercase leading-snug text-amber-900">
                                 ⚠️ ATENÇÃO: NÃO FECHE ESTA PÁGINA
                             </p>
-                            <p className="mt-2 text-xs font-semibold leading-relaxed text-red-400">
-                                Depois de pagar o Pix no app do seu banco, volte para esta tela e aguarde a confirmação. Seu acesso só é liberado automaticamente enquanto ela estiver aberta.
+                            <p className="mt-1.5 text-xs font-semibold leading-relaxed text-amber-800">
+                                Depois de pagar o Pix no app do seu banco, volte para esta tela e aguarde a confirmação. Seu acesso será liberado automaticamente em poucos segundos!
                             </p>
                         </div>
 
                         {/* Código Pix Copia e Cola */}
-                        <div className="mt-4 rounded-xl border border-white/10 bg-black/60 p-3 text-left">
-                            <p className="break-all font-mono text-[11px] leading-relaxed text-stone-300 max-h-24 overflow-y-auto">
+                        <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-3 text-left">
+                            <p className="break-all font-mono text-[11px] leading-relaxed text-slate-700 max-h-24 overflow-y-auto">
                                 {pixOrder.pixCopyPaste}
                             </p>
                         </div>
@@ -2063,10 +2079,10 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                         <button
                             type="button"
                             onClick={handleCopyPix}
-                            className={`mt-3 flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-xs font-black uppercase tracking-wider transition-all ${
+                            className={`mt-3 flex w-full items-center justify-center gap-2 rounded-full px-6 py-4 text-xs font-black uppercase tracking-wider transition-all cursor-pointer ${
                                 copiedPix
-                                    ? "bg-emerald-600 text-white"
-                                    : "bg-rose-600 hover:bg-rose-500 text-white shadow-lg shadow-rose-600/30"
+                                    ? "bg-emerald-600 text-white shadow-lg shadow-emerald-600/30"
+                                    : "bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-600/25 active:scale-[0.98]"
                             }`}
                         >
                             {copiedPix ? (
@@ -2083,8 +2099,8 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                         </button>
 
                         {/* Status de Aguardo com Spinner */}
-                        <div className="mt-5 flex items-center justify-center gap-2 text-center text-xs text-stone-400">
-                            <Loader2 className="size-3.5 animate-spin text-rose-500" />
+                        <div className="mt-5 flex items-center justify-center gap-2 text-center text-xs text-slate-500">
+                            <Loader2 className="size-3.5 animate-spin text-emerald-600" />
                             <span>Aguardando confirmação do pagamento no banco…</span>
                         </div>
                     </section>
