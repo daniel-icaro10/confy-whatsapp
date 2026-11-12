@@ -806,7 +806,7 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
     const currentCover = "/cover-ganhei-tres-namoradas.jpg";
 
     return (
-        <div className="min-h-dvh bg-[#07060a] text-stone-100 flex flex-col selection:bg-rose-500/40 selection:text-white pb-24 sm:pb-16 font-sans">
+        <div className="min-h-dvh bg-[#07060a] text-stone-100 flex flex-col selection:bg-rose-500/40 selection:text-white pb-24 sm:pb-16 font-sans w-full max-w-full overflow-x-hidden">
             {/* =========================================================================
                 TELA 1: PÁGINA DE VENDAS COM O PLAYER NATIVO VERTICAL HD
                 ========================================================================= */}
@@ -830,7 +830,7 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                         </div>
                     </header>
 
-                    <main className="max-w-xl mx-auto px-4 py-6 sm:py-10 flex flex-col items-center text-center">
+                    <main className="w-full max-w-xl min-w-0 mx-auto px-4 py-6 sm:py-10 flex flex-col items-center text-center">
                         {/* 1. Badge Em Alta no Brasil */}
                         <div className="mb-4 inline-block rounded-full border border-rose-500/25 bg-[#14101e] px-4 py-1.5 text-[10px] font-extrabold uppercase tracking-widest text-rose-400 sm:text-xs">
                             🔥 Em alta no Brasil
@@ -1146,14 +1146,14 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                         </div>
 
                         {/* 8. Prova Social: Marquee de Avaliações */}
-                        <div className="w-full mb-12 overflow-hidden">
+                        <div className="w-full max-w-full min-w-0 mb-12 overflow-hidden">
                             <h3 className="text-center text-xs font-bold uppercase tracking-widest text-stone-400 mb-6 flex items-center justify-center gap-2">
                                 <Star className="size-3.5 fill-amber-400 text-amber-400" />
                                 <span>Quem já comprou recomenda (+24.000 clientes)</span>
                             </h3>
 
                             {/* Linha 1 do Marquee */}
-                            <div className="flex gap-4 overflow-hidden py-2 select-none">
+                            <div className="w-full max-w-full min-w-0 flex gap-4 overflow-hidden py-2 select-none">
                                 <div className="flex gap-4 animate-marquee-left shrink-0">
                                     {[...TESTIMONIALS_ROW_1, ...TESTIMONIALS_ROW_1].map((t, idx) => (
                                         <div
@@ -1186,7 +1186,7 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                             </div>
 
                             {/* Linha 2 do Marquee */}
-                            <div className="flex gap-4 overflow-hidden py-2 select-none">
+                            <div className="w-full max-w-full min-w-0 flex gap-4 overflow-hidden py-2 select-none">
                                 <div className="flex gap-4 animate-marquee-right shrink-0">
                                     {[...TESTIMONIALS_ROW_2, ...TESTIMONIALS_ROW_2].map((t, idx) => (
                                         <div
@@ -1221,7 +1221,7 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                     </main>
 
                     {/* Barra Fixa Mobile no Rodapé */}
-                    <div className="fixed inset-x-0 bottom-0 z-40 mx-auto flex max-w-xl items-center justify-between gap-4 rounded-t-2xl border-t border-rose-500/20 bg-[#0e0a17]/95 px-4 py-3 shadow-[0_-10px_35px_rgba(0,0,0,0.8)] backdrop-blur-md sm:px-6">
+                    <div className="fixed inset-x-0 bottom-0 z-40 mx-auto flex max-w-xl items-center justify-between gap-4 rounded-t-2xl border-t border-rose-500/20 bg-[#0e0a17]/95 px-4 pt-3 pb-[max(12px,env(safe-area-inset-bottom))] shadow-[0_-10px_35px_rgba(0,0,0,0.8)] backdrop-blur-md sm:px-6">
                         <div className="flex min-w-0 items-center gap-2.5">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
@@ -1258,13 +1258,13 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                         MODAL DE UPSELL (CATÁLOGO VIP COMPLETO)
                         ========================================================================= */}
                     {isUpsellModalOpen && (
-                        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+                        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
                             <div
-                                className="absolute inset-0 bg-black/90 backdrop-blur-md"
+                                className="fixed inset-0 bg-black/90 backdrop-blur-md"
                                 onClick={() => setIsUpsellModalOpen(false)}
                             />
 
-                            <div className="relative z-10 flex w-full max-w-[420px] flex-col items-center rounded-3xl border-2 border-rose-500 bg-[#120e1c] p-6 text-center shadow-[0_25px_60px_rgba(225,29,72,0.25)] animate-in fade-in zoom-in-95 duration-200">
+                            <div className="relative z-10 flex w-full max-w-[420px] max-h-[calc(100dvh-2rem)] overflow-y-auto my-auto flex-col items-center rounded-3xl border-2 border-rose-500 bg-[#120e1c] p-5 sm:p-6 text-center shadow-[0_25px_60px_rgba(225,29,72,0.25)] animate-in fade-in zoom-in-95 duration-200">
                                 <button
                                     type="button"
                                     onClick={() => setIsUpsellModalOpen(false)}
@@ -1618,50 +1618,53 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                                             <span className="font-extrabold text-amber-300">{bump.discountPercent}% OFF</span>
                                         </div>
 
-                                        <div className="p-4 flex items-start gap-3.5">
-                                            {/* Custom Checkbox */}
-                                            <div
-                                                className={`mt-1 grid size-6 shrink-0 place-items-center rounded-lg border-2 transition-all ${
-                                                    isChecked
-                                                        ? "border-rose-500 bg-rose-500 text-white shadow-md shadow-rose-500/40"
-                                                        : "border-stone-500 bg-black/40 hover:border-stone-400"
-                                                }`}
-                                            >
-                                                {isChecked && <Check className="size-4 stroke-[3]" />}
-                                            </div>
+                                        <div className="p-3.5 sm:p-4">
+                                            {/* Linha Superior: Checkbox + Thumbnail + Título & Descrição */}
+                                            <div className="flex items-start gap-3">
+                                                {/* Custom Checkbox */}
+                                                <div
+                                                    className={`mt-0.5 grid size-6 shrink-0 place-items-center rounded-lg border-2 transition-all ${
+                                                        isChecked
+                                                            ? "border-rose-500 bg-rose-500 text-white shadow-md shadow-rose-500/40"
+                                                            : "border-stone-500 bg-black/40 hover:border-stone-400"
+                                                    }`}
+                                                >
+                                                    {isChecked && <Check className="size-4 stroke-[3]" />}
+                                                </div>
 
-                                            {/* Thumbnail */}
-                                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                                            <img
-                                                src={bump.iconUrl}
-                                                alt=""
-                                                className="mt-0.5 size-12 shrink-0 rounded-xl object-cover border border-white/10 shadow-md"
-                                            />
+                                                {/* Thumbnail */}
+                                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                                <img
+                                                    src={bump.iconUrl}
+                                                    alt=""
+                                                    className="size-11 sm:size-12 shrink-0 rounded-xl object-cover border border-white/10 shadow-md"
+                                                />
 
-                                            {/* Content */}
-                                            <div className="min-w-0 flex-1">
-                                                <div className="flex items-start justify-between gap-2">
-                                                    <span className="block text-sm font-black text-white leading-snug">
+                                                {/* Content */}
+                                                <div className="min-w-0 flex-1">
+                                                    <span className="block text-xs sm:text-sm font-black text-white leading-snug">
                                                         {bump.title}
                                                     </span>
+                                                    <p className="mt-1 text-[11px] sm:text-xs text-stone-400 leading-relaxed">
+                                                        {bump.description}
+                                                    </p>
                                                 </div>
-                                                <p className="mt-1 text-xs text-stone-400 leading-relaxed">
-                                                    {bump.description}
-                                                </p>
-                                                <div className="mt-2 flex items-center gap-2">
-                                                    <span className="text-[11px] text-stone-500 line-through">
+                                            </div>
+
+                                            {/* Linha Inferior: Preço + Botão Adicionar */}
+                                            <div className="mt-3 pt-2.5 border-t border-white/5 flex items-center justify-between gap-2">
+                                                <div className="flex flex-col sm:flex-row sm:items-center gap-0.5 sm:gap-2 min-w-0">
+                                                    <span className="text-[10px] sm:text-[11px] text-stone-500 line-through">
                                                         De R$ {formatMoney(bump.originalPrice)}
                                                     </span>
-                                                    <span className="text-sm font-black text-emerald-400">
+                                                    <span className="text-xs sm:text-sm font-black text-emerald-400">
                                                         por apenas + R$ {formatMoney(bump.price)}
                                                     </span>
                                                 </div>
-                                            </div>
 
-                                            {/* Action Pill */}
-                                            <div className="shrink-0 self-center">
+                                                {/* Action Pill */}
                                                 <span
-                                                    className={`inline-flex items-center rounded-full px-3 py-1.5 text-xs font-black transition-all ${
+                                                    className={`inline-flex items-center shrink-0 rounded-full px-3 py-1.5 text-xs font-black transition-all ${
                                                         isChecked
                                                             ? "bg-emerald-500 text-white shadow-md shadow-emerald-500/30"
                                                             : "border border-rose-500/60 bg-rose-500/10 text-rose-400 hover:bg-rose-500 hover:text-white"
@@ -1831,20 +1834,20 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                         <button
                             type="submit"
                             disabled={generatingPix || generatingCard}
-                            className="relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-rose-600 via-rose-500 to-rose-600 hover:from-rose-500 hover:to-rose-500 px-6 py-4 text-base font-black uppercase tracking-wider text-white shadow-xl shadow-rose-600/40 disabled:opacity-60 transition-all active:scale-[0.98]"
+                            className="relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-rose-600 via-rose-500 to-rose-600 hover:from-rose-500 hover:to-rose-500 px-4 sm:px-6 py-3.5 sm:py-4 text-xs sm:text-sm md:text-base font-black uppercase tracking-wide text-white shadow-xl shadow-rose-600/40 disabled:opacity-60 transition-all active:scale-[0.98] leading-tight text-center"
                         >
                             {generatingPix || generatingCard ? (
                                 <>
-                                    <Loader2 className="size-5 animate-spin" />
+                                    <Loader2 className="size-4 sm:size-5 animate-spin shrink-0" />
                                     <span>{paymentMethod === "pix" ? "Gerando Pix seguro..." : "Iniciando pagamento seguro..."}</span>
                                 </>
                             ) : (
                                 <>
-                                    <Lock className="size-5" />
+                                    <Lock className="size-4 sm:size-5 shrink-0" />
                                     <span>
                                         {paymentMethod === "pix"
-                                            ? `Pagar com Pix e Liberar Acesso — R$ ${formatMoney(currentTotalAmount)}`
-                                            : `Pagar no Cartão — R$ ${formatMoney(currentTotalAmount)}`}
+                                            ? `Liberar no Pix · R$ ${formatMoney(currentTotalAmount)}`
+                                            : `Pagar no Cartão · R$ ${formatMoney(currentTotalAmount)}`}
                                     </span>
                                 </>
                             )}

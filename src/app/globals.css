@@ -5,6 +5,16 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Previne qualquer quebra ou rolagem horizontal indesejada no mobile */
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
 /* ============================================================
    YESTV.AI / STREAMING MOBILE DESIGN TOKENS
    ============================================================ */

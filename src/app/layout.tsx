@@ -121,7 +121,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning className="dark scroll-smooth">
+    <html lang="pt-BR" suppressHydrationWarning className="dark scroll-smooth overflow-x-hidden w-full max-w-full">
       <head>
         <link rel="dns-prefetch" href={APP_URL} />
         <link rel="preconnect" href={APP_URL} crossOrigin="anonymous" />
@@ -151,7 +151,7 @@ export default function RootLayout({
         </noscript>
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${interTight.variable} font-sans antialiased text-[#f5f5f5] bg-[#0c0d0e] min-h-screen flex flex-col`}
+        className={`${geistSans.variable} ${geistMono.variable} ${interTight.variable} font-sans antialiased text-[#f5f5f5] bg-[#0c0d0e] min-h-screen flex flex-col overflow-x-hidden w-full max-w-full`}
         suppressHydrationWarning
       >
         <Providers>

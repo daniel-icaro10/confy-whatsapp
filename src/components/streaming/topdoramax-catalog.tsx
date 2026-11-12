@@ -685,7 +685,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
     }
 
     return (
-        <div className="min-h-dvh bg-[#0c0d0e] font-sans text-[#f5f5f5] pb-32 sm:pb-24 select-none">
+        <div className="min-h-dvh bg-[#0c0d0e] font-sans text-[#f5f5f5] pb-32 sm:pb-24 select-none w-full max-w-full overflow-x-hidden">
             {/* CABEÇALHO FIXO ESTILO HOTPLOT.AI */}
             <header
                 className={`fixed top-0 left-0 right-0 z-40 flex items-center justify-between gap-2 px-3 sm:px-10 h-[58px] sm:h-[66px] transition-all ${
@@ -1021,7 +1021,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                                     handlePrevBanner();
                                                 }}
                                                 aria-label="Capa anterior"
-                                                className="absolute -left-3 sm:-left-5 z-30 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/75 hover:bg-black/95 active:scale-90 border border-white/20 backdrop-blur-md text-white grid place-items-center shadow-[0_4px_16px_rgba(0,0,0,0.8)] transition cursor-pointer"
+                                                className="absolute left-1 sm:-left-5 z-30 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/75 hover:bg-black/95 active:scale-90 border border-white/20 backdrop-blur-md text-white grid place-items-center shadow-[0_4px_16px_rgba(0,0,0,0.8)] transition cursor-pointer"
                                             >
                                                 <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                                             </button>
@@ -1054,7 +1054,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                                     handleNextBanner();
                                                 }}
                                                 aria-label="Próxima capa"
-                                                className="absolute -right-3 sm:-right-5 z-30 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/75 hover:bg-black/95 active:scale-90 border border-white/20 backdrop-blur-md text-white grid place-items-center shadow-[0_4px_16px_rgba(0,0,0,0.8)] transition cursor-pointer"
+                                                className="absolute right-1 sm:-right-5 z-30 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/75 hover:bg-black/95 active:scale-90 border border-white/20 backdrop-blur-md text-white grid place-items-center shadow-[0_4px_16px_rgba(0,0,0,0.8)] transition cursor-pointer"
                                             >
                                                 <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                                             </button>
@@ -1236,7 +1236,11 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                                         WebkitTextStroke:
                                                             "2px rgba(255,255,255,0.45)"
                                                     }}
-                                                    className="absolute left-0 bottom-8 z-10 font-black text-[92px] sm:text-[124px] leading-[0.74] tracking-[-0.06em] text-transparent select-none pointer-events-none drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)]"
+                                                    className={`absolute left-0 bottom-8 sm:bottom-10 z-10 font-black leading-[0.74] tracking-[-0.08em] text-transparent select-none pointer-events-none drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)] ${
+                                                        idx >= 9
+                                                            ? "text-[68px] sm:text-[96px] -left-1"
+                                                            : "text-[86px] sm:text-[124px]"
+                                                    }`}
                                                 >
                                                     {idx + 1}
                                                 </span>
@@ -1511,6 +1515,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                                         onSelect={handleSelectDrama}
                                         isBookmarked={myListIds.includes(drama.id)}
                                         onToggleBookmark={(e) => toggleMyList(drama.id, e)}
+                                        hideLanguageTag={idx < 10}
                                     />
                                 </div>
                             ))}
@@ -1927,15 +1932,6 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                     <div className="max-w-[480px] mx-auto px-4 pt-3 flex flex-col items-center text-center">
                         {/* Player / Capa Bloqueada (.bloqueada-player) */}
                         <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-2xl overflow-hidden bg-[#111114] border border-white/10 mb-4">
-                            <button
-                                type="button"
-                                onClick={() => setLockedSerieModal(null)}
-                                aria-label="Voltar ao catálogo"
-                                className="absolute top-3 left-3 z-20 w-10 h-10 rounded-full bg-black/70 hover:bg-black border border-white/15 grid place-items-center text-white"
-                            >
-                                ←
-                            </button>
-
                             <img
                                 src={lockedSerieModal.bannerUrl || lockedSerieModal.coverUrl}
                                 alt={lockedSerieModal.title}
@@ -2275,13 +2271,15 @@ function CatalogPosterCard({
     isVip,
     onSelect,
     isBookmarked,
-    onToggleBookmark
+    onToggleBookmark,
+    hideLanguageTag
 }: {
     drama: Drama;
     isVip: boolean;
     onSelect: (drama: Drama) => void;
     isBookmarked?: boolean;
     onToggleBookmark?: (e: React.MouseEvent) => void;
+    hideLanguageTag?: boolean;
 }) {
     const langTag = detectLanguageTag(drama);
     const epCount = drama.episodes?.length || drama.totalEpisodes || 1;
@@ -2302,9 +2300,11 @@ function CatalogPosterCard({
                 <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
 
                 {/* Badge Dublado / Legendado */}
-                <span className="absolute top-1.5 left-1.5 sm:top-2 sm:left-2 z-20 px-1.5 sm:px-2 py-0.5 rounded-md sm:rounded-full bg-black/70 backdrop-blur-md border border-white/10 text-white text-[8px] sm:text-[9px] font-bold uppercase tracking-wider pointer-events-none">
-                    {langTag}
-                </span>
+                {!hideLanguageTag && (
+                    <span className="absolute top-1.5 left-1.5 sm:top-2 sm:left-2 z-20 px-1.5 py-0.5 rounded-md sm:rounded-full bg-black/75 backdrop-blur-md border border-white/10 text-white text-[7.5px] sm:text-[9px] font-extrabold uppercase tracking-tight pointer-events-none max-w-[65px] truncate">
+                        {langTag}
+                    </span>
+                )}
 
                 {/* Botão Salvar / Bookmark */}
                 {onToggleBookmark && (

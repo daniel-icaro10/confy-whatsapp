@@ -644,15 +644,18 @@ function WatchDramaContent() {
                         <Globe size={18} />
                     </button>
 
-                    {/* Logo & Brand Badge */}
-                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/50 backdrop-blur-md border border-white/15 shadow-sm">
-                        <div className="w-5 h-5 rounded-[6px] bg-[#e11d48] flex items-center justify-center text-white font-black text-[11px] shadow-sm">
-                            H
-                        </div>
-                        <span className="text-sm font-extrabold text-white tracking-tight">
-                            HotPlot<span className="text-white/40 font-normal">.ai</span>
-                        </span>
-                    </div>
+                    {/* Logo TvDrama Reels */}
+                    <Link
+                        href="/"
+                        className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/50 backdrop-blur-md border border-white/15 shadow-sm active:scale-95 transition"
+                    >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                            src="/logo.png"
+                            alt="TvDrama Reels"
+                            className="h-6 w-auto object-contain"
+                        />
+                    </Link>
 
                     {/* Search / Catalog */}
                     <Link
