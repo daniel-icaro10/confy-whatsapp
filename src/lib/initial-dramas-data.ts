@@ -28,28 +28,218 @@ export interface InitialDramaData {
 
 export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
     {
-        "id": "tdx-wall-street-nao-negocia-o-amor",
-        "title": "Wall Street Não Negocia o Amor",
-        "slug": "wall-street-nao-negocia-o-amor",
-        "synopsis": "No implacável mundo corporativo de Wall Street, poder, ambição e segredos colidem quando um magnata financeiro se vê dividido entre um império bilionário e uma paixão arrebatadora que ele não pode negociar.",
-        "coverUrl": "/cover-wall-street-nao-negocia-o-amor.jpg",
-        "bannerUrl": "/cover-wall-street-nao-negocia-o-amor.jpg",
+        "id": "tdx-a-vinganca-do-irmao",
+        "title": "A Vingança do Irmão (Dublado)",
+        "slug": "a-vinganca-do-irmao",
+        "synopsis": "Traído por aqueles em quem mais confiava e vendo sua família desmoronar, ele retorna anos depois sob uma nova identidade, determinado a vingar o irmão e recuperar tudo o que lhe foi tirado com justiça e poder implacáveis.",
+        "coverUrl": "/cover-a-vinganca-do-irmao.jpg",
+        "bannerUrl": "/cover-a-vinganca-do-irmao.jpg",
         "category": "Dublado",
-        "tags": "dublado,romance,drama,bilionario,wall street,negocios,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
+        "tags": "dublado,drama,vinganca,acao,familia,destaques,em alta",
+        "totalEpisodes": 22,
+        "freeEpisodesCount": 2,
         "isFeatured": true,
         "isVertical": true,
-        "viewsCount": 3840000,
-        "likesCount": 42100,
+        "viewsCount": 4680000,
+        "likesCount": 47500,
         "episodes": [
             {
                 "number": 1,
-                "title": "Filme Completo (Dublado)",
-                "description": "Wall Street Não Negocia o Amor completo e dublado em alta definição (84 minutos).",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvr7vi",
-                "durationSeconds": 5055,
+                "title": "Episódio 1",
+                "description": "Episódio 1 de A Vingança do Irmão completo e dublado em alta definição.",
+                "youtubeUrl": "",
+                "videoUrl": "/dramas/a-vinganca-do-irmao/ep-1.mp4",
+                "durationSeconds": 120,
                 "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Episódio 2",
+                "description": "Episódio 2 de A Vingança do Irmão completo e dublado em alta definição.",
+                "youtubeUrl": "",
+                "videoUrl": "/dramas/a-vinganca-do-irmao/ep-2.mp4",
+                "durationSeconds": 120,
+                "isFree": true
+            },
+            {
+                "number": 3,
+                "title": "Episódio 3",
+                "description": "Episódio 3 de A Vingança do Irmão completo e dublado em alta definição.",
+                "youtubeUrl": "",
+                "videoUrl": "/dramas/a-vinganca-do-irmao/ep-3.mp4",
+                "durationSeconds": 120,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Episódio 4",
+                "description": "Episódio 4 de A Vingança do Irmão completo e dublado em alta definição.",
+                "youtubeUrl": "",
+                "videoUrl": "/dramas/a-vinganca-do-irmao/ep-4.mp4",
+                "durationSeconds": 120,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Episódio 5",
+                "description": "Episódio 5 de A Vingança do Irmão completo e dublado em alta definição.",
+                "youtubeUrl": "",
+                "videoUrl": "/dramas/a-vinganca-do-irmao/ep-5.mp4",
+                "durationSeconds": 120,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Episódio 6",
+                "description": "Episódio 6 de A Vingança do Irmão completo e dublado em alta definição.",
+                "youtubeUrl": "",
+                "videoUrl": "/dramas/a-vinganca-do-irmao/ep-6.mp4",
+                "durationSeconds": 120,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Episódio 7",
+                "description": "Episódio 7 de A Vingança do Irmão completo e dublado em alta definição.",
+                "youtubeUrl": "",
+                "videoUrl": "/dramas/a-vinganca-do-irmao/ep-7.mp4",
+                "durationSeconds": 120,
+                "isFree": false
+            },
+            {
+                "number": 8,
+                "title": "Episódio 8",
+                "description": "Episódio 8 de A Vingança do Irmão completo e dublado em alta definição.",
+                "youtubeUrl": "",
+                "videoUrl": "/dramas/a-vinganca-do-irmao/ep-8.mp4",
+                "durationSeconds": 120,
+                "isFree": false
+            },
+            {
+                "number": 9,
+                "title": "Episódio 9",
+                "description": "Episódio 9 de A Vingança do Irmão completo e dublado em alta definição.",
+                "youtubeUrl": "",
+                "videoUrl": "/dramas/a-vinganca-do-irmao/ep-9.mp4",
+                "durationSeconds": 120,
+                "isFree": false
+            },
+            {
+                "number": 10,
+                "title": "Episódio 10",
+                "description": "Episódio 10 de A Vingança do Irmão completo e dublado em alta definição.",
+                "youtubeUrl": "",
+                "videoUrl": "/dramas/a-vinganca-do-irmao/ep-10.mp4",
+                "durationSeconds": 120,
+                "isFree": false
+            },
+            {
+                "number": 11,
+                "title": "Episódio 11",
+                "description": "Episódio 11 de A Vingança do Irmão completo e dublado em alta definição.",
+                "youtubeUrl": "",
+                "videoUrl": "/dramas/a-vinganca-do-irmao/ep-11.mp4",
+                "durationSeconds": 120,
+                "isFree": false
+            },
+            {
+                "number": 12,
+                "title": "Episódio 12",
+                "description": "Episódio 12 de A Vingança do Irmão completo e dublado em alta definição.",
+                "youtubeUrl": "",
+                "videoUrl": "/dramas/a-vinganca-do-irmao/ep-12.mp4",
+                "durationSeconds": 120,
+                "isFree": false
+            },
+            {
+                "number": 13,
+                "title": "Episódio 13",
+                "description": "Episódio 13 de A Vingança do Irmão completo e dublado em alta definição.",
+                "youtubeUrl": "",
+                "videoUrl": "/dramas/a-vinganca-do-irmao/ep-13.mp4",
+                "durationSeconds": 120,
+                "isFree": false
+            },
+            {
+                "number": 14,
+                "title": "Episódio 14",
+                "description": "Episódio 14 de A Vingança do Irmão completo e dublado em alta definição.",
+                "youtubeUrl": "",
+                "videoUrl": "/dramas/a-vinganca-do-irmao/ep-14.mp4",
+                "durationSeconds": 120,
+                "isFree": false
+            },
+            {
+                "number": 15,
+                "title": "Episódio 15",
+                "description": "Episódio 15 de A Vingança do Irmão completo e dublado em alta definição.",
+                "youtubeUrl": "",
+                "videoUrl": "/dramas/a-vinganca-do-irmao/ep-15.mp4",
+                "durationSeconds": 120,
+                "isFree": false
+            },
+            {
+                "number": 16,
+                "title": "Episódio 16",
+                "description": "Episódio 16 de A Vingança do Irmão completo e dublado em alta definição.",
+                "youtubeUrl": "",
+                "videoUrl": "/dramas/a-vinganca-do-irmao/ep-16.mp4",
+                "durationSeconds": 120,
+                "isFree": false
+            },
+            {
+                "number": 17,
+                "title": "Episódio 17",
+                "description": "Episódio 17 de A Vingança do Irmão completo e dublado em alta definição.",
+                "youtubeUrl": "",
+                "videoUrl": "/dramas/a-vinganca-do-irmao/ep-17.mp4",
+                "durationSeconds": 120,
+                "isFree": false
+            },
+            {
+                "number": 18,
+                "title": "Episódio 18",
+                "description": "Episódio 18 de A Vingança do Irmão completo e dublado em alta definição.",
+                "youtubeUrl": "",
+                "videoUrl": "/dramas/a-vinganca-do-irmao/ep-18.mp4",
+                "durationSeconds": 120,
+                "isFree": false
+            },
+            {
+                "number": 19,
+                "title": "Episódio 19",
+                "description": "Episódio 19 de A Vingança do Irmão completo e dublado em alta definição.",
+                "youtubeUrl": "",
+                "videoUrl": "/dramas/a-vinganca-do-irmao/ep-19.mp4",
+                "durationSeconds": 120,
+                "isFree": false
+            },
+            {
+                "number": 20,
+                "title": "Episódio 20",
+                "description": "Episódio 20 de A Vingança do Irmão completo e dublado em alta definição.",
+                "youtubeUrl": "",
+                "videoUrl": "/dramas/a-vinganca-do-irmao/ep-20.mp4",
+                "durationSeconds": 120,
+                "isFree": false
+            },
+            {
+                "number": 21,
+                "title": "Episódio 21",
+                "description": "Episódio 21 de A Vingança do Irmão completo e dublado em alta definição.",
+                "youtubeUrl": "",
+                "videoUrl": "/dramas/a-vinganca-do-irmao/ep-21.mp4",
+                "durationSeconds": 120,
+                "isFree": false
+            },
+            {
+                "number": 22,
+                "title": "Episódio 22",
+                "description": "Episódio 22 de A Vingança do Irmão completo e dublado em alta definição.",
+                "youtubeUrl": "",
+                "videoUrl": "/dramas/a-vinganca-do-irmao/ep-22.mp4",
+                "durationSeconds": 68,
+                "isFree": false
             }
         ]
     },
@@ -61,7 +251,7 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         "coverUrl": "/cover-ganhei-tres-namoradas.jpg",
         "bannerUrl": "/cover-ganhei-tres-namoradas.jpg",
         "category": "Dublado",
-        "tags": "dublado,dublada,fantasia,acao,romance,esparta,armas,destaques,em alta",
+        "tags": "dublado,fantasia,acao,romance,esparta,armas,destaques,em alta",
         "totalEpisodes": 60,
         "freeEpisodesCount": 2,
         "isFeatured": true,
@@ -1274,6 +1464,116 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         ]
     },
     {
+        "id": "tdx-herdeira-bilionaria-confronta-seu-marido-assassino",
+        "title": "Herdeira Bilionária Confronta Seu Marido Assassino",
+        "slug": "herdeira-bilionaria-confronta-seu-marido-assassino",
+        "synopsis": "Após descobrir a conspiração letal tramada por seu próprio marido, uma herdeira de bilhões forja a própria fraqueza para desmascará-lo friamente em um confronto de vingança sem precedentes.",
+        "coverUrl": "https://i.ytimg.com/vi/8Kqxta_ALzE/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/8Kqxta_ALzE/maxresdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,bombando,bilionario,vinganca,herdeira,traicao,drama",
+        "totalEpisodes": 3,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 38000,
+        "likesCount": 235378,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Herdeira Bilionária Confronta Seu Marido Assassino completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/8Kqxta_ALzE",
+                "durationSeconds": 676,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Herdeira Bilionária Confronta Seu Marido Assassino completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/UJExg6Dy9yE",
+                "durationSeconds": 1097,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Herdeira Bilionária Confronta Seu Marido Assassino completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/vxjXAWbC0pM",
+                "durationSeconds": 671,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-a-vinganca-da-herdeira-descartada",
+        "title": "A Vingança da Herdeira Descartada",
+        "slug": "a-vinganca-da-herdeira-descartada",
+        "synopsis": "Desprezada, expulsa e dada como derrotada por sua família egoísta, a legítima herdeira retorna triunfante, detendo o poder absoluto para recuperar o império que sempre foi seu por direito.",
+        "coverUrl": "https://i.ytimg.com/vi/6UHsi-m-9uU/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/6UHsi-m-9uU/maxresdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,bombando,vinganca,herdeira,bilionario,drama,destaques",
+        "totalEpisodes": 3,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 35000,
+        "likesCount": 185395,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de A Vingança da Herdeira Descartada completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/6UHsi-m-9uU",
+                "durationSeconds": 891,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de A Vingança da Herdeira Descartada completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Q5TvMwCAxj0",
+                "durationSeconds": 1541,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de A Vingança da Herdeira Descartada completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/j-KYMUEZHD4",
+                "durationSeconds": 988,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-da-favela-ao-trono",
+        "title": "Da Favela ao Trono",
+        "slug": "da-favela-ao-trono",
+        "synopsis": "Nascido nas vielas e moldado pelas dificuldades, um jovem determinado desafia todas as probabilidades e preconceitos para conquistar o topo da alta sociedade e o respeito que sempre mereceu.",
+        "coverUrl": "https://i.ytimg.com/vi/54QkzeojpI0/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/54QkzeojpI0/maxresdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,superacao,favela,trono,sucesso,drama",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 31000,
+        "likesCount": 153300,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Episódio Completo",
+                "description": "Episódio 1 de Da Favela ao Trono completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/54QkzeojpI0",
+                "durationSeconds": 750,
+                "isFree": true
+            }
+        ]
+    },
+    {
         "id": "tdx-agora-podem-beijar-a-noiva",
         "title": "Agora Podem Beijar a Noiva...",
         "slug": "agora-podem-beijar-a-noiva",
@@ -1330,6 +1630,32 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "youtubeUrl": "https://youtu.be/oNJGtIGlddc",
                 "durationSeconds": 1419,
                 "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-forcada-a-tornar-se-noiva-de-um-chefe-gangster-contrato-de-amor",
+        "title": "Forçada a Tornar-se Noiva de um Chefe Gangster: Contrato de Amor",
+        "slug": "forcada-a-tornar-se-noiva-de-um-chefe-gangster-contrato-de-amor",
+        "synopsis": "Para salvar sua família da ruína total, uma jovem inocente assina um contrato irrevogável com o líder mais impiedoso do submundo, dando início a uma convivência carregada de tensão e paixão proibida.",
+        "coverUrl": "https://i.ytimg.com/vi/15E9emKLxIE/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/15E9emKLxIE/maxresdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,mafia,gangster,contrato,casamento-forcado,romance",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 27000,
+        "likesCount": 88900,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Episódio Completo",
+                "description": "Episódio 1 de Forçada a Tornar-se Noiva de um Chefe Gangster: Contrato de Amor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/15E9emKLxIE",
+                "durationSeconds": 1462,
+                "isFree": true
             }
         ]
     },
@@ -1410,6 +1736,66 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         ]
     },
     {
+        "id": "tdx-o-ceo-que-sentiu-minha-gravidez",
+        "title": "O CEO que Sentiu Minha Gravidez",
+        "slug": "o-ceo-que-sentiu-minha-gravidez",
+        "synopsis": "Após uma noite inesquecível e misteriosa, um CEO poderoso e reservado descobre a gravidez oculta da mulher que nunca conseguiu esquecer, iniciando uma busca frenética por seu herdeiro.",
+        "coverUrl": "https://i.ytimg.com/vi/Qgfn7KkK6mc/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/Qgfn7KkK6mc/maxresdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,ceo,gravidez,bebe-secreto,bilionario,romance",
+        "totalEpisodes": 2,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 24000,
+        "likesCount": 68950,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de O CEO que Sentiu Minha Gravidez completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Qgfn7KkK6mc",
+                "durationSeconds": 1162,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de O CEO que Sentiu Minha Gravidez completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/OSqWqLPAP3Q",
+                "durationSeconds": 1174,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-o-limite-do-amor",
+        "title": "O Limite do Amor",
+        "slug": "o-limite-do-amor",
+        "synopsis": "Até onde alguém é capaz de ir em nome da paixão? Quando o orgulho e as convenções sociais colidem, dois corações intensos descobrem que o verdadeiro amor não conhece limites.",
+        "coverUrl": "https://i.ytimg.com/vi/4RMTES4Yddk/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/4RMTES4Yddk/maxresdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,limite-do-amor,romance,paixao,drama,emocao",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 23000,
+        "likesCount": 64750,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Episódio Completo",
+                "description": "Episódio 1 de O Limite do Amor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/4RMTES4Yddk",
+                "durationSeconds": 2195,
+                "isFree": true
+            }
+        ]
+    },
+    {
         "id": "tdx-nao-desafie-a-senhora-bilionaria",
         "title": "Não Desafie a Senhora Bilionária",
         "slug": "nao-desafie-a-senhora-bilionaria",
@@ -1444,6 +1830,74 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         ]
     },
     {
+        "id": "tdx-encontrei-meu-papai-na-obra",
+        "title": "Encontrei Meu Papai na Obra",
+        "slug": "encontrei-meu-papai-na-obra",
+        "synopsis": "Durante uma visita inesperada a um canteiro de obras, uma garotinha de olhos brilhantes reconhece na figura de um trabalhador humilde o homem que é secretamente o homem mais rico do país.",
+        "coverUrl": "https://i.ytimg.com/vi/jfCMBB51J3I/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/jfCMBB51J3I/maxresdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,familia,filha,papai-secreto,emocionante,drama,bilionario-disfarcado",
+        "totalEpisodes": 3,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 21000,
+        "likesCount": 54040,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Encontrei Meu Papai na Obra completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/jfCMBB51J3I",
+                "durationSeconds": 1200,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Encontrei Meu Papai na Obra completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/qyNFetLqMMQ",
+                "durationSeconds": 1187,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Encontrei Meu Papai na Obra completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/1Q1M6tzdK2k",
+                "durationSeconds": 1051,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-casei-com-o-ceo-que-trai-por-detras-das-mentiras-existe-o-amor",
+        "title": "Casei com o CEO que Traí: Por Detrás das Mentiras, Existe o Amor",
+        "slug": "casei-com-o-ceo-que-trai-por-detras-das-mentiras-existe-o-amor",
+        "synopsis": "Marcada pela culpa e envolvida em uma rede de enganos, ela se une em matrimônio ao CEO que no passado prejudicou, descobrindo que sob a frieza de seu olhar ainda arde um amor inextinguível.",
+        "coverUrl": "https://i.ytimg.com/vi/rUqxsSHFHjg/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/rUqxsSHFHjg/maxresdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,ceo,casamento,mentiras,perdao,romance,redencao",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 20000,
+        "likesCount": 53200,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Episódio Completo",
+                "description": "Episódio 1 de Casei com o CEO que Traí: Por Detrás das Mentiras, Existe o Amor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/rUqxsSHFHjg",
+                "durationSeconds": 1529,
+                "isFree": true
+            }
+        ]
+    },
+    {
         "id": "tdx-amor-entre-segredos",
         "title": "Amor Entre Segredos",
         "slug": "amor-entre-segredos",
@@ -1466,6 +1920,74 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "youtubeUrl": "https://youtu.be/zR0beyCx4I8",
                 "durationSeconds": 865,
                 "isFree": true
+            }
+        ]
+    },
+    {
+        "id": "tdx-papai-malvado-voce-ta-frito",
+        "title": "Papai Malvado, Você Tá Frito!",
+        "slug": "papai-malvado-voce-ta-frito",
+        "synopsis": "Determinada a vingar sua mãe e colocar juízo na cabeça do pai magnata que a abandonou, uma criança genial apronta todas as armadilhas para domar o coração do poderoso CEO.",
+        "coverUrl": "https://i.ytimg.com/vi/KFXLb8kWfF0/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/KFXLb8kWfF0/maxresdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,familia,filho-esperto,ceo,comedia-romantica,reconciliacao",
+        "totalEpisodes": 2,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 18500,
+        "likesCount": 35140,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Papai Malvado, Você Tá Frito! completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/KFXLb8kWfF0",
+                "durationSeconds": 881,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Papai Malvado, Você Tá Frito! completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/BUPFrp_5Cls",
+                "durationSeconds": 868,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-o-genio-de-rua-que-salvou-meu-imperio",
+        "title": "O Gênio de Rua que Salvou Meu Império",
+        "slug": "o-genio-de-rua-que-salvou-meu-imperio",
+        "synopsis": "Quando a maior corporação da cidade estava à beira do colapso econômico por traição interna, a mente brilhante de um jovem das ruas se torna a única esperança de salvação do império.",
+        "coverUrl": "https://i.ytimg.com/vi/4eRwbUYL7W8/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/4eRwbUYL7W8/maxresdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,genio,imperio,bilionario,negocios,superacao,drama",
+        "totalEpisodes": 2,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 18000,
+        "likesCount": 32550,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de O Gênio de Rua que Salvou Meu Império completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/4eRwbUYL7W8",
+                "durationSeconds": 1292,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de O Gênio de Rua que Salvou Meu Império completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Yg7kGqNPxpc",
+                "durationSeconds": 1260,
+                "isFree": false
             }
         ]
     },
@@ -1499,6 +2021,160 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "description": "Episódio 2 de A Dama Chefe: Da Traída à Amada completo e dublado em alta definição.",
                 "youtubeUrl": "https://youtu.be/XqjVNN9Db-M",
                 "durationSeconds": 753,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-mamae-eu-trouxe-o-papai-pra-te-salvar",
+        "title": "Mamãe, Eu Trouxe o Papai pra Te Salvar!",
+        "slug": "mamae-eu-trouxe-o-papai-pra-te-salvar",
+        "synopsis": "Cansado de ver sua mãe sofrer injustiças, um menininho corajoso vai até a sede da maior empresa do país para trazer o pai bilionário de volta e salvar a família de uma vez por todas.",
+        "coverUrl": "https://i.ytimg.com/vi/Pe8Eh0emakM/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/Pe8Eh0emakM/maxresdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,crianca-fofa,papai-salvador,resgate,reconciliacao,romance",
+        "totalEpisodes": 2,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 17000,
+        "likesCount": 27650,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Mamãe, Eu Trouxe o Papai pra Te Salvar! completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Pe8Eh0emakM",
+                "durationSeconds": 1531,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Mamãe, Eu Trouxe o Papai pra Te Salvar! completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/YUqXbD_ijxo",
+                "durationSeconds": 1389,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-vinganca-elegante-de-uma-mae-bilionaria",
+        "title": "Vingança Elegante de uma Mãe Bilionária",
+        "slug": "vinganca-elegante-de-uma-mae-bilionaria",
+        "synopsis": "Com classe, inteligência afiada e recursos ilimitados, uma mãe bilionária arquiteta a vingança perfeita contra aqueles que conspiraram contra seu sangue, sem derramar uma única lágrima em vão.",
+        "coverUrl": "https://i.ytimg.com/vi/uaaOa_WTIO0/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/uaaOa_WTIO0/maxresdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,mae-bilionaria,vinganca,luxo,poder,justica",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 16500,
+        "likesCount": 26600,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Episódio Completo",
+                "description": "Episódio 1 de Vingança Elegante de uma Mãe Bilionária completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/uaaOa_WTIO0",
+                "durationSeconds": 1744,
+                "isFree": true
+            }
+        ]
+    },
+    {
+        "id": "tdx-o-100-divorcio-foi-o-seu-maior-erro",
+        "title": "O 100º Divórcio Foi o Seu Maior Erro",
+        "slug": "o-100-divorcio-foi-o-seu-maior-erro",
+        "synopsis": "Ele acreditava que o divórcio seria apenas mais uma formalidade em sua rotina de negócios, mas percebe o tamanho do seu erro no instante em que sua ex-esposa se torna a mulher mais disputada do país.",
+        "coverUrl": "https://i.ytimg.com/vi/VgOkf39MsGQ/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/VgOkf39MsGQ/maxresdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,divorcio,arrependimento,reconquista,drama-conjugal,romance",
+        "totalEpisodes": 2,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 16000,
+        "likesCount": 25340,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de O 100º Divórcio Foi o Seu Maior Erro completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/VgOkf39MsGQ",
+                "durationSeconds": 1500,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de O 100º Divórcio Foi o Seu Maior Erro completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/_IY5igl_FKY",
+                "durationSeconds": 782,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-caminho-para-a-liberdade",
+        "title": "Caminho para a Liberdade",
+        "slug": "caminho-para-a-liberdade",
+        "synopsis": "Um vislumbre emocionante de superação e coragem onde cada segundo conta na luta de uma alma valente para quebrar as correntes da opressão e alcançar a tão sonhada liberdade.",
+        "coverUrl": "https://i.ytimg.com/vi/5ih5sVRjMto/hqdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/5ih5sVRjMto/hqdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,liberdade,emocao,curta,drama",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 15500,
+        "likesCount": 24500,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Episódio Completo",
+                "description": "Episódio 1 de Caminho para a Liberdade completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/5ih5sVRjMto",
+                "durationSeconds": 193,
+                "isFree": true
+            }
+        ]
+    },
+    {
+        "id": "tdx-caso-encerrado-o-retorno-da-rainha-do-direito",
+        "title": "Caso Encerrado: O Retorno da Rainha do Direito",
+        "slug": "caso-encerrado-o-retorno-da-rainha-do-direito",
+        "synopsis": "Conhecida por sua mente cirúrgica nos tribunais, a mais brilhante advogada da nação retorna após anos afastada para assumir o caso mais perigoso da sua carreira e restabelecer a verdade.",
+        "coverUrl": "https://i.ytimg.com/vi/7ogXC5oUWhY/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/7ogXC5oUWhY/maxresdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,advogada,tribunal,retorno-triunfal,justica,drama",
+        "totalEpisodes": 2,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 15000,
+        "likesCount": 23800,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Caso Encerrado: O Retorno da Rainha do Direito completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/7ogXC5oUWhY",
+                "durationSeconds": 1259,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Caso Encerrado: O Retorno da Rainha do Direito completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/_aGao4zEHYA",
+                "durationSeconds": 1254,
                 "isFree": false
             }
         ]
@@ -1541,6 +2217,168 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "description": "Episódio 3 de Casamento Acidental com Meu CEO Pobre completo e dublado em alta definição.",
                 "youtubeUrl": "https://youtu.be/OfcNKbKnabw",
                 "durationSeconds": 634,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-depois-do-termino-casei-com-o-chefao-da-mafia",
+        "title": "Depois do Término, Casei com o Chefão da Máfia",
+        "slug": "depois-do-termino-casei-com-o-chefao-da-mafia",
+        "synopsis": "Logo após ser covardemente descartada por seu ex-noivo arrogante, ela cruza o caminho do chefão da máfia, que lhe oferece sua proteção total, seu império e um casamento irresistível.",
+        "coverUrl": "https://i.ytimg.com/vi/VqCyItFZG2U/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/VqCyItFZG2U/maxresdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,termino,chefao-da-mafia,casamento-inesperado,protecao,perigo",
+        "totalEpisodes": 2,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 14000,
+        "likesCount": 17290,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Depois do Término, Casei com o Chefão da Máfia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/VqCyItFZG2U",
+                "durationSeconds": 1394,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Depois do Término, Casei com o Chefão da Máfia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/XFg40Z9eSis",
+                "durationSeconds": 1392,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-ele-arranjou-uma-amante-e-eu-conquistei-o-ceu",
+        "title": "Ele Arranjou Uma Amante E Eu Conquistei o Céu",
+        "slug": "ele-arranjou-uma-amante-e-eu-conquistei-o-ceu",
+        "synopsis": "Enquanto o marido tolo desfilava publicamente com sua amante fútil, a esposa menosprezada assumia o controle absoluto do mercado internacional, conquistando o mundo com sua genialidade.",
+        "coverUrl": "https://i.ytimg.com/vi/Yc7eG2Zldmw/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/Yc7eG2Zldmw/maxresdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,amante,traicao,sucesso-feminino,volta-por-cima,vinganca",
+        "totalEpisodes": 2,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 13500,
+        "likesCount": 17150,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Ele Arranjou Uma Amante E Eu Conquistei o Céu completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Yc7eG2Zldmw",
+                "durationSeconds": 1654,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Ele Arranjou Uma Amante E Eu Conquistei o Céu completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/y2GWDfmaXTY",
+                "durationSeconds": 1640,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-mae-solteira-casa-acidentalmente-com-bilionario-enquanto-procura-crianca-desapar",
+        "title": "Mãe Solteira Casa Acidentalmente com Bilionário Enquanto Procura Criança Desaparecida",
+        "slug": "mae-solteira-casa-acidentalmente-com-bilionario-enquanto-procura-crianca-desapar",
+        "synopsis": "Em busca desesperada por pistas de seu filho desaparecido, uma mãe corajosa acaba selando um matrimônio de conveniência com um bilionário que guarda as respostas que ela tanto procura.",
+        "coverUrl": "https://i.ytimg.com/vi/LOe6IbAwnyg/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/LOe6IbAwnyg/maxresdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,mae-solteira,bilionario,busca,filho-desaparecido,destino",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 13000,
+        "likesCount": 16800,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Episódio Completo",
+                "description": "Episódio 1 de Mãe Solteira Casa Acidentalmente com Bilionário Enquanto Procura Criança Desaparecida completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/LOe6IbAwnyg",
+                "durationSeconds": 898,
+                "isFree": true
+            }
+        ]
+    },
+    {
+        "id": "tdx-papai-essa-crianca-nem-e-sua",
+        "title": "Papai, Essa Criança Nem É Sua",
+        "slug": "papai-essa-crianca-nem-e-sua",
+        "synopsis": "Em meio a uma tempestade familiar de acusações e testes de DNA manipulados, uma revelação comovente prova que a verdadeira ligação entre pai e filho vai muito além do sangue.",
+        "coverUrl": "https://i.ytimg.com/vi/lJpXnn91VsY/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/lJpXnn91VsY/maxresdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,paternidade,duvida,verdade,familia,revelacao",
+        "totalEpisodes": 2,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 12500,
+        "likesCount": 16438,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Papai, Essa Criança Nem É Sua completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/lJpXnn91VsY",
+                "durationSeconds": 961,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Papai, Essa Criança Nem É Sua completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/bv-sLK1brxU",
+                "durationSeconds": 490,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-ossos-marcados-pela-dor",
+        "title": "Ossos Marcados pela Dor",
+        "slug": "ossos-marcados-pela-dor",
+        "synopsis": "Marcada pelas cicatrizes de um passado doloroso e injusto, ela encontra nos braços de um homem protetor e compreensivo a força necessária para curar as feridas da alma e recomeçar.",
+        "coverUrl": "https://i.ytimg.com/vi/Q-HN04KztIY/maxresdefault.jpg",
+        "bannerUrl": "https://i.ytimg.com/vi/Q-HN04KztIY/maxresdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,dor,superacao,passado-sombrio,amor-e-cura,drama",
+        "totalEpisodes": 2,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 12000,
+        "likesCount": 16100,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Ossos Marcados pela Dor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Q-HN04KztIY",
+                "durationSeconds": 1131,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Ossos Marcados pela Dor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/VcWE48UT-Ds",
+                "durationSeconds": 1170,
                 "isFree": false
             }
         ]
@@ -1893,6 +2731,144 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "description": "Episódio 22 de Corrida para o Meu Coração completo e dublado em alta definição.",
                 "youtubeUrl": "https://youtu.be/SMehkSen-Xs",
                 "durationSeconds": 490,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-minha-cura-comeca-com-ela",
+        "title": "Minha Cura Começa com Ela",
+        "slug": "minha-cura-comeca-com-ela",
+        "synopsis": "Ferido pelo passado e desacreditado do amor, um homem poderoso descobre na gentileza e força de uma mulher o verdadeiro caminho para a redenção.",
+        "coverUrl": "https://img.youtube.com/vi/ouyG-_dm86g/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/ouyG-_dm86g/hqdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,bombando,tendencias,romance,drama",
+        "totalEpisodes": 15,
+        "freeEpisodesCount": 1,
+        "isFeatured": true,
+        "isVertical": true,
+        "viewsCount": 710000,
+        "likesCount": 4259,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Minha Cura Começa com Ela completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/ouyG-_dm86g",
+                "durationSeconds": 1142,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Minha Cura Começa com Ela completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/EDIZ-dSCcs8",
+                "durationSeconds": 1137,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Minha Cura Começa com Ela completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/5nzT6noh3zo",
+                "durationSeconds": 1274,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Minha Cura Começa com Ela completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/qaunJuAqKM4",
+                "durationSeconds": 1014,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de Minha Cura Começa com Ela completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/g0tf1b-cYXM",
+                "durationSeconds": 1082,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de Minha Cura Começa com Ela completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/XilJu6-FOhI",
+                "durationSeconds": 1171,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de Minha Cura Começa com Ela completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/0-aTwQBQsXw",
+                "durationSeconds": 1281,
+                "isFree": false
+            },
+            {
+                "number": 8,
+                "title": "Parte 8",
+                "description": "Episódio 8 de Minha Cura Começa com Ela completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/L6ixni7YbtQ",
+                "durationSeconds": 1193,
+                "isFree": false
+            },
+            {
+                "number": 9,
+                "title": "Parte 9",
+                "description": "Episódio 9 de Minha Cura Começa com Ela completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/xc-EQucTerk",
+                "durationSeconds": 1193,
+                "isFree": false
+            },
+            {
+                "number": 10,
+                "title": "Parte 10",
+                "description": "Episódio 10 de Minha Cura Começa com Ela completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/35BQn5D4EVY",
+                "durationSeconds": 1043,
+                "isFree": false
+            },
+            {
+                "number": 11,
+                "title": "Parte 11",
+                "description": "Episódio 11 de Minha Cura Começa com Ela completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Hu4R1jcRN_U",
+                "durationSeconds": 1134,
+                "isFree": false
+            },
+            {
+                "number": 12,
+                "title": "Parte 12",
+                "description": "Episódio 12 de Minha Cura Começa com Ela completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/CGVlETzgsFc",
+                "durationSeconds": 1139,
+                "isFree": false
+            },
+            {
+                "number": 13,
+                "title": "Parte 13",
+                "description": "Episódio 13 de Minha Cura Começa com Ela completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/rd8hmgZoN20",
+                "durationSeconds": 1203,
+                "isFree": false
+            },
+            {
+                "number": 14,
+                "title": "Parte 14",
+                "description": "Episódio 14 de Minha Cura Começa com Ela completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/d9bnhksTy2w",
+                "durationSeconds": 952,
+                "isFree": false
+            },
+            {
+                "number": 15,
+                "title": "Parte 15",
+                "description": "Episódio 15 de Minha Cura Começa com Ela completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/xupMPMQf2zA",
+                "durationSeconds": 1116,
                 "isFree": false
             }
         ]
@@ -2578,6 +3554,32 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         ]
     },
     {
+        "id": "tdx-um-bilionario-uma-noiva-falsa-um-bebe-inesperado-e-um-amor-que-nenhum-dos-d",
+        "title": "Um bilionário, uma noiva falsa, um bebê inesperado — e um amor que nenhum dos dois viu chegar.",
+        "slug": "um-bilionario-uma-noiva-falsa-um-bebe-inesperado-e-um-amor-que-nenhum-dos-d",
+        "synopsis": "Um poderoso magnata acostumado a comandar impérios descobre que o verdadeiro amor não tem preço quando seu destino cruza com uma mulher destemida em Um bilionário, uma noiva falsa, um bebê inesperado — e um amor que nenhum dos dois viu chegar..",
+        "coverUrl": "https://img.youtube.com/vi/CCX-X2TOW6w/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/CCX-X2TOW6w/hqdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,bombando,tendencias,bilionario,ceo,luxo,casamento-arranjado,romance,drama",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": true,
+        "isVertical": true,
+        "viewsCount": 34223,
+        "likesCount": 11978,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Um bilionário, uma noiva falsa, um bebê inesperado — e um amor que nenhum dos dois viu chegar. completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/CCX-X2TOW6w",
+                "durationSeconds": 4320,
+                "isFree": true
+            }
+        ]
+    },
+    {
         "id": "tdx-quando-nos-reencontrarmos",
         "title": "Quando Nos Reencontrarmos",
         "slug": "quando-nos-reencontrarmos",
@@ -2727,6 +3729,272 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "description": "Episódio 17 de Quando Nos Reencontrarmos completo e dublado em alta definição.",
                 "youtubeUrl": "https://youtu.be/YlMpN7eVlik",
                 "durationSeconds": 689,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-o-bebado-sem-lobo-rorin",
+        "title": "O Bêbado Sem Lobo (Rorin)",
+        "slug": "o-bebado-sem-lobo-rorin",
+        "synopsis": "Rejeitado pela alcatéia e desacreditado por todos, Rorin descobre uma força oculta que desafiará a própria hierarquia dos lobos.",
+        "coverUrl": "https://img.youtube.com/vi/1Y7TfQtPDMk/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/1Y7TfQtPDMk/hqdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,bombando,tendencias,fantasia,sobrenatural,romance,drama",
+        "totalEpisodes": 31,
+        "freeEpisodesCount": 1,
+        "isFeatured": true,
+        "isVertical": true,
+        "viewsCount": 980000,
+        "likesCount": 7925,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/1Y7TfQtPDMk",
+                "durationSeconds": 591,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/XJ666WDzZwc",
+                "durationSeconds": 2170,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/eTfntEVORbM",
+                "durationSeconds": 2176,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Oq1Y2ZuJ3SE",
+                "durationSeconds": 2010,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/xAjcKBFSrwE",
+                "durationSeconds": 272,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/CeejbH3-zdU",
+                "durationSeconds": 929,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/jLR93xBiAMI",
+                "durationSeconds": 2163,
+                "isFree": false
+            },
+            {
+                "number": 8,
+                "title": "Parte 8",
+                "description": "Episódio 8 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/yP_ZsVkvk0Y",
+                "durationSeconds": 269,
+                "isFree": false
+            },
+            {
+                "number": 9,
+                "title": "Parte 9",
+                "description": "Episódio 9 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/ZkUsxlV6SVk",
+                "durationSeconds": 272,
+                "isFree": false
+            },
+            {
+                "number": 10,
+                "title": "Parte 10",
+                "description": "Episódio 10 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/a5f-8NQVNcw",
+                "durationSeconds": 938,
+                "isFree": false
+            },
+            {
+                "number": 11,
+                "title": "Parte 11",
+                "description": "Episódio 11 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/SjHhG8e-kXY",
+                "durationSeconds": 271,
+                "isFree": false
+            },
+            {
+                "number": 12,
+                "title": "Parte 12",
+                "description": "Episódio 12 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/sphd0UnRu_c",
+                "durationSeconds": 1240,
+                "isFree": false
+            },
+            {
+                "number": 13,
+                "title": "Parte 13",
+                "description": "Episódio 13 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/S_tnPUTp0p4",
+                "durationSeconds": 2170,
+                "isFree": false
+            },
+            {
+                "number": 14,
+                "title": "Parte 14",
+                "description": "Episódio 14 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/78QktSrK5IU",
+                "durationSeconds": 2228,
+                "isFree": false
+            },
+            {
+                "number": 15,
+                "title": "Parte 15",
+                "description": "Episódio 15 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/2pe4DQmUzsU",
+                "durationSeconds": 250,
+                "isFree": false
+            },
+            {
+                "number": 16,
+                "title": "Parte 16",
+                "description": "Episódio 16 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Pvo4-3aImzE",
+                "durationSeconds": 2170,
+                "isFree": false
+            },
+            {
+                "number": 17,
+                "title": "Parte 17",
+                "description": "Episódio 17 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Np4pHNU8QNw",
+                "durationSeconds": 2189,
+                "isFree": false
+            },
+            {
+                "number": 18,
+                "title": "Parte 18",
+                "description": "Episódio 18 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/keMRS0ZijcQ",
+                "durationSeconds": 1672,
+                "isFree": false
+            },
+            {
+                "number": 19,
+                "title": "Parte 19",
+                "description": "Episódio 19 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/nbGPSRkt_oA",
+                "durationSeconds": 181,
+                "isFree": false
+            },
+            {
+                "number": 20,
+                "title": "Parte 20",
+                "description": "Episódio 20 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/CSY1iMPdaTE",
+                "durationSeconds": 590,
+                "isFree": false
+            },
+            {
+                "number": 21,
+                "title": "Parte 21",
+                "description": "Episódio 21 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/BcvBLzRUznk",
+                "durationSeconds": 1262,
+                "isFree": false
+            },
+            {
+                "number": 22,
+                "title": "Parte 22",
+                "description": "Episódio 22 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cPPODD1l8GA",
+                "durationSeconds": 938,
+                "isFree": false
+            },
+            {
+                "number": 23,
+                "title": "Parte 23",
+                "description": "Episódio 23 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Vb15cZ-hw34",
+                "durationSeconds": 1122,
+                "isFree": false
+            },
+            {
+                "number": 24,
+                "title": "Parte 24",
+                "description": "Episódio 24 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/St3RDIqXbCM",
+                "durationSeconds": 2363,
+                "isFree": false
+            },
+            {
+                "number": 25,
+                "title": "Parte 25",
+                "description": "Episódio 25 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/5TSBSHhtZYM",
+                "durationSeconds": 2170,
+                "isFree": false
+            },
+            {
+                "number": 26,
+                "title": "Parte 26",
+                "description": "Episódio 26 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/P3T1hL8XbMM",
+                "durationSeconds": 1809,
+                "isFree": false
+            },
+            {
+                "number": 27,
+                "title": "Parte 27",
+                "description": "Episódio 27 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/1A7x3bOzOW8",
+                "durationSeconds": 611,
+                "isFree": false
+            },
+            {
+                "number": 28,
+                "title": "Parte 28",
+                "description": "Episódio 28 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/icybl3fVKqs",
+                "durationSeconds": 2010,
+                "isFree": false
+            },
+            {
+                "number": 29,
+                "title": "Parte 29",
+                "description": "Episódio 29 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/1HpbzEP4Mtw",
+                "durationSeconds": 938,
+                "isFree": false
+            },
+            {
+                "number": 30,
+                "title": "Parte 30",
+                "description": "Episódio 30 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/V2J-37Zfp2U",
+                "durationSeconds": 2170,
+                "isFree": false
+            },
+            {
+                "number": 31,
+                "title": "Parte 31",
+                "description": "Episódio 31 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Qbp2bsCW1oY",
+                "durationSeconds": 250,
                 "isFree": false
             }
         ]
@@ -3082,6 +4350,444 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         ]
     },
     {
+        "id": "tdx-meu-rival-no-gelo",
+        "title": "Meu Rival no Gelo",
+        "slug": "meu-rival-no-gelo",
+        "synopsis": "Acompanhe a emocionante história de Meu Rival no Gelo, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/YVBaEG0jrn8/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/YVBaEG0jrn8/hqdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,bombando,tendencias,romance,drama",
+        "totalEpisodes": 7,
+        "freeEpisodesCount": 1,
+        "isFeatured": true,
+        "isVertical": true,
+        "viewsCount": 34255,
+        "likesCount": 11989,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Meu Rival no Gelo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/YVBaEG0jrn8",
+                "durationSeconds": 248,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Meu Rival no Gelo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/pmcMbVFw1vY",
+                "durationSeconds": 249,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Meu Rival no Gelo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/-gDXC8ig0rM",
+                "durationSeconds": 803,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Meu Rival no Gelo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/d9UvW-xIcDE",
+                "durationSeconds": 303,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de Meu Rival no Gelo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/8zu87ktlfg4",
+                "durationSeconds": 476,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de Meu Rival no Gelo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/sGitYQbawqw",
+                "durationSeconds": 590,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de Meu Rival no Gelo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/BnjMx4LblUM",
+                "durationSeconds": 249,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-amor-em-jogo-com-o-bilionario",
+        "title": "Amor em Jogo com o Bilionário",
+        "slug": "amor-em-jogo-com-o-bilionario",
+        "synopsis": "Um poderoso magnata acostumado a comandar impérios descobre que o verdadeiro amor não tem preço quando seu destino cruza com uma mulher destemida em Amor em Jogo com o Bilionário.",
+        "coverUrl": "https://img.youtube.com/vi/VjMR6eVQP6U/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/VjMR6eVQP6U/hqdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,bombando,tendencias,bilionario,ceo,luxo,romance,drama",
+        "totalEpisodes": 18,
+        "freeEpisodesCount": 1,
+        "isFeatured": true,
+        "isVertical": true,
+        "viewsCount": 1150000,
+        "likesCount": 8892,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/VjMR6eVQP6U",
+                "durationSeconds": 738,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/tOdHCUgZWWE",
+                "durationSeconds": 701,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/B1DeLIlFHsk",
+                "durationSeconds": 722,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/0EnnBwozbXw",
+                "durationSeconds": 649,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/miF6XB1y0oo",
+                "durationSeconds": 858,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/awjnV7bvV-8",
+                "durationSeconds": 769,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/M2JKNNUXSdc",
+                "durationSeconds": 609,
+                "isFree": false
+            },
+            {
+                "number": 8,
+                "title": "Parte 8",
+                "description": "Episódio 8 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/wC6iyFZta_M",
+                "durationSeconds": 834,
+                "isFree": false
+            },
+            {
+                "number": 9,
+                "title": "Parte 9",
+                "description": "Episódio 9 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Wh4-SQPjr8Y",
+                "durationSeconds": 858,
+                "isFree": false
+            },
+            {
+                "number": 10,
+                "title": "Parte 10",
+                "description": "Episódio 10 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/2fUtjsyKlA4",
+                "durationSeconds": 846,
+                "isFree": false
+            },
+            {
+                "number": 11,
+                "title": "Parte 11",
+                "description": "Episódio 11 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/SYrN059Gi8k",
+                "durationSeconds": 839,
+                "isFree": false
+            },
+            {
+                "number": 12,
+                "title": "Parte 12",
+                "description": "Episódio 12 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Kth2uAPRx_I",
+                "durationSeconds": 365,
+                "isFree": false
+            },
+            {
+                "number": 13,
+                "title": "Parte 13",
+                "description": "Episódio 13 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/6qP7bXpjJKU",
+                "durationSeconds": 858,
+                "isFree": false
+            },
+            {
+                "number": 14,
+                "title": "Parte 14",
+                "description": "Episódio 14 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/T9Bicrs0DGM",
+                "durationSeconds": 808,
+                "isFree": false
+            },
+            {
+                "number": 15,
+                "title": "Parte 15",
+                "description": "Episódio 15 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/J-xT0vsCd5M",
+                "durationSeconds": 841,
+                "isFree": false
+            },
+            {
+                "number": 16,
+                "title": "Parte 16",
+                "description": "Episódio 16 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/6utYt0Bhfds",
+                "durationSeconds": 867,
+                "isFree": false
+            },
+            {
+                "number": 17,
+                "title": "Parte 17",
+                "description": "Episódio 17 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/0t_3N4zXAXc",
+                "durationSeconds": 729,
+                "isFree": false
+            },
+            {
+                "number": 18,
+                "title": "Parte 18",
+                "description": "Episódio 18 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/dZKp_K_HnuI",
+                "durationSeconds": 872,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-noiva-virgem-do-alfa",
+        "title": "Noiva Virgem do Alfa",
+        "slug": "noiva-virgem-do-alfa",
+        "synopsis": "Lendas ancestrais, vínculos eternos de almas gêmeas e batalhas ferozes pelo trono supremo revelam os maiores mistérios em Noiva Virgem do Alfa.",
+        "coverUrl": "https://img.youtube.com/vi/x8cmk6_aPHc/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/x8cmk6_aPHc/hqdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,bombando,tendencias,fantasia,sobrenatural,casamento-arranjado,romance,drama",
+        "totalEpisodes": 23,
+        "freeEpisodesCount": 1,
+        "isFeatured": true,
+        "isVertical": true,
+        "viewsCount": 1240000,
+        "likesCount": 5594,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Noiva Virgem do Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/x8cmk6_aPHc",
+                "durationSeconds": 728,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Noiva Virgem do Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/GVelleFMRqU",
+                "durationSeconds": 665,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Noiva Virgem do Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/u6b3XVXcfNc",
+                "durationSeconds": 728,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Noiva Virgem do Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/FtkAYFMqQ5w",
+                "durationSeconds": 528,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de Noiva Virgem do Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Wj9xQV3ot0k",
+                "durationSeconds": 528,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de Noiva Virgem do Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/f8yLEuFWCkg",
+                "durationSeconds": 410,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de Noiva Virgem do Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Ip0v0YYxZS0",
+                "durationSeconds": 293,
+                "isFree": false
+            },
+            {
+                "number": 8,
+                "title": "Parte 8",
+                "description": "Episódio 8 de Noiva Virgem do Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/YBVqcGetCgw",
+                "durationSeconds": 927,
+                "isFree": false
+            },
+            {
+                "number": 9,
+                "title": "Parte 9",
+                "description": "Episódio 9 de Noiva Virgem do Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Knb50Jq4FPE",
+                "durationSeconds": 639,
+                "isFree": false
+            },
+            {
+                "number": 10,
+                "title": "Parte 10",
+                "description": "Episódio 10 de Noiva Virgem do Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/lxaPCBzR6sw",
+                "durationSeconds": 392,
+                "isFree": false
+            },
+            {
+                "number": 11,
+                "title": "Parte 11",
+                "description": "Episódio 11 de Noiva Virgem do Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/CV2RcLVjZ_8",
+                "durationSeconds": 843,
+                "isFree": false
+            },
+            {
+                "number": 12,
+                "title": "Parte 12",
+                "description": "Episódio 12 de Noiva Virgem do Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/tPv-ILWTYrY",
+                "durationSeconds": 867,
+                "isFree": false
+            },
+            {
+                "number": 13,
+                "title": "Parte 13",
+                "description": "Episódio 13 de Noiva Virgem do Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/rEMbEemoNaE",
+                "durationSeconds": 300,
+                "isFree": false
+            },
+            {
+                "number": 14,
+                "title": "Parte 14",
+                "description": "Episódio 14 de Noiva Virgem do Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/JgIPUogUDzc",
+                "durationSeconds": 755,
+                "isFree": false
+            },
+            {
+                "number": 15,
+                "title": "Parte 15",
+                "description": "Episódio 15 de Noiva Virgem do Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Ywx0HJBDNI4",
+                "durationSeconds": 300,
+                "isFree": false
+            },
+            {
+                "number": 16,
+                "title": "Parte 16",
+                "description": "Episódio 16 de Noiva Virgem do Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/QItEnSvBArQ",
+                "durationSeconds": 182,
+                "isFree": false
+            },
+            {
+                "number": 17,
+                "title": "Parte 17",
+                "description": "Episódio 17 de Noiva Virgem do Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/jbzVoHL4URA",
+                "durationSeconds": 989,
+                "isFree": false
+            },
+            {
+                "number": 18,
+                "title": "Parte 18",
+                "description": "Episódio 18 de Noiva Virgem do Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Bqnl6iB9f8M",
+                "durationSeconds": 916,
+                "isFree": false
+            },
+            {
+                "number": 19,
+                "title": "Parte 19",
+                "description": "Episódio 19 de Noiva Virgem do Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/0mF7uVGHTQY",
+                "durationSeconds": 736,
+                "isFree": false
+            },
+            {
+                "number": 20,
+                "title": "Parte 20",
+                "description": "Episódio 20 de Noiva Virgem do Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/TUnO59nyOAk",
+                "durationSeconds": 672,
+                "isFree": false
+            },
+            {
+                "number": 21,
+                "title": "Parte 21",
+                "description": "Episódio 21 de Noiva Virgem do Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/QFUdnN25Uro",
+                "durationSeconds": 825,
+                "isFree": false
+            },
+            {
+                "number": 22,
+                "title": "Parte 22",
+                "description": "Episódio 22 de Noiva Virgem do Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/GY1mfnaGcJw",
+                "durationSeconds": 1016,
+                "isFree": false
+            },
+            {
+                "number": 23,
+                "title": "Parte 23",
+                "description": "Episódio 23 de Noiva Virgem do Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/prMsYT0Aswg",
+                "durationSeconds": 896,
+                "isFree": false
+            }
+        ]
+    },
+    {
         "id": "tdx-natal-despertar-eu-vejo-tudo",
         "title": "Natal Despertar: Eu Vejo Tudo",
         "slug": "natal-despertar-eu-vejo-tudo",
@@ -3387,6 +5093,442 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "description": "Episódio 5 de O Brilho por Trás do Disfarce completo e dublado em alta definição.",
                 "youtubeUrl": "https://youtu.be/PJFkq8I5PJc",
                 "durationSeconds": 1973,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-no-leito-da-vinganca",
+        "title": "No Leito da Vingança",
+        "slug": "no-leito-da-vinganca",
+        "synopsis": "Humilhado no passado, o retorno triunfal para cobrar cada dívida e proteger quem ama abala as estruturas de todos os traidores em No Leito da Vingança.",
+        "coverUrl": "https://img.youtube.com/vi/kVnEpJNxFcY/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/kVnEpJNxFcY/hqdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,bombando,tendencias,vinganca,poder,romance,drama",
+        "totalEpisodes": 31,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 32236,
+        "likesCount": 11282,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de No Leito da Vingança completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/kVnEpJNxFcY",
+                "durationSeconds": 1198,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de No Leito da Vingança completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Ymu-LerrcO0",
+                "durationSeconds": 1523,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de No Leito da Vingança completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/bGGqgF2d31M",
+                "durationSeconds": 569,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de No Leito da Vingança completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/RInTA07AhKg",
+                "durationSeconds": 1506,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de No Leito da Vingança completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/FCq3QbV2Su0",
+                "durationSeconds": 433,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de No Leito da Vingança completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/IbV1oFEaoZY",
+                "durationSeconds": 1575,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de No Leito da Vingança completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/RsoIb83wsrI",
+                "durationSeconds": 508,
+                "isFree": false
+            },
+            {
+                "number": 8,
+                "title": "Parte 8",
+                "description": "Episódio 8 de No Leito da Vingança completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/xBtbbr5yBD4",
+                "durationSeconds": 1358,
+                "isFree": false
+            },
+            {
+                "number": 9,
+                "title": "Parte 9",
+                "description": "Episódio 9 de No Leito da Vingança completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/onf2t39nMZI",
+                "durationSeconds": 221,
+                "isFree": false
+            },
+            {
+                "number": 10,
+                "title": "Parte 10",
+                "description": "Episódio 10 de No Leito da Vingança completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/PvX91PNyNKs",
+                "durationSeconds": 521,
+                "isFree": false
+            },
+            {
+                "number": 11,
+                "title": "Parte 11",
+                "description": "Episódio 11 de No Leito da Vingança completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/ic_EPA0glwc",
+                "durationSeconds": 1553,
+                "isFree": false
+            },
+            {
+                "number": 12,
+                "title": "Parte 12",
+                "description": "Episódio 12 de No Leito da Vingança completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/svhN6DqqzqI",
+                "durationSeconds": 3010,
+                "isFree": false
+            },
+            {
+                "number": 13,
+                "title": "Parte 13",
+                "description": "Episódio 13 de No Leito da Vingança completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/PY8W8fplckw",
+                "durationSeconds": 1284,
+                "isFree": false
+            },
+            {
+                "number": 14,
+                "title": "Parte 14",
+                "description": "Episódio 14 de No Leito da Vingança completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/r5fbNVeWAy0",
+                "durationSeconds": 1512,
+                "isFree": false
+            },
+            {
+                "number": 15,
+                "title": "Parte 15",
+                "description": "Episódio 15 de No Leito da Vingança completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/vZRih4V1nbE",
+                "durationSeconds": 741,
+                "isFree": false
+            },
+            {
+                "number": 16,
+                "title": "Parte 16",
+                "description": "Episódio 16 de No Leito da Vingança completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/31-tYU5sgHU",
+                "durationSeconds": 1534,
+                "isFree": false
+            },
+            {
+                "number": 17,
+                "title": "Parte 17",
+                "description": "Episódio 17 de No Leito da Vingança completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/JJCroHcnhMU",
+                "durationSeconds": 1523,
+                "isFree": false
+            },
+            {
+                "number": 18,
+                "title": "Parte 18",
+                "description": "Episódio 18 de No Leito da Vingança completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/tQSkI7ewqRE",
+                "durationSeconds": 1327,
+                "isFree": false
+            },
+            {
+                "number": 19,
+                "title": "Parte 19",
+                "description": "Episódio 19 de No Leito da Vingança completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/V9kXXcV1bzs",
+                "durationSeconds": 1527,
+                "isFree": false
+            },
+            {
+                "number": 20,
+                "title": "Parte 20",
+                "description": "Episódio 20 de No Leito da Vingança completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/h9YZPaZMT6c",
+                "durationSeconds": 1525,
+                "isFree": false
+            },
+            {
+                "number": 21,
+                "title": "Parte 21",
+                "description": "Episódio 21 de No Leito da Vingança completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/U8v323GGr8g",
+                "durationSeconds": 1453,
+                "isFree": false
+            },
+            {
+                "number": 22,
+                "title": "Parte 22",
+                "description": "Episódio 22 de No Leito da Vingança completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/D-Ss0MK-hx4",
+                "durationSeconds": 1470,
+                "isFree": false
+            },
+            {
+                "number": 23,
+                "title": "Parte 23",
+                "description": "Episódio 23 de No Leito da Vingança completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/7jRPjATlE9c",
+                "durationSeconds": 685,
+                "isFree": false
+            },
+            {
+                "number": 24,
+                "title": "Parte 24",
+                "description": "Episódio 24 de No Leito da Vingança completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/syuyPko3EyY",
+                "durationSeconds": 1472,
+                "isFree": false
+            },
+            {
+                "number": 25,
+                "title": "Parte 25",
+                "description": "Episódio 25 de No Leito da Vingança completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/6M4Y4wcKJR0",
+                "durationSeconds": 535,
+                "isFree": false
+            },
+            {
+                "number": 26,
+                "title": "Parte 26",
+                "description": "Episódio 26 de No Leito da Vingança completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/9prghb_8Yyg",
+                "durationSeconds": 1249,
+                "isFree": false
+            },
+            {
+                "number": 27,
+                "title": "Parte 27",
+                "description": "Episódio 27 de No Leito da Vingança completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/K9JL699bin4",
+                "durationSeconds": 418,
+                "isFree": false
+            },
+            {
+                "number": 28,
+                "title": "Parte 28",
+                "description": "Episódio 28 de No Leito da Vingança completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/zyzneZNGUjw",
+                "durationSeconds": 1327,
+                "isFree": false
+            },
+            {
+                "number": 29,
+                "title": "Parte 29",
+                "description": "Episódio 29 de No Leito da Vingança completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/L_eeXVHhvzw",
+                "durationSeconds": 1546,
+                "isFree": false
+            },
+            {
+                "number": 30,
+                "title": "Parte 30",
+                "description": "Episódio 30 de No Leito da Vingança completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/ouTYEh-G2LM",
+                "durationSeconds": 1522,
+                "isFree": false
+            },
+            {
+                "number": 31,
+                "title": "Parte 31",
+                "description": "Episódio 31 de No Leito da Vingança completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/exdNcIcv8ug",
+                "durationSeconds": 1506,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-beijo-que-expoe-tudo",
+        "title": "Beijo que Expõe Tudo",
+        "slug": "beijo-que-expoe-tudo",
+        "synopsis": "Acompanhe a emocionante história de Beijo que Expõe Tudo, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/1sDlRQYfH5U/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/1sDlRQYfH5U/hqdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,romance,drama",
+        "totalEpisodes": 19,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 30253,
+        "likesCount": 10588,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Beijo que Expõe Tudo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/1sDlRQYfH5U",
+                "durationSeconds": 1465,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Beijo que Expõe Tudo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/zNT5BU4MJdA",
+                "durationSeconds": 283,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Beijo que Expõe Tudo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/FZOehmcdBgQ",
+                "durationSeconds": 964,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Beijo que Expõe Tudo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/pQTa0nnud_g",
+                "durationSeconds": 1122,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de Beijo que Expõe Tudo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/RHPgQvuLogo",
+                "durationSeconds": 717,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de Beijo que Expõe Tudo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/8BYFu-JBhD8",
+                "durationSeconds": 645,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de Beijo que Expõe Tudo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/p3SciU30P_Q",
+                "durationSeconds": 539,
+                "isFree": false
+            },
+            {
+                "number": 8,
+                "title": "Parte 8",
+                "description": "Episódio 8 de Beijo que Expõe Tudo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/qIbUSu7tC78",
+                "durationSeconds": 817,
+                "isFree": false
+            },
+            {
+                "number": 9,
+                "title": "Parte 9",
+                "description": "Episódio 9 de Beijo que Expõe Tudo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/vzSnSX_1CtM",
+                "durationSeconds": 819,
+                "isFree": false
+            },
+            {
+                "number": 10,
+                "title": "Parte 10",
+                "description": "Episódio 10 de Beijo que Expõe Tudo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/eqZ8mJvMd4Y",
+                "durationSeconds": 861,
+                "isFree": false
+            },
+            {
+                "number": 11,
+                "title": "Parte 11",
+                "description": "Episódio 11 de Beijo que Expõe Tudo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/IgFWvgHpJ4w",
+                "durationSeconds": 1529,
+                "isFree": false
+            },
+            {
+                "number": 12,
+                "title": "Parte 12",
+                "description": "Episódio 12 de Beijo que Expõe Tudo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/DWsQp655tzI",
+                "durationSeconds": 733,
+                "isFree": false
+            },
+            {
+                "number": 13,
+                "title": "Parte 13",
+                "description": "Episódio 13 de Beijo que Expõe Tudo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Zx_Y5GLrHNY",
+                "durationSeconds": 263,
+                "isFree": false
+            },
+            {
+                "number": 14,
+                "title": "Parte 14",
+                "description": "Episódio 14 de Beijo que Expõe Tudo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/QkYIIWYP0vw",
+                "durationSeconds": 1513,
+                "isFree": false
+            },
+            {
+                "number": 15,
+                "title": "Parte 15",
+                "description": "Episódio 15 de Beijo que Expõe Tudo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/aXFcJnSNPO0",
+                "durationSeconds": 804,
+                "isFree": false
+            },
+            {
+                "number": 16,
+                "title": "Parte 16",
+                "description": "Episódio 16 de Beijo que Expõe Tudo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/OTi-8dc21Sw",
+                "durationSeconds": 889,
+                "isFree": false
+            },
+            {
+                "number": 17,
+                "title": "Parte 17",
+                "description": "Episódio 17 de Beijo que Expõe Tudo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/HWoSmxXQjhs",
+                "durationSeconds": 1751,
+                "isFree": false
+            },
+            {
+                "number": 18,
+                "title": "Parte 18",
+                "description": "Episódio 18 de Beijo que Expõe Tudo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/FCBv0tckdRw",
+                "durationSeconds": 789,
+                "isFree": false
+            },
+            {
+                "number": 19,
+                "title": "Parte 19",
+                "description": "Episódio 19 de Beijo que Expõe Tudo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Sk-1h9TKCwI",
+                "durationSeconds": 795,
                 "isFree": false
             }
         ]
@@ -3820,6 +5962,272 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         ]
     },
     {
+        "id": "tdx-voo-para-o-amor-i",
+        "title": "Voo para o Amor I",
+        "slug": "voo-para-o-amor-i",
+        "synopsis": "Marcados por feridas do passado, duas vidas encontram no afeto e na cumplicidade o caminho para a redenção e a felicidade em Voo para o Amor I.",
+        "coverUrl": "https://img.youtube.com/vi/-vgVIWDhqfM/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/-vgVIWDhqfM/hqdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,romance,drama",
+        "totalEpisodes": 31,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 32045,
+        "likesCount": 11215,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Voo para o Amor I completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/-vgVIWDhqfM",
+                "durationSeconds": 901,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Voo para o Amor I completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/o5BkRdOht_0",
+                "durationSeconds": 901,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Voo para o Amor I completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/vT6wW0SRoqk",
+                "durationSeconds": 1044,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Voo para o Amor I completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/U-bFeS0mf3o",
+                "durationSeconds": 510,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de Voo para o Amor I completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/9GrMIwrTtW8",
+                "durationSeconds": 598,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de Voo para o Amor I completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/RNW93YmuNCo",
+                "durationSeconds": 834,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de Voo para o Amor I completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/edxhsAbgVmc",
+                "durationSeconds": 845,
+                "isFree": false
+            },
+            {
+                "number": 8,
+                "title": "Parte 8",
+                "description": "Episódio 8 de Voo para o Amor I completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/O-ynoWDgr6g",
+                "durationSeconds": 235,
+                "isFree": false
+            },
+            {
+                "number": 9,
+                "title": "Parte 9",
+                "description": "Episódio 9 de Voo para o Amor I completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/EBND_wZgy5M",
+                "durationSeconds": 566,
+                "isFree": false
+            },
+            {
+                "number": 10,
+                "title": "Parte 10",
+                "description": "Episódio 10 de Voo para o Amor I completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/GIK1VyL4SKI",
+                "durationSeconds": 417,
+                "isFree": false
+            },
+            {
+                "number": 11,
+                "title": "Parte 11",
+                "description": "Episódio 11 de Voo para o Amor I completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/p9cylmEffIA",
+                "durationSeconds": 298,
+                "isFree": false
+            },
+            {
+                "number": 12,
+                "title": "Parte 12",
+                "description": "Episódio 12 de Voo para o Amor I completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/2U4lBjwrCcU",
+                "durationSeconds": 233,
+                "isFree": false
+            },
+            {
+                "number": 13,
+                "title": "Parte 13",
+                "description": "Episódio 13 de Voo para o Amor I completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/GInlTRJMx5s",
+                "durationSeconds": 660,
+                "isFree": false
+            },
+            {
+                "number": 14,
+                "title": "Parte 14",
+                "description": "Episódio 14 de Voo para o Amor I completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/967HQtp0BGo",
+                "durationSeconds": 1410,
+                "isFree": false
+            },
+            {
+                "number": 15,
+                "title": "Parte 15",
+                "description": "Episódio 15 de Voo para o Amor I completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/xKZSnethoH0",
+                "durationSeconds": 660,
+                "isFree": false
+            },
+            {
+                "number": 16,
+                "title": "Parte 16",
+                "description": "Episódio 16 de Voo para o Amor I completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/0COV1UOTfwQ",
+                "durationSeconds": 485,
+                "isFree": false
+            },
+            {
+                "number": 17,
+                "title": "Parte 17",
+                "description": "Episódio 17 de Voo para o Amor I completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/wnk1aK5KcQA",
+                "durationSeconds": 947,
+                "isFree": false
+            },
+            {
+                "number": 18,
+                "title": "Parte 18",
+                "description": "Episódio 18 de Voo para o Amor I completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/iB7KvSzU28A",
+                "durationSeconds": 273,
+                "isFree": false
+            },
+            {
+                "number": 19,
+                "title": "Parte 19",
+                "description": "Episódio 19 de Voo para o Amor I completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/wiLs8Bv_hHA",
+                "durationSeconds": 1069,
+                "isFree": false
+            },
+            {
+                "number": 20,
+                "title": "Parte 20",
+                "description": "Episódio 20 de Voo para o Amor I completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/S2oUIP0w5bw",
+                "durationSeconds": 586,
+                "isFree": false
+            },
+            {
+                "number": 21,
+                "title": "Parte 21",
+                "description": "Episódio 21 de Voo para o Amor I completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/qJQsI3S9wVc",
+                "durationSeconds": 1066,
+                "isFree": false
+            },
+            {
+                "number": 22,
+                "title": "Parte 22",
+                "description": "Episódio 22 de Voo para o Amor I completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/CN7dH285HjI",
+                "durationSeconds": 926,
+                "isFree": false
+            },
+            {
+                "number": 23,
+                "title": "Parte 23",
+                "description": "Episódio 23 de Voo para o Amor I completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/mHf7wmoSYg0",
+                "durationSeconds": 246,
+                "isFree": false
+            },
+            {
+                "number": 24,
+                "title": "Parte 24",
+                "description": "Episódio 24 de Voo para o Amor I completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/bcr9kzObZqw",
+                "durationSeconds": 822,
+                "isFree": false
+            },
+            {
+                "number": 25,
+                "title": "Parte 25",
+                "description": "Episódio 25 de Voo para o Amor I completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/dDFlNyFVi7g",
+                "durationSeconds": 660,
+                "isFree": false
+            },
+            {
+                "number": 26,
+                "title": "Parte 26",
+                "description": "Episódio 26 de Voo para o Amor I completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/sgYDgniVuok",
+                "durationSeconds": 252,
+                "isFree": false
+            },
+            {
+                "number": 27,
+                "title": "Parte 27",
+                "description": "Episódio 27 de Voo para o Amor I completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/DKUcBrg-qXQ",
+                "durationSeconds": 935,
+                "isFree": false
+            },
+            {
+                "number": 28,
+                "title": "Parte 28",
+                "description": "Episódio 28 de Voo para o Amor I completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/1KXLYAbq5pU",
+                "durationSeconds": 1053,
+                "isFree": false
+            },
+            {
+                "number": 29,
+                "title": "Parte 29",
+                "description": "Episódio 29 de Voo para o Amor I completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/lHuEJTOyQQQ",
+                "durationSeconds": 731,
+                "isFree": false
+            },
+            {
+                "number": 30,
+                "title": "Parte 30",
+                "description": "Episódio 30 de Voo para o Amor I completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/_YfFOPXMPsc",
+                "durationSeconds": 935,
+                "isFree": false
+            },
+            {
+                "number": 31,
+                "title": "Parte 31",
+                "description": "Episódio 31 de Voo para o Amor I completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/ouK0Wk7Om0M",
+                "durationSeconds": 485,
+                "isFree": false
+            }
+        ]
+    },
+    {
         "id": "tdx-herdeira-usurpada-pela-melhor-amiga",
         "title": "Herdeira Usurpada pela Melhor Amiga",
         "slug": "herdeira-usurpada-pela-melhor-amiga",
@@ -4040,6 +6448,216 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         ]
     },
     {
+        "id": "tdx-o-chefe-da-mafia-implora",
+        "title": "O Chefe da Máfia Implora",
+        "slug": "o-chefe-da-mafia-implora",
+        "synopsis": "Em um submundo dominado pelo poder e perigo das famílias mafiosas, segredos do passado e uma atração irresistível colocam vidas em jogo em O Chefe da Máfia Implora.",
+        "coverUrl": "https://img.youtube.com/vi/n1btmZupCXU/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/n1btmZupCXU/hqdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,mafia,suspense,romance,drama",
+        "totalEpisodes": 24,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 33365,
+        "likesCount": 11677,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de O Chefe da Máfia Implora completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/n1btmZupCXU",
+                "durationSeconds": 1664,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de O Chefe da Máfia Implora completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/QGj4BwtNRF0",
+                "durationSeconds": 1312,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de O Chefe da Máfia Implora completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/W1ODLTlaUJs",
+                "durationSeconds": 1307,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de O Chefe da Máfia Implora completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Red7v4kc4Ok",
+                "durationSeconds": 1308,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de O Chefe da Máfia Implora completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/IdrO0EWZs60",
+                "durationSeconds": 335,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de O Chefe da Máfia Implora completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/-njIAUTKp1k",
+                "durationSeconds": 336,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de O Chefe da Máfia Implora completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/asGdFnFvnxM",
+                "durationSeconds": 1700,
+                "isFree": false
+            },
+            {
+                "number": 8,
+                "title": "Parte 8",
+                "description": "Episódio 8 de O Chefe da Máfia Implora completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/7xuRyHa7V-A",
+                "durationSeconds": 1668,
+                "isFree": false
+            },
+            {
+                "number": 9,
+                "title": "Parte 9",
+                "description": "Episódio 9 de O Chefe da Máfia Implora completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/_C3L3taPMDo",
+                "durationSeconds": 1730,
+                "isFree": false
+            },
+            {
+                "number": 10,
+                "title": "Parte 10",
+                "description": "Episódio 10 de O Chefe da Máfia Implora completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/6OVo5aMIwjk",
+                "durationSeconds": 1305,
+                "isFree": false
+            },
+            {
+                "number": 11,
+                "title": "Parte 11",
+                "description": "Episódio 11 de O Chefe da Máfia Implora completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/iGEqKs7jzQo",
+                "durationSeconds": 1305,
+                "isFree": false
+            },
+            {
+                "number": 12,
+                "title": "Parte 12",
+                "description": "Episódio 12 de O Chefe da Máfia Implora completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/DUv5vEe3Ra0",
+                "durationSeconds": 1590,
+                "isFree": false
+            },
+            {
+                "number": 13,
+                "title": "Parte 13",
+                "description": "Episódio 13 de O Chefe da Máfia Implora completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/VDjc5jEl7xw",
+                "durationSeconds": 1530,
+                "isFree": false
+            },
+            {
+                "number": 14,
+                "title": "Parte 14",
+                "description": "Episódio 14 de O Chefe da Máfia Implora completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/xPmdHwEbZf0",
+                "durationSeconds": 1682,
+                "isFree": false
+            },
+            {
+                "number": 15,
+                "title": "Parte 15",
+                "description": "Episódio 15 de O Chefe da Máfia Implora completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/o55LWG2W5hw",
+                "durationSeconds": 338,
+                "isFree": false
+            },
+            {
+                "number": 16,
+                "title": "Parte 16",
+                "description": "Episódio 16 de O Chefe da Máfia Implora completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/auIdwh33KIU",
+                "durationSeconds": 300,
+                "isFree": false
+            },
+            {
+                "number": 17,
+                "title": "Parte 17",
+                "description": "Episódio 17 de O Chefe da Máfia Implora completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/rqP2yJ-WrEg",
+                "durationSeconds": 1578,
+                "isFree": false
+            },
+            {
+                "number": 18,
+                "title": "Parte 18",
+                "description": "Episódio 18 de O Chefe da Máfia Implora completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/16ysjTVbeJw",
+                "durationSeconds": 1742,
+                "isFree": false
+            },
+            {
+                "number": 19,
+                "title": "Parte 19",
+                "description": "Episódio 19 de O Chefe da Máfia Implora completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/1-dgWXarMNI",
+                "durationSeconds": 1218,
+                "isFree": false
+            },
+            {
+                "number": 20,
+                "title": "Parte 20",
+                "description": "Episódio 20 de O Chefe da Máfia Implora completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/VUulSBqJQFo",
+                "durationSeconds": 1133,
+                "isFree": false
+            },
+            {
+                "number": 21,
+                "title": "Parte 21",
+                "description": "Episódio 21 de O Chefe da Máfia Implora completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/rH_pGx76vto",
+                "durationSeconds": 1773,
+                "isFree": false
+            },
+            {
+                "number": 22,
+                "title": "Parte 22",
+                "description": "Episódio 22 de O Chefe da Máfia Implora completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/H2jLa7fkhx4",
+                "durationSeconds": 1327,
+                "isFree": false
+            },
+            {
+                "number": 23,
+                "title": "Parte 23",
+                "description": "Episódio 23 de O Chefe da Máfia Implora completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/MLSr4l2SPL0",
+                "durationSeconds": 1216,
+                "isFree": false
+            },
+            {
+                "number": 24,
+                "title": "Parte 24",
+                "description": "Episódio 24 de O Chefe da Máfia Implora completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/TdeGRkwshPc",
+                "durationSeconds": 318,
+                "isFree": false
+            }
+        ]
+    },
+    {
         "id": "tdx-a-princesa-esta-de-volta",
         "title": "A Princesa Está de Volta",
         "slug": "a-princesa-esta-de-volta",
@@ -4206,6 +6824,32 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "youtubeUrl": "https://youtu.be/ZVn4eLiOtvg",
                 "durationSeconds": 870,
                 "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-superando-meu-guarda-costas",
+        "title": "Superando Meu Guarda-Costas",
+        "slug": "superando-meu-guarda-costas",
+        "synopsis": "Acompanhe a emocionante história de Superando Meu Guarda-Costas, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/6_Jcsv3jA8s/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/6_Jcsv3jA8s/hqdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,romance,drama",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 25754,
+        "likesCount": 9013,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Superando Meu Guarda-Costas completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/6_Jcsv3jA8s",
+                "durationSeconds": 4176,
+                "isFree": true
             }
         ]
     },
@@ -4433,6 +7077,104 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "description": "Episódio 19 de Depois da Dor, Eu Floresci completo e dublado em alta definição.",
                 "youtubeUrl": "https://youtu.be/PjuyorgMLbg",
                 "durationSeconds": 701,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-quando-a-lua-esconde-sua-coroa",
+        "title": "Quando a Lua Esconde Sua Coroa",
+        "slug": "quando-a-lua-esconde-sua-coroa",
+        "synopsis": "Acompanhe a emocionante história de Quando a Lua Esconde Sua Coroa, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/ot6OdkEImK4/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/ot6OdkEImK4/hqdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,romance,drama",
+        "totalEpisodes": 10,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 22837,
+        "likesCount": 7992,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Quando a Lua Esconde Sua Coroa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/ot6OdkEImK4",
+                "durationSeconds": 525,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Quando a Lua Esconde Sua Coroa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/XMi7yHQ2jl4",
+                "durationSeconds": 524,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Quando a Lua Esconde Sua Coroa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Dh7vjkqsdbM",
+                "durationSeconds": 793,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Quando a Lua Esconde Sua Coroa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/vFhmFjyxOoI",
+                "durationSeconds": 852,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de Quando a Lua Esconde Sua Coroa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/W0kVwsKP3hA",
+                "durationSeconds": 866,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de Quando a Lua Esconde Sua Coroa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/ugBFXletArk",
+                "durationSeconds": 934,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de Quando a Lua Esconde Sua Coroa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/4KDWFpZ6Uik",
+                "durationSeconds": 910,
+                "isFree": false
+            },
+            {
+                "number": 8,
+                "title": "Parte 8",
+                "description": "Episódio 8 de Quando a Lua Esconde Sua Coroa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/bR4nj_p57Ik",
+                "durationSeconds": 855,
+                "isFree": false
+            },
+            {
+                "number": 9,
+                "title": "Parte 9",
+                "description": "Episódio 9 de Quando a Lua Esconde Sua Coroa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/_ypipPXt94g",
+                "durationSeconds": 874,
+                "isFree": false
+            },
+            {
+                "number": 10,
+                "title": "Parte 10",
+                "description": "Episódio 10 de Quando a Lua Esconde Sua Coroa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/jthxP9_tcBo",
+                "durationSeconds": 254,
                 "isFree": false
             }
         ]
@@ -5038,6 +7780,192 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         ]
     },
     {
+        "id": "tdx-a-controladora-que-salvou-o-voo",
+        "title": "A Controladora que Salvou o Voo",
+        "slug": "a-controladora-que-salvou-o-voo",
+        "synopsis": "Acompanhe a emocionante história de A Controladora que Salvou o Voo, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/i9k4_S1hZEY/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/i9k4_S1hZEY/hqdefault.jpg",
+        "category": "Legendado",
+        "tags": "Legendado, dublado,romance,drama",
+        "totalEpisodes": 21,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 25231,
+        "likesCount": 8830,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/i9k4_S1hZEY",
+                "durationSeconds": 1661,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/omvHvVSmlhw",
+                "durationSeconds": 1654,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/MGEWcjbXCFk",
+                "durationSeconds": 1661,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/_-WeXEBUl0I",
+                "durationSeconds": 1668,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/PFMVMzG-ZnM",
+                "durationSeconds": 1644,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/_gIZ2s6MQ8M",
+                "durationSeconds": 1408,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/PL9bPE8j79E",
+                "durationSeconds": 1223,
+                "isFree": false
+            },
+            {
+                "number": 8,
+                "title": "Parte 8",
+                "description": "Episódio 8 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/22MnrqDSO3E",
+                "durationSeconds": 1737,
+                "isFree": false
+            },
+            {
+                "number": 9,
+                "title": "Parte 9",
+                "description": "Episódio 9 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/vOJOe2IkzJk",
+                "durationSeconds": 1654,
+                "isFree": false
+            },
+            {
+                "number": 10,
+                "title": "Parte 10",
+                "description": "Episódio 10 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Fl0LKsYd5do",
+                "durationSeconds": 224,
+                "isFree": false
+            },
+            {
+                "number": 11,
+                "title": "Parte 11",
+                "description": "Episódio 11 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/NsKGTsnzBj4",
+                "durationSeconds": 323,
+                "isFree": false
+            },
+            {
+                "number": 12,
+                "title": "Parte 12",
+                "description": "Episódio 12 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/LAY8yMDPruI",
+                "durationSeconds": 1097,
+                "isFree": false
+            },
+            {
+                "number": 13,
+                "title": "Parte 13",
+                "description": "Episódio 13 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/gLuYE8cCM40",
+                "durationSeconds": 1737,
+                "isFree": false
+            },
+            {
+                "number": 14,
+                "title": "Parte 14",
+                "description": "Episódio 14 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/zRH4eiE38Xw",
+                "durationSeconds": 1645,
+                "isFree": false
+            },
+            {
+                "number": 15,
+                "title": "Parte 15",
+                "description": "Episódio 15 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/OZkhYy6Fk9E",
+                "durationSeconds": 1097,
+                "isFree": false
+            },
+            {
+                "number": 16,
+                "title": "Parte 16",
+                "description": "Episódio 16 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/ooZ22a7PBY4",
+                "durationSeconds": 1645,
+                "isFree": false
+            },
+            {
+                "number": 17,
+                "title": "Parte 17",
+                "description": "Episódio 17 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/uS5eigklr3k",
+                "durationSeconds": 977,
+                "isFree": false
+            },
+            {
+                "number": 18,
+                "title": "Parte 18",
+                "description": "Episódio 18 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/JBr9GKZc1ko",
+                "durationSeconds": 1556,
+                "isFree": false
+            },
+            {
+                "number": 19,
+                "title": "Parte 19",
+                "description": "Episódio 19 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/6BfFwOK_rx8",
+                "durationSeconds": 1408,
+                "isFree": false
+            },
+            {
+                "number": 20,
+                "title": "Parte 20",
+                "description": "Episódio 20 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/GW3t0Hi78Zk",
+                "durationSeconds": 522,
+                "isFree": false
+            },
+            {
+                "number": 21,
+                "title": "Parte 21",
+                "description": "Episódio 21 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/1pN20q7ErEA",
+                "durationSeconds": 357,
+                "isFree": false
+            }
+        ]
+    },
+    {
         "id": "tdx-a-criada-exclusiva-do-bilionario",
         "title": "A Criada Exclusiva do Bilionário",
         "slug": "a-criada-exclusiva-do-bilionario",
@@ -5285,8942 +8213,6 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "description": "Episódio 7 de Todo Domingo Corro Até Você completo e dublado em alta definição.",
                 "youtubeUrl": "https://youtu.be/ZS4BPgv4g5c",
                 "durationSeconds": 613,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-traido-pelos-que-amava",
-        "title": "Traído Pelos Que Amava",
-        "slug": "traido-pelos-que-amava",
-        "synopsis": "Acompanhe a emocionante história de Traído Pelos Que Amava, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/V5KvCvGDggo/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/V5KvCvGDggo/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 10,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 32329,
-        "likesCount": 11315,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Traído Pelos Que Amava completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/V5KvCvGDggo",
-                "durationSeconds": 1252,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Traído Pelos Que Amava completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/YxG_ScVvyJk",
-                "durationSeconds": 1792,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Traído Pelos Que Amava completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/mQ9lbx383vg",
-                "durationSeconds": 1258,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Traído Pelos Que Amava completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/o9ag3p0x_dU",
-                "durationSeconds": 822,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de Traído Pelos Que Amava completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/fnSMsJPodUA",
-                "durationSeconds": 1641,
-                "isFree": false
-            },
-            {
-                "number": 6,
-                "title": "Parte 6",
-                "description": "Episódio 6 de Traído Pelos Que Amava completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/f93kqFgNVxc",
-                "durationSeconds": 2518,
-                "isFree": false
-            },
-            {
-                "number": 7,
-                "title": "Parte 7",
-                "description": "Episódio 7 de Traído Pelos Que Amava completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/JrhcDLN_mGc",
-                "durationSeconds": 2960,
-                "isFree": false
-            },
-            {
-                "number": 8,
-                "title": "Parte 8",
-                "description": "Episódio 8 de Traído Pelos Que Amava completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/fg6-geTanLA",
-                "durationSeconds": 2541,
-                "isFree": false
-            },
-            {
-                "number": 9,
-                "title": "Parte 9",
-                "description": "Episódio 9 de Traído Pelos Que Amava completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/RW08AJ0qSo0",
-                "durationSeconds": 2428,
-                "isFree": false
-            },
-            {
-                "number": 10,
-                "title": "Parte 10",
-                "description": "Episódio 10 de Traído Pelos Que Amava completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/_LFbgK2QnCw",
-                "durationSeconds": 2541,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-marcada-pelo-meu-meio-irmao-alfa",
-        "title": "Marcada pelo Meu Meio-Irmão Alfa",
-        "slug": "marcada-pelo-meu-meio-irmao-alfa",
-        "synopsis": "Lendas ancestrais, vínculos eternos de almas gêmeas e batalhas ferozes pelo trono supremo revelam os maiores mistérios em Marcada pelo Meu Meio-Irmão Alfa.",
-        "coverUrl": "https://img.youtube.com/vi/vfaSYc3oG7s/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/vfaSYc3oG7s/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,fantasia,sobrenatural,romance,drama",
-        "totalEpisodes": 13,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 30126,
-        "likesCount": 10544,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Marcada pelo Meu Meio-Irmão Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/vfaSYc3oG7s",
-                "durationSeconds": 383,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Marcada pelo Meu Meio-Irmão Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/9Hd0TCmUmmc",
-                "durationSeconds": 995,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Marcada pelo Meu Meio-Irmão Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/T_5UmAFI8z0",
-                "durationSeconds": 1023,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Marcada pelo Meu Meio-Irmão Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/LfYQqkJTY-8",
-                "durationSeconds": 1089,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de Marcada pelo Meu Meio-Irmão Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/1Zk6yg7EIgU",
-                "durationSeconds": 1036,
-                "isFree": false
-            },
-            {
-                "number": 6,
-                "title": "Parte 6",
-                "description": "Episódio 6 de Marcada pelo Meu Meio-Irmão Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/AmYXrHyCqZc",
-                "durationSeconds": 1102,
-                "isFree": false
-            },
-            {
-                "number": 7,
-                "title": "Parte 7",
-                "description": "Episódio 7 de Marcada pelo Meu Meio-Irmão Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/9O3btK82Lwg",
-                "durationSeconds": 1094,
-                "isFree": false
-            },
-            {
-                "number": 8,
-                "title": "Parte 8",
-                "description": "Episódio 8 de Marcada pelo Meu Meio-Irmão Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/N6ITNDRnjDI",
-                "durationSeconds": 1256,
-                "isFree": false
-            },
-            {
-                "number": 9,
-                "title": "Parte 9",
-                "description": "Episódio 9 de Marcada pelo Meu Meio-Irmão Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/GjLQh6XObOs",
-                "durationSeconds": 897,
-                "isFree": false
-            },
-            {
-                "number": 10,
-                "title": "Parte 10",
-                "description": "Episódio 10 de Marcada pelo Meu Meio-Irmão Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/95NGcPTpr7Q",
-                "durationSeconds": 383,
-                "isFree": false
-            },
-            {
-                "number": 11,
-                "title": "Parte 11",
-                "description": "Episódio 11 de Marcada pelo Meu Meio-Irmão Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/hUzhlZlux0w",
-                "durationSeconds": 466,
-                "isFree": false
-            },
-            {
-                "number": 12,
-                "title": "Parte 12",
-                "description": "Episódio 12 de Marcada pelo Meu Meio-Irmão Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/tnZtGz6TBfE",
-                "durationSeconds": 1525,
-                "isFree": false
-            },
-            {
-                "number": 13,
-                "title": "Parte 13",
-                "description": "Episódio 13 de Marcada pelo Meu Meio-Irmão Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/2j5KWChn9zE",
-                "durationSeconds": 1555,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-no-ritmo-de-um-bom-amor",
-        "title": "No Ritmo de um Bom Amor",
-        "slug": "no-ritmo-de-um-bom-amor",
-        "synopsis": "Marcados por feridas do passado, duas vidas encontram no afeto e na cumplicidade o caminho para a redenção e a felicidade em No Ritmo de um Bom Amor.",
-        "coverUrl": "https://img.youtube.com/vi/s6ED2V66ovg/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/s6ED2V66ovg/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 16,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 8960,
-        "likesCount": 3136,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/s6ED2V66ovg",
-                "durationSeconds": 1338,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/UFuyQGjhURE",
-                "durationSeconds": 1375,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/9NRl0gRwoaQ",
-                "durationSeconds": 1370,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/n7msKIDKop4",
-                "durationSeconds": 962,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/P7vM4Equtdo",
-                "durationSeconds": 1281,
-                "isFree": false
-            },
-            {
-                "number": 6,
-                "title": "Parte 6",
-                "description": "Episódio 6 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/7gc_hxVe9jo",
-                "durationSeconds": 1497,
-                "isFree": false
-            },
-            {
-                "number": 7,
-                "title": "Parte 7",
-                "description": "Episódio 7 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/hLZRVxLkIKQ",
-                "durationSeconds": 1370,
-                "isFree": false
-            },
-            {
-                "number": 8,
-                "title": "Parte 8",
-                "description": "Episódio 8 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/rhHBiSi-iPs",
-                "durationSeconds": 1758,
-                "isFree": false
-            },
-            {
-                "number": 9,
-                "title": "Parte 9",
-                "description": "Episódio 9 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/lKpUiQ3oMB8",
-                "durationSeconds": 278,
-                "isFree": false
-            },
-            {
-                "number": 10,
-                "title": "Parte 10",
-                "description": "Episódio 10 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/IKJ0vgsKR8E",
-                "durationSeconds": 852,
-                "isFree": false
-            },
-            {
-                "number": 11,
-                "title": "Parte 11",
-                "description": "Episódio 11 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/fnhakgoZfBE",
-                "durationSeconds": 334,
-                "isFree": false
-            },
-            {
-                "number": 12,
-                "title": "Parte 12",
-                "description": "Episódio 12 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/eUmCop2O6_g",
-                "durationSeconds": 867,
-                "isFree": false
-            },
-            {
-                "number": 13,
-                "title": "Parte 13",
-                "description": "Episódio 13 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/YH1EGq1HDsM",
-                "durationSeconds": 1337,
-                "isFree": false
-            },
-            {
-                "number": 14,
-                "title": "Parte 14",
-                "description": "Episódio 14 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/GPIsFMd6nRM",
-                "durationSeconds": 811,
-                "isFree": false
-            },
-            {
-                "number": 15,
-                "title": "Parte 15",
-                "description": "Episódio 15 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/vI8fpPheF0E",
-                "durationSeconds": 2017,
-                "isFree": false
-            },
-            {
-                "number": 16,
-                "title": "Parte 16",
-                "description": "Episódio 16 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/TMUueRe76-Q",
-                "durationSeconds": 2088,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-morto-por-amor-vivo-por-odio",
-        "title": "Morto por Amor Vivo por Ódio",
-        "slug": "morto-por-amor-vivo-por-odio",
-        "synopsis": "Marcados por feridas do passado, duas vidas encontram no afeto e na cumplicidade o caminho para a redenção e a felicidade em Morto por Amor Vivo por Ódio.",
-        "coverUrl": "https://img.youtube.com/vi/am1w2nzVC8w/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/am1w2nzVC8w/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 15,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 31946,
-        "likesCount": 11181,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Morto por Amor Vivo por Ódio completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/am1w2nzVC8w",
-                "durationSeconds": 267,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Morto por Amor Vivo por Ódio completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/14pjbBxeXzc",
-                "durationSeconds": 815,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Morto por Amor Vivo por Ódio completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/4N8ptVyJRcg",
-                "durationSeconds": 1432,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Morto por Amor Vivo por Ódio completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/I8edt8E3jDA",
-                "durationSeconds": 819,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de Morto por Amor Vivo por Ódio completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Wiq7Hi8txXQ",
-                "durationSeconds": 817,
-                "isFree": false
-            },
-            {
-                "number": 6,
-                "title": "Parte 6",
-                "description": "Episódio 6 de Morto por Amor Vivo por Ódio completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/wtOrxKkU8M4",
-                "durationSeconds": 1319,
-                "isFree": false
-            },
-            {
-                "number": 7,
-                "title": "Parte 7",
-                "description": "Episódio 7 de Morto por Amor Vivo por Ódio completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/EDflYcxVYrs",
-                "durationSeconds": 458,
-                "isFree": false
-            },
-            {
-                "number": 8,
-                "title": "Parte 8",
-                "description": "Episódio 8 de Morto por Amor Vivo por Ódio completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/UautO9ASnA0",
-                "durationSeconds": 256,
-                "isFree": false
-            },
-            {
-                "number": 9,
-                "title": "Parte 9",
-                "description": "Episódio 9 de Morto por Amor Vivo por Ódio completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/cEQVPDVWQbs",
-                "durationSeconds": 1923,
-                "isFree": false
-            },
-            {
-                "number": 10,
-                "title": "Parte 10",
-                "description": "Episódio 10 de Morto por Amor Vivo por Ódio completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/rbCea_nUepI",
-                "durationSeconds": 508,
-                "isFree": false
-            },
-            {
-                "number": 11,
-                "title": "Parte 11",
-                "description": "Episódio 11 de Morto por Amor Vivo por Ódio completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/nxlrfSkrnHw",
-                "durationSeconds": 1432,
-                "isFree": false
-            },
-            {
-                "number": 12,
-                "title": "Parte 12",
-                "description": "Episódio 12 de Morto por Amor Vivo por Ódio completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/vzKTb_P23T4",
-                "durationSeconds": 727,
-                "isFree": false
-            },
-            {
-                "number": 13,
-                "title": "Parte 13",
-                "description": "Episódio 13 de Morto por Amor Vivo por Ódio completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/ZlpAuUARj0Q",
-                "durationSeconds": 816,
-                "isFree": false
-            },
-            {
-                "number": 14,
-                "title": "Parte 14",
-                "description": "Episódio 14 de Morto por Amor Vivo por Ódio completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/b6FGm-CIGyg",
-                "durationSeconds": 816,
-                "isFree": false
-            },
-            {
-                "number": 15,
-                "title": "Parte 15",
-                "description": "Episódio 15 de Morto por Amor Vivo por Ódio completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/sbes-qcQlhw",
-                "durationSeconds": 817,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-cuidado-a-herdeira-voltou",
-        "title": "Cuidado, a Herdeira Voltou",
-        "slug": "cuidado-a-herdeira-voltou",
-        "synopsis": "Acompanhe a emocionante história de Cuidado, a Herdeira Voltou, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/rtmec_z_JZM/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/rtmec_z_JZM/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 10,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 11712,
-        "likesCount": 4099,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Cuidado, a Herdeira Voltou completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/rtmec_z_JZM",
-                "durationSeconds": 1326,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Cuidado, a Herdeira Voltou completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/EsL0bluK9sw",
-                "durationSeconds": 1238,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Cuidado, a Herdeira Voltou completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/_la8zLvPZuY",
-                "durationSeconds": 566,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Cuidado, a Herdeira Voltou completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Y7h7McWyJXA",
-                "durationSeconds": 1326,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de Cuidado, a Herdeira Voltou completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/AAsmAin0N94",
-                "durationSeconds": 1541,
-                "isFree": false
-            },
-            {
-                "number": 6,
-                "title": "Parte 6",
-                "description": "Episódio 6 de Cuidado, a Herdeira Voltou completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/DEIi5b1xGNk",
-                "durationSeconds": 1238,
-                "isFree": false
-            },
-            {
-                "number": 7,
-                "title": "Parte 7",
-                "description": "Episódio 7 de Cuidado, a Herdeira Voltou completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Q4v1OHWQUS0",
-                "durationSeconds": 1584,
-                "isFree": false
-            },
-            {
-                "number": 8,
-                "title": "Parte 8",
-                "description": "Episódio 8 de Cuidado, a Herdeira Voltou completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/kXAenFhARrs",
-                "durationSeconds": 1255,
-                "isFree": false
-            },
-            {
-                "number": 9,
-                "title": "Parte 9",
-                "description": "Episódio 9 de Cuidado, a Herdeira Voltou completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Od5ZrzEGCrc",
-                "durationSeconds": 1656,
-                "isFree": false
-            },
-            {
-                "number": 10,
-                "title": "Parte 10",
-                "description": "Episódio 10 de Cuidado, a Herdeira Voltou completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/oAyRgpJTluw",
-                "durationSeconds": 1584,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-28-dias-com-o-alfa",
-        "title": "28 Dias com o Alfa",
-        "slug": "28-dias-com-o-alfa",
-        "synopsis": "Lendas ancestrais, vínculos eternos de almas gêmeas e batalhas ferozes pelo trono supremo revelam os maiores mistérios em 28 Dias com o Alfa.",
-        "coverUrl": "https://img.youtube.com/vi/no8GyuyCBkA/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/no8GyuyCBkA/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,fantasia,sobrenatural,romance,drama",
-        "totalEpisodes": 20,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 33297,
-        "likesCount": 11653,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de 28 Dias com o Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/no8GyuyCBkA",
-                "durationSeconds": 842,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de 28 Dias com o Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/7ZLlRnvnMQg",
-                "durationSeconds": 780,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de 28 Dias com o Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/SwIjf583kAg",
-                "durationSeconds": 868,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de 28 Dias com o Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/YiTOp2IpwQo",
-                "durationSeconds": 668,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de 28 Dias com o Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Uin67H61_wo",
-                "durationSeconds": 783,
-                "isFree": false
-            },
-            {
-                "number": 6,
-                "title": "Parte 6",
-                "description": "Episódio 6 de 28 Dias com o Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/jKMvoZ_yO9A",
-                "durationSeconds": 524,
-                "isFree": false
-            },
-            {
-                "number": 7,
-                "title": "Parte 7",
-                "description": "Episódio 7 de 28 Dias com o Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/I48mXoiZ54M",
-                "durationSeconds": 796,
-                "isFree": false
-            },
-            {
-                "number": 8,
-                "title": "Parte 8",
-                "description": "Episódio 8 de 28 Dias com o Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/zAkEnUGG3IA",
-                "durationSeconds": 981,
-                "isFree": false
-            },
-            {
-                "number": 9,
-                "title": "Parte 9",
-                "description": "Episódio 9 de 28 Dias com o Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/8XNWas43xog",
-                "durationSeconds": 867,
-                "isFree": false
-            },
-            {
-                "number": 10,
-                "title": "Parte 10",
-                "description": "Episódio 10 de 28 Dias com o Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/0Rt6ASpUxXA",
-                "durationSeconds": 736,
-                "isFree": false
-            },
-            {
-                "number": 11,
-                "title": "Parte 11",
-                "description": "Episódio 11 de 28 Dias com o Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/GLR43qhUPKk",
-                "durationSeconds": 852,
-                "isFree": false
-            },
-            {
-                "number": 12,
-                "title": "Parte 12",
-                "description": "Episódio 12 de 28 Dias com o Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/3ZldgCT_fyA",
-                "durationSeconds": 760,
-                "isFree": false
-            },
-            {
-                "number": 13,
-                "title": "Parte 13",
-                "description": "Episódio 13 de 28 Dias com o Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/sQ_rC7mE0HA",
-                "durationSeconds": 722,
-                "isFree": false
-            },
-            {
-                "number": 14,
-                "title": "Parte 14",
-                "description": "Episódio 14 de 28 Dias com o Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/VrLTos_6BwQ",
-                "durationSeconds": 816,
-                "isFree": false
-            },
-            {
-                "number": 15,
-                "title": "Parte 15",
-                "description": "Episódio 15 de 28 Dias com o Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/OMAbWvHeO04",
-                "durationSeconds": 790,
-                "isFree": false
-            },
-            {
-                "number": 16,
-                "title": "Parte 16",
-                "description": "Episódio 16 de 28 Dias com o Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/GKSMlRKbq6s",
-                "durationSeconds": 1354,
-                "isFree": false
-            },
-            {
-                "number": 17,
-                "title": "Parte 17",
-                "description": "Episódio 17 de 28 Dias com o Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/c0FXUjMip9E",
-                "durationSeconds": 822,
-                "isFree": false
-            },
-            {
-                "number": 18,
-                "title": "Parte 18",
-                "description": "Episódio 18 de 28 Dias com o Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/nnZWbSiIi4c",
-                "durationSeconds": 842,
-                "isFree": false
-            },
-            {
-                "number": 19,
-                "title": "Parte 19",
-                "description": "Episódio 19 de 28 Dias com o Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/L-YbgUok6p0",
-                "durationSeconds": 802,
-                "isFree": false
-            },
-            {
-                "number": 20,
-                "title": "Parte 20",
-                "description": "Episódio 20 de 28 Dias com o Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/7itxzYPVlvg",
-                "durationSeconds": 768,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-sem-olhar-para-tras",
-        "title": "Sem Olhar para Trás",
-        "slug": "sem-olhar-para-tras",
-        "synopsis": "Acompanhe a emocionante história de Sem Olhar para Trás, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/qStdw1zfebQ/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/qStdw1zfebQ/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 5,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 25925,
-        "likesCount": 9073,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Sem Olhar para Trás completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/qStdw1zfebQ",
-                "durationSeconds": 1135,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Sem Olhar para Trás completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/j630RFUPgNk",
-                "durationSeconds": 1088,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Sem Olhar para Trás completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Mh5orWG8SB0",
-                "durationSeconds": 1103,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Sem Olhar para Trás completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/1hb2halM884",
-                "durationSeconds": 959,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de Sem Olhar para Trás completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/oqDKI_bo_uM",
-                "durationSeconds": 1160,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-a-herdeira-encantada-voltou",
-        "title": "A Herdeira Encantada Voltou!",
-        "slug": "a-herdeira-encantada-voltou",
-        "synopsis": "Acompanhe a emocionante história de A Herdeira Encantada Voltou!, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/ciX1Iyh1H94/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/ciX1Iyh1H94/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 2,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 22060,
-        "likesCount": 7720,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de A Herdeira Encantada Voltou! completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/ciX1Iyh1H94",
-                "durationSeconds": 1714,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de A Herdeira Encantada Voltou! completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/YqAeuLyMU0I",
-                "durationSeconds": 701,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-meu-ceo-meu-milagre",
-        "title": "Meu CEO Meu Milagre",
-        "slug": "meu-ceo-meu-milagre",
-        "synopsis": "Um poderoso magnata acostumado a comandar impérios descobre que o verdadeiro amor não tem preço quando seu destino cruza com uma mulher destemida em Meu CEO Meu Milagre.",
-        "coverUrl": "https://img.youtube.com/vi/IvmFw1T7fDs/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/IvmFw1T7fDs/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,bilionario,ceo,luxo,romance,drama",
-        "totalEpisodes": 5,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 19840,
-        "likesCount": 6944,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Meu CEO Meu Milagre completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/IvmFw1T7fDs",
-                "durationSeconds": 850,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Meu CEO Meu Milagre completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/S5eT7U4rwmM",
-                "durationSeconds": 811,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Meu CEO Meu Milagre completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/F8nvT0YDqwY",
-                "durationSeconds": 1147,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Meu CEO Meu Milagre completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/9iPAKfQioSI",
-                "durationSeconds": 387,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de Meu CEO Meu Milagre completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/CPhAb9hnVXk",
-                "durationSeconds": 1094,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-de-envenenada-a-inimiga-implacavel",
-        "title": "De Envenenada a Inimiga Implacável",
-        "slug": "de-envenenada-a-inimiga-implacavel",
-        "synopsis": "Acompanhe a emocionante história de De Envenenada a Inimiga Implacável, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/yuyrd1so_ik/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/yuyrd1so_ik/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 14,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 34314,
-        "likesCount": 12009,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de De Envenenada a Inimiga Implacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/yuyrd1so_ik",
-                "durationSeconds": 1296,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de De Envenenada a Inimiga Implacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Y9JamaEtIBA",
-                "durationSeconds": 1309,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de De Envenenada a Inimiga Implacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/wPSTzH-791A",
-                "durationSeconds": 1333,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de De Envenenada a Inimiga Implacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Sx1CT3whzzc",
-                "durationSeconds": 1275,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de De Envenenada a Inimiga Implacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/vWnjji3tKG4",
-                "durationSeconds": 250,
-                "isFree": false
-            },
-            {
-                "number": 6,
-                "title": "Parte 6",
-                "description": "Episódio 6 de De Envenenada a Inimiga Implacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/yAHw1a6QzUA",
-                "durationSeconds": 1297,
-                "isFree": false
-            },
-            {
-                "number": 7,
-                "title": "Parte 7",
-                "description": "Episódio 7 de De Envenenada a Inimiga Implacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/UUgrNdkeM3M",
-                "durationSeconds": 1312,
-                "isFree": false
-            },
-            {
-                "number": 8,
-                "title": "Parte 8",
-                "description": "Episódio 8 de De Envenenada a Inimiga Implacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/1tiowOWrzJQ",
-                "durationSeconds": 1266,
-                "isFree": false
-            },
-            {
-                "number": 9,
-                "title": "Parte 9",
-                "description": "Episódio 9 de De Envenenada a Inimiga Implacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/6CdiARZkTIY",
-                "durationSeconds": 1302,
-                "isFree": false
-            },
-            {
-                "number": 10,
-                "title": "Parte 10",
-                "description": "Episódio 10 de De Envenenada a Inimiga Implacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/xyBQCpVDl40",
-                "durationSeconds": 1315,
-                "isFree": false
-            },
-            {
-                "number": 11,
-                "title": "Parte 11",
-                "description": "Episódio 11 de De Envenenada a Inimiga Implacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/8Kr2yNtdRm0",
-                "durationSeconds": 808,
-                "isFree": false
-            },
-            {
-                "number": 12,
-                "title": "Parte 12",
-                "description": "Episódio 12 de De Envenenada a Inimiga Implacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/6IwRNBZZ1Lk",
-                "durationSeconds": 361,
-                "isFree": false
-            },
-            {
-                "number": 13,
-                "title": "Parte 13",
-                "description": "Episódio 13 de De Envenenada a Inimiga Implacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/axutkho9O54",
-                "durationSeconds": 1259,
-                "isFree": false
-            },
-            {
-                "number": 14,
-                "title": "Parte 14",
-                "description": "Episódio 14 de De Envenenada a Inimiga Implacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/d3yZkolOVcs",
-                "durationSeconds": 1002,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-nao-mexa-com-a-pequena",
-        "title": "Não Mexa com a Pequena",
-        "slug": "nao-mexa-com-a-pequena",
-        "synopsis": "Acompanhe a emocionante história de Não Mexa com a Pequena, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/4aJPvWo021Q/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/4aJPvWo021Q/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 7,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 25055,
-        "likesCount": 8769,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Não Mexa com a Pequena completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/4aJPvWo021Q",
-                "durationSeconds": 833,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Não Mexa com a Pequena completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/o0K_DvbL00I",
-                "durationSeconds": 297,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Não Mexa com a Pequena completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/DKuw4BR7FUk",
-                "durationSeconds": 199,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Não Mexa com a Pequena completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/XGpkFbbBTN0",
-                "durationSeconds": 198,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de Não Mexa com a Pequena completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/6XFHvbYAOPQ",
-                "durationSeconds": 1261,
-                "isFree": false
-            },
-            {
-                "number": 6,
-                "title": "Parte 6",
-                "description": "Episódio 6 de Não Mexa com a Pequena completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/uC8VlRo2RLY",
-                "durationSeconds": 199,
-                "isFree": false
-            },
-            {
-                "number": 7,
-                "title": "Parte 7",
-                "description": "Episódio 7 de Não Mexa com a Pequena completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/5o1ktT3oFwo",
-                "durationSeconds": 439,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-do-servico-ao-sucesso",
-        "title": "Do Serviço ao Sucesso",
-        "slug": "do-servico-ao-sucesso",
-        "synopsis": "Acompanhe a emocionante história de Do Serviço ao Sucesso, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/CXkfJrZfVkQ/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/CXkfJrZfVkQ/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 16425,
-        "likesCount": 5748,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Do Serviço ao Sucesso completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/CXkfJrZfVkQ",
-                "durationSeconds": 198,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "tdx-meu-sim-ao-rei-da-mafia",
-        "title": "Meu Sim ao Rei da Máfia",
-        "slug": "meu-sim-ao-rei-da-mafia",
-        "synopsis": "Em um submundo dominado pelo poder e perigo das famílias mafiosas, segredos do passado e uma atração irresistível colocam vidas em jogo em Meu Sim ao Rei da Máfia.",
-        "coverUrl": "https://img.youtube.com/vi/Ax9CsuRQAf8/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/Ax9CsuRQAf8/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,mafia,suspense,romance,drama",
-        "totalEpisodes": 15,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 33619,
-        "likesCount": 11766,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Meu Sim ao Rei da Máfia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Ax9CsuRQAf8",
-                "durationSeconds": 208,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Meu Sim ao Rei da Máfia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/bbkbdOarBnE",
-                "durationSeconds": 656,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Meu Sim ao Rei da Máfia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/bzcPwPm8cNs",
-                "durationSeconds": 943,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Meu Sim ao Rei da Máfia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/tZyr9Tnp6Is",
-                "durationSeconds": 951,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de Meu Sim ao Rei da Máfia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/A9QG5lK6Esk",
-                "durationSeconds": 944,
-                "isFree": false
-            },
-            {
-                "number": 6,
-                "title": "Parte 6",
-                "description": "Episódio 6 de Meu Sim ao Rei da Máfia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/W3DaS2hn42Q",
-                "durationSeconds": 936,
-                "isFree": false
-            },
-            {
-                "number": 7,
-                "title": "Parte 7",
-                "description": "Episódio 7 de Meu Sim ao Rei da Máfia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/grjWQd1NBGQ",
-                "durationSeconds": 963,
-                "isFree": false
-            },
-            {
-                "number": 8,
-                "title": "Parte 8",
-                "description": "Episódio 8 de Meu Sim ao Rei da Máfia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/_KMh7JFSloI",
-                "durationSeconds": 1292,
-                "isFree": false
-            },
-            {
-                "number": 9,
-                "title": "Parte 9",
-                "description": "Episódio 9 de Meu Sim ao Rei da Máfia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/75Eauc9uK7o",
-                "durationSeconds": 1333,
-                "isFree": false
-            },
-            {
-                "number": 10,
-                "title": "Parte 10",
-                "description": "Episódio 10 de Meu Sim ao Rei da Máfia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/bBFL3W_onpg",
-                "durationSeconds": 684,
-                "isFree": false
-            },
-            {
-                "number": 11,
-                "title": "Parte 11",
-                "description": "Episódio 11 de Meu Sim ao Rei da Máfia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/uk32zuVV0wE",
-                "durationSeconds": 936,
-                "isFree": false
-            },
-            {
-                "number": 12,
-                "title": "Parte 12",
-                "description": "Episódio 12 de Meu Sim ao Rei da Máfia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/kjtPzqD1PRc",
-                "durationSeconds": 836,
-                "isFree": false
-            },
-            {
-                "number": 13,
-                "title": "Parte 13",
-                "description": "Episódio 13 de Meu Sim ao Rei da Máfia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/kZ2QWY9lC_k",
-                "durationSeconds": 1423,
-                "isFree": false
-            },
-            {
-                "number": 14,
-                "title": "Parte 14",
-                "description": "Episódio 14 de Meu Sim ao Rei da Máfia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/MUxP03WG4OU",
-                "durationSeconds": 1256,
-                "isFree": false
-            },
-            {
-                "number": 15,
-                "title": "Parte 15",
-                "description": "Episódio 15 de Meu Sim ao Rei da Máfia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/VBsvcXFotfU",
-                "durationSeconds": 936,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-de-ninguem-a-queridinha-dele",
-        "title": "De Ninguém a Queridinha Dele",
-        "slug": "de-ninguem-a-queridinha-dele",
-        "synopsis": "Acompanhe a emocionante história de De Ninguém a Queridinha Dele, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/MWpY4N1pVRE/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/MWpY4N1pVRE/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 12851,
-        "likesCount": 4497,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de De Ninguém a Queridinha Dele completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/MWpY4N1pVRE",
-                "durationSeconds": 1512,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "tdx-vinganca-de-sangue-a-justica-da-irma",
-        "title": "Vingança de Sangue: A Justiça da Irmã",
-        "slug": "vinganca-de-sangue-a-justica-da-irma",
-        "synopsis": "Humilhado no passado, o retorno triunfal para cobrar cada dívida e proteger quem ama abala as estruturas de todos os traidores em Vingança de Sangue: A Justiça da Irmã.",
-        "coverUrl": "https://img.youtube.com/vi/5kPkEC_DDs4/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/5kPkEC_DDs4/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,vinganca,poder,romance,drama",
-        "totalEpisodes": 4,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 29997,
-        "likesCount": 10498,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Vingança de Sangue: A Justiça da Irmã completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/5kPkEC_DDs4",
-                "durationSeconds": 1328,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Vingança de Sangue: A Justiça da Irmã completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/QpsbgVg1d60",
-                "durationSeconds": 1585,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Vingança de Sangue: A Justiça da Irmã completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/0Nw4V8OFC_g",
-                "durationSeconds": 1118,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Vingança de Sangue: A Justiça da Irmã completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Po7tYEJq6Yo",
-                "durationSeconds": 1371,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-dinheiro-caindo-sem-fim",
-        "title": "Dinheiro Caindo Sem Fim",
-        "slug": "dinheiro-caindo-sem-fim",
-        "synopsis": "Acompanhe a emocionante história de Dinheiro Caindo Sem Fim, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/wx7nUF8budU/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/wx7nUF8budU/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 3,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 30743,
-        "likesCount": 10760,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Dinheiro Caindo Sem Fim completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/wx7nUF8budU",
-                "durationSeconds": 912,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Dinheiro Caindo Sem Fim completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/nx2DyqU-214",
-                "durationSeconds": 604,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Dinheiro Caindo Sem Fim completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/9XuNBoJw3kI",
-                "durationSeconds": 1348,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-meu-dom-da-riqueza",
-        "title": "Meu Dom da Riqueza",
-        "slug": "meu-dom-da-riqueza",
-        "synopsis": "Acompanhe a emocionante história de Meu Dom da Riqueza, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/xSC6GZlCAQo/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/xSC6GZlCAQo/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 12,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 31846,
-        "likesCount": 11146,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Meu Dom da Riqueza completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/xSC6GZlCAQo",
-                "durationSeconds": 1327,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Meu Dom da Riqueza completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/3zablaYHrDg",
-                "durationSeconds": 2268,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Meu Dom da Riqueza completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/75f86RCpbrE",
-                "durationSeconds": 1347,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Meu Dom da Riqueza completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/WLnswxPlv5U",
-                "durationSeconds": 744,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de Meu Dom da Riqueza completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/6r9F-4XO9e4",
-                "durationSeconds": 2352,
-                "isFree": false
-            },
-            {
-                "number": 6,
-                "title": "Parte 6",
-                "description": "Episódio 6 de Meu Dom da Riqueza completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/YiOAnCzC900",
-                "durationSeconds": 762,
-                "isFree": false
-            },
-            {
-                "number": 7,
-                "title": "Parte 7",
-                "description": "Episódio 7 de Meu Dom da Riqueza completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/hXl-t7mn0RI",
-                "durationSeconds": 925,
-                "isFree": false
-            },
-            {
-                "number": 8,
-                "title": "Parte 8",
-                "description": "Episódio 8 de Meu Dom da Riqueza completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/j-pLNVCKBjA",
-                "durationSeconds": 2161,
-                "isFree": false
-            },
-            {
-                "number": 9,
-                "title": "Parte 9",
-                "description": "Episódio 9 de Meu Dom da Riqueza completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/vvkAOvzIPNU",
-                "durationSeconds": 1839,
-                "isFree": false
-            },
-            {
-                "number": 10,
-                "title": "Parte 10",
-                "description": "Episódio 10 de Meu Dom da Riqueza completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/t3WIWzuTAxg",
-                "durationSeconds": 825,
-                "isFree": false
-            },
-            {
-                "number": 11,
-                "title": "Parte 11",
-                "description": "Episódio 11 de Meu Dom da Riqueza completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/MtSKQc54ADc",
-                "durationSeconds": 1172,
-                "isFree": false
-            },
-            {
-                "number": 12,
-                "title": "Parte 12",
-                "description": "Episódio 12 de Meu Dom da Riqueza completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/gOeTuKeVtTY",
-                "durationSeconds": 2093,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-papai-campeao-esua-filha-da-sorte",
-        "title": "Papai Campeão esua Filha da Sorte",
-        "slug": "papai-campeao-esua-filha-da-sorte",
-        "synopsis": "Acompanhe a emocionante história de Papai Campeão esua Filha da Sorte, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/7usOmQ-gsbY/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/7usOmQ-gsbY/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 8,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 11484,
-        "likesCount": 4019,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Papai Campeão esua Filha da Sorte completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/7usOmQ-gsbY",
-                "durationSeconds": 773,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Papai Campeão esua Filha da Sorte completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/tQoRJ--0HdY",
-                "durationSeconds": 779,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Papai Campeão esua Filha da Sorte completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/rmd9HeDGg-A",
-                "durationSeconds": 736,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Papai Campeão esua Filha da Sorte completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/J__0WLoxNYM",
-                "durationSeconds": 852,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de Papai Campeão esua Filha da Sorte completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/u-4rrSwm9UE",
-                "durationSeconds": 787,
-                "isFree": false
-            },
-            {
-                "number": 6,
-                "title": "Parte 6",
-                "description": "Episódio 6 de Papai Campeão esua Filha da Sorte completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/bXzwQwJf7FQ",
-                "durationSeconds": 761,
-                "isFree": false
-            },
-            {
-                "number": 7,
-                "title": "Parte 7",
-                "description": "Episódio 7 de Papai Campeão esua Filha da Sorte completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/HAScXgbsd1I",
-                "durationSeconds": 442,
-                "isFree": false
-            },
-            {
-                "number": 8,
-                "title": "Parte 8",
-                "description": "Episódio 8 de Papai Campeão esua Filha da Sorte completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/bdtaV_HLH2U",
-                "durationSeconds": 719,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-recuperando-nossa-melodia",
-        "title": "Recuperando Nossa Melodia",
-        "slug": "recuperando-nossa-melodia",
-        "synopsis": "Acompanhe a emocionante história de Recuperando Nossa Melodia, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/9NemnDAxdAA/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/9NemnDAxdAA/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 10,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 28621,
-        "likesCount": 10017,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Recuperando Nossa Melodia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/9NemnDAxdAA",
-                "durationSeconds": 816,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Recuperando Nossa Melodia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/qr56NNe8XZE",
-                "durationSeconds": 885,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Recuperando Nossa Melodia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/C3gMLrWA8g8",
-                "durationSeconds": 1096,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Recuperando Nossa Melodia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/baITob8tI_E",
-                "durationSeconds": 932,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de Recuperando Nossa Melodia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/JrAeHz4WPKs",
-                "durationSeconds": 1053,
-                "isFree": false
-            },
-            {
-                "number": 6,
-                "title": "Parte 6",
-                "description": "Episódio 6 de Recuperando Nossa Melodia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/YNzCSiHuoZk",
-                "durationSeconds": 918,
-                "isFree": false
-            },
-            {
-                "number": 7,
-                "title": "Parte 7",
-                "description": "Episódio 7 de Recuperando Nossa Melodia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/JADMHfq8IW8",
-                "durationSeconds": 855,
-                "isFree": false
-            },
-            {
-                "number": 8,
-                "title": "Parte 8",
-                "description": "Episódio 8 de Recuperando Nossa Melodia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/xgw0fUedLXY",
-                "durationSeconds": 910,
-                "isFree": false
-            },
-            {
-                "number": 9,
-                "title": "Parte 9",
-                "description": "Episódio 9 de Recuperando Nossa Melodia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/rUqvXoVDvKA",
-                "durationSeconds": 953,
-                "isFree": false
-            },
-            {
-                "number": 10,
-                "title": "Parte 10",
-                "description": "Episódio 10 de Recuperando Nossa Melodia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/uFVVhoSGgO8",
-                "durationSeconds": 972,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-de-zombado-a-imparavel",
-        "title": "De Zombado a Imparável",
-        "slug": "de-zombado-a-imparavel",
-        "synopsis": "Acompanhe a emocionante história de De Zombado a Imparável, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/6-0a1Gx2AKA/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/6-0a1Gx2AKA/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 4,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 15099,
-        "likesCount": 5284,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de De Zombado a Imparável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/6-0a1Gx2AKA",
-                "durationSeconds": 1046,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de De Zombado a Imparável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/WOm8djT_h8A",
-                "durationSeconds": 846,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de De Zombado a Imparável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/zEN3hlqblzA",
-                "durationSeconds": 1083,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de De Zombado a Imparável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/vWQLqDSVDyo",
-                "durationSeconds": 1046,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-amanha-sera-minha-vez",
-        "title": "Amanhã Será Minha Vez",
-        "slug": "amanha-sera-minha-vez",
-        "synopsis": "Acompanhe a emocionante história de Amanhã Será Minha Vez, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/qFTyLLjlhQM/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/qFTyLLjlhQM/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 26096,
-        "likesCount": 9133,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Amanhã Será Minha Vez completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/qFTyLLjlhQM",
-                "durationSeconds": 915,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "tdx-meu-bilionarioimplacavel",
-        "title": "Meu BilionárioImplacável",
-        "slug": "meu-bilionarioimplacavel",
-        "synopsis": "Um poderoso magnata acostumado a comandar impérios descobre que o verdadeiro amor não tem preço quando seu destino cruza com uma mulher destemida em Meu BilionárioImplacável.",
-        "coverUrl": "https://img.youtube.com/vi/kfmMZjA1Tq0/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/kfmMZjA1Tq0/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,bilionario,ceo,luxo,romance,drama",
-        "totalEpisodes": 18,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 18582,
-        "likesCount": 6503,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Meu BilionárioImplacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/kfmMZjA1Tq0",
-                "durationSeconds": 1497,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Meu BilionárioImplacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/jFaCgPO_LXE",
-                "durationSeconds": 1522,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Meu BilionárioImplacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/7P0awVyH-9Y",
-                "durationSeconds": 1510,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Meu BilionárioImplacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/fk0aHyNkr3s",
-                "durationSeconds": 1072,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de Meu BilionárioImplacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/2uXWGIaLaWU",
-                "durationSeconds": 949,
-                "isFree": false
-            },
-            {
-                "number": 6,
-                "title": "Parte 6",
-                "description": "Episódio 6 de Meu BilionárioImplacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/21LlGPMsGrc",
-                "durationSeconds": 1328,
-                "isFree": false
-            },
-            {
-                "number": 7,
-                "title": "Parte 7",
-                "description": "Episódio 7 de Meu BilionárioImplacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/lQpvIupewgI",
-                "durationSeconds": 191,
-                "isFree": false
-            },
-            {
-                "number": 8,
-                "title": "Parte 8",
-                "description": "Episódio 8 de Meu BilionárioImplacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/LgjpxVhhAzw",
-                "durationSeconds": 1323,
-                "isFree": false
-            },
-            {
-                "number": 9,
-                "title": "Parte 9",
-                "description": "Episódio 9 de Meu BilionárioImplacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/B18q9nyk-sY",
-                "durationSeconds": 1030,
-                "isFree": false
-            },
-            {
-                "number": 10,
-                "title": "Parte 10",
-                "description": "Episódio 10 de Meu BilionárioImplacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/0dQIv7S1fp4",
-                "durationSeconds": 1447,
-                "isFree": false
-            },
-            {
-                "number": 11,
-                "title": "Parte 11",
-                "description": "Episódio 11 de Meu BilionárioImplacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/5DN1Cmkd7hY",
-                "durationSeconds": 186,
-                "isFree": false
-            },
-            {
-                "number": 12,
-                "title": "Parte 12",
-                "description": "Episódio 12 de Meu BilionárioImplacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/JfrJergAUTI",
-                "durationSeconds": 1354,
-                "isFree": false
-            },
-            {
-                "number": 13,
-                "title": "Parte 13",
-                "description": "Episódio 13 de Meu BilionárioImplacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/IMAbDUfBkVU",
-                "durationSeconds": 1328,
-                "isFree": false
-            },
-            {
-                "number": 14,
-                "title": "Parte 14",
-                "description": "Episódio 14 de Meu BilionárioImplacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/uxRSLvia3bw",
-                "durationSeconds": 1103,
-                "isFree": false
-            },
-            {
-                "number": 15,
-                "title": "Parte 15",
-                "description": "Episódio 15 de Meu BilionárioImplacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/zZ41JBW0-UM",
-                "durationSeconds": 1035,
-                "isFree": false
-            },
-            {
-                "number": 16,
-                "title": "Parte 16",
-                "description": "Episódio 16 de Meu BilionárioImplacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/YzUt-AU5AK0",
-                "durationSeconds": 191,
-                "isFree": false
-            },
-            {
-                "number": 17,
-                "title": "Parte 17",
-                "description": "Episódio 17 de Meu BilionárioImplacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/BYs3juof7Rg",
-                "durationSeconds": 1371,
-                "isFree": false
-            },
-            {
-                "number": 18,
-                "title": "Parte 18",
-                "description": "Episódio 18 de Meu BilionárioImplacável completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/qhalrn4qZLo",
-                "durationSeconds": 1323,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-a-tutora-e-o-rebelde",
-        "title": "A Tutora e o Rebelde",
-        "slug": "a-tutora-e-o-rebelde",
-        "synopsis": "Acompanhe a emocionante história de A Tutora e o Rebelde, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/3_WZbiGf5E0/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/3_WZbiGf5E0/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 16,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 23218,
-        "likesCount": 8126,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de A Tutora e o Rebelde completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/3_WZbiGf5E0",
-                "durationSeconds": 997,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de A Tutora e o Rebelde completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/_d0GaFHz2v4",
-                "durationSeconds": 997,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de A Tutora e o Rebelde completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/LPrwEEcfX4U",
-                "durationSeconds": 357,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de A Tutora e o Rebelde completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/tECGdRguQ2w",
-                "durationSeconds": 1067,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de A Tutora e o Rebelde completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/lkPlEC6I6MQ",
-                "durationSeconds": 911,
-                "isFree": false
-            },
-            {
-                "number": 6,
-                "title": "Parte 6",
-                "description": "Episódio 6 de A Tutora e o Rebelde completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/hrQWXQqBWgg",
-                "durationSeconds": 858,
-                "isFree": false
-            },
-            {
-                "number": 7,
-                "title": "Parte 7",
-                "description": "Episódio 7 de A Tutora e o Rebelde completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/RoId0hgMb78",
-                "durationSeconds": 679,
-                "isFree": false
-            },
-            {
-                "number": 8,
-                "title": "Parte 8",
-                "description": "Episódio 8 de A Tutora e o Rebelde completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/0j2mPOw05wM",
-                "durationSeconds": 831,
-                "isFree": false
-            },
-            {
-                "number": 9,
-                "title": "Parte 9",
-                "description": "Episódio 9 de A Tutora e o Rebelde completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/swK7RrYeAI4",
-                "durationSeconds": 490,
-                "isFree": false
-            },
-            {
-                "number": 10,
-                "title": "Parte 10",
-                "description": "Episódio 10 de A Tutora e o Rebelde completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/q4kZqrH4BUo",
-                "durationSeconds": 779,
-                "isFree": false
-            },
-            {
-                "number": 11,
-                "title": "Parte 11",
-                "description": "Episódio 11 de A Tutora e o Rebelde completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Kc3hQjnzNTE",
-                "durationSeconds": 353,
-                "isFree": false
-            },
-            {
-                "number": 12,
-                "title": "Parte 12",
-                "description": "Episódio 12 de A Tutora e o Rebelde completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/HYHXzDOBFPA",
-                "durationSeconds": 1020,
-                "isFree": false
-            },
-            {
-                "number": 13,
-                "title": "Parte 13",
-                "description": "Episódio 13 de A Tutora e o Rebelde completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/ULqed5NLoRg",
-                "durationSeconds": 692,
-                "isFree": false
-            },
-            {
-                "number": 14,
-                "title": "Parte 14",
-                "description": "Episódio 14 de A Tutora e o Rebelde completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Z_1dA1qIoX4",
-                "durationSeconds": 597,
-                "isFree": false
-            },
-            {
-                "number": 15,
-                "title": "Parte 15",
-                "description": "Episódio 15 de A Tutora e o Rebelde completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Y56gKp0yU9g",
-                "durationSeconds": 377,
-                "isFree": false
-            },
-            {
-                "number": 16,
-                "title": "Parte 16",
-                "description": "Episódio 16 de A Tutora e o Rebelde completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/TDPdsexL-9o",
-                "durationSeconds": 932,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-o-lado-oculto-do-marido",
-        "title": "O Lado Oculto do Marido",
-        "slug": "o-lado-oculto-do-marido",
-        "synopsis": "Acompanhe a emocionante história de O Lado Oculto do Marido, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/PBtMjSOxh7s/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/PBtMjSOxh7s/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 7,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 21863,
-        "likesCount": 7652,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de O Lado Oculto do Marido completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/PBtMjSOxh7s",
-                "durationSeconds": 1180,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de O Lado Oculto do Marido completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/akEHj341YPg",
-                "durationSeconds": 195,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de O Lado Oculto do Marido completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/j9uEPooBgQM",
-                "durationSeconds": 523,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de O Lado Oculto do Marido completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/f6_5bdwj42s",
-                "durationSeconds": 195,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de O Lado Oculto do Marido completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/VcSEIOankgo",
-                "durationSeconds": 1230,
-                "isFree": false
-            },
-            {
-                "number": 6,
-                "title": "Parte 6",
-                "description": "Episódio 6 de O Lado Oculto do Marido completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/mZ92bL84JPE",
-                "durationSeconds": 1183,
-                "isFree": false
-            },
-            {
-                "number": 7,
-                "title": "Parte 7",
-                "description": "Episódio 7 de O Lado Oculto do Marido completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/BgFNsMss9u0",
-                "durationSeconds": 523,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-ascensao-do-pequeno-mestre",
-        "title": "Ascensão do Pequeno Mestre",
-        "slug": "ascensao-do-pequeno-mestre",
-        "synopsis": "Acompanhe a emocionante história de Ascensão do Pequeno Mestre, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/cGsnblGs0DI/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/cGsnblGs0DI/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 4,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 16643,
-        "likesCount": 5825,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Ascensão do Pequeno Mestre completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/cGsnblGs0DI",
-                "durationSeconds": 286,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Ascensão do Pequeno Mestre completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/f7SuvBFapmc",
-                "durationSeconds": 584,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Ascensão do Pequeno Mestre completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/qiLqKk-owWk",
-                "durationSeconds": 331,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Ascensão do Pequeno Mestre completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/DP2F911cqSI",
-                "durationSeconds": 453,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-magnata-secreto-amor-revelado",
-        "title": "Magnata Secreto Amor Revelado",
-        "slug": "magnata-secreto-amor-revelado",
-        "synopsis": "Um poderoso magnata acostumado a comandar impérios descobre que o verdadeiro amor não tem preço quando seu destino cruza com uma mulher destemida em Magnata Secreto Amor Revelado.",
-        "coverUrl": "https://img.youtube.com/vi/RDju7xmaPp4/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/RDju7xmaPp4/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 13077,
-        "likesCount": 4576,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Magnata Secreto Amor Revelado completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/RDju7xmaPp4",
-                "durationSeconds": 644,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "tdx-acao-de-gracas-em-familia",
-        "title": "Ação de Graças em Família",
-        "slug": "acao-de-gracas-em-familia",
-        "synopsis": "Acompanhe a emocionante história de Ação de Graças em Família, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/aagB7L5z6fM/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/aagB7L5z6fM/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 9,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 32509,
-        "likesCount": 11378,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Ação de Graças em Família completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/aagB7L5z6fM",
-                "durationSeconds": 1196,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Ação de Graças em Família completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/JJtxP3HSmT0",
-                "durationSeconds": 512,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Ação de Graças em Família completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/esNQqRSrzAI",
-                "durationSeconds": 248,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Ação de Graças em Família completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/QjTnz6huDSs",
-                "durationSeconds": 823,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de Ação de Graças em Família completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/5JU6p2qeMdk",
-                "durationSeconds": 429,
-                "isFree": false
-            },
-            {
-                "number": 6,
-                "title": "Parte 6",
-                "description": "Episódio 6 de Ação de Graças em Família completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/84QgDzKNT4o",
-                "durationSeconds": 1398,
-                "isFree": false
-            },
-            {
-                "number": 7,
-                "title": "Parte 7",
-                "description": "Episódio 7 de Ação de Graças em Família completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/qH8gMwqrr1w",
-                "durationSeconds": 509,
-                "isFree": false
-            },
-            {
-                "number": 8,
-                "title": "Parte 8",
-                "description": "Episódio 8 de Ação de Graças em Família completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/A-CioPjPPo8",
-                "durationSeconds": 1007,
-                "isFree": false
-            },
-            {
-                "number": 9,
-                "title": "Parte 9",
-                "description": "Episódio 9 de Ação de Graças em Família completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Dw06d8sSbFc",
-                "durationSeconds": 1040,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-o-preco-do-seu-adeus",
-        "title": "O Preço do Seu Adeus",
-        "slug": "o-preco-do-seu-adeus",
-        "synopsis": "Acompanhe a emocionante história de O Preço do Seu Adeus, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/KlIYdNZnMNQ/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/KlIYdNZnMNQ/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 29867,
-        "likesCount": 10453,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de O Preço do Seu Adeus completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/KlIYdNZnMNQ",
-                "durationSeconds": 1469,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "tdx-do-nada-ao-heroi-marido-com-supervisao",
-        "title": "Do Nada ao Herói: Marido com Supervisão",
-        "slug": "do-nada-ao-heroi-marido-com-supervisao",
-        "synopsis": "Acompanhe a emocionante história de Do Nada ao Herói: Marido com Supervisão, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/v81cJc8IVy8/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/v81cJc8IVy8/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 15,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 11255,
-        "likesCount": 3939,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Do Nada ao Herói: Marido com Supervisão completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/v81cJc8IVy8",
-                "durationSeconds": 1755,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Do Nada ao Herói: Marido com Supervisão completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/LoK6fTZPzeU",
-                "durationSeconds": 801,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Do Nada ao Herói: Marido com Supervisão completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/spIRmxPiRtM",
-                "durationSeconds": 328,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Do Nada ao Herói: Marido com Supervisão completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/tAjhzy0EyXM",
-                "durationSeconds": 563,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de Do Nada ao Herói: Marido com Supervisão completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/JgyTHuDwmm0",
-                "durationSeconds": 1032,
-                "isFree": false
-            },
-            {
-                "number": 6,
-                "title": "Parte 6",
-                "description": "Episódio 6 de Do Nada ao Herói: Marido com Supervisão completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/nzX7__XysPs",
-                "durationSeconds": 328,
-                "isFree": false
-            },
-            {
-                "number": 7,
-                "title": "Parte 7",
-                "description": "Episódio 7 de Do Nada ao Herói: Marido com Supervisão completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/DbUeqjzDERY",
-                "durationSeconds": 1810,
-                "isFree": false
-            },
-            {
-                "number": 8,
-                "title": "Parte 8",
-                "description": "Episódio 8 de Do Nada ao Herói: Marido com Supervisão completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/ZRRSauuyD0c",
-                "durationSeconds": 1806,
-                "isFree": false
-            },
-            {
-                "number": 9,
-                "title": "Parte 9",
-                "description": "Episódio 9 de Do Nada ao Herói: Marido com Supervisão completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/BOdQ_AyHya8",
-                "durationSeconds": 1238,
-                "isFree": false
-            },
-            {
-                "number": 10,
-                "title": "Parte 10",
-                "description": "Episódio 10 de Do Nada ao Herói: Marido com Supervisão completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/oZGXJXgi-so",
-                "durationSeconds": 1955,
-                "isFree": false
-            },
-            {
-                "number": 11,
-                "title": "Parte 11",
-                "description": "Episódio 11 de Do Nada ao Herói: Marido com Supervisão completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/gmps7jcw0fQ",
-                "durationSeconds": 1692,
-                "isFree": false
-            },
-            {
-                "number": 12,
-                "title": "Parte 12",
-                "description": "Episódio 12 de Do Nada ao Herói: Marido com Supervisão completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/WpUb3KcVzpI",
-                "durationSeconds": 1800,
-                "isFree": false
-            },
-            {
-                "number": 13,
-                "title": "Parte 13",
-                "description": "Episódio 13 de Do Nada ao Herói: Marido com Supervisão completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/s8R147VWxdU",
-                "durationSeconds": 682,
-                "isFree": false
-            },
-            {
-                "number": 14,
-                "title": "Parte 14",
-                "description": "Episódio 14 de Do Nada ao Herói: Marido com Supervisão completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/gMsii3t8g6M",
-                "durationSeconds": 1800,
-                "isFree": false
-            },
-            {
-                "number": 15,
-                "title": "Parte 15",
-                "description": "Episódio 15 de Do Nada ao Herói: Marido com Supervisão completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/EkLDWZ8Xeng",
-                "durationSeconds": 723,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-traicao-do-beneficiado",
-        "title": "Traição do Beneficiado",
-        "slug": "traicao-do-beneficiado",
-        "synopsis": "Acompanhe a emocionante história de Traição do Beneficiado, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/zdbq9OOFqtU/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/zdbq9OOFqtU/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 4,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 28766,
-        "likesCount": 10068,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Traição do Beneficiado completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/zdbq9OOFqtU",
-                "durationSeconds": 296,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Traição do Beneficiado completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/4YgeDFv3cXg",
-                "durationSeconds": 355,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Traição do Beneficiado completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/ZrGeaS_94lQ",
-                "durationSeconds": 225,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Traição do Beneficiado completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/FFWynHm8ekQ",
-                "durationSeconds": 1354,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-herdeira-retoma-seu-trono",
-        "title": "Herdeira Retoma Seu Trono",
-        "slug": "herdeira-retoma-seu-trono",
-        "synopsis": "Acompanhe a emocionante história de Herdeira Retoma Seu Trono, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/2Zl5Ff_z_r0/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/2Zl5Ff_z_r0/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 5,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 33155,
-        "likesCount": 11604,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Herdeira Retoma Seu Trono completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/2Zl5Ff_z_r0",
-                "durationSeconds": 986,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Herdeira Retoma Seu Trono completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/1ZWoOrS97-E",
-                "durationSeconds": 665,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Herdeira Retoma Seu Trono completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Uir9hommvqU",
-                "durationSeconds": 711,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Herdeira Retoma Seu Trono completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/lhmaG78Vs1A",
-                "durationSeconds": 1565,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de Herdeira Retoma Seu Trono completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/IZfAjnI8Y-I",
-                "durationSeconds": 675,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-a-familia-perfeita-da-garota-planta",
-        "title": "A Família Perfeita da Garota Planta",
-        "slug": "a-familia-perfeita-da-garota-planta",
-        "synopsis": "Acompanhe a emocionante história de A Família Perfeita da Garota Planta, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/nXYuJ0dDvNs/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/nXYuJ0dDvNs/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 4,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 26264,
-        "likesCount": 9192,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de A Família Perfeita da Garota Planta completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/nXYuJ0dDvNs",
-                "durationSeconds": 1492,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de A Família Perfeita da Garota Planta completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/-tv3NEA20bM",
-                "durationSeconds": 255,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de A Família Perfeita da Garota Planta completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/hmbvb01tdic",
-                "durationSeconds": 1134,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de A Família Perfeita da Garota Planta completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/A-osQJV7rJ4",
-                "durationSeconds": 1308,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-casal-de-poder-supremo",
-        "title": "Casal de Poder Supremo",
-        "slug": "casal-de-poder-supremo",
-        "synopsis": "Acompanhe a emocionante história de Casal de Poder Supremo, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/dscb7VqeE8M/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/dscb7VqeE8M/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 5,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 16862,
-        "likesCount": 5901,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Casal de Poder Supremo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/dscb7VqeE8M",
-                "durationSeconds": 1319,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Casal de Poder Supremo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/ISaKmfE-i80",
-                "durationSeconds": 1022,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Casal de Poder Supremo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/DJmokS36e4A",
-                "durationSeconds": 1205,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Casal de Poder Supremo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/eU3_WRZiyYM",
-                "durationSeconds": 1086,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de Casal de Poder Supremo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/de53XacjgUo",
-                "durationSeconds": 1224,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-ele-nao-conhece-misericordia",
-        "title": "Ele Não Conhece Misericórdia",
-        "slug": "ele-nao-conhece-misericordia",
-        "synopsis": "Acompanhe a emocionante história de Ele Não Conhece Misericórdia, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/el_A7nPzBKI/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/el_A7nPzBKI/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 5,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 33733,
-        "likesCount": 11806,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Ele Não Conhece Misericórdia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/el_A7nPzBKI",
-                "durationSeconds": 1092,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Ele Não Conhece Misericórdia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/LdLi6o9-LLo",
-                "durationSeconds": 888,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Ele Não Conhece Misericórdia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/FPq27QU0zeY",
-                "durationSeconds": 1153,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Ele Não Conhece Misericórdia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/D_eKFH9JdmA",
-                "durationSeconds": 1595,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de Ele Não Conhece Misericórdia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/N1g2CZpw7Eo",
-                "durationSeconds": 849,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-poder-alem-do-olhar",
-        "title": "Poder Além do Olhar",
-        "slug": "poder-alem-do-olhar",
-        "synopsis": "Acompanhe a emocionante história de Poder Além do Olhar, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/-xYMAmUnHVU/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/-xYMAmUnHVU/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 13304,
-        "likesCount": 4656,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Poder Além do Olhar completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/-xYMAmUnHVU",
-                "durationSeconds": 1719,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "tdx-acenda-meu-fogo",
-        "title": "Acenda meu fogo",
-        "slug": "acenda-meu-fogo",
-        "synopsis": "Acompanhe a emocionante história de Acenda meu fogo, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/PRTJSgGl7Jg/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/PRTJSgGl7Jg/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 11,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 29735,
-        "likesCount": 10407,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Acenda meu fogo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/PRTJSgGl7Jg",
-                "durationSeconds": 413,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Acenda meu fogo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/JaxRSqL0cfI",
-                "durationSeconds": 413,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Acenda meu fogo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/JG19p0Auhfo",
-                "durationSeconds": 567,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Acenda meu fogo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/w9zJ-U7HKqQ",
-                "durationSeconds": 337,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de Acenda meu fogo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Px4AmmTjGUU",
-                "durationSeconds": 203,
-                "isFree": false
-            },
-            {
-                "number": 6,
-                "title": "Parte 6",
-                "description": "Episódio 6 de Acenda meu fogo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/FXf41JoLLBs",
-                "durationSeconds": 441,
-                "isFree": false
-            },
-            {
-                "number": 7,
-                "title": "Parte 7",
-                "description": "Episódio 7 de Acenda meu fogo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/2ERBbS1rwfU",
-                "durationSeconds": 446,
-                "isFree": false
-            },
-            {
-                "number": 8,
-                "title": "Parte 8",
-                "description": "Episódio 8 de Acenda meu fogo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/ut_gHjH1isM",
-                "durationSeconds": 235,
-                "isFree": false
-            },
-            {
-                "number": 9,
-                "title": "Parte 9",
-                "description": "Episódio 9 de Acenda meu fogo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/nmMH8pnU8x4",
-                "durationSeconds": 554,
-                "isFree": false
-            },
-            {
-                "number": 10,
-                "title": "Parte 10",
-                "description": "Episódio 10 de Acenda meu fogo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/UicTcrMlrWw",
-                "durationSeconds": 471,
-                "isFree": false
-            },
-            {
-                "number": 11,
-                "title": "Parte 11",
-                "description": "Episódio 11 de Acenda meu fogo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Y4xzIGx5f4E",
-                "durationSeconds": 394,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-meus-cinco-maridos-bestiais",
-        "title": "Meus Cinco Maridos Bestiais",
-        "slug": "meus-cinco-maridos-bestiais",
-        "synopsis": "Acompanhe a emocionante história de Meus Cinco Maridos Bestiais, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/FJXGfAR2b1A/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/FJXGfAR2b1A/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 2,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 9650,
-        "likesCount": 3377,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Meus Cinco Maridos Bestiais completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/FJXGfAR2b1A",
-                "durationSeconds": 2045,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Meus Cinco Maridos Bestiais completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/g5BeiBFfM-8",
-                "durationSeconds": 959,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-a-irma-errada-na-cama-dele",
-        "title": "A Irmã Errada na Cama Dele",
-        "slug": "a-irma-errada-na-cama-dele",
-        "synopsis": "Acompanhe a emocionante história de A Irmã Errada na Cama Dele, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/1HF9wzaSnMM/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/1HF9wzaSnMM/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 2,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 30978,
-        "likesCount": 10842,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de A Irmã Errada na Cama Dele completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/1HF9wzaSnMM",
-                "durationSeconds": 1804,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de A Irmã Errada na Cama Dele completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/6TsgSwDpv-o",
-                "durationSeconds": 1709,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-o-contrato-do-nosso-destino",
-        "title": "O Contrato do Nosso Destino",
-        "slug": "o-contrato-do-nosso-destino",
-        "synopsis": "Um matrimônio selado por conveniência e obrigações familiares esconde sentimentos intensos e segredos proibidos em O Contrato do Nosso Destino.",
-        "coverUrl": "https://img.youtube.com/vi/A9zXHkpsh7g/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/A9zXHkpsh7g/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 5,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 28909,
-        "likesCount": 10118,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de O Contrato do Nosso Destino completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/A9zXHkpsh7g",
-                "durationSeconds": 1378,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de O Contrato do Nosso Destino completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/IY63lJbCiPI",
-                "durationSeconds": 1066,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de O Contrato do Nosso Destino completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/M8wIkCBVP_s",
-                "durationSeconds": 1279,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de O Contrato do Nosso Destino completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Ptm7GwIN2Nc",
-                "durationSeconds": 1377,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de O Contrato do Nosso Destino completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/P51oFslkuPw",
-                "durationSeconds": 1314,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-quando-a-neve-derrete",
-        "title": "Quando a Neve Derrete",
-        "slug": "quando-a-neve-derrete",
-        "synopsis": "Acompanhe a emocionante história de Quando a Neve Derrete, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/jOrAkJwC5Qc/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/jOrAkJwC5Qc/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 4,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 34030,
-        "likesCount": 11910,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Quando a Neve Derrete completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/jOrAkJwC5Qc",
-                "durationSeconds": 897,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Quando a Neve Derrete completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/m1s5TDrGXwg",
-                "durationSeconds": 761,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Quando a Neve Derrete completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/VNfuimPeJ8Q",
-                "durationSeconds": 851,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Quando a Neve Derrete completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/DRaO6uH880M",
-                "durationSeconds": 1085,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-fera-do-amor",
-        "title": "Fera do Amor",
-        "slug": "fera-do-amor",
-        "synopsis": "Lendas ancestrais, vínculos eternos de almas gêmeas e batalhas ferozes pelo trono supremo revelam os maiores mistérios em Fera do Amor.",
-        "coverUrl": "https://img.youtube.com/vi/PshSv-qZYDg/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/PshSv-qZYDg/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 34469,
-        "likesCount": 12064,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Fera do Amor completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/PshSv-qZYDg",
-                "durationSeconds": 1454,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "tdx-o-pedreiro-e-a-bilionaria",
-        "title": "O Pedreiro e a Bilionária",
-        "slug": "o-pedreiro-e-a-bilionaria",
-        "synopsis": "Acompanhe a emocionante história de O Pedreiro e a Bilionária, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/2OIhdQYriug/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/2OIhdQYriug/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 13,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 34387,
-        "likesCount": 12035,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de O Pedreiro e a Bilionária completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/2OIhdQYriug",
-                "durationSeconds": 1293,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de O Pedreiro e a Bilionária completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/KNt36BqTjA0",
-                "durationSeconds": 1293,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de O Pedreiro e a Bilionária completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/AJmpNV_gFjk",
-                "durationSeconds": 1549,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de O Pedreiro e a Bilionária completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/J4DSCBX41Ac",
-                "durationSeconds": 1186,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de O Pedreiro e a Bilionária completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Uu0NEeAhJN8",
-                "durationSeconds": 1040,
-                "isFree": false
-            },
-            {
-                "number": 6,
-                "title": "Parte 6",
-                "description": "Episódio 6 de O Pedreiro e a Bilionária completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/SJojG-BhCdU",
-                "durationSeconds": 1492,
-                "isFree": false
-            },
-            {
-                "number": 7,
-                "title": "Parte 7",
-                "description": "Episódio 7 de O Pedreiro e a Bilionária completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/ZIETJ85UbjI",
-                "durationSeconds": 1691,
-                "isFree": false
-            },
-            {
-                "number": 8,
-                "title": "Parte 8",
-                "description": "Episódio 8 de O Pedreiro e a Bilionária completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/7ImQrtO4lJ4",
-                "durationSeconds": 1508,
-                "isFree": false
-            },
-            {
-                "number": 9,
-                "title": "Parte 9",
-                "description": "Episódio 9 de O Pedreiro e a Bilionária completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/aowkAKmMkk4",
-                "durationSeconds": 1155,
-                "isFree": false
-            },
-            {
-                "number": 10,
-                "title": "Parte 10",
-                "description": "Episódio 10 de O Pedreiro e a Bilionária completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/deO1Perm1hs",
-                "durationSeconds": 1293,
-                "isFree": false
-            },
-            {
-                "number": 11,
-                "title": "Parte 11",
-                "description": "Episódio 11 de O Pedreiro e a Bilionária completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/iultTP_nNdk",
-                "durationSeconds": 1187,
-                "isFree": false
-            },
-            {
-                "number": 12,
-                "title": "Parte 12",
-                "description": "Episódio 12 de O Pedreiro e a Bilionária completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Qo2sL9pi5fI",
-                "durationSeconds": 272,
-                "isFree": false
-            },
-            {
-                "number": 13,
-                "title": "Parte 13",
-                "description": "Episódio 13 de O Pedreiro e a Bilionária completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/iuAmps3opJ8",
-                "durationSeconds": 1810,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-o-cowboy-bilionario-escondido",
-        "title": "O Cowboy Bilionário Escondido",
-        "slug": "o-cowboy-bilionario-escondido",
-        "synopsis": "Um poderoso magnata acostumado a comandar impérios descobre que o verdadeiro amor não tem preço quando seu destino cruza com uma mulher destemida em O Cowboy Bilionário Escondido.",
-        "coverUrl": "https://img.youtube.com/vi/NPj4tpY2boo/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/NPj4tpY2boo/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,bilionario,ceo,luxo,romance,drama",
-        "totalEpisodes": 2,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 31093,
-        "likesCount": 10882,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de O Cowboy Bilionário Escondido completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/NPj4tpY2boo",
-                "durationSeconds": 252,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de O Cowboy Bilionário Escondido completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/yAIvb8ENQ2U",
-                "durationSeconds": 286,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-a-paixao-secreta-do-meu-marido",
-        "title": "A Paixão Secreta do Meu Marido",
-        "slug": "a-paixao-secreta-do-meu-marido",
-        "synopsis": "Marcados por feridas do passado, duas vidas encontram no afeto e na cumplicidade o caminho para a redenção e a felicidade em A Paixão Secreta do Meu Marido.",
-        "coverUrl": "https://img.youtube.com/vi/YE3W50AAWJE/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/YE3W50AAWJE/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 2,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 31534,
-        "likesCount": 11036,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de A Paixão Secreta do Meu Marido completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/YE3W50AAWJE",
-                "durationSeconds": 1334,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de A Paixão Secreta do Meu Marido completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/sIRPYUwfUIM",
-                "durationSeconds": 465,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-paixao-tabu-meu-meio-irmao",
-        "title": "Paixão Tabu: Meu Meio-Irmão",
-        "slug": "paixao-tabu-meu-meio-irmao",
-        "synopsis": "Marcados por feridas do passado, duas vidas encontram no afeto e na cumplicidade o caminho para a redenção e a felicidade em Paixão Tabu: Meu Meio-Irmão.",
-        "coverUrl": "https://img.youtube.com/vi/z1mt3s-KRXs/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/z1mt3s-KRXs/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 4,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 33005,
-        "likesCount": 11551,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Paixão Tabu: Meu Meio-Irmão completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/z1mt3s-KRXs",
-                "durationSeconds": 854,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Paixão Tabu: Meu Meio-Irmão completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/qq4hgwYdWRM",
-                "durationSeconds": 655,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Paixão Tabu: Meu Meio-Irmão completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Olzlm_tnE2w",
-                "durationSeconds": 1111,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Paixão Tabu: Meu Meio-Irmão completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/pnhHa_Ajdyk",
-                "durationSeconds": 1144,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-nascido-para-correr",
-        "title": "Nascido para Correr",
-        "slug": "nascido-para-correr",
-        "synopsis": "Acompanhe a emocionante história de Nascido para Correr, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/ZHNsSXQ0gow/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/ZHNsSXQ0gow/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,dublado,romance,drama",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 26598,
-        "likesCount": 9309,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Nascido para Correr completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbtu6fa",
-                "durationSeconds": 1243,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "tdx-venci-meu-passado-casando-com-ele",
-        "title": "Venci Meu Passado Casando com Ele",
-        "slug": "venci-meu-passado-casando-com-ele",
-        "synopsis": "Acompanhe a emocionante história de Venci Meu Passado Casando com Ele, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/6d9-WUef7u4/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/6d9-WUef7u4/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 5,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 33840,
-        "likesCount": 11844,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Venci Meu Passado Casando com Ele completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/6d9-WUef7u4",
-                "durationSeconds": 1220,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Venci Meu Passado Casando com Ele completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/r9FBgfXRXv0",
-                "durationSeconds": 1215,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Venci Meu Passado Casando com Ele completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/qseExkWUpfg",
-                "durationSeconds": 1189,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Venci Meu Passado Casando com Ele completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/DhrIwZfnlVo",
-                "durationSeconds": 1047,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de Venci Meu Passado Casando com Ele completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/bFUCihC5wPU",
-                "durationSeconds": 1220,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-paixao-proibida-pelo-pastor",
-        "title": "Paixão Proibida pelo Pastor",
-        "slug": "paixao-proibida-pelo-pastor",
-        "synopsis": "Marcados por feridas do passado, duas vidas encontram no afeto e na cumplicidade o caminho para a redenção e a felicidade em Paixão Proibida pelo Pastor.",
-        "coverUrl": "https://img.youtube.com/vi/bXOA9u00M1w/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/bXOA9u00M1w/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 5,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 27086,
-        "likesCount": 9480,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Paixão Proibida pelo Pastor completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/bXOA9u00M1w",
-                "durationSeconds": 913,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Paixão Proibida pelo Pastor completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/kpujzVTnkXo",
-                "durationSeconds": 1384,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Paixão Proibida pelo Pastor completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Lf0AYQr_3gQ",
-                "durationSeconds": 1467,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Paixão Proibida pelo Pastor completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/t3VEkyml8hY",
-                "durationSeconds": 727,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de Paixão Proibida pelo Pastor completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/nG3qCzmMIXo",
-                "durationSeconds": 1091,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-confesse-ou-seja-apagado",
-        "title": "Confesse ou Seja Apagado",
-        "slug": "confesse-ou-seja-apagado",
-        "synopsis": "Acompanhe a emocionante história de Confesse ou Seja Apagado, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/0f4Ao4igZno/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/0f4Ao4igZno/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 5,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 13755,
-        "likesCount": 4814,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Confesse ou Seja Apagado completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/0f4Ao4igZno",
-                "durationSeconds": 1562,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Confesse ou Seja Apagado completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/2FBvtr5M-4k",
-                "durationSeconds": 1306,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Confesse ou Seja Apagado completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/ieD4h6nFZE8",
-                "durationSeconds": 455,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Confesse ou Seja Apagado completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Sc4vZLHq2Ak",
-                "durationSeconds": 451,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de Confesse ou Seja Apagado completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/2J-SeI1b0Jk",
-                "durationSeconds": 456,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-casadainesperadamente-com-o-ceo",
-        "title": "CasadaInesperadamente com o CEO",
-        "slug": "casadainesperadamente-com-o-ceo",
-        "synopsis": "Um poderoso magnata acostumado a comandar impérios descobre que o verdadeiro amor não tem preço quando seu destino cruza com uma mulher destemida em CasadaInesperadamente com o CEO.",
-        "coverUrl": "https://img.youtube.com/vi/XqcxcKftddY/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/XqcxcKftddY/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,bilionario,ceo,luxo,casamento-arranjado,romance,drama",
-        "totalEpisodes": 3,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 32766,
-        "likesCount": 11468,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de CasadaInesperadamente com o CEO completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/XqcxcKftddY",
-                "durationSeconds": 899,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de CasadaInesperadamente com o CEO completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/A90d3hflGD4",
-                "durationSeconds": 184,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de CasadaInesperadamente com o CEO completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/u3tOlbSIxy4",
-                "durationSeconds": 875,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-memorias-de-um-inocente",
-        "title": "Memórias de Um Inocente",
-        "slug": "memorias-de-um-inocente",
-        "synopsis": "Acompanhe a emocionante história de Memórias de Um Inocente, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/bHwg0RIWzJg/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/bHwg0RIWzJg/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 3,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 29466,
-        "likesCount": 10313,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Memórias de Um Inocente completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/bHwg0RIWzJg",
-                "durationSeconds": 1215,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Memórias de Um Inocente completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/YzsogmX9cJs",
-                "durationSeconds": 1000,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Memórias de Um Inocente completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/hQ112Yw3EE0",
-                "durationSeconds": 1505,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-o-jogo-do-carma",
-        "title": "O Jogo do Carma",
-        "slug": "o-jogo-do-carma",
-        "synopsis": "Acompanhe a emocionante história de O Jogo do Carma, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/JuW1-jSj8Co/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/JuW1-jSj8Co/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 8,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 32927,
-        "likesCount": 11524,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de O Jogo do Carma completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/JuW1-jSj8Co",
-                "durationSeconds": 478,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de O Jogo do Carma completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/DZACibKfV8g",
-                "durationSeconds": 1656,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de O Jogo do Carma completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/4FZ7V60jaTk",
-                "durationSeconds": 1325,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de O Jogo do Carma completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/CCywqracNxM",
-                "durationSeconds": 1129,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de O Jogo do Carma completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/N7L4pCU4AdY",
-                "durationSeconds": 444,
-                "isFree": false
-            },
-            {
-                "number": 6,
-                "title": "Parte 6",
-                "description": "Episódio 6 de O Jogo do Carma completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/E5eo9zwPHiM",
-                "durationSeconds": 395,
-                "isFree": false
-            },
-            {
-                "number": 7,
-                "title": "Parte 7",
-                "description": "Episódio 7 de O Jogo do Carma completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/wdZLVUzXfho",
-                "durationSeconds": 351,
-                "isFree": false
-            },
-            {
-                "number": 8,
-                "title": "Parte 8",
-                "description": "Episódio 8 de O Jogo do Carma completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/phZFv0t_Gno",
-                "durationSeconds": 641,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-meu-bully-meu-irmao",
-        "title": "Meu Bully, Meu Irmão",
-        "slug": "meu-bully-meu-irmao",
-        "synopsis": "Acompanhe a emocionante história de Meu Bully, Meu Irmão, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/2rC64OkVIr0/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/2rC64OkVIr0/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 26762,
-        "likesCount": 9366,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Meu Bully, Meu Irmão completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/2rC64OkVIr0",
-                "durationSeconds": 359,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "tdx-a-coroa-do-mendigo-oculto",
-        "title": "A Coroa do Mendigo Oculto",
-        "slug": "a-coroa-do-mendigo-oculto",
-        "synopsis": "Acompanhe a emocionante história de A Coroa do Mendigo Oculto, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/l6eT8mlIhx8/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/l6eT8mlIhx8/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 17727,
-        "likesCount": 6204,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de A Coroa do Mendigo Oculto completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/l6eT8mlIhx8",
-                "durationSeconds": 1212,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "tdx-a-filha-do-inferno-chegou",
-        "title": "A Filha do Inferno Chegou",
-        "slug": "a-filha-do-inferno-chegou",
-        "synopsis": "Acompanhe a emocionante história de A Filha do Inferno Chegou, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/L2RgJ0pNGsI/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/L2RgJ0pNGsI/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 5,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 32848,
-        "likesCount": 11496,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de A Filha do Inferno Chegou completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/L2RgJ0pNGsI",
-                "durationSeconds": 887,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de A Filha do Inferno Chegou completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/7YJ4gbEfSeA",
-                "durationSeconds": 913,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de A Filha do Inferno Chegou completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/MEKMrkjcORg",
-                "durationSeconds": 893,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de A Filha do Inferno Chegou completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/r2Evq6UZmlE",
-                "durationSeconds": 795,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de A Filha do Inferno Chegou completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/lT5aKu-hOcY",
-                "durationSeconds": 911,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-meu-marido-bilionario-de-duas-caras",
-        "title": "Meu Marido Bilionário de Duas Caras",
-        "slug": "meu-marido-bilionario-de-duas-caras",
-        "synopsis": "Um poderoso magnata acostumado a comandar impérios descobre que o verdadeiro amor não tem preço quando seu destino cruza com uma mulher destemida em Meu Marido Bilionário de Duas Caras.",
-        "coverUrl": "https://img.youtube.com/vi/Wvz4x19DUUw/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/Wvz4x19DUUw/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,bilionario,ceo,luxo,romance,drama",
-        "totalEpisodes": 4,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 13980,
-        "likesCount": 4893,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Meu Marido Bilionário de Duas Caras completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Wvz4x19DUUw",
-                "durationSeconds": 321,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Meu Marido Bilionário de Duas Caras completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/EFuZGTi26SQ",
-                "durationSeconds": 226,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Meu Marido Bilionário de Duas Caras completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/1E2yM3dpWxw",
-                "durationSeconds": 227,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Meu Marido Bilionário de Duas Caras completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Zc8NSn_i6_w",
-                "durationSeconds": 454,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-o-beijo-que-virou-namoro",
-        "title": "O Beijo Que Virou Namoro",
-        "slug": "o-beijo-que-virou-namoro",
-        "synopsis": "Marcados por feridas do passado, duas vidas encontram no afeto e na cumplicidade o caminho para a redenção e a felicidade em O Beijo Que Virou Namoro.",
-        "coverUrl": "https://img.youtube.com/vi/m_rH6pll_mY/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/m_rH6pll_mY/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 26925,
-        "likesCount": 9423,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de O Beijo Que Virou Namoro completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/m_rH6pll_mY",
-                "durationSeconds": 800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "tdx-o-pacto-alem-do-estadio",
-        "title": "O Pacto Além do Estádio",
-        "slug": "o-pacto-alem-do-estadio",
-        "synopsis": "Acompanhe a emocionante história de O Pacto Além do Estádio, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/g_rDg7XzC4U/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/g_rDg7XzC4U/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 21066,
-        "likesCount": 7373,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de O Pacto Além do Estádio completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/g_rDg7XzC4U",
-                "durationSeconds": 1448,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "tdx-do-peso-a-gloria",
-        "title": "Do Peso à Glória",
-        "slug": "do-peso-a-gloria",
-        "synopsis": "Acompanhe a emocionante história de Do Peso à Glória, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/ZzS8mmueSoQ/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/ZzS8mmueSoQ/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 2,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 17728,
-        "likesCount": 6204,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Do Peso à Glória completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/ZzS8mmueSoQ",
-                "durationSeconds": 217,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Do Peso à Glória completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/rSuoH7HMwSw",
-                "durationSeconds": 297,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-toque-da-fortuna",
-        "title": "Toque da Fortuna",
-        "slug": "toque-da-fortuna",
-        "synopsis": "Acompanhe a emocionante história de Toque da Fortuna, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/tjzlQLwcyQU/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/tjzlQLwcyQU/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 5,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 14205,
-        "likesCount": 4971,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Toque da Fortuna completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/tjzlQLwcyQU",
-                "durationSeconds": 226,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Toque da Fortuna completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/X3Zyu6qZCrM",
-                "durationSeconds": 1008,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Toque da Fortuna completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/WBilrR7zU54",
-                "durationSeconds": 1058,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Toque da Fortuna completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/3K7GDG77wew",
-                "durationSeconds": 1029,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de Toque da Fortuna completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/PnsDiPrMmIU",
-                "durationSeconds": 751,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-amor-entre-a-nevoa",
-        "title": "Amor Entre a Névoa",
-        "slug": "amor-entre-a-nevoa",
-        "synopsis": "Marcados por feridas do passado, duas vidas encontram no afeto e na cumplicidade o caminho para a redenção e a felicidade em Amor Entre a Névoa.",
-        "coverUrl": "https://img.youtube.com/vi/r0fc7xWud1c/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/r0fc7xWud1c/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 29190,
-        "likesCount": 10216,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Amor Entre a Névoa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/r0fc7xWud1c",
-                "durationSeconds": 1211,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "tdx-beleza-frianova-vida",
-        "title": "Beleza FriaNova Vida",
-        "slug": "beleza-frianova-vida",
-        "synopsis": "Acompanhe a emocionante história de Beleza FriaNova Vida, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/j4hqwZ8dJ_c/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/j4hqwZ8dJ_c/hqdefault.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama",
-        "totalEpisodes": 4,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 31205,
-        "likesCount": 10921,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Beleza FriaNova Vida completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/j4hqwZ8dJ_c",
-                "durationSeconds": 962,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Beleza FriaNova Vida completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/QCovJ7QTx84",
-                "durationSeconds": 1103,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Beleza FriaNova Vida completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/AzWzdtVUKyY",
-                "durationSeconds": 1245,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Beleza FriaNova Vida completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/cEpLUMo1J1k",
-                "durationSeconds": 1178,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqo4m",
-        "title": "Domador Divino: Disputado pelas Feras",
-        "slug": "domador-divino-disputado-pelas-feras",
-        "synopsis": "Domador Divino: Disputado pelas Feras — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3861953,
-        "likesCount": 46343,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Domador Divino: Disputado pelas Feras completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqo4m",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqp9u",
-        "title": "O Ritual da Noiva Carmesim",
-        "slug": "o-ritual-da-noiva-carmesim",
-        "synopsis": "O Ritual da Noiva Carmesim — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3274170,
-        "likesCount": 39290,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Ritual da Noiva Carmesim completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqp9u",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqn32",
-        "title": "Seduzindo o Marido da Minha Irmã Pelas Costas",
-        "slug": "seduzindo-o-marido-da-minha-irma-pelas-costas",
-        "synopsis": "Seduzindo o Marido da Minha Irmã Pelas Costas — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3256695,
-        "likesCount": 39080,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Seduzindo o Marido da Minha Irmã Pelas Costas completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqn32",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqncq",
-        "title": "A Dragonesa Contra a Falsa Princesa",
-        "slug": "a-dragonesa-contra-a-falsa-princesa",
-        "synopsis": "A Dragonesa Contra a Falsa Princesa — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 1879449,
-        "likesCount": 22553,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Dragonesa Contra a Falsa Princesa completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqncq",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqnoy",
-        "title": "A Estagiária Genial",
-        "slug": "a-estagiaria-genial",
-        "synopsis": "A Estagiária Genial — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 2574561,
-        "likesCount": 30894,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Estagiária Genial completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqnoy",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqmla",
-        "title": "O Dia em que Deixei de Te Amar",
-        "slug": "o-dia-em-que-deixei-de-te-amar",
-        "synopsis": "O Dia em que Deixei de Te Amar — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3400698,
-        "likesCount": 40808,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Dia em que Deixei de Te Amar completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqmla",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqlze",
-        "title": "Invasão dos Insetos: A Vingança do Mago Divino",
-        "slug": "invasao-dos-insetos-a-vinganca-do-mago-divino",
-        "synopsis": "Invasão dos Insetos: A Vingança do Mago Divino — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3526069,
-        "likesCount": 42312,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Invasão dos Insetos: A Vingança do Mago Divino completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqlze",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvql2i",
-        "title": "Casada com o Tio do Ex-Noivo",
-        "slug": "casada-com-o-tio-do-ex-noivo",
-        "synopsis": "Casada com o Tio do Ex-Noivo — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3456521,
-        "likesCount": 41478,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Casada com o Tio do Ex-Noivo completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvql2i",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqlo2",
-        "title": "Ele Usa Seu Rosto",
-        "slug": "ele-usa-seu-rosto",
-        "synopsis": "Ele Usa Seu Rosto — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 2452398,
-        "likesCount": 29428,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Ele Usa Seu Rosto completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqlo2",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqlcm",
-        "title": "Casando com o Bilionário Amaldiçoado",
-        "slug": "casando-com-o-bilionario-amaldicoado",
-        "synopsis": "Casando com o Bilionário Amaldiçoado — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 1719556,
-        "likesCount": 20634,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Casando com o Bilionário Amaldiçoado completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqlcm",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqkpm",
-        "title": "A Vingança do Irmão",
-        "slug": "a-vinganca-do-irmao",
-        "synopsis": "A Vingança do Irmão — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3576500,
-        "likesCount": 42918,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Vingança do Irmão completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqkpm",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbviwoq",
-        "title": "Sem Misericórdia no Céu",
-        "slug": "sem-misericordia-no-ceu",
-        "synopsis": "Sem Misericórdia no Céu — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 4053386,
-        "likesCount": 48640,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Sem Misericórdia no Céu completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbviwoq",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvixdi",
-        "title": "Traição à Beira da Piscina",
-        "slug": "traicao-a-beira-da-piscina",
-        "synopsis": "Traição à Beira da Piscina — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 2261035,
-        "likesCount": 27132,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Traição à Beira da Piscina completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvixdi",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbviwc2",
-        "title": "Renascida: A Vingança Amorosa de uma Bombeira",
-        "slug": "renascida-a-vinganca-amorosa-de-uma-bombeira",
-        "synopsis": "Renascida: A Vingança Amorosa de uma Bombeira — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3290169,
-        "likesCount": 39482,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Renascida: A Vingança Amorosa de uma Bombeira completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbviwc2",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvip36",
-        "title": "Meu Chefe É Meu Marido de Contrato",
-        "slug": "meu-chefe-e-meu-marido-de-contrato",
-        "synopsis": "Meu Chefe É Meu Marido de Contrato — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 2861589,
-        "likesCount": 34339,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Meu Chefe É Meu Marido de Contrato completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvip36",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvh336",
-        "title": "A Menina e o Pai Partido",
-        "slug": "a-menina-e-o-pai-partido",
-        "synopsis": "A Menina e o Pai Partido — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 4064479,
-        "likesCount": 48773,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Menina e o Pai Partido completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvh336",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvh3ge",
-        "title": "A Noiva Foda do Bilionário Cadeirante",
-        "slug": "a-noiva-foda-do-bilionario-cadeirante",
-        "synopsis": "A Noiva Foda do Bilionário Cadeirante — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 4163805,
-        "likesCount": 49965,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Noiva Foda do Bilionário Cadeirante completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvh3ge",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvh0yy",
-        "title": "O Jogo dos Três Companheiros",
-        "slug": "o-jogo-dos-tres-companheiros",
-        "synopsis": "O Jogo dos Três Companheiros — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 2021061,
-        "likesCount": 24252,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Jogo dos Três Companheiros completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvh0yy",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvgz1m",
-        "title": "Amor Depois das Mentiras",
-        "slug": "amor-depois-das-mentiras",
-        "synopsis": "Amor Depois das Mentiras — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3676509,
-        "likesCount": 44118,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Amor Depois das Mentiras completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvgz1m",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbv6oma",
-        "title": "A Mentira Perfeita do Meu Marido",
-        "slug": "a-mentira-perfeita-do-meu-marido",
-        "synopsis": "A Mentira Perfeita do Meu Marido — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 2066535,
-        "likesCount": 24798,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Mentira Perfeita do Meu Marido completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbv6oma",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbv5z0e",
-        "title": "A Noiva Roubada do Rei Alfa",
-        "slug": "a-noiva-roubada-do-rei-alfa",
-        "synopsis": "A Noiva Roubada do Rei Alfa — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3029039,
-        "likesCount": 36348,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Noiva Roubada do Rei Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbv5z0e",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxeii",
-        "title": "Entendo os Animais Falando Mal de Mim",
-        "slug": "entendo-os-animais-falando-mal-de-mim",
-        "synopsis": "Entendo os Animais Falando Mal de Mim — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3373968,
-        "likesCount": 40487,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Entendo os Animais Falando Mal de Mim completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxeii",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuv4qy",
-        "title": "Sua Esposa Bilionária Foi Embora",
-        "slug": "sua-esposa-bilionaria-foi-embora",
-        "synopsis": "Sua Esposa Bilionária Foi Embora — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 1468049,
-        "likesCount": 17616,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Sua Esposa Bilionária Foi Embora completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuv4qy",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuv5l2",
-        "title": "Você Mexeu com a Herdeira Errada",
-        "slug": "voce-mexeu-com-a-herdeira-errada",
-        "synopsis": "Você Mexeu com a Herdeira Errada — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 4227712,
-        "likesCount": 50732,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Você Mexeu com a Herdeira Errada completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuv5l2",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuv46u",
-        "title": "O Marido Surdo Ouviu Tudo",
-        "slug": "o-marido-surdo-ouviu-tudo",
-        "synopsis": "O Marido Surdo Ouviu Tudo — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3029145,
-        "likesCount": 36349,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Marido Surdo Ouviu Tudo completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuv46u",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuv242",
-        "title": "Meu Noivo Era um Falso Mulherengo",
-        "slug": "meu-noivo-era-um-falso-mulherengo",
-        "synopsis": "Meu Noivo Era um Falso Mulherengo — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 1305259,
-        "likesCount": 15663,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Meu Noivo Era um Falso Mulherengo completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuv242",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuv4fq",
-        "title": "O Motorista Vale por um Exército",
-        "slug": "o-motorista-vale-por-um-exercito",
-        "synopsis": "O Motorista Vale por um Exército — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 2021906,
-        "likesCount": 24262,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Motorista Vale por um Exército completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuv4fq",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuv3d2",
-        "title": "O Bobinho Cativo do Dragão",
-        "slug": "o-bobinho-cativo-do-dragao",
-        "synopsis": "O Bobinho Cativo do Dragão — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3254342,
-        "likesCount": 39052,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Bobinho Cativo do Dragão completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuv3d2",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuv33a",
-        "title": "Minha Ex-Mulher é uma Bilionária Secreta",
-        "slug": "minha-ex-mulher-e-uma-bilionaria-secreta",
-        "synopsis": "Minha Ex-Mulher é uma Bilionária Secreta — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 2416509,
-        "likesCount": 28998,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Minha Ex-Mulher é uma Bilionária Secreta completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuv33a",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuuzj2",
-        "title": "Do Lixo à Riqueza: Senhor Bilionário do Oceano",
-        "slug": "do-lixo-a-riqueza-senhor-bilionario-do-oceano",
-        "synopsis": "Do Lixo à Riqueza: Senhor Bilionário do Oceano — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3679551,
-        "likesCount": 44154,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Do Lixo à Riqueza: Senhor Bilionário do Oceano completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuuzj2",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuv1qu",
-        "title": "Meu Marido Me Entregou ao Inimigo",
-        "slug": "meu-marido-me-entregou-ao-inimigo",
-        "synopsis": "Meu Marido Me Entregou ao Inimigo — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3784969,
-        "likesCount": 45419,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Meu Marido Me Entregou ao Inimigo completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuv1qu",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuv0ee",
-        "title": "Emagreci 55 Quilos e Larguei o Futuro Duque",
-        "slug": "emagreci-55-quilos-e-larguei-o-futuro-duque",
-        "synopsis": "Emagreci 55 Quilos e Larguei o Futuro Duque — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 4471049,
-        "likesCount": 53652,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Emagreci 55 Quilos e Larguei o Futuro Duque completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuv0ee",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuv0qu",
-        "title": "Grande Erro: Torturando o Bilionário Oculto",
-        "slug": "grande-erro-torturando-o-bilionario-oculto",
-        "synopsis": "Grande Erro: Torturando o Bilionário Oculto — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 4455916,
-        "likesCount": 53470,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Grande Erro: Torturando o Bilionário Oculto completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuv0qu",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuuxzy",
-        "title": "A Foto de Família Revelou a Verdade",
-        "slug": "a-foto-de-familia-revelou-a-verdade",
-        "synopsis": "A Foto de Família Revelou a Verdade — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3801923,
-        "likesCount": 45623,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Foto de Família Revelou a Verdade completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuuxzy",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuuyc6",
-        "title": "A Herdeira Assassina",
-        "slug": "a-herdeira-assassina",
-        "synopsis": "A Herdeira Assassina — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3727749,
-        "likesCount": 44732,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Herdeira Assassina completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuuyc6",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuuywa",
-        "title": "De Substituta a Seu Amor Inatingível",
-        "slug": "de-substituta-a-seu-amor-inatingivel",
-        "synopsis": "De Substituta a Seu Amor Inatingível — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3678718,
-        "likesCount": 44144,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "De Substituta a Seu Amor Inatingível completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuuywa",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuuvrm",
-        "title": "Laços Despedaçados dos Irmãos Fae",
-        "slug": "lacos-despedacados-dos-irmaos-fae",
-        "synopsis": "Laços Despedaçados dos Irmãos Fae — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3610542,
-        "likesCount": 43326,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Laços Despedaçados dos Irmãos Fae completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuuvrm",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuuxe6",
-        "title": "A Babá que Ouve os Bebês da Máfia",
-        "slug": "a-baba-que-ouve-os-bebes-da-mafia",
-        "synopsis": "A Babá que Ouve os Bebês da Máfia — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3373110,
-        "likesCount": 40477,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Babá que Ouve os Bebês da Máfia completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuuxe6",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuuwqy",
-        "title": "O Filho Brilha Sozinho",
-        "slug": "o-filho-brilha-sozinho",
-        "synopsis": "O Filho Brilha Sozinho — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 1783811,
-        "likesCount": 21405,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Filho Brilha Sozinho completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuuwqy",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuux2a",
-        "title": "O Filho do Deus-Rei e os Quatro Pestinhas do Apocalipse",
-        "slug": "o-filho-do-deus-rei-e-os-quatro-pestinhas-do-apocalipse",
-        "synopsis": "O Filho do Deus-Rei e os Quatro Pestinhas do Apocalipse — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 2810158,
-        "likesCount": 33721,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Filho do Deus-Rei e os Quatro Pestinhas do Apocalipse completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuux2a",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuuva2",
-        "title": "Guerra por Herança - A Verdadeira Herdeira",
-        "slug": "guerra-por-heranca-a-verdadeira-herdeira",
-        "synopsis": "Guerra por Herança - A Verdadeira Herdeira — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 1969921,
-        "likesCount": 23639,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Guerra por Herança - A Verdadeira Herdeira completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuuva2",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuuu5e",
-        "title": "Como Chutar um Craque da Bola",
-        "slug": "como-chutar-um-craque-da-bola",
-        "synopsis": "Como Chutar um Craque da Bola — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 1989136,
-        "likesCount": 23869,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Como Chutar um Craque da Bola completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuuu5e",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuuuem",
-        "title": "A Virgem Sacrificada Que Seduziu Um Deus",
-        "slug": "a-virgem-sacrificada-que-seduziu-um-deus",
-        "synopsis": "A Virgem Sacrificada Que Seduziu Um Deus — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 1264259,
-        "likesCount": 15171,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Virgem Sacrificada Que Seduziu Um Deus completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuuuem",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuoaqu",
-        "title": "Troquei de Marido com Minha Best",
-        "slug": "troquei-de-marido-com-minha-best",
-        "synopsis": "Troquei de Marido com Minha Best — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 2060435,
-        "likesCount": 24725,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Troquei de Marido com Minha Best completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuoaqu",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuo9ry",
-        "title": "Sincronia Sensorial",
-        "slug": "sincronia-sensorial",
-        "synopsis": "Sincronia Sensorial — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 2850187,
-        "likesCount": 34202,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Sincronia Sensorial completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuo9ry",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuo8ha",
-        "title": "Refém do Padrasto do Meu Ex",
-        "slug": "refem-do-padrasto-do-meu-ex",
-        "synopsis": "Refém do Padrasto do Meu Ex — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 2505608,
-        "likesCount": 30067,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Refém do Padrasto do Meu Ex completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuo8ha",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuo75q",
-        "title": "Os Trigêmeos do Rei Dragão",
-        "slug": "os-trigemeos-do-rei-dragao",
-        "synopsis": "Os Trigêmeos do Rei Dragão — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 4061991,
-        "likesCount": 48743,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Os Trigêmeos do Rei Dragão completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuo75q",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuo6by",
-        "title": "O Último Guerreiro Feroz",
-        "slug": "o-ultimo-guerreiro-feroz",
-        "synopsis": "O Último Guerreiro Feroz — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3025415,
-        "likesCount": 36304,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Último Guerreiro Feroz completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuo6by",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuo6m2",
-        "title": "Obsessão Atrás das Grades",
-        "slug": "obsessao-atras-das-grades",
-        "synopsis": "Obsessão Atrás das Grades — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 2185771,
-        "likesCount": 26229,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Obsessão Atrás das Grades completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuo6m2",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuny4u",
-        "title": "Da Prisão ao Serviço Secreto",
-        "slug": "da-prisao-ao-servico-secreto",
-        "synopsis": "Da Prisão ao Serviço Secreto — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 2053415,
-        "likesCount": 24640,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Da Prisão ao Serviço Secreto completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuny4u",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbul3za",
-        "title": "A Queridinha do Bilionário",
-        "slug": "a-queridinha-do-bilionario",
-        "synopsis": "A Queridinha do Bilionário — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3923509,
-        "likesCount": 47082,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Queridinha do Bilionário completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbul3za",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbukw9e",
-        "title": "Você Vai se Arrepender de Trair uma Super-Heroína",
-        "slug": "voce-vai-se-arrepender-de-trair-uma-super-heroina",
-        "synopsis": "Você Vai se Arrepender de Trair uma Super-Heroína — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 2593531,
-        "likesCount": 31122,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Você Vai se Arrepender de Trair uma Super-Heroína completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbukw9e",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbukuom",
-        "title": "O Monstro do Meu Namorado Me Quer",
-        "slug": "o-monstro-do-meu-namorado-me-quer",
-        "synopsis": "O Monstro do Meu Namorado Me Quer — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3680504,
-        "likesCount": 44166,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Monstro do Meu Namorado Me Quer completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbukuom",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuku6q",
-        "title": "O Dragão Me Escolheu",
-        "slug": "o-dragao-me-escolheu",
-        "synopsis": "O Dragão Me Escolheu — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3401403,
-        "likesCount": 40816,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Dragão Me Escolheu completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuku6q",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuksoa",
-        "title": "Meu Companheiro Fera Rank S",
-        "slug": "meu-companheiro-fera-rank-s",
-        "synopsis": "Meu Companheiro Fera Rank S — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 2854085,
-        "likesCount": 34249,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Meu Companheiro Fera Rank S completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuksoa",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbukvra",
-        "title": "Uma Noite com o Governador",
-        "slug": "uma-noite-com-o-governador",
-        "synopsis": "Uma Noite com o Governador — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3367652,
-        "likesCount": 40411,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Uma Noite com o Governador completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbukvra",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuksaa",
-        "title": "Mãe Solo em Fuga e Seu Marido Bilionário",
-        "slug": "mae-solo-em-fuga-e-seu-marido-bilionario",
-        "synopsis": "Mãe Solo em Fuga e Seu Marido Bilionário — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 1766809,
-        "likesCount": 21201,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Mãe Solo em Fuga e Seu Marido Bilionário completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuksaa",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbukre6",
-        "title": "Como Fazer um Deus da Morte Pecar",
-        "slug": "como-fazer-um-deus-da-morte-pecar",
-        "synopsis": "Como Fazer um Deus da Morte Pecar — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3256216,
-        "likesCount": 39074,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Como Fazer um Deus da Morte Pecar completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbukre6",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbukqmq",
-        "title": "Casada com o Diabo",
-        "slug": "casada-com-o-diabo",
-        "synopsis": "Casada com o Diabo — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3068233,
-        "likesCount": 36818,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Casada com o Diabo completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbukqmq",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbtupd6",
-        "title": "Virgem Cativa do Rei Pirata",
-        "slug": "virgem-cativa-do-rei-pirata",
-        "synopsis": "Virgem Cativa do Rei Pirata — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 1958250,
-        "likesCount": 23499,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Virgem Cativa do Rei Pirata completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbtupd6",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbtunju",
-        "title": "Três Mil Feitiços",
-        "slug": "tres-mil-feiticos",
-        "synopsis": "Três Mil Feitiços — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3769931,
-        "likesCount": 45239,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Três Mil Feitiços completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbtunju",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbtujxi",
-        "title": "Quatro Esposas do Rei Feroz",
-        "slug": "quatro-esposas-do-rei-feroz",
-        "synopsis": "Quatro Esposas do Rei Feroz — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3205350,
-        "likesCount": 38464,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Quatro Esposas do Rei Feroz completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbtujxi",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbtuijq",
-        "title": "Presos na Mesma Cicatriz",
-        "slug": "presos-na-mesma-cicatriz",
-        "synopsis": "Presos na Mesma Cicatriz — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3462230,
-        "likesCount": 41546,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Presos na Mesma Cicatriz completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbtuijq",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbtuhpy",
-        "title": "Patrimônio Secreto",
-        "slug": "patrimonio-secreto",
-        "synopsis": "Patrimônio Secreto — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3338668,
-        "likesCount": 40064,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Patrimônio Secreto completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbtuhpy",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbtuhbe",
-        "title": "Papai é o Príncipe: Destino nos Uniu",
-        "slug": "papai-e-o-principe-destino-nos-uniu",
-        "synopsis": "Papai é o Príncipe: Destino nos Uniu — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3172409,
-        "likesCount": 38068,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Papai é o Príncipe: Destino nos Uniu completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbtuhbe",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbtuao2",
-        "title": "O Juramento do Magnata Secreto",
-        "slug": "o-juramento-do-magnata-secreto",
-        "synopsis": "O Juramento do Magnata Secreto — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 2253272,
-        "likesCount": 27039,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Juramento do Magnata Secreto completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbtuao2",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbtu8h6",
-        "title": "O Ex Lendário Já Te Esqueceu",
-        "slug": "o-ex-lendario-ja-te-esqueceu",
-        "synopsis": "O Ex Lendário Já Te Esqueceu — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 2992364,
-        "likesCount": 35908,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Ex Lendário Já Te Esqueceu completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbtu8h6",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbtudmu",
-        "title": "O Rei da Arena Fria",
-        "slug": "o-rei-da-arena-fria",
-        "synopsis": "O Rei da Arena Fria — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 2046441,
-        "likesCount": 24557,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Rei da Arena Fria completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbtudmu",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbtu7ya",
-        "title": "O Brilho que o Tempo Escondeu",
-        "slug": "o-brilho-que-o-tempo-escondeu",
-        "synopsis": "O Brilho que o Tempo Escondeu — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 4055849,
-        "likesCount": 48670,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Brilho que o Tempo Escondeu completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbtu7ya",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttzb6",
-        "title": "Espero Trigêmeos do Professor Alfa",
-        "slug": "espero-trigemeos-do-professor-alfa",
-        "synopsis": "Espero Trigêmeos do Professor Alfa — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 2969637,
-        "likesCount": 35635,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Espero Trigêmeos do Professor Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttzb6",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbtu0y6",
-        "title": "Guerreira de Fogo",
-        "slug": "guerreira-de-fogo",
-        "synopsis": "Guerreira de Fogo — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 2038311,
-        "likesCount": 24459,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Guerreira de Fogo completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbtu0y6",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttzqi",
-        "title": "Fênix da Divorciada",
-        "slug": "fenix-da-divorciada",
-        "synopsis": "Fênix da Divorciada — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 1448445,
-        "likesCount": 17381,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Fênix da Divorciada completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttzqi",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbtty5q",
-        "title": "Dormi com a Diretora",
-        "slug": "dormi-com-a-diretora",
-        "synopsis": "Dormi com a Diretora — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3084378,
-        "likesCount": 37012,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Dormi com a Diretora completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbtty5q",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttn5m",
-        "title": "A Noiva Escrava do Dragão",
-        "slug": "a-noiva-escrava-do-dragao",
-        "synopsis": "A Noiva Escrava do Dragão — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3419334,
-        "likesCount": 41032,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Noiva Escrava do Dragão completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttn5m",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbtttju",
-        "title": "Casada com o Cowboy Bilionário",
-        "slug": "casada-com-o-cowboy-bilionario",
-        "synopsis": "Casada com o Cowboy Bilionário — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 4203419,
-        "likesCount": 50441,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Casada com o Cowboy Bilionário completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbtttju",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttu5y",
-        "title": "Casada com o Rei Pirata",
-        "slug": "casada-com-o-rei-pirata",
-        "synopsis": "Casada com o Rei Pirata — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 1986179,
-        "likesCount": 23834,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Casada com o Rei Pirata completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttu5y",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttsyu",
-        "title": "Batimentos sob o Mesmo Teto",
-        "slug": "batimentos-sob-o-mesmo-teto",
-        "synopsis": "Batimentos sob o Mesmo Teto — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3914969,
-        "likesCount": 46979,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Batimentos sob o Mesmo Teto completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttsyu",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttkh2",
-        "title": "A Filha Mimada de Cinco Lordes",
-        "slug": "a-filha-mimada-de-cinco-lordes",
-        "synopsis": "A Filha Mimada de Cinco Lordes — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 2052775,
-        "likesCount": 24633,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Filha Mimada de Cinco Lordes completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttkh2",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbtts7i",
-        "title": "Assassino e Babá de Aluguel",
-        "slug": "assassino-e-baba-de-aluguel",
-        "synopsis": "Assassino e Babá de Aluguel — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 2316744,
-        "likesCount": 27800,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Assassino e Babá de Aluguel completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbtts7i",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttpom",
-        "title": "A Serva Sem Lobo é a Rainha",
-        "slug": "a-serva-sem-lobo-e-a-rainha",
-        "synopsis": "A Serva Sem Lobo é a Rainha — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 4307294,
-        "likesCount": 51687,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Serva Sem Lobo é a Rainha completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttpom",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttocu",
-        "title": "A Princesa Élfica Retorna",
-        "slug": "a-princesa-elfica-retorna",
-        "synopsis": "A Princesa Élfica Retorna — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Dublado",
-        "tags": "dublado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 3571968,
-        "likesCount": 42863,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Princesa Élfica Retorna completo e dublado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttocu",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "tdx-herdeira-bilionaria-confronta-seu-marido-assassino",
-        "title": "Herdeira Bilionária Confronta Seu Marido Assassino",
-        "slug": "herdeira-bilionaria-confronta-seu-marido-assassino",
-        "synopsis": "Após descobrir a conspiração letal tramada por seu próprio marido, uma herdeira de bilhões forja a própria fraqueza para desmascará-lo friamente em um confronto de vingança sem precedentes.",
-        "coverUrl": "https://i.ytimg.com/vi/8Kqxta_ALzE/maxresdefault.jpg",
-        "bannerUrl": "https://i.ytimg.com/vi/8Kqxta_ALzE/maxresdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,bombando,bilionario,vinganca,herdeira,traicao,drama",
-        "totalEpisodes": 3,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 38000,
-        "likesCount": 235378,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Herdeira Bilionária Confronta Seu Marido Assassino completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/8Kqxta_ALzE",
-                "durationSeconds": 676,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Herdeira Bilionária Confronta Seu Marido Assassino completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/UJExg6Dy9yE",
-                "durationSeconds": 1097,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Herdeira Bilionária Confronta Seu Marido Assassino completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/vxjXAWbC0pM",
-                "durationSeconds": 671,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-a-vinganca-da-herdeira-descartada",
-        "title": "A Vingança da Herdeira Descartada",
-        "slug": "a-vinganca-da-herdeira-descartada",
-        "synopsis": "Desprezada, expulsa e dada como derrotada por sua família egoísta, a legítima herdeira retorna triunfante, detendo o poder absoluto para recuperar o império que sempre foi seu por direito.",
-        "coverUrl": "https://i.ytimg.com/vi/6UHsi-m-9uU/maxresdefault.jpg",
-        "bannerUrl": "https://i.ytimg.com/vi/6UHsi-m-9uU/maxresdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,bombando,vinganca,herdeira,bilionario,drama,destaques",
-        "totalEpisodes": 3,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 35000,
-        "likesCount": 185395,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de A Vingança da Herdeira Descartada completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/6UHsi-m-9uU",
-                "durationSeconds": 891,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de A Vingança da Herdeira Descartada completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Q5TvMwCAxj0",
-                "durationSeconds": 1541,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de A Vingança da Herdeira Descartada completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/j-KYMUEZHD4",
-                "durationSeconds": 988,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-da-favela-ao-trono",
-        "title": "Da Favela ao Trono",
-        "slug": "da-favela-ao-trono",
-        "synopsis": "Nascido nas vielas e moldado pelas dificuldades, um jovem determinado desafia todas as probabilidades e preconceitos para conquistar o topo da alta sociedade e o respeito que sempre mereceu.",
-        "coverUrl": "https://i.ytimg.com/vi/54QkzeojpI0/maxresdefault.jpg",
-        "bannerUrl": "https://i.ytimg.com/vi/54QkzeojpI0/maxresdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,superacao,favela,trono,sucesso,drama",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 31000,
-        "likesCount": 153300,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Episódio Completo",
-                "description": "Episódio 1 de Da Favela ao Trono completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/54QkzeojpI0",
-                "durationSeconds": 750,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "tdx-forcada-a-tornar-se-noiva-de-um-chefe-gangster-contrato-de-amor",
-        "title": "Forçada a Tornar-se Noiva de um Chefe Gangster: Contrato de Amor",
-        "slug": "forcada-a-tornar-se-noiva-de-um-chefe-gangster-contrato-de-amor",
-        "synopsis": "Para salvar sua família da ruína total, uma jovem inocente assina um contrato irrevogável com o líder mais impiedoso do submundo, dando início a uma convivência carregada de tensão e paixão proibida.",
-        "coverUrl": "https://i.ytimg.com/vi/15E9emKLxIE/maxresdefault.jpg",
-        "bannerUrl": "https://i.ytimg.com/vi/15E9emKLxIE/maxresdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,mafia,gangster,contrato,casamento-forcado,romance",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 27000,
-        "likesCount": 88900,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Episódio Completo",
-                "description": "Episódio 1 de Forçada a Tornar-se Noiva de um Chefe Gangster: Contrato de Amor completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/15E9emKLxIE",
-                "durationSeconds": 1462,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "tdx-o-ceo-que-sentiu-minha-gravidez",
-        "title": "O CEO que Sentiu Minha Gravidez",
-        "slug": "o-ceo-que-sentiu-minha-gravidez",
-        "synopsis": "Após uma noite inesquecível e misteriosa, um CEO poderoso e reservado descobre a gravidez oculta da mulher que nunca conseguiu esquecer, iniciando uma busca frenética por seu herdeiro.",
-        "coverUrl": "https://i.ytimg.com/vi/Qgfn7KkK6mc/maxresdefault.jpg",
-        "bannerUrl": "https://i.ytimg.com/vi/Qgfn7KkK6mc/maxresdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,ceo,gravidez,bebe-secreto,bilionario,romance",
-        "totalEpisodes": 2,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 24000,
-        "likesCount": 68950,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de O CEO que Sentiu Minha Gravidez completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Qgfn7KkK6mc",
-                "durationSeconds": 1162,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de O CEO que Sentiu Minha Gravidez completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/OSqWqLPAP3Q",
-                "durationSeconds": 1174,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-o-limite-do-amor",
-        "title": "O Limite do Amor",
-        "slug": "o-limite-do-amor",
-        "synopsis": "Até onde alguém é capaz de ir em nome da paixão? Quando o orgulho e as convenções sociais colidem, dois corações intensos descobrem que o verdadeiro amor não conhece limites.",
-        "coverUrl": "https://i.ytimg.com/vi/4RMTES4Yddk/maxresdefault.jpg",
-        "bannerUrl": "https://i.ytimg.com/vi/4RMTES4Yddk/maxresdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,limite-do-amor,romance,paixao,drama,emocao",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 23000,
-        "likesCount": 64750,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Episódio Completo",
-                "description": "Episódio 1 de O Limite do Amor completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/4RMTES4Yddk",
-                "durationSeconds": 2195,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "tdx-encontrei-meu-papai-na-obra",
-        "title": "Encontrei Meu Papai na Obra",
-        "slug": "encontrei-meu-papai-na-obra",
-        "synopsis": "Durante uma visita inesperada a um canteiro de obras, uma garotinha de olhos brilhantes reconhece na figura de um trabalhador humilde o homem que é secretamente o homem mais rico do país.",
-        "coverUrl": "https://i.ytimg.com/vi/jfCMBB51J3I/maxresdefault.jpg",
-        "bannerUrl": "https://i.ytimg.com/vi/jfCMBB51J3I/maxresdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,familia,filha,papai-secreto,emocionante,drama,bilionario-disfarcado",
-        "totalEpisodes": 3,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 21000,
-        "likesCount": 54040,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Encontrei Meu Papai na Obra completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/jfCMBB51J3I",
-                "durationSeconds": 1200,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Encontrei Meu Papai na Obra completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/qyNFetLqMMQ",
-                "durationSeconds": 1187,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Encontrei Meu Papai na Obra completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/1Q1M6tzdK2k",
-                "durationSeconds": 1051,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-casei-com-o-ceo-que-trai-por-detras-das-mentiras-existe-o-amor",
-        "title": "Casei com o CEO que Traí: Por Detrás das Mentiras, Existe o Amor",
-        "slug": "casei-com-o-ceo-que-trai-por-detras-das-mentiras-existe-o-amor",
-        "synopsis": "Marcada pela culpa e envolvida em uma rede de enganos, ela se une em matrimônio ao CEO que no passado prejudicou, descobrindo que sob a frieza de seu olhar ainda arde um amor inextinguível.",
-        "coverUrl": "https://i.ytimg.com/vi/rUqxsSHFHjg/maxresdefault.jpg",
-        "bannerUrl": "https://i.ytimg.com/vi/rUqxsSHFHjg/maxresdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,ceo,casamento,mentiras,perdao,romance,redencao",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 20000,
-        "likesCount": 53200,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Episódio Completo",
-                "description": "Episódio 1 de Casei com o CEO que Traí: Por Detrás das Mentiras, Existe o Amor completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/rUqxsSHFHjg",
-                "durationSeconds": 1529,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "tdx-papai-malvado-voce-ta-frito",
-        "title": "Papai Malvado, Você Tá Frito!",
-        "slug": "papai-malvado-voce-ta-frito",
-        "synopsis": "Determinada a vingar sua mãe e colocar juízo na cabeça do pai magnata que a abandonou, uma criança genial apronta todas as armadilhas para domar o coração do poderoso CEO.",
-        "coverUrl": "https://i.ytimg.com/vi/KFXLb8kWfF0/maxresdefault.jpg",
-        "bannerUrl": "https://i.ytimg.com/vi/KFXLb8kWfF0/maxresdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,familia,filho-esperto,ceo,comedia-romantica,reconciliacao",
-        "totalEpisodes": 2,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 18500,
-        "likesCount": 35140,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Papai Malvado, Você Tá Frito! completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/KFXLb8kWfF0",
-                "durationSeconds": 881,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Papai Malvado, Você Tá Frito! completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/BUPFrp_5Cls",
-                "durationSeconds": 868,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-o-genio-de-rua-que-salvou-meu-imperio",
-        "title": "O Gênio de Rua que Salvou Meu Império",
-        "slug": "o-genio-de-rua-que-salvou-meu-imperio",
-        "synopsis": "Quando a maior corporação da cidade estava à beira do colapso econômico por traição interna, a mente brilhante de um jovem das ruas se torna a única esperança de salvação do império.",
-        "coverUrl": "https://i.ytimg.com/vi/4eRwbUYL7W8/maxresdefault.jpg",
-        "bannerUrl": "https://i.ytimg.com/vi/4eRwbUYL7W8/maxresdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,genio,imperio,bilionario,negocios,superacao,drama",
-        "totalEpisodes": 2,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 18000,
-        "likesCount": 32550,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de O Gênio de Rua que Salvou Meu Império completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/4eRwbUYL7W8",
-                "durationSeconds": 1292,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de O Gênio de Rua que Salvou Meu Império completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Yg7kGqNPxpc",
-                "durationSeconds": 1260,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-mamae-eu-trouxe-o-papai-pra-te-salvar",
-        "title": "Mamãe, Eu Trouxe o Papai pra Te Salvar!",
-        "slug": "mamae-eu-trouxe-o-papai-pra-te-salvar",
-        "synopsis": "Cansado de ver sua mãe sofrer injustiças, um menininho corajoso vai até a sede da maior empresa do país para trazer o pai bilionário de volta e salvar a família de uma vez por todas.",
-        "coverUrl": "https://i.ytimg.com/vi/Pe8Eh0emakM/maxresdefault.jpg",
-        "bannerUrl": "https://i.ytimg.com/vi/Pe8Eh0emakM/maxresdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,crianca-fofa,papai-salvador,resgate,reconciliacao,romance",
-        "totalEpisodes": 2,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 17000,
-        "likesCount": 27650,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Mamãe, Eu Trouxe o Papai pra Te Salvar! completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Pe8Eh0emakM",
-                "durationSeconds": 1531,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Mamãe, Eu Trouxe o Papai pra Te Salvar! completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/YUqXbD_ijxo",
-                "durationSeconds": 1389,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-vinganca-elegante-de-uma-mae-bilionaria",
-        "title": "Vingança Elegante de uma Mãe Bilionária",
-        "slug": "vinganca-elegante-de-uma-mae-bilionaria",
-        "synopsis": "Com classe, inteligência afiada e recursos ilimitados, uma mãe bilionária arquiteta a vingança perfeita contra aqueles que conspiraram contra seu sangue, sem derramar uma única lágrima em vão.",
-        "coverUrl": "https://i.ytimg.com/vi/uaaOa_WTIO0/maxresdefault.jpg",
-        "bannerUrl": "https://i.ytimg.com/vi/uaaOa_WTIO0/maxresdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,mae-bilionaria,vinganca,luxo,poder,justica",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 16500,
-        "likesCount": 26600,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Episódio Completo",
-                "description": "Episódio 1 de Vingança Elegante de uma Mãe Bilionária completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/uaaOa_WTIO0",
-                "durationSeconds": 1744,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "tdx-o-100-divorcio-foi-o-seu-maior-erro",
-        "title": "O 100º Divórcio Foi o Seu Maior Erro",
-        "slug": "o-100-divorcio-foi-o-seu-maior-erro",
-        "synopsis": "Ele acreditava que o divórcio seria apenas mais uma formalidade em sua rotina de negócios, mas percebe o tamanho do seu erro no instante em que sua ex-esposa se torna a mulher mais disputada do país.",
-        "coverUrl": "https://i.ytimg.com/vi/VgOkf39MsGQ/maxresdefault.jpg",
-        "bannerUrl": "https://i.ytimg.com/vi/VgOkf39MsGQ/maxresdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,divorcio,arrependimento,reconquista,drama-conjugal,romance",
-        "totalEpisodes": 2,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 16000,
-        "likesCount": 25340,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de O 100º Divórcio Foi o Seu Maior Erro completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/VgOkf39MsGQ",
-                "durationSeconds": 1500,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de O 100º Divórcio Foi o Seu Maior Erro completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/_IY5igl_FKY",
-                "durationSeconds": 782,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-caminho-para-a-liberdade",
-        "title": "Caminho para a Liberdade",
-        "slug": "caminho-para-a-liberdade",
-        "synopsis": "Um vislumbre emocionante de superação e coragem onde cada segundo conta na luta de uma alma valente para quebrar as correntes da opressão e alcançar a tão sonhada liberdade.",
-        "coverUrl": "https://i.ytimg.com/vi/5ih5sVRjMto/hqdefault.jpg",
-        "bannerUrl": "https://i.ytimg.com/vi/5ih5sVRjMto/hqdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,liberdade,emocao,curta,drama",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 15500,
-        "likesCount": 24500,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Episódio Completo",
-                "description": "Episódio 1 de Caminho para a Liberdade completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/5ih5sVRjMto",
-                "durationSeconds": 193,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "tdx-caso-encerrado-o-retorno-da-rainha-do-direito",
-        "title": "Caso Encerrado: O Retorno da Rainha do Direito",
-        "slug": "caso-encerrado-o-retorno-da-rainha-do-direito",
-        "synopsis": "Conhecida por sua mente cirúrgica nos tribunais, a mais brilhante advogada da nação retorna após anos afastada para assumir o caso mais perigoso da sua carreira e restabelecer a verdade.",
-        "coverUrl": "https://i.ytimg.com/vi/7ogXC5oUWhY/maxresdefault.jpg",
-        "bannerUrl": "https://i.ytimg.com/vi/7ogXC5oUWhY/maxresdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,advogada,tribunal,retorno-triunfal,justica,drama",
-        "totalEpisodes": 2,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 15000,
-        "likesCount": 23800,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Caso Encerrado: O Retorno da Rainha do Direito completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/7ogXC5oUWhY",
-                "durationSeconds": 1259,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Caso Encerrado: O Retorno da Rainha do Direito completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/_aGao4zEHYA",
-                "durationSeconds": 1254,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-depois-do-termino-casei-com-o-chefao-da-mafia",
-        "title": "Depois do Término, Casei com o Chefão da Máfia",
-        "slug": "depois-do-termino-casei-com-o-chefao-da-mafia",
-        "synopsis": "Logo após ser covardemente descartada por seu ex-noivo arrogante, ela cruza o caminho do chefão da máfia, que lhe oferece sua proteção total, seu império e um casamento irresistível.",
-        "coverUrl": "https://i.ytimg.com/vi/VqCyItFZG2U/maxresdefault.jpg",
-        "bannerUrl": "https://i.ytimg.com/vi/VqCyItFZG2U/maxresdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,termino,chefao-da-mafia,casamento-inesperado,protecao,perigo",
-        "totalEpisodes": 2,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 14000,
-        "likesCount": 17290,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Depois do Término, Casei com o Chefão da Máfia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/VqCyItFZG2U",
-                "durationSeconds": 1394,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Depois do Término, Casei com o Chefão da Máfia completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/XFg40Z9eSis",
-                "durationSeconds": 1392,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-ele-arranjou-uma-amante-e-eu-conquistei-o-ceu",
-        "title": "Ele Arranjou Uma Amante E Eu Conquistei o Céu",
-        "slug": "ele-arranjou-uma-amante-e-eu-conquistei-o-ceu",
-        "synopsis": "Enquanto o marido tolo desfilava publicamente com sua amante fútil, a esposa menosprezada assumia o controle absoluto do mercado internacional, conquistando o mundo com sua genialidade.",
-        "coverUrl": "https://i.ytimg.com/vi/Yc7eG2Zldmw/maxresdefault.jpg",
-        "bannerUrl": "https://i.ytimg.com/vi/Yc7eG2Zldmw/maxresdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,amante,traicao,sucesso-feminino,volta-por-cima,vinganca",
-        "totalEpisodes": 2,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 13500,
-        "likesCount": 17150,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Ele Arranjou Uma Amante E Eu Conquistei o Céu completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Yc7eG2Zldmw",
-                "durationSeconds": 1654,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Ele Arranjou Uma Amante E Eu Conquistei o Céu completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/y2GWDfmaXTY",
-                "durationSeconds": 1640,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-mae-solteira-casa-acidentalmente-com-bilionario-enquanto-procura-crianca-desapar",
-        "title": "Mãe Solteira Casa Acidentalmente com Bilionário Enquanto Procura Criança Desaparecida",
-        "slug": "mae-solteira-casa-acidentalmente-com-bilionario-enquanto-procura-crianca-desapar",
-        "synopsis": "Em busca desesperada por pistas de seu filho desaparecido, uma mãe corajosa acaba selando um matrimônio de conveniência com um bilionário que guarda as respostas que ela tanto procura.",
-        "coverUrl": "https://i.ytimg.com/vi/LOe6IbAwnyg/maxresdefault.jpg",
-        "bannerUrl": "https://i.ytimg.com/vi/LOe6IbAwnyg/maxresdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,mae-solteira,bilionario,busca,filho-desaparecido,destino",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 13000,
-        "likesCount": 16800,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Episódio Completo",
-                "description": "Episódio 1 de Mãe Solteira Casa Acidentalmente com Bilionário Enquanto Procura Criança Desaparecida completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/LOe6IbAwnyg",
-                "durationSeconds": 898,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "tdx-papai-essa-crianca-nem-e-sua",
-        "title": "Papai, Essa Criança Nem É Sua",
-        "slug": "papai-essa-crianca-nem-e-sua",
-        "synopsis": "Em meio a uma tempestade familiar de acusações e testes de DNA manipulados, uma revelação comovente prova que a verdadeira ligação entre pai e filho vai muito além do sangue.",
-        "coverUrl": "https://i.ytimg.com/vi/lJpXnn91VsY/maxresdefault.jpg",
-        "bannerUrl": "https://i.ytimg.com/vi/lJpXnn91VsY/maxresdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,paternidade,duvida,verdade,familia,revelacao",
-        "totalEpisodes": 2,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 12500,
-        "likesCount": 16438,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Papai, Essa Criança Nem É Sua completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/lJpXnn91VsY",
-                "durationSeconds": 961,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Papai, Essa Criança Nem É Sua completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/bv-sLK1brxU",
-                "durationSeconds": 490,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-ossos-marcados-pela-dor",
-        "title": "Ossos Marcados pela Dor",
-        "slug": "ossos-marcados-pela-dor",
-        "synopsis": "Marcada pelas cicatrizes de um passado doloroso e injusto, ela encontra nos braços de um homem protetor e compreensivo a força necessária para curar as feridas da alma e recomeçar.",
-        "coverUrl": "https://i.ytimg.com/vi/Q-HN04KztIY/maxresdefault.jpg",
-        "bannerUrl": "https://i.ytimg.com/vi/Q-HN04KztIY/maxresdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,dor,superacao,passado-sombrio,amor-e-cura,drama",
-        "totalEpisodes": 2,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 12000,
-        "likesCount": 16100,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Ossos Marcados pela Dor completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Q-HN04KztIY",
-                "durationSeconds": 1131,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Ossos Marcados pela Dor completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/VcWE48UT-Ds",
-                "durationSeconds": 1170,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-minha-cura-comeca-com-ela",
-        "title": "Minha Cura Começa com Ela",
-        "slug": "minha-cura-comeca-com-ela",
-        "synopsis": "Ferido pelo passado e desacreditado do amor, um homem poderoso descobre na gentileza e força de uma mulher o verdadeiro caminho para a redenção.",
-        "coverUrl": "https://img.youtube.com/vi/ouyG-_dm86g/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/ouyG-_dm86g/hqdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,bombando,tendencias,romance,drama",
-        "totalEpisodes": 15,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 710000,
-        "likesCount": 4259,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Minha Cura Começa com Ela completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/ouyG-_dm86g",
-                "durationSeconds": 1142,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Minha Cura Começa com Ela completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/EDIZ-dSCcs8",
-                "durationSeconds": 1137,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Minha Cura Começa com Ela completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/5nzT6noh3zo",
-                "durationSeconds": 1274,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Minha Cura Começa com Ela completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/qaunJuAqKM4",
-                "durationSeconds": 1014,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de Minha Cura Começa com Ela completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/g0tf1b-cYXM",
-                "durationSeconds": 1082,
-                "isFree": false
-            },
-            {
-                "number": 6,
-                "title": "Parte 6",
-                "description": "Episódio 6 de Minha Cura Começa com Ela completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/XilJu6-FOhI",
-                "durationSeconds": 1171,
-                "isFree": false
-            },
-            {
-                "number": 7,
-                "title": "Parte 7",
-                "description": "Episódio 7 de Minha Cura Começa com Ela completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/0-aTwQBQsXw",
-                "durationSeconds": 1281,
-                "isFree": false
-            },
-            {
-                "number": 8,
-                "title": "Parte 8",
-                "description": "Episódio 8 de Minha Cura Começa com Ela completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/L6ixni7YbtQ",
-                "durationSeconds": 1193,
-                "isFree": false
-            },
-            {
-                "number": 9,
-                "title": "Parte 9",
-                "description": "Episódio 9 de Minha Cura Começa com Ela completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/xc-EQucTerk",
-                "durationSeconds": 1193,
-                "isFree": false
-            },
-            {
-                "number": 10,
-                "title": "Parte 10",
-                "description": "Episódio 10 de Minha Cura Começa com Ela completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/35BQn5D4EVY",
-                "durationSeconds": 1043,
-                "isFree": false
-            },
-            {
-                "number": 11,
-                "title": "Parte 11",
-                "description": "Episódio 11 de Minha Cura Começa com Ela completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Hu4R1jcRN_U",
-                "durationSeconds": 1134,
-                "isFree": false
-            },
-            {
-                "number": 12,
-                "title": "Parte 12",
-                "description": "Episódio 12 de Minha Cura Começa com Ela completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/CGVlETzgsFc",
-                "durationSeconds": 1139,
-                "isFree": false
-            },
-            {
-                "number": 13,
-                "title": "Parte 13",
-                "description": "Episódio 13 de Minha Cura Começa com Ela completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/rd8hmgZoN20",
-                "durationSeconds": 1203,
-                "isFree": false
-            },
-            {
-                "number": 14,
-                "title": "Parte 14",
-                "description": "Episódio 14 de Minha Cura Começa com Ela completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/d9bnhksTy2w",
-                "durationSeconds": 952,
-                "isFree": false
-            },
-            {
-                "number": 15,
-                "title": "Parte 15",
-                "description": "Episódio 15 de Minha Cura Começa com Ela completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/xupMPMQf2zA",
-                "durationSeconds": 1116,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-um-bilionario-uma-noiva-falsa-um-bebe-inesperado-e-um-amor-que-nenhum-dos-d",
-        "title": "Um bilionário, uma noiva falsa, um bebê inesperado — e um amor que nenhum dos dois viu chegar.",
-        "slug": "um-bilionario-uma-noiva-falsa-um-bebe-inesperado-e-um-amor-que-nenhum-dos-d",
-        "synopsis": "Um poderoso magnata acostumado a comandar impérios descobre que o verdadeiro amor não tem preço quando seu destino cruza com uma mulher destemida em Um bilionário, uma noiva falsa, um bebê inesperado — e um amor que nenhum dos dois viu chegar..",
-        "coverUrl": "https://img.youtube.com/vi/CCX-X2TOW6w/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/CCX-X2TOW6w/hqdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,bombando,tendencias,bilionario,ceo,luxo,casamento-arranjado,romance,drama",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 34223,
-        "likesCount": 11978,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Um bilionário, uma noiva falsa, um bebê inesperado — e um amor que nenhum dos dois viu chegar. completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/CCX-X2TOW6w",
-                "durationSeconds": 4320,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "tdx-o-bebado-sem-lobo-rorin",
-        "title": "O Bêbado Sem Lobo (Rorin)",
-        "slug": "o-bebado-sem-lobo-rorin",
-        "synopsis": "Rejeitado pela alcatéia e desacreditado por todos, Rorin descobre uma força oculta que desafiará a própria hierarquia dos lobos.",
-        "coverUrl": "https://img.youtube.com/vi/1Y7TfQtPDMk/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/1Y7TfQtPDMk/hqdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,bombando,tendencias,fantasia,sobrenatural,romance,drama",
-        "totalEpisodes": 31,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 980000,
-        "likesCount": 7925,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/1Y7TfQtPDMk",
-                "durationSeconds": 591,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/XJ666WDzZwc",
-                "durationSeconds": 2170,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/eTfntEVORbM",
-                "durationSeconds": 2176,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Oq1Y2ZuJ3SE",
-                "durationSeconds": 2010,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/xAjcKBFSrwE",
-                "durationSeconds": 272,
-                "isFree": false
-            },
-            {
-                "number": 6,
-                "title": "Parte 6",
-                "description": "Episódio 6 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/CeejbH3-zdU",
-                "durationSeconds": 929,
-                "isFree": false
-            },
-            {
-                "number": 7,
-                "title": "Parte 7",
-                "description": "Episódio 7 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/jLR93xBiAMI",
-                "durationSeconds": 2163,
-                "isFree": false
-            },
-            {
-                "number": 8,
-                "title": "Parte 8",
-                "description": "Episódio 8 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/yP_ZsVkvk0Y",
-                "durationSeconds": 269,
-                "isFree": false
-            },
-            {
-                "number": 9,
-                "title": "Parte 9",
-                "description": "Episódio 9 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/ZkUsxlV6SVk",
-                "durationSeconds": 272,
-                "isFree": false
-            },
-            {
-                "number": 10,
-                "title": "Parte 10",
-                "description": "Episódio 10 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/a5f-8NQVNcw",
-                "durationSeconds": 938,
-                "isFree": false
-            },
-            {
-                "number": 11,
-                "title": "Parte 11",
-                "description": "Episódio 11 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/SjHhG8e-kXY",
-                "durationSeconds": 271,
-                "isFree": false
-            },
-            {
-                "number": 12,
-                "title": "Parte 12",
-                "description": "Episódio 12 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/sphd0UnRu_c",
-                "durationSeconds": 1240,
-                "isFree": false
-            },
-            {
-                "number": 13,
-                "title": "Parte 13",
-                "description": "Episódio 13 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/S_tnPUTp0p4",
-                "durationSeconds": 2170,
-                "isFree": false
-            },
-            {
-                "number": 14,
-                "title": "Parte 14",
-                "description": "Episódio 14 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/78QktSrK5IU",
-                "durationSeconds": 2228,
-                "isFree": false
-            },
-            {
-                "number": 15,
-                "title": "Parte 15",
-                "description": "Episódio 15 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/2pe4DQmUzsU",
-                "durationSeconds": 250,
-                "isFree": false
-            },
-            {
-                "number": 16,
-                "title": "Parte 16",
-                "description": "Episódio 16 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Pvo4-3aImzE",
-                "durationSeconds": 2170,
-                "isFree": false
-            },
-            {
-                "number": 17,
-                "title": "Parte 17",
-                "description": "Episódio 17 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Np4pHNU8QNw",
-                "durationSeconds": 2189,
-                "isFree": false
-            },
-            {
-                "number": 18,
-                "title": "Parte 18",
-                "description": "Episódio 18 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/keMRS0ZijcQ",
-                "durationSeconds": 1672,
-                "isFree": false
-            },
-            {
-                "number": 19,
-                "title": "Parte 19",
-                "description": "Episódio 19 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/nbGPSRkt_oA",
-                "durationSeconds": 181,
-                "isFree": false
-            },
-            {
-                "number": 20,
-                "title": "Parte 20",
-                "description": "Episódio 20 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/CSY1iMPdaTE",
-                "durationSeconds": 590,
-                "isFree": false
-            },
-            {
-                "number": 21,
-                "title": "Parte 21",
-                "description": "Episódio 21 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/BcvBLzRUznk",
-                "durationSeconds": 1262,
-                "isFree": false
-            },
-            {
-                "number": 22,
-                "title": "Parte 22",
-                "description": "Episódio 22 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/cPPODD1l8GA",
-                "durationSeconds": 938,
-                "isFree": false
-            },
-            {
-                "number": 23,
-                "title": "Parte 23",
-                "description": "Episódio 23 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Vb15cZ-hw34",
-                "durationSeconds": 1122,
-                "isFree": false
-            },
-            {
-                "number": 24,
-                "title": "Parte 24",
-                "description": "Episódio 24 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/St3RDIqXbCM",
-                "durationSeconds": 2363,
-                "isFree": false
-            },
-            {
-                "number": 25,
-                "title": "Parte 25",
-                "description": "Episódio 25 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/5TSBSHhtZYM",
-                "durationSeconds": 2170,
-                "isFree": false
-            },
-            {
-                "number": 26,
-                "title": "Parte 26",
-                "description": "Episódio 26 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/P3T1hL8XbMM",
-                "durationSeconds": 1809,
-                "isFree": false
-            },
-            {
-                "number": 27,
-                "title": "Parte 27",
-                "description": "Episódio 27 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/1A7x3bOzOW8",
-                "durationSeconds": 611,
-                "isFree": false
-            },
-            {
-                "number": 28,
-                "title": "Parte 28",
-                "description": "Episódio 28 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/icybl3fVKqs",
-                "durationSeconds": 2010,
-                "isFree": false
-            },
-            {
-                "number": 29,
-                "title": "Parte 29",
-                "description": "Episódio 29 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/1HpbzEP4Mtw",
-                "durationSeconds": 938,
-                "isFree": false
-            },
-            {
-                "number": 30,
-                "title": "Parte 30",
-                "description": "Episódio 30 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/V2J-37Zfp2U",
-                "durationSeconds": 2170,
-                "isFree": false
-            },
-            {
-                "number": 31,
-                "title": "Parte 31",
-                "description": "Episódio 31 de O Bêbado Sem Lobo (Rorin) completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Qbp2bsCW1oY",
-                "durationSeconds": 250,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-meu-rival-no-gelo",
-        "title": "Meu Rival no Gelo",
-        "slug": "meu-rival-no-gelo",
-        "synopsis": "Acompanhe a emocionante história de Meu Rival no Gelo, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/YVBaEG0jrn8/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/YVBaEG0jrn8/hqdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,bombando,tendencias,romance,drama",
-        "totalEpisodes": 7,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 34255,
-        "likesCount": 11989,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Meu Rival no Gelo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/YVBaEG0jrn8",
-                "durationSeconds": 248,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Meu Rival no Gelo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/pmcMbVFw1vY",
-                "durationSeconds": 249,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Meu Rival no Gelo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/-gDXC8ig0rM",
-                "durationSeconds": 803,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Meu Rival no Gelo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/d9UvW-xIcDE",
-                "durationSeconds": 303,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de Meu Rival no Gelo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/8zu87ktlfg4",
-                "durationSeconds": 476,
-                "isFree": false
-            },
-            {
-                "number": 6,
-                "title": "Parte 6",
-                "description": "Episódio 6 de Meu Rival no Gelo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/sGitYQbawqw",
-                "durationSeconds": 590,
-                "isFree": false
-            },
-            {
-                "number": 7,
-                "title": "Parte 7",
-                "description": "Episódio 7 de Meu Rival no Gelo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/BnjMx4LblUM",
-                "durationSeconds": 249,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-amor-em-jogo-com-o-bilionario",
-        "title": "Amor em Jogo com o Bilionário",
-        "slug": "amor-em-jogo-com-o-bilionario",
-        "synopsis": "Um poderoso magnata acostumado a comandar impérios descobre que o verdadeiro amor não tem preço quando seu destino cruza com uma mulher destemida em Amor em Jogo com o Bilionário.",
-        "coverUrl": "https://img.youtube.com/vi/VjMR6eVQP6U/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/VjMR6eVQP6U/hqdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,bombando,tendencias,bilionario,ceo,luxo,romance,drama",
-        "totalEpisodes": 18,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 1150000,
-        "likesCount": 8892,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/VjMR6eVQP6U",
-                "durationSeconds": 738,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/tOdHCUgZWWE",
-                "durationSeconds": 701,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/B1DeLIlFHsk",
-                "durationSeconds": 722,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/0EnnBwozbXw",
-                "durationSeconds": 649,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/miF6XB1y0oo",
-                "durationSeconds": 858,
-                "isFree": false
-            },
-            {
-                "number": 6,
-                "title": "Parte 6",
-                "description": "Episódio 6 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/awjnV7bvV-8",
-                "durationSeconds": 769,
-                "isFree": false
-            },
-            {
-                "number": 7,
-                "title": "Parte 7",
-                "description": "Episódio 7 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/M2JKNNUXSdc",
-                "durationSeconds": 609,
-                "isFree": false
-            },
-            {
-                "number": 8,
-                "title": "Parte 8",
-                "description": "Episódio 8 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/wC6iyFZta_M",
-                "durationSeconds": 834,
-                "isFree": false
-            },
-            {
-                "number": 9,
-                "title": "Parte 9",
-                "description": "Episódio 9 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Wh4-SQPjr8Y",
-                "durationSeconds": 858,
-                "isFree": false
-            },
-            {
-                "number": 10,
-                "title": "Parte 10",
-                "description": "Episódio 10 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/2fUtjsyKlA4",
-                "durationSeconds": 846,
-                "isFree": false
-            },
-            {
-                "number": 11,
-                "title": "Parte 11",
-                "description": "Episódio 11 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/SYrN059Gi8k",
-                "durationSeconds": 839,
-                "isFree": false
-            },
-            {
-                "number": 12,
-                "title": "Parte 12",
-                "description": "Episódio 12 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Kth2uAPRx_I",
-                "durationSeconds": 365,
-                "isFree": false
-            },
-            {
-                "number": 13,
-                "title": "Parte 13",
-                "description": "Episódio 13 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/6qP7bXpjJKU",
-                "durationSeconds": 858,
-                "isFree": false
-            },
-            {
-                "number": 14,
-                "title": "Parte 14",
-                "description": "Episódio 14 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/T9Bicrs0DGM",
-                "durationSeconds": 808,
-                "isFree": false
-            },
-            {
-                "number": 15,
-                "title": "Parte 15",
-                "description": "Episódio 15 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/J-xT0vsCd5M",
-                "durationSeconds": 841,
-                "isFree": false
-            },
-            {
-                "number": 16,
-                "title": "Parte 16",
-                "description": "Episódio 16 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/6utYt0Bhfds",
-                "durationSeconds": 867,
-                "isFree": false
-            },
-            {
-                "number": 17,
-                "title": "Parte 17",
-                "description": "Episódio 17 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/0t_3N4zXAXc",
-                "durationSeconds": 729,
-                "isFree": false
-            },
-            {
-                "number": 18,
-                "title": "Parte 18",
-                "description": "Episódio 18 de Amor em Jogo com o Bilionário completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/dZKp_K_HnuI",
-                "durationSeconds": 872,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-noiva-virgem-do-alfa",
-        "title": "Noiva Virgem do Alfa",
-        "slug": "noiva-virgem-do-alfa",
-        "synopsis": "Lendas ancestrais, vínculos eternos de almas gêmeas e batalhas ferozes pelo trono supremo revelam os maiores mistérios em Noiva Virgem do Alfa.",
-        "coverUrl": "https://img.youtube.com/vi/x8cmk6_aPHc/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/x8cmk6_aPHc/hqdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,bombando,tendencias,fantasia,sobrenatural,casamento-arranjado,romance,drama",
-        "totalEpisodes": 23,
-        "freeEpisodesCount": 1,
-        "isFeatured": true,
-        "isVertical": true,
-        "viewsCount": 1240000,
-        "likesCount": 5594,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Noiva Virgem do Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/x8cmk6_aPHc",
-                "durationSeconds": 728,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Noiva Virgem do Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/GVelleFMRqU",
-                "durationSeconds": 665,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Noiva Virgem do Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/u6b3XVXcfNc",
-                "durationSeconds": 728,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Noiva Virgem do Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/FtkAYFMqQ5w",
-                "durationSeconds": 528,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de Noiva Virgem do Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Wj9xQV3ot0k",
-                "durationSeconds": 528,
-                "isFree": false
-            },
-            {
-                "number": 6,
-                "title": "Parte 6",
-                "description": "Episódio 6 de Noiva Virgem do Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/f8yLEuFWCkg",
-                "durationSeconds": 410,
-                "isFree": false
-            },
-            {
-                "number": 7,
-                "title": "Parte 7",
-                "description": "Episódio 7 de Noiva Virgem do Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Ip0v0YYxZS0",
-                "durationSeconds": 293,
-                "isFree": false
-            },
-            {
-                "number": 8,
-                "title": "Parte 8",
-                "description": "Episódio 8 de Noiva Virgem do Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/YBVqcGetCgw",
-                "durationSeconds": 927,
-                "isFree": false
-            },
-            {
-                "number": 9,
-                "title": "Parte 9",
-                "description": "Episódio 9 de Noiva Virgem do Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Knb50Jq4FPE",
-                "durationSeconds": 639,
-                "isFree": false
-            },
-            {
-                "number": 10,
-                "title": "Parte 10",
-                "description": "Episódio 10 de Noiva Virgem do Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/lxaPCBzR6sw",
-                "durationSeconds": 392,
-                "isFree": false
-            },
-            {
-                "number": 11,
-                "title": "Parte 11",
-                "description": "Episódio 11 de Noiva Virgem do Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/CV2RcLVjZ_8",
-                "durationSeconds": 843,
-                "isFree": false
-            },
-            {
-                "number": 12,
-                "title": "Parte 12",
-                "description": "Episódio 12 de Noiva Virgem do Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/tPv-ILWTYrY",
-                "durationSeconds": 867,
-                "isFree": false
-            },
-            {
-                "number": 13,
-                "title": "Parte 13",
-                "description": "Episódio 13 de Noiva Virgem do Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/rEMbEemoNaE",
-                "durationSeconds": 300,
-                "isFree": false
-            },
-            {
-                "number": 14,
-                "title": "Parte 14",
-                "description": "Episódio 14 de Noiva Virgem do Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/JgIPUogUDzc",
-                "durationSeconds": 755,
-                "isFree": false
-            },
-            {
-                "number": 15,
-                "title": "Parte 15",
-                "description": "Episódio 15 de Noiva Virgem do Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Ywx0HJBDNI4",
-                "durationSeconds": 300,
-                "isFree": false
-            },
-            {
-                "number": 16,
-                "title": "Parte 16",
-                "description": "Episódio 16 de Noiva Virgem do Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/QItEnSvBArQ",
-                "durationSeconds": 182,
-                "isFree": false
-            },
-            {
-                "number": 17,
-                "title": "Parte 17",
-                "description": "Episódio 17 de Noiva Virgem do Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/jbzVoHL4URA",
-                "durationSeconds": 989,
-                "isFree": false
-            },
-            {
-                "number": 18,
-                "title": "Parte 18",
-                "description": "Episódio 18 de Noiva Virgem do Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Bqnl6iB9f8M",
-                "durationSeconds": 916,
-                "isFree": false
-            },
-            {
-                "number": 19,
-                "title": "Parte 19",
-                "description": "Episódio 19 de Noiva Virgem do Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/0mF7uVGHTQY",
-                "durationSeconds": 736,
-                "isFree": false
-            },
-            {
-                "number": 20,
-                "title": "Parte 20",
-                "description": "Episódio 20 de Noiva Virgem do Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/TUnO59nyOAk",
-                "durationSeconds": 672,
-                "isFree": false
-            },
-            {
-                "number": 21,
-                "title": "Parte 21",
-                "description": "Episódio 21 de Noiva Virgem do Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/QFUdnN25Uro",
-                "durationSeconds": 825,
-                "isFree": false
-            },
-            {
-                "number": 22,
-                "title": "Parte 22",
-                "description": "Episódio 22 de Noiva Virgem do Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/GY1mfnaGcJw",
-                "durationSeconds": 1016,
-                "isFree": false
-            },
-            {
-                "number": 23,
-                "title": "Parte 23",
-                "description": "Episódio 23 de Noiva Virgem do Alfa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/prMsYT0Aswg",
-                "durationSeconds": 896,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-no-leito-da-vinganca",
-        "title": "No Leito da Vingança",
-        "slug": "no-leito-da-vinganca",
-        "synopsis": "Humilhado no passado, o retorno triunfal para cobrar cada dívida e proteger quem ama abala as estruturas de todos os traidores em No Leito da Vingança.",
-        "coverUrl": "https://img.youtube.com/vi/kVnEpJNxFcY/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/kVnEpJNxFcY/hqdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,bombando,tendencias,vinganca,poder,romance,drama",
-        "totalEpisodes": 31,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 32236,
-        "likesCount": 11282,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de No Leito da Vingança completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/kVnEpJNxFcY",
-                "durationSeconds": 1198,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de No Leito da Vingança completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Ymu-LerrcO0",
-                "durationSeconds": 1523,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de No Leito da Vingança completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/bGGqgF2d31M",
-                "durationSeconds": 569,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de No Leito da Vingança completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/RInTA07AhKg",
-                "durationSeconds": 1506,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de No Leito da Vingança completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/FCq3QbV2Su0",
-                "durationSeconds": 433,
-                "isFree": false
-            },
-            {
-                "number": 6,
-                "title": "Parte 6",
-                "description": "Episódio 6 de No Leito da Vingança completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/IbV1oFEaoZY",
-                "durationSeconds": 1575,
-                "isFree": false
-            },
-            {
-                "number": 7,
-                "title": "Parte 7",
-                "description": "Episódio 7 de No Leito da Vingança completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/RsoIb83wsrI",
-                "durationSeconds": 508,
-                "isFree": false
-            },
-            {
-                "number": 8,
-                "title": "Parte 8",
-                "description": "Episódio 8 de No Leito da Vingança completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/xBtbbr5yBD4",
-                "durationSeconds": 1358,
-                "isFree": false
-            },
-            {
-                "number": 9,
-                "title": "Parte 9",
-                "description": "Episódio 9 de No Leito da Vingança completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/onf2t39nMZI",
-                "durationSeconds": 221,
-                "isFree": false
-            },
-            {
-                "number": 10,
-                "title": "Parte 10",
-                "description": "Episódio 10 de No Leito da Vingança completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/PvX91PNyNKs",
-                "durationSeconds": 521,
-                "isFree": false
-            },
-            {
-                "number": 11,
-                "title": "Parte 11",
-                "description": "Episódio 11 de No Leito da Vingança completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/ic_EPA0glwc",
-                "durationSeconds": 1553,
-                "isFree": false
-            },
-            {
-                "number": 12,
-                "title": "Parte 12",
-                "description": "Episódio 12 de No Leito da Vingança completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/svhN6DqqzqI",
-                "durationSeconds": 3010,
-                "isFree": false
-            },
-            {
-                "number": 13,
-                "title": "Parte 13",
-                "description": "Episódio 13 de No Leito da Vingança completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/PY8W8fplckw",
-                "durationSeconds": 1284,
-                "isFree": false
-            },
-            {
-                "number": 14,
-                "title": "Parte 14",
-                "description": "Episódio 14 de No Leito da Vingança completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/r5fbNVeWAy0",
-                "durationSeconds": 1512,
-                "isFree": false
-            },
-            {
-                "number": 15,
-                "title": "Parte 15",
-                "description": "Episódio 15 de No Leito da Vingança completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/vZRih4V1nbE",
-                "durationSeconds": 741,
-                "isFree": false
-            },
-            {
-                "number": 16,
-                "title": "Parte 16",
-                "description": "Episódio 16 de No Leito da Vingança completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/31-tYU5sgHU",
-                "durationSeconds": 1534,
-                "isFree": false
-            },
-            {
-                "number": 17,
-                "title": "Parte 17",
-                "description": "Episódio 17 de No Leito da Vingança completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/JJCroHcnhMU",
-                "durationSeconds": 1523,
-                "isFree": false
-            },
-            {
-                "number": 18,
-                "title": "Parte 18",
-                "description": "Episódio 18 de No Leito da Vingança completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/tQSkI7ewqRE",
-                "durationSeconds": 1327,
-                "isFree": false
-            },
-            {
-                "number": 19,
-                "title": "Parte 19",
-                "description": "Episódio 19 de No Leito da Vingança completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/V9kXXcV1bzs",
-                "durationSeconds": 1527,
-                "isFree": false
-            },
-            {
-                "number": 20,
-                "title": "Parte 20",
-                "description": "Episódio 20 de No Leito da Vingança completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/h9YZPaZMT6c",
-                "durationSeconds": 1525,
-                "isFree": false
-            },
-            {
-                "number": 21,
-                "title": "Parte 21",
-                "description": "Episódio 21 de No Leito da Vingança completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/U8v323GGr8g",
-                "durationSeconds": 1453,
-                "isFree": false
-            },
-            {
-                "number": 22,
-                "title": "Parte 22",
-                "description": "Episódio 22 de No Leito da Vingança completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/D-Ss0MK-hx4",
-                "durationSeconds": 1470,
-                "isFree": false
-            },
-            {
-                "number": 23,
-                "title": "Parte 23",
-                "description": "Episódio 23 de No Leito da Vingança completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/7jRPjATlE9c",
-                "durationSeconds": 685,
-                "isFree": false
-            },
-            {
-                "number": 24,
-                "title": "Parte 24",
-                "description": "Episódio 24 de No Leito da Vingança completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/syuyPko3EyY",
-                "durationSeconds": 1472,
-                "isFree": false
-            },
-            {
-                "number": 25,
-                "title": "Parte 25",
-                "description": "Episódio 25 de No Leito da Vingança completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/6M4Y4wcKJR0",
-                "durationSeconds": 535,
-                "isFree": false
-            },
-            {
-                "number": 26,
-                "title": "Parte 26",
-                "description": "Episódio 26 de No Leito da Vingança completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/9prghb_8Yyg",
-                "durationSeconds": 1249,
-                "isFree": false
-            },
-            {
-                "number": 27,
-                "title": "Parte 27",
-                "description": "Episódio 27 de No Leito da Vingança completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/K9JL699bin4",
-                "durationSeconds": 418,
-                "isFree": false
-            },
-            {
-                "number": 28,
-                "title": "Parte 28",
-                "description": "Episódio 28 de No Leito da Vingança completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/zyzneZNGUjw",
-                "durationSeconds": 1327,
-                "isFree": false
-            },
-            {
-                "number": 29,
-                "title": "Parte 29",
-                "description": "Episódio 29 de No Leito da Vingança completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/L_eeXVHhvzw",
-                "durationSeconds": 1546,
-                "isFree": false
-            },
-            {
-                "number": 30,
-                "title": "Parte 30",
-                "description": "Episódio 30 de No Leito da Vingança completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/ouTYEh-G2LM",
-                "durationSeconds": 1522,
-                "isFree": false
-            },
-            {
-                "number": 31,
-                "title": "Parte 31",
-                "description": "Episódio 31 de No Leito da Vingança completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/exdNcIcv8ug",
-                "durationSeconds": 1506,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-beijo-que-expoe-tudo",
-        "title": "Beijo que Expõe Tudo",
-        "slug": "beijo-que-expoe-tudo",
-        "synopsis": "Acompanhe a emocionante história de Beijo que Expõe Tudo, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/1sDlRQYfH5U/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/1sDlRQYfH5U/hqdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,romance,drama",
-        "totalEpisodes": 19,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 30253,
-        "likesCount": 10588,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Beijo que Expõe Tudo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/1sDlRQYfH5U",
-                "durationSeconds": 1465,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Beijo que Expõe Tudo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/zNT5BU4MJdA",
-                "durationSeconds": 283,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Beijo que Expõe Tudo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/FZOehmcdBgQ",
-                "durationSeconds": 964,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Beijo que Expõe Tudo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/pQTa0nnud_g",
-                "durationSeconds": 1122,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de Beijo que Expõe Tudo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/RHPgQvuLogo",
-                "durationSeconds": 717,
-                "isFree": false
-            },
-            {
-                "number": 6,
-                "title": "Parte 6",
-                "description": "Episódio 6 de Beijo que Expõe Tudo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/8BYFu-JBhD8",
-                "durationSeconds": 645,
-                "isFree": false
-            },
-            {
-                "number": 7,
-                "title": "Parte 7",
-                "description": "Episódio 7 de Beijo que Expõe Tudo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/p3SciU30P_Q",
-                "durationSeconds": 539,
-                "isFree": false
-            },
-            {
-                "number": 8,
-                "title": "Parte 8",
-                "description": "Episódio 8 de Beijo que Expõe Tudo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/qIbUSu7tC78",
-                "durationSeconds": 817,
-                "isFree": false
-            },
-            {
-                "number": 9,
-                "title": "Parte 9",
-                "description": "Episódio 9 de Beijo que Expõe Tudo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/vzSnSX_1CtM",
-                "durationSeconds": 819,
-                "isFree": false
-            },
-            {
-                "number": 10,
-                "title": "Parte 10",
-                "description": "Episódio 10 de Beijo que Expõe Tudo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/eqZ8mJvMd4Y",
-                "durationSeconds": 861,
-                "isFree": false
-            },
-            {
-                "number": 11,
-                "title": "Parte 11",
-                "description": "Episódio 11 de Beijo que Expõe Tudo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/IgFWvgHpJ4w",
-                "durationSeconds": 1529,
-                "isFree": false
-            },
-            {
-                "number": 12,
-                "title": "Parte 12",
-                "description": "Episódio 12 de Beijo que Expõe Tudo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/DWsQp655tzI",
-                "durationSeconds": 733,
-                "isFree": false
-            },
-            {
-                "number": 13,
-                "title": "Parte 13",
-                "description": "Episódio 13 de Beijo que Expõe Tudo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Zx_Y5GLrHNY",
-                "durationSeconds": 263,
-                "isFree": false
-            },
-            {
-                "number": 14,
-                "title": "Parte 14",
-                "description": "Episódio 14 de Beijo que Expõe Tudo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/QkYIIWYP0vw",
-                "durationSeconds": 1513,
-                "isFree": false
-            },
-            {
-                "number": 15,
-                "title": "Parte 15",
-                "description": "Episódio 15 de Beijo que Expõe Tudo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/aXFcJnSNPO0",
-                "durationSeconds": 804,
-                "isFree": false
-            },
-            {
-                "number": 16,
-                "title": "Parte 16",
-                "description": "Episódio 16 de Beijo que Expõe Tudo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/OTi-8dc21Sw",
-                "durationSeconds": 889,
-                "isFree": false
-            },
-            {
-                "number": 17,
-                "title": "Parte 17",
-                "description": "Episódio 17 de Beijo que Expõe Tudo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/HWoSmxXQjhs",
-                "durationSeconds": 1751,
-                "isFree": false
-            },
-            {
-                "number": 18,
-                "title": "Parte 18",
-                "description": "Episódio 18 de Beijo que Expõe Tudo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/FCBv0tckdRw",
-                "durationSeconds": 789,
-                "isFree": false
-            },
-            {
-                "number": 19,
-                "title": "Parte 19",
-                "description": "Episódio 19 de Beijo que Expõe Tudo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Sk-1h9TKCwI",
-                "durationSeconds": 795,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-voo-para-o-amor-i",
-        "title": "Voo para o Amor I",
-        "slug": "voo-para-o-amor-i",
-        "synopsis": "Marcados por feridas do passado, duas vidas encontram no afeto e na cumplicidade o caminho para a redenção e a felicidade em Voo para o Amor I.",
-        "coverUrl": "https://img.youtube.com/vi/-vgVIWDhqfM/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/-vgVIWDhqfM/hqdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,romance,drama",
-        "totalEpisodes": 31,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 32045,
-        "likesCount": 11215,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Voo para o Amor I completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/-vgVIWDhqfM",
-                "durationSeconds": 901,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Voo para o Amor I completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/o5BkRdOht_0",
-                "durationSeconds": 901,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Voo para o Amor I completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/vT6wW0SRoqk",
-                "durationSeconds": 1044,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Voo para o Amor I completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/U-bFeS0mf3o",
-                "durationSeconds": 510,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de Voo para o Amor I completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/9GrMIwrTtW8",
-                "durationSeconds": 598,
-                "isFree": false
-            },
-            {
-                "number": 6,
-                "title": "Parte 6",
-                "description": "Episódio 6 de Voo para o Amor I completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/RNW93YmuNCo",
-                "durationSeconds": 834,
-                "isFree": false
-            },
-            {
-                "number": 7,
-                "title": "Parte 7",
-                "description": "Episódio 7 de Voo para o Amor I completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/edxhsAbgVmc",
-                "durationSeconds": 845,
-                "isFree": false
-            },
-            {
-                "number": 8,
-                "title": "Parte 8",
-                "description": "Episódio 8 de Voo para o Amor I completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/O-ynoWDgr6g",
-                "durationSeconds": 235,
-                "isFree": false
-            },
-            {
-                "number": 9,
-                "title": "Parte 9",
-                "description": "Episódio 9 de Voo para o Amor I completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/EBND_wZgy5M",
-                "durationSeconds": 566,
-                "isFree": false
-            },
-            {
-                "number": 10,
-                "title": "Parte 10",
-                "description": "Episódio 10 de Voo para o Amor I completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/GIK1VyL4SKI",
-                "durationSeconds": 417,
-                "isFree": false
-            },
-            {
-                "number": 11,
-                "title": "Parte 11",
-                "description": "Episódio 11 de Voo para o Amor I completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/p9cylmEffIA",
-                "durationSeconds": 298,
-                "isFree": false
-            },
-            {
-                "number": 12,
-                "title": "Parte 12",
-                "description": "Episódio 12 de Voo para o Amor I completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/2U4lBjwrCcU",
-                "durationSeconds": 233,
-                "isFree": false
-            },
-            {
-                "number": 13,
-                "title": "Parte 13",
-                "description": "Episódio 13 de Voo para o Amor I completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/GInlTRJMx5s",
-                "durationSeconds": 660,
-                "isFree": false
-            },
-            {
-                "number": 14,
-                "title": "Parte 14",
-                "description": "Episódio 14 de Voo para o Amor I completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/967HQtp0BGo",
-                "durationSeconds": 1410,
-                "isFree": false
-            },
-            {
-                "number": 15,
-                "title": "Parte 15",
-                "description": "Episódio 15 de Voo para o Amor I completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/xKZSnethoH0",
-                "durationSeconds": 660,
-                "isFree": false
-            },
-            {
-                "number": 16,
-                "title": "Parte 16",
-                "description": "Episódio 16 de Voo para o Amor I completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/0COV1UOTfwQ",
-                "durationSeconds": 485,
-                "isFree": false
-            },
-            {
-                "number": 17,
-                "title": "Parte 17",
-                "description": "Episódio 17 de Voo para o Amor I completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/wnk1aK5KcQA",
-                "durationSeconds": 947,
-                "isFree": false
-            },
-            {
-                "number": 18,
-                "title": "Parte 18",
-                "description": "Episódio 18 de Voo para o Amor I completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/iB7KvSzU28A",
-                "durationSeconds": 273,
-                "isFree": false
-            },
-            {
-                "number": 19,
-                "title": "Parte 19",
-                "description": "Episódio 19 de Voo para o Amor I completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/wiLs8Bv_hHA",
-                "durationSeconds": 1069,
-                "isFree": false
-            },
-            {
-                "number": 20,
-                "title": "Parte 20",
-                "description": "Episódio 20 de Voo para o Amor I completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/S2oUIP0w5bw",
-                "durationSeconds": 586,
-                "isFree": false
-            },
-            {
-                "number": 21,
-                "title": "Parte 21",
-                "description": "Episódio 21 de Voo para o Amor I completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/qJQsI3S9wVc",
-                "durationSeconds": 1066,
-                "isFree": false
-            },
-            {
-                "number": 22,
-                "title": "Parte 22",
-                "description": "Episódio 22 de Voo para o Amor I completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/CN7dH285HjI",
-                "durationSeconds": 926,
-                "isFree": false
-            },
-            {
-                "number": 23,
-                "title": "Parte 23",
-                "description": "Episódio 23 de Voo para o Amor I completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/mHf7wmoSYg0",
-                "durationSeconds": 246,
-                "isFree": false
-            },
-            {
-                "number": 24,
-                "title": "Parte 24",
-                "description": "Episódio 24 de Voo para o Amor I completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/bcr9kzObZqw",
-                "durationSeconds": 822,
-                "isFree": false
-            },
-            {
-                "number": 25,
-                "title": "Parte 25",
-                "description": "Episódio 25 de Voo para o Amor I completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/dDFlNyFVi7g",
-                "durationSeconds": 660,
-                "isFree": false
-            },
-            {
-                "number": 26,
-                "title": "Parte 26",
-                "description": "Episódio 26 de Voo para o Amor I completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/sgYDgniVuok",
-                "durationSeconds": 252,
-                "isFree": false
-            },
-            {
-                "number": 27,
-                "title": "Parte 27",
-                "description": "Episódio 27 de Voo para o Amor I completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/DKUcBrg-qXQ",
-                "durationSeconds": 935,
-                "isFree": false
-            },
-            {
-                "number": 28,
-                "title": "Parte 28",
-                "description": "Episódio 28 de Voo para o Amor I completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/1KXLYAbq5pU",
-                "durationSeconds": 1053,
-                "isFree": false
-            },
-            {
-                "number": 29,
-                "title": "Parte 29",
-                "description": "Episódio 29 de Voo para o Amor I completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/lHuEJTOyQQQ",
-                "durationSeconds": 731,
-                "isFree": false
-            },
-            {
-                "number": 30,
-                "title": "Parte 30",
-                "description": "Episódio 30 de Voo para o Amor I completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/_YfFOPXMPsc",
-                "durationSeconds": 935,
-                "isFree": false
-            },
-            {
-                "number": 31,
-                "title": "Parte 31",
-                "description": "Episódio 31 de Voo para o Amor I completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/ouK0Wk7Om0M",
-                "durationSeconds": 485,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-o-chefe-da-mafia-implora",
-        "title": "O Chefe da Máfia Implora",
-        "slug": "o-chefe-da-mafia-implora",
-        "synopsis": "Em um submundo dominado pelo poder e perigo das famílias mafiosas, segredos do passado e uma atração irresistível colocam vidas em jogo em O Chefe da Máfia Implora.",
-        "coverUrl": "https://img.youtube.com/vi/n1btmZupCXU/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/n1btmZupCXU/hqdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,mafia,suspense,romance,drama",
-        "totalEpisodes": 24,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 33365,
-        "likesCount": 11677,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de O Chefe da Máfia Implora completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/n1btmZupCXU",
-                "durationSeconds": 1664,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de O Chefe da Máfia Implora completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/QGj4BwtNRF0",
-                "durationSeconds": 1312,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de O Chefe da Máfia Implora completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/W1ODLTlaUJs",
-                "durationSeconds": 1307,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de O Chefe da Máfia Implora completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Red7v4kc4Ok",
-                "durationSeconds": 1308,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de O Chefe da Máfia Implora completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/IdrO0EWZs60",
-                "durationSeconds": 335,
-                "isFree": false
-            },
-            {
-                "number": 6,
-                "title": "Parte 6",
-                "description": "Episódio 6 de O Chefe da Máfia Implora completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/-njIAUTKp1k",
-                "durationSeconds": 336,
-                "isFree": false
-            },
-            {
-                "number": 7,
-                "title": "Parte 7",
-                "description": "Episódio 7 de O Chefe da Máfia Implora completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/asGdFnFvnxM",
-                "durationSeconds": 1700,
-                "isFree": false
-            },
-            {
-                "number": 8,
-                "title": "Parte 8",
-                "description": "Episódio 8 de O Chefe da Máfia Implora completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/7xuRyHa7V-A",
-                "durationSeconds": 1668,
-                "isFree": false
-            },
-            {
-                "number": 9,
-                "title": "Parte 9",
-                "description": "Episódio 9 de O Chefe da Máfia Implora completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/_C3L3taPMDo",
-                "durationSeconds": 1730,
-                "isFree": false
-            },
-            {
-                "number": 10,
-                "title": "Parte 10",
-                "description": "Episódio 10 de O Chefe da Máfia Implora completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/6OVo5aMIwjk",
-                "durationSeconds": 1305,
-                "isFree": false
-            },
-            {
-                "number": 11,
-                "title": "Parte 11",
-                "description": "Episódio 11 de O Chefe da Máfia Implora completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/iGEqKs7jzQo",
-                "durationSeconds": 1305,
-                "isFree": false
-            },
-            {
-                "number": 12,
-                "title": "Parte 12",
-                "description": "Episódio 12 de O Chefe da Máfia Implora completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/DUv5vEe3Ra0",
-                "durationSeconds": 1590,
-                "isFree": false
-            },
-            {
-                "number": 13,
-                "title": "Parte 13",
-                "description": "Episódio 13 de O Chefe da Máfia Implora completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/VDjc5jEl7xw",
-                "durationSeconds": 1530,
-                "isFree": false
-            },
-            {
-                "number": 14,
-                "title": "Parte 14",
-                "description": "Episódio 14 de O Chefe da Máfia Implora completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/xPmdHwEbZf0",
-                "durationSeconds": 1682,
-                "isFree": false
-            },
-            {
-                "number": 15,
-                "title": "Parte 15",
-                "description": "Episódio 15 de O Chefe da Máfia Implora completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/o55LWG2W5hw",
-                "durationSeconds": 338,
-                "isFree": false
-            },
-            {
-                "number": 16,
-                "title": "Parte 16",
-                "description": "Episódio 16 de O Chefe da Máfia Implora completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/auIdwh33KIU",
-                "durationSeconds": 300,
-                "isFree": false
-            },
-            {
-                "number": 17,
-                "title": "Parte 17",
-                "description": "Episódio 17 de O Chefe da Máfia Implora completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/rqP2yJ-WrEg",
-                "durationSeconds": 1578,
-                "isFree": false
-            },
-            {
-                "number": 18,
-                "title": "Parte 18",
-                "description": "Episódio 18 de O Chefe da Máfia Implora completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/16ysjTVbeJw",
-                "durationSeconds": 1742,
-                "isFree": false
-            },
-            {
-                "number": 19,
-                "title": "Parte 19",
-                "description": "Episódio 19 de O Chefe da Máfia Implora completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/1-dgWXarMNI",
-                "durationSeconds": 1218,
-                "isFree": false
-            },
-            {
-                "number": 20,
-                "title": "Parte 20",
-                "description": "Episódio 20 de O Chefe da Máfia Implora completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/VUulSBqJQFo",
-                "durationSeconds": 1133,
-                "isFree": false
-            },
-            {
-                "number": 21,
-                "title": "Parte 21",
-                "description": "Episódio 21 de O Chefe da Máfia Implora completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/rH_pGx76vto",
-                "durationSeconds": 1773,
-                "isFree": false
-            },
-            {
-                "number": 22,
-                "title": "Parte 22",
-                "description": "Episódio 22 de O Chefe da Máfia Implora completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/H2jLa7fkhx4",
-                "durationSeconds": 1327,
-                "isFree": false
-            },
-            {
-                "number": 23,
-                "title": "Parte 23",
-                "description": "Episódio 23 de O Chefe da Máfia Implora completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/MLSr4l2SPL0",
-                "durationSeconds": 1216,
-                "isFree": false
-            },
-            {
-                "number": 24,
-                "title": "Parte 24",
-                "description": "Episódio 24 de O Chefe da Máfia Implora completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/TdeGRkwshPc",
-                "durationSeconds": 318,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-superando-meu-guarda-costas",
-        "title": "Superando Meu Guarda-Costas",
-        "slug": "superando-meu-guarda-costas",
-        "synopsis": "Acompanhe a emocionante história de Superando Meu Guarda-Costas, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/6_Jcsv3jA8s/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/6_Jcsv3jA8s/hqdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,romance,drama",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 25754,
-        "likesCount": 9013,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Superando Meu Guarda-Costas completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/6_Jcsv3jA8s",
-                "durationSeconds": 4176,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "tdx-quando-a-lua-esconde-sua-coroa",
-        "title": "Quando a Lua Esconde Sua Coroa",
-        "slug": "quando-a-lua-esconde-sua-coroa",
-        "synopsis": "Acompanhe a emocionante história de Quando a Lua Esconde Sua Coroa, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/ot6OdkEImK4/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/ot6OdkEImK4/hqdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,romance,drama",
-        "totalEpisodes": 10,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 22837,
-        "likesCount": 7992,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de Quando a Lua Esconde Sua Coroa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/ot6OdkEImK4",
-                "durationSeconds": 525,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de Quando a Lua Esconde Sua Coroa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/XMi7yHQ2jl4",
-                "durationSeconds": 524,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de Quando a Lua Esconde Sua Coroa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Dh7vjkqsdbM",
-                "durationSeconds": 793,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de Quando a Lua Esconde Sua Coroa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/vFhmFjyxOoI",
-                "durationSeconds": 852,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de Quando a Lua Esconde Sua Coroa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/W0kVwsKP3hA",
-                "durationSeconds": 866,
-                "isFree": false
-            },
-            {
-                "number": 6,
-                "title": "Parte 6",
-                "description": "Episódio 6 de Quando a Lua Esconde Sua Coroa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/ugBFXletArk",
-                "durationSeconds": 934,
-                "isFree": false
-            },
-            {
-                "number": 7,
-                "title": "Parte 7",
-                "description": "Episódio 7 de Quando a Lua Esconde Sua Coroa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/4KDWFpZ6Uik",
-                "durationSeconds": 910,
-                "isFree": false
-            },
-            {
-                "number": 8,
-                "title": "Parte 8",
-                "description": "Episódio 8 de Quando a Lua Esconde Sua Coroa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/bR4nj_p57Ik",
-                "durationSeconds": 855,
-                "isFree": false
-            },
-            {
-                "number": 9,
-                "title": "Parte 9",
-                "description": "Episódio 9 de Quando a Lua Esconde Sua Coroa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/_ypipPXt94g",
-                "durationSeconds": 874,
-                "isFree": false
-            },
-            {
-                "number": 10,
-                "title": "Parte 10",
-                "description": "Episódio 10 de Quando a Lua Esconde Sua Coroa completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/jthxP9_tcBo",
-                "durationSeconds": 254,
-                "isFree": false
-            }
-        ]
-    },
-    {
-        "id": "tdx-a-controladora-que-salvou-o-voo",
-        "title": "A Controladora que Salvou o Voo",
-        "slug": "a-controladora-que-salvou-o-voo",
-        "synopsis": "Acompanhe a emocionante história de A Controladora que Salvou o Voo, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
-        "coverUrl": "https://img.youtube.com/vi/i9k4_S1hZEY/hqdefault.jpg",
-        "bannerUrl": "https://img.youtube.com/vi/i9k4_S1hZEY/hqdefault.jpg",
-        "category": "Legendado",
-        "tags": "Legendado, dublado,romance,drama",
-        "totalEpisodes": 21,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 25231,
-        "likesCount": 8830,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Parte 1",
-                "description": "Episódio 1 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/i9k4_S1hZEY",
-                "durationSeconds": 1661,
-                "isFree": true
-            },
-            {
-                "number": 2,
-                "title": "Parte 2",
-                "description": "Episódio 2 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/omvHvVSmlhw",
-                "durationSeconds": 1654,
-                "isFree": false
-            },
-            {
-                "number": 3,
-                "title": "Parte 3",
-                "description": "Episódio 3 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/MGEWcjbXCFk",
-                "durationSeconds": 1661,
-                "isFree": false
-            },
-            {
-                "number": 4,
-                "title": "Parte 4",
-                "description": "Episódio 4 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/_-WeXEBUl0I",
-                "durationSeconds": 1668,
-                "isFree": false
-            },
-            {
-                "number": 5,
-                "title": "Parte 5",
-                "description": "Episódio 5 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/PFMVMzG-ZnM",
-                "durationSeconds": 1644,
-                "isFree": false
-            },
-            {
-                "number": 6,
-                "title": "Parte 6",
-                "description": "Episódio 6 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/_gIZ2s6MQ8M",
-                "durationSeconds": 1408,
-                "isFree": false
-            },
-            {
-                "number": 7,
-                "title": "Parte 7",
-                "description": "Episódio 7 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/PL9bPE8j79E",
-                "durationSeconds": 1223,
-                "isFree": false
-            },
-            {
-                "number": 8,
-                "title": "Parte 8",
-                "description": "Episódio 8 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/22MnrqDSO3E",
-                "durationSeconds": 1737,
-                "isFree": false
-            },
-            {
-                "number": 9,
-                "title": "Parte 9",
-                "description": "Episódio 9 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/vOJOe2IkzJk",
-                "durationSeconds": 1654,
-                "isFree": false
-            },
-            {
-                "number": 10,
-                "title": "Parte 10",
-                "description": "Episódio 10 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/Fl0LKsYd5do",
-                "durationSeconds": 224,
-                "isFree": false
-            },
-            {
-                "number": 11,
-                "title": "Parte 11",
-                "description": "Episódio 11 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/NsKGTsnzBj4",
-                "durationSeconds": 323,
-                "isFree": false
-            },
-            {
-                "number": 12,
-                "title": "Parte 12",
-                "description": "Episódio 12 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/LAY8yMDPruI",
-                "durationSeconds": 1097,
-                "isFree": false
-            },
-            {
-                "number": 13,
-                "title": "Parte 13",
-                "description": "Episódio 13 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/gLuYE8cCM40",
-                "durationSeconds": 1737,
-                "isFree": false
-            },
-            {
-                "number": 14,
-                "title": "Parte 14",
-                "description": "Episódio 14 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/zRH4eiE38Xw",
-                "durationSeconds": 1645,
-                "isFree": false
-            },
-            {
-                "number": 15,
-                "title": "Parte 15",
-                "description": "Episódio 15 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/OZkhYy6Fk9E",
-                "durationSeconds": 1097,
-                "isFree": false
-            },
-            {
-                "number": 16,
-                "title": "Parte 16",
-                "description": "Episódio 16 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/ooZ22a7PBY4",
-                "durationSeconds": 1645,
-                "isFree": false
-            },
-            {
-                "number": 17,
-                "title": "Parte 17",
-                "description": "Episódio 17 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/uS5eigklr3k",
-                "durationSeconds": 977,
-                "isFree": false
-            },
-            {
-                "number": 18,
-                "title": "Parte 18",
-                "description": "Episódio 18 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/JBr9GKZc1ko",
-                "durationSeconds": 1556,
-                "isFree": false
-            },
-            {
-                "number": 19,
-                "title": "Parte 19",
-                "description": "Episódio 19 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/6BfFwOK_rx8",
-                "durationSeconds": 1408,
-                "isFree": false
-            },
-            {
-                "number": 20,
-                "title": "Parte 20",
-                "description": "Episódio 20 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/GW3t0Hi78Zk",
-                "durationSeconds": 522,
-                "isFree": false
-            },
-            {
-                "number": 21,
-                "title": "Parte 21",
-                "description": "Episódio 21 de A Controladora que Salvou o Voo completo e dublado em alta definição.",
-                "youtubeUrl": "https://youtu.be/1pN20q7ErEA",
-                "durationSeconds": 357,
                 "isFree": false
             }
         ]
@@ -14622,6 +8614,372 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         ]
     },
     {
+        "id": "tdx-traido-pelos-que-amava",
+        "title": "Traído Pelos Que Amava",
+        "slug": "traido-pelos-que-amava",
+        "synopsis": "Acompanhe a emocionante história de Traído Pelos Que Amava, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/V5KvCvGDggo/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/V5KvCvGDggo/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 10,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 32329,
+        "likesCount": 11315,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Traído Pelos Que Amava completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/V5KvCvGDggo",
+                "durationSeconds": 1252,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Traído Pelos Que Amava completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/YxG_ScVvyJk",
+                "durationSeconds": 1792,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Traído Pelos Que Amava completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/mQ9lbx383vg",
+                "durationSeconds": 1258,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Traído Pelos Que Amava completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/o9ag3p0x_dU",
+                "durationSeconds": 822,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de Traído Pelos Que Amava completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/fnSMsJPodUA",
+                "durationSeconds": 1641,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de Traído Pelos Que Amava completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/f93kqFgNVxc",
+                "durationSeconds": 2518,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de Traído Pelos Que Amava completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/JrhcDLN_mGc",
+                "durationSeconds": 2960,
+                "isFree": false
+            },
+            {
+                "number": 8,
+                "title": "Parte 8",
+                "description": "Episódio 8 de Traído Pelos Que Amava completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/fg6-geTanLA",
+                "durationSeconds": 2541,
+                "isFree": false
+            },
+            {
+                "number": 9,
+                "title": "Parte 9",
+                "description": "Episódio 9 de Traído Pelos Que Amava completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/RW08AJ0qSo0",
+                "durationSeconds": 2428,
+                "isFree": false
+            },
+            {
+                "number": 10,
+                "title": "Parte 10",
+                "description": "Episódio 10 de Traído Pelos Que Amava completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/_LFbgK2QnCw",
+                "durationSeconds": 2541,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-marcada-pelo-meu-meio-irmao-alfa",
+        "title": "Marcada pelo Meu Meio-Irmão Alfa",
+        "slug": "marcada-pelo-meu-meio-irmao-alfa",
+        "synopsis": "Lendas ancestrais, vínculos eternos de almas gêmeas e batalhas ferozes pelo trono supremo revelam os maiores mistérios em Marcada pelo Meu Meio-Irmão Alfa.",
+        "coverUrl": "https://img.youtube.com/vi/vfaSYc3oG7s/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/vfaSYc3oG7s/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,fantasia,sobrenatural,romance,drama",
+        "totalEpisodes": 13,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 30126,
+        "likesCount": 10544,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Marcada pelo Meu Meio-Irmão Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/vfaSYc3oG7s",
+                "durationSeconds": 383,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Marcada pelo Meu Meio-Irmão Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/9Hd0TCmUmmc",
+                "durationSeconds": 995,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Marcada pelo Meu Meio-Irmão Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/T_5UmAFI8z0",
+                "durationSeconds": 1023,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Marcada pelo Meu Meio-Irmão Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/LfYQqkJTY-8",
+                "durationSeconds": 1089,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de Marcada pelo Meu Meio-Irmão Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/1Zk6yg7EIgU",
+                "durationSeconds": 1036,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de Marcada pelo Meu Meio-Irmão Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/AmYXrHyCqZc",
+                "durationSeconds": 1102,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de Marcada pelo Meu Meio-Irmão Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/9O3btK82Lwg",
+                "durationSeconds": 1094,
+                "isFree": false
+            },
+            {
+                "number": 8,
+                "title": "Parte 8",
+                "description": "Episódio 8 de Marcada pelo Meu Meio-Irmão Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/N6ITNDRnjDI",
+                "durationSeconds": 1256,
+                "isFree": false
+            },
+            {
+                "number": 9,
+                "title": "Parte 9",
+                "description": "Episódio 9 de Marcada pelo Meu Meio-Irmão Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/GjLQh6XObOs",
+                "durationSeconds": 897,
+                "isFree": false
+            },
+            {
+                "number": 10,
+                "title": "Parte 10",
+                "description": "Episódio 10 de Marcada pelo Meu Meio-Irmão Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/95NGcPTpr7Q",
+                "durationSeconds": 383,
+                "isFree": false
+            },
+            {
+                "number": 11,
+                "title": "Parte 11",
+                "description": "Episódio 11 de Marcada pelo Meu Meio-Irmão Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/hUzhlZlux0w",
+                "durationSeconds": 466,
+                "isFree": false
+            },
+            {
+                "number": 12,
+                "title": "Parte 12",
+                "description": "Episódio 12 de Marcada pelo Meu Meio-Irmão Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/tnZtGz6TBfE",
+                "durationSeconds": 1525,
+                "isFree": false
+            },
+            {
+                "number": 13,
+                "title": "Parte 13",
+                "description": "Episódio 13 de Marcada pelo Meu Meio-Irmão Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/2j5KWChn9zE",
+                "durationSeconds": 1555,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-no-ritmo-de-um-bom-amor",
+        "title": "No Ritmo de um Bom Amor",
+        "slug": "no-ritmo-de-um-bom-amor",
+        "synopsis": "Marcados por feridas do passado, duas vidas encontram no afeto e na cumplicidade o caminho para a redenção e a felicidade em No Ritmo de um Bom Amor.",
+        "coverUrl": "https://img.youtube.com/vi/s6ED2V66ovg/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/s6ED2V66ovg/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 16,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 8960,
+        "likesCount": 3136,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/s6ED2V66ovg",
+                "durationSeconds": 1338,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/UFuyQGjhURE",
+                "durationSeconds": 1375,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/9NRl0gRwoaQ",
+                "durationSeconds": 1370,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/n7msKIDKop4",
+                "durationSeconds": 962,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/P7vM4Equtdo",
+                "durationSeconds": 1281,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/7gc_hxVe9jo",
+                "durationSeconds": 1497,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/hLZRVxLkIKQ",
+                "durationSeconds": 1370,
+                "isFree": false
+            },
+            {
+                "number": 8,
+                "title": "Parte 8",
+                "description": "Episódio 8 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/rhHBiSi-iPs",
+                "durationSeconds": 1758,
+                "isFree": false
+            },
+            {
+                "number": 9,
+                "title": "Parte 9",
+                "description": "Episódio 9 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/lKpUiQ3oMB8",
+                "durationSeconds": 278,
+                "isFree": false
+            },
+            {
+                "number": 10,
+                "title": "Parte 10",
+                "description": "Episódio 10 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/IKJ0vgsKR8E",
+                "durationSeconds": 852,
+                "isFree": false
+            },
+            {
+                "number": 11,
+                "title": "Parte 11",
+                "description": "Episódio 11 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/fnhakgoZfBE",
+                "durationSeconds": 334,
+                "isFree": false
+            },
+            {
+                "number": 12,
+                "title": "Parte 12",
+                "description": "Episódio 12 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/eUmCop2O6_g",
+                "durationSeconds": 867,
+                "isFree": false
+            },
+            {
+                "number": 13,
+                "title": "Parte 13",
+                "description": "Episódio 13 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/YH1EGq1HDsM",
+                "durationSeconds": 1337,
+                "isFree": false
+            },
+            {
+                "number": 14,
+                "title": "Parte 14",
+                "description": "Episódio 14 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/GPIsFMd6nRM",
+                "durationSeconds": 811,
+                "isFree": false
+            },
+            {
+                "number": 15,
+                "title": "Parte 15",
+                "description": "Episódio 15 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/vI8fpPheF0E",
+                "durationSeconds": 2017,
+                "isFree": false
+            },
+            {
+                "number": 16,
+                "title": "Parte 16",
+                "description": "Episódio 16 de No Ritmo de um Bom Amor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/TMUueRe76-Q",
+                "durationSeconds": 2088,
+                "isFree": false
+            }
+        ]
+    },
+    {
         "id": "tdx-o-drama-do-banquete-de-noivado",
         "title": "O Drama do Banquete de Noivado",
         "slug": "o-drama-do-banquete-de-noivado",
@@ -14715,6 +9073,242 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "description": "Episódio 10 de O Drama do Banquete de Noivado completo e dublado em alta definição.",
                 "youtubeUrl": "https://youtu.be/GBqDn6QqDts",
                 "durationSeconds": 455,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-morto-por-amor-vivo-por-odio",
+        "title": "Morto por Amor Vivo por Ódio",
+        "slug": "morto-por-amor-vivo-por-odio",
+        "synopsis": "Marcados por feridas do passado, duas vidas encontram no afeto e na cumplicidade o caminho para a redenção e a felicidade em Morto por Amor Vivo por Ódio.",
+        "coverUrl": "https://img.youtube.com/vi/am1w2nzVC8w/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/am1w2nzVC8w/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 15,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 31946,
+        "likesCount": 11181,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Morto por Amor Vivo por Ódio completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/am1w2nzVC8w",
+                "durationSeconds": 267,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Morto por Amor Vivo por Ódio completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/14pjbBxeXzc",
+                "durationSeconds": 815,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Morto por Amor Vivo por Ódio completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/4N8ptVyJRcg",
+                "durationSeconds": 1432,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Morto por Amor Vivo por Ódio completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/I8edt8E3jDA",
+                "durationSeconds": 819,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de Morto por Amor Vivo por Ódio completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Wiq7Hi8txXQ",
+                "durationSeconds": 817,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de Morto por Amor Vivo por Ódio completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/wtOrxKkU8M4",
+                "durationSeconds": 1319,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de Morto por Amor Vivo por Ódio completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/EDflYcxVYrs",
+                "durationSeconds": 458,
+                "isFree": false
+            },
+            {
+                "number": 8,
+                "title": "Parte 8",
+                "description": "Episódio 8 de Morto por Amor Vivo por Ódio completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/UautO9ASnA0",
+                "durationSeconds": 256,
+                "isFree": false
+            },
+            {
+                "number": 9,
+                "title": "Parte 9",
+                "description": "Episódio 9 de Morto por Amor Vivo por Ódio completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cEQVPDVWQbs",
+                "durationSeconds": 1923,
+                "isFree": false
+            },
+            {
+                "number": 10,
+                "title": "Parte 10",
+                "description": "Episódio 10 de Morto por Amor Vivo por Ódio completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/rbCea_nUepI",
+                "durationSeconds": 508,
+                "isFree": false
+            },
+            {
+                "number": 11,
+                "title": "Parte 11",
+                "description": "Episódio 11 de Morto por Amor Vivo por Ódio completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/nxlrfSkrnHw",
+                "durationSeconds": 1432,
+                "isFree": false
+            },
+            {
+                "number": 12,
+                "title": "Parte 12",
+                "description": "Episódio 12 de Morto por Amor Vivo por Ódio completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/vzKTb_P23T4",
+                "durationSeconds": 727,
+                "isFree": false
+            },
+            {
+                "number": 13,
+                "title": "Parte 13",
+                "description": "Episódio 13 de Morto por Amor Vivo por Ódio completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/ZlpAuUARj0Q",
+                "durationSeconds": 816,
+                "isFree": false
+            },
+            {
+                "number": 14,
+                "title": "Parte 14",
+                "description": "Episódio 14 de Morto por Amor Vivo por Ódio completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/b6FGm-CIGyg",
+                "durationSeconds": 816,
+                "isFree": false
+            },
+            {
+                "number": 15,
+                "title": "Parte 15",
+                "description": "Episódio 15 de Morto por Amor Vivo por Ódio completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/sbes-qcQlhw",
+                "durationSeconds": 817,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-cuidado-a-herdeira-voltou",
+        "title": "Cuidado, a Herdeira Voltou",
+        "slug": "cuidado-a-herdeira-voltou",
+        "synopsis": "Acompanhe a emocionante história de Cuidado, a Herdeira Voltou, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/rtmec_z_JZM/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/rtmec_z_JZM/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 10,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 11712,
+        "likesCount": 4099,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Cuidado, a Herdeira Voltou completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/rtmec_z_JZM",
+                "durationSeconds": 1326,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Cuidado, a Herdeira Voltou completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/EsL0bluK9sw",
+                "durationSeconds": 1238,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Cuidado, a Herdeira Voltou completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/_la8zLvPZuY",
+                "durationSeconds": 566,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Cuidado, a Herdeira Voltou completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Y7h7McWyJXA",
+                "durationSeconds": 1326,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de Cuidado, a Herdeira Voltou completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/AAsmAin0N94",
+                "durationSeconds": 1541,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de Cuidado, a Herdeira Voltou completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/DEIi5b1xGNk",
+                "durationSeconds": 1238,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de Cuidado, a Herdeira Voltou completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Q4v1OHWQUS0",
+                "durationSeconds": 1584,
+                "isFree": false
+            },
+            {
+                "number": 8,
+                "title": "Parte 8",
+                "description": "Episódio 8 de Cuidado, a Herdeira Voltou completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/kXAenFhARrs",
+                "durationSeconds": 1255,
+                "isFree": false
+            },
+            {
+                "number": 9,
+                "title": "Parte 9",
+                "description": "Episódio 9 de Cuidado, a Herdeira Voltou completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Od5ZrzEGCrc",
+                "durationSeconds": 1656,
+                "isFree": false
+            },
+            {
+                "number": 10,
+                "title": "Parte 10",
+                "description": "Episódio 10 de Cuidado, a Herdeira Voltou completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/oAyRgpJTluw",
+                "durationSeconds": 1584,
                 "isFree": false
             }
         ]
@@ -14866,6 +9460,184 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         ]
     },
     {
+        "id": "tdx-28-dias-com-o-alfa",
+        "title": "28 Dias com o Alfa",
+        "slug": "28-dias-com-o-alfa",
+        "synopsis": "Lendas ancestrais, vínculos eternos de almas gêmeas e batalhas ferozes pelo trono supremo revelam os maiores mistérios em 28 Dias com o Alfa.",
+        "coverUrl": "https://img.youtube.com/vi/no8GyuyCBkA/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/no8GyuyCBkA/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,fantasia,sobrenatural,romance,drama",
+        "totalEpisodes": 20,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 33297,
+        "likesCount": 11653,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de 28 Dias com o Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/no8GyuyCBkA",
+                "durationSeconds": 842,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de 28 Dias com o Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/7ZLlRnvnMQg",
+                "durationSeconds": 780,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de 28 Dias com o Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/SwIjf583kAg",
+                "durationSeconds": 868,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de 28 Dias com o Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/YiTOp2IpwQo",
+                "durationSeconds": 668,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de 28 Dias com o Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Uin67H61_wo",
+                "durationSeconds": 783,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de 28 Dias com o Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/jKMvoZ_yO9A",
+                "durationSeconds": 524,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de 28 Dias com o Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/I48mXoiZ54M",
+                "durationSeconds": 796,
+                "isFree": false
+            },
+            {
+                "number": 8,
+                "title": "Parte 8",
+                "description": "Episódio 8 de 28 Dias com o Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/zAkEnUGG3IA",
+                "durationSeconds": 981,
+                "isFree": false
+            },
+            {
+                "number": 9,
+                "title": "Parte 9",
+                "description": "Episódio 9 de 28 Dias com o Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/8XNWas43xog",
+                "durationSeconds": 867,
+                "isFree": false
+            },
+            {
+                "number": 10,
+                "title": "Parte 10",
+                "description": "Episódio 10 de 28 Dias com o Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/0Rt6ASpUxXA",
+                "durationSeconds": 736,
+                "isFree": false
+            },
+            {
+                "number": 11,
+                "title": "Parte 11",
+                "description": "Episódio 11 de 28 Dias com o Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/GLR43qhUPKk",
+                "durationSeconds": 852,
+                "isFree": false
+            },
+            {
+                "number": 12,
+                "title": "Parte 12",
+                "description": "Episódio 12 de 28 Dias com o Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/3ZldgCT_fyA",
+                "durationSeconds": 760,
+                "isFree": false
+            },
+            {
+                "number": 13,
+                "title": "Parte 13",
+                "description": "Episódio 13 de 28 Dias com o Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/sQ_rC7mE0HA",
+                "durationSeconds": 722,
+                "isFree": false
+            },
+            {
+                "number": 14,
+                "title": "Parte 14",
+                "description": "Episódio 14 de 28 Dias com o Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/VrLTos_6BwQ",
+                "durationSeconds": 816,
+                "isFree": false
+            },
+            {
+                "number": 15,
+                "title": "Parte 15",
+                "description": "Episódio 15 de 28 Dias com o Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/OMAbWvHeO04",
+                "durationSeconds": 790,
+                "isFree": false
+            },
+            {
+                "number": 16,
+                "title": "Parte 16",
+                "description": "Episódio 16 de 28 Dias com o Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/GKSMlRKbq6s",
+                "durationSeconds": 1354,
+                "isFree": false
+            },
+            {
+                "number": 17,
+                "title": "Parte 17",
+                "description": "Episódio 17 de 28 Dias com o Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/c0FXUjMip9E",
+                "durationSeconds": 822,
+                "isFree": false
+            },
+            {
+                "number": 18,
+                "title": "Parte 18",
+                "description": "Episódio 18 de 28 Dias com o Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/nnZWbSiIi4c",
+                "durationSeconds": 842,
+                "isFree": false
+            },
+            {
+                "number": 19,
+                "title": "Parte 19",
+                "description": "Episódio 19 de 28 Dias com o Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/L-YbgUok6p0",
+                "durationSeconds": 802,
+                "isFree": false
+            },
+            {
+                "number": 20,
+                "title": "Parte 20",
+                "description": "Episódio 20 de 28 Dias com o Alfa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/7itxzYPVlvg",
+                "durationSeconds": 768,
+                "isFree": false
+            }
+        ]
+    },
+    {
         "id": "tdx-adeus-ao-passado-ola-ao-amor",
         "title": "Adeus ao Passado Olá ao Amor",
         "slug": "adeus-ao-passado-ola-ao-amor",
@@ -14951,6 +9723,64 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "description": "Episódio 9 de Adeus ao Passado Olá ao Amor completo e dublado em alta definição.",
                 "youtubeUrl": "https://youtu.be/gPqd8K4Y4Xk",
                 "durationSeconds": 884,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-sem-olhar-para-tras",
+        "title": "Sem Olhar para Trás",
+        "slug": "sem-olhar-para-tras",
+        "synopsis": "Acompanhe a emocionante história de Sem Olhar para Trás, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/qStdw1zfebQ/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/qStdw1zfebQ/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 5,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 25925,
+        "likesCount": 9073,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Sem Olhar para Trás completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/qStdw1zfebQ",
+                "durationSeconds": 1135,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Sem Olhar para Trás completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/j630RFUPgNk",
+                "durationSeconds": 1088,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Sem Olhar para Trás completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Mh5orWG8SB0",
+                "durationSeconds": 1103,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Sem Olhar para Trás completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/1hb2halM884",
+                "durationSeconds": 959,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de Sem Olhar para Trás completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/oqDKI_bo_uM",
+                "durationSeconds": 1160,
                 "isFree": false
             }
         ]
@@ -15668,6 +10498,466 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         ]
     },
     {
+        "id": "tdx-a-herdeira-encantada-voltou",
+        "title": "A Herdeira Encantada Voltou!",
+        "slug": "a-herdeira-encantada-voltou",
+        "synopsis": "Acompanhe a emocionante história de A Herdeira Encantada Voltou!, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/ciX1Iyh1H94/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/ciX1Iyh1H94/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 2,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 22060,
+        "likesCount": 7720,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de A Herdeira Encantada Voltou! completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/ciX1Iyh1H94",
+                "durationSeconds": 1714,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de A Herdeira Encantada Voltou! completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/YqAeuLyMU0I",
+                "durationSeconds": 701,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-meu-ceo-meu-milagre",
+        "title": "Meu CEO Meu Milagre",
+        "slug": "meu-ceo-meu-milagre",
+        "synopsis": "Um poderoso magnata acostumado a comandar impérios descobre que o verdadeiro amor não tem preço quando seu destino cruza com uma mulher destemida em Meu CEO Meu Milagre.",
+        "coverUrl": "https://img.youtube.com/vi/IvmFw1T7fDs/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/IvmFw1T7fDs/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,bilionario,ceo,luxo,romance,drama",
+        "totalEpisodes": 5,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 19840,
+        "likesCount": 6944,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Meu CEO Meu Milagre completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/IvmFw1T7fDs",
+                "durationSeconds": 850,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Meu CEO Meu Milagre completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/S5eT7U4rwmM",
+                "durationSeconds": 811,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Meu CEO Meu Milagre completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/F8nvT0YDqwY",
+                "durationSeconds": 1147,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Meu CEO Meu Milagre completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/9iPAKfQioSI",
+                "durationSeconds": 387,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de Meu CEO Meu Milagre completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/CPhAb9hnVXk",
+                "durationSeconds": 1094,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-de-envenenada-a-inimiga-implacavel",
+        "title": "De Envenenada a Inimiga Implacável",
+        "slug": "de-envenenada-a-inimiga-implacavel",
+        "synopsis": "Acompanhe a emocionante história de De Envenenada a Inimiga Implacável, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/yuyrd1so_ik/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/yuyrd1so_ik/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 14,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 34314,
+        "likesCount": 12009,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de De Envenenada a Inimiga Implacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/yuyrd1so_ik",
+                "durationSeconds": 1296,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de De Envenenada a Inimiga Implacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Y9JamaEtIBA",
+                "durationSeconds": 1309,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de De Envenenada a Inimiga Implacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/wPSTzH-791A",
+                "durationSeconds": 1333,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de De Envenenada a Inimiga Implacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Sx1CT3whzzc",
+                "durationSeconds": 1275,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de De Envenenada a Inimiga Implacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/vWnjji3tKG4",
+                "durationSeconds": 250,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de De Envenenada a Inimiga Implacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/yAHw1a6QzUA",
+                "durationSeconds": 1297,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de De Envenenada a Inimiga Implacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/UUgrNdkeM3M",
+                "durationSeconds": 1312,
+                "isFree": false
+            },
+            {
+                "number": 8,
+                "title": "Parte 8",
+                "description": "Episódio 8 de De Envenenada a Inimiga Implacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/1tiowOWrzJQ",
+                "durationSeconds": 1266,
+                "isFree": false
+            },
+            {
+                "number": 9,
+                "title": "Parte 9",
+                "description": "Episódio 9 de De Envenenada a Inimiga Implacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/6CdiARZkTIY",
+                "durationSeconds": 1302,
+                "isFree": false
+            },
+            {
+                "number": 10,
+                "title": "Parte 10",
+                "description": "Episódio 10 de De Envenenada a Inimiga Implacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/xyBQCpVDl40",
+                "durationSeconds": 1315,
+                "isFree": false
+            },
+            {
+                "number": 11,
+                "title": "Parte 11",
+                "description": "Episódio 11 de De Envenenada a Inimiga Implacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/8Kr2yNtdRm0",
+                "durationSeconds": 808,
+                "isFree": false
+            },
+            {
+                "number": 12,
+                "title": "Parte 12",
+                "description": "Episódio 12 de De Envenenada a Inimiga Implacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/6IwRNBZZ1Lk",
+                "durationSeconds": 361,
+                "isFree": false
+            },
+            {
+                "number": 13,
+                "title": "Parte 13",
+                "description": "Episódio 13 de De Envenenada a Inimiga Implacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/axutkho9O54",
+                "durationSeconds": 1259,
+                "isFree": false
+            },
+            {
+                "number": 14,
+                "title": "Parte 14",
+                "description": "Episódio 14 de De Envenenada a Inimiga Implacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/d3yZkolOVcs",
+                "durationSeconds": 1002,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-nao-mexa-com-a-pequena",
+        "title": "Não Mexa com a Pequena",
+        "slug": "nao-mexa-com-a-pequena",
+        "synopsis": "Acompanhe a emocionante história de Não Mexa com a Pequena, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/4aJPvWo021Q/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/4aJPvWo021Q/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 7,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 25055,
+        "likesCount": 8769,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Não Mexa com a Pequena completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/4aJPvWo021Q",
+                "durationSeconds": 833,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Não Mexa com a Pequena completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/o0K_DvbL00I",
+                "durationSeconds": 297,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Não Mexa com a Pequena completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/DKuw4BR7FUk",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Não Mexa com a Pequena completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/XGpkFbbBTN0",
+                "durationSeconds": 198,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de Não Mexa com a Pequena completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/6XFHvbYAOPQ",
+                "durationSeconds": 1261,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de Não Mexa com a Pequena completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/uC8VlRo2RLY",
+                "durationSeconds": 199,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de Não Mexa com a Pequena completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/5o1ktT3oFwo",
+                "durationSeconds": 439,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-do-servico-ao-sucesso",
+        "title": "Do Serviço ao Sucesso",
+        "slug": "do-servico-ao-sucesso",
+        "synopsis": "Acompanhe a emocionante história de Do Serviço ao Sucesso, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/CXkfJrZfVkQ/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/CXkfJrZfVkQ/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 16425,
+        "likesCount": 5748,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Do Serviço ao Sucesso completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/CXkfJrZfVkQ",
+                "durationSeconds": 198,
+                "isFree": true
+            }
+        ]
+    },
+    {
+        "id": "tdx-meu-sim-ao-rei-da-mafia",
+        "title": "Meu Sim ao Rei da Máfia",
+        "slug": "meu-sim-ao-rei-da-mafia",
+        "synopsis": "Em um submundo dominado pelo poder e perigo das famílias mafiosas, segredos do passado e uma atração irresistível colocam vidas em jogo em Meu Sim ao Rei da Máfia.",
+        "coverUrl": "https://img.youtube.com/vi/Ax9CsuRQAf8/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/Ax9CsuRQAf8/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,mafia,suspense,romance,drama",
+        "totalEpisodes": 15,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 33619,
+        "likesCount": 11766,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Meu Sim ao Rei da Máfia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Ax9CsuRQAf8",
+                "durationSeconds": 208,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Meu Sim ao Rei da Máfia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/bbkbdOarBnE",
+                "durationSeconds": 656,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Meu Sim ao Rei da Máfia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/bzcPwPm8cNs",
+                "durationSeconds": 943,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Meu Sim ao Rei da Máfia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/tZyr9Tnp6Is",
+                "durationSeconds": 951,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de Meu Sim ao Rei da Máfia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/A9QG5lK6Esk",
+                "durationSeconds": 944,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de Meu Sim ao Rei da Máfia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/W3DaS2hn42Q",
+                "durationSeconds": 936,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de Meu Sim ao Rei da Máfia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/grjWQd1NBGQ",
+                "durationSeconds": 963,
+                "isFree": false
+            },
+            {
+                "number": 8,
+                "title": "Parte 8",
+                "description": "Episódio 8 de Meu Sim ao Rei da Máfia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/_KMh7JFSloI",
+                "durationSeconds": 1292,
+                "isFree": false
+            },
+            {
+                "number": 9,
+                "title": "Parte 9",
+                "description": "Episódio 9 de Meu Sim ao Rei da Máfia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/75Eauc9uK7o",
+                "durationSeconds": 1333,
+                "isFree": false
+            },
+            {
+                "number": 10,
+                "title": "Parte 10",
+                "description": "Episódio 10 de Meu Sim ao Rei da Máfia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/bBFL3W_onpg",
+                "durationSeconds": 684,
+                "isFree": false
+            },
+            {
+                "number": 11,
+                "title": "Parte 11",
+                "description": "Episódio 11 de Meu Sim ao Rei da Máfia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/uk32zuVV0wE",
+                "durationSeconds": 936,
+                "isFree": false
+            },
+            {
+                "number": 12,
+                "title": "Parte 12",
+                "description": "Episódio 12 de Meu Sim ao Rei da Máfia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/kjtPzqD1PRc",
+                "durationSeconds": 836,
+                "isFree": false
+            },
+            {
+                "number": 13,
+                "title": "Parte 13",
+                "description": "Episódio 13 de Meu Sim ao Rei da Máfia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/kZ2QWY9lC_k",
+                "durationSeconds": 1423,
+                "isFree": false
+            },
+            {
+                "number": 14,
+                "title": "Parte 14",
+                "description": "Episódio 14 de Meu Sim ao Rei da Máfia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/MUxP03WG4OU",
+                "durationSeconds": 1256,
+                "isFree": false
+            },
+            {
+                "number": 15,
+                "title": "Parte 15",
+                "description": "Episódio 15 de Meu Sim ao Rei da Máfia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/VBsvcXFotfU",
+                "durationSeconds": 936,
+                "isFree": false
+            }
+        ]
+    },
+    {
         "id": "tdx-o-bebe-secreto-do-rei-alfa",
         "title": "O Bebê Secreto do Rei Alfa",
         "slug": "o-bebe-secreto-do-rei-alfa",
@@ -15706,6 +10996,32 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "youtubeUrl": "https://youtu.be/KRe0LdiIhrs",
                 "durationSeconds": 999,
                 "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-de-ninguem-a-queridinha-dele",
+        "title": "De Ninguém a Queridinha Dele",
+        "slug": "de-ninguem-a-queridinha-dele",
+        "synopsis": "Acompanhe a emocionante história de De Ninguém a Queridinha Dele, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/MWpY4N1pVRE/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/MWpY4N1pVRE/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 12851,
+        "likesCount": 4497,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de De Ninguém a Queridinha Dele completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/MWpY4N1pVRE",
+                "durationSeconds": 1512,
+                "isFree": true
             }
         ]
     },
@@ -15787,6 +11103,56 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "description": "Episódio 8 de Crédito Roubado Amor Perdido completo e dublado em alta definição.",
                 "youtubeUrl": "https://youtu.be/edaa8ha74xA",
                 "durationSeconds": 523,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-vinganca-de-sangue-a-justica-da-irma",
+        "title": "Vingança de Sangue: A Justiça da Irmã",
+        "slug": "vinganca-de-sangue-a-justica-da-irma",
+        "synopsis": "Humilhado no passado, o retorno triunfal para cobrar cada dívida e proteger quem ama abala as estruturas de todos os traidores em Vingança de Sangue: A Justiça da Irmã.",
+        "coverUrl": "https://img.youtube.com/vi/5kPkEC_DDs4/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/5kPkEC_DDs4/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,vinganca,poder,romance,drama",
+        "totalEpisodes": 4,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 29997,
+        "likesCount": 10498,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Vingança de Sangue: A Justiça da Irmã completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/5kPkEC_DDs4",
+                "durationSeconds": 1328,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Vingança de Sangue: A Justiça da Irmã completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/QpsbgVg1d60",
+                "durationSeconds": 1585,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Vingança de Sangue: A Justiça da Irmã completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/0Nw4V8OFC_g",
+                "durationSeconds": 1118,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Vingança de Sangue: A Justiça da Irmã completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Po7tYEJq6Yo",
+                "durationSeconds": 1371,
                 "isFree": false
             }
         ]
@@ -15882,6 +11248,342 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         ]
     },
     {
+        "id": "tdx-dinheiro-caindo-sem-fim",
+        "title": "Dinheiro Caindo Sem Fim",
+        "slug": "dinheiro-caindo-sem-fim",
+        "synopsis": "Acompanhe a emocionante história de Dinheiro Caindo Sem Fim, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/wx7nUF8budU/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/wx7nUF8budU/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 3,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 30743,
+        "likesCount": 10760,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Dinheiro Caindo Sem Fim completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/wx7nUF8budU",
+                "durationSeconds": 912,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Dinheiro Caindo Sem Fim completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/nx2DyqU-214",
+                "durationSeconds": 604,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Dinheiro Caindo Sem Fim completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/9XuNBoJw3kI",
+                "durationSeconds": 1348,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-meu-dom-da-riqueza",
+        "title": "Meu Dom da Riqueza",
+        "slug": "meu-dom-da-riqueza",
+        "synopsis": "Acompanhe a emocionante história de Meu Dom da Riqueza, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/xSC6GZlCAQo/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/xSC6GZlCAQo/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 12,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 31846,
+        "likesCount": 11146,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Meu Dom da Riqueza completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/xSC6GZlCAQo",
+                "durationSeconds": 1327,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Meu Dom da Riqueza completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/3zablaYHrDg",
+                "durationSeconds": 2268,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Meu Dom da Riqueza completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/75f86RCpbrE",
+                "durationSeconds": 1347,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Meu Dom da Riqueza completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/WLnswxPlv5U",
+                "durationSeconds": 744,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de Meu Dom da Riqueza completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/6r9F-4XO9e4",
+                "durationSeconds": 2352,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de Meu Dom da Riqueza completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/YiOAnCzC900",
+                "durationSeconds": 762,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de Meu Dom da Riqueza completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/hXl-t7mn0RI",
+                "durationSeconds": 925,
+                "isFree": false
+            },
+            {
+                "number": 8,
+                "title": "Parte 8",
+                "description": "Episódio 8 de Meu Dom da Riqueza completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/j-pLNVCKBjA",
+                "durationSeconds": 2161,
+                "isFree": false
+            },
+            {
+                "number": 9,
+                "title": "Parte 9",
+                "description": "Episódio 9 de Meu Dom da Riqueza completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/vvkAOvzIPNU",
+                "durationSeconds": 1839,
+                "isFree": false
+            },
+            {
+                "number": 10,
+                "title": "Parte 10",
+                "description": "Episódio 10 de Meu Dom da Riqueza completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/t3WIWzuTAxg",
+                "durationSeconds": 825,
+                "isFree": false
+            },
+            {
+                "number": 11,
+                "title": "Parte 11",
+                "description": "Episódio 11 de Meu Dom da Riqueza completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/MtSKQc54ADc",
+                "durationSeconds": 1172,
+                "isFree": false
+            },
+            {
+                "number": 12,
+                "title": "Parte 12",
+                "description": "Episódio 12 de Meu Dom da Riqueza completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/gOeTuKeVtTY",
+                "durationSeconds": 2093,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-papai-campeao-esua-filha-da-sorte",
+        "title": "Papai Campeão esua Filha da Sorte",
+        "slug": "papai-campeao-esua-filha-da-sorte",
+        "synopsis": "Acompanhe a emocionante história de Papai Campeão esua Filha da Sorte, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/7usOmQ-gsbY/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/7usOmQ-gsbY/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 8,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 11484,
+        "likesCount": 4019,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Papai Campeão esua Filha da Sorte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/7usOmQ-gsbY",
+                "durationSeconds": 773,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Papai Campeão esua Filha da Sorte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/tQoRJ--0HdY",
+                "durationSeconds": 779,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Papai Campeão esua Filha da Sorte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/rmd9HeDGg-A",
+                "durationSeconds": 736,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Papai Campeão esua Filha da Sorte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/J__0WLoxNYM",
+                "durationSeconds": 852,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de Papai Campeão esua Filha da Sorte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/u-4rrSwm9UE",
+                "durationSeconds": 787,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de Papai Campeão esua Filha da Sorte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/bXzwQwJf7FQ",
+                "durationSeconds": 761,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de Papai Campeão esua Filha da Sorte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/HAScXgbsd1I",
+                "durationSeconds": 442,
+                "isFree": false
+            },
+            {
+                "number": 8,
+                "title": "Parte 8",
+                "description": "Episódio 8 de Papai Campeão esua Filha da Sorte completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/bdtaV_HLH2U",
+                "durationSeconds": 719,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-recuperando-nossa-melodia",
+        "title": "Recuperando Nossa Melodia",
+        "slug": "recuperando-nossa-melodia",
+        "synopsis": "Acompanhe a emocionante história de Recuperando Nossa Melodia, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/9NemnDAxdAA/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/9NemnDAxdAA/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 10,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 28621,
+        "likesCount": 10017,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Recuperando Nossa Melodia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/9NemnDAxdAA",
+                "durationSeconds": 816,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Recuperando Nossa Melodia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/qr56NNe8XZE",
+                "durationSeconds": 885,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Recuperando Nossa Melodia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/C3gMLrWA8g8",
+                "durationSeconds": 1096,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Recuperando Nossa Melodia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/baITob8tI_E",
+                "durationSeconds": 932,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de Recuperando Nossa Melodia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/JrAeHz4WPKs",
+                "durationSeconds": 1053,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de Recuperando Nossa Melodia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/YNzCSiHuoZk",
+                "durationSeconds": 918,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de Recuperando Nossa Melodia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/JADMHfq8IW8",
+                "durationSeconds": 855,
+                "isFree": false
+            },
+            {
+                "number": 8,
+                "title": "Parte 8",
+                "description": "Episódio 8 de Recuperando Nossa Melodia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/xgw0fUedLXY",
+                "durationSeconds": 910,
+                "isFree": false
+            },
+            {
+                "number": 9,
+                "title": "Parte 9",
+                "description": "Episódio 9 de Recuperando Nossa Melodia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/rUqvXoVDvKA",
+                "durationSeconds": 953,
+                "isFree": false
+            },
+            {
+                "number": 10,
+                "title": "Parte 10",
+                "description": "Episódio 10 de Recuperando Nossa Melodia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/uFVVhoSGgO8",
+                "durationSeconds": 972,
+                "isFree": false
+            }
+        ]
+    },
+    {
         "id": "tdx-o-curador-milagroso",
         "title": "O Curador Milagroso",
         "slug": "o-curador-milagroso",
@@ -15948,6 +11650,82 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         ]
     },
     {
+        "id": "tdx-de-zombado-a-imparavel",
+        "title": "De Zombado a Imparável",
+        "slug": "de-zombado-a-imparavel",
+        "synopsis": "Acompanhe a emocionante história de De Zombado a Imparável, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/6-0a1Gx2AKA/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/6-0a1Gx2AKA/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 4,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 15099,
+        "likesCount": 5284,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de De Zombado a Imparável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/6-0a1Gx2AKA",
+                "durationSeconds": 1046,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de De Zombado a Imparável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/WOm8djT_h8A",
+                "durationSeconds": 846,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de De Zombado a Imparável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/zEN3hlqblzA",
+                "durationSeconds": 1083,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de De Zombado a Imparável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/vWQLqDSVDyo",
+                "durationSeconds": 1046,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-amanha-sera-minha-vez",
+        "title": "Amanhã Será Minha Vez",
+        "slug": "amanha-sera-minha-vez",
+        "synopsis": "Acompanhe a emocionante história de Amanhã Será Minha Vez, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/qFTyLLjlhQM/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/qFTyLLjlhQM/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 26096,
+        "likesCount": 9133,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Amanhã Será Minha Vez completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/qFTyLLjlhQM",
+                "durationSeconds": 915,
+                "isFree": true
+            }
+        ]
+    },
+    {
         "id": "tdx-o-retorno-da-sombra",
         "title": "O Retorno da Sombra",
         "slug": "o-retorno-da-sombra",
@@ -16009,6 +11787,314 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "description": "Episódio 6 de O Retorno da Sombra completo e dublado em alta definição.",
                 "youtubeUrl": "https://youtu.be/t2BfC4wIKVo",
                 "durationSeconds": 1329,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-meu-bilionarioimplacavel",
+        "title": "Meu BilionárioImplacável",
+        "slug": "meu-bilionarioimplacavel",
+        "synopsis": "Um poderoso magnata acostumado a comandar impérios descobre que o verdadeiro amor não tem preço quando seu destino cruza com uma mulher destemida em Meu BilionárioImplacável.",
+        "coverUrl": "https://img.youtube.com/vi/kfmMZjA1Tq0/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/kfmMZjA1Tq0/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,bilionario,ceo,luxo,romance,drama",
+        "totalEpisodes": 18,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 18582,
+        "likesCount": 6503,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Meu BilionárioImplacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/kfmMZjA1Tq0",
+                "durationSeconds": 1497,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Meu BilionárioImplacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/jFaCgPO_LXE",
+                "durationSeconds": 1522,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Meu BilionárioImplacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/7P0awVyH-9Y",
+                "durationSeconds": 1510,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Meu BilionárioImplacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/fk0aHyNkr3s",
+                "durationSeconds": 1072,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de Meu BilionárioImplacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/2uXWGIaLaWU",
+                "durationSeconds": 949,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de Meu BilionárioImplacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/21LlGPMsGrc",
+                "durationSeconds": 1328,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de Meu BilionárioImplacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/lQpvIupewgI",
+                "durationSeconds": 191,
+                "isFree": false
+            },
+            {
+                "number": 8,
+                "title": "Parte 8",
+                "description": "Episódio 8 de Meu BilionárioImplacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/LgjpxVhhAzw",
+                "durationSeconds": 1323,
+                "isFree": false
+            },
+            {
+                "number": 9,
+                "title": "Parte 9",
+                "description": "Episódio 9 de Meu BilionárioImplacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/B18q9nyk-sY",
+                "durationSeconds": 1030,
+                "isFree": false
+            },
+            {
+                "number": 10,
+                "title": "Parte 10",
+                "description": "Episódio 10 de Meu BilionárioImplacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/0dQIv7S1fp4",
+                "durationSeconds": 1447,
+                "isFree": false
+            },
+            {
+                "number": 11,
+                "title": "Parte 11",
+                "description": "Episódio 11 de Meu BilionárioImplacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/5DN1Cmkd7hY",
+                "durationSeconds": 186,
+                "isFree": false
+            },
+            {
+                "number": 12,
+                "title": "Parte 12",
+                "description": "Episódio 12 de Meu BilionárioImplacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/JfrJergAUTI",
+                "durationSeconds": 1354,
+                "isFree": false
+            },
+            {
+                "number": 13,
+                "title": "Parte 13",
+                "description": "Episódio 13 de Meu BilionárioImplacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/IMAbDUfBkVU",
+                "durationSeconds": 1328,
+                "isFree": false
+            },
+            {
+                "number": 14,
+                "title": "Parte 14",
+                "description": "Episódio 14 de Meu BilionárioImplacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/uxRSLvia3bw",
+                "durationSeconds": 1103,
+                "isFree": false
+            },
+            {
+                "number": 15,
+                "title": "Parte 15",
+                "description": "Episódio 15 de Meu BilionárioImplacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/zZ41JBW0-UM",
+                "durationSeconds": 1035,
+                "isFree": false
+            },
+            {
+                "number": 16,
+                "title": "Parte 16",
+                "description": "Episódio 16 de Meu BilionárioImplacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/YzUt-AU5AK0",
+                "durationSeconds": 191,
+                "isFree": false
+            },
+            {
+                "number": 17,
+                "title": "Parte 17",
+                "description": "Episódio 17 de Meu BilionárioImplacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/BYs3juof7Rg",
+                "durationSeconds": 1371,
+                "isFree": false
+            },
+            {
+                "number": 18,
+                "title": "Parte 18",
+                "description": "Episódio 18 de Meu BilionárioImplacável completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/qhalrn4qZLo",
+                "durationSeconds": 1323,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-a-tutora-e-o-rebelde",
+        "title": "A Tutora e o Rebelde",
+        "slug": "a-tutora-e-o-rebelde",
+        "synopsis": "Acompanhe a emocionante história de A Tutora e o Rebelde, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/3_WZbiGf5E0/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/3_WZbiGf5E0/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 16,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 23218,
+        "likesCount": 8126,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de A Tutora e o Rebelde completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/3_WZbiGf5E0",
+                "durationSeconds": 997,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de A Tutora e o Rebelde completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/_d0GaFHz2v4",
+                "durationSeconds": 997,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de A Tutora e o Rebelde completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/LPrwEEcfX4U",
+                "durationSeconds": 357,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de A Tutora e o Rebelde completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/tECGdRguQ2w",
+                "durationSeconds": 1067,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de A Tutora e o Rebelde completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/lkPlEC6I6MQ",
+                "durationSeconds": 911,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de A Tutora e o Rebelde completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/hrQWXQqBWgg",
+                "durationSeconds": 858,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de A Tutora e o Rebelde completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/RoId0hgMb78",
+                "durationSeconds": 679,
+                "isFree": false
+            },
+            {
+                "number": 8,
+                "title": "Parte 8",
+                "description": "Episódio 8 de A Tutora e o Rebelde completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/0j2mPOw05wM",
+                "durationSeconds": 831,
+                "isFree": false
+            },
+            {
+                "number": 9,
+                "title": "Parte 9",
+                "description": "Episódio 9 de A Tutora e o Rebelde completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/swK7RrYeAI4",
+                "durationSeconds": 490,
+                "isFree": false
+            },
+            {
+                "number": 10,
+                "title": "Parte 10",
+                "description": "Episódio 10 de A Tutora e o Rebelde completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/q4kZqrH4BUo",
+                "durationSeconds": 779,
+                "isFree": false
+            },
+            {
+                "number": 11,
+                "title": "Parte 11",
+                "description": "Episódio 11 de A Tutora e o Rebelde completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Kc3hQjnzNTE",
+                "durationSeconds": 353,
+                "isFree": false
+            },
+            {
+                "number": 12,
+                "title": "Parte 12",
+                "description": "Episódio 12 de A Tutora e o Rebelde completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/HYHXzDOBFPA",
+                "durationSeconds": 1020,
+                "isFree": false
+            },
+            {
+                "number": 13,
+                "title": "Parte 13",
+                "description": "Episódio 13 de A Tutora e o Rebelde completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/ULqed5NLoRg",
+                "durationSeconds": 692,
+                "isFree": false
+            },
+            {
+                "number": 14,
+                "title": "Parte 14",
+                "description": "Episódio 14 de A Tutora e o Rebelde completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Z_1dA1qIoX4",
+                "durationSeconds": 597,
+                "isFree": false
+            },
+            {
+                "number": 15,
+                "title": "Parte 15",
+                "description": "Episódio 15 de A Tutora e o Rebelde completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Y56gKp0yU9g",
+                "durationSeconds": 377,
+                "isFree": false
+            },
+            {
+                "number": 16,
+                "title": "Parte 16",
+                "description": "Episódio 16 de A Tutora e o Rebelde completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/TDPdsexL-9o",
+                "durationSeconds": 932,
                 "isFree": false
             }
         ]
@@ -16099,6 +12185,80 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "description": "Episódio 9 de Meu Noivo Foi, Casei com Outro completo e dublado em alta definição.",
                 "youtubeUrl": "https://youtu.be/jTXI9XjVBpU",
                 "durationSeconds": 845,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-o-lado-oculto-do-marido",
+        "title": "O Lado Oculto do Marido",
+        "slug": "o-lado-oculto-do-marido",
+        "synopsis": "Acompanhe a emocionante história de O Lado Oculto do Marido, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/PBtMjSOxh7s/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/PBtMjSOxh7s/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 7,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 21863,
+        "likesCount": 7652,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de O Lado Oculto do Marido completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/PBtMjSOxh7s",
+                "durationSeconds": 1180,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de O Lado Oculto do Marido completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/akEHj341YPg",
+                "durationSeconds": 195,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de O Lado Oculto do Marido completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/j9uEPooBgQM",
+                "durationSeconds": 523,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de O Lado Oculto do Marido completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/f6_5bdwj42s",
+                "durationSeconds": 195,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de O Lado Oculto do Marido completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/VcSEIOankgo",
+                "durationSeconds": 1230,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de O Lado Oculto do Marido completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/mZ92bL84JPE",
+                "durationSeconds": 1183,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de O Lado Oculto do Marido completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/BgFNsMss9u0",
+                "durationSeconds": 523,
                 "isFree": false
             }
         ]
@@ -16438,6 +12598,56 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         ]
     },
     {
+        "id": "tdx-ascensao-do-pequeno-mestre",
+        "title": "Ascensão do Pequeno Mestre",
+        "slug": "ascensao-do-pequeno-mestre",
+        "synopsis": "Acompanhe a emocionante história de Ascensão do Pequeno Mestre, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/cGsnblGs0DI/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/cGsnblGs0DI/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 4,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 16643,
+        "likesCount": 5825,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Ascensão do Pequeno Mestre completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cGsnblGs0DI",
+                "durationSeconds": 286,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Ascensão do Pequeno Mestre completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/f7SuvBFapmc",
+                "durationSeconds": 584,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Ascensão do Pequeno Mestre completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/qiLqKk-owWk",
+                "durationSeconds": 331,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Ascensão do Pequeno Mestre completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/DP2F911cqSI",
+                "durationSeconds": 453,
+                "isFree": false
+            }
+        ]
+    },
+    {
         "id": "tdx-virgem-do-volei-de-praia",
         "title": "Virgem do Vôlei de Praia",
         "slug": "virgem-do-volei-de-praia",
@@ -16694,6 +12904,148 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "youtubeUrl": "https://youtu.be/yEL5Knap5aU",
                 "durationSeconds": 2139,
                 "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-magnata-secreto-amor-revelado",
+        "title": "Magnata Secreto Amor Revelado",
+        "slug": "magnata-secreto-amor-revelado",
+        "synopsis": "Um poderoso magnata acostumado a comandar impérios descobre que o verdadeiro amor não tem preço quando seu destino cruza com uma mulher destemida em Magnata Secreto Amor Revelado.",
+        "coverUrl": "https://img.youtube.com/vi/RDju7xmaPp4/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/RDju7xmaPp4/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 13077,
+        "likesCount": 4576,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Magnata Secreto Amor Revelado completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/RDju7xmaPp4",
+                "durationSeconds": 644,
+                "isFree": true
+            }
+        ]
+    },
+    {
+        "id": "tdx-acao-de-gracas-em-familia",
+        "title": "Ação de Graças em Família",
+        "slug": "acao-de-gracas-em-familia",
+        "synopsis": "Acompanhe a emocionante história de Ação de Graças em Família, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/aagB7L5z6fM/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/aagB7L5z6fM/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 9,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 32509,
+        "likesCount": 11378,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Ação de Graças em Família completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/aagB7L5z6fM",
+                "durationSeconds": 1196,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Ação de Graças em Família completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/JJtxP3HSmT0",
+                "durationSeconds": 512,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Ação de Graças em Família completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/esNQqRSrzAI",
+                "durationSeconds": 248,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Ação de Graças em Família completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/QjTnz6huDSs",
+                "durationSeconds": 823,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de Ação de Graças em Família completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/5JU6p2qeMdk",
+                "durationSeconds": 429,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de Ação de Graças em Família completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/84QgDzKNT4o",
+                "durationSeconds": 1398,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de Ação de Graças em Família completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/qH8gMwqrr1w",
+                "durationSeconds": 509,
+                "isFree": false
+            },
+            {
+                "number": 8,
+                "title": "Parte 8",
+                "description": "Episódio 8 de Ação de Graças em Família completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/A-CioPjPPo8",
+                "durationSeconds": 1007,
+                "isFree": false
+            },
+            {
+                "number": 9,
+                "title": "Parte 9",
+                "description": "Episódio 9 de Ação de Graças em Família completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Dw06d8sSbFc",
+                "durationSeconds": 1040,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-o-preco-do-seu-adeus",
+        "title": "O Preço do Seu Adeus",
+        "slug": "o-preco-do-seu-adeus",
+        "synopsis": "Acompanhe a emocionante história de O Preço do Seu Adeus, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/KlIYdNZnMNQ/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/KlIYdNZnMNQ/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 29867,
+        "likesCount": 10453,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de O Preço do Seu Adeus completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/KlIYdNZnMNQ",
+                "durationSeconds": 1469,
+                "isFree": true
             }
         ]
     },
@@ -16976,6 +13328,252 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         ]
     },
     {
+        "id": "tdx-do-nada-ao-heroi-marido-com-supervisao",
+        "title": "Do Nada ao Herói: Marido com Supervisão",
+        "slug": "do-nada-ao-heroi-marido-com-supervisao",
+        "synopsis": "Acompanhe a emocionante história de Do Nada ao Herói: Marido com Supervisão, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/v81cJc8IVy8/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/v81cJc8IVy8/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 15,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 11255,
+        "likesCount": 3939,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Do Nada ao Herói: Marido com Supervisão completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/v81cJc8IVy8",
+                "durationSeconds": 1755,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Do Nada ao Herói: Marido com Supervisão completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/LoK6fTZPzeU",
+                "durationSeconds": 801,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Do Nada ao Herói: Marido com Supervisão completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/spIRmxPiRtM",
+                "durationSeconds": 328,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Do Nada ao Herói: Marido com Supervisão completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/tAjhzy0EyXM",
+                "durationSeconds": 563,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de Do Nada ao Herói: Marido com Supervisão completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/JgyTHuDwmm0",
+                "durationSeconds": 1032,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de Do Nada ao Herói: Marido com Supervisão completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/nzX7__XysPs",
+                "durationSeconds": 328,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de Do Nada ao Herói: Marido com Supervisão completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/DbUeqjzDERY",
+                "durationSeconds": 1810,
+                "isFree": false
+            },
+            {
+                "number": 8,
+                "title": "Parte 8",
+                "description": "Episódio 8 de Do Nada ao Herói: Marido com Supervisão completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/ZRRSauuyD0c",
+                "durationSeconds": 1806,
+                "isFree": false
+            },
+            {
+                "number": 9,
+                "title": "Parte 9",
+                "description": "Episódio 9 de Do Nada ao Herói: Marido com Supervisão completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/BOdQ_AyHya8",
+                "durationSeconds": 1238,
+                "isFree": false
+            },
+            {
+                "number": 10,
+                "title": "Parte 10",
+                "description": "Episódio 10 de Do Nada ao Herói: Marido com Supervisão completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/oZGXJXgi-so",
+                "durationSeconds": 1955,
+                "isFree": false
+            },
+            {
+                "number": 11,
+                "title": "Parte 11",
+                "description": "Episódio 11 de Do Nada ao Herói: Marido com Supervisão completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/gmps7jcw0fQ",
+                "durationSeconds": 1692,
+                "isFree": false
+            },
+            {
+                "number": 12,
+                "title": "Parte 12",
+                "description": "Episódio 12 de Do Nada ao Herói: Marido com Supervisão completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/WpUb3KcVzpI",
+                "durationSeconds": 1800,
+                "isFree": false
+            },
+            {
+                "number": 13,
+                "title": "Parte 13",
+                "description": "Episódio 13 de Do Nada ao Herói: Marido com Supervisão completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/s8R147VWxdU",
+                "durationSeconds": 682,
+                "isFree": false
+            },
+            {
+                "number": 14,
+                "title": "Parte 14",
+                "description": "Episódio 14 de Do Nada ao Herói: Marido com Supervisão completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/gMsii3t8g6M",
+                "durationSeconds": 1800,
+                "isFree": false
+            },
+            {
+                "number": 15,
+                "title": "Parte 15",
+                "description": "Episódio 15 de Do Nada ao Herói: Marido com Supervisão completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/EkLDWZ8Xeng",
+                "durationSeconds": 723,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-traicao-do-beneficiado",
+        "title": "Traição do Beneficiado",
+        "slug": "traicao-do-beneficiado",
+        "synopsis": "Acompanhe a emocionante história de Traição do Beneficiado, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/zdbq9OOFqtU/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/zdbq9OOFqtU/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 4,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 28766,
+        "likesCount": 10068,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Traição do Beneficiado completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/zdbq9OOFqtU",
+                "durationSeconds": 296,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Traição do Beneficiado completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/4YgeDFv3cXg",
+                "durationSeconds": 355,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Traição do Beneficiado completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/ZrGeaS_94lQ",
+                "durationSeconds": 225,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Traição do Beneficiado completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/FFWynHm8ekQ",
+                "durationSeconds": 1354,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-herdeira-retoma-seu-trono",
+        "title": "Herdeira Retoma Seu Trono",
+        "slug": "herdeira-retoma-seu-trono",
+        "synopsis": "Acompanhe a emocionante história de Herdeira Retoma Seu Trono, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/2Zl5Ff_z_r0/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/2Zl5Ff_z_r0/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 5,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 33155,
+        "likesCount": 11604,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Herdeira Retoma Seu Trono completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/2Zl5Ff_z_r0",
+                "durationSeconds": 986,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Herdeira Retoma Seu Trono completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/1ZWoOrS97-E",
+                "durationSeconds": 665,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Herdeira Retoma Seu Trono completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Uir9hommvqU",
+                "durationSeconds": 711,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Herdeira Retoma Seu Trono completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/lhmaG78Vs1A",
+                "durationSeconds": 1565,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de Herdeira Retoma Seu Trono completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/IZfAjnI8Y-I",
+                "durationSeconds": 675,
+                "isFree": false
+            }
+        ]
+    },
+    {
         "id": "tdx-meu-amante-secreto-e-filho-da-minha-melhor-amiga",
         "title": "Meu Amante Secreto é Filho da Minha Melhor Amiga",
         "slug": "meu-amante-secreto-e-filho-da-minha-melhor-amiga",
@@ -17061,6 +13659,56 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "description": "Episódio 9 de Meu Amante Secreto é Filho da Minha Melhor Amiga completo e dublado em alta definição.",
                 "youtubeUrl": "https://youtu.be/SHTK1QtsBms",
                 "durationSeconds": 369,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-a-familia-perfeita-da-garota-planta",
+        "title": "A Família Perfeita da Garota Planta",
+        "slug": "a-familia-perfeita-da-garota-planta",
+        "synopsis": "Acompanhe a emocionante história de A Família Perfeita da Garota Planta, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/nXYuJ0dDvNs/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/nXYuJ0dDvNs/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 4,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 26264,
+        "likesCount": 9192,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de A Família Perfeita da Garota Planta completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/nXYuJ0dDvNs",
+                "durationSeconds": 1492,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de A Família Perfeita da Garota Planta completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/-tv3NEA20bM",
+                "durationSeconds": 255,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de A Família Perfeita da Garota Planta completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/hmbvb01tdic",
+                "durationSeconds": 1134,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de A Família Perfeita da Garota Planta completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/A-osQJV7rJ4",
+                "durationSeconds": 1308,
                 "isFree": false
             }
         ]
@@ -17810,6 +14458,122 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         ]
     },
     {
+        "id": "tdx-casal-de-poder-supremo",
+        "title": "Casal de Poder Supremo",
+        "slug": "casal-de-poder-supremo",
+        "synopsis": "Acompanhe a emocionante história de Casal de Poder Supremo, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/dscb7VqeE8M/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/dscb7VqeE8M/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 5,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 16862,
+        "likesCount": 5901,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Casal de Poder Supremo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/dscb7VqeE8M",
+                "durationSeconds": 1319,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Casal de Poder Supremo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/ISaKmfE-i80",
+                "durationSeconds": 1022,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Casal de Poder Supremo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/DJmokS36e4A",
+                "durationSeconds": 1205,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Casal de Poder Supremo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/eU3_WRZiyYM",
+                "durationSeconds": 1086,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de Casal de Poder Supremo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/de53XacjgUo",
+                "durationSeconds": 1224,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-ele-nao-conhece-misericordia",
+        "title": "Ele Não Conhece Misericórdia",
+        "slug": "ele-nao-conhece-misericordia",
+        "synopsis": "Acompanhe a emocionante história de Ele Não Conhece Misericórdia, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/el_A7nPzBKI/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/el_A7nPzBKI/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 5,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 33733,
+        "likesCount": 11806,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Ele Não Conhece Misericórdia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/el_A7nPzBKI",
+                "durationSeconds": 1092,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Ele Não Conhece Misericórdia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/LdLi6o9-LLo",
+                "durationSeconds": 888,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Ele Não Conhece Misericórdia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/FPq27QU0zeY",
+                "durationSeconds": 1153,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Ele Não Conhece Misericórdia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/D_eKFH9JdmA",
+                "durationSeconds": 1595,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de Ele Não Conhece Misericórdia completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/N1g2CZpw7Eo",
+                "durationSeconds": 849,
+                "isFree": false
+            }
+        ]
+    },
+    {
         "id": "tdx-a-alfa-torturada",
         "title": "A Alfa Torturada",
         "slug": "a-alfa-torturada",
@@ -17872,6 +14636,32 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "youtubeUrl": "https://youtu.be/xfDaKkil1F0",
                 "durationSeconds": 832,
                 "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-poder-alem-do-olhar",
+        "title": "Poder Além do Olhar",
+        "slug": "poder-alem-do-olhar",
+        "synopsis": "Acompanhe a emocionante história de Poder Além do Olhar, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/-xYMAmUnHVU/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/-xYMAmUnHVU/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 13304,
+        "likesCount": 4656,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Poder Além do Olhar completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/-xYMAmUnHVU",
+                "durationSeconds": 1719,
+                "isFree": true
             }
         ]
     },
@@ -17961,6 +14751,180 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "description": "Episódio 9 de Uma Noite com o Meu Meio-irmão completo e dublado em alta definição.",
                 "youtubeUrl": "https://youtu.be/0sfwZTbGMmY",
                 "durationSeconds": 1152,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-acenda-meu-fogo",
+        "title": "Acenda meu fogo",
+        "slug": "acenda-meu-fogo",
+        "synopsis": "Acompanhe a emocionante história de Acenda meu fogo, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/PRTJSgGl7Jg/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/PRTJSgGl7Jg/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 11,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 29735,
+        "likesCount": 10407,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Acenda meu fogo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/PRTJSgGl7Jg",
+                "durationSeconds": 413,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Acenda meu fogo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/JaxRSqL0cfI",
+                "durationSeconds": 413,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Acenda meu fogo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/JG19p0Auhfo",
+                "durationSeconds": 567,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Acenda meu fogo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/w9zJ-U7HKqQ",
+                "durationSeconds": 337,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de Acenda meu fogo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Px4AmmTjGUU",
+                "durationSeconds": 203,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de Acenda meu fogo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/FXf41JoLLBs",
+                "durationSeconds": 441,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de Acenda meu fogo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/2ERBbS1rwfU",
+                "durationSeconds": 446,
+                "isFree": false
+            },
+            {
+                "number": 8,
+                "title": "Parte 8",
+                "description": "Episódio 8 de Acenda meu fogo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/ut_gHjH1isM",
+                "durationSeconds": 235,
+                "isFree": false
+            },
+            {
+                "number": 9,
+                "title": "Parte 9",
+                "description": "Episódio 9 de Acenda meu fogo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/nmMH8pnU8x4",
+                "durationSeconds": 554,
+                "isFree": false
+            },
+            {
+                "number": 10,
+                "title": "Parte 10",
+                "description": "Episódio 10 de Acenda meu fogo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/UicTcrMlrWw",
+                "durationSeconds": 471,
+                "isFree": false
+            },
+            {
+                "number": 11,
+                "title": "Parte 11",
+                "description": "Episódio 11 de Acenda meu fogo completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Y4xzIGx5f4E",
+                "durationSeconds": 394,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-meus-cinco-maridos-bestiais",
+        "title": "Meus Cinco Maridos Bestiais",
+        "slug": "meus-cinco-maridos-bestiais",
+        "synopsis": "Acompanhe a emocionante história de Meus Cinco Maridos Bestiais, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/FJXGfAR2b1A/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/FJXGfAR2b1A/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 2,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 9650,
+        "likesCount": 3377,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Meus Cinco Maridos Bestiais completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/FJXGfAR2b1A",
+                "durationSeconds": 2045,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Meus Cinco Maridos Bestiais completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/g5BeiBFfM-8",
+                "durationSeconds": 959,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-a-irma-errada-na-cama-dele",
+        "title": "A Irmã Errada na Cama Dele",
+        "slug": "a-irma-errada-na-cama-dele",
+        "synopsis": "Acompanhe a emocionante história de A Irmã Errada na Cama Dele, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/1HF9wzaSnMM/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/1HF9wzaSnMM/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 2,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 30978,
+        "likesCount": 10842,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de A Irmã Errada na Cama Dele completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/1HF9wzaSnMM",
+                "durationSeconds": 1804,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de A Irmã Errada na Cama Dele completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/6TsgSwDpv-o",
+                "durationSeconds": 1709,
                 "isFree": false
             }
         ]
@@ -18101,6 +15065,64 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "description": "Episódio 7 de Mais Espada Menos Batom completo e dublado em alta definição.",
                 "youtubeUrl": "https://youtu.be/qk_wvyZDuyU",
                 "durationSeconds": 239,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-o-contrato-do-nosso-destino",
+        "title": "O Contrato do Nosso Destino",
+        "slug": "o-contrato-do-nosso-destino",
+        "synopsis": "Um matrimônio selado por conveniência e obrigações familiares esconde sentimentos intensos e segredos proibidos em O Contrato do Nosso Destino.",
+        "coverUrl": "https://img.youtube.com/vi/A9zXHkpsh7g/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/A9zXHkpsh7g/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 5,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 28909,
+        "likesCount": 10118,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de O Contrato do Nosso Destino completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/A9zXHkpsh7g",
+                "durationSeconds": 1378,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de O Contrato do Nosso Destino completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/IY63lJbCiPI",
+                "durationSeconds": 1066,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de O Contrato do Nosso Destino completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/M8wIkCBVP_s",
+                "durationSeconds": 1279,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de O Contrato do Nosso Destino completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Ptm7GwIN2Nc",
+                "durationSeconds": 1377,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de O Contrato do Nosso Destino completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/P51oFslkuPw",
+                "durationSeconds": 1314,
                 "isFree": false
             }
         ]
@@ -18256,6 +15278,56 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         ]
     },
     {
+        "id": "tdx-quando-a-neve-derrete",
+        "title": "Quando a Neve Derrete",
+        "slug": "quando-a-neve-derrete",
+        "synopsis": "Acompanhe a emocionante história de Quando a Neve Derrete, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/jOrAkJwC5Qc/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/jOrAkJwC5Qc/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 4,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 34030,
+        "likesCount": 11910,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Quando a Neve Derrete completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/jOrAkJwC5Qc",
+                "durationSeconds": 897,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Quando a Neve Derrete completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/m1s5TDrGXwg",
+                "durationSeconds": 761,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Quando a Neve Derrete completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/VNfuimPeJ8Q",
+                "durationSeconds": 851,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Quando a Neve Derrete completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/DRaO6uH880M",
+                "durationSeconds": 1085,
+                "isFree": false
+            }
+        ]
+    },
+    {
         "id": "tdx-trocada-pela-irma-o-alfa-rejeitado",
         "title": "Trocada pela Irmã: O Alfa Rejeitado",
         "slug": "trocada-pela-irma-o-alfa-rejeitado",
@@ -18364,6 +15436,32 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         ]
     },
     {
+        "id": "tdx-fera-do-amor",
+        "title": "Fera do Amor",
+        "slug": "fera-do-amor",
+        "synopsis": "Lendas ancestrais, vínculos eternos de almas gêmeas e batalhas ferozes pelo trono supremo revelam os maiores mistérios em Fera do Amor.",
+        "coverUrl": "https://img.youtube.com/vi/PshSv-qZYDg/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/PshSv-qZYDg/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 34469,
+        "likesCount": 12064,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Fera do Amor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/PshSv-qZYDg",
+                "durationSeconds": 1454,
+                "isFree": true
+            }
+        ]
+    },
+    {
         "id": "tdx-a-veterinaria-no-trono-das-feras",
         "title": "A Veterinária no Trono das Feras",
         "slug": "a-veterinaria-no-trono-das-feras",
@@ -18451,6 +15549,128 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "description": "Episódio 6 de Orgulho Encontra o Amor completo e dublado em alta definição.",
                 "youtubeUrl": "https://youtu.be/i96sMwWcK_M",
                 "durationSeconds": 868,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-o-pedreiro-e-a-bilionaria",
+        "title": "O Pedreiro e a Bilionária",
+        "slug": "o-pedreiro-e-a-bilionaria",
+        "synopsis": "Acompanhe a emocionante história de O Pedreiro e a Bilionária, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/2OIhdQYriug/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/2OIhdQYriug/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 13,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 34387,
+        "likesCount": 12035,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de O Pedreiro e a Bilionária completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/2OIhdQYriug",
+                "durationSeconds": 1293,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de O Pedreiro e a Bilionária completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/KNt36BqTjA0",
+                "durationSeconds": 1293,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de O Pedreiro e a Bilionária completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/AJmpNV_gFjk",
+                "durationSeconds": 1549,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de O Pedreiro e a Bilionária completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/J4DSCBX41Ac",
+                "durationSeconds": 1186,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de O Pedreiro e a Bilionária completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Uu0NEeAhJN8",
+                "durationSeconds": 1040,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de O Pedreiro e a Bilionária completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/SJojG-BhCdU",
+                "durationSeconds": 1492,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de O Pedreiro e a Bilionária completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/ZIETJ85UbjI",
+                "durationSeconds": 1691,
+                "isFree": false
+            },
+            {
+                "number": 8,
+                "title": "Parte 8",
+                "description": "Episódio 8 de O Pedreiro e a Bilionária completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/7ImQrtO4lJ4",
+                "durationSeconds": 1508,
+                "isFree": false
+            },
+            {
+                "number": 9,
+                "title": "Parte 9",
+                "description": "Episódio 9 de O Pedreiro e a Bilionária completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/aowkAKmMkk4",
+                "durationSeconds": 1155,
+                "isFree": false
+            },
+            {
+                "number": 10,
+                "title": "Parte 10",
+                "description": "Episódio 10 de O Pedreiro e a Bilionária completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/deO1Perm1hs",
+                "durationSeconds": 1293,
+                "isFree": false
+            },
+            {
+                "number": 11,
+                "title": "Parte 11",
+                "description": "Episódio 11 de O Pedreiro e a Bilionária completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/iultTP_nNdk",
+                "durationSeconds": 1187,
+                "isFree": false
+            },
+            {
+                "number": 12,
+                "title": "Parte 12",
+                "description": "Episódio 12 de O Pedreiro e a Bilionária completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Qo2sL9pi5fI",
+                "durationSeconds": 272,
+                "isFree": false
+            },
+            {
+                "number": 13,
+                "title": "Parte 13",
+                "description": "Episódio 13 de O Pedreiro e a Bilionária completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/iuAmps3opJ8",
+                "durationSeconds": 1810,
                 "isFree": false
             }
         ]
@@ -18880,6 +16100,74 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         ]
     },
     {
+        "id": "tdx-o-cowboy-bilionario-escondido",
+        "title": "O Cowboy Bilionário Escondido",
+        "slug": "o-cowboy-bilionario-escondido",
+        "synopsis": "Um poderoso magnata acostumado a comandar impérios descobre que o verdadeiro amor não tem preço quando seu destino cruza com uma mulher destemida em O Cowboy Bilionário Escondido.",
+        "coverUrl": "https://img.youtube.com/vi/NPj4tpY2boo/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/NPj4tpY2boo/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,bilionario,ceo,luxo,romance,drama",
+        "totalEpisodes": 2,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 31093,
+        "likesCount": 10882,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de O Cowboy Bilionário Escondido completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/NPj4tpY2boo",
+                "durationSeconds": 252,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de O Cowboy Bilionário Escondido completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/yAIvb8ENQ2U",
+                "durationSeconds": 286,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-a-paixao-secreta-do-meu-marido",
+        "title": "A Paixão Secreta do Meu Marido",
+        "slug": "a-paixao-secreta-do-meu-marido",
+        "synopsis": "Marcados por feridas do passado, duas vidas encontram no afeto e na cumplicidade o caminho para a redenção e a felicidade em A Paixão Secreta do Meu Marido.",
+        "coverUrl": "https://img.youtube.com/vi/YE3W50AAWJE/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/YE3W50AAWJE/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 2,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 31534,
+        "likesCount": 11036,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de A Paixão Secreta do Meu Marido completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/YE3W50AAWJE",
+                "durationSeconds": 1334,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de A Paixão Secreta do Meu Marido completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/sIRPYUwfUIM",
+                "durationSeconds": 465,
+                "isFree": false
+            }
+        ]
+    },
+    {
         "id": "tdx-gravida-de-trigemeos",
         "title": "Grávida de Trigêmeos",
         "slug": "gravida-de-trigemeos",
@@ -18972,6 +16260,56 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         ]
     },
     {
+        "id": "tdx-paixao-tabu-meu-meio-irmao",
+        "title": "Paixão Tabu: Meu Meio-Irmão",
+        "slug": "paixao-tabu-meu-meio-irmao",
+        "synopsis": "Marcados por feridas do passado, duas vidas encontram no afeto e na cumplicidade o caminho para a redenção e a felicidade em Paixão Tabu: Meu Meio-Irmão.",
+        "coverUrl": "https://img.youtube.com/vi/z1mt3s-KRXs/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/z1mt3s-KRXs/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 4,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 33005,
+        "likesCount": 11551,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Paixão Tabu: Meu Meio-Irmão completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/z1mt3s-KRXs",
+                "durationSeconds": 854,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Paixão Tabu: Meu Meio-Irmão completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/qq4hgwYdWRM",
+                "durationSeconds": 655,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Paixão Tabu: Meu Meio-Irmão completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Olzlm_tnE2w",
+                "durationSeconds": 1111,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Paixão Tabu: Meu Meio-Irmão completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/pnhHa_Ajdyk",
+                "durationSeconds": 1144,
+                "isFree": false
+            }
+        ]
+    },
+    {
         "id": "tdx-um-laco-perfumado",
         "title": "Um Laço Perfumado",
         "slug": "um-laco-perfumado",
@@ -19018,6 +16356,32 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "youtubeUrl": "https://youtu.be/8KSJCqDHbes",
                 "durationSeconds": 1000,
                 "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-nascido-para-correr",
+        "title": "Nascido para Correr",
+        "slug": "nascido-para-correr",
+        "synopsis": "Acompanhe a emocionante história de Nascido para Correr, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/ZHNsSXQ0gow/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/ZHNsSXQ0gow/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 26598,
+        "likesCount": 9309,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Nascido para Correr completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/ZHNsSXQ0gow",
+                "durationSeconds": 1243,
+                "isFree": true
             }
         ]
     },
@@ -19496,6 +16860,264 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         ]
     },
     {
+        "id": "tdx-venci-meu-passado-casando-com-ele",
+        "title": "Venci Meu Passado Casando com Ele",
+        "slug": "venci-meu-passado-casando-com-ele",
+        "synopsis": "Acompanhe a emocionante história de Venci Meu Passado Casando com Ele, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/6d9-WUef7u4/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/6d9-WUef7u4/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 5,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 33840,
+        "likesCount": 11844,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Venci Meu Passado Casando com Ele completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/6d9-WUef7u4",
+                "durationSeconds": 1220,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Venci Meu Passado Casando com Ele completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/r9FBgfXRXv0",
+                "durationSeconds": 1215,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Venci Meu Passado Casando com Ele completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/qseExkWUpfg",
+                "durationSeconds": 1189,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Venci Meu Passado Casando com Ele completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/DhrIwZfnlVo",
+                "durationSeconds": 1047,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de Venci Meu Passado Casando com Ele completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/bFUCihC5wPU",
+                "durationSeconds": 1220,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-paixao-proibida-pelo-pastor",
+        "title": "Paixão Proibida pelo Pastor",
+        "slug": "paixao-proibida-pelo-pastor",
+        "synopsis": "Marcados por feridas do passado, duas vidas encontram no afeto e na cumplicidade o caminho para a redenção e a felicidade em Paixão Proibida pelo Pastor.",
+        "coverUrl": "https://img.youtube.com/vi/bXOA9u00M1w/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/bXOA9u00M1w/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 5,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 27086,
+        "likesCount": 9480,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Paixão Proibida pelo Pastor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/bXOA9u00M1w",
+                "durationSeconds": 913,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Paixão Proibida pelo Pastor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/kpujzVTnkXo",
+                "durationSeconds": 1384,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Paixão Proibida pelo Pastor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Lf0AYQr_3gQ",
+                "durationSeconds": 1467,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Paixão Proibida pelo Pastor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/t3VEkyml8hY",
+                "durationSeconds": 727,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de Paixão Proibida pelo Pastor completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/nG3qCzmMIXo",
+                "durationSeconds": 1091,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-confesse-ou-seja-apagado",
+        "title": "Confesse ou Seja Apagado",
+        "slug": "confesse-ou-seja-apagado",
+        "synopsis": "Acompanhe a emocionante história de Confesse ou Seja Apagado, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/0f4Ao4igZno/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/0f4Ao4igZno/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 5,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 13755,
+        "likesCount": 4814,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Confesse ou Seja Apagado completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/0f4Ao4igZno",
+                "durationSeconds": 1562,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Confesse ou Seja Apagado completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/2FBvtr5M-4k",
+                "durationSeconds": 1306,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Confesse ou Seja Apagado completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/ieD4h6nFZE8",
+                "durationSeconds": 455,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Confesse ou Seja Apagado completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Sc4vZLHq2Ak",
+                "durationSeconds": 451,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de Confesse ou Seja Apagado completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/2J-SeI1b0Jk",
+                "durationSeconds": 456,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-casadainesperadamente-com-o-ceo",
+        "title": "CasadaInesperadamente com o CEO",
+        "slug": "casadainesperadamente-com-o-ceo",
+        "synopsis": "Um poderoso magnata acostumado a comandar impérios descobre que o verdadeiro amor não tem preço quando seu destino cruza com uma mulher destemida em CasadaInesperadamente com o CEO.",
+        "coverUrl": "https://img.youtube.com/vi/XqcxcKftddY/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/XqcxcKftddY/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,bilionario,ceo,luxo,casamento-arranjado,romance,drama",
+        "totalEpisodes": 3,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 32766,
+        "likesCount": 11468,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de CasadaInesperadamente com o CEO completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/XqcxcKftddY",
+                "durationSeconds": 899,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de CasadaInesperadamente com o CEO completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/A90d3hflGD4",
+                "durationSeconds": 184,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de CasadaInesperadamente com o CEO completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/u3tOlbSIxy4",
+                "durationSeconds": 875,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-memorias-de-um-inocente",
+        "title": "Memórias de Um Inocente",
+        "slug": "memorias-de-um-inocente",
+        "synopsis": "Acompanhe a emocionante história de Memórias de Um Inocente, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/bHwg0RIWzJg/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/bHwg0RIWzJg/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 3,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 29466,
+        "likesCount": 10313,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Memórias de Um Inocente completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/bHwg0RIWzJg",
+                "durationSeconds": 1215,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Memórias de Um Inocente completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/YzsogmX9cJs",
+                "durationSeconds": 1000,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Memórias de Um Inocente completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/hQ112Yw3EE0",
+                "durationSeconds": 1505,
+                "isFree": false
+            }
+        ]
+    },
+    {
         "id": "tdx-duas-vezes-era-uma-vez",
         "title": "Duas Vezes Era uma Vez",
         "slug": "duas-vezes-era-uma-vez",
@@ -19786,6 +17408,88 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         ]
     },
     {
+        "id": "tdx-o-jogo-do-carma",
+        "title": "O Jogo do Carma",
+        "slug": "o-jogo-do-carma",
+        "synopsis": "Acompanhe a emocionante história de O Jogo do Carma, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/JuW1-jSj8Co/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/JuW1-jSj8Co/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 8,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 32927,
+        "likesCount": 11524,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de O Jogo do Carma completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/JuW1-jSj8Co",
+                "durationSeconds": 478,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de O Jogo do Carma completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/DZACibKfV8g",
+                "durationSeconds": 1656,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de O Jogo do Carma completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/4FZ7V60jaTk",
+                "durationSeconds": 1325,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de O Jogo do Carma completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/CCywqracNxM",
+                "durationSeconds": 1129,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de O Jogo do Carma completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/N7L4pCU4AdY",
+                "durationSeconds": 444,
+                "isFree": false
+            },
+            {
+                "number": 6,
+                "title": "Parte 6",
+                "description": "Episódio 6 de O Jogo do Carma completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/E5eo9zwPHiM",
+                "durationSeconds": 395,
+                "isFree": false
+            },
+            {
+                "number": 7,
+                "title": "Parte 7",
+                "description": "Episódio 7 de O Jogo do Carma completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/wdZLVUzXfho",
+                "durationSeconds": 351,
+                "isFree": false
+            },
+            {
+                "number": 8,
+                "title": "Parte 8",
+                "description": "Episódio 8 de O Jogo do Carma completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/phZFv0t_Gno",
+                "durationSeconds": 641,
+                "isFree": false
+            }
+        ]
+    },
+    {
         "id": "tdx-meu-inimigo-me-engravidou",
         "title": "Meu Inimigo Me Engravidou",
         "slug": "meu-inimigo-me-engravidou",
@@ -19844,6 +17548,32 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         ]
     },
     {
+        "id": "tdx-meu-bully-meu-irmao",
+        "title": "Meu Bully, Meu Irmão",
+        "slug": "meu-bully-meu-irmao",
+        "synopsis": "Acompanhe a emocionante história de Meu Bully, Meu Irmão, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/2rC64OkVIr0/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/2rC64OkVIr0/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 26762,
+        "likesCount": 9366,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Meu Bully, Meu Irmão completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/2rC64OkVIr0",
+                "durationSeconds": 359,
+                "isFree": true
+            }
+        ]
+    },
+    {
         "id": "tdx-7-dias-internada-a-herdeira-descobriu-que-sua-propria-familia-queria-ve-la-",
         "title": "7 Dias Internada: A Herdeira Descobriu que Sua Própria Família Queria Vê-la Morta!",
         "slug": "7-dias-internada-a-herdeira-descobriu-que-sua-propria-familia-queria-ve-la-",
@@ -19865,6 +17595,32 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "description": "Episódio 1 de 7 Dias Internada: A Herdeira Descobriu que Sua Própria Família Queria Vê-la Morta! completo e dublado em alta definição.",
                 "youtubeUrl": "https://youtu.be/DUMx1KQqEvc",
                 "durationSeconds": 451,
+                "isFree": true
+            }
+        ]
+    },
+    {
+        "id": "tdx-a-coroa-do-mendigo-oculto",
+        "title": "A Coroa do Mendigo Oculto",
+        "slug": "a-coroa-do-mendigo-oculto",
+        "synopsis": "Acompanhe a emocionante história de A Coroa do Mendigo Oculto, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/l6eT8mlIhx8/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/l6eT8mlIhx8/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 17727,
+        "likesCount": 6204,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de A Coroa do Mendigo Oculto completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/l6eT8mlIhx8",
+                "durationSeconds": 1212,
                 "isFree": true
             }
         ]
@@ -20330,6 +18086,64 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         ]
     },
     {
+        "id": "tdx-a-filha-do-inferno-chegou",
+        "title": "A Filha do Inferno Chegou",
+        "slug": "a-filha-do-inferno-chegou",
+        "synopsis": "Acompanhe a emocionante história de A Filha do Inferno Chegou, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/L2RgJ0pNGsI/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/L2RgJ0pNGsI/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 5,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 32848,
+        "likesCount": 11496,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de A Filha do Inferno Chegou completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/L2RgJ0pNGsI",
+                "durationSeconds": 887,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de A Filha do Inferno Chegou completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/7YJ4gbEfSeA",
+                "durationSeconds": 913,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de A Filha do Inferno Chegou completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/MEKMrkjcORg",
+                "durationSeconds": 893,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de A Filha do Inferno Chegou completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/r2Evq6UZmlE",
+                "durationSeconds": 795,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de A Filha do Inferno Chegou completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/lT5aKu-hOcY",
+                "durationSeconds": 911,
+                "isFree": false
+            }
+        ]
+    },
+    {
         "id": "tdx-traida-e-morta-chloe-renasceu-em-7-dias-casou-se-com-o-bilionario-e-deu-o-t",
         "title": "Traída e Morta, Chloe Renasceu: Em 7 Dias, Casou-se com o Bilionário e Deu o Troco!",
         "slug": "traida-e-morta-chloe-renasceu-em-7-dias-casou-se-com-o-bilionario-e-deu-o-t",
@@ -20728,6 +18542,82 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         ]
     },
     {
+        "id": "tdx-meu-marido-bilionario-de-duas-caras",
+        "title": "Meu Marido Bilionário de Duas Caras",
+        "slug": "meu-marido-bilionario-de-duas-caras",
+        "synopsis": "Um poderoso magnata acostumado a comandar impérios descobre que o verdadeiro amor não tem preço quando seu destino cruza com uma mulher destemida em Meu Marido Bilionário de Duas Caras.",
+        "coverUrl": "https://img.youtube.com/vi/Wvz4x19DUUw/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/Wvz4x19DUUw/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,bilionario,ceo,luxo,romance,drama",
+        "totalEpisodes": 4,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 13980,
+        "likesCount": 4893,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Meu Marido Bilionário de Duas Caras completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Wvz4x19DUUw",
+                "durationSeconds": 321,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Meu Marido Bilionário de Duas Caras completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/EFuZGTi26SQ",
+                "durationSeconds": 226,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Meu Marido Bilionário de Duas Caras completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/1E2yM3dpWxw",
+                "durationSeconds": 227,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Meu Marido Bilionário de Duas Caras completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/Zc8NSn_i6_w",
+                "durationSeconds": 454,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-o-beijo-que-virou-namoro",
+        "title": "O Beijo Que Virou Namoro",
+        "slug": "o-beijo-que-virou-namoro",
+        "synopsis": "Marcados por feridas do passado, duas vidas encontram no afeto e na cumplicidade o caminho para a redenção e a felicidade em O Beijo Que Virou Namoro.",
+        "coverUrl": "https://img.youtube.com/vi/m_rH6pll_mY/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/m_rH6pll_mY/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 26925,
+        "likesCount": 9423,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de O Beijo Que Virou Namoro completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/m_rH6pll_mY",
+                "durationSeconds": 800,
+                "isFree": true
+            }
+        ]
+    },
+    {
         "id": "tdx-amor-em-meio-as-chamas",
         "title": "Amor em Meio às Chamas",
         "slug": "amor-em-meio-as-chamas",
@@ -20922,6 +18812,32 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         ]
     },
     {
+        "id": "tdx-o-pacto-alem-do-estadio",
+        "title": "O Pacto Além do Estádio",
+        "slug": "o-pacto-alem-do-estadio",
+        "synopsis": "Acompanhe a emocionante história de O Pacto Além do Estádio, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/g_rDg7XzC4U/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/g_rDg7XzC4U/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 21066,
+        "likesCount": 7373,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de O Pacto Além do Estádio completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/g_rDg7XzC4U",
+                "durationSeconds": 1448,
+                "isFree": true
+            }
+        ]
+    },
+    {
         "id": "tdx-sussurros-no-marques",
         "title": "Sussurros no Marquês",
         "slug": "sussurros-no-marques",
@@ -20994,6 +18910,40 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "youtubeUrl": "https://youtu.be/AM74HNABdQw",
                 "durationSeconds": 554,
                 "isFree": true
+            }
+        ]
+    },
+    {
+        "id": "tdx-do-peso-a-gloria",
+        "title": "Do Peso à Glória",
+        "slug": "do-peso-a-gloria",
+        "synopsis": "Acompanhe a emocionante história de Do Peso à Glória, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/ZzS8mmueSoQ/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/ZzS8mmueSoQ/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 2,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 17728,
+        "likesCount": 6204,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Do Peso à Glória completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/ZzS8mmueSoQ",
+                "durationSeconds": 217,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Do Peso à Glória completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/rSuoH7HMwSw",
+                "durationSeconds": 297,
+                "isFree": false
             }
         ]
     },
@@ -21130,6 +19080,64 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
         ]
     },
     {
+        "id": "tdx-toque-da-fortuna",
+        "title": "Toque da Fortuna",
+        "slug": "toque-da-fortuna",
+        "synopsis": "Acompanhe a emocionante história de Toque da Fortuna, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/tjzlQLwcyQU/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/tjzlQLwcyQU/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 5,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 14205,
+        "likesCount": 4971,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Toque da Fortuna completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/tjzlQLwcyQU",
+                "durationSeconds": 226,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Toque da Fortuna completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/X3Zyu6qZCrM",
+                "durationSeconds": 1008,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Toque da Fortuna completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/WBilrR7zU54",
+                "durationSeconds": 1058,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Toque da Fortuna completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/3K7GDG77wew",
+                "durationSeconds": 1029,
+                "isFree": false
+            },
+            {
+                "number": 5,
+                "title": "Parte 5",
+                "description": "Episódio 5 de Toque da Fortuna completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/PnsDiPrMmIU",
+                "durationSeconds": 751,
+                "isFree": false
+            }
+        ]
+    },
+    {
         "id": "tdx-promessas-quebradas-oceanos-de-distancia",
         "title": "Promessas Quebradas Oceanos de Distância",
         "slug": "promessas-quebradas-oceanos-de-distancia",
@@ -21200,6 +19208,32 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "youtubeUrl": "https://youtu.be/Z3Orlm_mq0U",
                 "durationSeconds": 1416,
                 "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-amor-entre-a-nevoa",
+        "title": "Amor Entre a Névoa",
+        "slug": "amor-entre-a-nevoa",
+        "synopsis": "Marcados por feridas do passado, duas vidas encontram no afeto e na cumplicidade o caminho para a redenção e a felicidade em Amor Entre a Névoa.",
+        "coverUrl": "https://img.youtube.com/vi/r0fc7xWud1c/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/r0fc7xWud1c/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 1,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 29190,
+        "likesCount": 10216,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Amor Entre a Névoa completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/r0fc7xWud1c",
+                "durationSeconds": 1211,
+                "isFree": true
             }
         ]
     },
@@ -21347,6 +19381,56 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "description": "Episódio 5 de Amor em Fragmentos completo e dublado em alta definição.",
                 "youtubeUrl": "https://youtu.be/EgmyoI_YbMs",
                 "durationSeconds": 781,
+                "isFree": false
+            }
+        ]
+    },
+    {
+        "id": "tdx-beleza-frianova-vida",
+        "title": "Beleza FriaNova Vida",
+        "slug": "beleza-frianova-vida",
+        "synopsis": "Acompanhe a emocionante história de Beleza FriaNova Vida, com reviravoltas de tirar o fôlego, intrigas familiares e um romance inesquecível dublado em alta definição.",
+        "coverUrl": "https://img.youtube.com/vi/j4hqwZ8dJ_c/hqdefault.jpg",
+        "bannerUrl": "https://img.youtube.com/vi/j4hqwZ8dJ_c/hqdefault.jpg",
+        "category": "Dublado",
+        "tags": "dublado,romance,drama",
+        "totalEpisodes": 4,
+        "freeEpisodesCount": 1,
+        "isFeatured": false,
+        "isVertical": true,
+        "viewsCount": 31205,
+        "likesCount": 10921,
+        "episodes": [
+            {
+                "number": 1,
+                "title": "Parte 1",
+                "description": "Episódio 1 de Beleza FriaNova Vida completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/j4hqwZ8dJ_c",
+                "durationSeconds": 962,
+                "isFree": true
+            },
+            {
+                "number": 2,
+                "title": "Parte 2",
+                "description": "Episódio 2 de Beleza FriaNova Vida completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/QCovJ7QTx84",
+                "durationSeconds": 1103,
+                "isFree": false
+            },
+            {
+                "number": 3,
+                "title": "Parte 3",
+                "description": "Episódio 3 de Beleza FriaNova Vida completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/AzWzdtVUKyY",
+                "durationSeconds": 1245,
+                "isFree": false
+            },
+            {
+                "number": 4,
+                "title": "Parte 4",
+                "description": "Episódio 4 de Beleza FriaNova Vida completo e dublado em alta definição.",
+                "youtubeUrl": "https://youtu.be/cEpLUMo1J1k",
+                "durationSeconds": 1178,
                 "isFree": false
             }
         ]
@@ -21551,5024 +19635,6 @@ export const INITIAL_YOUTUBE_DRAMAS: InitialDramaData[] = [
                 "description": "Episódio 1 de Noiva Renascida, Perseguição Sem Fim do Príncipe Regente completo e dublado em alta definição.",
                 "youtubeUrl": "https://youtu.be/VOBWvshkwH8",
                 "durationSeconds": 593,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvr3qu",
-        "title": "Suas Lágrimas Não Significam Nada Agora",
-        "slug": "suas-lagrimas-nao-significam-nada-agora",
-        "synopsis": "Suas Lágrimas Não Significam Nada Agora — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3891872,
-        "likesCount": 46702,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Suas Lágrimas Não Significam Nada Agora completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvr3qu",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvr5r6",
-        "title": "Virei Zumbi e Fiquei Invencível",
-        "slug": "virei-zumbi-e-fiquei-invencivel",
-        "synopsis": "Virei Zumbi e Fiquei Invencível — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1693647,
-        "likesCount": 20323,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Virei Zumbi e Fiquei Invencível completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvr5r6",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-Legendado (provável)",
-        "title": "Sr. Mu",
-        "slug": "sr-mu",
-        "synopsis": "Sr. Mu — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2961202,
-        "likesCount": 35534,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Sr. Mu completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=Legendado (provável)",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-Dublado",
-        "title": "Seu Arrependimento Tardio",
-        "slug": "seu-arrependimento-tardio",
-        "synopsis": "Seu Arrependimento Tardio — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3284771,
-        "likesCount": 39417,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Seu Arrependimento Tardio completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=Dublado",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqzr6",
-        "title": "O Verdadeiro Autor",
-        "slug": "o-verdadeiro-autor",
-        "synopsis": "O Verdadeiro Autor — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2852403,
-        "likesCount": 34228,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Verdadeiro Autor completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqzr6",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqyzq",
-        "title": "O Lobo Lunar Despertou",
-        "slug": "o-lobo-lunar-despertou",
-        "synopsis": "O Lobo Lunar Despertou — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3666894,
-        "likesCount": 44002,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Lobo Lunar Despertou completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqyzq",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqtzy",
-        "title": "Ela Não Vai se Calar",
-        "slug": "ela-nao-vai-se-calar",
-        "synopsis": "Ela Não Vai se Calar — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3165636,
-        "likesCount": 37987,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Ela Não Vai se Calar completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqtzy",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvr02y",
-        "title": "Protegendo o Coração do CEO",
-        "slug": "protegendo-o-coracao-do-ceo",
-        "synopsis": "Protegendo o Coração do CEO — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1631955,
-        "likesCount": 19583,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Protegendo o Coração do CEO completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvr02y",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvr0gq",
-        "title": "Rainha: O Vestido Perdido",
-        "slug": "rainha-o-vestido-perdido",
-        "synopsis": "Rainha: O Vestido Perdido — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2404889,
-        "likesCount": 28858,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Rainha: O Vestido Perdido completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvr0gq",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqxze",
-        "title": "Meu Pincel Esconde uma Espada Mortal",
-        "slug": "meu-pincel-esconde-uma-espada-mortal",
-        "synopsis": "Meu Pincel Esconde uma Espada Mortal — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2221907,
-        "likesCount": 26662,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Meu Pincel Esconde uma Espada Mortal completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqxze",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqzja",
-        "title": "O Retorno do Ceifador",
-        "slug": "o-retorno-do-ceifador",
-        "synopsis": "O Retorno do Ceifador — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2146618,
-        "likesCount": 25759,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Retorno do Ceifador completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqzja",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqz8y",
-        "title": "O Retorno da Rainha das Líderes de Torcida",
-        "slug": "o-retorno-da-rainha-das-lideres-de-torcida",
-        "synopsis": "O Retorno da Rainha das Líderes de Torcida — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3413357,
-        "likesCount": 40960,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Retorno da Rainha das Líderes de Torcida completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqz8y",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqwh2",
-        "title": "Meu Chefe é uma CEO em Perigo",
-        "slug": "meu-chefe-e-uma-ceo-em-perigo",
-        "synopsis": "Meu Chefe é uma CEO em Perigo — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3839504,
-        "likesCount": 46074,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Meu Chefe é uma CEO em Perigo completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqwh2",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqxna",
-        "title": "Meu Namorado É um Chefão",
-        "slug": "meu-namorado-e-um-chefao",
-        "synopsis": "Meu Namorado É um Chefão — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3831510,
-        "likesCount": 45978,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Meu Namorado É um Chefão completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqxna",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqyii",
-        "title": "Não Tem Volta",
-        "slug": "nao-tem-volta",
-        "synopsis": "Não Tem Volta — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1929762,
-        "likesCount": 23157,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Não Tem Volta completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqyii",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqy92",
-        "title": "Não Provoque a Filha do Comandante",
-        "slug": "nao-provoque-a-filha-do-comandante",
-        "synopsis": "Não Provoque a Filha do Comandante — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3985773,
-        "likesCount": 47829,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Não Provoque a Filha do Comandante completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqy92",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqvb2",
-        "title": "Ganhei Visão de Raio-X e Fiquei Rico",
-        "slug": "ganhei-visao-de-raio-x-e-fiquei-rico",
-        "synopsis": "Ganhei Visão de Raio-X e Fiquei Rico — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1290471,
-        "likesCount": 15485,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Ganhei Visão de Raio-X e Fiquei Rico completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqvb2",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqwpe",
-        "title": "Meu Ex Bilionário Me Prendeu",
-        "slug": "meu-ex-bilionario-me-prendeu",
-        "synopsis": "Meu Ex Bilionário Me Prendeu — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4307787,
-        "likesCount": 51693,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Meu Ex Bilionário Me Prendeu completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqwpe",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqvm2",
-        "title": "Grávido do Astro do Hóquei",
-        "slug": "gravido-do-astro-do-hoquei",
-        "synopsis": "Grávido do Astro do Hóquei — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3698025,
-        "likesCount": 44376,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Grávido do Astro do Hóquei completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqvm2",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqvve",
-        "title": "Lendo Sua Mente",
-        "slug": "lendo-sua-mente",
-        "synopsis": "Lendo Sua Mente — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2924108,
-        "likesCount": 35089,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Lendo Sua Mente completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqvve",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqv2q",
-        "title": "Fim do Amor Fingido",
-        "slug": "fim-do-amor-fingido",
-        "synopsis": "Fim do Amor Fingido — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1874064,
-        "likesCount": 22488,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Fim do Amor Fingido completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqv2q",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqucu",
-        "title": "Eles escolheram o assassino e me abandonaram",
-        "slug": "eles-escolheram-o-assassino-e-me-abandonaram",
-        "synopsis": "Eles escolheram o assassino e me abandonaram — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4481134,
-        "likesCount": 53773,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Eles escolheram o assassino e me abandonaram completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqucu",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqtlm",
-        "title": "Do Nada ao Império",
-        "slug": "do-nada-ao-imperio",
-        "synopsis": "Do Nada ao Império — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1643391,
-        "likesCount": 19720,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Do Nada ao Império completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqtlm",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqsiq",
-        "title": "Casada com um Bilionário Mentiroso",
-        "slug": "casada-com-um-bilionario-mentiroso",
-        "synopsis": "Casada com um Bilionário Mentiroso — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2256381,
-        "likesCount": 27076,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Casada com um Bilionário Mentiroso completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqsiq",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqr6a",
-        "title": "A Noiva Americana do Chefão",
-        "slug": "a-noiva-americana-do-chefao",
-        "synopsis": "A Noiva Americana do Chefão — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2865064,
-        "likesCount": 34380,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Noiva Americana do Chefão completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqr6a",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqrfq",
-        "title": "A Noiva Grávida Virou o Xodó da Família",
-        "slug": "a-noiva-gravida-virou-o-xodo-da-familia",
-        "synopsis": "A Noiva Grávida Virou o Xodó da Família — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2414310,
-        "likesCount": 28971,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Noiva Grávida Virou o Xodó da Família completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqrfq",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqs8a",
-        "title": "Aipo da Primavera em Conserva Frostpond",
-        "slug": "aipo-da-primavera-em-conserva-frostpond",
-        "synopsis": "Aipo da Primavera em Conserva Frostpond — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1911684,
-        "likesCount": 22940,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Aipo da Primavera em Conserva Frostpond completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqs8a",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqrwi",
-        "title": "A Vingança do Arquimago",
-        "slug": "a-vinganca-do-arquimago",
-        "synopsis": "A Vingança do Arquimago — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2417732,
-        "likesCount": 29012,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Vingança do Arquimago completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqrwi",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqrmu",
-        "title": "A Noiva que Fugiu",
-        "slug": "a-noiva-que-fugiu",
-        "synopsis": "A Noiva que Fugiu — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3440762,
-        "likesCount": 41289,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Noiva que Fugiu completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqrmu",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqqp2",
-        "title": "A Menina dos Seus Olhos",
-        "slug": "a-menina-dos-seus-olhos",
-        "synopsis": "A Menina dos Seus Olhos — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1496871,
-        "likesCount": 17962,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Menina dos Seus Olhos completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqqp2",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqqvi",
-        "title": "A Mulher do Campo Que Você Bateu É a Madrinha da Máfia",
-        "slug": "a-mulher-do-campo-que-voce-bateu-e-a-madrinha-da-mafia",
-        "synopsis": "A Mulher do Campo Que Você Bateu É a Madrinha da Máfia — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1452198,
-        "likesCount": 17426,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Mulher do Campo Que Você Bateu É a Madrinha da Máfia completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqqvi",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqqg2",
-        "title": "A Irmã Oculta do Rei dos Elfos",
-        "slug": "a-irma-oculta-do-rei-dos-elfos",
-        "synopsis": "A Irmã Oculta do Rei dos Elfos — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1519635,
-        "likesCount": 18235,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Irmã Oculta do Rei dos Elfos completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqqg2",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqq5u",
-        "title": "A Babá que Ouvia os Pensamentos dos Bebês Dragões",
-        "slug": "a-baba-que-ouvia-os-pensamentos-dos-bebes-dragoes",
-        "synopsis": "A Babá que Ouvia os Pensamentos dos Bebês Dragões — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1878249,
-        "likesCount": 22538,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Babá que Ouvia os Pensamentos dos Bebês Dragões completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqq5u",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvqpn6",
-        "title": "24 Horas com Seu Marido",
-        "slug": "24-horas-com-seu-marido",
-        "synopsis": "24 Horas com Seu Marido — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1496512,
-        "likesCount": 17958,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "24 Horas com Seu Marido completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvqpn6",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvivbm",
-        "title": "Por Que Tão Ciumento?",
-        "slug": "por-que-tao-ciumento",
-        "synopsis": "Por Que Tão Ciumento? — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2010724,
-        "likesCount": 24128,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Por Que Tão Ciumento? completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvivbm",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvivpy",
-        "title": "Quarta e Polegadas",
-        "slug": "quarta-e-polegadas",
-        "synopsis": "Quarta e Polegadas — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3576917,
-        "likesCount": 42923,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Quarta e Polegadas completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvivpy",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbviw0e",
-        "title": "Reivindicada pelo Don Impiedoso",
-        "slug": "reivindicada-pelo-don-impiedoso",
-        "synopsis": "Reivindicada pelo Don Impiedoso — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2141481,
-        "likesCount": 25697,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Reivindicada pelo Don Impiedoso completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbviw0e",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbviu16",
-        "title": "O Segredo da Minha Namorada",
-        "slug": "o-segredo-da-minha-namorada",
-        "synopsis": "O Segredo da Minha Namorada — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1685709,
-        "likesCount": 20228,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Segredo da Minha Namorada completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbviu16",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvisuq",
-        "title": "O Filhote Pobre é na Verdade o Vassalo do Deus Fera",
-        "slug": "o-filhote-pobre-e-na-verdade-o-vassalo-do-deus-fera",
-        "synopsis": "O Filhote Pobre é na Verdade o Vassalo do Deus Fera — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4468621,
-        "likesCount": 53623,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Filhote Pobre é na Verdade o Vassalo do Deus Fera completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvisuq",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvitpe",
-        "title": "O Príncipe Elfo É o Pai 2",
-        "slug": "o-principe-elfo-e-o-pai-2",
-        "synopsis": "O Príncipe Elfo É o Pai 2 — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4142830,
-        "likesCount": 49713,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Príncipe Elfo É o Pai 2 completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvitpe",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbviqqi",
-        "title": "Minha Ex-Esposa Implorou por Perdão ao Descobrir que Entrei para a Expedição Antártica",
-        "slug": "minha-ex-esposa-implorou-por-perdao-ao-descobrir-que-entrei-para-a-expedicao-antartica",
-        "synopsis": "Minha Ex-Esposa Implorou por Perdão ao Descobrir que Entrei para a Expedição Antártica — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4158928,
-        "likesCount": 49907,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Minha Ex-Esposa Implorou por Perdão ao Descobrir que Entrei para a Expedição Antártica completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbviqqi",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbviq5e",
-        "title": "Meu Peru de Estimação é uma Fênix Lendária",
-        "slug": "meu-peru-de-estimacao-e-uma-fenix-lendaria",
-        "synopsis": "Meu Peru de Estimação é uma Fênix Lendária — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2854372,
-        "likesCount": 34252,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Meu Peru de Estimação é uma Fênix Lendária completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbviq5e",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvirmm",
-        "title": "O Alfa Sem Lobo Vai Embora",
-        "slug": "o-alfa-sem-lobo-vai-embora",
-        "synopsis": "O Alfa Sem Lobo Vai Embora — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3417274,
-        "likesCount": 41007,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Alfa Sem Lobo Vai Embora completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvirmm",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvis0m",
-        "title": "O Chefe Oculto é Impiedoso",
-        "slug": "o-chefe-oculto-e-impiedoso",
-        "synopsis": "O Chefe Oculto é Impiedoso — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1280123,
-        "likesCount": 15361,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Chefe Oculto é Impiedoso completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvis0m",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvird6",
-        "title": "Minha Mulher Virou Presa",
-        "slug": "minha-mulher-virou-presa",
-        "synopsis": "Minha Mulher Virou Presa — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4138791,
-        "likesCount": 49665,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Minha Mulher Virou Presa completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvird6",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvippm",
-        "title": "Meu Novo Pai Uiva para a Lua",
-        "slug": "meu-novo-pai-uiva-para-a-lua",
-        "synopsis": "Meu Novo Pai Uiva para a Lua — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2182243,
-        "likesCount": 26186,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Meu Novo Pai Uiva para a Lua completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvippm",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvio0q",
-        "title": "Ligada ao Coração Amaldiçoado",
-        "slug": "ligada-ao-coracao-amaldicoado",
-        "synopsis": "Ligada ao Coração Amaldiçoado — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3868007,
-        "likesCount": 46416,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Ligada ao Coração Amaldiçoado completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvio0q",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvh6lq",
-        "title": "Cai na Paixão Selvagem",
-        "slug": "cai-na-paixao-selvagem",
-        "synopsis": "Cai na Paixão Selvagem — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1207027,
-        "likesCount": 14484,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Cai na Paixão Selvagem completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvh6lq",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvh706",
-        "title": "Companheira do Meu Inimigo Jurado",
-        "slug": "companheira-do-meu-inimigo-jurado",
-        "synopsis": "Companheira do Meu Inimigo Jurado — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1903133,
-        "likesCount": 22837,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Companheira do Meu Inimigo Jurado completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvh706",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvh8sy",
-        "title": "Ganhe um Prêmio",
-        "slug": "ganhe-um-premio",
-        "synopsis": "Ganhe um Prêmio — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1817307,
-        "likesCount": 21807,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Ganhe um Prêmio completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvh8sy",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvh8i2",
-        "title": "Eu Sou a Filha do Rei Elfo",
-        "slug": "eu-sou-a-filha-do-rei-elfo",
-        "synopsis": "Eu Sou a Filha do Rei Elfo — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4389523,
-        "likesCount": 52674,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Eu Sou a Filha do Rei Elfo completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvh8i2",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvh7a6",
-        "title": "Dormi com o Pai do Meu Ex",
-        "slug": "dormi-com-o-pai-do-meu-ex",
-        "synopsis": "Dormi com o Pai do Meu Ex — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1533874,
-        "likesCount": 18406,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Dormi com o Pai do Meu Ex completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvh7a6",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvh7km",
-        "title": "Drogada Para a Cama Dele",
-        "slug": "drogada-para-a-cama-dele",
-        "synopsis": "Drogada Para a Cama Dele — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4380135,
-        "likesCount": 52561,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Drogada Para a Cama Dele completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvh7km",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvh872",
-        "title": "Eu Apaguei Ele da Minha Memória",
-        "slug": "eu-apaguei-ele-da-minha-memoria",
-        "synopsis": "Eu Apaguei Ele da Minha Memória — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1884714,
-        "likesCount": 22616,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Eu Apaguei Ele da Minha Memória completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvh872",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvh4v6",
-        "title": "A Vingança Começa: Casando com o Poderoso Irmão do Meu Marido",
-        "slug": "a-vinganca-comeca-casando-com-o-poderoso-irmao-do-meu-marido",
-        "synopsis": "A Vingança Começa: Casando com o Poderoso Irmão do Meu Marido — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1249836,
-        "likesCount": 14998,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Vingança Começa: Casando com o Poderoso Irmão do Meu Marido completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvh4v6",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvh5ka",
-        "title": "Amor Na Cama do Meu Tio Postiço",
-        "slug": "amor-na-cama-do-meu-tio-postico",
-        "synopsis": "Amor Na Cama do Meu Tio Postiço — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2972317,
-        "likesCount": 35667,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Amor Na Cama do Meu Tio Postiço completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvh5ka",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvh7vu",
-        "title": "Ele Não Me Enxergou",
-        "slug": "ele-nao-me-enxergou",
-        "synopsis": "Ele Não Me Enxergou — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2703938,
-        "likesCount": 32447,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Ele Não Me Enxergou completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvh7vu",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvh4h6",
-        "title": "A única companheira do Alfa",
-        "slug": "a-unica-companheira-do-alfa",
-        "synopsis": "A única companheira do Alfa — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3623511,
-        "likesCount": 43482,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A única companheira do Alfa completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvh4h6",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvh45a",
-        "title": "A Ômega Que Você Humilhou É a Sua Deusa",
-        "slug": "a-omega-que-voce-humilhou-e-a-sua-deusa",
-        "synopsis": "A Ômega Que Você Humilhou É a Sua Deusa — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3920892,
-        "likesCount": 47050,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Ômega Que Você Humilhou É a Sua Deusa completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvh45a",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvh172",
-        "title": "A Coroa das Profundezas",
-        "slug": "a-coroa-das-profundezas",
-        "synopsis": "A Coroa das Profundezas — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2148900,
-        "likesCount": 25786,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Coroa das Profundezas completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvh172",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvh2ke",
-        "title": "A Garota na Sujeira",
-        "slug": "a-garota-na-sujeira",
-        "synopsis": "A Garota na Sujeira — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3392617,
-        "likesCount": 40711,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Garota na Sujeira completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvh2ke",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvh24y",
-        "title": "A Esposa Que Cortou as Pernas Dele",
-        "slug": "a-esposa-que-cortou-as-pernas-dele",
-        "synopsis": "A Esposa Que Cortou as Pernas Dele — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2780579,
-        "likesCount": 33366,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Esposa Que Cortou as Pernas Dele completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvh24y",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbvh1oq",
-        "title": "A Cortina da Mentira",
-        "slug": "a-cortina-da-mentira",
-        "synopsis": "A Cortina da Mentira — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4042972,
-        "likesCount": 48515,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Cortina da Mentira completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbvh1oq",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbv78tq",
-        "title": "Meu Marido Tritão Amaldiçoado Governa as Profundezas",
-        "slug": "meu-marido-tritao-amaldicoado-governa-as-profundezas",
-        "synopsis": "Meu Marido Tritão Amaldiçoado Governa as Profundezas — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3959082,
-        "likesCount": 47508,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Meu Marido Tritão Amaldiçoado Governa as Profundezas completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbv78tq",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbv78aq",
-        "title": "Meu Marido Me Achava Incapaz de Trair",
-        "slug": "meu-marido-me-achava-incapaz-de-trair",
-        "synopsis": "Meu Marido Me Achava Incapaz de Trair — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4165602,
-        "likesCount": 49987,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Meu Marido Me Achava Incapaz de Trair completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbv78aq",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbv799m",
-        "title": "Meu Namorado Campeão Me Espancou Por Ela",
-        "slug": "meu-namorado-campeao-me-espancou-por-ela",
-        "synopsis": "Meu Namorado Campeão Me Espancou Por Ela — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2884568,
-        "likesCount": 34614,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Meu Namorado Campeão Me Espancou Por Ela completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbv799m",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbv77s2",
-        "title": "Meu Marido Frio Não Me Deixa Ir!",
-        "slug": "meu-marido-frio-nao-me-deixa-ir",
-        "synopsis": "Meu Marido Frio Não Me Deixa Ir! — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3408648,
-        "likesCount": 40903,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Meu Marido Frio Não Me Deixa Ir! completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbv77s2",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbv75k2",
-        "title": "Me Ame ou Perca Tudo",
-        "slug": "me-ame-ou-perca-tudo",
-        "synopsis": "Me Ame ou Perca Tudo — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3650593,
-        "likesCount": 43807,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Me Ame ou Perca Tudo completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbv75k2",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbv74u2",
-        "title": "Ligada ao Mago Assassino",
-        "slug": "ligada-ao-mago-assassino",
-        "synopsis": "Ligada ao Mago Assassino — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4347563,
-        "likesCount": 52170,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Ligada ao Mago Assassino completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbv74u2",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbv73wu",
-        "title": "Grávida do Pai Adotivo do Meu Ex por Vingança",
-        "slug": "gravida-do-pai-adotivo-do-meu-ex-por-vinganca",
-        "synopsis": "Grávida do Pai Adotivo do Meu Ex por Vingança — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3101975,
-        "likesCount": 37223,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Grávida do Pai Adotivo do Meu Ex por Vingança completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbv73wu",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbv6plu",
-        "title": "A Noiva do Deus da Guerra Caído",
-        "slug": "a-noiva-do-deus-da-guerra-caido",
-        "synopsis": "A Noiva do Deus da Guerra Caído — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4453417,
-        "likesCount": 53441,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Noiva do Deus da Guerra Caído completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbv6plu",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbv6p16",
-        "title": "A Noiva Banida do Rei Alfa",
-        "slug": "a-noiva-banida-do-rei-alfa",
-        "synopsis": "A Noiva Banida do Rei Alfa — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2627268,
-        "likesCount": 31527,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Noiva Banida do Rei Alfa completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbv6p16",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbv6nr6",
-        "title": "A Mãe Invisível Poderosa",
-        "slug": "a-mae-invisivel-poderosa",
-        "synopsis": "A Mãe Invisível Poderosa — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1564669,
-        "likesCount": 18776,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Mãe Invisível Poderosa completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbv6nr6",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbv6o6i",
-        "title": "A Médica que Ele Desprezou é a Princesa da Máfia",
-        "slug": "a-medica-que-ele-desprezou-e-a-princesa-da-mafia",
-        "synopsis": "A Médica que Ele Desprezou é a Princesa da Máfia — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3277391,
-        "likesCount": 39328,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Médica que Ele Desprezou é a Princesa da Máfia completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbv6o6i",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbv6mf6",
-        "title": "A Cria de Demônio do Clã dos Dragões",
-        "slug": "a-cria-de-demonio-do-cla-dos-dragoes",
-        "synopsis": "A Cria de Demônio do Clã dos Dragões — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3661689,
-        "likesCount": 43940,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Cria de Demônio do Clã dos Dragões completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbv6mf6",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbv6nf2",
-        "title": "A Jogada da Rainha Lycan Exilada",
-        "slug": "a-jogada-da-rainha-lycan-exilada",
-        "synopsis": "A Jogada da Rainha Lycan Exilada — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3614350,
-        "likesCount": 43372,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Jogada da Rainha Lycan Exilada completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbv6nf2",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbv6n2a",
-        "title": "A Herdeira de Neve: Resgatada pelo Meu Pai Bilionário",
-        "slug": "a-herdeira-de-neve-resgatada-pelo-meu-pai-bilionario",
-        "synopsis": "A Herdeira de Neve: Resgatada pelo Meu Pai Bilionário — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1830909,
-        "likesCount": 21970,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Herdeira de Neve: Resgatada pelo Meu Pai Bilionário completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbv6n2a",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbv6mqu",
-        "title": "A Família Escondida Sob Minha Casa",
-        "slug": "a-familia-escondida-sob-minha-casa",
-        "synopsis": "A Família Escondida Sob Minha Casa — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2231334,
-        "likesCount": 26776,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Família Escondida Sob Minha Casa completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbv6mqu",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbv6m5u",
-        "title": "A Amante do Meu Marido Tem HIV",
-        "slug": "a-amante-do-meu-marido-tem-hiv",
-        "synopsis": "A Amante do Meu Marido Tem HIV — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1515706,
-        "likesCount": 18188,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Amante do Meu Marido Tem HIV completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbv6m5u",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxpcq",
-        "title": "Seu Cavaleiro é a Mulher que Ele Não Consegue Esquecer",
-        "slug": "seu-cavaleiro-e-a-mulher-que-ele-nao-consegue-esquecer",
-        "synopsis": "Seu Cavaleiro é a Mulher que Ele Não Consegue Esquecer — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3981938,
-        "likesCount": 47783,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Seu Cavaleiro é a Mulher que Ele Não Consegue Esquecer completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxpcq",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxnvy",
-        "title": "Rei da Prisão: Amor sem Amarras",
-        "slug": "rei-da-prisao-amor-sem-amarras",
-        "synopsis": "Rei da Prisão: Amor sem Amarras — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4402781,
-        "likesCount": 52833,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Rei da Prisão: Amor sem Amarras completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxnvy",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxonu",
-        "title": "Seja a Garota Doce Dela",
-        "slug": "seja-a-garota-doce-dela",
-        "synopsis": "Seja a Garota Doce Dela — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4145049,
-        "likesCount": 49740,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Seja a Garota Doce Dela completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxonu",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxmo2",
-        "title": "Princesa Súcubo Gordinha: De Vítima Enterrada a Imperatriz do Abismo",
-        "slug": "princesa-sucubo-gordinha-de-vitima-enterrada-a-imperatriz-do-abismo",
-        "synopsis": "Princesa Súcubo Gordinha: De Vítima Enterrada a Imperatriz do Abismo — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2576144,
-        "likesCount": 30913,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Princesa Súcubo Gordinha: De Vítima Enterrada a Imperatriz do Abismo completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxmo2",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxn8a",
-        "title": "Quando a Neve Cai e Ela Não Sorri Mais",
-        "slug": "quando-a-neve-cai-e-ela-nao-sorri-mais",
-        "synopsis": "Quando a Neve Cai e Ela Não Sorri Mais — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3890162,
-        "likesCount": 46681,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Quando a Neve Cai e Ela Não Sorri Mais completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxn8a",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxjde",
-        "title": "O Íncubo que Incendiou o Gelo",
-        "slug": "o-incubo-que-incendiou-o-gelo",
-        "synopsis": "O Íncubo que Incendiou o Gelo — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2812904,
-        "likesCount": 33754,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Íncubo que Incendiou o Gelo completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxjde",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxjx2",
-        "title": "O Príncipe Elfo Chorou Sangue no Meu Caixão de Gelo",
-        "slug": "o-principe-elfo-chorou-sangue-no-meu-caixao-de-gelo",
-        "synopsis": "O Príncipe Elfo Chorou Sangue no Meu Caixão de Gelo — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3895184,
-        "likesCount": 46742,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Príncipe Elfo Chorou Sangue no Meu Caixão de Gelo completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxjx2",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxkrm",
-        "title": "Os 5 Anjinhos da Sorte da Titia",
-        "slug": "os-5-anjinhos-da-sorte-da-titia",
-        "synopsis": "Os 5 Anjinhos da Sorte da Titia — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3455970,
-        "likesCount": 41471,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Os 5 Anjinhos da Sorte da Titia completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxkrm",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxlb2",
-        "title": "Papai Lucifer e Sua Falsa Esposa",
-        "slug": "papai-lucifer-e-sua-falsa-esposa",
-        "synopsis": "Papai Lucifer e Sua Falsa Esposa — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1814392,
-        "likesCount": 21772,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Papai Lucifer e Sua Falsa Esposa completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxlb2",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxk8e",
-        "title": "O Rei Lobo se Apaixonou pela Tutora de Seu Filho",
-        "slug": "o-rei-lobo-se-apaixonou-pela-tutora-de-seu-filho",
-        "synopsis": "O Rei Lobo se Apaixonou pela Tutora de Seu Filho — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4211257,
-        "likesCount": 50535,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Rei Lobo se Apaixonou pela Tutora de Seu Filho completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxk8e",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxj5a",
-        "title": "O Herdeiro Inesperado: A Cinderela que Deu à Luz o Filho do Príncipe",
-        "slug": "o-herdeiro-inesperado-a-cinderela-que-deu-a-luz-o-filho-do-principe",
-        "synopsis": "O Herdeiro Inesperado: A Cinderela que Deu à Luz o Filho do Príncipe — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3400595,
-        "likesCount": 40807,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Herdeiro Inesperado: A Cinderela que Deu à Luz o Filho do Príncipe completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxj5a",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxjni",
-        "title": "O Padrinho Não Deveria Me Amar",
-        "slug": "o-padrinho-nao-deveria-me-amar",
-        "synopsis": "O Padrinho Não Deveria Me Amar — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2506187,
-        "likesCount": 30074,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Padrinho Não Deveria Me Amar completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxjni",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxivy",
-        "title": "O Chefão da Máfia Não Vai Mais se Esconder",
-        "slug": "o-chefao-da-mafia-nao-vai-mais-se-esconder",
-        "synopsis": "O Chefão da Máfia Não Vai Mais se Esconder — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3166925,
-        "likesCount": 38003,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Chefão da Máfia Não Vai Mais se Esconder completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxivy",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxilm",
-        "title": "O CEO Que Sempre Foi Meu",
-        "slug": "o-ceo-que-sempre-foi-meu",
-        "synopsis": "O CEO Que Sempre Foi Meu — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2640255,
-        "likesCount": 31683,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O CEO Que Sempre Foi Meu completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxilm",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxibe",
-        "title": "O Calor da Sua Língua",
-        "slug": "o-calor-da-sua-lingua",
-        "synopsis": "O Calor da Sua Língua — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3677630,
-        "likesCount": 44131,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Calor da Sua Língua completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxibe",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxhrq",
-        "title": "O Bebê Secreto do Rei Mercenário",
-        "slug": "o-bebe-secreto-do-rei-mercenario",
-        "synopsis": "O Bebê Secreto do Rei Mercenário — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1473206,
-        "likesCount": 17678,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Bebê Secreto do Rei Mercenário completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxhrq",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxhhi",
-        "title": "O Arrependimento dos Meus Quatro Pais Fera",
-        "slug": "o-arrependimento-dos-meus-quatro-pais-fera",
-        "synopsis": "O Arrependimento dos Meus Quatro Pais Fera — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1237455,
-        "likesCount": 14849,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Arrependimento dos Meus Quatro Pais Fera completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxhhi",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxhzi",
-        "title": "O Boxeador Se Apaixonou Por Mim",
-        "slug": "o-boxeador-se-apaixonou-por-mim",
-        "synopsis": "O Boxeador Se Apaixonou Por Mim — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3860160,
-        "likesCount": 46321,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Boxeador Se Apaixonou Por Mim completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxhzi",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxgjq",
-        "title": "Meu Rival Alfa me Engravidou",
-        "slug": "meu-rival-alfa-me-engravidou",
-        "synopsis": "Meu Rival Alfa me Engravidou — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1916454,
-        "likesCount": 22997,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Meu Rival Alfa me Engravidou completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxgjq",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxh16",
-        "title": "Minha Audição Venceu as Probabilidades",
-        "slug": "minha-audicao-venceu-as-probabilidades",
-        "synopsis": "Minha Audição Venceu as Probabilidades — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1906273,
-        "likesCount": 22875,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Minha Audição Venceu as Probabilidades completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxh16",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxh9e",
-        "title": "Minha Escolha Faz o Rei Dragão",
-        "slug": "minha-escolha-faz-o-rei-dragao",
-        "synopsis": "Minha Escolha Faz o Rei Dragão — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4458882,
-        "likesCount": 53506,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Minha Escolha Faz o Rei Dragão completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxh9e",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxft2",
-        "title": "Meu Marido Nunca Me Escolheu",
-        "slug": "meu-marido-nunca-me-escolheu",
-        "synopsis": "Meu Marido Nunca Me Escolheu — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3378258,
-        "likesCount": 40539,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Meu Marido Nunca Me Escolheu completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxft2",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxgty",
-        "title": "Meu Sonho Proibido com a Serpente",
-        "slug": "meu-sonho-proibido-com-a-serpente",
-        "synopsis": "Meu Sonho Proibido com a Serpente — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1809441,
-        "likesCount": 21713,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Meu Sonho Proibido com a Serpente completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxgty",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxg46",
-        "title": "Meu Mendigo é o Senhor do Reino",
-        "slug": "meu-mendigo-e-o-senhor-do-reino",
-        "synopsis": "Meu Mendigo é o Senhor do Reino — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3784110,
-        "likesCount": 45409,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Meu Mendigo é o Senhor do Reino completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxg46",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxgce",
-        "title": "Meu Presente Veio do Inferno",
-        "slug": "meu-presente-veio-do-inferno",
-        "synopsis": "Meu Presente Veio do Inferno — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4021648,
-        "likesCount": 48259,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Meu Presente Veio do Inferno completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxgce",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxfc6",
-        "title": "Jogo de Terror: Minha Namorada Fantasma é Rank S",
-        "slug": "jogo-de-terror-minha-namorada-fantasma-e-rank-s",
-        "synopsis": "Jogo de Terror: Minha Namorada Fantasma é Rank S — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2108606,
-        "likesCount": 25303,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Jogo de Terror: Minha Namorada Fantasma é Rank S completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxfc6",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxdeq",
-        "title": "Cerco Zumbi: Ele Bloqueou Minha Fuga por Ela",
-        "slug": "cerco-zumbi-ele-bloqueou-minha-fuga-por-ela",
-        "synopsis": "Cerco Zumbi: Ele Bloqueou Minha Fuga por Ela — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2549048,
-        "likesCount": 30588,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Cerco Zumbi: Ele Bloqueou Minha Fuga por Ela completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxdeq",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxfli",
-        "title": "Linhagem Divina: A Verdade Sobre a Filha de Hera",
-        "slug": "linhagem-divina-a-verdade-sobre-a-filha-de-hera",
-        "synopsis": "Linhagem Divina: A Verdade Sobre a Filha de Hera — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3310955,
-        "likesCount": 39731,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Linhagem Divina: A Verdade Sobre a Filha de Hera completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxfli",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxet6",
-        "title": "Eu Me Apaixonei por um Serial Killer",
-        "slug": "eu-me-apaixonei-por-um-serial-killer",
-        "synopsis": "Eu Me Apaixonei por um Serial Killer — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4217315,
-        "likesCount": 50607,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Eu Me Apaixonei por um Serial Killer completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxet6",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxe82",
-        "title": "Dez presentes para destruir meu marido",
-        "slug": "dez-presentes-para-destruir-meu-marido",
-        "synopsis": "Dez presentes para destruir meu marido — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3768790,
-        "likesCount": 45225,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Dez presentes para destruir meu marido completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxe82",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxdy2",
-        "title": "Curvem-se ao Poderoso Chefão",
-        "slug": "curvem-se-ao-poderoso-chefao",
-        "synopsis": "Curvem-se ao Poderoso Chefão — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2174130,
-        "likesCount": 26089,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Curvem-se ao Poderoso Chefão completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxdy2",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxd2u",
-        "title": "CEO e filha voltam; ex surta!",
-        "slug": "ceo-e-filha-voltam-ex-surta",
-        "synopsis": "CEO e filha voltam; ex surta! — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2906345,
-        "likesCount": 34876,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "CEO e filha voltam; ex surta! completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxd2u",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuxdpi",
-        "title": "Chega de Chantagem Emocional",
-        "slug": "chega-de-chantagem-emocional",
-        "synopsis": "Chega de Chantagem Emocional — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4331787,
-        "likesCount": 51981,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Chega de Chantagem Emocional completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuxdpi",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuv7za",
-        "title": "A Noiva Substituta do Fazendeiro Bilionário",
-        "slug": "a-noiva-substituta-do-fazendeiro-bilionario",
-        "synopsis": "A Noiva Substituta do Fazendeiro Bilionário — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2905140,
-        "likesCount": 34861,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Noiva Substituta do Fazendeiro Bilionário completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuv7za",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuv8wq",
-        "title": "Casando-se com o Senhor dos Dragões que Ele Desprezou",
-        "slug": "casando-se-com-o-senhor-dos-dragoes-que-ele-desprezou",
-        "synopsis": "Casando-se com o Senhor dos Dragões que Ele Desprezou — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1275470,
-        "likesCount": 15305,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Casando-se com o Senhor dos Dragões que Ele Desprezou completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuv8wq",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuv8mu",
-        "title": "Amada Enfim: A Garota Que Renasceu das Cinzas",
-        "slug": "amada-enfim-a-garota-que-renasceu-das-cinzas",
-        "synopsis": "Amada Enfim: A Garota Que Renasceu das Cinzas — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2235862,
-        "likesCount": 26830,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Amada Enfim: A Garota Que Renasceu das Cinzas completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuv8mu",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuv6yq",
-        "title": "A Encantadora de Bebês do Alfa",
-        "slug": "a-encantadora-de-bebes-do-alfa",
-        "synopsis": "A Encantadora de Bebês do Alfa — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1260269,
-        "likesCount": 15123,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Encantadora de Bebês do Alfa completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuv6yq",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuv89u",
-        "title": "A Pousada dos Monstros: Meus Funcionários Deficientes São Demônios Apocalípticos",
-        "slug": "a-pousada-dos-monstros-meus-funcionarios-deficientes-sao-demonios-apocalipticos",
-        "synopsis": "A Pousada dos Monstros: Meus Funcionários Deficientes São Demônios Apocalípticos — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2285096,
-        "likesCount": 27421,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Pousada dos Monstros: Meus Funcionários Deficientes São Demônios Apocalípticos completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuv89u",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuv7li",
-        "title": "A Garotinha da Oradora dos Dragões",
-        "slug": "a-garotinha-da-oradora-dos-dragoes",
-        "synopsis": "A Garotinha da Oradora dos Dragões — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2568678,
-        "likesCount": 30824,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Garotinha da Oradora dos Dragões completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuv7li",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuv7a2",
-        "title": "A Esposa Fugitiva do Padrinho da Máfia",
-        "slug": "a-esposa-fugitiva-do-padrinho-da-mafia",
-        "synopsis": "A Esposa Fugitiva do Padrinho da Máfia — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2382999,
-        "likesCount": 28595,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Esposa Fugitiva do Padrinho da Máfia completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuv7a2",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuv6ba",
-        "title": "A Armadilha da Herdeira da Mansão Blackwood",
-        "slug": "a-armadilha-da-herdeira-da-mansao-blackwood",
-        "synopsis": "A Armadilha da Herdeira da Mansão Blackwood — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3038889,
-        "likesCount": 36466,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Armadilha da Herdeira da Mansão Blackwood completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuv6ba",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuv6lm",
-        "title": "A Bilionária Tratada como Serva",
-        "slug": "a-bilionaria-tratada-como-serva",
-        "synopsis": "A Bilionária Tratada como Serva — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2578299,
-        "likesCount": 30939,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Bilionária Tratada como Serva completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuv6lm",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuv5vy",
-        "title": "A 79ª Noiva do Deus Cobra",
-        "slug": "a-79-noiva-do-deus-cobra",
-        "synopsis": "A 79ª Noiva do Deus Cobra — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2868866,
-        "likesCount": 34426,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A 79ª Noiva do Deus Cobra completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuv5vy",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuo8vu",
-        "title": "Rei da Ilha",
-        "slug": "rei-da-ilha",
-        "synopsis": "Rei da Ilha — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2706413,
-        "likesCount": 32476,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Rei da Ilha completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuo8vu",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuoage",
-        "title": "Superbombeiro",
-        "slug": "superbombeiro",
-        "synopsis": "Superbombeiro — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2064788,
-        "likesCount": 24777,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Superbombeiro completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuoage",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuoa4e",
-        "title": "Sorte Depois de Acolher um Demônio",
-        "slug": "sorte-depois-de-acolher-um-demonio",
-        "synopsis": "Sorte Depois de Acolher um Demônio — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1352270,
-        "likesCount": 16227,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Sorte Depois de Acolher um Demônio completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuoa4e",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuo96u",
-        "title": "Renascida: Divórcio Antes da Erupção do Vesúvio",
-        "slug": "renascida-divorcio-antes-da-erupcao-do-vesuvio",
-        "synopsis": "Renascida: Divórcio Antes da Erupção do Vesúvio — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3600570,
-        "likesCount": 43206,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Renascida: Divórcio Antes da Erupção do Vesúvio completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuo96u",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuo7ri",
-        "title": "Parti Grávida e Você Se Arrependeu",
-        "slug": "parti-gravida-e-voce-se-arrependeu",
-        "synopsis": "Parti Grávida e Você Se Arrependeu — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3353980,
-        "likesCount": 40247,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Parti Grávida e Você Se Arrependeu completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuo7ri",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuo7g6",
-        "title": "Pai Mecânico: A Galáxia sob seu Comando",
-        "slug": "pai-mecanico-a-galaxia-sob-seu-comando",
-        "synopsis": "Pai Mecânico: A Galáxia sob seu Comando — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2686411,
-        "likesCount": 32236,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Pai Mecânico: A Galáxia sob seu Comando completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuo7g6",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuo57u",
-        "title": "O Marido Frio Me Mima Demais",
-        "slug": "o-marido-frio-me-mima-demais",
-        "synopsis": "O Marido Frio Me Mima Demais — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4057870,
-        "likesCount": 48694,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Marido Frio Me Mima Demais completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuo57u",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuo48i",
-        "title": "O Faxineiro é um Rei Mecha Rank SSS",
-        "slug": "o-faxineiro-e-um-rei-mecha-rank-sss",
-        "synopsis": "O Faxineiro é um Rei Mecha Rank SSS — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2231451,
-        "likesCount": 26777,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Faxineiro é um Rei Mecha Rank SSS completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuo48i",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuo5pq",
-        "title": "O Príncipe Elfo É o Pai do Meu Bebê 2",
-        "slug": "o-principe-elfo-e-o-pai-do-meu-bebe-2",
-        "synopsis": "O Príncipe Elfo É o Pai do Meu Bebê 2 — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3884817,
-        "likesCount": 46617,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Príncipe Elfo É o Pai do Meu Bebê 2 completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuo5pq",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuo4ki",
-        "title": "O Garoto Sem Destino",
-        "slug": "o-garoto-sem-destino",
-        "synopsis": "O Garoto Sem Destino — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2085002,
-        "likesCount": 25020,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Garoto Sem Destino completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuo4ki",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuo3lu",
-        "title": "O Deus Leão Não Me Deixa Partir",
-        "slug": "o-deus-leao-nao-me-deixa-partir",
-        "synopsis": "O Deus Leão Não Me Deixa Partir — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1471138,
-        "likesCount": 17653,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Deus Leão Não Me Deixa Partir completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuo3lu",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuo3vu",
-        "title": "O Don por Trás dos Óculos Escuros",
-        "slug": "o-don-por-tras-dos-oculos-escuros",
-        "synopsis": "O Don por Trás dos Óculos Escuros — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2269532,
-        "likesCount": 27234,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Don por Trás dos Óculos Escuros completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuo3vu",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuo3bi",
-        "title": "O Cavalariço Governa o Reino.",
-        "slug": "o-cavalarico-governa-o-reino",
-        "synopsis": "O Cavalariço Governa o Reino. — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1616316,
-        "likesCount": 19395,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Cavalariço Governa o Reino. completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuo3bi",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuo1vm",
-        "title": "Não Mexa Com o Gênio Demitido",
-        "slug": "nao-mexa-com-o-genio-demitido",
-        "synopsis": "Não Mexa Com o Gênio Demitido — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2182088,
-        "likesCount": 26185,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Não Mexa Com o Gênio Demitido completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuo1vm",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuo29i",
-        "title": "Noiva Renascida: Meu Caçador é um Lorde",
-        "slug": "noiva-renascida-meu-cacador-e-um-lorde",
-        "synopsis": "Noiva Renascida: Meu Caçador é um Lorde — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3467935,
-        "likesCount": 41615,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Noiva Renascida: Meu Caçador é um Lorde completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuo29i",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuo2my",
-        "title": "Noiva Substituta do Chefe da Máfia: O Amargo Arrependimento do Meu Ex",
-        "slug": "noiva-substituta-do-chefe-da-mafia-o-amargo-arrependimento-do-meu-ex",
-        "synopsis": "Noiva Substituta do Chefe da Máfia: O Amargo Arrependimento do Meu Ex — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4089651,
-        "likesCount": 49075,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Noiva Substituta do Chefe da Máfia: O Amargo Arrependimento do Meu Ex completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuo2my",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuo0bq",
-        "title": "Meu Marido Mendigo é o Senhor do Olimpo",
-        "slug": "meu-marido-mendigo-e-o-senhor-do-olimpo",
-        "synopsis": "Meu Marido Mendigo é o Senhor do Olimpo — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1588958,
-        "likesCount": 19067,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Meu Marido Mendigo é o Senhor do Olimpo completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuo0bq",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbuo012",
-        "title": "Jogos de Sedução do Dragão",
-        "slug": "jogos-de-seducao-do-dragao",
-        "synopsis": "Jogos de Sedução do Dragão — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4008042,
-        "likesCount": 48096,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Jogos de Sedução do Dragão completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbuo012",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbunywu",
-        "title": "Entrega do Diabo: Faça os Demônios Chorarem",
-        "slug": "entrega-do-diabo-faca-os-demonios-chorarem",
-        "synopsis": "Entrega do Diabo: Faça os Demônios Chorarem — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2782431,
-        "likesCount": 33389,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Entrega do Diabo: Faça os Demônios Chorarem completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbunywu",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbunxoq",
-        "title": "Cowboys em Marte",
-        "slug": "cowboys-em-marte",
-        "synopsis": "Cowboys em Marte — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4364691,
-        "likesCount": 52376,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Cowboys em Marte completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbunxoq",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbunweu",
-        "title": "A Suprema Luna: O Intocável Rei Lobo se Ajoelha para Mim",
-        "slug": "a-suprema-luna-o-intocavel-rei-lobo-se-ajoelha-para-mim",
-        "synopsis": "A Suprema Luna: O Intocável Rei Lobo se Ajoelha para Mim — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2534185,
-        "likesCount": 30410,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Suprema Luna: O Intocável Rei Lobo se Ajoelha para Mim completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbunweu",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbunvxu",
-        "title": "A Substituta do Demônio do Mar",
-        "slug": "a-substituta-do-demonio-do-mar",
-        "synopsis": "A Substituta do Demônio do Mar — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2746086,
-        "likesCount": 32953,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Substituta do Demônio do Mar completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbunvxu",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbunwsq",
-        "title": "A Única Rainha do Faraó",
-        "slug": "a-unica-rainha-do-farao",
-        "synopsis": "A Única Rainha do Faraó — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2832767,
-        "likesCount": 33993,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Única Rainha do Faraó completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbunwsq",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbul1v6",
-        "title": "A Herdeira Roubada que Cura",
-        "slug": "a-herdeira-roubada-que-cura",
-        "synopsis": "A Herdeira Roubada que Cura — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3556193,
-        "likesCount": 42674,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Herdeira Roubada que Cura completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbul1v6",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbul3mu",
-        "title": "A Princesa Oculta do Rei Demônio",
-        "slug": "a-princesa-oculta-do-rei-demonio",
-        "synopsis": "A Princesa Oculta do Rei Demônio — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3408943,
-        "likesCount": 40907,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Princesa Oculta do Rei Demônio completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbul3mu",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbul2la",
-        "title": "A Mendiga e o Bilionário",
-        "slug": "a-mendiga-e-o-bilionario",
-        "synopsis": "A Mendiga e o Bilionário — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3882936,
-        "likesCount": 46595,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Mendiga e o Bilionário completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbul2la",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbul2vu",
-        "title": "A Noiva Inesperada do Voto da Máfia",
-        "slug": "a-noiva-inesperada-do-voto-da-mafia",
-        "synopsis": "A Noiva Inesperada do Voto da Máfia — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4178540,
-        "likesCount": 50142,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Noiva Inesperada do Voto da Máfia completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbul2vu",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbul29i",
-        "title": "A Lágrima da Sereia",
-        "slug": "a-lagrima-da-sereia",
-        "synopsis": "A Lágrima da Sereia — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2176616,
-        "likesCount": 26119,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Lágrima da Sereia completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbul29i",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbul0nm",
-        "title": "A Bruxa e Seus Cinco Monstros Devotos (EP 51-100)",
-        "slug": "a-bruxa-e-seus-cinco-monstros-devotos-ep-51-100",
-        "synopsis": "A Bruxa e Seus Cinco Monstros Devotos (EP 51-100) — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1932610,
-        "likesCount": 23191,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Bruxa e Seus Cinco Monstros Devotos (EP 51-100) completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbul0nm",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbul0aq",
-        "title": "A Amante Dela É Minha",
-        "slug": "a-amante-dela-e-minha",
-        "synopsis": "A Amante Dela É Minha — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1666654,
-        "likesCount": 19999,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Amante Dela É Minha completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbul0aq",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbu8kne",
-        "title": "Orestes: O Herdeiro Bastardo",
-        "slug": "orestes-o-herdeiro-bastardo",
-        "synopsis": "Orestes: O Herdeiro Bastardo — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4307170,
-        "likesCount": 51686,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Orestes: O Herdeiro Bastardo completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbu8kne",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbu8ea2",
-        "title": "Married to a Disabled Duke",
-        "slug": "married-to-a-disabled-duke",
-        "synopsis": "Married to a Disabled Duke — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3054500,
-        "likesCount": 36654,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Married to a Disabled Duke completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbu8ea2",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbu85fa",
-        "title": "Depurando meu destino: agora sou a vilã",
-        "slug": "depurando-meu-destino-agora-sou-a-vila",
-        "synopsis": "Depurando meu destino: agora sou a vilã — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1696026,
-        "likesCount": 20352,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Depurando meu destino: agora sou a vilã completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbu85fa",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbtul82",
-        "title": "Rota Mortal para o Amor",
-        "slug": "rota-mortal-para-o-amor",
-        "synopsis": "Rota Mortal para o Amor — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2570074,
-        "likesCount": 30840,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Rota Mortal para o Amor completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbtul82",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbtuj9m",
-        "title": "Proibida para Ele",
-        "slug": "proibida-para-ele",
-        "synopsis": "Proibida para Ele — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4199466,
-        "likesCount": 50393,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Proibida para Ele completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbtuj9m",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbtuixe",
-        "title": "Príncipe Alienígena no Plantão",
-        "slug": "principe-alienigena-no-plantao",
-        "synopsis": "Príncipe Alienígena no Plantão — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2627257,
-        "likesCount": 31527,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Príncipe Alienígena no Plantão completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbtuixe",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbtugv2",
-        "title": "Pacto Eterno Enterrado na Dor",
-        "slug": "pacto-eterno-enterrado-na-dor",
-        "synopsis": "Pacto Eterno Enterrado na Dor — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1893492,
-        "likesCount": 22721,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Pacto Eterno Enterrado na Dor completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbtugv2",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbtuff6",
-        "title": "O Único Intocável pelos Zumbis",
-        "slug": "o-unico-intocavel-pelos-zumbis",
-        "synopsis": "O Único Intocável pelos Zumbis — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4427340,
-        "likesCount": 53128,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Único Intocável pelos Zumbis completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbtuff6",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbtud5m",
-        "title": "O Rei Alfa É Louco por Mim",
-        "slug": "o-rei-alfa-e-louco-por-mim",
-        "synopsis": "O Rei Alfa É Louco por Mim — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2353490,
-        "likesCount": 28241,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Rei Alfa É Louco por Mim completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbtud5m",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbtub2y",
-        "title": "O Limite do Perdão",
-        "slug": "o-limite-do-perdao",
-        "synopsis": "O Limite do Perdão — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3380460,
-        "likesCount": 40565,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "O Limite do Perdão completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbtub2y",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbtu3vu",
-        "title": "Meu Marido Vemdo Espaço Sideral",
-        "slug": "meu-marido-vemdo-espaco-sideral",
-        "synopsis": "Meu Marido Vemdo Espaço Sideral — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2541675,
-        "likesCount": 30500,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Meu Marido Vemdo Espaço Sideral completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbtu3vu",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbtu4aa",
-        "title": "Meu Meio-Irmão É o Rei Lobo",
-        "slug": "meu-meio-irmao-e-o-rei-lobo",
-        "synopsis": "Meu Meio-Irmão É o Rei Lobo — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3821623,
-        "likesCount": 45859,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Meu Meio-Irmão É o Rei Lobo completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbtu4aa",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttwve",
-        "title": "Devoção Ardente",
-        "slug": "devocao-ardente",
-        "synopsis": "Devoção Ardente — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2876277,
-        "likesCount": 34515,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Devoção Ardente completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttwve",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbtu5sa",
-        "title": "Não Toque no Meu Filho",
-        "slug": "nao-toque-no-meu-filho",
-        "synopsis": "Não Toque no Meu Filho — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4438047,
-        "likesCount": 53256,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Não Toque no Meu Filho completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbtu5sa",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbtu4nm",
-        "title": "Meu Querido Suspeito",
-        "slug": "meu-querido-suspeito",
-        "synopsis": "Meu Querido Suspeito — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4471454,
-        "likesCount": 53657,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Meu Querido Suspeito completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbtu4nm",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbtu1rm",
-        "title": "Juramento do Mago: Outro Mundo",
-        "slug": "juramento-do-mago-outro-mundo",
-        "synopsis": "Juramento do Mago: Outro Mundo — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1550062,
-        "likesCount": 18600,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Juramento do Mago: Outro Mundo completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbtu1rm",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbtu0k6",
-        "title": "Grávida dos Herdeiros do CEO",
-        "slug": "gravida-dos-herdeiros-do-ceo",
-        "synopsis": "Grávida dos Herdeiros do CEO — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1360043,
-        "likesCount": 16320,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Grávida dos Herdeiros do CEO completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbtu0k6",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttxpi",
-        "title": "Dois Reis Elfos pra Nós Duas",
-        "slug": "dois-reis-elfos-pra-nos-duas",
-        "synopsis": "Dois Reis Elfos pra Nós Duas — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2002519,
-        "likesCount": 24030,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Dois Reis Elfos pra Nós Duas completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttxpi",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttyzq",
-        "title": "Escolhida pelo Pai da Minha Amiga",
-        "slug": "escolhida-pelo-pai-da-minha-amiga",
-        "synopsis": "Escolhida pelo Pai da Minha Amiga — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3917629,
-        "likesCount": 47011,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Escolhida pelo Pai da Minha Amiga completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttyzq",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttyl6",
-        "title": "Ele Rejeitou a Noiva Errada",
-        "slug": "ele-rejeitou-a-noiva-errada",
-        "synopsis": "Ele Rejeitou a Noiva Errada — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1484403,
-        "likesCount": 17812,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Ele Rejeitou a Noiva Errada completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttyl6",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttvny",
-        "title": "Contrato Perverso da Herdeira",
-        "slug": "contrato-perverso-da-herdeira",
-        "synopsis": "Contrato Perverso da Herdeira — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1589019,
-        "likesCount": 19068,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Contrato Perverso da Herdeira completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttvny",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttujy",
-        "title": "Cavaleiro e o Dragão da Terra",
-        "slug": "cavaleiro-e-o-dragao-da-terra",
-        "synopsis": "Cavaleiro e o Dragão da Terra — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4304471,
-        "likesCount": 51653,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Cavaleiro e o Dragão da Terra completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttujy",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttvbq",
-        "title": "Concreto e Mentiras",
-        "slug": "concreto-e-mentiras",
-        "synopsis": "Concreto e Mentiras — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2033348,
-        "likesCount": 24400,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Concreto e Mentiras completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttvbq",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttwg2",
-        "title": "Deixando o Alfa de Joelhos",
-        "slug": "deixando-o-alfa-de-joelhos",
-        "synopsis": "Deixando o Alfa de Joelhos — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2112891,
-        "likesCount": 25354,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Deixando o Alfa de Joelhos completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttwg2",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttuyq",
-        "title": "Compartilhar a Vida com Você",
-        "slug": "compartilhar-a-vida-com-voce",
-        "synopsis": "Compartilhar a Vida com Você — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1856921,
-        "likesCount": 22283,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Compartilhar a Vida com Você completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttuyq",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttqx6",
-        "title": "Academia de Feitiços",
-        "slug": "academia-de-feiticos",
-        "synopsis": "Academia de Feitiços — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2203940,
-        "likesCount": 26447,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Academia de Feitiços completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttqx6",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttq7m",
-        "title": "A Substituta Perfeita",
-        "slug": "a-substituta-perfeita",
-        "synopsis": "A Substituta Perfeita — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3483661,
-        "likesCount": 41803,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Substituta Perfeita completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttq7m",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttr92",
-        "title": "Apaixonado pelo Bilionário Amigo do Meu Pai",
-        "slug": "apaixonado-pelo-bilionario-amigo-do-meu-pai",
-        "synopsis": "Apaixonado pelo Bilionário Amigo do Meu Pai — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1723481,
-        "likesCount": 20681,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Apaixonado pelo Bilionário Amigo do Meu Pai completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttr92",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttrqq",
-        "title": "Apaixonado pelo Meu Irmão",
-        "slug": "apaixonado-pelo-meu-irmao",
-        "synopsis": "Apaixonado pelo Meu Irmão — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1615384,
-        "likesCount": 19384,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "Apaixonado pelo Meu Irmão completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttrqq",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttp9i",
-        "title": "A Rainha Matadora de Deuses",
-        "slug": "a-rainha-matadora-de-deuses",
-        "synopsis": "A Rainha Matadora de Deuses — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3890380,
-        "likesCount": 46684,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Rainha Matadora de Deuses completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttp9i",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbtto0a",
-        "title": "A Paixão Proibida de um Lobo",
-        "slug": "a-paixao-proibida-de-um-lobo",
-        "synopsis": "A Paixão Proibida de um Lobo — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3731462,
-        "likesCount": 44777,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Paixão Proibida de um Lobo completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbtto0a",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttqji",
-        "title": "A Traição da Minha Esposa",
-        "slug": "a-traicao-da-minha-esposa",
-        "synopsis": "A Traição da Minha Esposa — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2787254,
-        "likesCount": 33447,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Traição da Minha Esposa completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttqji",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttisi",
-        "title": "A Criatura Sem Pelos",
-        "slug": "a-criatura-sem-pelos",
-        "synopsis": "A Criatura Sem Pelos — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2094728,
-        "likesCount": 25136,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Criatura Sem Pelos completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttisi",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttnmi",
-        "title": "A Noiva Voltou",
-        "slug": "a-noiva-voltou",
-        "synopsis": "A Noiva Voltou — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 2668571,
-        "likesCount": 32022,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Noiva Voltou completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttnmi",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttm4m",
-        "title": "A Mentira Vampírica",
-        "slug": "a-mentira-vampirica",
-        "synopsis": "A Mentira Vampírica — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 3961193,
-        "likesCount": 47534,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Mentira Vampírica completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttm4m",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttmjq",
-        "title": "A Noiva Desafiante do Alfa Amaldiçoado",
-        "slug": "a-noiva-desafiante-do-alfa-amaldicoado",
-        "synopsis": "A Noiva Desafiante do Alfa Amaldiçoado — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1666429,
-        "likesCount": 19997,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Noiva Desafiante do Alfa Amaldiçoado completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttmjq",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttkwy",
-        "title": "A Maldição do Oráculo",
-        "slug": "a-maldicao-do-oraculo",
-        "synopsis": "A Maldição do Oráculo — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-5.jpg",
-        "bannerUrl": "/cover-generic-5.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1272181,
-        "likesCount": 15266,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Maldição do Oráculo completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttkwy",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttlcy",
-        "title": "A Médica do Chefão da Máfia",
-        "slug": "a-medica-do-chefao-da-mafia",
-        "synopsis": "A Médica do Chefão da Máfia — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-1.jpg",
-        "bannerUrl": "/cover-generic-1.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1297458,
-        "likesCount": 15569,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Médica do Chefão da Máfia completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttlcy",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttk4y",
-        "title": "A Exceção às Suas Regras",
-        "slug": "a-excecao-as-suas-regras",
-        "synopsis": "A Exceção às Suas Regras — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-2.jpg",
-        "bannerUrl": "/cover-generic-2.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 1761813,
-        "likesCount": 21141,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Exceção às Suas Regras completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttk4y",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttj6u",
-        "title": "A Esposa Muda do Chefão",
-        "slug": "a-esposa-muda-do-chefao",
-        "synopsis": "A Esposa Muda do Chefão — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-3.jpg",
-        "bannerUrl": "/cover-generic-3.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4396742,
-        "likesCount": 52760,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Esposa Muda do Chefão completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttj6u",
-                "durationSeconds": 4800,
-                "isFree": true
-            }
-        ]
-    },
-    {
-        "id": "dm-xbttjnu",
-        "title": "A Estrela do Rei dos Elfos",
-        "slug": "a-estrela-do-rei-dos-elfos",
-        "synopsis": "A Estrela do Rei dos Elfos — Uma história eletrizante e cheia de reviravoltas sobre amor, poder e superação. Assista completa sem cortes e sem anúncios em alta definição no TvDrama Reels.",
-        "coverUrl": "/cover-generic-4.jpg",
-        "bannerUrl": "/cover-generic-4.jpg",
-        "category": "Legendado",
-        "tags": "legendado,romance,drama,novela vertical,em alta,destaques",
-        "totalEpisodes": 1,
-        "freeEpisodesCount": 1,
-        "isFeatured": false,
-        "isVertical": true,
-        "viewsCount": 4010211,
-        "likesCount": 48122,
-        "episodes": [
-            {
-                "number": 1,
-                "title": "Filme Completo",
-                "description": "A Estrela do Rei dos Elfos completo e legendado em alta definição.",
-                "youtubeUrl": "https://geo.dailymotion.com/player.html?video=xbttjnu",
-                "durationSeconds": 4800,
                 "isFree": true
             }
         ]
