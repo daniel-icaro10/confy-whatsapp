@@ -9,7 +9,7 @@ export async function GET(request: Request) {
         const includeDrafts = searchParams.get("all") === "true";
         const forceSync = searchParams.get("sync") === "true";
 
-        await ensureInitialDramas(forceSync);
+        await ensureInitialDramas(true);
 
         const dramas = await prisma.drama.findMany({
             where: includeDrafts ? {} : { status: "PUBLISHED" },

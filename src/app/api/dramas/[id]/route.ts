@@ -8,7 +8,7 @@ export async function GET(
     { params }: { params: Promise<{ id: string }> }
 ) {
     try {
-        await ensureInitialDramas();
+        await ensureInitialDramas(true);
         const { id } = await params;
 
         const drama = await prisma.drama.findFirst({

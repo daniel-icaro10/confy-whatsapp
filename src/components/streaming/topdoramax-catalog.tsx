@@ -324,11 +324,18 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
     }, []);
 
     // Exibe apenas as novelas reais disponíveis no sistema (banco de dados ou catálogo inicial)
+    // Filtra rigorosamente qualquer série que possua link de iframe do dailymotion que esteja bloqueado
     const dramas = useMemo(() => {
-        if (dbDramas.length > 0) {
-            return dbDramas;
-        }
-        return DEFAULT_CATALOG_DRAMAS;
+        const source = dbDramas.length > 0 ? dbDramas : DEFAULT_CATALOG_DRAMAS;
+        return source.filter((d) => {
+            if (d.slug === "wall-street-nao-negocia-o-amor") return false;
+            const hasBlockedIframe = d.episodes?.some(
+                (ep: any) =>
+                    (ep.youtubeUrl && ep.youtubeUrl.includes("dailymotion.com")) ||
+                    (ep.videoUrl && ep.videoUrl.includes("dailymotion.com"))
+            );
+            return !hasBlockedIframe;
+        });
     }, [dbDramas]);
 
     // Verifica acesso VIP (sessão Admin, retorno Stripe, parâmetro ?phone= do robô do WhatsApp ou localStorage)

@@ -537,9 +537,30 @@ let dramasEnsured = false;
 export async function ensureInitialDramas(force: boolean = false) {
     if (dramasEnsured && !force) return;
     try {
+        const validSlugs = INITIAL_YOUTUBE_DRAMAS.map((d) => d.slug);
+
+        // 1. Remove qualquer drama legado ou que não esteja no catálogo oficial de INITIAL_YOUTUBE_DRAMAS
         await prisma.drama.deleteMany({
             where: {
-                slug: { in: LEGACY_MOCK_DRAMA_SLUGS }
+                OR: [
+                    { slug: { in: LEGACY_MOCK_DRAMA_SLUGS } },
+                    { slug: { notIn: validSlugs } },
+                    { slug: "wall-street-nao-negocia-o-amor" }
+                ]
+            }
+        });
+
+        // 2. Remove qualquer drama que tenha episódios com iframes quebrados do dailymotion
+        await prisma.drama.deleteMany({
+            where: {
+                episodes: {
+                    some: {
+                        OR: [
+                            { youtubeUrl: { contains: "dailymotion.com" } },
+                            { videoUrl: { contains: "dailymotion.com" } }
+                        ]
+                    }
+                }
             }
         });
 
