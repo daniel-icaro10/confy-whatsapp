@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { OfertaSalesPageClient } from "./oferta-client";
+import { OfertaSalesPageClient, DramaOffer } from "./oferta-client";
 import { INITIAL_YOUTUBE_DRAMAS } from "@/lib/initial-dramas-data";
 import { prisma } from "@/lib/prisma";
 
@@ -64,6 +64,67 @@ export async function generateMetadata({ params }: OfertaPageProps): Promise<Met
 export default async function OfertaPage({ params }: OfertaPageProps) {
     const { slug } = await params;
 
+    let initialDrama: DramaOffer | null = null;
+    try {
+        const drama = await prisma.drama.findFirst({
+            where: {
+                OR: [{ slug }, { id: slug }]
+            },
+            include: {
+                episodes: {
+                    orderBy: { number: "asc" }
+                }
+            }
+        });
+
+        if (drama) {
+            initialDrama = {
+                id: drama.id,
+                title: drama.title,
+                slug: drama.slug,
+                synopsis: drama.synopsis || "",
+                coverUrl: drama.coverUrl,
+                bannerUrl: drama.bannerUrl || drama.coverUrl,
+                category: drama.category || "Romance",
+                totalEpisodes: drama.totalEpisodes || drama.episodes.length,
+                trailerYoutubeUrl: drama.trailerYoutubeUrl || drama.episodes[0]?.youtubeUrl || null,
+                episodes: drama.episodes.map((ep) => ({
+                    number: ep.number,
+                    title: ep.title,
+                    youtubeUrl: ep.youtubeUrl || (ep as any).videoUrl || "",
+                    durationSeconds: ep.durationSeconds || 900,
+                    isFree: ep.isFree
+                }))
+            };
+        } else {
+            const fallback = INITIAL_YOUTUBE_DRAMAS.find(
+                (d) => d.slug === slug || d.id === slug
+            );
+            if (fallback) {
+                initialDrama = {
+                    id: fallback.id,
+                    title: fallback.title,
+                    slug: fallback.slug,
+                    synopsis: fallback.synopsis,
+                    coverUrl: "/cover-ganhei-tres-namoradas.jpg",
+                    bannerUrl: "/cover-ganhei-tres-namoradas.jpg",
+                    category: fallback.category,
+                    totalEpisodes: fallback.totalEpisodes || fallback.episodes.length,
+                    trailerYoutubeUrl: fallback.episodes[0]?.youtubeUrl || null,
+                    episodes: fallback.episodes.map((ep) => ({
+                        number: ep.number,
+                        title: ep.title,
+                        youtubeUrl: ep.youtubeUrl || (ep as any).videoUrl || "",
+                        durationSeconds: ep.durationSeconds || 900,
+                        isFree: ep.isFree
+                    }))
+                };
+            }
+        }
+    } catch {
+        // fallback
+    }
+
     return (
         <Suspense
             fallback={
@@ -75,7 +136,7 @@ export default async function OfertaPage({ params }: OfertaPageProps) {
                 </div>
             }
         >
-            <OfertaSalesPageClient slug={slug} />
+            <OfertaSalesPageClient slug={slug} initialDrama={initialDrama} />
         </Suspense>
     );
 }

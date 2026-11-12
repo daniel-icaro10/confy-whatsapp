@@ -29,7 +29,6 @@ import {
     ArrowLeft
 } from "lucide-react";
 import { DEFAULT_OFFER_PLANS, extractYoutubeId, extractDailymotionId, OfferPlan } from "@/lib/segredos-defaults";
-import { INITIAL_YOUTUBE_DRAMAS } from "@/lib/initial-dramas-data";
 import { VipAccessModal } from "@/components/streaming/vip-access-modal";
 import { PwaInstallModal } from "@/components/streaming/pwa-install-modal";
 import { FramedYoutubePlayer } from "@/components/streaming/framed-youtube-player";
@@ -136,74 +135,13 @@ function WatchDramaContent() {
                     } else if (data.drama.episodes?.length > 0) {
                         setCurrentEpNumber(data.drama.episodes[0].number);
                     }
-                } else {
-                    const fallback = INITIAL_YOUTUBE_DRAMAS.find(
-                        (d) => d.slug === dramaIdOrSlug || d.id === dramaIdOrSlug
-                    );
-                    if (fallback) {
-                        setDrama({
-                            id: fallback.id,
-                            title: fallback.title,
-                            slug: fallback.slug,
-                            synopsis: fallback.synopsis,
-                            coverUrl: fallback.coverUrl,
-                            bannerUrl: fallback.bannerUrl || fallback.coverUrl,
-                            category: fallback.category,
-                            totalEpisodes: fallback.totalEpisodes,
-                            freeEpisodesCount: fallback.freeEpisodesCount,
-                            isVertical: fallback.isVertical,
-                            likesCount: fallback.likesCount,
-                            episodes: fallback.episodes.map((ep) => ({
-                                id: `${fallback.id}-ep-${ep.number}`,
-                                number: ep.number,
-                                title: ep.title,
-                                description: ep.description,
-                                youtubeUrl: ep.youtubeUrl,
-                                videoUrl: (ep as any).videoUrl || undefined,
-                                durationSeconds: ep.durationSeconds || 900,
-                                isFree: ep.isFree
-                            }))
-                        });
-                        setLikesCount(fallback.likesCount || 49200);
-                        const epParam = Number(searchParams.get("ep"));
-                        if (epParam && epParam > 0) {
-                            setCurrentEpNumber(epParam);
-                        }
-                    }
                 }
                 const funnelData = await funnelRes.json();
                 if (Array.isArray(funnelData?.plans) && funnelData.plans.length > 0) {
                     setPlans(funnelData.plans);
                 }
             } catch {
-                const fallback = INITIAL_YOUTUBE_DRAMAS.find(
-                    (d) => d.slug === dramaIdOrSlug || d.id === dramaIdOrSlug
-                );
-                if (fallback) {
-                    setDrama({
-                        id: fallback.id,
-                        title: fallback.title,
-                        slug: fallback.slug,
-                        synopsis: fallback.synopsis,
-                        coverUrl: fallback.coverUrl,
-                        bannerUrl: fallback.bannerUrl || fallback.coverUrl,
-                        category: fallback.category,
-                        totalEpisodes: fallback.totalEpisodes,
-                        freeEpisodesCount: fallback.freeEpisodesCount,
-                        isVertical: fallback.isVertical,
-                        likesCount: fallback.likesCount,
-                        episodes: fallback.episodes.map((ep) => ({
-                            id: `${fallback.id}-ep-${ep.number}`,
-                            number: ep.number,
-                            title: ep.title,
-                            description: ep.description,
-                            youtubeUrl: ep.youtubeUrl,
-                            videoUrl: (ep as any).videoUrl || undefined,
-                            durationSeconds: ep.durationSeconds || 900,
-                            isFree: ep.isFree
-                        }))
-                    });
-                }
+                // Ignore network error; fallback handled gracefully by UI
             } finally {
                 setLoading(false);
             }

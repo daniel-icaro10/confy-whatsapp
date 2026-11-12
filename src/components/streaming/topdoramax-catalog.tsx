@@ -22,7 +22,6 @@ import {
     Globe
 } from "lucide-react";
 import { DEFAULT_OFFER_PLANS, OfferPlan } from "@/lib/segredos-defaults";
-import { INITIAL_YOUTUBE_DRAMAS } from "@/lib/initial-dramas-data";
 import { VipAccessModal } from "@/components/streaming/vip-access-modal";
 import { PwaInstallModal } from "@/components/streaming/pwa-install-modal";
 
@@ -52,31 +51,6 @@ export interface Drama {
     episodes: Episode[];
     isShowcaseOnly?: boolean;
 }
-
-const DEFAULT_CATALOG_DRAMAS: Drama[] = INITIAL_YOUTUBE_DRAMAS.map((d) => ({
-    id: d.id,
-    title: d.title,
-    slug: d.slug,
-    synopsis: d.synopsis,
-    coverUrl: d.coverUrl,
-    bannerUrl: d.bannerUrl || d.coverUrl,
-    category: d.category,
-    tags: d.tags,
-    totalEpisodes: d.totalEpisodes,
-    freeEpisodesCount: d.freeEpisodesCount,
-    isFeatured: d.isFeatured,
-    isVertical: d.isVertical,
-    viewsCount: d.viewsCount,
-    likesCount: d.likesCount,
-    episodes: d.episodes.map((ep) => ({
-        id: `${d.id}-ep-${ep.number}`,
-        number: ep.number,
-        title: ep.title,
-        isFree: ep.isFree,
-        durationSeconds: ep.durationSeconds || 900
-    })),
-    isShowcaseOnly: false
-}));
 
 function semAcento(t: string): string {
     return (t || "")
@@ -220,16 +194,17 @@ function matchesFilterCategory(drama: Drama, filter: string): boolean {
 
 interface TopDoramaxCatalogProps {
     forceCatalogView?: boolean;
+    initialDramas?: Drama[];
 }
 
-export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalogProps) {
+export function TopDoramaxCatalog({ forceCatalogView = false, initialDramas = [] }: TopDoramaxCatalogProps) {
     const router = useRouter();
     const searchParams = useSearchParams();
     const { data: session } = useSession();
     const isAdmin = Boolean(session?.user);
 
-    const [dbDramas, setDbDramas] = useState<Drama[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [dbDramas, setDbDramas] = useState<Drama[]>(initialDramas);
+    const [loading, setLoading] = useState(initialDramas.length === 0);
     const [activeTab, setActiveTab] = useState<"inicio" | "descobrir" | "emalta" | "minhalista">("inicio");
     const [activeCategory, setActiveCategory] = useState<string>("todos");
     const [discoverCategory, setDiscoverCategory] = useState<string>("populares");
@@ -327,7 +302,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
     // Exibe apenas as novelas reais disponíveis no sistema (banco de dados ou catálogo inicial)
     // Filtra rigorosamente qualquer série que possua link de iframe do dailymotion que esteja bloqueado
     const dramas = useMemo(() => {
-        const source = dbDramas.length > 0 ? dbDramas : DEFAULT_CATALOG_DRAMAS;
+        const source = dbDramas.length > 0 ? dbDramas : initialDramas;
         return source.filter((d) => {
             if (d.slug === "wall-street-nao-negocia-o-amor") return false;
             const hasBlockedIframe = d.episodes?.some(
@@ -337,7 +312,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
             );
             return !hasBlockedIframe;
         });
-    }, [dbDramas]);
+    }, [dbDramas, initialDramas]);
 
     // Verifica acesso VIP (sessão Admin, retorno Stripe, parâmetro ?phone= do robô do WhatsApp ou localStorage)
     useEffect(() => {

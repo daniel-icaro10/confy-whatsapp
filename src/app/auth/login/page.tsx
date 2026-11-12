@@ -53,7 +53,7 @@ function LoginForm() {
             if (result?.error) {
                 setError("E-mail ou senha inválidos.");
             } else {
-                localStorage.setItem("sdc_viewer_phone", "5511999999999");
+                localStorage.setItem("sdc_viewer_phone", email.trim() || "admin");
                 localStorage.setItem("sdc_viewer_vip", "true");
                 window.location.href = callbackUrl;
                 router.refresh();

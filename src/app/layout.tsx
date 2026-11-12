@@ -63,7 +63,7 @@ export async function generateMetadata(): Promise<Metadata> {
     manifest: "/manifest.json",
     generator: "Next.js",
     keywords: [
-      "novelas verticais", "dramas", "doramas", "segredos do coracao",
+      "novelas verticais", "dramas", "doramas", "tvdrama reels",
       "series curtas", "romance", "novela completa", "dramawave"
     ],
     referrer: "origin-when-cross-origin",

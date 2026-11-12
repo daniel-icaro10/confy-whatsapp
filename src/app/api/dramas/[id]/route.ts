@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { ensureInitialDramas } from "@/lib/segredos-defaults";
 import { auth } from "@/lib/auth";
+import { INITIAL_YOUTUBE_DRAMAS } from "@/lib/initial-dramas-data";
 
 export async function GET(
     _request: Request,
@@ -23,6 +24,36 @@ export async function GET(
         });
 
         if (!drama) {
+            const fallback = INITIAL_YOUTUBE_DRAMAS.find(
+                (d) => d.slug === id || d.id === id
+            );
+            if (fallback) {
+                return NextResponse.json({
+                    drama: {
+                        id: fallback.id,
+                        title: fallback.title,
+                        slug: fallback.slug,
+                        synopsis: fallback.synopsis,
+                        coverUrl: fallback.coverUrl,
+                        bannerUrl: fallback.bannerUrl || fallback.coverUrl,
+                        category: fallback.category,
+                        totalEpisodes: fallback.totalEpisodes,
+                        freeEpisodesCount: fallback.freeEpisodesCount,
+                        isVertical: fallback.isVertical,
+                        likesCount: fallback.likesCount,
+                        episodes: fallback.episodes.map((ep) => ({
+                            id: `${fallback.id}-ep-${ep.number}`,
+                            number: ep.number,
+                            title: ep.title,
+                            description: ep.description,
+                            youtubeUrl: ep.youtubeUrl,
+                            videoUrl: ep.videoUrl || undefined,
+                            durationSeconds: ep.durationSeconds || 900,
+                            isFree: ep.isFree
+                        }))
+                    }
+                });
+            }
             return NextResponse.json({ error: "Novela não encontrada" }, { status: 404 });
         }
 

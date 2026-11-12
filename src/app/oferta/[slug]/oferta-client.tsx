@@ -33,7 +33,6 @@ import {
     Download,
     Users
 } from "lucide-react";
-import { INITIAL_YOUTUBE_DRAMAS } from "@/lib/initial-dramas-data";
 import { loadStripeClient } from "@/lib/stripe-client";
 
 interface Episode {
@@ -44,7 +43,7 @@ interface Episode {
     isFree: boolean;
 }
 
-interface DramaOffer {
+export interface DramaOffer {
     id: string;
     title: string;
     slug: string;
@@ -173,12 +172,12 @@ const formatPhone = (val: string) => {
     return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7, 11)}`;
 };
 
-export function OfertaSalesPageClient({ slug }: { slug: string }) {
+export function OfertaSalesPageClient({ slug, initialDrama }: { slug: string; initialDrama?: DramaOffer | null }) {
     const router = useRouter();
 
     // Estado da Novela
-    const [drama, setDrama] = useState<DramaOffer | null>(null);
-    const [loadingDrama, setLoadingDrama] = useState(true);
+    const [drama, setDrama] = useState<DramaOffer | null>(initialDrama || null);
+    const [loadingDrama, setLoadingDrama] = useState(!initialDrama);
 
     // Controle de Telas (view): 'offer' (página inicial) | 'checkout' (dados e pagamento) | 'pix' (código gerado)
     const [currentView, setCurrentView] = useState<"offer" | "checkout" | "pix">("offer");
@@ -263,10 +262,15 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
         }
     }, []);
 
-    // 1. Carrega dados do drama
+    // 1. Carrega dados do drama (se não fornecido inicialmente pelo servidor)
     useEffect(() => {
-        let isMounted = true;
+        if (initialDrama) {
+            setDrama(initialDrama);
+            setLoadingDrama(false);
+            return;
+        }
 
+        let isMounted = true;
         async function fetchDrama() {
             try {
                 const res = await fetch(`/api/dramas/${slug}`);
@@ -280,30 +284,12 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                 }
             } catch {}
 
-            const fallback = INITIAL_YOUTUBE_DRAMAS.find(
-                (d) => d.slug === slug || d.id === slug
-            );
-
-            if (fallback && isMounted) {
-                setDrama({
-                    id: fallback.id,
-                    title: fallback.title,
-                    slug: fallback.slug,
-                    synopsis: fallback.synopsis,
-                    coverUrl: "/cover-ganhei-tres-namoradas.jpg",
-                    bannerUrl: "/cover-ganhei-tres-namoradas.jpg",
-                    category: fallback.category,
-                    totalEpisodes: fallback.totalEpisodes || fallback.episodes.length,
-                    trailerYoutubeUrl: fallback.episodes[0]?.youtubeUrl || null,
-                    episodes: fallback.episodes
-                });
-            }
             if (isMounted) setLoadingDrama(false);
         }
 
         fetchDrama();
         return () => { isMounted = false; };
-    }, [slug]);
+    }, [slug, initialDrama]);
 
     // Dispara ViewContent no Meta Pixel assim que a oferta é visualizada
     useEffect(() => {
