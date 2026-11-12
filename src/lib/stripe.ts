@@ -336,7 +336,10 @@ export async function createStripePaymentIntent(input: CreateStripeCheckoutInput
         throw new Error("Chave secreta da Stripe não configurada.");
     }
 
-    const amountCents = Math.round(plan.price * 100);
+    const finalAmount = typeof input.customAmount === "number" && input.customAmount > 0
+        ? input.customAmount
+        : plan.price;
+    const amountCents = Math.round(finalAmount * 100);
     const customerEmail = input.customerEmail?.trim() || `${cleanPhone}@tvdramareels.com`;
     const customerName = input.customerName?.trim() || "Assinante TvDrama Reels";
 
@@ -375,7 +378,7 @@ export async function createStripePaymentIntent(input: CreateStripeCheckoutInput
             customerName,
             customerEmail,
             planName: `${plan.name} — TvDrama Reels`,
-            amount: plan.price,
+            amount: finalAmount,
             status: "PENDING",
             dramaId: input.dramaId || null
         }
@@ -385,7 +388,7 @@ export async function createStripePaymentIntent(input: CreateStripeCheckoutInput
         clientSecret: data.client_secret as string,
         paymentIntentId: data.id as string,
         orderId: order.id,
-        amount: plan.price,
+        amount: finalAmount,
         planName: plan.name,
         publishableKey: (config as any).stripePublishableKey || process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ""
     };

@@ -722,24 +722,13 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                             window.scrollTo({ top: 0, behavior: "smooth" });
                         }}
                         className="text-left focus:outline-none flex items-center gap-2 group cursor-pointer"
-                        aria-label="Ir para a página inicial"
+                        aria-label="Ir para a página inicial do TvDrama Reels"
                     >
-                        {/* Mobile: Pill centralizada idêntica à referência HotPlot.ai */}
-                        <div className="flex sm:hidden items-center gap-2 px-2 py-1 rounded-2xl">
-                            <div className="size-7 rounded-xl bg-gradient-to-tr from-[#f43f5e] via-rose-500 to-pink-500 flex items-center justify-center text-white font-black text-xs shadow-md shadow-rose-600/40">
-                                H
-                            </div>
-                            <span className="font-extrabold text-[16px] text-white tracking-tight">
-                                HotPlot<span className="text-[#f43f5e]">.ai</span>
-                            </span>
-                        </div>
-
-                        {/* Desktop: Logo oficial TvDrama Reels */}
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                             src="/logo.png"
                             alt="TvDrama Reels"
-                            className="hidden sm:block h-[34px] sm:h-[40px] w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+                            className="h-[30px] sm:h-[40px] w-auto object-contain transition-transform duration-200 group-hover:scale-105"
                         />
                     </button>
 

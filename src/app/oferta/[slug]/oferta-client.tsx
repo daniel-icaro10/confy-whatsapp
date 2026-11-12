@@ -29,9 +29,11 @@ import {
     Mail,
     Shield,
     CheckCircle2,
-    BadgePercent
+    BadgePercent,
+    Download
 } from "lucide-react";
 import { INITIAL_YOUTUBE_DRAMAS } from "@/lib/initial-dramas-data";
+import { loadStripeClient } from "@/lib/stripe-client";
 
 interface Episode {
     number: number;
@@ -68,26 +70,26 @@ interface OrderBump {
 
 const ORDER_BUMPS: OrderBump[] = [
     {
-        id: "bump-whatsapp",
-        badge: "⚡ MAIS ESCOLHIDO (94% DOS CLIENTES)",
-        title: "Entrega Imediata & Acesso no WhatsApp",
-        description: "Receba o link privativo de acesso e o aplicativo PWA direto no seu WhatsApp em menos de 10 segundos, sem filas e com suporte VIP prioritário.",
-        originalPrice: 19.90,
+        id: "bump-offline",
+        badge: "⚡ INOVAÇÃO (96% DOS CLIENTES LEVAM)",
+        title: "Modo Offline & Download no Celular",
+        description: "Baixe qualquer episódio em 1 toque para assistir offline sem internet, sem travamentos e sem gastar seu 4G no ônibus, trabalho ou viagens.",
+        originalPrice: 24.90,
         price: 4.90,
-        discountPercent: 75,
-        iconUrl: "/bump-whatsapp.jpg",
-        tagHighlight: "LIBERAÇÃO INSTANTÂNEA"
+        discountPercent: 80,
+        iconUrl: "/bump-offline.jpg",
+        tagHighlight: "ASSISTA MESMO SEM SINAL"
     },
     {
         id: "bump-18",
-        badge: "🔥 CONTEÚDO EXCLUSIVO (SEM CENSURA)",
-        title: "Novelinhas Secretas com Cenas +18",
-        description: "Desbloqueie a pasta secreta com todos os episódios completos das novelinhas mais intensas e picantes, 100% sem cortes e com áudio dublado original em alta definição.",
+        badge: "🔥 COFRE SECRETO (+18 SEM CENSURA)",
+        title: "Cenas Quentes Proibidas & Finais Alternativos",
+        description: "Desbloqueie o cofre privativo com episódios proibidos, cenas picantes sem cortes de censura e os finais alternativos exclusivos de mais de 80 novelinhas.",
         originalPrice: 29.90,
         price: 5.00,
         discountPercent: 83,
         iconUrl: "/bump-18.webp",
-        tagHighlight: "ÁUDIO E VÍDEO 100% SEM CENSURA"
+        tagHighlight: "ÁUDIO & VÍDEO 100% SEM CORTES"
     }
 ];
 
@@ -195,6 +197,14 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
     const [generatingPix, setGeneratingPix] = useState(false);
     const [generatingCard, setGeneratingCard] = useState(false);
 
+    // Stripe Checkout Transparente (in-page)
+    const [cardholderName, setCardholderName] = useState("");
+    const [stripeReady, setStripeReady] = useState(false);
+    const [cardSuccess, setCardSuccess] = useState(false);
+    const stripeRef = useRef<any>(null);
+    const cardElementRef = useRef<any>(null);
+    const cardContainerRef = useRef<HTMLDivElement | null>(null);
+
     // Pedido Pix Gerado
     const [pixOrder, setPixOrder] = useState<{
         orderId: string;
@@ -293,6 +303,87 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
             }
         }
     }, [currentPreviewEp]);
+
+    // 2.1 Monta o Stripe Card Element transparente sem sair da página
+    useEffect(() => {
+        if (currentView !== "checkout" || paymentMethod !== "card" || cardSuccess) {
+            if (cardElementRef.current) {
+                try {
+                    cardElementRef.current.destroy();
+                } catch {}
+                cardElementRef.current = null;
+            }
+            return;
+        }
+
+        let isMounted = true;
+        const key = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "pk_live_51Rj3NkCmp0vwBFJWkWFoa5MMpcMv6bq25zC6jKOYgeMSfspVF7OeaAy0vexwmh7JbSx51HmzKoYho1kJeYESoCpT00r68X5IZs";
+
+        async function mountStripeCard() {
+            try {
+                if (!cardContainerRef.current) return;
+                const stripe = await loadStripeClient(key);
+                if (!isMounted || !stripe || !cardContainerRef.current) return;
+                stripeRef.current = stripe;
+
+                if (cardElementRef.current) {
+                    try {
+                        cardElementRef.current.destroy();
+                    } catch {}
+                    cardElementRef.current = null;
+                }
+
+                const elements = stripe.elements({ locale: "pt-BR" });
+                const card = elements.create("card", {
+                    hidePostalCode: true,
+                    style: {
+                        base: {
+                            color: "#ffffff",
+                            fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+                            fontSize: "14px",
+                            fontSmoothing: "antialiased",
+                            "::placeholder": {
+                                color: "#71717a"
+                            }
+                        },
+                        invalid: {
+                            color: "#f43f5e",
+                            iconColor: "#f43f5e"
+                        }
+                    }
+                });
+
+                card.mount(cardContainerRef.current);
+                cardElementRef.current = card;
+                setStripeReady(true);
+
+                card.on("change", (event: any) => {
+                    if (event.error) {
+                        setFormError(event.error.message);
+                    } else {
+                        setFormError("");
+                    }
+                });
+            } catch (err: any) {
+                console.error("Erro ao montar Stripe Card Element:", err);
+            }
+        }
+
+        const timer = setTimeout(() => {
+            mountStripeCard();
+        }, 120);
+
+        return () => {
+            isMounted = false;
+            clearTimeout(timer);
+            if (cardElementRef.current) {
+                try {
+                    cardElementRef.current.destroy();
+                } catch {}
+                cardElementRef.current = null;
+            }
+        };
+    }, [currentView, paymentMethod, cardSuccess]);
 
     // Desmuta áudio do vídeo nativo
     const unmuteVideo = () => {
@@ -479,7 +570,7 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
         }
     };
 
-    // Submete checkout via Cartão de Crédito (Stripe)
+    // Submete pagamento transparente via Cartão de Crédito (Stripe In-Page, sem redirecionar)
     const handleGenerateCard = async (e: React.FormEvent) => {
         e.preventDefault();
         setFormError("");
@@ -501,6 +592,16 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
             return;
         }
 
+        if (!cardholderName.trim()) {
+            setFormError("Informe o nome impresso no cartão de crédito.");
+            return;
+        }
+
+        if (!stripeRef.current || !cardElementRef.current) {
+            setFormError("O formulário de cartão seguro ainda está carregando. Aguarde um instante.");
+            return;
+        }
+
         setGeneratingCard(true);
 
         // Dispara evento AddPaymentInfo no Meta Pixel
@@ -517,26 +618,85 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
 
         try {
             const planKey = selectedPackage === "upsell" ? "monthly" : "single_drama";
-            const res = await fetch("/api/stripe/checkout", {
+
+            // 1. Cria o PaymentIntent diretamente no backend
+            const piRes = await fetch("/api/stripe/payment-intent", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    name: name.trim(),
+                    name: cardholderName.trim(),
                     email: emailClean,
                     phone: phoneDigits,
                     amount: currentTotalAmount,
                     dramaId: slug,
-                    planKey,
-                    mode: "payment"
+                    planKey
                 })
             });
 
-            const data = await res.json();
-            if (!res.ok || !data.checkoutUrl) {
-                throw new Error(data.error || "Não foi possível iniciar o pagamento com cartão. Tente via Pix para aprovação imediata.");
+            const piData = await piRes.json();
+            if (!piRes.ok || !piData?.clientSecret) {
+                throw new Error(piData?.error || "Não foi possível preparar o pagamento com cartão.");
             }
 
-            window.location.href = data.checkoutUrl;
+            // 2. Confirma o pagamento diretamente com Stripe.js na mesma página
+            const { paymentIntent, error: stripeErr } = await stripeRef.current.confirmCardPayment(
+                piData.clientSecret,
+                {
+                    payment_method: {
+                        card: cardElementRef.current,
+                        billing_details: {
+                            name: cardholderName.trim(),
+                            email: emailClean,
+                            phone: phoneDigits
+                        }
+                    }
+                }
+            );
+
+            if (stripeErr) {
+                let msg = stripeErr.message || "Cartão não autorizado pela operadora.";
+                if (stripeErr.code === "card_declined") {
+                    msg = "Cartão recusado pelo banco emissor. Tente outro cartão ou pague via Pix instantâneo.";
+                } else if (stripeErr.code === "insufficient_funds") {
+                    msg = "Saldo insuficiente no cartão. Você pode efetuar o pagamento via Pix instantâneo.";
+                } else if (stripeErr.code === "expired_card") {
+                    msg = "Data de validade do cartão expirada.";
+                } else if (stripeErr.code === "incorrect_cvc") {
+                    msg = "Código de segurança (CVC) inválido.";
+                }
+                throw new Error(msg);
+            }
+
+            if (paymentIntent && paymentIntent.status === "succeeded") {
+                // 3. Notifica backend para aprovar o pedido e liberar acesso
+                await fetch("/api/stripe/confirm", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        paymentIntentId: paymentIntent.id,
+                        phone: phoneDigits
+                    })
+                }).catch(() => {});
+
+                // Dispara evento Purchase no Meta Pixel
+                if (typeof window !== "undefined" && (window as any).fbq) {
+                    try {
+                        (window as any).fbq("track", "Purchase", {
+                            content_name: drama?.title || "Novela Dublada",
+                            content_ids: [slug],
+                            currency: "BRL",
+                            value: currentTotalAmount
+                        });
+                    } catch {}
+                }
+
+                localStorage.setItem("sdc_viewer_phone", phoneDigits);
+                localStorage.setItem("sdc_viewer_vip", "true");
+                setCardSuccess(true);
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            } else {
+                throw new Error("O pagamento está em análise pela sua operadora de cartão.");
+            }
         } catch (err: any) {
             setFormError(err.message || "Erro ao processar cartão. Recomendamos usar o Pix para aprovação imediata.");
         } finally {
@@ -1224,22 +1384,85 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                 ========================================================================= */}
             {currentView === "checkout" && (
                 <div className="max-w-xl mx-auto px-4 py-6 sm:py-10 w-full">
-                    {/* Topo do Checkout */}
-                    <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
-                        <button
-                            type="button"
-                            onClick={() => setCurrentView("offer")}
-                            className="flex items-center gap-1.5 text-xs font-semibold text-stone-400 hover:text-white transition-colors"
-                        >
-                            <ArrowLeft className="size-4" />
-                            <span>Voltar à oferta</span>
-                        </button>
+                    {cardSuccess ? (
+                        <div className="rounded-3xl border border-emerald-500/30 bg-[#101918]/95 backdrop-blur-xl p-6 sm:p-8 text-center space-y-6 shadow-2xl shadow-emerald-500/10">
+                            <div className="mx-auto size-16 rounded-full bg-emerald-500/20 border-2 border-emerald-500 flex items-center justify-center text-emerald-400 shadow-xl shadow-emerald-500/30">
+                                <Check className="size-8 stroke-[3]" />
+                            </div>
 
-                        <div className="flex items-center gap-1.5 text-[11px] font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full">
-                            <Lock className="size-3" />
-                            <span>Ambiente 100% Seguro</span>
+                            <div className="space-y-2">
+                                <span className="inline-block px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs font-black uppercase tracking-wider">
+                                    Pagamento Aprovado no Cartão
+                                </span>
+                                <h2 className="text-2xl sm:text-3xl font-black text-white">
+                                    Acesso Liberado com Sucesso!
+                                </h2>
+                                <p className="text-xs sm:text-sm text-stone-300 max-w-sm mx-auto leading-relaxed">
+                                    Seu pagamento foi confirmado com segurança. Seus episódios já estão 100% desbloqueados em Full HD no seu dispositivo!
+                                </p>
+                            </div>
+
+                            <div className="rounded-2xl border border-white/10 bg-black/50 p-4 text-left flex items-center gap-3.5">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
+                                    src={currentCover}
+                                    alt=""
+                                    className="size-14 rounded-xl object-cover border border-white/10"
+                                />
+                                <div className="min-w-0 flex-1">
+                                    <span className="text-[10px] font-bold text-rose-400 uppercase tracking-wider block">
+                                        {selectedPackage === "upsell" ? "⭐ Pacote VIP Ilimitado" : "🎬 Temporada Completa"}
+                                    </span>
+                                    <h4 className="text-sm font-bold text-white truncate">
+                                        {selectedPackage === "upsell" ? "Catálogo VIP Completo" : currentTitle}
+                                    </h4>
+                                    <p className="text-[11px] text-emerald-400 font-semibold mt-0.5 flex items-center gap-1">
+                                        <CheckCircle2 className="size-3" /> Status: 100% Desbloqueado
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="space-y-3 pt-2">
+                                <a
+                                    href={`/assistir/${slug}`}
+                                    className="relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-600 hover:from-emerald-500 hover:to-emerald-400 px-6 py-4 text-base font-black uppercase tracking-wider text-white shadow-xl shadow-emerald-600/30 transition-all active:scale-[0.98]"
+                                >
+                                    <Play className="size-5 fill-white" />
+                                    <span>Começar a Assistir Agora</span>
+                                </a>
+
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        const phoneNum = "5511999999999";
+                                        const msg = encodeURIComponent(`Olá, acabei de pagar a novela ${currentTitle} no cartão e quero confirmar meu acesso!`);
+                                        window.open(`https://wa.me/${phoneNum}?text=${msg}`, "_blank");
+                                    }}
+                                    className="inline-flex items-center justify-center gap-2 text-xs text-stone-400 hover:text-white transition-colors"
+                                >
+                                    <MessageCircle className="size-3.5" />
+                                    <span>Dúvidas? Fale com nosso suporte no WhatsApp</span>
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    ) : (
+                        <>
+                            {/* Topo do Checkout */}
+                            <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
+                                <button
+                                    type="button"
+                                    onClick={() => setCurrentView("offer")}
+                                    className="flex items-center gap-1.5 text-xs font-semibold text-stone-400 hover:text-white transition-colors"
+                                >
+                                    <ArrowLeft className="size-4" />
+                                    <span>Voltar à oferta</span>
+                                </button>
+
+                                <div className="flex items-center gap-1.5 text-[11px] font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full">
+                                    <Lock className="size-3" />
+                                    <span>Ambiente 100% Seguro</span>
+                                </div>
+                            </div>
 
                     {/* Resumo do Pacote Selecionado */}
                     <div className="mb-6 rounded-2xl border border-rose-500/30 bg-[#161022] p-4 flex items-center justify-between gap-3">
@@ -1518,7 +1741,7 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                                 </button>
                             </div>
 
-                            {/* Informações da Forma Selecionada */}
+                            {/* Informações e Formulário da Forma Selecionada */}
                             {paymentMethod === "pix" ? (
                                 <div className="mt-4 rounded-xl border border-emerald-500/20 bg-emerald-950/20 p-3.5 text-xs text-stone-300 flex items-start gap-2.5">
                                     <CheckCircle2 className="size-4 text-emerald-400 shrink-0 mt-0.5" />
@@ -1527,11 +1750,53 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                                     </p>
                                 </div>
                             ) : (
-                                <div className="mt-4 rounded-xl border border-rose-500/20 bg-rose-950/20 p-3.5 text-xs text-stone-300 flex items-start gap-2.5">
-                                    <Shield className="size-4 text-rose-400 shrink-0 mt-0.5" />
-                                    <p className="leading-relaxed">
-                                        <strong className="text-white">Ambiente Seguro Stripe:</strong> processamento com criptografia bancária de ponta a ponta. Você será direcionado para o checkout oficial protegido.
-                                    </p>
+                                <div className="mt-4 space-y-3.5 rounded-xl border border-rose-500/25 bg-black/50 p-4">
+                                    <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
+                                        <span className="text-xs font-bold text-white flex items-center gap-1.5">
+                                            <CreditCard className="size-3.5 text-rose-400" />
+                                            <span>Cartão de Crédito (Checkout Transparente)</span>
+                                        </span>
+                                        <span className="text-[10px] text-emerald-400 font-semibold flex items-center gap-1">
+                                            <Lock className="size-2.5" /> 100% Seguro
+                                        </span>
+                                    </div>
+
+                                    {/* Nome impresso no cartão */}
+                                    <div>
+                                        <label className="block text-xs font-semibold text-stone-300 mb-1.5" htmlFor="cardholder-name">
+                                            Nome impresso no cartão
+                                        </label>
+                                        <input
+                                            id="cardholder-name"
+                                            type="text"
+                                            value={cardholderName}
+                                            onChange={(e) => setCardholderName(e.target.value.toUpperCase())}
+                                            placeholder="NOME COMO ESTÁ NO CARTÃO"
+                                            required={paymentMethod === "card"}
+                                            className="w-full rounded-xl border border-white/10 bg-black/60 px-4 py-3 text-xs sm:text-sm text-white placeholder-stone-500 outline-none focus:border-rose-500 uppercase tracking-wider font-mono transition-colors"
+                                        />
+                                    </div>
+
+                                    {/* Stripe Card Element Container (Transparente in-page) */}
+                                    <div>
+                                        <label className="block text-xs font-semibold text-stone-300 mb-1.5">
+                                            Dados do Cartão (Número, Validade e CVC)
+                                        </label>
+                                        <div
+                                            ref={cardContainerRef}
+                                            className="rounded-xl border border-white/10 bg-black/60 px-4 py-3.5 text-sm text-white focus-within:border-rose-500 transition-all min-h-[46px]"
+                                        />
+                                    </div>
+
+                                    <div className="flex items-center justify-between text-[10px] text-stone-400 pt-1">
+                                        <span className="flex items-center gap-1">
+                                            <ShieldCheck className="size-3 text-emerald-400" />
+                                            Pagamento processado na mesma página
+                                        </span>
+                                        <span className="font-semibold text-stone-300">
+                                            Até 12x no cartão
+                                        </span>
+                                    </div>
                                 </div>
                             )}
 
@@ -1602,6 +1867,8 @@ export function OfertaSalesPageClient({ slug }: { slug: string }) {
                             </p>
                         </div>
                     </form>
+                    </>
+                    )}
                 </div>
             )}
 
