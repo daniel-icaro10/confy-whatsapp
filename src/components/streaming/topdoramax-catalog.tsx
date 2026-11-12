@@ -809,15 +809,8 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                 </div>
 
                 <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-                    {/* Mobile: Perfil / VIP rápido */}
-                    <button
-                        type="button"
-                        onClick={() => setActiveOverlay("perfil")}
-                        className="sm:hidden size-9 rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/10 flex items-center justify-center text-white/90 active:scale-95 transition cursor-pointer"
-                        aria-label="Meu Perfil"
-                    >
-                        <User className="size-4" />
-                    </button>
+                    {/* Mobile: Espaçador invisível para balancear perfeitamente o ícone de globo à esquerda e manter a logo 100% centralizada (estilo HotPlot.ai) */}
+                    <div className="sm:hidden size-9 shrink-0 pointer-events-none" aria-hidden="true" />
 
                     {isAdmin ? (
                         <>
@@ -2161,7 +2154,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                     <span className="text-[10px] font-semibold">Descobrir</span>
                 </button>
 
-                {/* 3. Em Alta (Pílula Rosa Central Estilo HotPlot.ai) */}
+                {/* 3. Para você (Retângulo Arredondado Rosa Estilo HotPlot.ai) */}
                 <button
                     type="button"
                     onClick={() => {
@@ -2171,10 +2164,10 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                     }}
                     className="flex flex-col items-center justify-center py-0.5 px-2 rounded-xl transition cursor-pointer group"
                 >
-                    <div className={`w-12 h-7 rounded-full flex items-center justify-center shadow-lg transition-transform group-active:scale-90 ${
+                    <div className={`w-[48px] h-[28px] rounded-[10px] flex items-center justify-center shadow-lg transition-transform group-active:scale-90 ${
                         activeTab === "emalta" && activeOverlay === "none"
                             ? "bg-[#f43f5e] shadow-[0_0_16px_rgba(244,63,94,0.6)]"
-                            : "bg-[#f43f5e]/85 hover:bg-[#f43f5e]"
+                            : "bg-[#f43f5e]/90 hover:bg-[#f43f5e]"
                     }`}>
                         <Play className="w-3.5 h-3.5 text-white fill-white ml-0.5" />
                     </div>
@@ -2183,7 +2176,7 @@ export function TopDoramaxCatalog({ forceCatalogView = false }: TopDoramaxCatalo
                             ? "text-rose-400 font-bold"
                             : "text-white/60"
                     }`}>
-                        Em Alta
+                        Para você
                     </span>
                 </button>
 
